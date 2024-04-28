@@ -1,0 +1,41 @@
+// abstracts
+@use 'abstracts/resets';
+@use 'abstracts/index';
+@use 'abstracts/mixins';
+@use 'abstracts/boilerplates';
+@use 'abstracts/breakpoints';
+
+// components
+// general | use across multiple pages
+@use 'components/account_nav';
+@use 'components/account_footer';
+@use 'components/nav';
+@use 'components/footer';
+
+// landing page
+@use 'components/landing_page/header';
+@use 'components/landing_page/branches';
+@use 'components/landing_page/services';
+@use 'components/landing_page/testimonials';
+
+// signup page | form
+@use 'components/signup_page/signup_form';
+
+// login page | form
+@use 'components/login_page/login_form';
+
+// account page
+@use 'components/account_page/side_nav';
+@use 'components/account_page/account_header';
+@use 'components/account_page/info';
+
+// appointment form page
+@use 'components/appointment_form_page/form';
+@use 'components/appointment_form_page/confirmation';
+
+// admin interface
+@use 'components/admin_page/dashboard/admin_nav';
+@use 'components/admin_page/dashboard/sidebar_nav';
+@use 'components/admin_page/appointments';
+@use 'components/admin_page/patients';
+@use 'components/admin_page/reports';

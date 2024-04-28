@@ -1,0 +1,70 @@
+@use '../../abstracts' as *;
+
+.services__section {
+  @include display-flex($dir: column, $gap: 75px);
+  padding-block: 100px;
+
+  .heading {
+    @include display-flex($gap: 20px, $dir: column);
+
+    .header {
+      font-family: 'DMSans-Black', sans-serif;
+      font-size: var(--fs-500);
+      color: var(--pr-clr-300);
+    }
+
+    .sub__header {
+      width: 932px;
+      line-height: 1.6em;
+      font-family: 'DMSans-Regular', sans-serif;
+      font-size: var(--fs-300);
+      color: var(--ntrl-clr-300);
+      text-align: center;
+    }
+  }
+
+  .card {
+    @include display-flex($gap: 64px);
+    width: max-content;
+
+    img {
+      width: 442px;
+      height: 435px;
+      border-radius: 1rem;
+      object-fit: cover ;
+    }
+
+    .service__container {
+      @include display-flex($gap: 10px, $dir: column, $y: flex-start);
+
+      .card__label {
+        font-family: 'DMSans-Bold', sans-serif;
+        font-size: var(--fs-100);
+        color: var(--ntrl-clr-100);
+        background-color: var(--pr-clr-300);
+        padding: 8px 10px 8px 10px;
+        border-radius: 2rem;
+      }
+
+      .card__header {
+        width: 372px;
+        font-family: 'DMSans-Bold', sans-serif;
+        font-size: var(--fs-450);
+        color: var(--pr-clr-100);
+        line-height: 1.1em;
+      }
+
+      .card__desc {
+        width: 494px;
+        font-family: 'DMSans-Regular', sans-serif;
+        font-size: var(--fs-300);
+        color: var(--ntrl-clr-300);
+        line-height: 1.6em;
+      }
+    }
+  }
+
+  .card:nth-child(3) {
+    flex-direction: row-reverse;
+  }
+}

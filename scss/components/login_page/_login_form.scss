@@ -1,0 +1,86 @@
+@use '../../abstracts' as *;
+
+body {
+  width: 100%;
+  min-height: 100vh;
+  background: url(/assets/images/mesh_bg.png);
+  background-repeat: no-repeat;
+  background-size: 100%;
+
+  main {
+    width: 100%;
+    @include flex($dir: column);
+
+    .login-form__section {
+      @include display-flex($dir: column, $gap: 42px, $y: flex-start);
+      width: 414px;
+      background-color: var(--ntrl-clr-100);
+      padding: 2rem;
+      margin-block: 4rem;
+      border-radius: 8px;
+      overflow: hidden;
+
+      .header {
+        align-self: center;
+        font-family: 'DMSans-Black', sans-serif;
+        font-size: var(--fs-400);
+        color: var(--pr-clr-300);
+      }
+
+      .login__form {
+        width: 100%;
+        @include display-flex($dir: column, $gap: 2rem, $y: flex-start);
+
+        .field {
+          width: 100%;
+          @include display-flex($dir: column, $y: flex-start);
+
+          // outline: var(--debug);
+
+          label {
+            font-family: 'DMSans-SemiBold', sans-serif;
+            font-size: var(--fs-200);
+            color: var(--pr-clr-400);
+          }
+
+          input {
+            width: 100%;
+            padding: 8px;
+            border-bottom: 1px solid var(--pr-clr-400);
+            font-family: 'DMSans-SemiBold', sans-serif;
+            font-size: var(--fs-200);
+            color: var(--pr-clr-300);
+
+            &::placeholder {
+              font-family: 'DMSans-Regular', sans-serif;
+              font-size: var(--fs-200);
+              color: var(--pr-clr-400);
+            }
+
+            &:hover,
+            &:focus {
+              border-color: var(--pr-clr-300);
+            }
+          }
+        }
+      }
+
+      .submit__button {
+        width: 100%;
+        font-family: 'DMSans-SemiBold', sans-serif;
+        font-size: var(--fs-200);
+        color: var(--ntrl-clr-100);
+        background-color: var(--pr-clr-300);
+        padding: 1rem;
+        border-radius: 6px;
+      }
+
+      .signup__link {
+        align-self: center;
+        font-family: 'DMSans-Regular', sans-serif;
+        font-size: var(--fs-200);
+        color: var(--pr-clr-300);
+      }
+    }
+  }
+}

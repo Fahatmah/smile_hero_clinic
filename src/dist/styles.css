@@ -1,0 +1,774 @@
+/* Box sizing rules */
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font: inherit;
+  text-decoration: none;
+  list-style: none;
+}
+
+input,
+button {
+  border: 0;
+  outline: 0;
+  background: none;
+}
+
+/* Remove default margin */
+body,
+h1,
+h2,
+h3,
+h4,
+p,
+figure,
+blockquote,
+dl,
+dd {
+  margin: 0;
+}
+
+/* Remove list styles on ul, ol elements with a list role, which suggests default styling will be removed */
+ul[role=list],
+ol[role=list] {
+  list-style: none;
+}
+
+/* Set core root defaults */
+html:focus-within {
+  scroll-behavior: smooth;
+}
+
+/* Set core body defaults */
+body {
+  min-height: 100vh;
+  text-rendering: optimizeSpeed;
+}
+
+/* A elements that don't have a class get default styles */
+a:not([class]) {
+  -webkit-text-decoration-skip: ink;
+          text-decoration-skip-ink: auto;
+}
+
+/* Make images easier to work with */
+img,
+picture {
+  max-width: 100%;
+  display: block;
+}
+
+/* Inherit fonts for inputs and buttons */
+input,
+button,
+textarea,
+select {
+  font: inherit;
+}
+
+/* Remove all animations, transitions and smooth scroll for people that prefer not to see them */
+@media (prefers-reduced-motion: reduce) {
+  html:focus-within {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+:root {
+  --pr-clr-100: #e84531;
+  --pr-clr-200: #faaf0d;
+  --pr-clr-300: #1d72f2;
+  --pr-clr-400: #1d72f285;
+  --ntrl-clr-100: #ffffff;
+  --ntrl-clr-200: #ebebeb;
+  --ntrl-clr-300: #616161;
+  --ntrl-clr-400: #212121;
+  --fs-100: 0.75rem; /* smaller size 12px */
+  --fs-200: 1rem; /* default size 16px*/
+  --fs-300: 1.25rem; /* medium size 20px*/
+  --fs-400: 2rem; /* card header 32px*/
+  --fs-450: 3rem; /* service card header 48px */
+  --fs-500: 3.375rem; /* section header 54px*/
+  --fs-600: 6rem; /* landing page header 96px*/
+  --debug: 1px solid #333;
+}
+@font-face {
+  font-family: "DMSans-Thin";
+  src: url("/assets/font/DMSans-Thin.ttf") format("truetype");
+}
+@font-face {
+  font-family: "DMSans-Light";
+  src: url("/assets/font/DMSans-Light.ttf") format("truetype");
+}
+@font-face {
+  font-family: "DMSans-ExtraLight";
+  src: url("/assets/font/DMSans-ExtraLight.ttf") format("truetype");
+}
+@font-face {
+  font-family: "DMSans-Regular";
+  src: url("/assets/font/DMSans-Regular.ttf") format("truetype");
+}
+@font-face {
+  font-family: "DMSans-Medium";
+  src: url("/assets/font/DMSans-Medium.ttf") format("truetype");
+}
+@font-face {
+  font-family: "DMSans-SemiBold";
+  src: url("/assets/font/DMSans-SemiBold.ttf") format("truetype");
+}
+@font-face {
+  font-family: "DMSans-Bold";
+  src: url("/assets/font/DMSans-Bold.ttf") format("truetype");
+}
+@font-face {
+  font-family: "DMSans-ExtraBold";
+  src: url("/assets/font/DMSans-ExtraBold.ttf") format("truetype");
+}
+@font-face {
+  font-family: "DMSans-Black";
+  src: url("/assets/font/DMSans-Black.ttf") format("truetype");
+}
+
+body {
+  width: 100%;
+  min-height: 100vh;
+  font-family: "DMSans-Regular", sans-serif;
+  font-size: var(--fs-200);
+  color: var(--ntrl-clr-400);
+  background-color: var(--ntrl-clr-100);
+}
+body main {
+  width: 100%;
+}
+
+.nav {
+  position: sticky;
+  top: 0;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: row;
+  gap: 0;
+  justify-content: space-between;
+  padding: 1rem;
+  background-color: var(--ntrl-clr-100);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1058823529);
+  z-index: 1;
+}
+.nav__links {
+  min-height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: row;
+  gap: 2rem;
+}
+.nav__links li a {
+  color: var(--pr-clr-300);
+}
+.nav__links li a:hover {
+  text-decoration: underline;
+}
+.nav__links .signup_button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: row;
+  gap: 0;
+  background-color: var(--pr-clr-100);
+  border-radius: 6px;
+  width: 76px;
+  height: 39px;
+}
+.nav__links .signup_button button {
+  width: 100%;
+  height: 100%;
+}
+.nav__links .signup_button button a {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: row;
+  gap: 0;
+  width: 100%;
+  height: 100%;
+  color: var(--ntrl-clr-100);
+}
+
+.footer__section {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 90px;
+  width: 100%;
+  padding-block: 100px;
+  background-color: var(--pr-clr-300);
+  color: var(--ntrl-clr-100);
+  text-align: center;
+}
+.footer__section .footer__header .heading {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 15px;
+}
+.footer__section .footer__header .heading .header {
+  font-family: "DMSans-SemiBold", sans-serif;
+  font-size: var(--fs-500);
+}
+.footer__section .footer__header .heading p {
+  font-family: "DMSans-Regular", sans-serif;
+  font-size: var(--fs-200);
+}
+.footer__section .footer__header form {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: row;
+  gap: 0;
+  gap: 10px;
+  margin-top: 25px;
+  font-size: var(--fs-300);
+}
+.footer__section .footer__header form input {
+  background-color: var(--ntrl-clr-100);
+  padding: 1rem;
+  border-radius: 0.3rem;
+}
+.footer__section .footer__header form input::-moz-placeholder {
+  color: var(--ntrl-clr-300);
+}
+.footer__section .footer__header form input::placeholder {
+  color: var(--ntrl-clr-300);
+}
+.footer__section .footer__header form button {
+  background-color: var(--ntrl-clr-100);
+  padding: 1rem;
+  border-radius: 0.3rem;
+  color: var(--ntrl-clr-400);
+}
+.footer__section .contacts__container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: row;
+  gap: 0;
+  padding-bottom: 60px;
+  border-bottom: 1px solid #ffffff;
+}
+.footer__section .contacts__container .contact {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 10px;
+  width: 333px;
+}
+.footer__section .contacts__container .contact img {
+  width: 34px;
+  height: 34px;
+}
+.footer__section .contacts__container .contact p {
+  font-family: "DMSans-Regular", sans-serif;
+  font-size: var(--fs-300);
+}
+.footer__section .social-media__container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 20px;
+}
+.footer__section .social-media__container p {
+  width: 600px;
+  font-family: "DMSans-Regular", sans-serif;
+  font-size: var(--fs-200);
+  line-height: 1.6em;
+}
+.footer__section .social-media__container .social-medias {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: row;
+  gap: 12px;
+}
+
+.hero__section {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: row;
+  gap: 0;
+  flex-direction: column;
+  background-repeat: no-repeat;
+  background-size: 100%;
+}
+.hero__section .header {
+  color: var(--ntrl-clr-100);
+  font-family: "DMSans-Black", sans-serif;
+  font-size: var(--fs-600);
+  text-align: center;
+  line-height: 6.2rem;
+  max-width: 60rem;
+  margin-top: 40px;
+}
+.hero__section .sub__header {
+  color: var(--ntrl-clr-100);
+  font-size: var(--fs-300);
+  margin-top: 25px;
+}
+.hero__section form {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: row;
+  gap: 0;
+  gap: 10px;
+  margin-top: 25px;
+  font-size: var(--fs-300);
+}
+.hero__section form input {
+  background-color: var(--ntrl-clr-100);
+  padding: 1rem;
+  border-radius: 0.3rem;
+}
+.hero__section form button {
+  background-color: var(--pr-clr-100);
+  padding: 1rem;
+  border-radius: 0.3rem;
+  color: var(--ntrl-clr-100);
+}
+.hero__section .hero__image {
+  width: 858px;
+  height: 449px;
+  border: 1px solid #fff;
+  margin-top: 50px;
+  background-color: #fff;
+  border-top-left-radius: 0.6rem;
+  border-top-right-radius: 0.6rem;
+}
+
+.branches__section {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: row;
+  gap: 60px;
+  flex-direction: column;
+  padding: 100px 40px 100px 40px;
+  background-color: var(--ntrl-clr-100);
+}
+.branches__section .header {
+  color: var(--pr-clr-100);
+  font-size: var(--fs-500);
+  font-family: "DMSans-Bold", sans-serif;
+}
+.branches__section .branches__container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: row;
+  gap: 20px;
+}
+.branches__section .branches__container .branch {
+  width: 320px;
+  background-color: var(--ntrl-clr-100);
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 10px 20px 30px rgba(0, 0, 0, 0.1058823529);
+}
+.branches__section .branches__container .branch .header__container {
+  position: relative;
+  display: flex;
+  align-items: flex-end;
+  justify-content: flex-start;
+  flex-direction: row;
+  gap: 0;
+  width: 100%;
+  height: 250px;
+  padding: 1rem;
+  background: url(/assets/images/landing_page/dental_clinic_branch.jpg);
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+.branches__section .branches__container .branch .header__container::before {
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  bottom: 0;
+  left: 0;
+  background: linear-gradient(transparent, var(--pr-clr-300));
+}
+.branches__section .branches__container .branch .header__container p {
+  position: relative;
+  z-index: 1;
+  font-family: "DMSans-SemiBold", sans-serif;
+  font-size: var(--fs-400);
+  color: var(--ntrl-clr-100);
+}
+.branches__section .branches__container .branch .branch__details {
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  flex-direction: column;
+  gap: 20px;
+  padding: 30px;
+}
+.branches__section .branches__container .branch .branch__details .branch__title {
+  font-family: "DMSans-SemiBold", sans-serif;
+  font-size: var(--fs-300);
+  color: var(--pr-clr-300);
+}
+.branches__section .branches__container .branch .branch__details .branch__desc {
+  color: var(--ntrl-clr-300);
+  line-height: 1.6em;
+}
+.branches__section .branches__container .branch .branch__details button {
+  font-family: "DMSans-Regular", sans-serif;
+  font-size: var(--fs-200);
+  color: var(--ntrl-clr-100);
+  width: 100%;
+  padding: 1rem;
+  border-radius: 0.3rem;
+  background-color: var(--pr-clr-300);
+  cursor: pointer;
+}
+
+.services__section {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 75px;
+  padding-block: 100px;
+}
+.services__section .heading {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 20px;
+}
+.services__section .heading .header {
+  font-family: "DMSans-Black", sans-serif;
+  font-size: var(--fs-500);
+  color: var(--pr-clr-300);
+}
+.services__section .heading .sub__header {
+  width: 932px;
+  line-height: 1.6em;
+  font-family: "DMSans-Regular", sans-serif;
+  font-size: var(--fs-300);
+  color: var(--ntrl-clr-300);
+  text-align: center;
+}
+.services__section .card {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: row;
+  gap: 64px;
+  width: -moz-max-content;
+  width: max-content;
+}
+.services__section .card img {
+  width: 442px;
+  height: 435px;
+  border-radius: 1rem;
+  -o-object-fit: cover;
+     object-fit: cover;
+}
+.services__section .card .service__container {
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  flex-direction: column;
+  gap: 10px;
+}
+.services__section .card .service__container .card__label {
+  font-family: "DMSans-Bold", sans-serif;
+  font-size: var(--fs-100);
+  color: var(--ntrl-clr-100);
+  background-color: var(--pr-clr-300);
+  padding: 8px 10px 8px 10px;
+  border-radius: 2rem;
+}
+.services__section .card .service__container .card__header {
+  width: 372px;
+  font-family: "DMSans-Bold", sans-serif;
+  font-size: var(--fs-450);
+  color: var(--pr-clr-100);
+  line-height: 1.1em;
+}
+.services__section .card .service__container .card__desc {
+  width: 494px;
+  font-family: "DMSans-Regular", sans-serif;
+  font-size: var(--fs-300);
+  color: var(--ntrl-clr-300);
+  line-height: 1.6em;
+}
+.services__section .card:nth-child(3) {
+  flex-direction: row-reverse;
+}
+
+.testimonials__section {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 32px;
+  padding-block: 100px;
+}
+.testimonials__section .header {
+  font-family: "DMSans-Black", sans-serif;
+  font-size: var(--fs-500);
+  color: var(--pr-clr-300);
+}
+.testimonials__section .testimonial__container {
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  flex-direction: row;
+  gap: 32px;
+}
+.testimonials__section .testimonial__container .testimonial__card {
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  flex-direction: column;
+  gap: 10px;
+}
+.testimonials__section .testimonial__container .testimonial__card .testimonial__text {
+  width: 327px;
+  font-family: "DMSans-Regular", sans-serif;
+  font-size: var(--fs-200);
+  color: var(--ntrl-clr-300);
+  line-height: 1.5em;
+}
+.testimonials__section .testimonial__container .testimonial__card .testimonial__details {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: row;
+  gap: 10px;
+}
+.testimonials__section .testimonial__container .testimonial__card .testimonial__details img {
+  width: 2rem;
+  height: 2rem;
+  border-radius: 4rem;
+  -o-object-fit: cover;
+     object-fit: cover;
+}
+.testimonials__section .testimonial__container .testimonial__card .testimonial__details .testimonial__name {
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  flex-direction: column;
+  gap: 4px;
+}
+.testimonials__section .testimonial__container .testimonial__card .testimonial__details .testimonial__name .testimonial {
+  font-family: "DMSans-Bold", sans-serif;
+  font-size: var(--fs-200);
+  color: var(--pr-clr-300);
+}
+.testimonials__section .testimonial__container .testimonial__card .testimonial__details .testimonial__name .testimonial__branch {
+  font-family: "DMSans-SemiBold", sans-serif;
+  font-size: var(--fs-100);
+  color: var(--ntrl-clr-300);
+}
+
+body {
+  width: 100%;
+  min-height: 100vh;
+  background: url(/assets/images/mesh_bg.png);
+  background-repeat: no-repeat;
+  background-size: 100%;
+}
+body main {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+body main .signup-form__section {
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  flex-direction: column;
+  gap: 42px;
+  width: -moz-max-content;
+  width: max-content;
+  background-color: var(--ntrl-clr-100);
+  padding: 2rem;
+  margin-block: 4rem;
+  border-radius: 8px;
+  overflow: hidden;
+}
+body main .signup-form__section .header {
+  font-family: "DMSans-Black", sans-serif;
+  font-size: var(--fs-400);
+  color: var(--pr-clr-300);
+}
+body main .signup-form__section .signup__form {
+  width: 100%;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  flex-direction: column;
+  gap: 2rem;
+}
+body main .signup-form__section .signup__form .field {
+  width: 100%;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  flex-direction: column;
+  gap: 0;
+}
+body main .signup-form__section .signup__form .field label {
+  font-family: "DMSans-SemiBold", sans-serif;
+  font-size: var(--fs-200);
+  color: var(--pr-clr-400);
+}
+body main .signup-form__section .signup__form .field input {
+  width: 100%;
+  padding: 8px;
+  border-bottom: 1px solid var(--pr-clr-400);
+  font-family: "DMSans-SemiBold", sans-serif;
+  font-size: var(--fs-200);
+  color: var(--pr-clr-300);
+}
+body main .signup-form__section .signup__form .field input::-moz-placeholder {
+  font-family: "DMSans-Regular", sans-serif;
+  font-size: var(--fs-200);
+  color: var(--pr-clr-400);
+}
+body main .signup-form__section .signup__form .field input::placeholder {
+  font-family: "DMSans-Regular", sans-serif;
+  font-size: var(--fs-200);
+  color: var(--pr-clr-400);
+}
+body main .signup-form__section .signup__form .field input:hover, body main .signup-form__section .signup__form .field input:focus {
+  border-color: var(--pr-clr-300);
+}
+body main .signup-form__section .submit__button {
+  width: 100%;
+  font-family: "DMSans-SemiBold", sans-serif;
+  font-size: var(--fs-200);
+  color: var(--ntrl-clr-100);
+  background-color: var(--pr-clr-300);
+  padding: 1rem;
+  border-radius: 6px;
+}
+body main .signup-form__section .login__link {
+  align-self: center;
+  font-family: "DMSans-Regular", sans-serif;
+  font-size: var(--fs-200);
+  color: var(--pr-clr-300);
+}
+
+body {
+  width: 100%;
+  min-height: 100vh;
+  background: url(/assets/images/mesh_bg.png);
+  background-repeat: no-repeat;
+  background-size: 100%;
+}
+body main {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+body main .login-form__section {
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  flex-direction: column;
+  gap: 42px;
+  width: 414px;
+  background-color: var(--ntrl-clr-100);
+  padding: 2rem;
+  margin-block: 4rem;
+  border-radius: 8px;
+  overflow: hidden;
+}
+body main .login-form__section .header {
+  align-self: center;
+  font-family: "DMSans-Black", sans-serif;
+  font-size: var(--fs-400);
+  color: var(--pr-clr-300);
+}
+body main .login-form__section .login__form {
+  width: 100%;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  flex-direction: column;
+  gap: 2rem;
+}
+body main .login-form__section .login__form .field {
+  width: 100%;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  flex-direction: column;
+  gap: 0;
+}
+body main .login-form__section .login__form .field label {
+  font-family: "DMSans-SemiBold", sans-serif;
+  font-size: var(--fs-200);
+  color: var(--pr-clr-400);
+}
+body main .login-form__section .login__form .field input {
+  width: 100%;
+  padding: 8px;
+  border-bottom: 1px solid var(--pr-clr-400);
+  font-family: "DMSans-SemiBold", sans-serif;
+  font-size: var(--fs-200);
+  color: var(--pr-clr-300);
+}
+body main .login-form__section .login__form .field input::-moz-placeholder {
+  font-family: "DMSans-Regular", sans-serif;
+  font-size: var(--fs-200);
+  color: var(--pr-clr-400);
+}
+body main .login-form__section .login__form .field input::placeholder {
+  font-family: "DMSans-Regular", sans-serif;
+  font-size: var(--fs-200);
+  color: var(--pr-clr-400);
+}
+body main .login-form__section .login__form .field input:hover, body main .login-form__section .login__form .field input:focus {
+  border-color: var(--pr-clr-300);
+}
+body main .login-form__section .submit__button {
+  width: 100%;
+  font-family: "DMSans-SemiBold", sans-serif;
+  font-size: var(--fs-200);
+  color: var(--ntrl-clr-100);
+  background-color: var(--pr-clr-300);
+  padding: 1rem;
+  border-radius: 6px;
+}
+body main .login-form__section .signup__link {
+  align-self: center;
+  font-family: "DMSans-Regular", sans-serif;
+  font-size: var(--fs-200);
+  color: var(--pr-clr-300);
+}/*# sourceMappingURL=styles.css.map */
