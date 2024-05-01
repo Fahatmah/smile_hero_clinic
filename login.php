@@ -1,21 +1,35 @@
+<?php
+require_once 'includes/config_session.inc.php';
+require_once 'includes/signup_view.inc.php';
+require_once 'includes/login_view.inc.php';
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Signup an Account | Smile Hero Clinic</title>
+    <title>Log in your account | Smile Hero Clinic</title>
     <!-- stylesheets -->
     <link rel="stylesheet" href="src/dist/styles.css" />
   </head>
   <body>
+
+  <?php
+    //  outputUsername();
+  ?>
+  
     <main>
       <!-- navigation bar -->
       <nav class="nav">
-        <img src="/assets/images/logoipsum.svg" alt="smile hero clinic logo " />
+        <img src="./assets/images/logoipsum.svg" alt="smile hero clinic logo " />
         <!-- links -->
         <ul class="nav__links">
           <!-- <li>
-            <a href="/index.html#branchesSection">Branches</a>
+            <button>
+              <a href="#">Branches</a>
+            </button>
           </li> -->
           <li>
             <button>
@@ -24,60 +38,56 @@
           </li>
           <li>
             <button>
-              <a href="/login.html" target="_blank">Login</a>
+              <a href="login.html">Login</a>
             </button>
           </li>
           <li class="signup_button">
             <button>
-              <a href="/signup.html">Sign Up</a>
+              <a href="signup.php" target="_blank">Sign Up</a>
             </button>
           </li>
         </ul>
       </nav>
 
       <!-- sign up form -->
-      <section class="signup-form__section">
-        <h1 class="header">Create new account</h1>
+      <section class="login-form__section">
+        <h1 class="header">Login</h1>
         <!-- form -->
-        <form action="" class="signup__form">
+        <form action="includes/login.inc.php" method="post" class="login__form">
           <div class="field">
-            <label for="name">Name</label>
+            <label for="username">Username</label>
             <input
               type="text"
-              placeholder="e.g. Fahatmah Mabang"
-              id="name"
-              name="name"
-            />
-          </div>
-          <div class="field">
-            <label for="username">Username</label
-            ><input
-              type="text"
-              placeholder="e.g. fahatmah"
+              placeholder="fahatmahmabang"
               id="username"
               name="username"
             />
           </div>
           <div class="field">
-            <label for="password">Email</label
+            <label for="password">Password</label
             ><input
               type="password"
-              placeholder="e.g. fahatmahmabang@gmail.com"
+              placeholder="********"
               id="password"
               name="password"
             />
           </div>
           <!-- submit button -->
-          <button type="submit" class="submit__button">Signup</button>
-          <!-- login form link -->
+          <button type="submit" class="submit__button">login</button>
+          <!-- signup form link -->
           <a
-            href="/login.html"
+            href="signup.php"
             target="_blank"
             rel="noopener noreferrer"
-            class="login__link"
-            >Already have an account? Login</a
+            class="signup__link"
+            >Don't have an account? Signup</a
           >
         </form>
+
+        <?php
+          //classs name of text is form_error
+          checkLoginErrors();
+        ?>
       </section>
     </main>
     <!-- footer -->

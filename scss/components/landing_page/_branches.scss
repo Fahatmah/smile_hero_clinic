@@ -1,4 +1,4 @@
-@use '../../abstracts' as *;
+@use "../../abstracts" as *;
 
 .branches__section {
   width: 100%;
@@ -10,7 +10,7 @@
   .header {
     color: var(--pr-clr-100);
     font-size: var(--fs-500);
-    font-family: 'DMSans-Bold', sans-serif;
+    font-family: "DMSans-Bold", sans-serif;
   }
 
   .branches__container {
@@ -46,7 +46,7 @@
         p {
           position: relative;
           z-index: 1;
-          font-family: 'DMSans-SemiBold', sans-serif;
+          font-family: "DMSans-SemiBold", sans-serif;
           font-size: var(--fs-400);
           color: var(--ntrl-clr-100);
         }
@@ -57,7 +57,7 @@
         padding: 30px;
 
         .branch__title {
-          font-family: 'DMSans-SemiBold', sans-serif;
+          font-family: "DMSans-SemiBold", sans-serif;
           font-size: var(--fs-300);
           color: var(--pr-clr-300);
         }
@@ -68,7 +68,7 @@
         }
 
         button {
-          font-family: 'DMSans-Regular', sans-serif;
+          font-family: "DMSans-Regular", sans-serif;
           font-size: var(--fs-200);
           color: var(--ntrl-clr-100);
           width: 100%;
