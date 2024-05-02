@@ -147,11 +147,7 @@ require_once "includes/signup_view.inc.php"
       <div class="contacts__container">
         <div class="contact">
           <img
-<<<<<<< HEAD:signup.php
-            src="./assets/icons/landing_page/location-dot-solid.svg"
-=======
             src="/assets/icons/landing_page/location-dot-solid.png"
->>>>>>> main:signup.html
             alt=""
             style="width: 2rem; height: 2rem"
           />
@@ -159,11 +155,7 @@ require_once "includes/signup_view.inc.php"
         </div>
         <div class="contact">
           <img
-<<<<<<< HEAD:signup.php
-            src="./assets/icons/landing_page/envelope-solid.svg"
-=======
             src="/assets/icons/landing_page/envelope-solid.png"
->>>>>>> main:signup.html
             alt=""
             style="width: 2rem; height: 2rem"
           />
@@ -171,11 +163,7 @@ require_once "includes/signup_view.inc.php"
         </div>
         <div class="contact">
           <img
-<<<<<<< HEAD:signup.php
-            src="./assets/icons/landing_page/phone-solid.svg"
-=======
             src="/assets/icons/landing_page/phone-solid.png"
->>>>>>> main:signup.html
             alt=""
             style="width: 2rem; height: 2rem"
           />
@@ -192,33 +180,21 @@ require_once "includes/signup_view.inc.php"
         <div class="social-medias">
           <a href=""
             ><img
-<<<<<<< HEAD:signup.php
-              src="./assets/icons/landing_page/square-instagram.svg"
-=======
               src="/assets/icons/landing_page/square-instagram.png"
->>>>>>> main:signup.html
               alt="instagram"
               style="width: 2rem; height: 2rem"
             />
           </a>
           <a href=""
             ><img
-<<<<<<< HEAD:signup.php
-              src="./assets/icons/landing_page/square-facebook.svg"
-=======
               src="/assets/icons/landing_page/square-facebook.png"
->>>>>>> main:signup.html
               alt="facebook"
               style="width: 2rem; height: 2rem"
             />
           </a>
           <a href=""
             ><img
-<<<<<<< HEAD:signup.php
-              src="./assets/icons/landing_page/linkedin.svg"
-=======
               src="/assets/icons/landing_page/linkedin.png"
->>>>>>> main:signup.html
               alt="linkedin"
               style="width: 2rem; height: 2rem"
             />
