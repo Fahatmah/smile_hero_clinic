@@ -43,6 +43,20 @@ function createUser(object $pdo,string $userid, string $fullname, string $email,
     setUser( $pdo, $userid,  $fullname,  $email,  $username, $password);
 }
 
-function generateUserID() {
-    return uniqid(); // You can use any method to generate a unique ID
+
+function generateUserID($conn) {
+    $unique = false;
+    $userID = '';
+    while (!$unique) {
+        $randString = strval(mt_rand()); // Convert integer to string
+        $userID = 'SHC' . substr(md5(uniqid($randString, true)), 0, 4) . 'TCU';
+        $query = "SELECT user_id FROM users WHERE user_id = :user_id";
+        $stmt = $conn->prepare($query);
+        $stmt->bindParam(':user_id', $userID);
+        $stmt->execute();
+        if ($stmt->rowCount() === 0) {
+            $unique = true;
+        }
+    }
+    return $userID;
 }

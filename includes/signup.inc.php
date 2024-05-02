@@ -12,19 +12,19 @@ if($_SERVER['REQUEST_METHOD'] === "POST") {
         require_once("signup_model.inc.php");
         require_once("signup_contr.inc.php");
 
-        $user_id = generateUserID();
+        $user_id = generateUserID($pdo);
 
         // ERROR HANDLERS
         $errors = [];
 
        if(isInputEmpty($fullname, $email, $username, $password)) {
-        $errors["emptyInput"] = "Fill in all fields!";
+        // $errors["emptyInput"] = "Fill in all fields!";
        }
        if(isNameTaken($pdo, $fullname)) {
         $errors["nameTaken"] = "name is already taken";
        }
        if(isEmailInvalid($email)) {
-        $errors["invalidEmail"] = "Email is used!";
+        $errors["invalidEmail"] = "Email is invalid!";
        }
        if(isUsernameTaken($pdo, $username)) {
         $errors["usernameTaken"] = "Username is already taken";

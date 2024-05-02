@@ -13,13 +13,23 @@ require_once 'includes/login_view.inc.php';
     <title>Log in your account | Smile Hero Clinic</title>
     <!-- stylesheets -->
     <link rel="stylesheet" href="src/dist/styles.css" />
+
+    <style>
+      .form_error{
+        position: absolute;
+        display: block;
+        left: 10em;
+        top: 22em;
+        color: red;
+        font-size: .75rem;
+      }
+
+      .login-form__section{
+        position: relative;
+      }
+    </style>
   </head>
   <body>
-
-  <?php
-    //  outputUsername();
-  ?>
-  
     <main>
       <!-- navigation bar -->
       <nav class="nav">
@@ -61,6 +71,7 @@ require_once 'includes/login_view.inc.php';
               placeholder="fahatmahmabang"
               id="username"
               name="username"
+              required
             />
           </div>
           <div class="field">
@@ -70,8 +81,13 @@ require_once 'includes/login_view.inc.php';
               placeholder="********"
               id="password"
               name="password"
+              required
             />
           </div>
+          <?php
+          //classs name of text is form_error
+          checkLoginErrors();
+        ?>
           <!-- submit button -->
           <button type="submit" class="submit__button">login</button>
           <!-- signup form link -->
@@ -83,11 +99,6 @@ require_once 'includes/login_view.inc.php';
             >Don't have an account? Signup</a
           >
         </form>
-
-        <?php
-          //classs name of text is form_error
-          checkLoginErrors();
-        ?>
       </section>
     </main>
     <!-- footer -->
@@ -111,7 +122,7 @@ require_once 'includes/login_view.inc.php';
       <div class="contacts__container">
         <div class="contact">
           <img
-            src="/assets/icons/landing_page/location-dot-solid.svg"
+            src="./assets/icons/landing_page/location-dot-solid.svg"
             alt=""
             style="width: 2rem; height: 2rem"
           />
@@ -119,7 +130,7 @@ require_once 'includes/login_view.inc.php';
         </div>
         <div class="contact">
           <img
-            src="/assets/icons/landing_page/envelope-solid.svg"
+            src="./assets/icons/landing_page/envelope-solid.svg"
             alt=""
             style="width: 2rem; height: 2rem"
           />
@@ -127,7 +138,7 @@ require_once 'includes/login_view.inc.php';
         </div>
         <div class="contact">
           <img
-            src="/assets/icons/landing_page/phone-solid.svg"
+            src="./assets/icons/landing_page/phone-solid.svg"
             alt=""
             style="width: 2rem; height: 2rem"
           />
@@ -144,21 +155,21 @@ require_once 'includes/login_view.inc.php';
         <div class="social-medias">
           <a href=""
             ><img
-              src="/assets/icons/landing_page/square-instagram.svg"
+              src="./assets/icons/landing_page/square-instagram.svg"
               alt="instagram"
               style="width: 2rem; height: 2rem"
             />
           </a>
           <a href=""
             ><img
-              src="/assets/icons/landing_page/square-facebook.svg"
+              src="./assets/icons/landing_page/square-facebook.svg"
               alt="facebook"
               style="width: 2rem; height: 2rem"
             />
           </a>
           <a href=""
             ><img
-              src="/assets/icons/landing_page/linkedin.svg"
+              src="./assets/icons/landing_page/linkedin.svg"
               alt="linkedin"
               style="width: 2rem; height: 2rem"
             />

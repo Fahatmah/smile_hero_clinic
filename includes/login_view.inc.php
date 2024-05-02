@@ -17,10 +17,8 @@ function outputUsername(){
 }
 
 function checkLoginErrors(){
-    if (isset($_SESSION["error_login"])) {
+    if (isset($_SESSION["errors_login"])) {
         $errors = $_SESSION["errors_login"];
-
-        echo"<br>";
 
          foreach ($errors as $error) {
             echo '<p class="form_error">' . $error . '</p>';

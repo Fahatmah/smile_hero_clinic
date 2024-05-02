@@ -36,7 +36,7 @@ function getName(object $pdo, string $fullname){
 
 
 function setUser( object $pdo,string $userid, string $fullname, string $email, string $username,string $password){
-    $query = "INSERT INTO users (id, fullname, email, username, pass, created_at) VALUES (:userid, :fullname, :email, :username, :pass, NOW())";
+    $query = "INSERT INTO users (user_id, fullname, email, username, pass, created_at) VALUES (:userid, :fullname, :email, :username, :pass, NOW())";
     $stmt = $pdo->prepare($query); // to prevent sql injection by separating data to query
 
     $options = [    

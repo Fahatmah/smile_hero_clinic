@@ -12,10 +12,6 @@ if($_SERVER['REQUEST_METHOD'] === "POST"){
           // ERROR HANDLERS
           $errors = [];
 
-          if(isInputEmpty($username, $password)) {
-           $errors["emptyInput"] = "Fill in all fields!";
-          }
-        
           $result = getUser($pdo, $username);   
 
           if(isUsernameWrong($result)){
@@ -37,10 +33,10 @@ if($_SERVER['REQUEST_METHOD'] === "POST"){
 
           // to create a new session id using the user id to match session id and user session id
           $newSessionId = session_create_id();
-          $sessionId = $newSessionId . "_" . $result["id"];
+          $sessionId = $newSessionId . "_" . $result["user_id"];
           session_id($sessionId);
 
-          $_SESSION["user_id"] =  $result["id"];
+          $_SESSION["user_id"] =  $result["user_id"];
           $_SESSION["user_username"] = htmlspecialchars($result["username"]);
 
           $_SESSION["last_regeneration"] = time();
