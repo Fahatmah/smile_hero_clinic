@@ -1,3 +1,8 @@
+<?php
+require_once "includes/config_session.inc.php";
+require_once "includes/signup_view.inc.php"
+?>
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -6,12 +11,31 @@
     <title>Signup an Account | Smile Hero Clinic</title>
     <!-- stylesheets -->
     <link rel="stylesheet" href="src/dist/styles.css" />
+    <style>
+      .error_container{
+        position: absolute;
+        display: block;
+        display: flex;
+        bottom: 1.25em;
+        left: 36.75em;
+      }
+      .form_error{
+      
+      
+        color: red;
+        font-size: .75rem;
+      }
+
+      .login-form__section{
+        position: relative;
+      }
+    </style>
   </head>
   <body>
     <main class="signup__page">
       <!-- navigation bar -->
       <nav class="nav">
-        <img src="/assets/images/logoipsum.svg" alt="smile hero clinic logo " />
+        <img src="./assets/images/logoipsum.svg" alt="smile hero clinic logo " />
         <!-- links -->
         <ul class="nav__links">
           <!-- <li>
@@ -24,12 +48,12 @@
           </li>
           <li>
             <button>
-              <a href="/login.html" target="_blank">Login</a>
+              <a href="login.php" target="_blank">Login</a>
             </button>
           </li>
           <li class="signup_button">
             <button>
-              <a href="/signup.html">Sign Up</a>
+              <a href="signup.html">Sign Up</a>
             </button>
           </li>
         </ul>
@@ -39,14 +63,25 @@
       <section class="signup-form__section">
         <h1 class="header">Create new account</h1>
         <!-- form -->
-        <form action="" class="signup__form">
+        <form action="includes/signup.inc.php" method="post" class="signup__form">
           <div class="field">
-            <label for="name">Name</label>
+            <label for="fullname">Name</label>
             <input
               type="text"
               placeholder="e.g. Fahatmah Mabang"
-              id="name"
-              name="name"
+              id="fullname"
+              name="fullname"
+              required
+            />
+          </div>
+          <div class="field">
+            <label for="email">Email</label
+            ><input
+              type="email"
+              placeholder="e.g. fahatmahmabang@gmail.com"
+              id="email"
+              name="email"
+              required
             />
           </div>
           <div class="field">
@@ -56,17 +91,28 @@
               placeholder="e.g. fahatmah"
               id="username"
               name="username"
+              required
             />
           </div>
           <div class="field">
-            <label for="password">Email</label
+            <label for="password">Password</label
             ><input
               type="password"
-              placeholder="e.g. fahatmahmabang@gmail.com"
+              placeholder="e.g. password"
               id="password"
               name="password"
+              required
             />
           </div>
+
+          <div class="error_container">
+          <?php
+      //classs name of text is form_error
+       checkSignupErrors();
+      ?>
+          </div>
+          
+    
           <!-- submit button -->
           <button type="submit" class="submit__button">Signup</button>
           <!-- login form link -->

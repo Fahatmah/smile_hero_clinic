@@ -1,3 +1,10 @@
+<?php
+require_once 'includes/config_session.inc.php';
+require_once 'includes/signup_view.inc.php';
+require_once 'includes/login_view.inc.php';
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -6,12 +13,27 @@
     <title>Log in your account | Smile Hero Clinic</title>
     <!-- stylesheets -->
     <link rel="stylesheet" href="src/dist/styles.css" />
+
+    <style>
+      .form_error{
+        position: absolute;
+        display: block;
+        left: 10em;
+        top: 22em;
+        color: red;
+        font-size: .75rem;
+      }
+
+      .login-form__section{
+        position: relative;
+      }
+    </style>
   </head>
   <body>
     <main class="login__page">
       <!-- navigation bar -->
       <nav class="nav">
-        <img src="/assets/images/logoipsum.svg" alt="smile hero clinic logo " />
+        <img src="./assets/images/logoipsum.svg" alt="smile hero clinic logo " />
         <!-- links -->
         <ul class="nav__links">
           <!-- <li>
@@ -26,12 +48,12 @@
           </li>
           <li>
             <button>
-              <a href="/login.html">Login</a>
+              <a href="login.html">Login</a>
             </button>
           </li>
           <li class="signup_button">
             <button>
-              <a href="/signup.html" target="_blank">Sign Up</a>
+              <a href="signup.php" target="_blank">Sign Up</a>
             </button>
           </li>
         </ul>
@@ -41,14 +63,15 @@
       <section class="login-form__section">
         <h1 class="header">Login</h1>
         <!-- form -->
-        <form action="" class="login__form">
+        <form action="includes/login.inc.php" method="post" class="login__form">
           <div class="field">
-            <label for="email">Email</label>
+            <label for="username">Username</label>
             <input
-              type="email"
-              placeholder="fahatmahmabang@gmail.com"
-              id="email"
-              name="email"
+              type="text"
+              placeholder="fahatmahmabang"
+              id="username"
+              name="username"
+              required
             />
           </div>
           <div class="field">
@@ -58,13 +81,18 @@
               placeholder="********"
               id="password"
               name="password"
+              required
             />
           </div>
+          <?php
+          //classs name of text is form_error
+          checkLoginErrors();
+        ?>
           <!-- submit button -->
           <button type="submit" class="submit__button">login</button>
           <!-- signup form link -->
           <a
-            href="/signup.html"
+            href="signup.php"
             target="_blank"
             rel="noopener noreferrer"
             class="signup__link"
