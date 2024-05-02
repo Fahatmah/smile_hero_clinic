@@ -1,0 +1,84 @@
+@use '../../abstracts' as *;
+
+.profile__info {
+  width: 767px;
+  @include display-flex($dir: column, $gap: 4rem, $y: flex-start);
+
+  h1 {
+    font-family: 'DMSans-Bold', sans-serif;
+    font-size: var(--fs-400);
+    color: var(--pr-clr-300);
+  }
+
+  .info__header {
+    width: 100%;
+    @include display-flex($x: space-between);
+
+    .details__container {
+      @include display-flex($x: space-between, $gap: 1rem);
+
+      .user__details {
+        .user__name {
+          font-family: 'DMSans-Bold', sans-serif;
+          font-size: var(--fs-400);
+          color: var(--pr-clr-300);
+        }
+
+        .user__address {
+          color: var(--ntrl-clr-350);
+          font-family: 'DMSans-Regular', sans-serif;
+          font-size: var(--fs-200);
+        }
+      }
+    }
+
+    .delete__button {
+      width: 160px;
+      padding: 1rem;
+      background-color: var(--pr-clr-100);
+      border-radius: 6px;
+      color: var(--ntrl-clr-100);
+    }
+  }
+
+  // more details container
+
+  .additional_details__container {
+    width: 100%;
+    @include display-flex($dir: column, $y: flex-start);
+    padding: 1rem;
+    border: 1px solid var(--pr-clr-300);
+    border-radius: 6px;
+
+    .item {
+      width: 100%;
+      height: 80px;
+      @include display-flex($x: space-between);
+      // padding: 1rem;
+
+      &:not(:last-child) {
+        border-bottom: 1px solid var(--pr-clr-400);
+      }
+
+      .details {
+        width: 100%;
+        @include display-flex($dir: column, $y: flex-start, $gap: 12px);
+
+        .detail__header {
+          font-family: 'DMSans-Bold', sans-serif;
+          font-size: var(--fs-300);
+          color: var(--pr-clr-300);
+        }
+      }
+    }
+
+    .edit__button {
+      width: 100px;
+      height: 100%;
+      color: var(--pr-clr-300);
+      border-left: 1px solid var(--pr-clr-400);
+
+      // outline: var(--debug);
+    }
+  }
+}

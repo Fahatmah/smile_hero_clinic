@@ -2,14 +2,18 @@
   // colors
   // primary colors
   --pr-clr-100: #e84531;
+  --pr-clr-150: #ff6e5c;
   --pr-clr-200: #faaf0d;
   --pr-clr-300: #1d72f2;
+  --pr-clr-350: #5c9dff;
   --pr-clr-400: #1d72f285;
 
   // neutral colors
   --ntrl-clr-100: #ffffff;
   --ntrl-clr-200: #ebebeb;
+  --ntrl-clr-250: #f0f3f9;
   --ntrl-clr-300: #616161;
+  --ntrl-clr-350: #2c2c2c;
   --ntrl-clr-400: #212121;
 
   // font family
@@ -79,5 +83,18 @@ body {
 
   main {
     width: 100%;
+
+    &.landing__page,
+    &.signup__page,
+    &.login__page {
+      background: url(/assets/images/mesh_bg.png);
+      background-repeat: no-repeat;
+      background-size: 100%;
+    }
+
+    .account__container {
+      margin-left: 300px;
+      padding: 2rem;
+    }
   }
 }

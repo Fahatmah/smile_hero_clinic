@@ -1,0 +1,24 @@
+@use '../../abstracts' as *;
+
+.appointment__page {
+  width: 767px;
+  @include display-flex($dir: column, $y: flex-start, $gap: 2rem);
+
+  .header {
+    width: 100%;
+    @include display-flex($x: space-between);
+
+    h1 {
+      font-family: 'DMSans-Bold', sans-serif;
+      font-size: var(--fs-400);
+      color: var(--pr-clr-300);
+    }
+
+    .appointment__button {
+      padding: 1rem;
+      background-color: var(--pr-clr-100);
+      color: var(--ntrl-clr-100);
+      border-radius: 6px;
+    }
+  }
+}
