@@ -30,7 +30,7 @@ require_once 'includes/login_view.inc.php';
     </style>
   </head>
   <body>
-    <main>
+    <main class="login__page">
       <!-- navigation bar -->
       <nav class="nav">
         <img src="./assets/images/logoipsum.svg" alt="smile hero clinic logo " />
@@ -122,7 +122,11 @@ require_once 'includes/login_view.inc.php';
       <div class="contacts__container">
         <div class="contact">
           <img
+<<<<<<< HEAD:login.php
             src="./assets/icons/landing_page/location-dot-solid.svg"
+=======
+            src="/assets/icons/landing_page/location-dot-solid.png"
+>>>>>>> main:login.html
             alt=""
             style="width: 2rem; height: 2rem"
           />
@@ -130,7 +134,11 @@ require_once 'includes/login_view.inc.php';
         </div>
         <div class="contact">
           <img
+<<<<<<< HEAD:login.php
             src="./assets/icons/landing_page/envelope-solid.svg"
+=======
+            src="/assets/icons/landing_page/envelope-solid.png"
+>>>>>>> main:login.html
             alt=""
             style="width: 2rem; height: 2rem"
           />
@@ -138,7 +146,11 @@ require_once 'includes/login_view.inc.php';
         </div>
         <div class="contact">
           <img
+<<<<<<< HEAD:login.php
             src="./assets/icons/landing_page/phone-solid.svg"
+=======
+            src="/assets/icons/landing_page/phone-solid.png"
+>>>>>>> main:login.html
             alt=""
             style="width: 2rem; height: 2rem"
           />
@@ -155,21 +167,33 @@ require_once 'includes/login_view.inc.php';
         <div class="social-medias">
           <a href=""
             ><img
+<<<<<<< HEAD:login.php
               src="./assets/icons/landing_page/square-instagram.svg"
+=======
+              src="/assets/icons/landing_page/square-instagram.png"
+>>>>>>> main:login.html
               alt="instagram"
               style="width: 2rem; height: 2rem"
             />
           </a>
           <a href=""
             ><img
+<<<<<<< HEAD:login.php
               src="./assets/icons/landing_page/square-facebook.svg"
+=======
+              src="/assets/icons/landing_page/square-facebook.png"
+>>>>>>> main:login.html
               alt="facebook"
               style="width: 2rem; height: 2rem"
             />
           </a>
           <a href=""
             ><img
+<<<<<<< HEAD:login.php
               src="./assets/icons/landing_page/linkedin.svg"
+=======
+              src="/assets/icons/landing_page/linkedin.png"
+>>>>>>> main:login.html
               alt="linkedin"
               style="width: 2rem; height: 2rem"
             />

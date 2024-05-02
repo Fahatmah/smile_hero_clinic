@@ -7,7 +7,7 @@
 
 // components
 // general | use across multiple pages
-@use 'components/account_nav';
+@use 'components/account_header';
 @use 'components/account_footer';
 @use 'components/nav';
 @use 'components/footer';
@@ -25,13 +25,14 @@
 @use 'components/login_page/login_form';
 
 // account page
-@use 'components/account_page/side_nav';
-@use 'components/account_page/account_header';
-@use 'components/account_page/info';
-
-// appointment form page
-@use 'components/appointment_form_page/form';
-@use 'components/appointment_form_page/confirmation';
+@use 'components/user_page/side_nav';
+@use 'components/user_page/info';
+@use 'components/user_page/appointment_page';
+@use 'components/user_page/appointment_form_page';
+@use 'components/user_page/confirmation';
+@use 'components/user_page/history';
+@use 'components/user_page/faqs_questions';
+@use 'components/user_page/feedback';
 
 // admin interface
 @use 'components/admin_page/dashboard/admin_nav';
