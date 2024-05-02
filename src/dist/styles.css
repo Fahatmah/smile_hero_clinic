@@ -160,7 +160,7 @@ body main.landing__page, body main.signup__page, body main.login__page {
 }
 body main .account__container {
   margin-left: 300px;
-  padding: 2rem;
+  padding: rem;
 }
 
 .account__header {
