@@ -1,15 +1,15 @@
 <?php
 
-declare(strict_types= 1);
+declare(strict_types=1);
 
-function getUser(object $pdo,string $username){
-
-    $query = "SELECT * FROM users WHERE username = :username;";
-    $stmt = $pdo->prepare($query); // to prevent sql injection by separating data to query
-    $stmt->bindParam(":username", $username);
+function getUser(mysqli $conn, string $username) {
+    $query = "SELECT * FROM users WHERE username = ?;";
+    $stmt = $conn->prepare($query);
+    $stmt->bind_param("s", $username);
     $stmt->execute();
 
-    $result = $stmt->fetch(PDO::FETCH_ASSOC);
-    return $result;
-}
+    $result = $stmt->get_result();
+    $user = $result->fetch_assoc();
 
+    return $user;
+}
