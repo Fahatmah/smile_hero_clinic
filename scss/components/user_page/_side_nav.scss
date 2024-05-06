@@ -14,10 +14,14 @@
     li {
       width: 100%;
       @include display-flex($x: flex-start, $gap: 12px);
-      padding: 1rem;
+      // padding: 1rem;
       border-radius: 6px;
 
       // outline: var(--debug);
+
+      &:hover {
+        background-color: var(--ntrl-clr-350);
+      }
 
       &.active__link {
         background-color: var(--ntrl-clr-350);
@@ -30,6 +34,10 @@
 
       a,
       .theme__button {
+        @include display-flex($x: flex-start, $gap: 12px);
+        width: 100%;
+        height: 100%;
+        padding: 1rem;
         color: var(--ntrl-clr-100);
         font-size: var(--fs-200);
       }
@@ -37,9 +45,10 @@
       .logout__button {
         width: 100%;
         padding: 1rem;
+        justify-content: center;
         background-color: var(--pr-clr-300);
         border-radius: 6px;
-        font-family: "DMSans-Medium", sans-serif;
+        font-family: 'DMSans-Medium', sans-serif;
         text-align: center;
       }
     }

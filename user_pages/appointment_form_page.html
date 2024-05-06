@@ -23,48 +23,68 @@
       <nav class="side__nav">
         <ul>
           <li>
-            <img
-              src="../assets/icons/user_account/profile.png"
-              alt=""
-              style="width: 1.375rem; height: 1.375rem"
-            /><a href="#">Profile</a>
+            <a href="../user_pages/profile.html">
+              <img
+                src="../assets/icons/user_account/profile.png"
+                alt=""
+                style="width: 1.375rem; height: 1.375rem"
+              />
+              Profile
+            </a>
           </li>
           <li>
-            <img
-              src="../assets/icons/user_account/moon.png"
-              alt=""
-              style="width: 1.375rem; height: 1.375rem"
-            /><button class="theme__button">Dark Theme</button>
+            <a href="#">
+              <img
+                src="../assets/icons/user_account/moon.png"
+                alt=""
+                style="width: 1.375rem; height: 1.375rem"
+              />
+              Dark Theme
+            </a>
           </li>
           <li class="active__link">
-            <img
-              src="../assets/icons/user_account/appointments.png"
-              alt=""
-              style="width: 1.375rem; height: 1.375rem"
-            /><a href="../user_pages/appointment_page.html">Appointments</a>
+            <a href="#">
+              <img
+                src="../assets/icons/user_account/appointments.png"
+                alt=""
+                style="width: 1.375rem; height: 1.375rem"
+              />
+              Appointments
+            </a>
           </li>
           <li>
-            <img
-              src="../assets/icons/user_account/medical_history.png"
-              alt=""
-              style="width: 1.375rem; height: 1.375rem"
-            /><a href="../user_pages/dental_history.html">Dental History</a>
+            <a href="../user_pages/dental_history.html">
+              <img
+                src="../assets/icons/user_account/medical_history.png"
+                alt=""
+                style="width: 1.375rem; height: 1.375rem"
+              />
+              Dental History
+            </a>
           </li>
           <li>
-            <img
-              src="../assets/icons/user_account/faqs_questions.png"
-              alt=""
-              style="width: 1.375rem; height: 1.375rem"
-            /><a href="../user_pages/faqs_questions.html">FAQs & Questions</a>
+            <a href="../user_pages/faqs_questions.html">
+              <img
+                src="../assets/icons/user_account/faqs_questions.png"
+                alt=""
+                style="width: 1.375rem; height: 1.375rem"
+              />
+              FAQs & Questions
+            </a>
           </li>
           <li>
-            <img
-              src="../assets/icons/user_account/feedback.png"
-              alt=""
-              style="width: 1.375rem; height: 1.375rem"
-            /><a href="../user_pages/feedback.html">Feedback</a>
+            <a href="../user_pages/feedback.html">
+              <img
+                src="../assets/icons/user_account/feedback.png"
+                alt=""
+                style="width: 1.375rem; height: 1.375rem"
+              />
+              Feedback
+            </a>
           </li>
-          <li><a href="../index.html" class="logout__button">Logout</a></li>
+          <li>
+            <a href="../index.html" class="logout__button"> Logout </a>
+          </li>
         </ul>
       </nav>
 
@@ -74,7 +94,8 @@
 
         <form action="" class="form">
           <!-- personal details -->
-          <section class="personal__details">
+          <section class="personal__details form__container">
+            <h2>Personal Details</h2>
             <div class="field">
               <label for="name">Name</label>
               <input
@@ -82,6 +103,7 @@
                 name="name"
                 id="name"
                 placeholder="e.g. Fahatmah Mabang"
+                required
               />
             </div>
 
@@ -92,6 +114,7 @@
                 name="email"
                 id="email"
                 placeholder="e.g. fahatmahmabang@gmail.com"
+                required
               />
             </div>
 
@@ -102,6 +125,7 @@
                 name="contactnumber"
                 id="contactnumber"
                 placeholder="e.g. 09123456789"
+                required
               />
             </div>
 
@@ -112,57 +136,55 @@
           </section>
 
           <!-- preferences -->
-          <section class="preferences">
-            <!-- <div class="field">
-              <label for="appointmentDate">Date</label>
-              <input
-                type="datetime"
-                name="appointmentDate"
-                id="appointmentDate"
-                placeholder="05-02-2024"
-              />
-            </div> -->
+          <section class="preferences form__container">
+            <div class="fields">
+              <h3>Preferences</h3>
 
-            <div class="field">
-              <label for="appointmentDate">Date</label>
-              <select name="appointmentDate" id="appointmentDate">
-                <!-- Options will be dynamically generated here -->
-              </select>
-            </div>
+              <div class="field">
+                <label for="appointmentDate">Date</label>
+                <select name="appointmentDate" id="appointmentDate" required>
+                  <!-- Options will be dynamically generated here -->
+                </select>
+              </div>
 
-            <div class="field">
-              <label for="appointmentTime">Time</label>
-              <select name="appointmentTime" id="appointmentTime">
-                <option value="8:00 AM">8:00 AM</option>
-                <option value="9:00 AM">9:00 AM</option>
-                <option value="10:00 AM">10:00 AM</option>
-                <option value="11:00 AM">11:00 AM</option>
-                <option value="12:00 PM">12:00 PM</option>
-                <option value="1:00 PM">1:00 PM</option>
-                <option value="2:00 PM">2:00 PM</option>
-                <option value="3:00 PM">3:00 PM</option>
-                <option value="4:00 PM">4:00 PM</option>
-                <option value="5:00 PM">5:00 PM</option>
-              </select>
-            </div>
+              <div class="field">
+                <label for="appointmentTime">Time</label>
+                <select name="appointmentTime" id="appointmentTime" required>
+                  <option value="8:00 AM">8:00 AM</option>
+                  <option value="9:00 AM">9:00 AM</option>
+                  <option value="10:00 AM">10:00 AM</option>
+                  <option value="11:00 AM">11:00 AM</option>
+                  <option value="12:00 PM">12:00 PM</option>
+                  <option value="1:00 PM">1:00 PM</option>
+                  <option value="2:00 PM">2:00 PM</option>
+                  <option value="3:00 PM">3:00 PM</option>
+                  <option value="4:00 PM">4:00 PM</option>
+                  <option value="5:00 PM">5:00 PM</option>
+                </select>
+              </div>
 
-            <div class="field">
-              <label for="location">Location</label>
-              <select name="location" id="location">
-                <option value="Bayani Road, Taguig City">
-                  Bayani Road, Taguig City
-                </option>
-                <option value="Main Street, Makati City">
-                  Main Street, Makati City
-                </option>
-                <option value="Central Avenue, Quezon City">
-                  Central Avenue, Quezon City
-                </option>
-              </select>
+              <div class="field">
+                <label for="location">Location</label>
+                <select name="location" id="location" required>
+                  <option value="Bayani Road, Taguig City">
+                    Bayani Road, Taguig City
+                  </option>
+                  <option value="Main Street, Makati City">
+                    Main Street, Makati City
+                  </option>
+                  <option value="Central Avenue, Quezon City">
+                    Central Avenue, Quezon City
+                  </option>
+                </select>
+              </div>
             </div>
+            <p class="text__confirmation">
+              Please review the details and confirm your appointment
+            </p>
+            <button type="submit" class="create_appointment__button">
+              Create Appointment
+            </button>
           </section>
-
-          <button type="submit">Create Appointment</button>
         </form>
       </section>
     </main>
