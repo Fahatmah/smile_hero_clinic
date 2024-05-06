@@ -5,9 +5,10 @@ $dbname = 'smile_hero_clinic';
 $dbusername = 'root';
 $dbpassword = '';
 
-try {
-   $pdo = new PDO("mysql:host=$host;dbname=$dbname",$dbusername, $dbpassword);
-   $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-} catch (PDOException $e) {
-    die('Connection failed'. $e->getMessage());
+
+$conn = new mysqli($host, $dbusername, $dbpassword, $dbname);
+
+
+if ($conn->connect_error) {
+    die("Connection failed: " . $conn->connect_error);
 }

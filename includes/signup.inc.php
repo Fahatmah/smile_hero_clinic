@@ -1,41 +1,40 @@
 <?php
 
-if($_SERVER['REQUEST_METHOD'] === "POST") {
+if ($_SERVER['REQUEST_METHOD'] === "POST") {
 
     $fullname = $_POST["fullname"];
     $email = $_POST["email"];
     $username = $_POST["username"];
     $password = $_POST["password"];
 
-    try {
-        require_once("dbh.inc.php");
-        require_once("signup_model.inc.php");
-        require_once("signup_contr.inc.php");
+    require_once("dbh.inc.php");
+    require_once("signup_model.inc.php");
+    require_once("signup_contr.inc.php");
 
-        $user_id = generateUserID($pdo);
+    $user_id = generateUserID($conn);
 
-        // ERROR HANDLERS
-        $errors = [];
+    // ERROR HANDLERS
+    $errors = [];
 
-       if(isInputEmpty($fullname, $email, $username, $password)) {
+    if (isInputEmpty($fullname, $email, $username, $password)) {
         // $errors["emptyInput"] = "Fill in all fields!";
-       }
-       if(isNameTaken($pdo, $fullname)) {
-        $errors["nameTaken"] = "name is already taken";
-       }
-       if(isEmailInvalid($email)) {
+    }
+    if (isNameTaken($conn, $fullname)) {
+        $errors["nameTaken"] = "Name is already taken";
+    }
+    if (isEmailInvalid($email)) {
         $errors["invalidEmail"] = "Email is invalid!";
-       }
-       if(isUsernameTaken($pdo, $username)) {
+    }
+    if (isUsernameTaken($conn, $username)) {
         $errors["usernameTaken"] = "Username is already taken";
-       }
-       if(isEmailRegistered($pdo, $email)) {
+    }
+    if (isEmailRegistered($conn, $email)) {
         $errors["emailRegistered"] = "Email is already registered";
-       }
+    }
 
-       require_once("config_session.inc.php");
+    require_once("config_session.inc.php");
 
-       if($errors) {
+    if ($errors) {
         $_SESSION["errors_signup"] = $errors;
 
         // to not erase the input if have errors in signup
@@ -49,19 +48,16 @@ if($_SERVER['REQUEST_METHOD'] === "POST") {
 
         header("Location: ../signup.php");
         die();
-       }
-       
-       createUser($pdo, $user_id, $fullname, $email, $username, $password);
-       header("Location: ../login.php?signup=sucess");
-
-       $pdo = null;
-       $stmt = null;
-       
-       die();
-    } catch (PDOException $e) {
-        die('Query failed'. $e->getMessage());
     }
+
+    createUser($conn, $user_id, $fullname, $email, $username, $password);
+    echo "<script>alert('Account is created');</script>";
+    echo "<script>window.location.href='../login.php?signup=success';</script>";
+
+    $conn->close();
+    die();
 } else {
-    header("Location: ../signup.php");
+    echo "<script>alert('Account is not created');</script>";
+    echo "<script>window.location.href='../signup.php';</script>";
     die();
 }

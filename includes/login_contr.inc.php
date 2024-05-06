@@ -2,28 +2,15 @@
 
 declare(strict_types= 1);
 
-function isInputEmpty(string $username,string $password ){
-    if(empty($username) || empty($password)){
-        return true;
-    } else {
-        return false;
-    }
+function isInputEmpty(string $username, string $password) {
+    return empty($username) || empty($password);
 }
 
-
-function isUsernameWrong(bool|array $result){
-    if(!$result){
-        return true;
-    }else{
-        return false;
-    }
+function isUsernameWrong($result) {
+    return !$result;
 }
 
-function isPasswordWrong(string $password, string $hashedPassword){
-    if(!password_verify($password, $hashedPassword)){ 
-        return true;
-    }else{
-        return false;
-    }
+function isPasswordWrong(string $password, string $hashedPassword) {
+    return !password_verify($password, $hashedPassword);
 }
 
