@@ -1,10 +1,16 @@
+<?php
+require_once '../includes/config_session.inc.php';
+require_once '../includes/login_view.inc.php';
+require_once '../includes/appointment_view.inc.php';
+?>
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Create an appointment | Smile Hero Clinic</title>
-    <link rel="stylesheet" href="/src/dist/styles.css" />
+    <link rel="stylesheet" href="../src/dist/styles.css" />
   </head>
   <body>
     <main>
@@ -72,9 +78,25 @@
       <section class="appointment_form__container account__container">
         <h1>Schedule fresh meeting</h1>
 
-        <form action="" class="form">
+        <form action="../includes/appointment.inc.php" method="post" class="form">
+       
+         
           <!-- personal details -->
           <section class="personal__details">
+
+          <?php checkAppointErrors() ?>
+
+           <!-- id of user -->
+          <div class="field">
+            <input 
+              type="text" 
+              value="<?php outputUserId(); ?>"
+              name="user_id" 
+              id="user_id" 
+              style="display: none;"
+              ">
+            </div>
+
             <div class="field">
               <label for="name">Name</label>
               <input
@@ -82,6 +104,7 @@
                 name="name"
                 id="name"
                 placeholder="e.g. Fahatmah Mabang"
+                value="<?php outputFullName() ?>"
               />
             </div>
 
@@ -92,6 +115,7 @@
                 name="email"
                 id="email"
                 placeholder="e.g. fahatmahmabang@gmail.com"
+                value=" <?php outputEmail() ?>"
               />
             </div>
 
@@ -161,8 +185,7 @@
               </select>
             </div>
           </section>
-
-          <button type="submit">Create Appointment</button>
+          <input type="submit" name="submit" value="Create Appointment">
         </form>
       </section>
     </main>
@@ -171,32 +194,32 @@
     <script>
       // Function to generate options for weekdays
       function generateWeekdayOptions() {
-        var select = document.getElementById('appointmentDate')
-        var currentDate = new Date()
-        var options = ''
+        var select = document.getElementById("appointmentDate");
+        var currentDate = new Date();
+        var options = "";
 
         for (var i = 0; i < 7; i++) {
-          currentDate.setDate(currentDate.getDate() + 1) // Move to the next day
-          var dayOfWeek = currentDate.getDay() // Get the day of the week (0-6)
+          currentDate.setDate(currentDate.getDate() + 1); // Move to the next day
+          var dayOfWeek = currentDate.getDay(); // Get the day of the week (0-6)
 
           // Check if it's a weekday (Monday to Friday)
           if (dayOfWeek >= 1 && dayOfWeek <= 5) {
-            var option = document.createElement('option')
-            var dateFormatted = currentDate.toLocaleDateString('en-US', {
-              weekday: 'long',
-              year: 'numeric',
-              month: '2-digit',
-              day: '2-digit',
-            })
-            option.text = dateFormatted
-            option.value = dateFormatted
-            select.add(option)
+            var option = document.createElement("option");
+            var dateFormatted = currentDate.toLocaleDateString("en-US", {
+              weekday: "long",
+              year: "numeric",
+              month: "2-digit",
+              day: "2-digit",
+            });
+            option.text = dateFormatted;
+            option.value = dateFormatted;
+            select.add(option);
           }
         }
       }
 
       // Call the function to generate weekday options
-      generateWeekdayOptions()
+      generateWeekdayOptions();
     </script>
   </body>
 </html>

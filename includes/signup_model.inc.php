@@ -1,56 +1,54 @@
 <?php
 
-declare(strict_types= 1);
+declare(strict_types=1);
 
-function getUsername(object $pdo, string $username){
-
-    $query = "SELECT username FROM users WHERE username = :username;";
-    $stmt = $pdo->prepare($query); // to prevent sql injection by separating data to query
-    $stmt->bindParam(":username", $username);
+function getUsername(mysqli $conn, string $username) {
+    $query = "SELECT user_id FROM users WHERE username = ?";
+    $stmt = $conn->prepare($query);
+    $stmt->bind_param("s", $username);
     $stmt->execute();
 
-    $result = $stmt->fetch(PDO::FETCH_ASSOC);
-    return $result;
-}
-function getEmail(object $pdo, string $email){
+    $result = $stmt->get_result();
+    $user = $result->fetch_assoc();
 
-    $query = "SELECT username FROM users WHERE email = :email;";
-    $stmt = $pdo->prepare($query); // to prevent sql injection by separating data to query
-    $stmt->bindParam(":email", $email);
+    return $user;
+}
+
+function getEmail(mysqli $conn, string $email) {
+    $query = "SELECT user_id FROM users WHERE email = ?";
+    $stmt = $conn->prepare($query);
+    $stmt->bind_param("s", $email);
     $stmt->execute();
 
-    $result = $stmt->fetch(PDO::FETCH_ASSOC);
-    return $result;
+    $result = $stmt->get_result();
+    $user = $result->fetch_assoc();
+
+    return $user;
 }
 
-function getName(object $pdo, string $fullname){
-
-    $query = "SELECT username FROM users WHERE fullname = :fullname;";
-    $stmt = $pdo->prepare($query); // to prevent sql injection by separating data to query
-    $stmt->bindParam(":fullname", $fullname);
+function getName(mysqli $conn, string $fullname) {
+    $query = "SELECT user_id FROM users WHERE fullname = ?";
+    $stmt = $conn->prepare($query);
+    $stmt->bind_param("s", $fullname);
     $stmt->execute();
 
-    $result = $stmt->fetch(PDO::FETCH_ASSOC);
-    return $result;
+    $result = $stmt->get_result();
+    $user = $result->fetch_assoc();
+
+    return $user;
 }
 
+function setUser(mysqli $conn, string $userid, string $fullname, string $email, string $username, string $password) {
+    $query = "INSERT INTO users (user_id, fullname, email, username, pass, created_at) VALUES (?, ?, ?, ?, ?, NOW())";
+    $stmt = $conn->prepare($query);
 
-function setUser( object $pdo,string $userid, string $fullname, string $email, string $username,string $password){
-    $query = "INSERT INTO users (user_id, fullname, email, username, pass, created_at) VALUES (:userid, :fullname, :email, :username, :pass, NOW())";
-    $stmt = $pdo->prepare($query); // to prevent sql injection by separating data to query
-
-    $options = [    
+    $options = [
         'cost' => 12
     ];
     $hashedPassword = password_hash($password, PASSWORD_BCRYPT, $options);
 
-    $stmt->bindParam(":userid", $userid);
-    $stmt->bindParam(":fullname", $fullname);
-    $stmt->bindParam(":email", $email);
-    $stmt->bindParam(":username", $username);
-    $stmt->bindParam(":pass", $hashedPassword);
+    $stmt->bind_param("sssss", $userid, $fullname, $email, $username, $hashedPassword);
     $stmt->execute();
 
-    $result = $stmt->fetch(PDO::FETCH_ASSOC);
-    return $result;
+    return $stmt->affected_rows > 0;
 }
