@@ -17,6 +17,10 @@
 
       // outline: var(--debug);
 
+      &:hover {
+        background-color: var(--ntrl-clr-350);
+      }
+
       &.active__link {
         background-color: var(--ntrl-clr-350);
 

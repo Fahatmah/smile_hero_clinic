@@ -780,6 +780,9 @@ body main .form_container .header {
   width: 100%;
   border-radius: 6px;
 }
+.side__nav ul li:hover {
+  background-color: var(--ntrl-clr-350);
+}
 .side__nav ul li.active__link {
   background-color: var(--ntrl-clr-350);
 }
@@ -813,6 +816,7 @@ body main .form_container .header {
   justify-content: center;
   width: 100%;
   padding: 1rem;
+  justify-content: center;
   background-color: var(--pr-clr-300);
   border-radius: 6px;
   font-family: "DM Sans", sans-serif;

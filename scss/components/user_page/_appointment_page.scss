@@ -154,4 +154,118 @@
       }
     }
   }
+
+  .appointment__container {
+    width: 100%;
+    @include display-flex($gap: 12px, $dir: column);
+
+    .header {
+      width: 100%;
+      @include display-flex($x: space-between);
+      padding: 1rem;
+      background-color: var(--pr-clr-300);
+      border-radius: 6px;
+      color: var(--ntrl-clr-100);
+    }
+
+    .appointments {
+      width: 100%;
+      border: 1px solid var(--pr-clr-300);
+      border-radius: 6px;
+
+      .appointment {
+        .date {
+          @include display-flex($x: space-between);
+          padding: 1rem;
+          color: var(--pr-clr-300);
+          transition: 100ms;
+          cursor: pointer;
+
+          &:hover {
+            background-color: var(--pr-clr-400);
+            color: var(--ntrl-clr-100);
+            font-weight: bold;
+
+            .remove__button {
+              color: var(--ntrl-clr-100);
+            }
+          }
+
+          .remove__button {
+            color: var(--pr-clr-300);
+            cursor: pointer;
+
+            &:hover {
+              text-decoration: underline;
+            }
+          }
+        }
+
+        .details__container {
+          width: 100%;
+          @include display-flex($dir: column);
+          border-top: 1px solid var(--pr-clr-300);
+
+          .detail__header {
+            width: 100%;
+            @include display-flex($x: flex-start);
+            border-bottom: 1px solid var(--pr-clr-300);
+
+            p {
+              padding: 1rem;
+              width: 100%;
+              font-family: 'DMSans-Bold', sans-serif;
+              font-size: var(--fs-300);
+              color: var(--pr-clr-300);
+            }
+
+            p:nth-child(2) {
+              border-left: 1px solid var(--pr-clr-300);
+            }
+          }
+
+          .details {
+            width: 100%;
+            @include display-flex($y: flex-start);
+
+            .detail {
+              width: 100%;
+
+              .item {
+                @include display-flex($dir: column, $y: flex-start, $gap: 6px);
+                padding: 0.5rem 1rem;
+                border-bottom: 1px solid var(--pr-clr-300);
+
+                p:nth-child(1) {
+                  font-family: 'DMSans-Bold', sans-serif;
+                  font-size: var(--fs-300);
+                  color: var(--pr-clr-300);
+                }
+              }
+
+              &:nth-child(1) {
+                .item {
+                  p:nth-child(4) {
+                    border-width: 0px;
+                  }
+                }
+              }
+            }
+
+            .detail:first-child {
+              .item:last-child {
+                border-bottom: 0;
+              }
+            }
+
+            .detail:nth-child(2) {
+              .item {
+                border-left: 1px solid var(--pr-clr-300);
+              }
+            }
+          }
+        }
+      }
+    }
+  }
 }
