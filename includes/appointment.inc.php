@@ -38,7 +38,7 @@ if([$_SERVER['REQUEST_METHOD'] === "POST"]){
 
     createAppointment($conn, $user_id, $appointmentId, $name, $email, $contactnumber, $message, $appointmentDate, $appointmentTime, $location);
     echo "<script>alert('Appointment is created');</script>";
-    echo "<script>window.location.href='../user_pages/appointment_form_page.php';</script>";
+    echo "<script>window.location.href='../user_pages/appointment_page.html';</script>";
 
     $conn->close();
     die();
