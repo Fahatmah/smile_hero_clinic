@@ -6,7 +6,6 @@ if([$_SERVER['REQUEST_METHOD'] === "POST"]){
     $name = $_POST['name'];
     $email = $_POST['email'];
     $contact = $_POST['contactnumber'];
-    $contactnumber = intval($contact);
     $message = $_POST['message'];
     $appointmentDate = $_POST['appointmentDate'];
     $appointmentTime = $_POST['appointmentTime'];
@@ -17,28 +16,18 @@ if([$_SERVER['REQUEST_METHOD'] === "POST"]){
 
     $appointmentId = generateAppoinmentID($conn);
 
-    // ERROR HANDLERS
-    $errors = [];
 
-    if(isAppointmentInputEmpty($name, $email, $contactnumber)){
-        $errors["emptyInput"] = "Fill in all fields!";
-    }
-
-    if(isAppointmentEmailInvalid($email)){
-        $errors["invalidEmail"] = "Email is invalid!";
+    if(haveAppointment($conn, $name)){
+        echo "<script> alert('You already have Appointment') </script>";
+        echo "<script>window.location.href='../user_pages/appointment_page.php';</script>";
+        die();
     }
 
     require_once("config_session.inc.php");
 
-    if ($errors) {
-        $_SESSION["errors_appointment"] = $errors;
-        Header("Location: ../user_pages/appointment_form_page.php");
-        die();
-    }
-
-    createAppointment($conn, $user_id, $appointmentId, $name, $email, $contactnumber, $message, $appointmentDate, $appointmentTime, $location);
+    createAppointment($conn, $user_id, $appointmentId, $name, $email, $contact, $message, $appointmentDate, $appointmentTime, $location);
     echo "<script>alert('Appointment is created');</script>";
-    echo "<script>window.location.href='../user_pages/appointment_page.html';</script>";
+    echo "<script>window.close()</script>";
 
     $conn->close();
     die();
@@ -48,13 +37,9 @@ if([$_SERVER['REQUEST_METHOD'] === "POST"]){
     die();
 }
 
-function isAppointmentEmailInvalid(string $email) {
-    return !filter_var($email, FILTER_VALIDATE_EMAIL);
-}
-
-
-function isAppointmentInputEmpty(string $name, string $email, int $contactnumber ) {
-    return empty($name) || empty($email) || empty($contactnumber);
+function haveAppointment(mysqli $conn, string $name) {
+    $user = getUserid($conn, $name);
+    return $user !== null;
 }
 
 function generateAppoinmentID(mysqli $conn) {

@@ -11,6 +11,19 @@ require_once '../includes/appointment_view.inc.php';
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Create an appointment | Smile Hero Clinic</title>
     <link rel="stylesheet" href="../src/dist/styles.css" />
+
+    <style>
+      input::-webkit-outer-spin-button,
+      input::-webkit-inner-spin-button {
+        -webkit-appearance: none;
+        margin: 0;
+      }
+
+      /* Firefox */
+      input[type=number] {
+        -moz-appearance: textfield;
+      }
+    </style>
   </head>
   <body>
     <main>
@@ -99,7 +112,7 @@ require_once '../includes/appointment_view.inc.php';
 
             <div class="field">
               <label for="name">Name</label>
-              <input
+              <input required
                 type="text"
                 name="name"
                 id="name"
@@ -110,7 +123,7 @@ require_once '../includes/appointment_view.inc.php';
 
             <div class="field">
               <label for="email">Email</label>
-              <input
+              <input required
                 type="email"
                 name="email"
                 id="email"
@@ -121,8 +134,8 @@ require_once '../includes/appointment_view.inc.php';
 
             <div class="field">
               <label for="contactnumber">Contact Number</label>
-              <input
-                type="tel"
+              <input required
+                type="number"
                 name="contactnumber"
                 id="contactnumber"
                 placeholder="e.g. 09123456789"
@@ -131,7 +144,7 @@ require_once '../includes/appointment_view.inc.php';
 
             <div class="field">
               <label for="message">Message/Requests</label>
-              <input type="text" name="message" id="message" />
+              <input required type="text" name="message" id="message" />
             </div>
           </section>
 

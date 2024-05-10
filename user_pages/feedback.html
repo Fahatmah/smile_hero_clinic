@@ -43,7 +43,7 @@
             </a>
           </li>
           <li>
-            <a href="../user_pages/appointment_page.html">
+            <a href="../user_pages/appointment_page.php">
               <img
                 src="../assets/icons/user_account/appointments.png"
                 alt=""
@@ -83,7 +83,14 @@
             </a>
           </li>
           <li>
-            <a href="../index.html" class="logout__button"> Logout </a>
+            <form action="../includes/logout.php">
+              <input
+                type="submit"
+                style="cursor: pointer"
+                class="logout__button"
+                value="Logout"
+              />
+            </form>
           </li>
         </ul>
       </nav>

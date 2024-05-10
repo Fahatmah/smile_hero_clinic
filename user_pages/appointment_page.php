@@ -1,3 +1,26 @@
+<?php
+require_once '../includes/config_session.inc.php';
+require_once '../includes/login_view.inc.php';
+require_once '../includes/appointment_view.inc.php';
+
+require_once '../includes/dbh.inc.php';
+
+if(isset($_SESSION['user_id'])) {
+  $user_id = $_SESSION['user_id'];
+
+  // Fetch appointments for the user
+  $query = "SELECT * FROM appointments WHERE user_id = ?";
+  $stmt = $conn->prepare($query);
+  $stmt->bind_param("s", $user_id);
+  $stmt->execute();
+  $result = $stmt->get_result();
+} else {
+  // Redirect user to login if not logged in
+  header("Location: ../login.php");
+  exit();
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -83,7 +106,9 @@
             </a>
           </li>
           <li>
-            <a href="../index.html" class="logout__button"> Logout </a>
+            <form action="../includes/logout.php">
+                <input type="submit" style="cursor: pointer;" class="logout__button" value="Logout"> 
+            </form>
           </li>
         </ul>
       </nav>
@@ -109,8 +134,10 @@
 
           <div class="appointments">
             <div class="appointment">
+
+            <?php if ($row = $result->fetch_assoc()) { ?>
               <div class="date">
-                <p class="appoinment_date" id="appointmentDate">05-02-2024</p>
+                <p class="appoinment_date" id="appointmentDate">Appointment ID: <?php echo $row["appointment_id"]; ?></p>
                 <button class="remove__button" id="removeAppointmentBtn">
                   Cancel
                 </button>
@@ -124,37 +151,42 @@
                   <div class="detail">
                     <div class="item">
                       <p>Name</p>
-                      <p id="name">Fahatmah Mabang</p>
+                      <p id="name"><?php echo $row["name"]; ?></p>
                     </div>
                     <div class="item">
                       <p>Email</p>
-                      <p id="email">fahatmahmabang@gmail.com</p>
+                      <p id="email"><?php echo $row["email"]; ?></p>
                     </div>
                     <div class="item">
                       <p>Contact Number</p>
-                      <p id="contactNumber">09123456789</p>
+                      <p id="contactNumber"><?php echo $row["contact"]; ?></p>
                     </div>
                     <div class="item">
                       <p>Message</p>
-                      <p id="message"></p>
+                      <p id="message"><?php echo $row["message"]; ?></p>
                     </div>
                   </div>
                   <div class="detail">
                     <div class="item">
                       <p>Date</p>
-                      <p id="date">05-02-2024</p>
+                      <p id="date"><?php echo $row["date"]; ?></p>
                     </div>
                     <div class="item">
                       <p>Time</p>
-                      <p id="time">10 AM</p>
+                      <p id="time"><?php echo $row["time"]; ?></p>
                     </div>
                     <div class="item">
                       <p>Location</p>
-                      <p id="location">Bayani Road, Taguig City</p>
+                      <p id="location"><?php echo $row["location"]; ?></p>
                     </div>
                   </div>
                 </div>
               </div>
+              <?php } else {
+                echo "<p> No Appointments Found. </p>";
+              } 
+              
+              $conn->close()?>
             </div>
           </div>
         </div>
