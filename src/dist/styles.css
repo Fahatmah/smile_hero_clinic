@@ -816,7 +816,6 @@ body main .form_container .header {
   justify-content: center;
   width: 100%;
   padding: 1rem;
-  justify-content: center;
   background-color: var(--pr-clr-300);
   border-radius: 6px;
   font-family: "DM Sans", sans-serif;
@@ -1115,6 +1114,119 @@ body main .form_container .header {
 .appointment__page .appointment__container .appointments .item .appointment .appointment_details .details .detail:nth-child(4),
 .appointment__page .appointment__container .appointments .item .appointment .appointment_details .details .detail:nth-child(6) {
   border-left: 1px solid var(--pr-clr-350);
+}
+.appointment__page .appointment__container {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 12px;
+}
+.appointment__page .appointment__container .header {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-direction: row;
+  gap: 0;
+  padding: 1rem;
+  background-color: var(--pr-clr-300);
+  border-radius: 6px;
+  color: var(--ntrl-clr-100);
+}
+.appointment__page .appointment__container .appointments {
+  width: 100%;
+  border: 1px solid var(--pr-clr-300);
+  border-radius: 6px;
+}
+.appointment__page .appointment__container .appointments .appointment .date {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-direction: row;
+  gap: 0;
+  padding: 1rem;
+  color: var(--pr-clr-300);
+  transition: 100ms;
+  cursor: pointer;
+}
+.appointment__page .appointment__container .appointments .appointment .date:hover {
+  background-color: var(--pr-clr-400);
+  color: var(--ntrl-clr-100);
+  font-weight: bold;
+}
+.appointment__page .appointment__container .appointments .appointment .date:hover .remove__button {
+  color: var(--ntrl-clr-100);
+}
+.appointment__page .appointment__container .appointments .appointment .date .remove__button {
+  color: var(--pr-clr-300);
+  cursor: pointer;
+}
+.appointment__page .appointment__container .appointments .appointment .date .remove__button:hover {
+  text-decoration: underline;
+}
+.appointment__page .appointment__container .appointments .appointment .details__container {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 0;
+  border-top: 1px solid var(--pr-clr-300);
+}
+.appointment__page .appointment__container .appointments .appointment .details__container .detail__header {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  flex-direction: row;
+  gap: 0;
+  border-bottom: 1px solid var(--pr-clr-300);
+}
+.appointment__page .appointment__container .appointments .appointment .details__container .detail__header p {
+  padding: 1rem;
+  width: 100%;
+  font-family: "DMSans-Bold", sans-serif;
+  font-size: var(--fs-300);
+  color: var(--pr-clr-300);
+}
+.appointment__page .appointment__container .appointments .appointment .details__container .detail__header p:nth-child(2) {
+  border-left: 1px solid var(--pr-clr-300);
+}
+.appointment__page .appointment__container .appointments .appointment .details__container .details {
+  width: 100%;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  flex-direction: row;
+  gap: 0;
+}
+.appointment__page .appointment__container .appointments .appointment .details__container .details .detail {
+  width: 100%;
+}
+.appointment__page .appointment__container .appointments .appointment .details__container .details .detail .item {
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  flex-direction: column;
+  gap: 6px;
+  padding: 0.5rem 1rem;
+  border-bottom: 1px solid var(--pr-clr-300);
+}
+.appointment__page .appointment__container .appointments .appointment .details__container .details .detail .item p:nth-child(1) {
+  font-family: "DMSans-Bold", sans-serif;
+  font-size: var(--fs-300);
+  color: var(--pr-clr-300);
+}
+.appointment__page .appointment__container .appointments .appointment .details__container .details .detail:nth-child(1) .item p:nth-child(4) {
+  border-width: 0px;
+}
+.appointment__page .appointment__container .appointments .appointment .details__container .details .detail:first-child .item:last-child {
+  border-bottom: 0;
+}
+.appointment__page .appointment__container .appointments .appointment .details__container .details .detail:nth-child(2) .item {
+  border-left: 1px solid var(--pr-clr-300);
 }
 
 .appointment_form__container {
