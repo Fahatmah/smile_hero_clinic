@@ -16,7 +16,7 @@ if(isset($_SESSION['user_id'])) {
   $result = $stmt->get_result();
 } else {
   // Redirect user to login if not logged in
-  header("Location: ../login.php");
+  header("Location: ../login.php?access=failed");
   exit();
 }
 ?>
@@ -46,7 +46,7 @@ if(isset($_SESSION['user_id'])) {
       <nav class="side__nav">
         <ul>
           <li>
-            <a href="../user_pages/profile.html">
+            <a href="../user_pages/profile.php">
               <img
                 src="../assets/icons/user_account/profile.png"
                 alt=""
@@ -76,7 +76,7 @@ if(isset($_SESSION['user_id'])) {
             </a>
           </li>
           <li>
-            <a href="../user_pages/dental_history.html">
+            <a href="../user_pages/dental_history.php">
               <img
                 src="../assets/icons/user_account/medical_history.png"
                 alt=""
@@ -86,7 +86,7 @@ if(isset($_SESSION['user_id'])) {
             </a>
           </li>
           <li>
-            <a href="../user_pages/faqs_questions.html">
+            <a href="../user_pages/faqs_questions.php">
               <img
                 src="../assets/icons/user_account/faqs_questions.png"
                 alt=""
@@ -96,7 +96,7 @@ if(isset($_SESSION['user_id'])) {
             </a>
           </li>
           <li>
-            <a href="../user_pages/feedback.html">
+            <a href="../user_pages/feedback.php">
               <img
                 src="../assets/icons/user_account/feedback.png"
                 alt=""
@@ -137,10 +137,13 @@ if(isset($_SESSION['user_id'])) {
 
             <?php if ($row = $result->fetch_assoc()) { ?>
               <div class="date">
+              <form style="display: flex; justify-content:space-between; width: 100%;" action="../includes/cancelAppointment.php" method="post">
                 <p class="appoinment_date" id="appointmentDate">Appointment ID: <?php echo $row["appointment_id"]; ?></p>
-                <button class="remove__button" id="removeAppointmentBtn">
+                <input type="hidden" name="appointment_id" value="<?php echo $row["appointment_id"]; ?>">
+                <button type="submit" name="cancel_appointment" class="remove__button" id="removeAppointmentBtn">
                   Cancel
                 </button>
+                </form>
               </div>
               <div class="details__container">
                 <div class="detail__header">

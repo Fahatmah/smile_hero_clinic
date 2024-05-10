@@ -18,11 +18,6 @@ require_once '../includes/appointment_view.inc.php';
         -webkit-appearance: none;
         margin: 0;
       }
-
-      /* Firefox */
-      input[type=number] {
-        -moz-appearance: textfield;
-      }
     </style>
   </head>
   <body>

@@ -1,3 +1,9 @@
+<?php
+require_once '../includes/config_session.inc.php';
+require_once '../includes/login_view.inc.php';
+require_once '../includes/appointment_view.inc.php';
+?>
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -7,6 +13,7 @@
     <link rel="stylesheet" href="../src/dist/styles.css" />
   </head>
   <body>
+    <?php outputUserId() ?>
     <main>
       <!-- navigation header bar -->
       <nav class="account__header">
@@ -53,7 +60,7 @@
             </a>
           </li>
           <li>
-            <a href="../user_pages/dental_history.html">
+            <a href="../user_pages/dental_history.php">
               <img
                 src="../assets/icons/user_account/medical_history.png"
                 alt=""
@@ -63,7 +70,7 @@
             </a>
           </li>
           <li>
-            <a href="../user_pages/faqs_questions.html">
+            <a href="../user_pages/faqs_questions.php">
               <img
                 src="../assets/icons/user_account/faqs_questions.png"
                 alt=""
@@ -73,7 +80,7 @@
             </a>
           </li>
           <li>
-            <a href="../user_pages/feedback.html">
+            <a href="../user_pages/feedback.php">
               <img
                 src="../assets/icons/user_account/feedback.png"
                 alt=""
