@@ -3,14 +3,14 @@
 .hero__section {
   @include display-flex;
   flex-direction: column;
-  // background: url(/assets/images/mesh_bg.png);
+  // background: url(/images/images/mesh_bg.png);
   background-repeat: no-repeat;
   background-size: 100%;
 
   .header {
     color: var(--ntrl-clr-100);
-    font-family: 'DMSans-Black', sans-serif;
     font-size: var(--fs-600);
+    font-weight: 800;
     text-align: center;
     line-height: 6.2rem;
     max-width: 60rem;

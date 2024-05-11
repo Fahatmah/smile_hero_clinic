@@ -105,47 +105,11 @@ select {
   --fs-600: 6rem; /* landing page header 96px*/
   --debug: 1px solid #333;
 }
-@font-face {
-  font-family: "DMSans-Thin";
-  src: url("/assets/font/DMSans-Thin.ttf") format("truetype");
-}
-@font-face {
-  font-family: "DMSans-Light";
-  src: url("/assets/font/DMSans-Light.ttf") format("truetype");
-}
-@font-face {
-  font-family: "DMSans-ExtraLight";
-  src: url("/assets/font/DMSans-ExtraLight.ttf") format("truetype");
-}
-@font-face {
-  font-family: "DMSans-Regular";
-  src: url("/assets/font/DMSans-Regular.ttf") format("truetype");
-}
-@font-face {
-  font-family: "DMSans-Medium";
-  src: url("/assets/font/DMSans-Medium.ttf") format("truetype");
-}
-@font-face {
-  font-family: "DMSans-SemiBold";
-  src: url("/assets/font/DMSans-SemiBold.ttf") format("truetype");
-}
-@font-face {
-  font-family: "DMSans-Bold";
-  src: url("/assets/font/DMSans-Bold.ttf") format("truetype");
-}
-@font-face {
-  font-family: "DMSans-ExtraBold";
-  src: url("/assets/font/DMSans-ExtraBold.ttf") format("truetype");
-}
-@font-face {
-  font-family: "DMSans-Black";
-  src: url("/assets/font/DMSans-Black.ttf") format("truetype");
-}
 
 body {
   width: 100%;
   min-height: 100vh;
-  font-family: "DMSans-Regular", sans-serif;
+  font-family: "DM Sans", sans-serif;
   font-size: var(--fs-200);
   color: var(--ntrl-clr-400);
 }
@@ -259,11 +223,9 @@ body main .account__container {
   gap: 15px;
 }
 .footer__section .footer__header .heading .header {
-  font-family: "DMSans-SemiBold", sans-serif;
   font-size: var(--fs-500);
 }
 .footer__section .footer__header .heading p {
-  font-family: "DMSans-Regular", sans-serif;
   font-size: var(--fs-200);
 }
 .footer__section .footer__header form {
@@ -315,7 +277,6 @@ body main .account__container {
   height: 34px;
 }
 .footer__section .contacts__container .contact p {
-  font-family: "DMSans-Regular", sans-serif;
   font-size: var(--fs-300);
 }
 .footer__section .social-media__container {
@@ -327,7 +288,6 @@ body main .account__container {
 }
 .footer__section .social-media__container p {
   width: 600px;
-  font-family: "DMSans-Regular", sans-serif;
   font-size: var(--fs-200);
   line-height: 1.6em;
 }
@@ -351,8 +311,8 @@ body main .account__container {
 }
 .hero__section .header {
   color: var(--ntrl-clr-100);
-  font-family: "DMSans-Black", sans-serif;
   font-size: var(--fs-600);
+  font-weight: 800;
   text-align: center;
   line-height: 6.2rem;
   max-width: 60rem;
@@ -408,7 +368,6 @@ body main .account__container {
 .branches__section .header {
   color: var(--pr-clr-100);
   font-size: var(--fs-500);
-  font-family: "DMSans-Bold", sans-serif;
 }
 .branches__section .branches__container {
   display: flex;
@@ -434,7 +393,7 @@ body main .account__container {
   width: 100%;
   height: 250px;
   padding: 1rem;
-  background: url(/assets/images/landing_page/dental_clinic_branch.jpg);
+  background: url(/images/images/landing_page/dental_clinic_branch.jpg);
   background-size: cover;
   background-repeat: no-repeat;
 }
@@ -450,7 +409,6 @@ body main .account__container {
 .branches__section .branches__container .branch .header__container p {
   position: relative;
   z-index: 1;
-  font-family: "DMSans-SemiBold", sans-serif;
   font-size: var(--fs-400);
   color: var(--ntrl-clr-100);
 }
@@ -463,7 +421,6 @@ body main .account__container {
   padding: 30px;
 }
 .branches__section .branches__container .branch .branch__details .branch__title {
-  font-family: "DMSans-SemiBold", sans-serif;
   font-size: var(--fs-300);
   color: var(--pr-clr-300);
 }
@@ -472,7 +429,6 @@ body main .account__container {
   line-height: 1.6em;
 }
 .branches__section .branches__container .branch .branch__details button {
-  font-family: "DMSans-Regular", sans-serif;
   font-size: var(--fs-200);
   color: var(--ntrl-clr-100);
   width: 100%;
@@ -498,14 +454,12 @@ body main .account__container {
   gap: 20px;
 }
 .services__section .heading .header {
-  font-family: "DMSans-Black", sans-serif;
   font-size: var(--fs-500);
   color: var(--pr-clr-300);
 }
 .services__section .heading .sub__header {
   width: 932px;
   line-height: 1.6em;
-  font-family: "DMSans-Regular", sans-serif;
   font-size: var(--fs-300);
   color: var(--ntrl-clr-300);
   text-align: center;
@@ -534,7 +488,6 @@ body main .account__container {
   gap: 10px;
 }
 .services__section .card .service__container .card__label {
-  font-family: "DMSans-Bold", sans-serif;
   font-size: var(--fs-100);
   color: var(--ntrl-clr-100);
   background-color: var(--pr-clr-300);
@@ -543,14 +496,12 @@ body main .account__container {
 }
 .services__section .card .service__container .card__header {
   width: 372px;
-  font-family: "DMSans-Bold", sans-serif;
   font-size: var(--fs-450);
   color: var(--pr-clr-100);
   line-height: 1.1em;
 }
 .services__section .card .service__container .card__desc {
   width: 494px;
-  font-family: "DMSans-Regular", sans-serif;
   font-size: var(--fs-300);
   color: var(--ntrl-clr-300);
   line-height: 1.6em;
@@ -568,7 +519,6 @@ body main .account__container {
   padding-block: 100px;
 }
 .testimonials__section .header {
-  font-family: "DMSans-Black", sans-serif;
   font-size: var(--fs-500);
   color: var(--pr-clr-300);
 }
@@ -588,7 +538,6 @@ body main .account__container {
 }
 .testimonials__section .testimonial__container .testimonial__card .testimonial__text {
   width: 327px;
-  font-family: "DMSans-Regular", sans-serif;
   font-size: var(--fs-200);
   color: var(--ntrl-clr-300);
   line-height: 1.5em;
@@ -615,12 +564,10 @@ body main .account__container {
   gap: 4px;
 }
 .testimonials__section .testimonial__container .testimonial__card .testimonial__details .testimonial__name .testimonial {
-  font-family: "DMSans-Bold", sans-serif;
   font-size: var(--fs-200);
   color: var(--pr-clr-300);
 }
 .testimonials__section .testimonial__container .testimonial__card .testimonial__details .testimonial__name .testimonial__branch {
-  font-family: "DMSans-SemiBold", sans-serif;
   font-size: var(--fs-100);
   color: var(--ntrl-clr-300);
 }
@@ -638,8 +585,7 @@ body main .account__container {
   justify-content: center;
   flex-direction: column;
   gap: 42px;
-  width: -moz-max-content;
-  width: max-content;
+  width: 30rem;
   background-color: var(--ntrl-clr-100);
   padding: 2rem;
   margin-block: 4rem;
@@ -647,7 +593,6 @@ body main .account__container {
   overflow: hidden;
 }
 .signup__page .signup-form__section .header {
-  font-family: "DMSans-Black", sans-serif;
   font-size: var(--fs-400);
   color: var(--pr-clr-300);
 }
@@ -668,7 +613,6 @@ body main .account__container {
   gap: 0;
 }
 .signup__page .signup-form__section .signup__form .field label {
-  font-family: "DMSans-SemiBold", sans-serif;
   font-size: var(--fs-200);
   color: var(--pr-clr-400);
 }
@@ -676,17 +620,14 @@ body main .account__container {
   width: 100%;
   padding: 8px;
   border-bottom: 1px solid var(--pr-clr-400);
-  font-family: "DMSans-SemiBold", sans-serif;
   font-size: var(--fs-200);
   color: var(--pr-clr-300);
 }
 .signup__page .signup-form__section .signup__form .field input::-moz-placeholder {
-  font-family: "DMSans-Regular", sans-serif;
   font-size: var(--fs-200);
   color: var(--pr-clr-400);
 }
 .signup__page .signup-form__section .signup__form .field input::placeholder {
-  font-family: "DMSans-Regular", sans-serif;
   font-size: var(--fs-200);
   color: var(--pr-clr-400);
 }
@@ -695,7 +636,6 @@ body main .account__container {
 }
 .signup__page .signup-form__section .submit__button {
   width: 100%;
-  font-family: "DMSans-SemiBold", sans-serif;
   font-size: var(--fs-200);
   color: var(--ntrl-clr-100);
   background-color: var(--pr-clr-300);
@@ -704,7 +644,6 @@ body main .account__container {
 }
 .signup__page .signup-form__section .login__link {
   align-self: center;
-  font-family: "DMSans-Regular", sans-serif;
   font-size: var(--fs-200);
   color: var(--pr-clr-300);
 }
@@ -731,7 +670,6 @@ body main .account__container {
 }
 .login__page .login-form__section .header {
   align-self: center;
-  font-family: "DMSans-Black", sans-serif;
   font-size: var(--fs-400);
   color: var(--pr-clr-300);
 }
@@ -752,7 +690,6 @@ body main .account__container {
   gap: 0;
 }
 .login__page .login-form__section .login__form .field label {
-  font-family: "DMSans-SemiBold", sans-serif;
   font-size: var(--fs-200);
   color: var(--pr-clr-400);
 }
@@ -760,17 +697,14 @@ body main .account__container {
   width: 100%;
   padding: 8px;
   border-bottom: 1px solid var(--pr-clr-400);
-  font-family: "DMSans-SemiBold", sans-serif;
   font-size: var(--fs-200);
   color: var(--pr-clr-300);
 }
 .login__page .login-form__section .login__form .field input::-moz-placeholder {
-  font-family: "DMSans-Regular", sans-serif;
   font-size: var(--fs-200);
   color: var(--pr-clr-400);
 }
 .login__page .login-form__section .login__form .field input::placeholder {
-  font-family: "DMSans-Regular", sans-serif;
   font-size: var(--fs-200);
   color: var(--pr-clr-400);
 }
@@ -779,7 +713,6 @@ body main .account__container {
 }
 .login__page .login-form__section .submit__button {
   width: 100%;
-  font-family: "DMSans-SemiBold", sans-serif;
   font-size: var(--fs-200);
   color: var(--ntrl-clr-100);
   background-color: var(--pr-clr-300);
@@ -788,7 +721,6 @@ body main .account__container {
 }
 .login__page .login-form__section .signup__link {
   align-self: center;
-  font-family: "DMSans-Regular", sans-serif;
   font-size: var(--fs-200);
   color: var(--pr-clr-300);
 }
@@ -822,7 +754,7 @@ body main .account__container {
   background-color: var(--ntrl-clr-350);
 }
 .side__nav ul li.active__link a {
-  font-family: "DMSans-Bold", sans-serif;
+  font-family: "DM Sans", sans-serif;
   color: var(--pr-clr-300);
 }
 .side__nav ul li a,
@@ -835,7 +767,7 @@ body main .account__container {
   padding: 1rem;
   background-color: var(--pr-clr-300);
   border-radius: 6px;
-  font-family: "DMSans-Medium", sans-serif;
+  font-family: "DM Sans", sans-serif;
   text-align: center;
 }
 
@@ -848,7 +780,6 @@ body main .account__container {
   gap: 4rem;
 }
 .profile__info h1 {
-  font-family: "DMSans-Bold", sans-serif;
   font-size: var(--fs-400);
   color: var(--pr-clr-300);
 }
@@ -868,13 +799,11 @@ body main .account__container {
   gap: 1rem;
 }
 .profile__info .info__header .details__container .user__details .user__name {
-  font-family: "DMSans-Bold", sans-serif;
   font-size: var(--fs-400);
   color: var(--pr-clr-300);
 }
 .profile__info .info__header .details__container .user__details .user__address {
   color: var(--ntrl-clr-350);
-  font-family: "DMSans-Regular", sans-serif;
   font-size: var(--fs-200);
 }
 .profile__info .info__header .delete__button {
@@ -916,7 +845,6 @@ body main .account__container {
   gap: 12px;
 }
 .profile__info .additional_details__container .item .details .detail__header {
-  font-family: "DMSans-Bold", sans-serif;
   font-size: var(--fs-300);
   color: var(--pr-clr-300);
 }
@@ -944,7 +872,6 @@ body main .account__container {
   gap: 0;
 }
 .appointment__page .header h1 {
-  font-family: "DMSans-Bold", sans-serif;
   font-size: var(--fs-400);
   color: var(--pr-clr-300);
 }

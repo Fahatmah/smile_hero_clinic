@@ -9,7 +9,6 @@
     @include display-flex($x: space-between);
 
     h1 {
-      font-family: 'DMSans-Bold', sans-serif;
       font-size: var(--fs-400);
       color: var(--pr-clr-300);
     }

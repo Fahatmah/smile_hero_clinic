@@ -6,7 +6,7 @@
 
   .signup-form__section {
     @include display-flex($dir: column, $gap: 42px, $y: flex-start);
-    width: max-content;
+    width: 30rem;
     background-color: var(--ntrl-clr-100);
     padding: 2rem;
     margin-block: 4rem;
@@ -14,7 +14,6 @@
     overflow: hidden;
 
     .header {
-      font-family: 'DMSans-Black', sans-serif;
       font-size: var(--fs-400);
       color: var(--pr-clr-300);
     }
@@ -30,7 +29,6 @@
         // outline: var(--debug);
 
         label {
-          font-family: 'DMSans-SemiBold', sans-serif;
           font-size: var(--fs-200);
           color: var(--pr-clr-400);
         }
@@ -39,12 +37,10 @@
           width: 100%;
           padding: 8px;
           border-bottom: 1px solid var(--pr-clr-400);
-          font-family: 'DMSans-SemiBold', sans-serif;
           font-size: var(--fs-200);
           color: var(--pr-clr-300);
 
           &::placeholder {
-            font-family: 'DMSans-Regular', sans-serif;
             font-size: var(--fs-200);
             color: var(--pr-clr-400);
           }
@@ -59,7 +55,6 @@
 
     .submit__button {
       width: 100%;
-      font-family: 'DMSans-SemiBold', sans-serif;
       font-size: var(--fs-200);
       color: var(--ntrl-clr-100);
       background-color: var(--pr-clr-300);
@@ -69,7 +64,6 @@
 
     .login__link {
       align-self: center;
-      font-family: 'DMSans-Regular', sans-serif;
       font-size: var(--fs-200);
       color: var(--pr-clr-300);
     }

@@ -12,12 +12,10 @@
     .heading {
       @include display-flex($gap: 15px, $dir: column);
       .header {
-        font-family: 'DMSans-SemiBold', sans-serif;
         font-size: var(--fs-500);
       }
 
       p {
-        font-family: 'DMSans-Regular', sans-serif;
         font-size: var(--fs-200);
       }
     }
@@ -61,7 +59,6 @@
         height: 34px;
       }
       p {
-        font-family: 'DMSans-Regular', sans-serif;
         font-size: var(--fs-300);
       }
     }
@@ -71,7 +68,6 @@
     @include display-flex($gap: 20px, $dir: column);
     p {
       width: 600px;
-      font-family: 'DMSans-Regular', sans-serif;
       font-size: var(--fs-200);
       line-height: 1.6em;
     }
