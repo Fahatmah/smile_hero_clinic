@@ -4,6 +4,7 @@
   --pr-clr-100: #e84531;
   --pr-clr-150: #ff6e5c;
   --pr-clr-200: #faaf0d;
+  --pr-clr-250: #24e40f;
   --pr-clr-300: #1d72f2;
   --pr-clr-350: #5c9dff;
   --pr-clr-400: #1d72f285;
@@ -17,7 +18,7 @@
   --ntrl-clr-400: #212121;
 
   // font family
-  
+
   --fs-100: 0.75rem; /* smaller size 12px */
   --fs-200: 1rem; /* default size 16px*/
   --fs-300: 1.25rem; /* medium size 20px*/
@@ -32,25 +33,55 @@
 body {
   width: 100%;
   min-height: 100vh;
-  font-family: "DM Sans", sans-serif;
+  font-family: 'DM Sans', sans-serif;
   font-size: var(--fs-200);
   color: var(--ntrl-clr-400);
-  // background-color: var(--ntrl-clr-100);
+  background-color: var(--ntrl-clr-250);
 
   main {
+    position: relative;
     width: 100%;
-
-    &.landing__page,
-    &.signup__page,
-    &.login__page {
-      background: url(/assets/images/mesh_bg.png);
-      background-repeat: no-repeat;
-      background-size: 100%;
-    }
+    min-height: 100vh;
 
     .account__container {
-      margin-left: 300px;
-      padding: rem;
+      width: 78.3125%;
+      display: flex;
+      align-items: flex-start;
+      justify-content: flex-start;
+      padding-block-start: 1rem;
+      position: relative;
+      left: calc(15.625rem + 1rem);
+      // box-shadow: ;
+      // z-index: 1;
+
+      .account {
+        width: 100%;
+        background-color: var(--ntrl-clr-100);
+        padding: 1rem;
+        display: flex;
+        align-items: flex-start;
+        justify-content: flex-start;
+        flex-direction: column;
+        gap: 2rem;
+        border-radius: 8px;
+        // border: 1px solid var(--pr-clr-350);
+        box-shadow: 0 0 60px #1d72f22a;
+
+        h1 {
+          font-weight: 800;
+          font-size: var(--fs-400);
+          color: var(--pr-clr-300);
+        }
+      }
+    }
+
+    .form_container {
+      .header {
+        align-self: center;
+        font-size: var(--fs-400);
+        color: var(--pr-clr-300);
+        font-weight: 800;
+      }
     }
   }
 }

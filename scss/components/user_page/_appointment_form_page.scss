@@ -1,0 +1,136 @@
+@use '../../abstracts' as *;
+
+.appointment_form__container {
+  width: 70rem;
+
+  h1,
+  h2,
+  h3 {
+    font-size: var(--fs-400);
+    color: var(--pr-clr-300);
+    font-weight: bold;
+  }
+
+  .form {
+    width: 100%;
+    @include display-flex($gap: 1rem, $y: flex-start);
+    
+    .personal__details,
+    .preferences {
+      width: 100%;
+      @include display-flex($dir: column, $y: flex-start, $gap: 2rem);
+      padding: 2rem;
+      border-radius: 6px;
+      border: 1px solid var(--pr-clr-300);
+
+      .field {
+        width: 100%;
+        @include display-flex($dir: column, $y: flex-start);
+
+        label {
+          color: var(--pr-clr-300);
+          // font-weight: 600;
+        }
+
+        input {
+          width: 100%;
+          padding: 1rem 1rem 0.5rem 0;
+          border-bottom: 1px solid var(--pr-clr-400);
+          color: var(--pr-clr-300);
+          font-weight: bold;
+
+          &::placeholder {
+            color: var(--pr-clr-400);
+            font-weight: normal;
+          }
+
+          &:hover,
+          &:focus {
+            border-bottom: 1px solid var(--pr-clr-300);
+          }
+        } 
+
+        .text_validation {
+          @include display-flex();
+          // display: none;
+
+          .text {
+            font-size: var(--fs-100);
+
+            &.error {
+              color: var(--pr-clr-100);
+              display: none;
+            }
+
+            &.valid {
+              color: var(--pr-clr-250);
+              display: none;
+            }
+          }
+        }
+      }
+    }
+
+    .preferences {
+      border: 0;
+      @include display-flex($dir: column, $y: flex-start, $gap: 1rem);
+      padding: 0;
+
+      .fields {
+        width: 100%;
+        @include display-flex($dir: column, $y: space-between, $gap: 1rem);
+        border: 1px solid var(--pr-clr-300);
+        padding: 32px;
+        border-radius: 6px;
+
+        .field {
+          select {
+            appearance: none; /* Reset default styles */
+            -webkit-appearance: none; /* For older versions of Chrome and Safari */
+            -moz-appearance: none; /* For older versions of Firefox */
+            -ms-appearance: none; /* For older versions of IE */
+
+            /* Custom styles */
+            border: 0;
+            outline: 0;
+            background: none;
+            width: 100%;
+            padding: 1rem 1rem 0.5rem 0.5rem;
+            border-bottom: 1px solid var(--pr-clr-400);
+            // font-family: 'DMSans-Bold', sans-serif;
+            color: var(--pr-clr-300);
+            cursor: pointer;
+
+            &:focus {
+              border: 1px solid var(--pr-clr-300);
+              border-radius: 6px;
+            }
+          }
+        }
+      }
+
+      .text__confirmation {
+        font-size: calc(var(--fs-100) + 0.15rem);
+        font-style: italic;
+        color: var(--pr-clr-100);
+      }
+
+      .create_appointment__button {
+        padding: 1rem;
+        color: var(--ntrl-clr-100);
+        font-weight: bold;
+        background-color: var(--pr-clr-100);
+        border-radius: 6px;
+        cursor: pointer;
+
+        &:hover {
+          background-color: var(--pr-clr-150);
+        }
+
+        &:active {
+          background-color: var(--pr-clr-100);
+        }
+      }
+    }
+  }
+}

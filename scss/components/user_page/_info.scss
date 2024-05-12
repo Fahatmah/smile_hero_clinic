@@ -2,12 +2,7 @@
 
 .profile__info {
   width: 767px;
-  @include display-flex($dir: column, $gap: 4rem, $y: flex-start);
-
-  h1 {
-    font-size: var(--fs-400);
-    color: var(--pr-clr-300);
-  }
+  @include display-flex($dir: column, $gap: 2rem, $y: flex-start);
 
   .info__header {
     width: 100%;
@@ -20,6 +15,7 @@
         .user__name {
           font-size: var(--fs-400);
           color: var(--pr-clr-300);
+          font-weight: 800;
         }
 
         .user__address {
@@ -29,12 +25,44 @@
       }
     }
 
-    .delete__button {
-      width: 160px;
-      padding: 1rem;
-      background-color: var(--pr-clr-100);
-      border-radius: 6px;
-      color: var(--ntrl-clr-100);
+    .button_container {
+      @include display-flex($x: space-between, $gap: 1rem);
+      width: 24rem;
+
+      .button {
+        width: 100%;
+        border-radius: 6px;
+        padding: 1rem;
+        color: var(--ntrl-clr-100);
+        cursor: pointer;
+        transition: 200ms ease-in-out;
+
+        &:hover {
+          font-weight: bold;
+        }
+
+        &.edit {
+          background-color: var(--pr-clr-300);
+
+          &:hover {
+            box-shadow: 3px 3px 0px #1d72f269;
+          }
+        }
+
+        &.delete {
+          background-color: var(--pr-clr-100);
+
+          &:hover {
+            box-shadow: 3px 3px 0px #e846317d;
+          }
+        }
+
+        // does not work and i dont know
+        &:active {
+          background-color: var(--pr-clr-100);
+          transform: scale(0.97);
+        }
+      }
     }
   }
 
@@ -43,7 +71,7 @@
   .additional_details__container {
     width: 100%;
     @include display-flex($dir: column, $y: flex-start);
-    padding: 1rem;
+    // padding: 1rem;
     border: 1px solid var(--pr-clr-300);
     border-radius: 6px;
 
@@ -52,18 +80,39 @@
       height: 80px;
       @include display-flex($x: space-between);
       // padding: 1rem;
+      cursor: pointer;
+      transition: 200ms ease-in-out;
+      overflow: hidden;
 
       &:not(:last-child) {
         border-bottom: 1px solid var(--pr-clr-400);
       }
 
+      &:hover {
+        border: 1px solid var(--pr-clr-300);
+        border-radius: 8px;
+        background-color: var(--ntrl-clr-100);
+        transform: scale(1.08);
+        box-shadow: 0 0 60px #1d72f22a;
+      }
+
       .details {
         width: 100%;
-        @include display-flex($dir: column, $y: flex-start, $gap: 12px);
+        @include display-flex($dir: column, $y: flex-start, $gap: 0.3rem);
+        padding: 1rem;
+
+        &:hover .detail_content {
+          color: var(--ntrl-clr-350);
+        }
 
         .detail__header {
           font-size: var(--fs-300);
           color: var(--pr-clr-300);
+          font-weight: 600;
+        }
+
+        .detail_content {
+          color: var(--ntrl-clr-300);
         }
       }
     }
@@ -73,6 +122,17 @@
       height: 100%;
       color: var(--pr-clr-300);
       border-left: 1px solid var(--pr-clr-400);
+      cursor: pointer;
+
+      &:hover {
+        background-color: #1d72f22a;
+        font-weight: bold;
+      }
+
+      &:focus {
+        background-color: var(--pr-clr-300);
+        color: var(--ntrl-clr-100);
+      }
 
       // outline: var(--debug);
     }

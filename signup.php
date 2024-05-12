@@ -44,7 +44,7 @@ require_once "includes/signup_view.inc.php"
     <?php include('nav.php') ?>
 
     <!-- sign up form -->
-    <section class="signup-form__section">
+    <section class="signup form_container">
       <h1 class="header">Create new account</h1>
       <!-- form -->
       <form action="includes/signup.inc.php" method="post" class="signup__form">

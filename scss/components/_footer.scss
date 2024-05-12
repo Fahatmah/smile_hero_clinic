@@ -13,6 +13,7 @@
       @include display-flex($gap: 15px, $dir: column);
       .header {
         font-size: var(--fs-500);
+        font-weight: 800;
       }
 
       p {

@@ -5,13 +5,18 @@
   top: 0;
   width: 100%;
   @include display-flex($x: space-between);
-  padding: 28px 32px;
+  padding: 1rem;
   background-color: var(--ntrl-clr-100);
   box-shadow: 0 10px 30px #0000001b;
 
+  .logo {
+    width: 1.5rem;
+    height: 1.5rem;
+  }
+
   .account__profile_image {
-    width: 2.5rem;
-    height: 2.5rem;
+    width: 1.5rem;
+    height: 1.5rem;
 
     img {
       width: 100%;

@@ -10,6 +10,7 @@
   .header {
     color: var(--pr-clr-100);
     font-size: var(--fs-500);
+    font-weight: 800;
   }
 
   .branches__container {
@@ -40,6 +41,7 @@
           bottom: 0;
           left: 0;
           background: linear-gradient(transparent, var(--pr-clr-300));
+          // z-index: -1;
         }
 
         p {
@@ -47,6 +49,7 @@
           z-index: 1;
           font-size: var(--fs-400);
           color: var(--ntrl-clr-100);
+          font-weight: 600;
         }
       }
 
@@ -57,6 +60,7 @@
         .branch__title {
           font-size: var(--fs-300);
           color: var(--pr-clr-300);
+          font-weight: 600;
         }
 
         .branch__desc {

@@ -23,25 +23,87 @@
 
     <!-- appointment page -->
     <section class="appointment__page account__container">
-      <div class="header">
-        <h1>Your appointment</h1>
-        <a class="appointment__button" href="../user_pages/appointment_form_page.php" target="_blank">
-          Create New Appointment
-        </a>
-      </div>
-
-      <div class="appointment__container">
+      <div class="account">
         <div class="header">
-          <h2>Appointment Date</h2>
-          <h3>Remove</h3>
+          <h1>Your appointment</h1>
+          <a class="appointment__button" href="../user_pages/appointment_form_page.php" target="_blank">
+            Create New Appointment
+          </a>
         </div>
 
-        <div class="appointments">
-          <div class="item">
-            <p class="appoinment_date" id="appointmentDate">05-02-2024</p>
-            <button class="remove__button" id="removeAppointmentBtn">
-              Cancel
-            </button>
+        <div class="appointment__container">
+          <div class="header">
+            <h2>Appointment Date</h2>
+            <h3>Remove</h3>
+          </div>
+
+          <div class="appointments">
+            <div class="item">
+              <!-- header -->
+              <div class="item_header">
+                <p class="appoinment_date" id="appointmentDate">05-02-2024</p>
+                <button class="remove__button" id="removeAppointmentBtn">
+                  Cancel
+                </button>
+              </div>
+
+              <!-- appointment container -->
+              <div class="appointment">
+                <!-- appointment header -->
+                <div class="appointment_header">
+                  <p>Personal Details</p>
+                  <p>Preferences</p>
+                </div>
+
+                <!-- appointment details -->
+                <div class="appointment_details">
+                  <div class="details">
+                    <!-- name -->
+                    <div class="detail">
+                      <p class="detail_header">Name</p>
+                      <p class="detail_content" id="appName">Fahatmah Mabang</p>
+                    </div>
+
+                    <!-- date -->
+                    <div class="detail">
+                      <p class="detail_header">Date</p>
+                      <p class="detail_content" id="appDate">May 15, 2024</p>
+                    </div>
+
+                    <!-- email -->
+                    <div class="detail">
+                      <p class="detail_header">Email</p>
+                      <p class="detail_content" id="appEmail">fahatmahmabang@gmail.com</p>
+                    </div>
+
+                    <!-- time -->
+                    <div class="detail">
+                      <p class="detail_header">Time</p>
+                      <p class="detail_content" id="appTime">10 AM</p>
+                    </div>
+
+                    <!-- contact number -->
+                    <div class="detail">
+                      <p class="detail_header">Contact Number</p>
+                      <p class="detail_content" id="appContact">09123456789</p>
+                    </div>
+
+                    <!-- location -->
+                    <div class="detail">
+                      <p class="detail_header">Location</p>
+                      <p class="detail_content" id="appLoc">Bayani Road, Taguig City</p>
+                    </div>
+
+                    <!-- message/requests -->
+                    <div class="detail">
+                      <p class="detail_header">Message/Requests</p>
+                      <p class="detail_content" id="appMessage">-</p>
+                    </div>
+
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>

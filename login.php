@@ -43,13 +43,13 @@ require_once 'includes/login_view.inc.php';
     <?php include('nav.php') ?>
 
     <!-- sign up form -->
-    <section class="login-form__section">
+    <section class="login form_container">
       <h1 class="header">Login</h1>
       <!-- form -->
       <form action="includes/login.inc.php" method="post" class="login__form">
         <div class="field">
           <label for="username">Username</label>
-          <input type="text" placeholder="fahatmahmabang" id="username" name="username" required />
+          <input type="text" placeholder="fahatmahmabang" id="username" name="username" required autofocus />
         </div>
         <div class="field">
           <label for="password">Password</label><input type="password" placeholder="********" id="password"

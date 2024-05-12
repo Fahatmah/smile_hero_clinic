@@ -20,6 +20,13 @@
 
     <!-- navigation side nav -->
     <?php include('includes/sidenav.php'); ?>
+
+    <!--  -->
+    <section class="account__container">
+      <div class="account">
+        <h1>FAQs & Questions</h1>
+      </div>
+    </section>
   </main>
 </body>
 

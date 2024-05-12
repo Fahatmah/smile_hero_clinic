@@ -2,9 +2,9 @@
 
 .login__page {
   width: 100%;
-  @include flex($dir: column);
+  @include flex($dir: column, $x: flex-start);
 
-  .login-form__section {
+  .login {
     @include display-flex($dir: column, $gap: 42px, $y: flex-start);
     width: 414px;
     background-color: var(--ntrl-clr-100);
@@ -12,12 +12,6 @@
     margin-block: 4rem;
     border-radius: 8px;
     overflow: hidden;
-
-    .header {
-      align-self: center;
-      font-size: var(--fs-400);
-      color: var(--pr-clr-300);
-    }
 
     .login__form {
       width: 100%;
@@ -27,7 +21,12 @@
         width: 100%;
         @include display-flex($dir: column, $y: flex-start);
 
-        // outline: var(--debug);
+        &:hover label,
+        &:active label,
+        &:focus label {
+          font-weight: bold;
+          color: var(--pr-clr-300);
+        }
 
         label {
           font-size: var(--fs-200);

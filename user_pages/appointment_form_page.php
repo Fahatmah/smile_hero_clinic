@@ -29,106 +29,186 @@ require_once '../includes/appointment_view.inc.php';
 
     <!-- appointment form -->
     <section class="appointment_form__container account__container">
-      <h1>Schedule fresh meeting</h1>
+      <div class="account">
+        <h1>Schedule fresh meeting</h1>
 
-      <form action="../includes/appointment.inc.php" method="post" class="form">
+        <form action="../includes/appointment.inc.php" method="post" class="form" id="appointmentForm">
 
 
-        <!-- personal details -->
-        <section class="personal__details">
+          <!-- personal details -->
+          <section class="personal__details">
 
-          <?php checkAppointErrors() ?>
+            <?php checkAppointErrors() ?>
 
-          <!-- id of user -->
-          <div class="field">
-            <input type="text" value="<?php outputUserId(); ?>" name="user_id" id="user_id" style="display: none;" ">
+
+            <h2>Personal Details</h2>
+
+            <!-- id of user -->
+            <div style="display: none; visibility: hidden">
+              <input type="text" value="<?php outputUserId(); ?>" name="user_id" id="user_id">
             </div>
 
-            <div class=" field">
-            <label for="name">Name</label>
-            <input type="text" name="name" id="name" placeholder="e.g. Fahatmah Mabang"
-              value="<?php outputFullName() ?>" />
-          </div>
+            <div class="field">
+              <label for="name">Name</label>
+              <input type="text" name="name" id="name" placeholder="e.g. Fahatmah Mabang"
+                value="<?php outputFullName() ?>" />
+              <div class="text_validation">
+                <p class="text error">Error</p>
+                <p class="text valid">Valid</p>
+              </div>
+            </div>
 
-          <div class="field">
-            <label for="email">Email</label>
-            <input type="email" name="email" id="email" placeholder="e.g. fahatmahmabang@gmail.com"
-              value=" <?php outputEmail() ?>" />
-          </div>
+            <div class="field">
+              <label for="email">Email</label>
+              <input type="email" name="email" id="email" placeholder="e.g. fahatmahmabang@gmail.com"
+                value=" <?php outputEmail() ?>" />
+              <div class="text_validation">
+                <p class="text error">Error</p>
+                <p class="text valid">Valid</p>
+              </div>
+            </div>
 
-          <div class="field">
-            <label for="contactnumber">Contact Number</label>
-            <input type="tel" name="contactnumber" id="contactnumber" placeholder="e.g. 09123456789" />
-          </div>
+            <div class="field">
+              <label for="contactnumber">Contact Number</label>
+              <input type="tel" name="contactnumber" id="contactnumber" placeholder="e.g. 09123456789" />
+              <div class="text_validation">
+                <p class="text error">Error</p>
+                <p class="text valid">Valid</p>
+              </div>
+            </div>
 
-          <div class="field">
-            <label for="message">Message/Requests</label>
-            <input type="text" name="message" id="message" />
-          </div>
-        </section>
+            <div class="field">
+              <label for="message">Message/Requests</label>
+              <input type="text" name="message" id="message" />
+              <div class="text_validation">
+                <p class="text error">Error</p>
+                <p class="text valid">Valid</p>
+              </div>
+            </div>
+          </section>
 
-        <!-- preferences -->
-        <section class="preferences">
-          <!-- <div class="field">
-              <label for="appointmentDate">Date</label>
-              <input
-                type="datetime"
-                name="appointmentDate"
-                id="appointmentDate"
-                placeholder="05-02-2024"
-              />
-            </div> -->
+          <!-- preferences -->
+          <section class="preferences">
 
-          <div class="field">
-            <label for="appointmentDate">Date</label>
-            <select name="appointmentDate" id="appointmentDate">
-              <!-- Options will be dynamically generated here -->
-            </select>
-          </div>
+            <div class="fields">
+              <h3>Preferences</h3>
 
-          <div class="field">
-            <label for="appointmentTime">Time</label>
-            <select name="appointmentTime" id="appointmentTime">
-              <option value="8:00 AM">8:00 AM</option>
-              <option value="9:00 AM">9:00 AM</option>
-              <option value="10:00 AM">10:00 AM</option>
-              <option value="11:00 AM">11:00 AM</option>
-              <option value="12:00 PM">12:00 PM</option>
-              <option value="1:00 PM">1:00 PM</option>
-              <option value="2:00 PM">2:00 PM</option>
-              <option value="3:00 PM">3:00 PM</option>
-              <option value="4:00 PM">4:00 PM</option>
-              <option value="5:00 PM">5:00 PM</option>
-            </select>
-          </div>
+              <div class="field">
+                <label for="appointmentDate">Date</label>
+                <select name="appointmentDate" id="appointmentDate">
 
-          <div class="field">
-            <label for="location">Location</label>
-            <select name="location" id="location">
-              <option value="Bayani Road, Taguig City">
-                Bayani Road, Taguig City
-              </option>
-              <option value="Main Street, Makati City">
-                Main Street, Makati City
-              </option>
-              <option value="Central Avenue, Quezon City">
-                Central Avenue, Quezon City
-              </option>
-            </select>
-          </div>
-        </section>
-        <input type="submit" name="submit" value="Create Appointment">
-      </form>
+                </select>
+                <div class="text_validation">
+                  <p class="text error">Error</p>
+                  <p class="text valid">Valid</p>
+                </div>
+              </div>
+
+              <div class="field">
+                <label for="appointmentTime">Time</label>
+                <select name="appointmentTime" id="appointmentTime">
+                  <option value="-">-</option>
+                  <option value="8:00 AM">8:00 AM</option>
+                  <option value="9:00 AM">9:00 AM</option>
+                  <option value="10:00 AM">10:00 AM</option>
+                  <option value="11:00 AM">11:00 AM</option>
+                  <option value="12:00 PM">12:00 PM</option>
+                  <option value="1:00 PM">1:00 PM</option>
+                  <option value="2:00 PM">2:00 PM</option>
+                  <option value="3:00 PM">3:00 PM</option>
+                  <option value="4:00 PM">4:00 PM</option>
+                  <option value="5:00 PM">5:00 PM</option>
+                </select>
+                <div class="text_validation">
+                  <p class="text error">Error</p>
+                  <p class="text valid">Valid</p>
+                </div>
+              </div>
+
+              <div class="field">
+                <label for="location">Location</label>
+                <select name="location" id="location">
+                  <option value="-">-</option>
+                  <option value="Bayani Road, Taguig City">
+                    Bayani Road, Taguig City
+                  </option>
+                  <option value="Main Street, Makati City">
+                    Main Street, Makati City
+                  </option>
+                  <option value="Central Avenue, Quezon City">
+                    Central Avenue, Quezon City
+                  </option>
+                </select>
+                <div class="text_validation">
+                  <p class="text error">Error</p>
+                  <p class="text valid">Valid</p>
+                </div>
+              </div>
+            </div>
+            <input type="submit" name="submit" value="Create Appointment" class="create_appointment__button">
+          </section>
+        </form>
+      </div>
     </section>
   </main>
 
   <!-- scripts -->
   <script>
+  const appointmentForm = document.getElementById('appointmentForm')
+
+  appointmentForm.addEventListener('submit', (e) => {
+    e.preventDefault()
+
+    const fields = [{
+        id: 'name',
+        errorMessage: 'Name cannot be empty'
+      },
+      {
+        id: 'email',
+        errorMessage: 'Email cannot be empty'
+      },
+      {
+        id: 'contactnumber',
+        errorMessage: 'Contact number cannot be empty'
+      },
+      {
+        id: 'appointmentDate',
+        errorMessage: 'Please select a date'
+      },
+      {
+        id: 'appointmentTime',
+        errorMessage: 'Please select a time'
+      },
+      {
+        id: 'location',
+        errorMessage: 'Please select a location'
+      },
+    ]
+
+    fields.forEach((field) => {
+      const fieldElement = document.getElementById(field.id)
+      const errorElement =
+        fieldElement.nextElementSibling.querySelector('.text.error')
+      if (fieldElement.value.trim() === '-' || fieldElement.value.trim() === '') {
+        errorElement.innerText = field.errorMessage
+        errorElement.style.display = 'block'
+      } else {
+        errorElement.style.display = 'none'
+      }
+    })
+  })
+
+
   // Function to generate options for weekdays
   function generateWeekdayOptions() {
     var select = document.getElementById("appointmentDate");
     var currentDate = new Date();
-    var options = "";
+
+    // Create the default option
+    var defaultOption = document.createElement("option");
+    defaultOption.value = "-";
+    defaultOption.text = "-";
+    select.add(defaultOption);
 
     for (var i = 0; i < 7; i++) {
       currentDate.setDate(currentDate.getDate() + 1); // Move to the next day

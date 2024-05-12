@@ -7,6 +7,7 @@
   .header {
     font-size: var(--fs-500);
     color: var(--pr-clr-300);
+    font-weight: 800;
   }
 
   .testimonial__container {
@@ -37,11 +38,13 @@
           .testimonial {
             font-size: var(--fs-200);
             color: var(--pr-clr-300);
+            font-weight: 800;
           }
 
           .testimonial__branch {
             font-size: var(--fs-100);
             color: var(--ntrl-clr-300);
+            font-weight: 600;
           }
         }
       }

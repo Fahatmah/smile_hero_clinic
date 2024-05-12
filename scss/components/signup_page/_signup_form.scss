@@ -4,7 +4,7 @@
   width: 100%;
   @include flex($dir: column);
 
-  .signup-form__section {
+  .signup {
     @include display-flex($dir: column, $gap: 42px, $y: flex-start);
     width: 30rem;
     background-color: var(--ntrl-clr-100);
@@ -13,10 +13,6 @@
     border-radius: 8px;
     overflow: hidden;
 
-    .header {
-      font-size: var(--fs-400);
-      color: var(--pr-clr-300);
-    }
 
     .signup__form {
       width: 100%;

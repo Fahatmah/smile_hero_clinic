@@ -33,6 +33,7 @@
 @use 'components/user_page/history';
 @use 'components/user_page/faqs_questions';
 @use 'components/user_page/feedback';
+@use 'components/user_page/delete_acc_modal.scss';
 
 // admin interface
 @use 'components/admin_page/dashboard/admin_nav';
