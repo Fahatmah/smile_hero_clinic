@@ -1,4 +1,6 @@
 <?php
+require_once '../includes/config_session.inc.php';
+require_once '../includes/login_view.inc.php';
 // Get the current page filename
 $current_page = basename($_SERVER['PHP_SELF']);
 ?>
@@ -44,7 +46,7 @@ $current_page = basename($_SERVER['PHP_SELF']);
           src="../assets/icons/user_account/<?php echo ($current_page == 'feedback.php') ? 'feedback_active.png' : 'feedback.png'; ?>"
           alt="" style="width: 1.375rem; height: 1.375rem" />Feedback</a>
     </li>
-    <li id="logout_button" <?php echo ($current_page == 'index.php') ? 'class="active__link"' : ''; ?>><a
-        href="../index.php" class="logout__button">Logout</a></li>
+    <li id="logout_button" <?php echo ($current_page == '../includes/logout.php') ? 'class="active__link"' : ''; ?>><a
+        href="../includes/logout.php" class="logout__button">Logout</a></li>
   </ul>
 </nav>

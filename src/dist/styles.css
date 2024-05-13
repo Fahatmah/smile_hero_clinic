@@ -780,9 +780,6 @@ body main .form_container .header {
   width: 100%;
   border-radius: 6px;
 }
-.side__nav ul li:hover {
-  background-color: var(--ntrl-clr-350);
-}
 .side__nav ul li.active__link {
   background-color: var(--ntrl-clr-350);
 }
@@ -1140,93 +1137,93 @@ body main .form_container .header {
   border: 1px solid var(--pr-clr-300);
   border-radius: 6px;
 }
-.appointment__page .appointment__container .appointments .appointment .date {
+.appointment__page .appointment__container .appointments .item .item_header {
   display: flex;
   align-items: center;
   justify-content: space-between;
   flex-direction: row;
   gap: 0;
   padding: 1rem;
-  color: var(--pr-clr-300);
-  transition: 100ms;
+  border-bottom: 1px solid var(--pr-clr-300);
   cursor: pointer;
+  transition: 200ms ease-in-out;
+  overflow: hidden;
 }
-.appointment__page .appointment__container .appointments .appointment .date:hover {
-  background-color: var(--pr-clr-400);
-  color: var(--ntrl-clr-100);
+.appointment__page .appointment__container .appointments .item .item_header:hover {
+  border: 1px solid var(--pr-clr-300);
+  border-radius: 8px;
+  background-color: var(--ntrl-clr-100);
+  transform: scale(1.09);
+  box-shadow: 0 0 60px rgba(29, 114, 242, 0.1647058824);
+}
+.appointment__page .appointment__container .appointments .item .item_header p,
+.appointment__page .appointment__container .appointments .item .item_header button {
+  color: var(--pr-clr-300);
   font-weight: bold;
-}
-.appointment__page .appointment__container .appointments .appointment .date:hover .remove__button {
-  color: var(--ntrl-clr-100);
-}
-.appointment__page .appointment__container .appointments .appointment .date .remove__button {
-  color: var(--pr-clr-300);
   cursor: pointer;
 }
-.appointment__page .appointment__container .appointments .appointment .date .remove__button:hover {
+.appointment__page .appointment__container .appointments .item .item_header p:hover,
+.appointment__page .appointment__container .appointments .item .item_header button:hover {
   text-decoration: underline;
 }
-.appointment__page .appointment__container .appointments .appointment .details__container {
-  width: 100%;
+.appointment__page .appointment__container .appointments .item .appointment .appointment_header {
   display: flex;
   align-items: center;
-  justify-content: center;
-  flex-direction: column;
-  gap: 0;
-  border-top: 1px solid var(--pr-clr-300);
-}
-.appointment__page .appointment__container .appointments .appointment .details__container .detail__header {
-  width: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: flex-start;
+  justify-content: space-between;
   flex-direction: row;
   gap: 0;
-  border-bottom: 1px solid var(--pr-clr-300);
 }
-.appointment__page .appointment__container .appointments .appointment .details__container .detail__header p {
+.appointment__page .appointment__container .appointments .item .appointment .appointment_header > * {
+  width: 100%;
   padding: 1rem;
-  width: 100%;
-  font-family: "DMSans-Bold", sans-serif;
-  font-size: var(--fs-300);
   color: var(--pr-clr-300);
+  font-weight: bold;
+  border-bottom: 1px solid var(--pr-clr-300);
 }
-.appointment__page .appointment__container .appointments .appointment .details__container .detail__header p:nth-child(2) {
+.appointment__page .appointment__container .appointments .item .appointment .appointment_header p:nth-child(2) {
   border-left: 1px solid var(--pr-clr-300);
 }
-.appointment__page .appointment__container .appointments .appointment .details__container .details {
-  width: 100%;
+.appointment__page .appointment__container .appointments .item .appointment .appointment_details .details {
   display: flex;
-  align-items: flex-start;
+  align-items: center;
   justify-content: center;
   flex-direction: row;
   gap: 0;
+  flex-wrap: wrap;
 }
-.appointment__page .appointment__container .appointments .appointment .details__container .details .detail {
-  width: 100%;
-}
-.appointment__page .appointment__container .appointments .appointment .details__container .details .detail .item {
+.appointment__page .appointment__container .appointments .item .appointment .appointment_details .details .detail {
+  flex: 50%;
   display: flex;
   align-items: flex-start;
   justify-content: center;
   flex-direction: column;
-  gap: 6px;
-  padding: 0.5rem 1rem;
+  gap: 0.5rem;
+  padding: 1rem;
+  cursor: pointer;
+  transition: 200ms ease-in-out;
+  overflow: hidden;
+}
+.appointment__page .appointment__container .appointments .item .appointment .appointment_details .details .detail:not(:last-child) {
   border-bottom: 1px solid var(--pr-clr-300);
 }
-.appointment__page .appointment__container .appointments .appointment .details__container .details .detail .item p:nth-child(1) {
-  font-family: "DMSans-Bold", sans-serif;
-  font-size: var(--fs-300);
+.appointment__page .appointment__container .appointments .item .appointment .appointment_details .details .detail:hover {
+  border: 1px solid var(--pr-clr-300);
+  border-radius: 8px;
+  background-color: var(--ntrl-clr-100);
+  transform: scale(1.09);
+  box-shadow: 0 0 60px rgba(29, 114, 242, 0.1647058824);
+}
+.appointment__page .appointment__container .appointments .item .appointment .appointment_details .details .detail_header {
   color: var(--pr-clr-300);
+  font-weight: bold;
 }
-.appointment__page .appointment__container .appointments .appointment .details__container .details .detail:nth-child(1) .item p:nth-child(4) {
-  border-width: 0px;
+.appointment__page .appointment__container .appointments .item .appointment .appointment_details .details .detail_content {
+  color: var(--ntrl-clr-350);
 }
-.appointment__page .appointment__container .appointments .appointment .details__container .details .detail:first-child .item:last-child {
-  border-bottom: 0;
-}
-.appointment__page .appointment__container .appointments .appointment .details__container .details .detail:nth-child(2) .item {
-  border-left: 1px solid var(--pr-clr-300);
+.appointment__page .appointment__container .appointments .item .appointment .appointment_details .details .detail:nth-child(2),
+.appointment__page .appointment__container .appointments .item .appointment .appointment_details .details .detail:nth-child(4),
+.appointment__page .appointment__container .appointments .item .appointment .appointment_details .details .detail:nth-child(6) {
+  border-left: 1px solid var(--pr-clr-350);
 }
 
 .appointment_form__container {
