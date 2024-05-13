@@ -5,9 +5,9 @@
   padding-block: 100px;
 
   .header {
-    font-family: 'DMSans-Black', sans-serif;
     font-size: var(--fs-500);
     color: var(--pr-clr-300);
+    font-weight: 800;
   }
 
   .testimonial__container {
@@ -17,7 +17,6 @@
       @include display-flex($gap: 10px, $dir: column, $y: flex-start);
       .testimonial__text {
         width: 327px;
-        font-family: 'DMSans-Regular', sans-serif;
         font-size: var(--fs-200);
         color: var(--ntrl-clr-300);
         line-height: 1.5em;
@@ -37,15 +36,15 @@
           @include display-flex($gap: 4px, $dir: column, $y: flex-start);
 
           .testimonial {
-            font-family: 'DMSans-Bold', sans-serif;
             font-size: var(--fs-200);
             color: var(--pr-clr-300);
+            font-weight: 800;
           }
 
           .testimonial__branch {
-            font-family: 'DMSans-SemiBold', sans-serif;
             font-size: var(--fs-100);
             color: var(--ntrl-clr-300);
+            font-weight: 600;
           }
         }
       }

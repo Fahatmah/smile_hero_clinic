@@ -1,0 +1,158 @@
+:root {
+  --pr-clr-100: #e84531;
+  --pr-clr-150: #ff6e5c;
+  --pr-clr-200: #faaf0d;
+  --pr-clr-300: #1d72f2;
+  --pr-clr-350: #5c9dff;
+  --pr-clr-400: #1d72f285;
+  --ntrl-clr-100: #ffffff;
+  --ntrl-clr-200: #ebebeb;
+  --ntrl-clr-250: #f0f3f9;
+  --ntrl-clr-300: #616161;
+  --ntrl-clr-350: #2c2c2c;
+  --ntrl-clr-400: #212121;
+  --fs-100: 0.75rem; /* smaller size 12px */
+  --fs-200: 1rem; /* default size 16px*/
+  --fs-300: 1.25rem; /* medium size 20px*/
+  --fs-400: 2rem; /* card header 32px*/
+  --fs-450: 3rem; /* service card header 48px */
+  --fs-500: 3.375rem; /* section header 54px*/
+  --fs-600: 6rem; /* landing page header 96px*/
+  --debug: 1px solid #333;
+}
+
+body {
+  width: 100%;
+  min-height: 100vh;
+  font-family: "DM Sans", sans-serif;
+  font-size: var(--fs-200);
+  color: var(--ntrl-clr-400);
+  background-color: var(--ntrl-clr-250);
+}
+body main {
+  position: relative;
+  width: 100%;
+  min-height: 100vh;
+}
+body main .account__container {
+  width: 78.3125%;
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-start;
+  padding-block-start: 1rem;
+  position: relative;
+  left: 16.625rem;
+}
+body main .account__container .account {
+  width: 100%;
+  background-color: var(--ntrl-clr-100);
+  padding: 1rem;
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-start;
+  flex-direction: column;
+  gap: 2rem;
+  border-radius: 8px;
+  box-shadow: 0 0 60px rgba(29, 114, 242, 0.1647058824);
+}
+body main .account__container .account h1 {
+  font-weight: 800;
+  font-size: var(--fs-400);
+  color: var(--pr-clr-300);
+}
+body main .form_container .header {
+  align-self: center;
+  font-size: var(--fs-400);
+  color: var(--pr-clr-300);
+  font-weight: 800;
+}
+
+/* Box sizing rules */
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font: inherit;
+  text-decoration: none;
+  list-style: none;
+}
+
+input,
+button {
+  border: 0;
+  outline: 0;
+  background: none;
+}
+
+/* Remove default margin */
+body,
+h1,
+h2,
+h3,
+h4,
+p,
+figure,
+blockquote,
+dl,
+dd {
+  margin: 0;
+}
+
+/* Remove list styles on ul, ol elements with a list role, which suggests default styling will be removed */
+ul[role=list],
+ol[role=list] {
+  list-style: none;
+}
+
+/* Set core root defaults */
+html:focus-within {
+  scroll-behavior: smooth;
+}
+
+/* Set core body defaults */
+body {
+  min-height: 100vh;
+  text-rendering: optimizeSpeed;
+}
+
+/* A elements that don't have a class get default styles */
+a:not([class]) {
+  -webkit-text-decoration-skip: ink;
+          text-decoration-skip-ink: auto;
+}
+
+/* Make images easier to work with */
+img,
+picture {
+  max-width: 100%;
+  display: block;
+}
+
+/* Inherit fonts for inputs and buttons */
+input,
+button,
+textarea,
+select {
+  font: inherit;
+}
+
+/* Remove all animations, transitions and smooth scroll for people that prefer not to see them */
+@media (prefers-reduced-motion: reduce) {
+  html:focus-within {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+.modal_container {
+  position: absolute;
+  border: 1px solid red;
+}/*# sourceMappingURL=delete_acc_modal.css.map */

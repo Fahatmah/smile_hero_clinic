@@ -1,8 +1,10 @@
 <?php
+require_once '../includes/config_session.inc.php';
+require_once '../includes/login_view.inc.php';
 
-if([$_SERVER['REQUEST_METHOD'] === "POST"]){
+if([$_SERVER['REQUEST_METHOD'] === "POST"] && isset($_SESSION['user_id'])){
 
-    $user_id = $_POST['user_id'];
+    $user_id = $_SESSION['user_id'];
     $name = $_POST['name'];
     $email = $_POST['email'];
     $contact = $_POST['contactnumber'];

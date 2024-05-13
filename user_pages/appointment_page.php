@@ -31,87 +31,11 @@ if(isset($_SESSION['user_id'])) {
   </head>
   <body>
     <main>
-      <!-- navigation header bar -->
-      <nav class="account__header">
-        <img src="../assets/images/logoipsum.svg" alt="logo" class="logo" />
-        <div class="account__profile_image">
-          <img
-            src="../assets/images/default_profile_image.png"
-            alt="account image"
-          />
-        </div>
-      </nav>
+    <!-- navigation header bar -->
+    <?php include('includes/nav.php'); ?>
 
-      <!-- navigation side nav -->
-      <nav class="side__nav">
-        <ul>
-          <li>
-            <a href="../user_pages/profile.html">
-              <img
-                src="../assets/icons/user_account/profile.png"
-                alt=""
-                style="width: 1.375rem; height: 1.375rem"
-              />
-              Profile
-            </a>
-          </li>
-          <li>
-            <a href="#">
-              <img
-                src="../assets/icons/user_account/moon.png"
-                alt=""
-                style="width: 1.375rem; height: 1.375rem"
-              />
-              Dark Theme
-            </a>
-          </li>
-          <li class="active__link">
-            <a href="#">
-              <img
-                src="../assets/icons/user_account/appointments.png"
-                alt=""
-                style="width: 1.375rem; height: 1.375rem"
-              />
-              Appointments
-            </a>
-          </li>
-          <li>
-            <a href="../user_pages/dental_history.html">
-              <img
-                src="../assets/icons/user_account/medical_history.png"
-                alt=""
-                style="width: 1.375rem; height: 1.375rem"
-              />
-              Dental History
-            </a>
-          </li>
-          <li>
-            <a href="../user_pages/faqs_questions.html">
-              <img
-                src="../assets/icons/user_account/faqs_questions.png"
-                alt=""
-                style="width: 1.375rem; height: 1.375rem"
-              />
-              FAQs & Questions
-            </a>
-          </li>
-          <li>
-            <a href="../user_pages/feedback.html">
-              <img
-                src="../assets/icons/user_account/feedback.png"
-                alt=""
-                style="width: 1.375rem; height: 1.375rem"
-              />
-              Feedback
-            </a>
-          </li>
-          <li>
-            <form action="../includes/logout.php">
-                <input type="submit" style="cursor: pointer;" class="logout__button" value="Logout"> 
-            </form>
-          </li>
-        </ul>
-      </nav>
+    <!-- navigation side nav -->
+    <?php include('includes/sidenav.php'); ?>
 
       <!-- appointment page -->
       <section class="appointment__page account__container">

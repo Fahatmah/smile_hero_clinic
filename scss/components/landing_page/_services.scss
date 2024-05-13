@@ -8,15 +8,14 @@
     @include display-flex($gap: 20px, $dir: column);
 
     .header {
-      font-family: 'DMSans-Black', sans-serif;
       font-size: var(--fs-500);
       color: var(--pr-clr-300);
+      font-weight: 800;
     }
 
     .sub__header {
       width: 932px;
       line-height: 1.6em;
-      font-family: 'DMSans-Regular', sans-serif;
       font-size: var(--fs-300);
       color: var(--ntrl-clr-300);
       text-align: center;
@@ -38,9 +37,9 @@
       @include display-flex($gap: 10px, $dir: column, $y: flex-start);
 
       .card__label {
-        font-family: 'DMSans-Bold', sans-serif;
         font-size: var(--fs-100);
         color: var(--ntrl-clr-100);
+        font-weight: 600;
         background-color: var(--pr-clr-300);
         padding: 8px 10px 8px 10px;
         border-radius: 2rem;
@@ -48,15 +47,14 @@
 
       .card__header {
         width: 372px;
-        font-family: 'DMSans-Bold', sans-serif;
         font-size: var(--fs-450);
         color: var(--pr-clr-100);
+        font-weight: 800;
         line-height: 1.1em;
       }
 
       .card__desc {
         width: 494px;
-        font-family: 'DMSans-Regular', sans-serif;
         font-size: var(--fs-300);
         color: var(--ntrl-clr-300);
         line-height: 1.6em;

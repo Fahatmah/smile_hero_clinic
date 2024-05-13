@@ -2,54 +2,66 @@
 
 .side__nav {
   position: fixed;
-  width: 300px;
+  width: 250px;
   height: 100%;
   background-color: var(--ntrl-clr-400);
-  padding: 44px 32px;
+  padding: 1rem;
 
   ul {
     width: 100%;
-    @include display-flex($dir: column, $y: flex-start, $gap: 1rem);
+    @include display-flex($dir: column, $y: flex-start, $gap: 0.8rem);
 
     li {
       width: 100%;
-      @include display-flex($x: flex-start, $gap: 12px);
-      // padding: 1rem;
       border-radius: 6px;
 
       // outline: var(--debug);
-
-      &:hover {
-        background-color: var(--ntrl-clr-350);
-      }
 
       &.active__link {
         background-color: var(--ntrl-clr-350);
 
         a {
-          font-family: 'DMSans-Bold', sans-serif;
+          font-family: 'DM Sans', sans-serif;
           color: var(--pr-clr-300);
+          font-weight: bold;
         }
       }
 
       a,
       .theme__button {
         @include display-flex($x: flex-start, $gap: 12px);
-        width: 100%;
-        height: 100%;
-        padding: 1rem;
         color: var(--ntrl-clr-100);
-        font-size: var(--fs-200);
+        font-size: calc(var(--fs-100) + 0.1rem);
+        padding: 1rem;
+
+        &:hover {
+          background-color: var(--ntrl-clr-350);
+          border-radius: 6px;
+        }
       }
 
-      .logout__button {
-        width: 100%;
-        padding: 1rem;
-        justify-content: center;
-        background-color: var(--pr-clr-300);
-        border-radius: 6px;
-        font-family: 'DMSans-Medium', sans-serif;
+      &#logout_button {
+        padding: 0;
+        margin-top: 1rem;
         text-align: center;
+
+        .logout__button {
+          justify-content: center;
+          width: 100%;
+          padding: 1rem;
+          background-color: var(--pr-clr-300);
+          border-radius: 6px;
+          font-family: 'DM Sans', sans-serif;
+          text-align: center;
+
+          &:hover {
+            background-color: var(--pr-clr-350);
+          }
+
+          &:active {
+            background-color: var(--pr-clr-300);
+          }
+        }
       }
     }
   }

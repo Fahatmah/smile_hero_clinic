@@ -1,56 +1,71 @@
 @use '../../abstracts' as *;
 
 .appointment_form__container {
-  width: 47.9375rem;
+  width: 70rem;
 
   h1,
   h2,
   h3 {
-    font-family: 'DMSans-Bold', sans-serif;
     font-size: var(--fs-400);
     color: var(--pr-clr-300);
+    font-weight: bold;
   }
 
   .form {
     width: 100%;
     @include display-flex($gap: 1rem, $y: flex-start);
-    margin-top: 52px;
-
-    .form__container {
-      padding: 2rem;
-      border: 1px solid var(--pr-clr-300);
-      border-radius: 6px;
-    }
-
+    
     .personal__details,
     .preferences {
       width: 100%;
       @include display-flex($dir: column, $y: flex-start, $gap: 2rem);
+      padding: 2rem;
+      border-radius: 6px;
+      border: 1px solid var(--pr-clr-300);
 
       .field {
         width: 100%;
         @include display-flex($dir: column, $y: flex-start);
 
         label {
-          font-family: 'DMSans-Medium', sans-serif;
           color: var(--pr-clr-300);
+          // font-weight: 600;
         }
 
         input {
           width: 100%;
           padding: 1rem 1rem 0.5rem 0;
           border-bottom: 1px solid var(--pr-clr-400);
-          font-family: 'DMSans-Bold', sans-serif;
           color: var(--pr-clr-300);
+          font-weight: bold;
 
           &::placeholder {
-            font-family: 'DMSans-Regular', sans-serif;
             color: var(--pr-clr-400);
+            font-weight: normal;
           }
 
           &:hover,
           &:focus {
             border-bottom: 1px solid var(--pr-clr-300);
+          }
+        } 
+
+        .text_validation {
+          @include display-flex();
+          // display: none;
+
+          .text {
+            font-size: var(--fs-100);
+
+            &.error {
+              color: var(--pr-clr-100);
+              display: none;
+            }
+
+            &.valid {
+              color: var(--pr-clr-250);
+              display: none;
+            }
           }
         }
       }
@@ -102,8 +117,8 @@
 
       .create_appointment__button {
         padding: 1rem;
-        font-family: 'DMSans-Bold', sans-serif;
         color: var(--ntrl-clr-100);
+        font-weight: bold;
         background-color: var(--pr-clr-100);
         border-radius: 6px;
         cursor: pointer;

@@ -87,6 +87,7 @@ select {
   --pr-clr-100: #e84531;
   --pr-clr-150: #ff6e5c;
   --pr-clr-200: #faaf0d;
+  --pr-clr-250: #24e40f;
   --pr-clr-300: #1d72f2;
   --pr-clr-350: #5c9dff;
   --pr-clr-400: #1d72f285;
@@ -105,61 +106,51 @@ select {
   --fs-600: 6rem; /* landing page header 96px*/
   --debug: 1px solid #333;
 }
-@font-face {
-  font-family: "DMSans-Thin";
-  src: url("/assets/font/DMSans-Thin.ttf") format("truetype");
-}
-@font-face {
-  font-family: "DMSans-Light";
-  src: url("/assets/font/DMSans-Light.ttf") format("truetype");
-}
-@font-face {
-  font-family: "DMSans-ExtraLight";
-  src: url("/assets/font/DMSans-ExtraLight.ttf") format("truetype");
-}
-@font-face {
-  font-family: "DMSans-Regular";
-  src: url("/assets/font/DMSans-Regular.ttf") format("truetype");
-}
-@font-face {
-  font-family: "DMSans-Medium";
-  src: url("/assets/font/DMSans-Medium.ttf") format("truetype");
-}
-@font-face {
-  font-family: "DMSans-SemiBold";
-  src: url("/assets/font/DMSans-SemiBold.ttf") format("truetype");
-}
-@font-face {
-  font-family: "DMSans-Bold";
-  src: url("/assets/font/DMSans-Bold.ttf") format("truetype");
-}
-@font-face {
-  font-family: "DMSans-ExtraBold";
-  src: url("/assets/font/DMSans-ExtraBold.ttf") format("truetype");
-}
-@font-face {
-  font-family: "DMSans-Black";
-  src: url("/assets/font/DMSans-Black.ttf") format("truetype");
-}
 
 body {
   width: 100%;
   min-height: 100vh;
-  font-family: "DMSans-Regular", sans-serif;
+  font-family: "DM Sans", sans-serif;
   font-size: var(--fs-200);
   color: var(--ntrl-clr-400);
+  background-color: var(--ntrl-clr-250);
 }
 body main {
+  position: relative;
   width: 100%;
-}
-body main.landing__page, body main.signup__page, body main.login__page {
-  background: url(/assets/images/mesh_bg.png);
-  background-repeat: no-repeat;
-  background-size: 100%;
+  min-height: 100vh;
 }
 body main .account__container {
-  margin-left: 300px;
+  width: 78.3125%;
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-start;
+  padding-block-start: 1rem;
+  position: relative;
+  left: 16.625rem;
+}
+body main .account__container .account {
+  width: 100%;
+  background-color: var(--ntrl-clr-100);
   padding: 1rem;
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-start;
+  flex-direction: column;
+  gap: 2rem;
+  border-radius: 8px;
+  box-shadow: 0 0 60px rgba(29, 114, 242, 0.1647058824);
+}
+body main .account__container .account h1 {
+  font-weight: 800;
+  font-size: var(--fs-400);
+  color: var(--pr-clr-300);
+}
+body main .form_container .header {
+  align-self: center;
+  font-size: var(--fs-400);
+  color: var(--pr-clr-300);
+  font-weight: 800;
 }
 
 .account__header {
@@ -171,13 +162,17 @@ body main .account__container {
   justify-content: space-between;
   flex-direction: row;
   gap: 0;
-  padding: 28px 32px;
+  padding: 1rem;
   background-color: var(--ntrl-clr-100);
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1058823529);
 }
+.account__header .logo {
+  width: 1.5rem;
+  height: 1.5rem;
+}
 .account__header .account__profile_image {
-  width: 2.5rem;
-  height: 2.5rem;
+  width: 1.5rem;
+  height: 1.5rem;
 }
 .account__header .account__profile_image img {
   width: 100%;
@@ -197,7 +192,7 @@ body main .account__container {
   padding: 1rem;
   background-color: var(--ntrl-clr-100);
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1058823529);
-  z-index: 1;
+  z-index: 1000;
 }
 .nav__links {
   min-height: 100%;
@@ -259,11 +254,10 @@ body main .account__container {
   gap: 15px;
 }
 .footer__section .footer__header .heading .header {
-  font-family: "DMSans-SemiBold", sans-serif;
   font-size: var(--fs-500);
+  font-weight: 800;
 }
 .footer__section .footer__header .heading p {
-  font-family: "DMSans-Regular", sans-serif;
   font-size: var(--fs-200);
 }
 .footer__section .footer__header form {
@@ -315,7 +309,6 @@ body main .account__container {
   height: 34px;
 }
 .footer__section .contacts__container .contact p {
-  font-family: "DMSans-Regular", sans-serif;
   font-size: var(--fs-300);
 }
 .footer__section .social-media__container {
@@ -327,7 +320,6 @@ body main .account__container {
 }
 .footer__section .social-media__container p {
   width: 600px;
-  font-family: "DMSans-Regular", sans-serif;
   font-size: var(--fs-200);
   line-height: 1.6em;
 }
@@ -351,8 +343,8 @@ body main .account__container {
 }
 .hero__section .header {
   color: var(--ntrl-clr-100);
-  font-family: "DMSans-Black", sans-serif;
   font-size: var(--fs-600);
+  font-weight: 800;
   text-align: center;
   line-height: 6.2rem;
   max-width: 60rem;
@@ -408,7 +400,7 @@ body main .account__container {
 .branches__section .header {
   color: var(--pr-clr-100);
   font-size: var(--fs-500);
-  font-family: "DMSans-Bold", sans-serif;
+  font-weight: 800;
 }
 .branches__section .branches__container {
   display: flex;
@@ -434,7 +426,7 @@ body main .account__container {
   width: 100%;
   height: 250px;
   padding: 1rem;
-  background: url(/assets/images/landing_page/dental_clinic_branch.jpg);
+  background: url(/images/images/landing_page/dental_clinic_branch.jpg);
   background-size: cover;
   background-repeat: no-repeat;
 }
@@ -450,9 +442,9 @@ body main .account__container {
 .branches__section .branches__container .branch .header__container p {
   position: relative;
   z-index: 1;
-  font-family: "DMSans-SemiBold", sans-serif;
   font-size: var(--fs-400);
   color: var(--ntrl-clr-100);
+  font-weight: 600;
 }
 .branches__section .branches__container .branch .branch__details {
   display: flex;
@@ -463,16 +455,15 @@ body main .account__container {
   padding: 30px;
 }
 .branches__section .branches__container .branch .branch__details .branch__title {
-  font-family: "DMSans-SemiBold", sans-serif;
   font-size: var(--fs-300);
   color: var(--pr-clr-300);
+  font-weight: 600;
 }
 .branches__section .branches__container .branch .branch__details .branch__desc {
   color: var(--ntrl-clr-300);
   line-height: 1.6em;
 }
 .branches__section .branches__container .branch .branch__details button {
-  font-family: "DMSans-Regular", sans-serif;
   font-size: var(--fs-200);
   color: var(--ntrl-clr-100);
   width: 100%;
@@ -498,14 +489,13 @@ body main .account__container {
   gap: 20px;
 }
 .services__section .heading .header {
-  font-family: "DMSans-Black", sans-serif;
   font-size: var(--fs-500);
   color: var(--pr-clr-300);
+  font-weight: 800;
 }
 .services__section .heading .sub__header {
   width: 932px;
   line-height: 1.6em;
-  font-family: "DMSans-Regular", sans-serif;
   font-size: var(--fs-300);
   color: var(--ntrl-clr-300);
   text-align: center;
@@ -534,23 +524,22 @@ body main .account__container {
   gap: 10px;
 }
 .services__section .card .service__container .card__label {
-  font-family: "DMSans-Bold", sans-serif;
   font-size: var(--fs-100);
   color: var(--ntrl-clr-100);
+  font-weight: 600;
   background-color: var(--pr-clr-300);
   padding: 8px 10px 8px 10px;
   border-radius: 2rem;
 }
 .services__section .card .service__container .card__header {
   width: 372px;
-  font-family: "DMSans-Bold", sans-serif;
   font-size: var(--fs-450);
   color: var(--pr-clr-100);
+  font-weight: 800;
   line-height: 1.1em;
 }
 .services__section .card .service__container .card__desc {
   width: 494px;
-  font-family: "DMSans-Regular", sans-serif;
   font-size: var(--fs-300);
   color: var(--ntrl-clr-300);
   line-height: 1.6em;
@@ -568,9 +557,9 @@ body main .account__container {
   padding-block: 100px;
 }
 .testimonials__section .header {
-  font-family: "DMSans-Black", sans-serif;
   font-size: var(--fs-500);
   color: var(--pr-clr-300);
+  font-weight: 800;
 }
 .testimonials__section .testimonial__container {
   display: flex;
@@ -588,7 +577,6 @@ body main .account__container {
 }
 .testimonials__section .testimonial__container .testimonial__card .testimonial__text {
   width: 327px;
-  font-family: "DMSans-Regular", sans-serif;
   font-size: var(--fs-200);
   color: var(--ntrl-clr-300);
   line-height: 1.5em;
@@ -615,14 +603,14 @@ body main .account__container {
   gap: 4px;
 }
 .testimonials__section .testimonial__container .testimonial__card .testimonial__details .testimonial__name .testimonial {
-  font-family: "DMSans-Bold", sans-serif;
   font-size: var(--fs-200);
   color: var(--pr-clr-300);
+  font-weight: 800;
 }
 .testimonials__section .testimonial__container .testimonial__card .testimonial__details .testimonial__name .testimonial__branch {
-  font-family: "DMSans-SemiBold", sans-serif;
   font-size: var(--fs-100);
   color: var(--ntrl-clr-300);
+  font-weight: 600;
 }
 
 .signup__page {
@@ -632,26 +620,20 @@ body main .account__container {
   justify-content: center;
   flex-direction: column;
 }
-.signup__page .signup-form__section {
+.signup__page .signup {
   display: flex;
   align-items: flex-start;
   justify-content: center;
   flex-direction: column;
   gap: 42px;
-  width: -moz-max-content;
-  width: max-content;
+  width: 30rem;
   background-color: var(--ntrl-clr-100);
   padding: 2rem;
   margin-block: 4rem;
   border-radius: 8px;
   overflow: hidden;
 }
-.signup__page .signup-form__section .header {
-  font-family: "DMSans-Black", sans-serif;
-  font-size: var(--fs-400);
-  color: var(--pr-clr-300);
-}
-.signup__page .signup-form__section .signup__form {
+.signup__page .signup .signup__form {
   width: 100%;
   display: flex;
   align-items: flex-start;
@@ -659,7 +641,7 @@ body main .account__container {
   flex-direction: column;
   gap: 2rem;
 }
-.signup__page .signup-form__section .signup__form .field {
+.signup__page .signup .signup__form .field {
   width: 100%;
   display: flex;
   align-items: flex-start;
@@ -667,44 +649,38 @@ body main .account__container {
   flex-direction: column;
   gap: 0;
 }
-.signup__page .signup-form__section .signup__form .field label {
-  font-family: "DMSans-SemiBold", sans-serif;
+.signup__page .signup .signup__form .field label {
   font-size: var(--fs-200);
   color: var(--pr-clr-400);
 }
-.signup__page .signup-form__section .signup__form .field input {
+.signup__page .signup .signup__form .field input {
   width: 100%;
   padding: 8px;
   border-bottom: 1px solid var(--pr-clr-400);
-  font-family: "DMSans-SemiBold", sans-serif;
   font-size: var(--fs-200);
   color: var(--pr-clr-300);
 }
-.signup__page .signup-form__section .signup__form .field input::-moz-placeholder {
-  font-family: "DMSans-Regular", sans-serif;
+.signup__page .signup .signup__form .field input::-moz-placeholder {
   font-size: var(--fs-200);
   color: var(--pr-clr-400);
 }
-.signup__page .signup-form__section .signup__form .field input::placeholder {
-  font-family: "DMSans-Regular", sans-serif;
+.signup__page .signup .signup__form .field input::placeholder {
   font-size: var(--fs-200);
   color: var(--pr-clr-400);
 }
-.signup__page .signup-form__section .signup__form .field input:hover, .signup__page .signup-form__section .signup__form .field input:focus {
+.signup__page .signup .signup__form .field input:hover, .signup__page .signup .signup__form .field input:focus {
   border-color: var(--pr-clr-300);
 }
-.signup__page .signup-form__section .submit__button {
+.signup__page .signup .submit__button {
   width: 100%;
-  font-family: "DMSans-SemiBold", sans-serif;
   font-size: var(--fs-200);
   color: var(--ntrl-clr-100);
   background-color: var(--pr-clr-300);
   padding: 1rem;
   border-radius: 6px;
 }
-.signup__page .signup-form__section .login__link {
+.signup__page .signup .login__link {
   align-self: center;
-  font-family: "DMSans-Regular", sans-serif;
   font-size: var(--fs-200);
   color: var(--pr-clr-300);
 }
@@ -713,10 +689,10 @@ body main .account__container {
   width: 100%;
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-start;
   flex-direction: column;
 }
-.login__page .login-form__section {
+.login__page .login {
   display: flex;
   align-items: flex-start;
   justify-content: center;
@@ -729,13 +705,7 @@ body main .account__container {
   border-radius: 8px;
   overflow: hidden;
 }
-.login__page .login-form__section .header {
-  align-self: center;
-  font-family: "DMSans-Black", sans-serif;
-  font-size: var(--fs-400);
-  color: var(--pr-clr-300);
-}
-.login__page .login-form__section .login__form {
+.login__page .login .login__form {
   width: 100%;
   display: flex;
   align-items: flex-start;
@@ -743,7 +713,7 @@ body main .account__container {
   flex-direction: column;
   gap: 2rem;
 }
-.login__page .login-form__section .login__form .field {
+.login__page .login .login__form .field {
   width: 100%;
   display: flex;
   align-items: flex-start;
@@ -751,54 +721,52 @@ body main .account__container {
   flex-direction: column;
   gap: 0;
 }
-.login__page .login-form__section .login__form .field label {
-  font-family: "DMSans-SemiBold", sans-serif;
+.login__page .login .login__form .field:hover label, .login__page .login .login__form .field:active label, .login__page .login .login__form .field:focus label {
+  font-weight: bold;
+  color: var(--pr-clr-300);
+}
+.login__page .login .login__form .field label {
   font-size: var(--fs-200);
   color: var(--pr-clr-400);
 }
-.login__page .login-form__section .login__form .field input {
+.login__page .login .login__form .field input {
   width: 100%;
   padding: 8px;
   border-bottom: 1px solid var(--pr-clr-400);
-  font-family: "DMSans-SemiBold", sans-serif;
   font-size: var(--fs-200);
   color: var(--pr-clr-300);
 }
-.login__page .login-form__section .login__form .field input::-moz-placeholder {
-  font-family: "DMSans-Regular", sans-serif;
+.login__page .login .login__form .field input::-moz-placeholder {
   font-size: var(--fs-200);
   color: var(--pr-clr-400);
 }
-.login__page .login-form__section .login__form .field input::placeholder {
-  font-family: "DMSans-Regular", sans-serif;
+.login__page .login .login__form .field input::placeholder {
   font-size: var(--fs-200);
   color: var(--pr-clr-400);
 }
-.login__page .login-form__section .login__form .field input:hover, .login__page .login-form__section .login__form .field input:focus {
+.login__page .login .login__form .field input:hover, .login__page .login .login__form .field input:focus {
   border-color: var(--pr-clr-300);
 }
-.login__page .login-form__section .submit__button {
+.login__page .login .submit__button {
   width: 100%;
-  font-family: "DMSans-SemiBold", sans-serif;
   font-size: var(--fs-200);
   color: var(--ntrl-clr-100);
   background-color: var(--pr-clr-300);
   padding: 1rem;
   border-radius: 6px;
 }
-.login__page .login-form__section .signup__link {
+.login__page .login .signup__link {
   align-self: center;
-  font-family: "DMSans-Regular", sans-serif;
   font-size: var(--fs-200);
   color: var(--pr-clr-300);
 }
 
 .side__nav {
   position: fixed;
-  width: 300px;
+  width: 250px;
   height: 100%;
   background-color: var(--ntrl-clr-400);
-  padding: 44px 32px;
+  padding: 1rem;
 }
 .side__nav ul {
   width: 100%;
@@ -806,26 +774,19 @@ body main .account__container {
   align-items: flex-start;
   justify-content: center;
   flex-direction: column;
-  gap: 1rem;
+  gap: 0.8rem;
 }
 .side__nav ul li {
   width: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: flex-start;
-  flex-direction: row;
-  gap: 12px;
   border-radius: 6px;
-}
-.side__nav ul li:hover {
-  background-color: var(--ntrl-clr-350);
 }
 .side__nav ul li.active__link {
   background-color: var(--ntrl-clr-350);
 }
 .side__nav ul li.active__link a {
-  font-family: "DMSans-Bold", sans-serif;
+  font-family: "DM Sans", sans-serif;
   color: var(--pr-clr-300);
+  font-weight: bold;
 }
 .side__nav ul li a,
 .side__nav ul li .theme__button {
@@ -834,20 +795,34 @@ body main .account__container {
   justify-content: flex-start;
   flex-direction: row;
   gap: 12px;
-  width: 100%;
-  height: 100%;
-  padding: 1rem;
   color: var(--ntrl-clr-100);
-  font-size: var(--fs-200);
+  font-size: calc(var(--fs-100) + 0.1rem);
+  padding: 1rem;
 }
-.side__nav ul li .logout__button {
+.side__nav ul li a:hover,
+.side__nav ul li .theme__button:hover {
+  background-color: var(--ntrl-clr-350);
+  border-radius: 6px;
+}
+.side__nav ul li#logout_button {
+  padding: 0;
+  margin-top: 1rem;
+  text-align: center;
+}
+.side__nav ul li#logout_button .logout__button {
+  justify-content: center;
   width: 100%;
   padding: 1rem;
-  justify-content: center;
   background-color: var(--pr-clr-300);
   border-radius: 6px;
-  font-family: "DMSans-Medium", sans-serif;
+  font-family: "DM Sans", sans-serif;
   text-align: center;
+}
+.side__nav ul li#logout_button .logout__button:hover {
+  background-color: var(--pr-clr-350);
+}
+.side__nav ul li#logout_button .logout__button:active {
+  background-color: var(--pr-clr-300);
 }
 
 .profile__info {
@@ -856,12 +831,7 @@ body main .account__container {
   align-items: flex-start;
   justify-content: center;
   flex-direction: column;
-  gap: 4rem;
-}
-.profile__info h1 {
-  font-family: "DMSans-Bold", sans-serif;
-  font-size: var(--fs-400);
-  color: var(--pr-clr-300);
+  gap: 2rem;
 }
 .profile__info .info__header {
   width: 100%;
@@ -879,21 +849,48 @@ body main .account__container {
   gap: 1rem;
 }
 .profile__info .info__header .details__container .user__details .user__name {
-  font-family: "DMSans-Bold", sans-serif;
   font-size: var(--fs-400);
   color: var(--pr-clr-300);
+  font-weight: 800;
 }
 .profile__info .info__header .details__container .user__details .user__address {
   color: var(--ntrl-clr-350);
-  font-family: "DMSans-Regular", sans-serif;
   font-size: var(--fs-200);
 }
-.profile__info .info__header .delete__button {
-  width: 160px;
-  padding: 1rem;
-  background-color: var(--pr-clr-100);
+.profile__info .info__header .button_container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-direction: row;
+  gap: 1rem;
+  width: 24rem;
+}
+.profile__info .info__header .button_container .button {
+  width: 100%;
   border-radius: 6px;
+  padding: 1rem;
   color: var(--ntrl-clr-100);
+  cursor: pointer;
+  transition: 200ms ease-in-out;
+}
+.profile__info .info__header .button_container .button:hover {
+  font-weight: bold;
+}
+.profile__info .info__header .button_container .button.edit {
+  background-color: var(--pr-clr-300);
+}
+.profile__info .info__header .button_container .button.edit:hover {
+  box-shadow: 3px 3px 0px rgba(29, 114, 242, 0.4117647059);
+}
+.profile__info .info__header .button_container .button.delete {
+  background-color: var(--pr-clr-100);
+}
+.profile__info .info__header .button_container .button.delete:hover {
+  box-shadow: 3px 3px 0px rgba(232, 70, 49, 0.4901960784);
+}
+.profile__info .info__header .button_container .button:active {
+  background-color: var(--pr-clr-100);
+  transform: scale(0.97);
 }
 .profile__info .additional_details__container {
   width: 100%;
@@ -902,7 +899,6 @@ body main .account__container {
   justify-content: center;
   flex-direction: column;
   gap: 0;
-  padding: 1rem;
   border: 1px solid var(--pr-clr-300);
   border-radius: 6px;
 }
@@ -914,9 +910,19 @@ body main .account__container {
   justify-content: space-between;
   flex-direction: row;
   gap: 0;
+  cursor: pointer;
+  transition: 200ms ease-in-out;
+  overflow: hidden;
 }
 .profile__info .additional_details__container .item:not(:last-child) {
   border-bottom: 1px solid var(--pr-clr-400);
+}
+.profile__info .additional_details__container .item:hover {
+  border: 1px solid var(--pr-clr-300);
+  border-radius: 8px;
+  background-color: var(--ntrl-clr-100);
+  transform: scale(1.08);
+  box-shadow: 0 0 60px rgba(29, 114, 242, 0.1647058824);
 }
 .profile__info .additional_details__container .item .details {
   width: 100%;
@@ -924,18 +930,34 @@ body main .account__container {
   align-items: flex-start;
   justify-content: center;
   flex-direction: column;
-  gap: 12px;
+  gap: 0.3rem;
+  padding: 1rem;
+}
+.profile__info .additional_details__container .item .details:hover .detail_content {
+  color: var(--ntrl-clr-350);
 }
 .profile__info .additional_details__container .item .details .detail__header {
-  font-family: "DMSans-Bold", sans-serif;
   font-size: var(--fs-300);
   color: var(--pr-clr-300);
+  font-weight: 600;
+}
+.profile__info .additional_details__container .item .details .detail_content {
+  color: var(--ntrl-clr-300);
 }
 .profile__info .additional_details__container .edit__button {
   width: 100px;
   height: 100%;
   color: var(--pr-clr-300);
   border-left: 1px solid var(--pr-clr-400);
+  cursor: pointer;
+}
+.profile__info .additional_details__container .edit__button:hover {
+  background-color: rgba(29, 114, 242, 0.1647058824);
+  font-weight: bold;
+}
+.profile__info .additional_details__container .edit__button:focus {
+  background-color: var(--pr-clr-300);
+  color: var(--ntrl-clr-100);
 }
 
 .appointment__page {
@@ -955,15 +977,23 @@ body main .account__container {
   gap: 0;
 }
 .appointment__page .header h1 {
-  font-family: "DMSans-Bold", sans-serif;
   font-size: var(--fs-400);
   color: var(--pr-clr-300);
+  font-weight: bold;
 }
 .appointment__page .header .appointment__button {
   padding: 1rem;
   background-color: var(--pr-clr-100);
   color: var(--ntrl-clr-100);
+  font-weight: bold;
   border-radius: 6px;
+}
+.appointment__page .header .appointment__button:hover {
+  background-color: var(--pr-clr-150);
+}
+.appointment__page .header .appointment__button:active {
+  background-color: var(--pr-clr-100);
+  transform: scale(0.97);
 }
 .appointment__page .appointment__container {
   width: 100%;
@@ -985,109 +1015,113 @@ body main .account__container {
   border-radius: 6px;
   color: var(--ntrl-clr-100);
 }
+.appointment__page .appointment__container .header h2,
+.appointment__page .appointment__container .header h3 {
+  font-weight: bold;
+}
 .appointment__page .appointment__container .appointments {
   width: 100%;
-  border: 1px solid var(--pr-clr-300);
+  border: 1px solid var(--pr-clr-350);
   border-radius: 6px;
 }
-.appointment__page .appointment__container .appointments .appointment .date {
+.appointment__page .appointment__container .appointments .item .item_header {
   display: flex;
   align-items: center;
   justify-content: space-between;
   flex-direction: row;
   gap: 0;
   padding: 1rem;
-  color: var(--pr-clr-300);
-  transition: 100ms;
+  border-bottom: 1px solid var(--pr-clr-300);
   cursor: pointer;
+  transition: 200ms ease-in-out;
+  overflow: hidden;
 }
-.appointment__page .appointment__container .appointments .appointment .date:hover {
-  background-color: var(--pr-clr-400);
-  color: var(--ntrl-clr-100);
+.appointment__page .appointment__container .appointments .item .item_header:hover {
+  border: 1px solid var(--pr-clr-300);
+  border-radius: 8px;
+  background-color: var(--ntrl-clr-100);
+  transform: scale(1.09);
+  box-shadow: 0 0 60px rgba(29, 114, 242, 0.1647058824);
+}
+.appointment__page .appointment__container .appointments .item .item_header p,
+.appointment__page .appointment__container .appointments .item .item_header button {
+  color: var(--pr-clr-300);
   font-weight: bold;
-}
-.appointment__page .appointment__container .appointments .appointment .date:hover .remove__button {
-  color: var(--ntrl-clr-100);
-}
-.appointment__page .appointment__container .appointments .appointment .date .remove__button {
-  color: var(--pr-clr-300);
   cursor: pointer;
 }
-.appointment__page .appointment__container .appointments .appointment .date .remove__button:hover {
+.appointment__page .appointment__container .appointments .item .item_header p:hover,
+.appointment__page .appointment__container .appointments .item .item_header button:hover {
   text-decoration: underline;
 }
-.appointment__page .appointment__container .appointments .appointment .details__container {
-  width: 100%;
+.appointment__page .appointment__container .appointments .item .appointment .appointment_header {
   display: flex;
   align-items: center;
-  justify-content: center;
-  flex-direction: column;
-  gap: 0;
-  border-top: 1px solid var(--pr-clr-300);
-}
-.appointment__page .appointment__container .appointments .appointment .details__container .detail__header {
-  width: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: flex-start;
+  justify-content: space-between;
   flex-direction: row;
   gap: 0;
-  border-bottom: 1px solid var(--pr-clr-300);
 }
-.appointment__page .appointment__container .appointments .appointment .details__container .detail__header p {
+.appointment__page .appointment__container .appointments .item .appointment .appointment_header > * {
+  width: 100%;
   padding: 1rem;
-  width: 100%;
-  font-family: "DMSans-Bold", sans-serif;
-  font-size: var(--fs-300);
   color: var(--pr-clr-300);
+  font-weight: bold;
+  border-bottom: 1px solid var(--pr-clr-300);
 }
-.appointment__page .appointment__container .appointments .appointment .details__container .detail__header p:nth-child(2) {
+.appointment__page .appointment__container .appointments .item .appointment .appointment_header p:nth-child(2) {
   border-left: 1px solid var(--pr-clr-300);
 }
-.appointment__page .appointment__container .appointments .appointment .details__container .details {
-  width: 100%;
+.appointment__page .appointment__container .appointments .item .appointment .appointment_details .details {
   display: flex;
-  align-items: flex-start;
+  align-items: center;
   justify-content: center;
   flex-direction: row;
   gap: 0;
+  flex-wrap: wrap;
 }
-.appointment__page .appointment__container .appointments .appointment .details__container .details .detail {
-  width: 100%;
-}
-.appointment__page .appointment__container .appointments .appointment .details__container .details .detail .item {
+.appointment__page .appointment__container .appointments .item .appointment .appointment_details .details .detail {
+  flex: 50%;
   display: flex;
   align-items: flex-start;
   justify-content: center;
   flex-direction: column;
-  gap: 6px;
-  padding: 0.5rem 1rem;
+  gap: 0.5rem;
+  padding: 1rem;
+  cursor: pointer;
+  transition: 200ms ease-in-out;
+  overflow: hidden;
+}
+.appointment__page .appointment__container .appointments .item .appointment .appointment_details .details .detail:not(:last-child) {
   border-bottom: 1px solid var(--pr-clr-300);
 }
-.appointment__page .appointment__container .appointments .appointment .details__container .details .detail .item p:nth-child(1) {
-  font-family: "DMSans-Bold", sans-serif;
-  font-size: var(--fs-300);
+.appointment__page .appointment__container .appointments .item .appointment .appointment_details .details .detail:hover {
+  border: 1px solid var(--pr-clr-300);
+  border-radius: 8px;
+  background-color: var(--ntrl-clr-100);
+  transform: scale(1.09);
+  box-shadow: 0 0 60px rgba(29, 114, 242, 0.1647058824);
+}
+.appointment__page .appointment__container .appointments .item .appointment .appointment_details .details .detail_header {
   color: var(--pr-clr-300);
+  font-weight: bold;
 }
-.appointment__page .appointment__container .appointments .appointment .details__container .details .detail:nth-child(1) .item p:nth-child(4) {
-  border-width: 0px;
+.appointment__page .appointment__container .appointments .item .appointment .appointment_details .details .detail_content {
+  color: var(--ntrl-clr-350);
 }
-.appointment__page .appointment__container .appointments .appointment .details__container .details .detail:first-child .item:last-child {
-  border-bottom: 0;
-}
-.appointment__page .appointment__container .appointments .appointment .details__container .details .detail:nth-child(2) .item {
-  border-left: 1px solid var(--pr-clr-300);
+.appointment__page .appointment__container .appointments .item .appointment .appointment_details .details .detail:nth-child(2),
+.appointment__page .appointment__container .appointments .item .appointment .appointment_details .details .detail:nth-child(4),
+.appointment__page .appointment__container .appointments .item .appointment .appointment_details .details .detail:nth-child(6) {
+  border-left: 1px solid var(--pr-clr-350);
 }
 
 .appointment_form__container {
-  width: 47.9375rem;
+  width: 70rem;
 }
 .appointment_form__container h1,
 .appointment_form__container h2,
 .appointment_form__container h3 {
-  font-family: "DMSans-Bold", sans-serif;
   font-size: var(--fs-400);
   color: var(--pr-clr-300);
+  font-weight: bold;
 }
 .appointment_form__container .form {
   width: 100%;
@@ -1096,12 +1130,6 @@ body main .account__container {
   justify-content: center;
   flex-direction: row;
   gap: 1rem;
-  margin-top: 52px;
-}
-.appointment_form__container .form .form__container {
-  padding: 2rem;
-  border: 1px solid var(--pr-clr-300);
-  border-radius: 6px;
 }
 .appointment_form__container .form .personal__details,
 .appointment_form__container .form .preferences {
@@ -1111,6 +1139,9 @@ body main .account__container {
   justify-content: center;
   flex-direction: column;
   gap: 2rem;
+  padding: 2rem;
+  border-radius: 6px;
+  border: 1px solid var(--pr-clr-300);
 }
 .appointment_form__container .form .personal__details .field,
 .appointment_form__container .form .preferences .field {
@@ -1123,7 +1154,6 @@ body main .account__container {
 }
 .appointment_form__container .form .personal__details .field label,
 .appointment_form__container .form .preferences .field label {
-  font-family: "DMSans-Medium", sans-serif;
   color: var(--pr-clr-300);
 }
 .appointment_form__container .form .personal__details .field input,
@@ -1131,22 +1161,44 @@ body main .account__container {
   width: 100%;
   padding: 1rem 1rem 0.5rem 0;
   border-bottom: 1px solid var(--pr-clr-400);
-  font-family: "DMSans-Bold", sans-serif;
   color: var(--pr-clr-300);
+  font-weight: bold;
 }
 .appointment_form__container .form .personal__details .field input::-moz-placeholder, .appointment_form__container .form .preferences .field input::-moz-placeholder {
-  font-family: "DMSans-Regular", sans-serif;
   color: var(--pr-clr-400);
+  font-weight: normal;
 }
 .appointment_form__container .form .personal__details .field input::placeholder,
 .appointment_form__container .form .preferences .field input::placeholder {
-  font-family: "DMSans-Regular", sans-serif;
   color: var(--pr-clr-400);
+  font-weight: normal;
 }
 .appointment_form__container .form .personal__details .field input:hover, .appointment_form__container .form .personal__details .field input:focus,
 .appointment_form__container .form .preferences .field input:hover,
 .appointment_form__container .form .preferences .field input:focus {
   border-bottom: 1px solid var(--pr-clr-300);
+}
+.appointment_form__container .form .personal__details .field .text_validation,
+.appointment_form__container .form .preferences .field .text_validation {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: row;
+  gap: 0;
+}
+.appointment_form__container .form .personal__details .field .text_validation .text,
+.appointment_form__container .form .preferences .field .text_validation .text {
+  font-size: var(--fs-100);
+}
+.appointment_form__container .form .personal__details .field .text_validation .text.error,
+.appointment_form__container .form .preferences .field .text_validation .text.error {
+  color: var(--pr-clr-100);
+  display: none;
+}
+.appointment_form__container .form .personal__details .field .text_validation .text.valid,
+.appointment_form__container .form .preferences .field .text_validation .text.valid {
+  color: var(--pr-clr-250);
+  display: none;
 }
 .appointment_form__container .form .preferences {
   border: 0;
@@ -1194,8 +1246,8 @@ body main .account__container {
 }
 .appointment_form__container .form .preferences .create_appointment__button {
   padding: 1rem;
-  font-family: "DMSans-Bold", sans-serif;
   color: var(--ntrl-clr-100);
+  font-weight: bold;
   background-color: var(--pr-clr-100);
   border-radius: 6px;
   cursor: pointer;
@@ -1205,4 +1257,85 @@ body main .account__container {
 }
 .appointment_form__container .form .preferences .create_appointment__button:active {
   background-color: var(--pr-clr-100);
+}
+
+.modal_container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  transform: translate(-50%, -50%);
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: row;
+  gap: 0;
+  transform: scale(0);
+  transition: 200ms ease-in-out;
+  cursor: not-allowed;
+}
+.modal_container .delete-account {
+  width: min(100% - 0rem, 35rem);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 1rem;
+  padding: 1.5rem;
+  border-radius: 8px;
+  border: 1px solid var(--pr-clr-100);
+  background-color: var(--ntrl-clr-100);
+  box-shadow: 0 0 60px rgba(29, 114, 242, 0.1647058824);
+  text-align: center;
+  cursor: default;
+}
+.modal_container .delete-account .header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+.modal_container .delete-account h3 {
+  font-size: calc(var(--fs-300) + 0.5rem);
+  color: var(--pr-clr-300);
+  font-weight: 800;
+  line-height: 1.15;
+}
+.modal_container .delete-account p {
+  font-size: var(--fs-100);
+  color: var(--pr-clr-100);
+  font-weight: 500;
+}
+.modal_container .delete-account .button_container {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-direction: row;
+  gap: 1rem;
+}
+.modal_container .delete-account .button_container button {
+  width: 100%;
+  padding: 1rem;
+  color: var(--ntrl-clr-100);
+  border-radius: 8px;
+  transition: 200ms ease-in-out;
+  cursor: pointer;
+}
+.modal_container .delete-account .button_container button:hover {
+  font-weight: bold;
+}
+.modal_container .delete-account .button_container button#deleteAccountButton {
+  background-color: var(--pr-clr-100);
+}
+.modal_container .delete-account .button_container button#deleteAccountButton:hover {
+  box-shadow: 3px 3px 0px rgba(232, 70, 49, 0.4901960784);
+}
+.modal_container .delete-account .button_container button#exitButton {
+  background-color: var(--pr-clr-300);
+}
+.modal_container .delete-account .button_container button#exitButton:hover {
+  box-shadow: 3px 3px 0px rgba(29, 114, 242, 0.4117647059);
 }/*# sourceMappingURL=styles.css.map */
