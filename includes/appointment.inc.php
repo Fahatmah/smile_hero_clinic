@@ -21,7 +21,7 @@ if($_SERVER['REQUEST_METHOD'] === "POST" && isset($_SESSION['user_id'])){
 
     if(haveAppointment($conn, $name)){
         echo "<script> alert('You already have Appointment') </script>";
-        echo "<script>window.close();</script>";
+        echo "<script>window.location.href='../user_pages/appointment_page.php';</script>";
         die();
     }
 

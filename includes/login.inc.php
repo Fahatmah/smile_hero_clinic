@@ -41,7 +41,7 @@
 
       $_SESSION["last_regeneration"] = time();
 
-      Header("Location: ../user_pages/profile.php?login=success");
+      Header("Location: ../user_pages/profile.html?login=success");
 
       $conn->close();
       die();
