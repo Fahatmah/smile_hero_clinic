@@ -88,23 +88,10 @@ require_once '../includes/appointment_view.inc.php';
 
         <form action="../includes/appointment.inc.php" method="post" class="form">
        
-         
           <!-- personal details -->
           <section class="personal__details">
 
           <?php checkAppointErrors() ?>
-
-           <!-- id of user -->
-          <div class="field">
-            <input 
-              type="text" 
-              value="<?php outputUserId(); ?>"
-              name="user_id" 
-              id="user_id" 
-              style="display: none;"
-              ">
-            </div>
-
             <div class="field">
               <label for="name">Name</label>
               <input required
