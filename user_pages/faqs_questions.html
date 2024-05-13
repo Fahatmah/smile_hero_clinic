@@ -1,19 +1,12 @@
-<?php
-require_once '../includes/config_session.inc.php';
-require_once '../includes/login_view.inc.php';
-require_once '../includes/appointment_view.inc.php';
-?>
-
 <!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Feedback Form | Smile Hero Clinic</title>
+    <title>FAQs & Questions | Smile Hero Clinic</title>
     <link rel="stylesheet" href="../src/dist/styles.css" />
   </head>
   <body>
-  <?php outputUserId() ?>
     <main>
       <!-- navigation header bar -->
       <nav class="account__header">
@@ -30,7 +23,7 @@ require_once '../includes/appointment_view.inc.php';
       <nav class="side__nav">
         <ul>
           <li>
-            <a href="../user_pages/profile.php">
+            <a href="../user_pages/profile.html">
               <img
                 src="../assets/icons/user_account/profile.png"
                 alt=""
@@ -59,8 +52,8 @@ require_once '../includes/appointment_view.inc.php';
               Appointments
             </a>
           </li>
-          <li class="active__link">
-            <a href="#">
+          <li>
+            <a href="../user_pages/dental_history.html">
               <img
                 src="../assets/icons/user_account/medical_history.png"
                 alt=""
@@ -69,8 +62,8 @@ require_once '../includes/appointment_view.inc.php';
               Dental History
             </a>
           </li>
-          <li>
-            <a href="../user_pages/faqs_questions.php">
+          <li class="active__link">
+            <a href="#">
               <img
                 src="../assets/icons/user_account/faqs_questions.png"
                 alt=""
@@ -80,7 +73,7 @@ require_once '../includes/appointment_view.inc.php';
             </a>
           </li>
           <li>
-            <a href="../user_pages/feedback.php">
+            <a href="../user_pages/feedback.html">
               <img
                 src="../assets/icons/user_account/feedback.png"
                 alt=""
