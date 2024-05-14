@@ -1,6 +1,28 @@
 <?php
 require_once '../includes/config_session.inc.php';
 require_once '../includes/login_view.inc.php';
+require_once '../includes/dbh.inc.php';
+
+if(isset($_SESSION['user_id'])) {
+  $user_id = $_SESSION['user_id'];
+
+  // Fetch user details from users table
+  $user_query = "SELECT * FROM users WHERE user_id = ?";
+  $stmt = $conn->prepare($user_query);
+  $stmt->bind_param("s", $user_id);
+  $stmt->execute();
+  $result = $stmt->get_result();
+
+  // get contact number from appointments table
+  $contact_query = "SELECT * FROM appointments WHERE user_id = ?";
+  $contact_stmt = $conn->prepare($contact_query);
+  $contact_stmt->bind_param("s", $user_id);
+  $contact_stmt->execute();
+  $contact_result = $contact_stmt->get_result();
+}
+//  else {
+//   echo 
+// }
 ?>
 
 <!DOCTYPE html>
@@ -19,7 +41,7 @@ require_once '../includes/login_view.inc.php';
 </head>
 
 <body>
-<?php outputUserId(); ?>
+  <?php outputUserId(); ?>
   <main>
     <!-- navigation header bar -->
     <?php include('includes/nav.php'); ?>
@@ -29,6 +51,7 @@ require_once '../includes/login_view.inc.php';
 
     <!-- profile info -->
     <section class="profile__info account__container">
+      <?php if($row= $result->fetch_assoc() ) { ?>
       <div class="account">
         <h1>Your account information</h1>
         <div class="info__header">
@@ -37,9 +60,10 @@ require_once '../includes/login_view.inc.php';
             <img src="../assets/images/default_profile_image.png" alt="profile image"
               style="width: 90px; height: 90px" />
             <div class="user__details">
-              <h2 class="user__name" id="headerUserName">Fahatmah Mabang</h2>
+              <h2 class="user__name" id="headerUserName">
+                <?php echo $row["username"]; ?> </h2>
               <p class="user__address" id="headerUserAddress">
-                Reyes, Purok 3, Bicutan, Taguig City
+                No address
               </p>
             </div>
           </div>
@@ -73,42 +97,41 @@ require_once '../includes/login_view.inc.php';
           <div class="item">
             <div class="details">
               <p class="detail__header">Name</p>
-              <p class="full__name detail_content" id="fullName">Fahatmah Mabang</p>
+              <p class="full__name detail_content" id="fullName"><?php echo $row["fullname"]; ?></p>
             </div>
-            <!-- <button class="edit__button">Edit</button> -->
           </div>
           <div class="item">
             <div class="details">
               <p class="detail__header">Contact Number</p>
-              <p class="contact__number detail_content" id="contactNumber">09123456789</p>
+              <p class="contact__number detail_content"
+                <?php if($row= $contact_result->fetch_assoc() ) { ?>id="contactNumber">
+                <?php echo $row["contact"]; ?></p>
+              <?php } ?>
             </div>
-            <!-- <button class="edit__button">Edit</button> -->
           </div>
           <div class="item">
             <div class="details">
               <p class="detail__header">Address</p>
               <p class="address detail_content" id="address">
-                Reyes, Purok 3, Bicutan, Taguig City
+                No address
               </p>
             </div>
-            <!-- <button class="edit__button">Edit</button> -->
           </div>
           <div class="item">
             <div class="details">
               <p class="detail__header">Email</p>
-              <p class="email detail_content" id="email">fahatmahmabang@gmail.com</p>
+              <p class="email detail_content" id="email"><?php echo $row["email"]; ?></p>
             </div>
-            <!-- <button class="edit__button">Edit</button> -->
           </div>
           <div class="item">
             <div class="details">
               <p class="detail__header">Password</p>
               <p class="password detail_content" id="password">********</p>
             </div>
-            <!-- <button class="edit__button">Edit</button> -->
           </div>
         </div>
       </div>
+      <?php } ?>
     </section>
   </main>
 </body>
