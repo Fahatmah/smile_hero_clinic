@@ -4,7 +4,7 @@ if ($_SERVER['REQUEST_METHOD'] === "POST") {
 
     $fullname = $_POST["fullname"];
     $email = $_POST["email"];
-    $username = $_POST["username"];
+    $contact = $_POST["contact"];
     $password = $_POST["password"];
 
     require_once("dbh.inc.php");
@@ -16,7 +16,7 @@ if ($_SERVER['REQUEST_METHOD'] === "POST") {
     // ERROR HANDLERS
     $errors = [];
 
-    if (isInputEmpty($fullname, $email, $username, $password)) {
+    if (isInputEmpty($fullname, $email, $contact, $password)) {
         // $errors["emptyInput"] = "Fill in all fields!";
     }
     if (isNameTaken($conn, $fullname)) {
@@ -25,8 +25,8 @@ if ($_SERVER['REQUEST_METHOD'] === "POST") {
     if (isEmailInvalid($email)) {
         $errors["invalidEmail"] = "Email is invalid!";
     }
-    if (isUsernameTaken($conn, $username)) {
-        $errors["usernameTaken"] = "Username is already taken";
+    if (iscontactTaken($conn, $contact)) {
+        $errors["contactTaken"] = "contact is already taken";
     }
     if (isEmailRegistered($conn, $email)) {
         $errors["emailRegistered"] = "Email is already registered";
@@ -41,7 +41,7 @@ if ($_SERVER['REQUEST_METHOD'] === "POST") {
         // $signupData = [
         //     "name" => $name,
         //     "email" => $email,
-        //     "username" => $username
+        //     "contact" => $contact
         // ];
 
         // $_SESSION["signup_data"] = $signupData;
@@ -50,7 +50,7 @@ if ($_SERVER['REQUEST_METHOD'] === "POST") {
         die();
     }
 
-    createUser($conn, $user_id, $fullname, $email, $username, $password);
+    createUser($conn, $user_id, $fullname, $email, $contact, $password);
     echo "<script>alert('Account is created');</script>";
     echo "<script>window.location.href='../login.php?signup=success';</script>";
 

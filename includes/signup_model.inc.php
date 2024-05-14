@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-function getUsername(mysqli $conn, string $username) {
-    $query = "SELECT user_id FROM users WHERE username = ?";
+function getcontact(mysqli $conn, string $contact) {
+    $query = "SELECT user_id FROM users WHERE contact = ?";
     $stmt = $conn->prepare($query);
-    $stmt->bind_param("s", $username);
+    $stmt->bind_param("s", $contact);
     $stmt->execute();
 
     $result = $stmt->get_result();
@@ -26,6 +26,18 @@ function getEmail(mysqli $conn, string $email) {
     return $user;
 }
 
+function isEmailUnique($dbConnection, $email, $currentEmail ) {
+    $query = "SELECT COUNT(*) AS total FROM users WHERE email = ? AND email != ?";
+    $stmt = $dbConnection->prepare($query);
+    $stmt->bind_param("ss", $email, $currentEmail);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    $row = $result->fetch_assoc();
+    $total = $row['total'];
+    
+    return $total == 0; // Return true if email is unique, false otherwise
+}
+
 function getName(mysqli $conn, string $fullname) {
     $query = "SELECT user_id FROM users WHERE fullname = ?";
     $stmt = $conn->prepare($query);
@@ -38,8 +50,8 @@ function getName(mysqli $conn, string $fullname) {
     return $user;
 }
 
-function setUser(mysqli $conn, string $userid, string $fullname, string $email, string $username, string $password) {
-    $query = "INSERT INTO users (user_id, fullname, email, username, pass, created_at) VALUES (?, ?, ?, ?, ?, NOW())";
+function setUser(mysqli $conn, string $userid, string $fullname, string $email, string $contact, string $password) {
+    $query = "INSERT INTO users (user_id, fullname, email, contact, pass, created_at) VALUES (?, ?, ?, ?, ?, NOW())";
     $stmt = $conn->prepare($query);
 
     $options = [
@@ -47,7 +59,7 @@ function setUser(mysqli $conn, string $userid, string $fullname, string $email, 
     ];
     $hashedPassword = password_hash($password, PASSWORD_BCRYPT, $options);
 
-    $stmt->bind_param("sssss", $userid, $fullname, $email, $username, $hashedPassword);
+    $stmt->bind_param("sssss", $userid, $fullname, $email, $contact, $hashedPassword);
     $stmt->execute();
 
     return $stmt->affected_rows > 0;

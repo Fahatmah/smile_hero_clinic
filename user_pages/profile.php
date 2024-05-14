@@ -12,17 +12,11 @@ if(isset($_SESSION['user_id'])) {
   $stmt->bind_param("s", $user_id);
   $stmt->execute();
   $result = $stmt->get_result();
-
-  // get contact number from appointments table
-  $contact_query = "SELECT * FROM appointments WHERE user_id = ?";
-  $contact_stmt = $conn->prepare($contact_query);
-  $contact_stmt->bind_param("s", $user_id);
-  $contact_stmt->execute();
-  $contact_result = $contact_stmt->get_result();
+} else {
+  // Redirect user to login if not logged in
+  header("Location: ../login.php");
+  exit();
 }
-//  else {
-//   echo 
-// }
 ?>
 
 <!DOCTYPE html>
@@ -41,7 +35,6 @@ if(isset($_SESSION['user_id'])) {
 </head>
 
 <body>
-  <?php outputUserId(); ?>
   <main>
     <!-- navigation header bar -->
     <?php include('includes/nav.php'); ?>
@@ -61,17 +54,21 @@ if(isset($_SESSION['user_id'])) {
               style="width: 90px; height: 90px" />
             <div class="user__details">
               <h2 class="user__name" id="headerUserName">
-                <?php echo $row["username"]; ?> </h2>
+                <?php echo $row["fullname"]; ?> </h2>
               <p class="user__address" id="headerUserAddress">
-                No address
+              <?php if(strlen($row["address"])===0) { ?>
+                  No Address
+                <?php }else {
+                  echo $row["address"];
+                } ?>
               </p>
             </div>
           </div>
           <!-- action buttons -->
           <div class="button_container">
-            <button class="button edit" id="editAccountBtn">
+            <a href="includes/edit_profile.php" style="text-align: center;" class="button edit" id="editAccountBtn">
               Edit Account
-            </button>
+            </a>
             <button class="button delete" id="deleteAccountBtn">
               Delete Account
             </button>
@@ -86,7 +83,11 @@ if(isset($_SESSION['user_id'])) {
               </p>
             </div>
             <div class="button_container">
-              <button type="submit" id="deleteAccountButton">Yes, delete my account</button>
+              <button type="submit" id="deleteAccountButton"> 
+                <a href="includes/delete_acc.php">
+                  Yes, delete my account
+               </a> 
+              </button>
               <button id="exitButton">No, keep my account</button>
             </div>
           </div>
@@ -103,17 +104,19 @@ if(isset($_SESSION['user_id'])) {
           <div class="item">
             <div class="details">
               <p class="detail__header">Contact Number</p>
-              <p class="contact__number detail_content"
-                <?php if($row= $contact_result->fetch_assoc() ) { ?>id="contactNumber">
+              <p class="contact__number detail_content" id="contactNumber">
                 <?php echo $row["contact"]; ?></p>
-              <?php } ?>
             </div>
           </div>
           <div class="item">
             <div class="details">
               <p class="detail__header">Address</p>
               <p class="address detail_content" id="address">
-                No address
+                <?php if(strlen($row["address"])===0) { ?>
+                  No Address
+                <?php }else {
+                  echo $row["address"];
+                } ?>
               </p>
             </div>
           </div>

@@ -48,8 +48,8 @@ require_once 'includes/login_view.inc.php';
       <!-- form -->
       <form action="includes/login.inc.php" method="post" class="login__form">
         <div class="field">
-          <label for="username">Username</label>
-          <input type="text" placeholder="fahatmahmabang" id="username" name="username" required autofocus />
+          <label for="email">Email</label>
+          <input type="email" placeholder="fahatmahmabang@gmail.com" id="email" name="email" required autofocus />
         </div>
         <div class="field">
           <label for="password">Password</label><input type="password" placeholder="********" id="password"

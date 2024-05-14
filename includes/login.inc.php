@@ -1,6 +1,6 @@
 <?php
     if ($_SERVER['REQUEST_METHOD'] === "POST") {
-      $username = $_POST["username"];
+      $email = $_POST["email"];
       $password = $_POST["password"];
 
       require_once 'dbh.inc.php';
@@ -10,7 +10,7 @@
       // ERROR HANDLERS
       $errors = [];
 
-      $result = getUser($conn, $username);
+      $result = getUser($conn, $email);
 
       if (isUsernameWrong($result)) {
           $errors["login_incorrect"] = "Incorrect Username or Password";
@@ -37,6 +37,7 @@
       $_SESSION["user_id"] =  $result["user_id"];
       $_SESSION["fullname"] =  $result["fullname"];
       $_SESSION["email"] =  $result["email"];
+      $_SESSION["contact"] =  $result["contact"];
       $_SESSION["user_username"] = htmlspecialchars($result["username"]);
 
       $_SESSION["last_regeneration"] = time();

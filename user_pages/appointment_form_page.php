@@ -68,7 +68,8 @@ require_once '../includes/appointment_view.inc.php';
 
             <div class="field">
               <label for="contactnumber">Contact Number</label>
-              <input type="tel" name="contactnumber" id="contactnumber" placeholder="e.g. 09123456789" />
+              <input type="tel" name="contactnumber" id="contactnumber" placeholder="e.g. 09123456789"
+                value="<?php outputContact() ?>" />
               <div class="text_validation">
                 <p class="text error">Error</p>
                 <p class="text valid">Valid</p>

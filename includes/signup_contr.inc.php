@@ -2,16 +2,16 @@
 
 declare(strict_types=1);
 
-function isInputEmpty(string $fullname, string $email, string $username, string $password) {
-    return empty($fullname) || empty($email) || empty($username) || empty($password);
+function isInputEmpty(string $fullname, string $email, string $contact, string $password) {
+    return empty($fullname) || empty($email) || empty($contact) || empty($password);
 }
 
 function isEmailInvalid(string $email) {
     return !filter_var($email, FILTER_VALIDATE_EMAIL);
 }
 
-function isUsernameTaken(mysqli $conn, string $username) {
-    $user = getUsername($conn, $username);
+function iscontactTaken(mysqli $conn, string $contact) {
+    $user = getcontact($conn, $contact);
     return $user !== null;
 }
 
@@ -25,8 +25,13 @@ function isEmailRegistered(mysqli $conn, string $email) {
     return $user !== null;
 }
 
-function createUser(mysqli $conn, string $userid, string $fullname, string $email, string $username, string $password) {
-    setUser($conn, $userid, $fullname, $email, $username, $password);
+function isUpdatedEmailIsValid(mysqli $conn, string $email, $currentEmail) {
+    $user = isEmailUnique($conn, $email, $currentEmail);
+    return $user == null;
+}
+
+function createUser(mysqli $conn, string $userid, string $fullname, string $email, string $contact, string $password) {
+    setUser($conn, $userid, $fullname, $email, $contact, $password);
 }
 
 function generateUserID(mysqli $conn) {

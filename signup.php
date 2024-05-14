@@ -57,8 +57,8 @@ require_once "includes/signup_view.inc.php"
             name="email" required />
         </div>
         <div class="field">
-          <label for="username">Username</label><input type="text" placeholder="e.g. fahatmah" id="username"
-            name="username" required />
+          <label for="contact">contact</label><input type="tel" placeholder="e.g. 09000000000" id="contact"
+            name="contact" required />
         </div>
         <div class="field">
           <label for="password">Password</label><input type="password" placeholder="e.g. password" id="password"

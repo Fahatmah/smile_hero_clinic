@@ -36,6 +36,18 @@ function outputEmail(){
     }
 }
 
+function outputContact(){
+    if(isset($_SESSION["contact"])){
+      $contact = $_SESSION["contact"];
+      echo $contact;
+        // Header("Location: ../userpage.php?login=success");
+
+    }else{
+        Header("Location: ../login.php?login=failed");
+        // echo"you are not logged in";
+    }
+}
+
 function checkLoginErrors(){
     if (isset($_SESSION["errors_login"])) {
         $errors = $_SESSION["errors_login"];
