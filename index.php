@@ -27,8 +27,9 @@
 </head>
 
 <body>
-  <main class="landing__page"
-    style='background: url(assets/images/mesh_bg.png); background-repeat: no-repeat; background-size: 100%'>
+  <!-- <main class="landing__page"
+    style='background: url(assets/images/mesh_bg.png); background-repeat: no-repeat; background-size: 100%'> -->
+  <main class="landing__page">
     <!-- navigation bar -->
     <?php include('nav.php') ?>
 
@@ -43,7 +44,11 @@
         <button type="submit">Subscribe</button>
       </form>
 
-      <div class="hero__image"></div>
+      <!-- <div class="hero__image"
+        style="background-image: url(./assets/images/hero.png); background-size: 100%; background-repeat: no-repeat;">
+      </div> -->
+      <div class="hero__image">
+      </div>
     </header>
 
     <!-- branches -->

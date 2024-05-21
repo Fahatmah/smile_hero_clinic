@@ -43,6 +43,14 @@ body {
     width: 100%;
     min-height: 100vh;
 
+    &.landing__page,
+    &.login__page,
+    &.signup__page {
+      background: url(../../assets/images/mesh_bg.png);
+      background-size: 100%;
+      background-repeat: no-repeat;
+    }
+
     .account__container {
       width: 78.3125%;
       display: flex;

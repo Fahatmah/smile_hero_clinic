@@ -38,8 +38,7 @@ require_once 'includes/login_view.inc.php';
 </head>
 
 <body>
-  <main class="login__page"
-    style='background: url(assets/images/mesh_bg.png); background-repeat: no-repeat; background-size: cover'>
+  <main class="login__page">
     <!-- navigation bar -->
     <?php include('nav.php') ?>
 

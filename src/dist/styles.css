@@ -120,6 +120,11 @@ body main {
   width: 100%;
   min-height: 100vh;
 }
+body main.landing__page, body main.login__page, body main.signup__page {
+  background: url(../../assets/images/mesh_bg.png);
+  background-size: 100%;
+  background-repeat: no-repeat;
+}
 body main .account__container {
   width: 78.3125%;
   display: flex;
@@ -340,6 +345,7 @@ body main .form_container .header {
   flex-direction: column;
   background-repeat: no-repeat;
   background-size: 100%;
+  overflow: hidden;
 }
 .hero__section .header {
   color: var(--ntrl-clr-100);
@@ -378,12 +384,14 @@ body main .form_container .header {
 }
 .hero__section .hero__image {
   width: 858px;
-  height: 449px;
-  border: 1px solid #fff;
+  height: 340px;
   margin-top: 50px;
-  background-color: #fff;
+  background: url(../../assets/images/hero.png);
+  background-size: 100%;
+  background-repeat: no-repeat;
   border-top-left-radius: 0.6rem;
   border-top-right-radius: 0.6rem;
+  box-shadow: 2px 2px 60px rgba(51, 51, 51, 0.2980392157);
 }
 
 .branches__section {
