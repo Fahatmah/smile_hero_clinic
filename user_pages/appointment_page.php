@@ -5,7 +5,11 @@ require_once '../includes/appointment_view.inc.php';
 
 require_once '../includes/dbh.inc.php';
 
-if(isset($_SESSION['user_id'])) {
+if(!isset($_SESSION['user_id'])) {
+   // Redirect user to login if not logged in
+   header("Location: ../login.php");
+   exit();
+}
   $user_id = $_SESSION['user_id'];
 
   // Fetch appointments for the user
@@ -14,11 +18,8 @@ if(isset($_SESSION['user_id'])) {
   $stmt->bind_param("s", $user_id);
   $stmt->execute();
   $result = $stmt->get_result();
-} else {
-  // Redirect user to login if not logged in
-  header("Location: ../login.php");
-  exit();
-}
+  
+
 ?>
 
 <!DOCTYPE html>
@@ -54,24 +55,58 @@ if(isset($_SESSION['user_id'])) {
             Create New Appointment
           </a>
         </div>
-
+        <?php if ($row = $result->fetch_assoc()) { ?>
         <div class="appointment__container">
           <div class="header">
-            <h2>Appointment Date</h2>
+            <h2>Appointment Date: <?php echo $row['date'] ?></h2>
             <h3>Remove</h3>
           </div>
 
           <div class="appointments">
             <div class="item">
               <!-- header -->
-              <?php if ($row = $result->fetch_assoc()) { ?>
+             
               <div class="item_header">
                 <p class="appoinment_date" id="appointmentDate">Appointment ID: <?php echo $row["appointment_id"]; ?>
                 </p>
-                <button class="remove__button" id="removeAppointmentBtn">
+                <button class="remove__button" id="deleteAccountBtn">
                   Cancel
                 </button>
               </div>
+
+              <!--------- Modal --------->
+              <div class="modal_container delete-account">
+                <div class="delete-account">
+                  <div class="header" style="background-color: white;">
+                    <h3>Are you sure you want to cancel your Appointment?</h3>
+                    <p>*This action cannot be undone and all appointment details will be lost.*
+                    </p>
+                  </div>
+                  <div class="button_container">
+                  <button type="submit" id="deleteAccountButton"> 
+                    <form action="" method="get">
+                      <input type="submit" name="submit" value=" Yes, cancel appointment">
+                    </form>
+                  </button>
+                    <button id="exitButton">No, keep my appointment</button>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Cancel Appointment -->
+              <?php 
+              $appointment_id = $row['appointment_id'];
+              
+              if(isset($_GET["submit"])) {
+                $query = "DELETE FROM appointments WHERE appointment_id = ?";
+                $stmt = $conn->prepare($query);
+                $stmt->bind_param("s", $appointment_id);
+                $stmt->execute();
+
+                echo "<script> alert('Appointment is now canceled'); </script>";
+                echo "<script>window.location.href='appointment_page.php';</script>";
+               }
+              ?>
 
               <!-- appointment container -->
               <div class="appointment">
@@ -140,5 +175,25 @@ if(isset($_SESSION['user_id'])) {
     </section>
   </main>
 </body>
+
+<script>
+const openModalBtn = document.getElementById("deleteAccountBtn");
+const modalContainer = document.querySelector(".modal_container.delete-account");
+const exitBtn = document.getElementById("exitButton");
+const deleteAccountBtn = document.getElementById("deleteAccountButton");
+
+openModalBtn.addEventListener("click", () => {
+  modalContainer.style.transform = "scale(1)";
+})
+
+exitBtn.addEventListener("click", () => {
+  modalContainer.style.transform = "scale(0)";
+})
+
+// AJAX request to delete user when confirmation is clicked
+deleteAccountBtn.addEventListener("click", () => {
+  console.log("Delete Account Button Clicked!");
+});
+</script>
 
 </html>

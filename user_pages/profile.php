@@ -3,20 +3,20 @@ require_once '../includes/config_session.inc.php';
 require_once '../includes/login_view.inc.php';
 require_once '../includes/dbh.inc.php';
 
-if(isset($_SESSION['user_id'])) {
-  $user_id = $_SESSION['user_id'];
+if(!isset($_SESSION['user_id'])) {
+   // Redirect user to login if not logged in
+   header("Location: ../login.php");
+   exit();
+} 
+$user_id = $_SESSION['user_id'];
 
-  // Fetch user details from users table
-  $user_query = "SELECT * FROM users WHERE user_id = ?";
-  $stmt = $conn->prepare($user_query);
-  $stmt->bind_param("s", $user_id);
-  $stmt->execute();
-  $result = $stmt->get_result();
-} else {
-  // Redirect user to login if not logged in
-  header("Location: ../login.php");
-  exit();
-}
+// Fetch user details from users table
+$user_query = "SELECT * FROM users WHERE user_id = ?";
+$stmt = $conn->prepare($user_query);
+$stmt->bind_param("s", $user_id);
+$stmt->execute();
+$result = $stmt->get_result();
+
 ?>
 
 <!DOCTYPE html>

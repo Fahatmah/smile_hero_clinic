@@ -1,6 +1,12 @@
 <?php
 require_once '../includes/config_session.inc.php';
 require_once '../includes/login_view.inc.php';
+
+if(!isset($_SESSION['user_id'])) {
+  // Redirect user to login if not logged in
+  header("Location: ../login.php");
+  exit();
+}
 ?>
 
 <!DOCTYPE html>
