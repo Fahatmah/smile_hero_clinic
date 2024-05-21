@@ -45,14 +45,14 @@ require_once '../includes/appointment_view.inc.php';
 
             <h2>Personal Details</h2>
 
-            <div class="field">
+            <div class=" field">
               <label for="name">Name</label>
               <input type="text" name="name" id="name" placeholder="e.g. Fahatmah Mabang"
                 value="<?php outputFullName() ?>" />
-              <!-- <div class="text_validation">
+              <div class="text_validation">
                 <p class="text error">Error</p>
                 <p class="text valid">Valid</p>
-              </div> -->
+              </div>
 
             </div>
 
@@ -60,10 +60,10 @@ require_once '../includes/appointment_view.inc.php';
               <label for="email">Email</label>
               <input type="email" name="email" id="email" placeholder="e.g. fahatmahmabang@gmail.com"
                 value=" <?php outputEmail() ?>" />
-              <!-- <div class="text_validation">
+              <div class="text_validation">
                 <p class="text error">Error</p>
                 <p class="text valid">Valid</p>
-              </div> -->
+              </div>
 
             </div>
 
@@ -71,19 +71,19 @@ require_once '../includes/appointment_view.inc.php';
               <label for="contactnumber">Contact Number</label>
               <input type="tel" name="contactnumber" id="contactnumber" placeholder="e.g. 09123456789"
                 value="<?php outputContact() ?>" />
-              <!-- <div class="text_validation">
+              <div class="text_validation">
                 <p class="text error">Error</p>
                 <p class="text valid">Valid</p>
-              </div> -->
+              </div>
             </div>
 
             <div class="field">
               <label for="message">Message/Requests</label>
               <input type="text" name="message" id="message" />
-              <!-- <div class="text_validation">
+              <div class="text_validation">
                 <p class="text error">Error</p>
                 <p class="text valid">Valid</p>
-              </div> -->
+              </div>
             </div>
           </section>
 
@@ -144,7 +144,8 @@ require_once '../includes/appointment_view.inc.php';
                   <p class="text valid">Valid</p>
                 </div>
               </div>
-              <input type="submit" name="submit" value="Create Appointment" class="create_appointment__button">
+            </div>
+            <input type="submit" name="submit" value="Create Appointment" class="create_appointment__button">
           </section>
         </form>
       </div>

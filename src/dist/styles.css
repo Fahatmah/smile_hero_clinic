@@ -1226,6 +1226,152 @@ body main .form_container .header {
   border-left: 1px solid var(--pr-clr-300);
 }
 
+.appointment_form__container {
+  width: 70rem;
+}
+.appointment_form__container h1,
+.appointment_form__container h2,
+.appointment_form__container h3 {
+  font-size: var(--fs-400);
+  color: var(--pr-clr-300);
+  font-weight: bold;
+}
+.appointment_form__container .form {
+  width: 100%;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  flex-direction: row;
+  gap: 1rem;
+}
+.appointment_form__container .form .personal__details,
+.appointment_form__container .form .preferences {
+  width: 100%;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  flex-direction: column;
+  gap: 2rem;
+  padding: 2rem;
+  border-radius: 6px;
+  border: 1px solid var(--pr-clr-300);
+}
+.appointment_form__container .form .personal__details .field,
+.appointment_form__container .form .preferences .field {
+  width: 100%;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  flex-direction: column;
+  gap: 0;
+}
+.appointment_form__container .form .personal__details .field label,
+.appointment_form__container .form .preferences .field label {
+  color: var(--pr-clr-300);
+}
+.appointment_form__container .form .personal__details .field input,
+.appointment_form__container .form .preferences .field input {
+  width: 100%;
+  padding: 1rem 1rem 0.5rem 0;
+  border-bottom: 1px solid var(--pr-clr-400);
+  color: var(--pr-clr-300);
+  font-weight: bold;
+}
+.appointment_form__container .form .personal__details .field input::-moz-placeholder, .appointment_form__container .form .preferences .field input::-moz-placeholder {
+  color: var(--pr-clr-400);
+  font-weight: normal;
+}
+.appointment_form__container .form .personal__details .field input::placeholder,
+.appointment_form__container .form .preferences .field input::placeholder {
+  color: var(--pr-clr-400);
+  font-weight: normal;
+}
+.appointment_form__container .form .personal__details .field input:hover, .appointment_form__container .form .personal__details .field input:focus,
+.appointment_form__container .form .preferences .field input:hover,
+.appointment_form__container .form .preferences .field input:focus {
+  border-bottom: 1px solid var(--pr-clr-300);
+}
+.appointment_form__container .form .personal__details .field .text_validation,
+.appointment_form__container .form .preferences .field .text_validation {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: row;
+  gap: 0;
+}
+.appointment_form__container .form .personal__details .field .text_validation .text,
+.appointment_form__container .form .preferences .field .text_validation .text {
+  font-size: var(--fs-100);
+}
+.appointment_form__container .form .personal__details .field .text_validation .text.error,
+.appointment_form__container .form .preferences .field .text_validation .text.error {
+  color: var(--pr-clr-100);
+  display: none;
+}
+.appointment_form__container .form .personal__details .field .text_validation .text.valid,
+.appointment_form__container .form .preferences .field .text_validation .text.valid {
+  color: var(--pr-clr-250);
+  display: none;
+}
+.appointment_form__container .form .preferences {
+  border: 0;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  flex-direction: column;
+  gap: 1rem;
+  padding: 0;
+}
+.appointment_form__container .form .preferences .fields {
+  width: 100%;
+  display: flex;
+  align-items: space-between;
+  justify-content: center;
+  flex-direction: column;
+  gap: 1rem;
+  border: 1px solid var(--pr-clr-300);
+  padding: 32px;
+  border-radius: 6px;
+}
+.appointment_form__container .form .preferences .fields .field select {
+  appearance: none; /* Reset default styles */
+  -webkit-appearance: none; /* For older versions of Chrome and Safari */
+  -moz-appearance: none; /* For older versions of Firefox */
+  -ms-appearance: none; /* For older versions of IE */
+  /* Custom styles */
+  border: 0;
+  outline: 0;
+  background: none;
+  width: 100%;
+  padding: 1rem 1rem 0.5rem 0.5rem;
+  border-bottom: 1px solid var(--pr-clr-400);
+  color: var(--pr-clr-300);
+  cursor: pointer;
+}
+.appointment_form__container .form .preferences .fields .field select:focus {
+  border: 1px solid var(--pr-clr-300);
+  border-radius: 6px;
+}
+.appointment_form__container .form .preferences .text__confirmation {
+  font-size: calc(var(--fs-100) + 0.15rem);
+  font-style: italic;
+  color: var(--pr-clr-100);
+}
+.appointment_form__container .form .preferences .create_appointment__button {
+  padding: 1rem;
+  color: var(--ntrl-clr-100);
+  font-weight: bold;
+  background-color: var(--pr-clr-100);
+  border-radius: 6px;
+  cursor: pointer;
+}
+.appointment_form__container .form .preferences .create_appointment__button:hover {
+  background-color: var(--pr-clr-150);
+}
+.appointment_form__container .form .preferences .create_appointment__button:active {
+  background-color: var(--pr-clr-100);
+}
+
 .modal_container {
   position: absolute;
   top: 0;

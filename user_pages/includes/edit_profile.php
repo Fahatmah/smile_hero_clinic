@@ -165,7 +165,7 @@ $current_page = basename($_SERVER['PHP_SELF']);
             <!-- action buttons -->
             <div class="button_container">
               <input type="submit" value="Save" class="button edit" id="editAccountBtn">
-              <a href="profile.php" style="text-align: center;" class="button delete" id="deleteAccountBtn">
+              <a href="../profile.php" style="text-align: center;" class="button delete" id="deleteAccountBtn">
                 Cancel
               </a>
             </div>
@@ -177,28 +177,29 @@ $current_page = basename($_SERVER['PHP_SELF']);
             <div class="details">
               <p class="detail__header">Name</p>
               <input type="text" name="fullname" value="<?php echo htmlspecialchars($row["fullname"]); ?>"
-                class="full__name detail_content" id="fullName">
+                class="full__name detail_content" id="fullName" style="width: 100%;">
             </div>
           </div>
           <div class="item">
             <div class="details">
               <p class="detail__header">Contact Number</p>
               <input type="text" name="contact" value="<?php echo htmlspecialchars($row["contact"]); ?>"
-                class="contact__number detail_content" id="contactNumber">
+                class="contact__number detail_content" id="contactNumber" style="width: 100%;">
             </div>
           </div>
           <div class="item">
             <div class="details">
               <p class="detail__header">Address</p>
               <input type="text" name="address" value="<?php echo htmlspecialchars($row["address"]); ?>"
-                placeholder="no address" name="address" class="address detail_content" id="address">
+                placeholder="no address" name="address" class="address detail_content" id="address"
+                style="width: 100%;">
             </div>
           </div>
           <div class="item">
             <div class="details">
               <p class="detail__header">Email</p>
               <input type="text" name="email" value="<?php echo htmlspecialchars($row["email"]); ?>"
-                class="email detail_content" id="email">
+                class="email detail_content" id="email" style="width: 100%;">
             </div>
           </div>
           <div class="item">
