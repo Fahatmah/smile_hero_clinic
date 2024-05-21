@@ -1,0 +1,13 @@
+@use '../../abstracts' as *;
+
+.admin-sidenav {
+  background-color: var(--ntrl-clr-100);
+
+  ul {
+    li {
+      &.active__link {
+        background-color: var(--ntrl-clr-250);
+      }
+    }
+  }
+}

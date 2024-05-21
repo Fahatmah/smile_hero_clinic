@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="shortcut icon"
+      href="../assets/images/logoipsum.svg"
+      type="image/x-icon"
+    />
+    <title>Dashboard | Admin</title>
+    <link rel="stylesheet" href="../src/dist/styles.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <main>
+    <!-- nav header -->
+    <nav class="account__header admin-header">
+      <img src="../assets/images/logoipsum.svg" alt="logo" class="logo" />
+      <div class="account__profile_image">
+        <!-- profile image -->
+        <img
+          src="../assets/images/default_profile_image.png"
+          alt="account image"
+        />
+      </div>
+    </nav>
+
+    <!-- side bar -->
+    <nav class="side__nav admin-sidenav">
+      <ul>
+        <li class="active__link">
+          <a href="../user_pages/profile.php">
+            <img
+              src="../assets/admin_images/dashboard.png"
+              alt=""
+              style="width: 1.375rem; height: 1.375rem"
+            />Dashboard</a
+          >
+        </li>
+
+        <li id="logout_button">
+          <a href="../index.php" class="logout__button">Logout</a>
+        </li>
+      </ul>
+    </nav>
+
+    <!-- dashboard container -->
+    <section class="account__container">
+      <h1>Hello</h1>
+    </section>
+    </main>
+  </body>
+</html>

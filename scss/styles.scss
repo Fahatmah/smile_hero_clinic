@@ -28,7 +28,7 @@
 @use 'components/user_page/side_nav';
 @use 'components/user_page/info';
 @use 'components/user_page/appointment_page';
-@use 'components/user_page/appointment_form_page';
+// @use 'components/user_page/appointment_form_page';
 @use 'components/user_page/confirmation';
 @use 'components/user_page/history';
 @use 'components/user_page/faqs_questions';
@@ -36,8 +36,9 @@
 @use 'components/user_page/delete_acc_modal.scss';
 
 // admin interface
-@use 'components/admin_page/dashboard/admin_nav';
-@use 'components/admin_page/dashboard/sidebar_nav';
+@use 'components/admin_page/admin_nav';
+@use 'components/admin_page/sidebar_nav';
+@use 'components/admin_page/dashboard';
 @use 'components/admin_page/appointments';
 @use 'components/admin_page/patients';
 @use 'components/admin_page/reports';

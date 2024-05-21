@@ -9,6 +9,7 @@ require_once "includes/signup_view.inc.php"
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="shortcut icon" href="./assets/images/logoipsum.svg" type="image/x-icon">
   <title>Signup an Account | Smile Hero Clinic</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -57,7 +58,7 @@ require_once "includes/signup_view.inc.php"
             name="email" required />
         </div>
         <div class="field">
-          <label for="contact">contact</label><input type="tel" placeholder="e.g. 09000000000" id="contact"
+          <label for="contact">Contact Number</label><input type="tel" placeholder="e.g. 09000000000" id="contact"
             name="contact" required />
         </div>
         <div class="field">

@@ -9,6 +9,7 @@ require_once '../includes/login_view.inc.php';
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="shortcut icon" href="../assets/images/logoipsum.svg" type="image/x-icon">
   <title>Feedback Form | Smile Hero Clinic</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -19,7 +20,7 @@ require_once '../includes/login_view.inc.php';
 </head>
 
 <body>
-<?php outputUserId(); ?>
+  <?php outputUserId(); ?>
   <main>
     <!-- navigation header bar -->
     <?php include('includes/nav.php'); ?>

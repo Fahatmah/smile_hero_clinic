@@ -25,6 +25,7 @@ if(isset($_SESSION['user_id'])) {
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="shortcut icon" href="../assets/images/logoipsum.svg" type="image/x-icon">
   <title>Account | Smile Hero Clinic</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -56,8 +57,8 @@ if(isset($_SESSION['user_id'])) {
               <h2 class="user__name" id="headerUserName">
                 <?php echo $row["fullname"]; ?> </h2>
               <p class="user__address" id="headerUserAddress">
-              <?php if(strlen($row["address"])===0) { ?>
-                  No Address
+                <?php if(strlen($row["address"])===0) { ?>
+                No Address
                 <?php }else {
                   echo $row["address"];
                 } ?>
@@ -83,10 +84,10 @@ if(isset($_SESSION['user_id'])) {
               </p>
             </div>
             <div class="button_container">
-              <button type="submit" id="deleteAccountButton"> 
+              <button type="submit" id="deleteAccountButton">
                 <a href="includes/delete_acc.php">
                   Yes, delete my account
-               </a> 
+                </a>
               </button>
               <button id="exitButton">No, keep my account</button>
             </div>
@@ -113,7 +114,7 @@ if(isset($_SESSION['user_id'])) {
               <p class="detail__header">Address</p>
               <p class="address detail_content" id="address">
                 <?php if(strlen($row["address"])===0) { ?>
-                  No Address
+                No Address
                 <?php }else {
                   echo $row["address"];
                 } ?>

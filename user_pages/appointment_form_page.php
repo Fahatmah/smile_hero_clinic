@@ -10,6 +10,7 @@ require_once '../includes/appointment_view.inc.php';
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="shortcut icon" href="../assets/images/logoipsum.svg" type="image/x-icon">
   <title>Create an appointment | Smile Hero Clinic</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -44,14 +45,14 @@ require_once '../includes/appointment_view.inc.php';
 
             <h2>Personal Details</h2>
 
-            <div class=" field">
+            <div class="field">
               <label for="name">Name</label>
               <input type="text" name="name" id="name" placeholder="e.g. Fahatmah Mabang"
                 value="<?php outputFullName() ?>" />
-              <div class="text_validation">
+              <!-- <div class="text_validation">
                 <p class="text error">Error</p>
                 <p class="text valid">Valid</p>
-              </div>
+              </div> -->
 
             </div>
 
@@ -59,10 +60,10 @@ require_once '../includes/appointment_view.inc.php';
               <label for="email">Email</label>
               <input type="email" name="email" id="email" placeholder="e.g. fahatmahmabang@gmail.com"
                 value=" <?php outputEmail() ?>" />
-              <div class="text_validation">
+              <!-- <div class="text_validation">
                 <p class="text error">Error</p>
                 <p class="text valid">Valid</p>
-              </div>
+              </div> -->
 
             </div>
 
@@ -70,19 +71,19 @@ require_once '../includes/appointment_view.inc.php';
               <label for="contactnumber">Contact Number</label>
               <input type="tel" name="contactnumber" id="contactnumber" placeholder="e.g. 09123456789"
                 value="<?php outputContact() ?>" />
-              <div class="text_validation">
+              <!-- <div class="text_validation">
                 <p class="text error">Error</p>
                 <p class="text valid">Valid</p>
-              </div>
+              </div> -->
             </div>
 
             <div class="field">
               <label for="message">Message/Requests</label>
               <input type="text" name="message" id="message" />
-              <div class="text_validation">
+              <!-- <div class="text_validation">
                 <p class="text error">Error</p>
                 <p class="text valid">Valid</p>
-              </div>
+              </div> -->
             </div>
           </section>
 

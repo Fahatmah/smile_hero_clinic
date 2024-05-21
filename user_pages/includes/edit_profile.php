@@ -1,7 +1,6 @@
 <?php
 require_once '../../includes/config_session.inc.php';
 require_once '../../includes/login_view.inc.php';
-
 require_once '../../includes/dbh.inc.php';
 
 if(isset($_SESSION['user_id']) && isset($_SESSION["email"])) {
@@ -64,6 +63,8 @@ if(isset($_SESSION['user_id']) && isset($_SESSION["email"])) {
   header("Location: ../../login.php");
   exit();
 }
+
+$current_page = basename($_SERVER['PHP_SELF']);
 ?>
 
 <!DOCTYPE html>
@@ -72,25 +73,74 @@ if(isset($_SESSION['user_id']) && isset($_SESSION["email"])) {
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Account | Smile Hero Clinic</title>
+  <link rel="shortcut icon" href="../assets/images/logoipsum.svg" type="image/x-icon">
+  <title>Edit account | Smile Hero Clinic</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link
     href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&display=swap"
     rel="stylesheet" />
   <link rel="stylesheet" href="../../src/dist/styles.css" />
+  <style>
+  #loading-screen {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    background: rgba(0, 0, 0, 0.7);
+    z-index: 1000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #fff;
+    font-size: 1.5rem;
+    flex-direction: column;
+  }
+
+  .spinner {
+    border: 8px solid rgba(255, 255, 255, 0.3);
+    border-top: 8px solid #fff;
+    border-radius: 50%;
+    width: 60px;
+    height: 60px;
+    animation: spin 1s linear infinite;
+    margin-bottom: 20px;
+  }
+
+  @keyframes spin {
+    0% {
+      transform: rotate(0deg);
+    }
+
+    100% {
+      transform: rotate(360deg);
+    }
+  }
+  </style>
+
 </head>
 
 <body>
   <main>
-    <!-- navigation header bar -->
-    <!-- <?php include('includes/nav.php'); ?> -->
 
-    <!-- navigation side nav -->
-    <!-- <?php include('includes/sidenav.php'); ?> -->
-    
+    <div id="loading-screen" style="display: none;">
+      <div class="spinner"></div>
+      <p>Loading...</p>
+    </div>
+
+
+    <!-- navigation header bar -->
+    <nav class="account__header">
+      <img src="../../assets/images/logoipsum.svg" alt="logo" class="logo" />
+      <div class="account__profile_image">
+        <!-- profile image -->
+        <img src="../../assets/images/default_profile_image.png" alt="account image" />
+      </div>
+    </nav>
+
     <!-- profile info -->
-    <section class="profile__info account__container">
+    <section class="edit_profile profile__info account__container">
       <?php if($row= $result->fetch_assoc() ) { ?>
       <div class="account">
         <h1>Edit your account information</h1>
@@ -103,8 +153,8 @@ if(isset($_SESSION['user_id']) && isset($_SESSION["email"])) {
               <h2 class="user__name" id="headerUserName">
                 <?php echo htmlspecialchars($row["fullname"]); ?> </h2>
               <p class="user__address" id="headerUserAddress">
-              <?php if(strlen($row["address"])===0) { ?>
-                  No Address
+                <?php if(strlen($row["address"])===0) { ?>
+                No Address
                 <?php }else {
                   echo $row["address"];
                 } ?>
@@ -112,60 +162,49 @@ if(isset($_SESSION['user_id']) && isset($_SESSION["email"])) {
             </div>
           </div>
           <form action="" method="post">
-          <!-- action buttons -->
-          <div class="button_container">
-            <input type="submit" value="Save" class="button edit" id="editAccountBtn">
-            <a href="../profile.php" style="text-align: center;" class="button delete" id="deleteAccountBtn">
-                Cancel
-            </a>
-          </div>
-        </div>
-<!-- 
-        <div class="modal_container delete-account">
-          <div class="delete-account">
-            <div class="header">
-              <h3>Are you sure you want to permanently delete your account?</h3>
-              <p>*This action cannot be undone and all your data will be lost.*
-              </p>
-            </div>
+            <!-- action buttons -->
             <div class="button_container">
-              <button type="submit" id="deleteAccountButton">Yes, delete my account</button>
-              <button id="exitButton">No, keep my account</button>
+              <input type="submit" value="Save" class="button edit" id="editAccountBtn">
+              <a href="profile.php" style="text-align: center;" class="button delete" id="deleteAccountBtn">
+                Cancel
+              </a>
             </div>
-          </div>
-        </div> -->
+        </div>
 
         <!-- more details -->
         <div class="additional_details__container">
           <div class="item">
             <div class="details">
               <p class="detail__header">Name</p>
-              <input type="text" name="fullname" value="<?php echo htmlspecialchars($row["fullname"]); ?>" class="full__name detail_content" id="fullName">
+              <input type="text" name="fullname" value="<?php echo htmlspecialchars($row["fullname"]); ?>"
+                class="full__name detail_content" id="fullName">
             </div>
           </div>
           <div class="item">
             <div class="details">
               <p class="detail__header">Contact Number</p>
-              <input type="text" name="contact" value="<?php echo htmlspecialchars($row["contact"]); ?>" class="contact__number detail_content"
-                id="contactNumber">
+              <input type="text" name="contact" value="<?php echo htmlspecialchars($row["contact"]); ?>"
+                class="contact__number detail_content" id="contactNumber">
             </div>
           </div>
           <div class="item">
             <div class="details">
               <p class="detail__header">Address</p>
-              <input type="text" name="address" value="<?php echo htmlspecialchars($row["address"]); ?>" placeholder="no address" name="address" class="address detail_content" id="address">
+              <input type="text" name="address" value="<?php echo htmlspecialchars($row["address"]); ?>"
+                placeholder="no address" name="address" class="address detail_content" id="address">
             </div>
           </div>
           <div class="item">
             <div class="details">
               <p class="detail__header">Email</p>
-              <input type="text" name="email" value="<?php echo htmlspecialchars($row["email"]); ?>" class="email detail_content" id="email">
+              <input type="text" name="email" value="<?php echo htmlspecialchars($row["email"]); ?>"
+                class="email detail_content" id="email">
             </div>
           </div>
           <div class="item">
             <div class="details">
               <p class="detail__header">Enter New Password</p>
-                <input type="password" name="password" placeholder="********">
+              <input type="password" name="password" placeholder="********">
             </div>
           </div>
         </div>
@@ -174,5 +213,18 @@ if(isset($_SESSION['user_id']) && isset($_SESSION["email"])) {
       <?php } ?>
     </section>
   </main>
+  <script>
+  document.querySelector('form').addEventListener('submit', function(event) {
+    event.preventDefault(); // Prevent the form from submitting immediately
+    document.getElementById('loading-screen').style.display = 'flex';
+
+    // Wait for 3 seconds
+    setTimeout(function() {
+      event.target.submit(); // Submit the form after 3 seconds
+    }, 3000);
+  });
+  </script>
+
 </body>
+
 </html>
