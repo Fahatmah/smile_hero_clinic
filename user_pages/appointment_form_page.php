@@ -35,9 +35,6 @@ require_once '../includes/appointment_view.inc.php';
 
         <form action="../includes/appointment.inc.php" method="post" class="form" id="appointmentForm">
 
-
-
-
           <!-- personal details -->
           <section class="personal__details">
 
@@ -154,49 +151,58 @@ require_once '../includes/appointment_view.inc.php';
 
   <!-- scripts -->
   <script>
-  const appointmentForm = document.getElementById('appointmentForm')
+  const appointmentForm = document.getElementById('appointmentForm');
 
-  // appointmentForm.addEventListener('submit', (e) => {
-  //   e.preventDefault()
+  appointmentForm.addEventListener('submit', (e) => {
+    e.preventDefault();
 
-  //   const fields = [{
-  //       id: 'name',
-  //       errorMessage: 'Name cannot be empty'
-  //     },
-  //     {
-  //       id: 'email',
-  //       errorMessage: 'Email cannot be empty'
-  //     },
-  //     {
-  //       id: 'contactnumber',
-  //       errorMessage: 'Contact number cannot be empty'
-  //     },
-  //     {
-  //       id: 'appointmentDate',
-  //       errorMessage: 'Please select a date'
-  //     },
-  //     {
-  //       id: 'appointmentTime',
-  //       errorMessage: 'Please select a time'
-  //     },
-  //     {
-  //       id: 'location',
-  //       errorMessage: 'Please select a location'
-  //     },
-  //   ]
+    const fields = [{
+        id: 'name',
+        errorMessage: 'Name cannot be empty'
+      },
+      {
+        id: 'email',
+        errorMessage: 'Email cannot be empty'
+      },
+      {
+        id: 'contactnumber',
+        errorMessage: 'Contact number cannot be empty'
+      },
+      {
+        id: 'appointmentDate',
+        errorMessage: 'Please select a date'
+      },
+      {
+        id: 'appointmentTime',
+        errorMessage: 'Please select a time'
+      },
+      {
+        id: 'location',
+        errorMessage: 'Please select a location'
+      },
+    ];
 
-  //   fields.forEach((field) => {
-  //     const fieldElement = document.getElementById(field.id)
-  //     const errorElement =
-  //       fieldElement.nextElementSibling.querySelector('.text.error')
-  //     if (fieldElement.value.trim() === '-' || fieldElement.value.trim() === '') {
-  //       errorElement.innerText = field.errorMessage
-  //       errorElement.style.display = 'block'
-  //     } else {
-  //       errorElement.style.display = 'none'
-  //     }
-  //   })
-  // })
+    let isValid = true; // Initialize validation status flag
+
+    fields.forEach((field) => {
+      const fieldElement = document.getElementById(field.id);
+      const errorElement = fieldElement.nextElementSibling.querySelector('.text.error');
+
+      if (fieldElement.value.trim() === '-' || fieldElement.value.trim() === '') {
+        errorElement.innerText = field.errorMessage;
+        errorElement.style.display = 'block';
+        isValid = false; // Set flag to false if any field is invalid
+      } else {
+        errorElement.style.display = 'none';
+      }
+    });
+
+    // Check the validation status flag and submit the form if valid
+    if (isValid) {
+      HTMLFormElement.prototype.submit.call(appointmentForm); // Manually submit the form
+    }
+  });
+
 
 
   // Function to generate options for weekdays
