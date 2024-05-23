@@ -48,21 +48,21 @@ require_once 'includes/login_view.inc.php';
       <!-- form -->
       <form action="includes/login.inc.php" method="post" class="login__form">
         <div class="field">
-          <label for="email">Email</label>
           <input type="email" placeholder="fahatmahmabang@gmail.com" id="email" name="email" required autofocus />
+          <label for="email">Email</label>
         </div>
         <div class="field">
-          <label for="password">Password</label><input type="password" placeholder="********" id="password"
-            name="password" required />
+          <input type="password" placeholder="********" id="password" name="password" required />
+          <label for="password">Password</label>
         </div>
         <?php
           //classs name of text is form_error
           checkLoginErrors();
         ?>
         <!-- submit button -->
-        <button type="submit" class="submit__button">login</button>
+        <button type="submit" class="submit__button">Login</button>
         <!-- signup form link -->
-        <a href="signup.php" target="_blank" rel="noopener noreferrer" class="signup__link">Don't have an account?
+        <a href="signup.php" rel="noopener noreferrer" class="signup__link">Don't have an account?
           Signup</a>
       </form>
     </section>

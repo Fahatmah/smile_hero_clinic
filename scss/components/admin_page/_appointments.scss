@@ -1,0 +1,51 @@
+@use '../../abstracts' as *;
+
+.appointments__container.appointments__page {
+  width: 100%;
+
+  .appointments {
+    width: 100%;
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+
+      // head
+      thead {
+        tr {
+          th {
+            padding-bottom: 1rem;
+
+            &.patient_img {
+              width: 1rem;
+            }
+
+            &.patient_name {
+              width: 10rem;
+            }
+
+            &.patient_time {
+              width: 6rem;
+            }
+
+            &.patient_location {
+              width: 14rem;
+            }
+
+            &.actions {
+              width: 0.5rem;
+            }
+          }
+        }
+      }
+      // body
+      tbody {
+        tr {
+          td {
+            padding-block: 1rem;
+          }
+        }
+      }
+    }
+  }
+}

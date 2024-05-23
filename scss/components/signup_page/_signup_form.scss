@@ -20,7 +20,7 @@
 
       .field {
         width: 100%;
-        @include display-flex($dir: column, $y: flex-start);
+        @include display-flex($dir: column-reverse, $y: flex-start);
 
         // outline: var(--debug);
 
@@ -35,6 +35,14 @@
           border-bottom: 1px solid var(--pr-clr-400);
           font-size: var(--fs-200);
           color: var(--pr-clr-300);
+
+          &:hover + label,
+          &:active + label,
+          &:focus + label,
+          &:not(:placeholder-shown) + label {
+            font-weight: bold;
+            color: var(--pr-clr-300);
+          }
 
           &::placeholder {
             font-size: var(--fs-200);
@@ -56,12 +64,22 @@
       background-color: var(--pr-clr-300);
       padding: 1rem;
       border-radius: 6px;
+      cursor: pointer;
+
+      &:hover {
+        background-color: var(--pr-clr-350);
+        font-weight: 600;
+      }
     }
 
     .login__link {
       align-self: center;
       font-size: var(--fs-200);
       color: var(--pr-clr-300);
+
+      &:hover {
+        text-decoration: underline;
+      }
     }
   }
 }

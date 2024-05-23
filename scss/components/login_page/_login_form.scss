@@ -19,14 +19,14 @@
 
       .field {
         width: 100%;
-        @include display-flex($dir: column, $y: flex-start);
+        @include display-flex($dir: column-reverse, $y: flex-start);
 
-        &:hover label,
-        &:active label,
-        &:focus label {
-          font-weight: bold;
-          color: var(--pr-clr-300);
-        }
+        // &:hover label,
+        // &:active label,
+        // &:focus label {
+        //   font-weight: bold;
+        //   color: var(--pr-clr-300);
+        // }
 
         label {
           font-size: var(--fs-200);
@@ -40,12 +40,21 @@
           font-size: var(--fs-200);
           color: var(--pr-clr-300);
 
+          &:hover + label,
+          &:active + label,
+          &:focus + label,
+          &:not(:placeholder-shown) + label {
+            font-weight: bold;
+            color: var(--pr-clr-300);
+          }
+
           &::placeholder {
             font-size: var(--fs-200);
             color: var(--pr-clr-400);
           }
 
           &:hover,
+          &:active,
           &:focus {
             border-color: var(--pr-clr-300);
           }
@@ -60,12 +69,17 @@
       background-color: var(--pr-clr-300);
       padding: 1rem;
       border-radius: 6px;
+      cursor: pointer;
     }
 
     .signup__link {
       align-self: center;
       font-size: var(--fs-200);
       color: var(--pr-clr-300);
+
+      &:hover {
+        text-decoration: underline;
+      }
     }
   }
 }

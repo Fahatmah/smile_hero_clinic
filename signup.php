@@ -49,20 +49,20 @@ require_once "includes/signup_view.inc.php"
       <!-- form -->
       <form action="includes/signup.inc.php" method="post" class="signup__form">
         <div class="field">
+          <input type="text" placeholder="e.g. Fahatmah Mabang" id="fullname" name="fullname" required autofocus />
           <label for="fullname">Name</label>
-          <input type="text" placeholder="e.g. Fahatmah Mabang" id="fullname" name="fullname" required />
         </div>
         <div class="field">
-          <label for="email">Email</label><input type="email" placeholder="e.g. fahatmahmabang@gmail.com" id="email"
-            name="email" required />
+          <input type="email" placeholder="e.g. fahatmahmabang@gmail.com" id="email" name="email" required />
+          <label for="email">Email</label>
         </div>
         <div class="field">
-          <label for="contact">Contact Number</label><input type="tel" placeholder="e.g. 09000000000" id="contact"
-            name="contact" required />
+          <input type="tel" placeholder="e.g. 09000000000" id="contact" name="contact" required />
+          <label for="contact">Contact Number</label>
         </div>
         <div class="field">
-          <label for="password">Password</label><input type="password" placeholder="e.g. password" id="password"
-            name="password" required />
+          <input type="password" placeholder="e.g. password" id="password" name="password" required />
+          <label for="password">Password</label>
         </div>
 
         <div class="error_container">
@@ -76,7 +76,7 @@ require_once "includes/signup_view.inc.php"
         <!-- submit button -->
         <button type="submit" class="submit__button">Signup</button>
         <!-- login form link -->
-        <a href="/login.html" target="_blank" rel="noopener noreferrer" class="login__link">Already have an account?
+        <a href="login.php" rel="noopener noreferrer" class="login__link">Already have an account?
           Login</a>
       </form>
     </section>

@@ -654,7 +654,7 @@ body main .form_container .header {
   display: flex;
   align-items: flex-start;
   justify-content: center;
-  flex-direction: column;
+  flex-direction: column-reverse;
   gap: 0;
 }
 .signup__page .signup .signup__form .field label {
@@ -666,6 +666,14 @@ body main .form_container .header {
   padding: 8px;
   border-bottom: 1px solid var(--pr-clr-400);
   font-size: var(--fs-200);
+  color: var(--pr-clr-300);
+}
+.signup__page .signup .signup__form .field input:not(:-moz-placeholder-shown) + label {
+  font-weight: bold;
+  color: var(--pr-clr-300);
+}
+.signup__page .signup .signup__form .field input:hover + label, .signup__page .signup .signup__form .field input:active + label, .signup__page .signup .signup__form .field input:focus + label, .signup__page .signup .signup__form .field input:not(:placeholder-shown) + label {
+  font-weight: bold;
   color: var(--pr-clr-300);
 }
 .signup__page .signup .signup__form .field input::-moz-placeholder {
@@ -686,11 +694,19 @@ body main .form_container .header {
   background-color: var(--pr-clr-300);
   padding: 1rem;
   border-radius: 6px;
+  cursor: pointer;
+}
+.signup__page .signup .submit__button:hover {
+  background-color: var(--pr-clr-350);
+  font-weight: 600;
 }
 .signup__page .signup .login__link {
   align-self: center;
   font-size: var(--fs-200);
   color: var(--pr-clr-300);
+}
+.signup__page .signup .login__link:hover {
+  text-decoration: underline;
 }
 
 .login__page {
@@ -726,12 +742,8 @@ body main .form_container .header {
   display: flex;
   align-items: flex-start;
   justify-content: center;
-  flex-direction: column;
+  flex-direction: column-reverse;
   gap: 0;
-}
-.login__page .login .login__form .field:hover label, .login__page .login .login__form .field:active label, .login__page .login .login__form .field:focus label {
-  font-weight: bold;
-  color: var(--pr-clr-300);
 }
 .login__page .login .login__form .field label {
   font-size: var(--fs-200);
@@ -744,6 +756,14 @@ body main .form_container .header {
   font-size: var(--fs-200);
   color: var(--pr-clr-300);
 }
+.login__page .login .login__form .field input:not(:-moz-placeholder-shown) + label {
+  font-weight: bold;
+  color: var(--pr-clr-300);
+}
+.login__page .login .login__form .field input:hover + label, .login__page .login .login__form .field input:active + label, .login__page .login .login__form .field input:focus + label, .login__page .login .login__form .field input:not(:placeholder-shown) + label {
+  font-weight: bold;
+  color: var(--pr-clr-300);
+}
 .login__page .login .login__form .field input::-moz-placeholder {
   font-size: var(--fs-200);
   color: var(--pr-clr-400);
@@ -752,7 +772,7 @@ body main .form_container .header {
   font-size: var(--fs-200);
   color: var(--pr-clr-400);
 }
-.login__page .login .login__form .field input:hover, .login__page .login .login__form .field input:focus {
+.login__page .login .login__form .field input:hover, .login__page .login .login__form .field input:active, .login__page .login .login__form .field input:focus {
   border-color: var(--pr-clr-300);
 }
 .login__page .login .submit__button {
@@ -762,11 +782,15 @@ body main .form_container .header {
   background-color: var(--pr-clr-300);
   padding: 1rem;
   border-radius: 6px;
+  cursor: pointer;
 }
 .login__page .login .signup__link {
   align-self: center;
   font-size: var(--fs-200);
   color: var(--pr-clr-300);
+}
+.login__page .login .signup__link:hover {
+  text-decoration: underline;
 }
 
 .side__nav {
@@ -1466,4 +1490,410 @@ body main .form_container .header {
 }
 .admin-sidenav ul li.active__link {
   background-color: var(--ntrl-clr-250);
+}
+.admin-sidenav ul li a {
+  color: var(--ntrl-clr-400);
+}
+.admin-sidenav ul li a:hover {
+  background-color: var(--ntrl-clr-250);
+}
+.admin-sidenav ul li#logout_button .logout__button {
+  color: var(--ntrl-clr-100);
+}
+
+.admin-cards {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 1rem;
+}
+.admin-cards .cards__container {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-direction: row;
+  gap: 1rem;
+}
+.admin-cards .cards__container .card {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  flex-direction: column;
+  gap: 0;
+  padding: 1rem;
+  border-radius: 6px;
+  overflow: hidden;
+  box-shadow: 4px 4px 16px rgba(97, 97, 97, 0.1843137255);
+}
+.admin-cards .cards__container .card.patients {
+  background-color: var(--pr-clr-100);
+}
+.admin-cards .cards__container .card.patients .card_image {
+  top: 0rem;
+}
+.admin-cards .cards__container .card.doctors {
+  background-color: var(--pr-clr-200);
+}
+.admin-cards .cards__container .card.doctors .card_image {
+  top: -1rem;
+}
+.admin-cards .cards__container .card.appointments {
+  background-color: var(--pr-clr-300);
+}
+.admin-cards .cards__container .card.appointments .card_image {
+  right: -1rem;
+}
+.admin-cards .cards__container .card h1,
+.admin-cards .cards__container .card h2,
+.admin-cards .cards__container .card h3 {
+  font-size: var(--fs-450);
+  color: var(--ntrl-clr-100);
+  font-weight: 800;
+  letter-spacing: 3px;
+}
+.admin-cards .cards__container .card p {
+  color: var(--ntrl-clr-100);
+}
+.admin-cards .cards__container .card_image {
+  position: absolute;
+  top: 0.5rem;
+  right: 0;
+  width: 12rem;
+  height: 12rem;
+  opacity: 0.5;
+}
+.admin-cards .appointments__container {
+  width: 100%;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  flex-direction: row;
+  gap: 0;
+}
+.admin-cards .appointments__container .appointments {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-direction: column;
+  gap: 2rem;
+  padding: 2rem;
+  background-color: var(--ntrl-clr-100);
+  box-shadow: 4px 4px 16px rgba(97, 97, 97, 0.1843137255);
+  border-radius: 6px;
+  overflow: hidden;
+}
+.admin-cards .appointments__container .appointments .top_header {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-direction: row;
+  gap: 4rem;
+}
+.admin-cards .appointments__container .appointments .top_header h4 {
+  font-size: var(--fs-400);
+  color: var(--pr-clr-300);
+  font-weight: bold;
+}
+.admin-cards .appointments__container .appointments .top_header .search__bar {
+  position: relative;
+  width: 350px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-direction: row;
+  gap: 0;
+  background-color: var(--ntrl-clr-250);
+  border-radius: 6px;
+  overflow: hidden;
+}
+.admin-cards .appointments__container .appointments .top_header .search__bar input {
+  padding: 1rem;
+  width: 100%;
+  color: var(--ntrl-clr-300);
+}
+.admin-cards .appointments__container .appointments .top_header .search__bar button {
+  position: absolute;
+  right: 0;
+  padding: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: row;
+  gap: 0;
+  cursor: pointer;
+}
+.admin-cards .appointments__container .appointments .top_header .search__bar button img {
+  width: 1rem;
+  height: 1rem;
+}
+.admin-cards .appointments__container .appointments table {
+  border-collapse: collapse;
+}
+.admin-cards .appointments__container .appointments table thead tr th {
+  color: var(--ntrl-clr-350);
+  font-weight: bold;
+  text-align: left;
+  padding-bottom: 1rem;
+  padding-inline: 2rem;
+}
+.admin-cards .appointments__container .appointments table thead tr th.patient_img {
+  padding-inline: 1rem;
+}
+.admin-cards .appointments__container .appointments table thead tr th.patient_name {
+  width: 16.6rem;
+}
+.admin-cards .appointments__container .appointments table thead tr th.patient_time {
+  width: 8rem;
+}
+.admin-cards .appointments__container .appointments table thead tr th.actions {
+  width: 14rem;
+}
+.admin-cards .appointments__container .appointments table tbody tr {
+  cursor: pointer;
+}
+.admin-cards .appointments__container .appointments table tbody tr:hover {
+  background-color: var(--ntrl-clr-250);
+}
+.admin-cards .appointments__container .appointments table tbody tr td {
+  padding-block: 1rem;
+  padding-inline: 2rem;
+}
+.admin-cards .appointments__container .appointments table tbody tr td:first-of-type {
+  padding-inline: 1rem;
+}
+.admin-cards .appointments__container .appointments table tbody tr td .action_button__container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-direction: row;
+  gap: 0.5rem;
+}
+.admin-cards .appointments__container .appointments table tbody tr td .action_button__container .button {
+  width: 100%;
+  padding: 0.2rem;
+  color: var(--ntrl-clr-100);
+  border-radius: 2px;
+  overflow: hidden;
+  cursor: pointer;
+}
+.admin-cards .appointments__container .appointments table tbody tr td .action_button__container .button.accept {
+  background-color: var(--pr-clr-300);
+}
+.admin-cards .appointments__container .appointments table tbody tr td .action_button__container .button.cancel {
+  background-color: var(--pr-clr-100);
+}
+.admin-cards .appointments__container .appointments table tbody tr td .action_button__container .button:hover {
+  opacity: 0.8;
+}
+.admin-cards .appointments__container .appointments .see_all__button {
+  align-self: flex-start;
+  color: var(--ntrl-clr-300);
+}
+.admin-cards .appointments__container .appointments .see_all__button:hover {
+  color: var(--ntrl-clr-350);
+  text-decoration: underline;
+}
+.admin-cards .appointments__container .doctors__container {
+  width: 365px;
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-start;
+  flex-direction: column;
+  gap: 0;
+  padding: 2rem;
+  background-color: var(--ntrl-clr-100);
+  box-shadow: 4px 4px 16px rgba(97, 97, 97, 0.1843137255);
+  border-radius: 6px;
+  overflow: hidden;
+}
+.admin-cards .appointments__container .doctors__container h5 {
+  font-size: var(--fs-400);
+  color: var(--pr-clr-300);
+  font-weight: bold;
+  margin-bottom: 0.2rem;
+}
+.admin-cards .appointments__container .doctors__container ul {
+  width: 100%;
+}
+.admin-cards .appointments__container .doctors__container ul li {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  flex-direction: row;
+  gap: 1rem;
+  padding-block: 1rem;
+  padding-inline-start: 1rem;
+  border-radius: 6px;
+  cursor: pointer;
+}
+.admin-cards .appointments__container .doctors__container ul li:hover {
+  background-color: var(--ntrl-clr-250);
+}
+.admin-cards .appointments__container .doctors__container ul li img {
+  width: 2rem;
+  height: 2rem;
+  border-radius: 2rem;
+  -o-object-fit: cover;
+     object-fit: cover;
+}
+.admin-cards .patients__container {
+  width: 100%;
+  margin-bottom: 1rem;
+}
+.admin-cards .patients__container .patients {
+  width: 100%;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  flex-direction: column;
+  gap: 2rem;
+  padding: 2rem;
+  background-color: var(--ntrl-clr-100);
+  box-shadow: 4px 4px 16px rgba(97, 97, 97, 0.1843137255);
+  border-radius: 6px;
+  overflow: hidden;
+}
+.admin-cards .patients__container .patients .top_header {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-direction: row;
+  gap: 4rem;
+}
+.admin-cards .patients__container .patients .top_header h6 {
+  font-size: var(--fs-400);
+  color: var(--pr-clr-300);
+  font-weight: bold;
+}
+.admin-cards .patients__container .patients .top_header .search__bar {
+  position: relative;
+  width: 350px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-direction: row;
+  gap: 0;
+  background-color: var(--ntrl-clr-250);
+  border-radius: 6px;
+  overflow: hidden;
+}
+.admin-cards .patients__container .patients .top_header .search__bar input {
+  padding: 1rem;
+  width: 100%;
+  color: var(--ntrl-clr-300);
+}
+.admin-cards .patients__container .patients .top_header .search__bar button {
+  position: absolute;
+  right: 0;
+  padding: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: row;
+  gap: 0;
+  cursor: pointer;
+}
+.admin-cards .patients__container .patients .top_header .search__bar button img {
+  width: 1rem;
+  height: 1rem;
+}
+.admin-cards .patients__container .patients table {
+  width: 100%;
+  border-collapse: collapse;
+}
+.admin-cards .patients__container .patients table thead tr th {
+  color: var(--ntrl-clr-350);
+  font-weight: bold;
+  text-align: left;
+  padding-bottom: 1rem;
+}
+.admin-cards .patients__container .patients table thead tr th.patient_img {
+  width: 1rem;
+}
+.admin-cards .patients__container .patients table thead tr th.patient_name {
+  width: 10rem;
+}
+.admin-cards .patients__container .patients table thead tr th.patient_time {
+  width: 6rem;
+}
+.admin-cards .patients__container .patients table thead tr th.patient_location {
+  width: 14rem;
+}
+.admin-cards .patients__container .patients table thead tr th.actions {
+  width: 0.5rem;
+}
+.admin-cards .patients__container .patients table tbody tr {
+  cursor: pointer;
+}
+.admin-cards .patients__container .patients table tbody tr:hover {
+  background-color: var(--ntrl-clr-250);
+}
+.admin-cards .patients__container .patients table tbody tr td {
+  padding-block: 1rem;
+}
+.admin-cards .patients__container .patients table tbody tr td.action_button__container {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  flex-direction: row;
+  gap: 1rem;
+}
+.admin-cards .patients__container .patients table tbody tr td.action_button__container .button {
+  overflow: hidden;
+  cursor: pointer;
+}
+.admin-cards .patients__container .patients table tbody tr td.action_button__container .button img {
+  width: 1.3rem;
+  height: 1.3rem;
+}
+.admin-cards .patients__container .patients table tbody tr td.action_button__container .button:hover {
+  opacity: 0.8;
+}
+.admin-cards .patients__container .patients .see_all__button {
+  align-self: flex-start;
+  color: var(--ntrl-clr-300);
+}
+.admin-cards .patients__container .patients .see_all__button:hover {
+  color: var(--ntrl-clr-350);
+  text-decoration: underline;
+}
+
+.appointments__container.appointments__page {
+  width: 100%;
+}
+.appointments__container.appointments__page .appointments {
+  width: 100%;
+}
+.appointments__container.appointments__page .appointments table {
+  width: 100%;
+  border-collapse: collapse;
+}
+.appointments__container.appointments__page .appointments table thead tr th {
+  padding-bottom: 1rem;
+}
+.appointments__container.appointments__page .appointments table thead tr th.patient_img {
+  width: 1rem;
+}
+.appointments__container.appointments__page .appointments table thead tr th.patient_name {
+  width: 10rem;
+}
+.appointments__container.appointments__page .appointments table thead tr th.patient_time {
+  width: 6rem;
+}
+.appointments__container.appointments__page .appointments table thead tr th.patient_location {
+  width: 14rem;
+}
+.appointments__container.appointments__page .appointments table thead tr th.actions {
+  width: 0.5rem;
+}
+.appointments__container.appointments__page .appointments table tbody tr td {
+  padding-block: 1rem;
 }/*# sourceMappingURL=styles.css.map */
