@@ -22,6 +22,15 @@
 
       require_once("config_session.inc.php");
 
+      if(getAdminEmail($conn, $email) && getAdminpass($conn, $password)) {
+        Header("Location: ../admin/dashboard.php");
+
+        $_SESSION["adminEmail"] = getAdminEmail($conn, $email);
+        $conn->close();
+        die();
+      }
+
+
       if ($errors) {
           $_SESSION["errors_login"] = $errors;
 

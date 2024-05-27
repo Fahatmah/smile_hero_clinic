@@ -1,3 +1,15 @@
+<?php
+require_once '../includes/config_session.inc.php';
+require_once '../includes/login_view.inc.php';
+require_once '../includes/dbh.inc.php';
+
+if(!isset($_SESSION['adminEmail'])) {
+  // Redirect user to login if not logged in
+  header("Location: ../login.php?login=failed");
+  exit();
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 

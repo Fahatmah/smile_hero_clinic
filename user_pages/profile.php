@@ -85,7 +85,7 @@ $result = $stmt->get_result();
             </div>
             <div class="button_container">
               <button type="submit" id="deleteAccountButton">
-                <a href="includes/delete_acc.php">
+                <a href="includes/delete_acc.php" style="color: white;">
                   Yes, delete my account
                 </a>
               </button>

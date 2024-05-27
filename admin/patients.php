@@ -1,3 +1,24 @@
+<?php
+require_once '../includes/config_session.inc.php';
+require_once '../includes/login_view.inc.php';
+require_once '../includes/dbh.inc.php';
+
+if(!isset($_SESSION['adminEmail'])) {
+  // Redirect user to login if not logged in
+  header("Location: ../login.php?login=failed");
+  exit();
+}
+
+$query  = "SELECT * FROM users";
+$result = $conn->query($query);
+$users = [];
+if ($result->num_rows > 0) {
+    while($row = $result->fetch_assoc()) {
+        $users[] = $row;
+    }
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -53,12 +74,13 @@
             <!-- body -->
             <tbody>
               <!-- get only 3 patients to show -->
+              <?php foreach ($users as $user){ ?>
               <tr>
                 <td>
                   <img src="../assets/admin_images/default_image.svg" class="img"
                     style="border-radius: 4rem; width: 2rem; height: 2rem" />
                 </td>
-                <td>Juan Dela Cruz</td>
+                <td><?php echo htmlspecialchars($user['fullname']); ?></td>
                 <td>10 AM</td>
                 <td>123 Street, Example City</td>
                 <td class="action_button__container">
@@ -70,42 +92,7 @@
                   </button>
                 </td>
               </tr>
-
-              <tr>
-                <td>
-                  <img src="../assets/admin_images/default_image.svg" class="img"
-                    style="border-radius: 4rem; width: 2rem; height: 2rem" />
-                </td>
-                <td>Juan Dela Cruz</td>
-                <td>10 AM</td>
-                <td>123 Street, Example City</td>
-                <td class="action_button__container">
-                  <button class="button edit">
-                    <img src="../assets/admin_images/edit.svg" alt="edit icon" />
-                  </button>
-                  <button class="button delete">
-                    <img src="../assets/admin_images/trash.svg" alt="trash icon" />
-                  </button>
-                </td>
-              </tr>
-
-              <tr>
-                <td>
-                  <img src="../assets/admin_images/default_image.svg" class="img"
-                    style="border-radius: 4rem; width: 2rem; height: 2rem" />
-                </td>
-                <td>Juan Dela Cruz</td>
-                <td>10 AM</td>
-                <td>123 Street, Example City</td>
-                <td class="action_button__container">
-                  <button class="button edit">
-                    <img src="../assets/admin_images/edit.svg" alt="edit icon" />
-                  </button>
-                  <button class="button delete">
-                    <img src="../assets/admin_images/trash.svg" alt="trash icon" />
-                  </button>
-                </td>
-              </tr>
+              <?php } ?>
             </tbody>
           </table>
         </div>

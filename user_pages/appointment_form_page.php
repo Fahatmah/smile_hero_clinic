@@ -2,6 +2,22 @@
 require_once '../includes/config_session.inc.php';
 require_once '../includes/login_view.inc.php';
 require_once '../includes/appointment_view.inc.php';
+
+$showModal = false;
+$modalStatus = '';
+$modalMessage = '';
+if (isset($_SESSION['appointment_status'])) {
+    if ($_SESSION['appointment_status'] === 'created') {
+        $showModal = true;
+        $modalStatus = 'Appointment has been requested.';
+        $modalMessage = '*Wait for our email for the confirmation of your appointment.*';
+    } elseif ($_SESSION['appointment_status'] === 'exists') {
+        $showModal = true;
+        $modalStatus = 'You already requested an appointment.';
+        $modalMessage = '*please wait for our email for confirmation*';
+    }
+    unset($_SESSION['appointment_status']);
+}
 ?>
 
 <!DOCTYPE html>
@@ -37,9 +53,6 @@ require_once '../includes/appointment_view.inc.php';
 
           <!-- personal details -->
           <section class="personal__details">
-
-            <?php checkAppointErrors() ?>
-
             <h2>Personal Details</h2>
 
             <div class=" field">
@@ -83,6 +96,19 @@ require_once '../includes/appointment_view.inc.php';
               </div>
             </div>
           </section>
+
+          <!-- Modal -->
+          <div class="modal_container delete-account" style="display: none;">
+            <div class="delete-account">
+              <div class="header" style="background-color: white;">
+                <h3 id="modalStatus"></h3>
+                <p id="modalMessage"></p>
+              </div>
+              <div class="button_container">
+                <button id="exitButton">Ok</button>
+              </div>
+            </div>
+          </div>
 
           <!-- preferences -->
           <section class="preferences">
@@ -151,109 +177,120 @@ require_once '../includes/appointment_view.inc.php';
 
   <!-- scripts -->
   <script>
-  const appointmentForm = document.getElementById('appointmentForm');
+  document.addEventListener('DOMContentLoaded', () => {
+        const appointmentForm = document.getElementById('appointmentForm');
+        const modalContainer = document.querySelector(".modal_container.delete-account");
+        const exitBtn = document.getElementById("exitButton");
+        const modalStatus = document.getElementById("modalStatus");
+        const modalMessage = document.getElementById("modalMessage");
 
-  appointmentForm.addEventListener('submit', (e) => {
-    e.preventDefault();
+        // Check if the modal should be displayed
+        <?php if ($showModal) : ?>
+        modalStatus.innerText = "<?php echo $modalStatus; ?>";
+        modalMessage.innerText = "<?php echo $modalMessage; ?>";
+        modalContainer.style.display = "flex";
+        modalContainer.style.transform = "scale(1)";
+        <?php endif; ?>
 
-    const fields = [{
-        id: 'name',
-        errorMessage: 'Name cannot be empty'
-      },
-      {
-        id: 'email',
-        errorMessage: 'Email cannot be empty'
-      },
-      {
-        id: 'contactnumber',
-        errorMessage: 'Contact number cannot be empty'
-      },
-      {
-        id: 'appointmentDate',
-        errorMessage: 'Please select a date'
-      },
-      {
-        id: 'appointmentTime',
-        errorMessage: 'Please select a time'
-      },
-      {
-        id: 'location',
-        errorMessage: 'Please select a location'
-      },
-    ];
+        appointmentForm.addEventListener('submit', (e) => {
+            e.preventDefault();
 
-    let isValid = true; // Initialize validation status flag
+            const fields = [{
+                id: 'name',
+                errorMessage: 'Name cannot be empty'
+            },
+            {
+                id: 'email',
+                errorMessage: 'Email cannot be empty'
+            },
+            {
+                id: 'contactnumber',
+                errorMessage: 'Contact number cannot be empty'
+            },
+            {
+                id: 'appointmentDate',
+                errorMessage: 'Please select a date'
+            },
+            {
+                id: 'appointmentTime',
+                errorMessage: 'Please select a time'
+            },
+            {
+                id: 'location',
+                errorMessage: 'Please select a location'
+            },
+            ];
 
-    fields.forEach((field) => {
-      const fieldElement = document.getElementById(field.id);
-      const errorElement = fieldElement.nextElementSibling.querySelector('.text.error');
+            let isValid = true;
 
-      if (fieldElement.value.trim() === '-' || fieldElement.value.trim() === '') {
-        errorElement.innerText = field.errorMessage;
-        errorElement.style.display = 'block';
-        isValid = false; // Set flag to false if any field is invalid
-      } else {
-        errorElement.style.display = 'none';
-      }
-    });
+            fields.forEach((field) => {
+                const fieldElement = document.getElementById(field.id);
+                const errorElement = fieldElement.nextElementSibling.querySelector('.text.error');
 
-    // Check the validation status flag and submit the form if valid
-    if (isValid) {
-      HTMLFormElement.prototype.submit.call(appointmentForm); // Manually submit the form
-    }
-  });
+                if (fieldElement.value.trim() === '-' || fieldElement.value.trim() === '') {
+                    errorElement.innerText = field.errorMessage;
+                    errorElement.style.display = 'block';
+                    isValid = false;
+                } else {
+                    errorElement.style.display = 'none';
+                }
+            });
 
+            if (isValid) {
+                HTMLFormElement.prototype.submit.call(appointmentForm);
+            }
+        });
 
+        function generateWeekdayOptions() {
+            var select = document.getElementById("appointmentDate");
+            var currentDate = new Date();
 
-  // Function to generate options for weekdays
-  function generateWeekdayOptions() {
-    var select = document.getElementById("appointmentDate");
-    var currentDate = new Date();
+            var defaultOption = document.createElement("option");
+            defaultOption.value = "-";
+            defaultOption.text = "-";
+            select.add(defaultOption);
 
-    // Create the default option
-    var defaultOption = document.createElement("option");
-    defaultOption.value = "-";
-    defaultOption.text = "-";
-    select.add(defaultOption);
+            for (var i = 0; i < 7; i++) {
+                currentDate.setDate(currentDate.getDate() + 1);
+                var dayOfWeek = currentDate.getDay();
+                for (var i = 0; i < 7; i++) {
+                    currentDate.setDate(currentDate.getDate() + 1);
+                    var dayOfWeek = currentDate.getDay();
 
-    for (var i = 0; i < 7; i++) {
-      currentDate.setDate(currentDate.getDate() + 1); // Move to the next day
-      var dayOfWeek = currentDate.getDay(); // Get the day of the week (0-6)
-      for (var i = 0; i < 7; i++) {
-        currentDate.setDate(currentDate.getDate() + 1); // Move to the next day
-        var dayOfWeek = currentDate.getDay(); // Get the day of the week (0-6)
-
-        // Check if it's a weekday (Monday to Friday)
-        if (dayOfWeek >= 1 && dayOfWeek <= 5) {
-          var option = document.createElement("option");
-          var dateFormatted = currentDate.toLocaleDateString("en-US", {
-            weekday: "long",
-            year: "numeric",
-            month: "2-digit",
-            day: "2-digit",
-          });
-          option.text = dateFormatted;
-          option.value = dateFormatted;
-          select.add(option);
+                    if (dayOfWeek >= 1 && dayOfWeek <= 5) {
+                        var option = document.createElement("option");
+                        var dateFormatted = currentDate.toLocaleDateString("en-US", {
+                            weekday: "long",
+                            year: "numeric",
+                            month: "2-digit",
+                            day: "2-digit",
+                        });
+                        option.text = dateFormatted;
+                        option.value = dateFormatted;
+                        select.add(option);
+                    }
+                }
+            }
+            if (dayOfWeek >= 1 && dayOfWeek <= 5) {
+                var option = document.createElement("option");
+                var dateFormatted = currentDate.toLocaleDateString("en-US", {
+                    weekday: "long",
+                    year: "numeric",
+                    month: "2-digit",
+                    day: "2-digit",
+                });
+                option.text = dateFormatted;
+                option.value = dateFormatted;
+                select.add(option);
+            }
         }
-      }
-    }
-    // Check if it's a weekday (Monday to Friday)
-    if (dayOfWeek >= 1 && dayOfWeek <= 5) {
-      var option = document.createElement("option");
-      var dateFormatted = currentDate.toLocaleDateString("en-US", {
-        weekday: "long",
-        year: "numeric",
-        month: "2-digit",
-        day: "2-digit",
-      });
-      option.text = dateFormatted;
-      option.value = dateFormatted;
-      select.add(option);
-    }
-  }
-  // Call the function to generate weekday options
-  generateWeekdayOptions();
+        generateWeekdayOptions();
+
+        exitBtn.addEventListener("click", () => {
+            modalContainer.style.transform = "scale(0)";
+            window.close()
+        });
+    });
   </script>
 </body>
 

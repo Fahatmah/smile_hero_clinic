@@ -36,7 +36,7 @@
 
     <!-- logout button -->
     <li id="logout_button">
-      <a href="../index.php" class="logout__button">Logout</a>
+      <a href="../includes/logout.php" class="logout__button">Logout</a>
     </li>
   </ul>
 </nav>

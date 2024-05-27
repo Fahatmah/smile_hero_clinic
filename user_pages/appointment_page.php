@@ -13,7 +13,7 @@ if(!isset($_SESSION['user_id'])) {
   $user_id = $_SESSION['user_id'];
 
   // Fetch appointments for the user
-  $query = "SELECT * FROM appointments WHERE user_id = ?";
+  $query = "SELECT * FROM appointments WHERE user_id = ? AND status =  'accepted' ";
   $stmt = $conn->prepare($query);
   $stmt->bind_param("s", $user_id);
   $stmt->execute();
@@ -85,7 +85,7 @@ if(!isset($_SESSION['user_id'])) {
                   <div class="button_container">
                   <button type="submit" id="deleteAccountButton"> 
                     <form action="" method="get">
-                      <input type="submit" name="submit" value=" Yes, cancel appointment">
+                      <input type="submit" name="submit" value=" Yes, cancel appointment" style="color: white; cursor: pointer;">
                     </form>
                   </button>
                     <button id="exitButton">No, keep my appointment</button>

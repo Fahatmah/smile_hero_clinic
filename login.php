@@ -22,11 +22,11 @@ require_once 'includes/login_view.inc.php';
   <link rel="stylesheet" href="src/dist/styles.css" />
 
   <style>
-  .form_error {
+    .form_error {
     position: absolute;
     display: block;
-    left: 10em;
-    top: 22em;
+    top: 34em;
+    left: 45em;
     color: red;
     font-size: .75rem;
   }

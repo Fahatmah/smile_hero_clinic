@@ -23,8 +23,7 @@ require_once "includes/signup_view.inc.php"
     position: absolute;
     display: block;
     display: flex;
-    bottom: 1.25em;
-    left: 36.75em;
+    top: 37em;
   }
 
   .form_error {

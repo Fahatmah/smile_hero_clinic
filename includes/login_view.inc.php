@@ -35,6 +35,17 @@ function outputEmail(){
         // echo"you are not logged in";
     }
 }
+function outputAdminEmail(){
+    if(isset($_SESSION['adminEmail'])){
+      $email = $_SESSION['adminEmail'];
+      echo $email;
+        // Header("Location: ../userpage.php?login=success");
+
+    }else{
+        Header("Location: ../login.php?login=failed");
+        // echo"you are not logged in";
+    }
+}
 
 function outputContact(){
     if(isset($_SESSION["contact"])){
