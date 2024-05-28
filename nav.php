@@ -15,7 +15,7 @@
     </li>
     <li>
       <button>
-        <a href="#">About Us</a>
+        <a href="about.php">About Us</a>
       </button>
     </li>
     <li>

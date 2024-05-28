@@ -38,7 +38,7 @@
     <li <?php echo ($current_page == 'feedback.php') ? 'class="active__link"' : ''; ?>>
       <a href="../admin/feedback.php">
         <img
-          src="../assets/admin_images/<?php echo ($current_page == 'feedback.php') ? 'feedback_active.png' : 'feedback.png'; ?>"
+          src="../assets/admin_images/<?php echo ($current_page == 'feedback.php') ? 'feedback_active.svg' : 'feedback.svg'; ?>"
           alt="" style="width: 1.375rem; height: 1.375rem" />Reviews</a>
     </li>
 
