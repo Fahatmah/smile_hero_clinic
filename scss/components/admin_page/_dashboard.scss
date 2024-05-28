@@ -1,4 +1,4 @@
-@use '../../abstracts' as *;
+@use "../../abstracts" as *;
 
 .admin-cards {
   @include display-flex($dir: column, $gap: 1rem);
@@ -68,10 +68,11 @@
   // appointments container
   .appointments__container {
     width: 100%;
-    @include display-flex($x: space-between, $y: flex-start);
+    @include display-flex($x: space-between, $y: flex-start, $gap: 1rem);
     // appointments
     .appointments {
       // width: 100%;
+      min-height: 100%;
       @include display-flex($dir: column, $x: space-between, $gap: 2rem);
       padding: 2rem;
       background-color: var(--ntrl-clr-100);
@@ -262,7 +263,7 @@
   .patients__container {
     width: 100%;
     margin-bottom: 1rem;
-    
+
     .patients {
       width: 100%;
       @include display-flex(

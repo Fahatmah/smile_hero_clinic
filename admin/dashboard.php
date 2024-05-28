@@ -8,6 +8,24 @@ if(!isset($_SESSION['adminEmail'])) {
   header("Location: ../login.php?login=failed");
   exit();
 }
+
+$query  = "SELECT * FROM appointments WHERE status = 'request' ";
+$result = $conn->query($query);
+$users = [];
+if ($result->num_rows > 0) {
+  while($row = $result->fetch_assoc()) {
+      $users[] = $row;
+  }
+}
+
+$query  = "SELECT * FROM users";
+$result = $conn->query($query);
+$usersinfo = [];
+if ($result->num_rows > 0) {
+  while($row = $result->fetch_assoc()) {
+      $usersinfo[] = $row;
+  }
+}
 ?>
 
 <!DOCTYPE html>
@@ -79,62 +97,29 @@ if(!isset($_SESSION['adminEmail'])) {
                 <th class="patient_name">PATIENT NAME</th>
                 <th class="patient_time">TIME</th>
                 <!-- <th class="patient_doctor">DOCTOR</th> -->
-                <th class="actions">ACTIONS</th>
+                <th class="actions">STATUS</th>
               </tr>
             </thead>
 
             <!-- body -->
             <tbody>
               <!-- get only 3 appointments to show -->
+              <?php foreach ($users as $user){?>
               <tr>
                 <td>
                   <img src="../assets/admin_images/default_image.svg" class="img"
                     style="border-radius: 4rem; width: 2rem; height: 2rem" />
                 </td>
-                <td>Juan Dela Cruz</td>
-                <td>10 AM</td>
-                <!-- <td>Dr. Morice Vergara</td> -->
-                <td>
-                  <div class="action_button__container">
-                    <button class="button accept">Accept</button>
-                    <button class="button cancel">Cancel</button>
-                  </div>
-                </td>
+                <td><?php echo $user['name'];?></td>
+                <td><?php echo $user['date']; ?></td>
+                <td><?php echo $user['status']; ?></td>
               </tr>
-
-              <tr>
-                <td>
-                  <img src="../assets/admin_images/default_image.svg" class="img"
-                    style="border-radius: 4rem; width: 2rem; height: 2rem" />
-                </td>
-                <td>Anna Muntinlupa</td>
-                <td>2 PM</td>
-                <!-- <td>Dr. Andrew Gardo</td> -->
-                <td>
-                  <div class="action_button__container">
-                    <button class="button accept">Accept</button>
-                    <button class="button cancel">Cancel</button>
-                  </div>
-                </td>
-              </tr>
-
-              <tr>
-                <td>
-                  <img src="../assets/admin_images/default_image.svg" class="img"
-                    style="border-radius: 4rem; width: 2rem; height: 2rem" />
-                </td>
-                <td>Jose Tamasyo</td>
-                <td>8 AM</td>
-                <!-- <td>Dr. Liam Monte</td> -->
-                <td>
-                  <div class="action_button__container">
-                    <button class="button accept">Accept</button>
-                    <button class="button cancel">Cancel</button>
-                  </div>
-                </td>
-              </tr>
+              <?php } ?>
             </tbody>
           </table>
+          <?php if($result->num_rows == 0) { ?>
+            <p>No appointment requests</p>
+            <?php } ?>
 
           <!-- see all button -->
           <a href="../admin/appointments.php" class="see_all__button">See all</a>
@@ -198,17 +183,23 @@ if(!isset($_SESSION['adminEmail'])) {
             <!-- body -->
             <tbody>
               <!-- get only 3 patients to show -->
+              <?php foreach ($usersinfo as $user){?>
               <tr>
                 <td>
                   <img src="../assets/admin_images/default_image.svg" class="img"
                     style="border-radius: 4rem; width: 2rem; height: 2rem" />
                 </td>
-                <td>SHCf043TCU</td>
-                <td>Juan Dela Cruz</td>
-                <td>juandelacruz@gmail.com</td>
-                <td>09123456789</td>
-                <td>123 Street, Example City</td>
+                <td><?php echo $user['user_id'];?></td>
+                <td><?php echo $user['fullname'];?></td>
+                <td><?php echo $user['email'];?></td>
+                <td><?php echo $user['contact'];?></td>
+                <?php if( strlen($user['address']) === 0){?>
+                  <td>No Address</td>
+                <?php }else{ ?>
+                  <td><?php echo $user['address'];?></td>
+                <?php }?>
               </tr>
+              <?php } ?>
             </tbody>
           </table>
 
