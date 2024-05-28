@@ -1,0 +1,57 @@
+@use '../../abstracts' as *;
+
+.patients__container {
+  width: 100%;
+
+  .patients {
+    width: 100%;
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+
+      // head
+      thead {
+        tr {
+          th {
+            font-size: calc(var(--fs-100) + 0.10rem);
+            padding: 0.5rem;
+            color: var(--pr-clr-300) !important;
+            outline: 1px solid #1d72f285;
+
+            &.patient_img {
+              width: 1rem;
+            }
+
+            &.patient_name {
+              width: 16rem;
+            }
+
+            &.patient_email {
+              width: 3rem;
+            }
+
+            &.patient_contact {
+              width: 8rem;
+            }
+
+            &.patient_address {
+              width: 12rem;
+            }
+          }
+        }
+      }
+      // body
+      tbody {
+        tr {
+          td {
+            font-size: calc(var(--fs-100) + 0.10rem);
+            padding-block: 1rem;
+            padding-inline: 0.5rem;
+            outline: 1px solid #1d72f285;
+          }
+        }
+      }
+    }
+  }
+}

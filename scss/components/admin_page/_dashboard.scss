@@ -337,11 +337,15 @@
                 // padding-inline: 1rem;
               }
 
+              &.patient_id {
+                width: 6rem;
+              }
+
               &.patient_name {
                 width: 10rem;
               }
 
-              &.patient_time {
+              &.patient_email {
                 width: 6rem;
               }
 

@@ -43,7 +43,7 @@ if ($_SERVER['REQUEST_METHOD'] === "POST"){
     $stmt->bind_param("ss", $status, $appointment_id);
     $stmt->execute();
 
-    echo "<script> alert('Appointment has been Accept')</script>";
+    echo "<script> alert('Your appointment has been confirmed.')</script>";
     echo "<script>window.location.href='../appointments.php';</script>";
 
     $conn->close();

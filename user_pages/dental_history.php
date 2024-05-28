@@ -3,11 +3,22 @@ require_once '../includes/config_session.inc.php';
 require_once '../includes/login_view.inc.php';
 require_once '../includes/appointment_view.inc.php';
 
+require_once '../includes/dbh.inc.php';
+
 if(!isset($_SESSION['user_id'])) {
   // Redirect user to login if not logged in
   header("Location: ../login.php");
   exit();
 }
+
+$user_id = $_SESSION['user_id'];
+
+  // Fetch appointments for the user
+  $query = "SELECT * FROM appointments WHERE user_id = ? AND status =  'accepted' ";
+  $stmt = $conn->prepare($query);
+  $stmt->bind_param("s", $user_id);
+  $stmt->execute();
+  $result = $stmt->get_result();
 ?>
 
 <!DOCTYPE html>
@@ -35,9 +46,44 @@ if(!isset($_SESSION['user_id'])) {
     <?php include('includes/sidenav.php'); ?>
 
     <!--  -->
-    <section class="account__container">
+    <section class="dental_history__page account__container">
       <div class="account">
-        <h1>Dental History</h1>
+        <div class="header">
+          <h1>Dental History</h1>
+        </div>
+        <?php if ($row = $result->fetch_assoc()) { ?>
+
+        <div class="appointment__container">
+          <table>
+            <thead>
+              <tr>
+                <th>Id</th>
+                <th>Date & Time</th>
+                <th>Location</th>
+                <th>Email</th>
+                <th>Contact Number</th>
+                <th>Name</th>
+              </tr>
+            </thead>
+
+            <tbody>
+              <tr>
+                <td><?php echo $row["appointment_id"]; ?></td>
+                <td><?php echo $row['date'] ?></td>
+                <td><?php echo $row["location"]; ?></td>
+                <td><?php echo $row["email"]; ?></td>
+                <td><?php echo $row["contact"]; ?></td>
+                <td><?php echo $row["name"]; ?></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <?php } else {
+                echo "<p> No Appointments Found. </p>";
+              } 
+              
+              $conn->close()?>
+
       </div>
     </section>
   </main>

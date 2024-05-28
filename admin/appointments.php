@@ -50,7 +50,7 @@ if ($result->num_rows > 0) {
         <!-- appointment items -->
         <div class="appointments">
           <div class="top_header">
-            <h4>Appointments</h4>
+            <h4>Pending Requests</h4>
             <form class="search__bar">
               <input type="text" name="appointment" id="appointment" placeholder="Search..." />
               <button type="submit">
@@ -65,45 +65,48 @@ if ($result->num_rows > 0) {
             <thead>
               <tr>
                 <th class="patient_img">IMG</th>
-                <th class="patient_name">APPOINTMENT ID</th>
+                <th class="patient_appointment">APPOINTMENT ID</th>
                 <th class="patient_name">PATIENT NAME</th>
                 <th class="patient_time">TIME</th>
-                <!-- <th class="patient_doctor">DOCTOR</th> -->
+                <th class="patient_email">EMAIL</th>
+                <th class="patient_message">MESSAGE</th>
                 <th class="actions">ACTIONS</th>
               </tr>
             </thead>
 
             <!-- body -->
-            
+
             <?php foreach ($users as $user){?>
-              <tr>
-                <td>
-                  <img src="../assets/admin_images/default_image.svg" class="img"
-                    style="border-radius: 4rem; width: 2rem; height: 2rem" />
-                </td>
-                <td><?php echo $user['appointment_id']; ?></td>
-                <td><?php echo $user['name']; ?></td>
-                <td><?php echo $user['date']; ?></td>
-                <!-- <td>Dr. Morice Vergara</td> -->
-                <td>
-                  <div class="action_button__container">
-                    <form action="includes/send_email.php" method="post">
-                      <input type="hidden" name="app_id" value="<?php echo $user['appointment_id'];?>" >
-                      <input type="hidden" name="name" value="<?php echo $user['name'];?>" >
-                      <input type="hidden" name="email" value="<?php echo $user['email'];?>" >
-                      <input type="hidden" name="subject" value="Smile Hero Dental Clinic Appointment">
-                      <input type="hidden" name="message" value="Good Day <?php echo $user['name']; ?> this is Smile Hero Dental Clinic your appointment on <?php echo $user['date']; ?> at <?php echo $user['time']; ?> has been accept. Here is your Appointment ID : <?php echo $user['appointment_id']; ?> ">
+            <tr>
+              <td>
+                <img src="../assets/admin_images/default_image.svg" class="img"
+                  style="border-radius: 4rem; width: 2rem; height: 2rem" />
+              </td>
+              <td><?php echo $user['appointment_id']; ?></td>
+              <td><?php echo $user['name']; ?></td>
+              <td><?php echo $user['date']; ?></td>
+              <td><?php echo $user['email']; ?></td>
+              <td><?php echo $user['message']; ?></td>
+              <td>
+                <div class="action_button__container">
+                  <form action="includes/send_email.php" method="post">
+                    <input type="hidden" name="app_id" value="<?php echo $user['appointment_id'];?>">
+                    <input type="hidden" name="name" value="<?php echo $user['name'];?>">
+                    <input type="hidden" name="email" value="<?php echo $user['email'];?>">
+                    <input type="hidden" name="subject" value="Smile Hero Dental Clinic Appointment">
+                    <input type="hidden" name="message"
+                      value="Good Day <?php echo $user['name']; ?> this is Smile Hero Dental Clinic your appointment on <?php echo $user['date']; ?> at <?php echo $user['time']; ?> has been accept. Here is your Appointment ID : <?php echo $user['appointment_id']; ?> ">
                     <input type="submit" value="accept" name="submit" class="button accept">
-                    </form>
-                    <button class="button cancel">Cancel</button>
-                  </div>
-                </td>
-              </tr>
+                  </form>
+                  <button class="button cancel">Cancel</button>
+                </div>
+              </td>
+            </tr>
             <?php } ?>
           </table>
           <?php if($result->num_rows == 0) { ?>
-              <p>No appointment requests</p>
-            <?php } ?>
+          <p>No appointment requests</p>
+          <?php } ?>
         </div>
       </div>
     </section>

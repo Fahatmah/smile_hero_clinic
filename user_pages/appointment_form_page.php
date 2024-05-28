@@ -14,7 +14,7 @@ if (isset($_SESSION['appointment_status'])) {
     } elseif ($_SESSION['appointment_status'] === 'exists') {
         $showModal = true;
         $modalStatus = 'You already requested an appointment.';
-        $modalMessage = '*please wait for our email for confirmation*';
+        $modalMessage = '*Please wait for our email for confirmation*';
     }
     unset($_SESSION['appointment_status']);
 }
@@ -178,119 +178,119 @@ if (isset($_SESSION['appointment_status'])) {
   <!-- scripts -->
   <script>
   document.addEventListener('DOMContentLoaded', () => {
-        const appointmentForm = document.getElementById('appointmentForm');
-        const modalContainer = document.querySelector(".modal_container.delete-account");
-        const exitBtn = document.getElementById("exitButton");
-        const modalStatus = document.getElementById("modalStatus");
-        const modalMessage = document.getElementById("modalMessage");
+    const appointmentForm = document.getElementById('appointmentForm');
+    const modalContainer = document.querySelector(".modal_container.delete-account");
+    const exitBtn = document.getElementById("exitButton");
+    const modalStatus = document.getElementById("modalStatus");
+    const modalMessage = document.getElementById("modalMessage");
 
-        // Check if the modal should be displayed
-        <?php if ($showModal) : ?>
-        modalStatus.innerText = "<?php echo $modalStatus; ?>";
-        modalMessage.innerText = "<?php echo $modalMessage; ?>";
-        modalContainer.style.display = "flex";
-        modalContainer.style.transform = "scale(1)";
-        <?php endif; ?>
+    // Check if the modal should be displayed
+    <?php if ($showModal) : ?>
+    modalStatus.innerText = "<?php echo $modalStatus; ?>";
+    modalMessage.innerText = "<?php echo $modalMessage; ?>";
+    modalContainer.style.display = "flex";
+    modalContainer.style.transform = "scale(1)";
+    <?php endif; ?>
 
-        appointmentForm.addEventListener('submit', (e) => {
-            e.preventDefault();
+    appointmentForm.addEventListener('submit', (e) => {
+      e.preventDefault();
 
-            const fields = [{
-                id: 'name',
-                errorMessage: 'Name cannot be empty'
-            },
-            {
-                id: 'email',
-                errorMessage: 'Email cannot be empty'
-            },
-            {
-                id: 'contactnumber',
-                errorMessage: 'Contact number cannot be empty'
-            },
-            {
-                id: 'appointmentDate',
-                errorMessage: 'Please select a date'
-            },
-            {
-                id: 'appointmentTime',
-                errorMessage: 'Please select a time'
-            },
-            {
-                id: 'location',
-                errorMessage: 'Please select a location'
-            },
-            ];
+      const fields = [{
+          id: 'name',
+          errorMessage: 'Name cannot be empty'
+        },
+        {
+          id: 'email',
+          errorMessage: 'Email cannot be empty'
+        },
+        {
+          id: 'contactnumber',
+          errorMessage: 'Contact number cannot be empty'
+        },
+        {
+          id: 'appointmentDate',
+          errorMessage: 'Please select a date'
+        },
+        {
+          id: 'appointmentTime',
+          errorMessage: 'Please select a time'
+        },
+        {
+          id: 'location',
+          errorMessage: 'Please select a location'
+        },
+      ];
 
-            let isValid = true;
+      let isValid = true;
 
-            fields.forEach((field) => {
-                const fieldElement = document.getElementById(field.id);
-                const errorElement = fieldElement.nextElementSibling.querySelector('.text.error');
+      fields.forEach((field) => {
+        const fieldElement = document.getElementById(field.id);
+        const errorElement = fieldElement.nextElementSibling.querySelector('.text.error');
 
-                if (fieldElement.value.trim() === '-' || fieldElement.value.trim() === '') {
-                    errorElement.innerText = field.errorMessage;
-                    errorElement.style.display = 'block';
-                    isValid = false;
-                } else {
-                    errorElement.style.display = 'none';
-                }
-            });
-
-            if (isValid) {
-                HTMLFormElement.prototype.submit.call(appointmentForm);
-            }
-        });
-
-        function generateWeekdayOptions() {
-            var select = document.getElementById("appointmentDate");
-            var currentDate = new Date();
-
-            var defaultOption = document.createElement("option");
-            defaultOption.value = "-";
-            defaultOption.text = "-";
-            select.add(defaultOption);
-
-            for (var i = 0; i < 7; i++) {
-                currentDate.setDate(currentDate.getDate() + 1);
-                var dayOfWeek = currentDate.getDay();
-                for (var i = 0; i < 7; i++) {
-                    currentDate.setDate(currentDate.getDate() + 1);
-                    var dayOfWeek = currentDate.getDay();
-
-                    if (dayOfWeek >= 1 && dayOfWeek <= 5) {
-                        var option = document.createElement("option");
-                        var dateFormatted = currentDate.toLocaleDateString("en-US", {
-                            weekday: "long",
-                            year: "numeric",
-                            month: "2-digit",
-                            day: "2-digit",
-                        });
-                        option.text = dateFormatted;
-                        option.value = dateFormatted;
-                        select.add(option);
-                    }
-                }
-            }
-            if (dayOfWeek >= 1 && dayOfWeek <= 5) {
-                var option = document.createElement("option");
-                var dateFormatted = currentDate.toLocaleDateString("en-US", {
-                    weekday: "long",
-                    year: "numeric",
-                    month: "2-digit",
-                    day: "2-digit",
-                });
-                option.text = dateFormatted;
-                option.value = dateFormatted;
-                select.add(option);
-            }
+        if (fieldElement.value.trim() === '-' || fieldElement.value.trim() === '') {
+          errorElement.innerText = field.errorMessage;
+          errorElement.style.display = 'block';
+          isValid = false;
+        } else {
+          errorElement.style.display = 'none';
         }
-        generateWeekdayOptions();
+      });
 
-        exitBtn.addEventListener("click", () => {
-            modalContainer.style.transform = "scale(0)";
-            window.close()
-        });
+      if (isValid) {
+        HTMLFormElement.prototype.submit.call(appointmentForm);
+      }
     });
+
+    function generateWeekdayOptions() {
+      var select = document.getElementById("appointmentDate");
+      var currentDate = new Date();
+
+      var defaultOption = document.createElement("option");
+      defaultOption.value = "-";
+      defaultOption.text = "-";
+      select.add(defaultOption);
+
+      for (var i = 0; i < 7; i++) {
+        currentDate.setDate(currentDate.getDate() + 1);
+        var dayOfWeek = currentDate.getDay();
+        for (var i = 0; i < 7; i++) {
+          currentDate.setDate(currentDate.getDate() + 1);
+          var dayOfWeek = currentDate.getDay();
+
+          if (dayOfWeek >= 1 && dayOfWeek <= 5) {
+            var option = document.createElement("option");
+            var dateFormatted = currentDate.toLocaleDateString("en-US", {
+              weekday: "long",
+              year: "numeric",
+              month: "2-digit",
+              day: "2-digit",
+            });
+            option.text = dateFormatted;
+            option.value = dateFormatted;
+            select.add(option);
+          }
+        }
+      }
+      if (dayOfWeek >= 1 && dayOfWeek <= 5) {
+        var option = document.createElement("option");
+        var dateFormatted = currentDate.toLocaleDateString("en-US", {
+          weekday: "long",
+          year: "numeric",
+          month: "2-digit",
+          day: "2-digit",
+        });
+        option.text = dateFormatted;
+        option.value = dateFormatted;
+        select.add(option);
+      }
+    }
+    generateWeekdayOptions();
+
+    exitBtn.addEventListener("click", () => {
+      modalContainer.style.transform = "scale(0)";
+      window.close()
+    });
+  });
   </script>
 </body>
 

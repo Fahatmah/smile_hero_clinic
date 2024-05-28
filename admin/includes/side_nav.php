@@ -7,7 +7,7 @@
       <a href="../admin/dashboard.php">
         <img
           src="../assets/admin_images/<?php echo ($current_page == 'dashboard.php') ? 'dashboard_active.png' : 'dashboard.svg'; ?>"
-          alt="" style="width: 1.375rem; height: 1.375rem" />Dashboard</a>
+          alt="" style="width: 1.375rem; height: 1.375rem" />Overview</a>
     </li>
 
     <!-- appointments -->
@@ -15,7 +15,15 @@
       <a href="../admin/appointments.php">
         <img
           src="../assets/admin_images/<?php echo ($current_page == 'appointments.php') ? 'appointments_active.png' : 'appointments.svg'; ?>"
-          alt="" style="width: 1.375rem; height: 1.375rem" />Appointments</a>
+          alt="" style="width: 1.375rem; height: 1.375rem" />Pending Requests</a>
+    </li>
+
+    <!-- accepted appointments -->
+    <li <?php echo ($current_page == 'booked.php') ? 'class="active__link"' : ''; ?>>
+      <a href="../admin/booked.php">
+        <img
+          src="../assets/admin_images/<?php echo ($current_page == 'booked.php') ? 'reports_active.png' : 'reports.svg'; ?>"
+          alt="" style="width: 1.375rem; height: 1.375rem" />Booked Meetings</a>
     </li>
 
     <!-- patients -->
@@ -23,15 +31,15 @@
       <a href="../admin/patients.php">
         <img
           src="../assets/admin_images/<?php echo ($current_page == 'patients.php') ? 'patients_active.png' : 'patients.svg'; ?>"
-          alt="" style="width: 1.375rem; height: 1.375rem" />Patients</a>
+          alt="" style="width: 1.375rem; height: 1.375rem" />Clients/Patients</a>
     </li>
 
-    <!-- reports -->
-    <li <?php echo ($current_page == 'reports.php') ? 'class="active__link"' : ''; ?>>
-      <a href="../admin/reports.php">
+    <!-- reviews -->
+    <li <?php echo ($current_page == 'feedback.php') ? 'class="active__link"' : ''; ?>>
+      <a href="../admin/feedback.php">
         <img
-          src="../assets/admin_images/<?php echo ($current_page == 'reports.php') ? 'reports_active.png' : 'reports.svg'; ?>"
-          alt="" style="width: 1.375rem; height: 1.375rem" />Reports</a>
+          src="../assets/admin_images/<?php echo ($current_page == 'feedback.php') ? 'feedback_active.png' : 'feedback.png'; ?>"
+          alt="" style="width: 1.375rem; height: 1.375rem" />Reviews</a>
     </li>
 
     <!-- logout button -->

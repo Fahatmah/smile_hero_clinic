@@ -14,10 +14,17 @@
       thead {
         tr {
           th {
-            padding-bottom: 1rem;
+            padding: 0.5rem;
+            font-size: calc(var(--fs-100) + 0.10rem);
+            color: var(--pr-clr-300);
+            outline: 1px solid var(--pr-clr-400);
 
             &.patient_img {
               width: 1rem;
+            }
+
+            &.patient_appointment {
+              width: 2rem;
             }
 
             &.patient_name {
@@ -26,6 +33,14 @@
 
             &.patient_time {
               width: 6rem;
+            }
+
+            &.patient_email {
+              width: 6rem;
+            }
+
+            &.patient_message {
+              width: 10rem;
             }
 
             &.patient_location {
@@ -42,7 +57,10 @@
       tbody {
         tr {
           td {
+            font-size: calc(var(--fs-100) + 0.10rem);
             padding-block: 1rem;
+            padding-inline: 0.5rem;
+            outline: 1px solid var(--pr-clr-400);
           }
         }
       }

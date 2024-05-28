@@ -1,0 +1,42 @@
+@use '../../abstracts' as *;
+
+.dental_history__page {
+  width: 767px;
+  @include display-flex($dir: column, $y: flex-start, $gap: 2rem);
+
+  .header {
+    width: 100%;
+    @include display-flex($x: space-between);
+
+    h1 {
+      font-size: var(--fs-400);
+      color: var(--pr-clr-100) !important;
+      font-weight: bold;
+    }
+  }
+
+  .appointment__container {
+    width: 100%;
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+
+      th {
+        color: var(--ntrl-clr-100);
+        font-weight: bold;
+        text-align: left;
+        background-color: var(--pr-clr-100);
+        padding: 0.5rem;
+
+        border-right: 1px solid var(--ntrl-clr-100);
+      }
+
+      td {
+        padding: 0.5rem;
+
+        outline: 1px solid var(--pr-clr-100);
+      }
+    }
+  }
+}

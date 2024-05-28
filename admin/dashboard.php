@@ -181,16 +181,17 @@ if(!isset($_SESSION['adminEmail'])) {
             </form>
           </div>
 
-          <!-- appointments table -->
+          <!-- patients table -->
           <table>
             <!-- head -->
             <thead>
               <tr>
                 <th class="patient_img">IMG</th>
+                <th class="patient_id">USER ID</th>
                 <th class="patient_name">PATIENT NAME</th>
-                <th class="patient_time">TIME</th>
-                <th class="patient_location">LOCATION</th>
-                <th class="actions">ACTIONS</th>
+                <th class="patient_email">EMAIL</th>
+                <th class="patient_contact">CONTACT</th>
+                <th class="patient_address">ADDRESS</th>
               </tr>
             </thead>
 
@@ -202,53 +203,11 @@ if(!isset($_SESSION['adminEmail'])) {
                   <img src="../assets/admin_images/default_image.svg" class="img"
                     style="border-radius: 4rem; width: 2rem; height: 2rem" />
                 </td>
+                <td>SHCf043TCU</td>
                 <td>Juan Dela Cruz</td>
-                <td>10 AM</td>
+                <td>juandelacruz@gmail.com</td>
+                <td>09123456789</td>
                 <td>123 Street, Example City</td>
-                <td class="action_button__container">
-                  <button class="button edit">
-                    <img src="../assets/admin_images/edit.svg" alt="edit icon" />
-                  </button>
-                  <button class="button delete">
-                    <img src="../assets/admin_images/trash.svg" alt="trash icon" />
-                  </button>
-                </td>
-              </tr>
-
-              <tr>
-                <td>
-                  <img src="../assets/admin_images/default_image.svg" class="img"
-                    style="border-radius: 4rem; width: 2rem; height: 2rem" />
-                </td>
-                <td>Juan Dela Cruz</td>
-                <td>10 AM</td>
-                <td>123 Street, Example City</td>
-                <td class="action_button__container">
-                  <button class="button edit">
-                    <img src="../assets/admin_images/edit.svg" alt="edit icon" />
-                  </button>
-                  <button class="button delete">
-                    <img src="../assets/admin_images/trash.svg" alt="trash icon" />
-                  </button>
-                </td>
-              </tr>
-
-              <tr>
-                <td>
-                  <img src="../assets/admin_images/default_image.svg" class="img"
-                    style="border-radius: 4rem; width: 2rem; height: 2rem" />
-                </td>
-                <td>Juan Dela Cruz</td>
-                <td>10 AM</td>
-                <td>123 Street, Example City</td>
-                <td class="action_button__container">
-                  <button class="button edit">
-                    <img src="../assets/admin_images/edit.svg" alt="edit icon" />
-                  </button>
-                  <button class="button delete">
-                    <img src="../assets/admin_images/trash.svg" alt="trash icon" />
-                  </button>
-                </td>
               </tr>
             </tbody>
           </table>

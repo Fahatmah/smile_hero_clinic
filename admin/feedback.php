@@ -8,6 +8,15 @@ if(!isset($_SESSION['adminEmail'])) {
   header("Location: ../login.php?login=failed");
   exit();
 }
+
+$query  = "SELECT * FROM appointments WHERE status = 'accepted' ";
+$result = $conn->query($query);
+$users = [];
+if ($result->num_rows > 0) {
+  while($row = $result->fetch_assoc()) {
+      $users[] = $row;
+  }
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -32,6 +41,39 @@ if(!isset($_SESSION['adminEmail'])) {
 
     <!-- side bar -->
     <?php include("includes/side_nav.php"); ?>
+
+    <section class="account__container admin-cards">
+      <!-- appointments -->
+      <div class="appointments__container appointments__page">
+        <!-- appointment items -->
+        <div class="appointments">
+          <div class="top_header">
+            <h4>Client Reviews</h4>
+
+          </div>
+
+          <table>
+            <!-- head -->
+            <thead>
+              <tr>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Feedback Type</th>
+                <th>Feedback</th>
+              </tr>
+            </thead>
+
+            <!-- body -->
+            <tr>
+              <td>Juan Dela Cruz</td>
+              <td>juandelacruz@mail.com</td>
+              <td>Compliment</td>
+              <td>This is a sample feedback</td>
+            </tr>
+          </table>
+        </div>
+      </div>
+    </section>
   </main>
 </body>
 
