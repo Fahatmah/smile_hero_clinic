@@ -9,7 +9,7 @@ if(!isset($_SESSION['adminEmail'])) {
   exit();
 }
 
-$query  = "SELECT * FROM appointments WHERE status = 'accepted' ";
+$query  = "SELECT * FROM feedback";
 $result = $conn->query($query);
 $users = [];
 if ($result->num_rows > 0) {
@@ -64,12 +64,14 @@ if ($result->num_rows > 0) {
             </thead>
 
             <!-- body -->
+            <?php foreach($users as $user){?>
             <tr>
-              <td>Juan Dela Cruz</td>
-              <td>juandelacruz@mail.com</td>
-              <td>Compliment</td>
-              <td>This is a sample feedback</td>
+              <td><?php echo $user['name']?></td>
+              <td><?php echo $user['email']?></td>
+              <td><?php echo $user['feedback_type']?></td>
+              <td><?php echo $user['feedback']?></td>
             </tr>
+            <?php } ?>
           </table>
         </div>
       </div>

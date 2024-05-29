@@ -85,7 +85,11 @@ if ($result->num_rows > 0) {
               <td><?php echo $user['name']; ?></td>
               <td><?php echo $user['date']; ?></td>
               <td><?php echo $user['email']; ?></td>
-              <td><?php echo $user['message']; ?></td>
+              <?php if(strlen($user['message']) === 0){ ?>
+                <td>No Message</td>
+              <?php } else {?>
+                <td><?php echo $user['message']; ?></td>
+              <?php } ?>
             </tr>
             <?php } ?>
           </table>

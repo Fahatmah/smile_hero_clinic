@@ -26,7 +26,6 @@ if(!isset($_SESSION['user_id'])) {
 </head>
 
 <body>
-  <!-- <?php outputUserId(); ?> -->
   <main>
     <!-- navigation header bar -->
     <?php include('includes/nav.php'); ?>
@@ -39,28 +38,30 @@ if(!isset($_SESSION['user_id'])) {
       <div class="account">
         <h1>Feedback</h1>
 
-        <form action="">
-          <input type="text" placeholder="Name" />
-          <input type="text" placeholder="Email" />
+        <form action="includes/send_feedback.php" method="post">
+          <input type="text" name="name" placeholder="Name" value="<?php outputFullName() ?>" required/>
+          <input type="text" name="email" placeholder="Email" value="<?php outputEmail() ?>" required/>
           <div class="radio-container">
             <h2>Feedback Type</h2>
             <div class="radios">
               <div class="radio-label">
-                <input type="radio" id="compliment" name="choices" value="compliment" />
+                <input type="radio" id="compliment" name="choices" value="compliment" required/>
                 <label for="compliment">Compliment</label>
               </div>
               <div class="radio-label">
-                <input type="radio" id="suggestion" name="choices" value="suggestion" />
+                <input type="radio" id="suggestion" name="choices" value="suggestion" required/>
                 <label for="suggestion">Suggestion</label>
               </div>
               <div class="radio-label">
-                <input type="radio" id="complaint" name="choices" value="complaint" />
+                <input type="radio" id="complaint" name="choices" value="complaint" required/>
                 <label for="complaint">Complaint</label>
               </div>
             </div>
           </div>
           <textarea name="feedback" id="feedback" placeholder="Please type your feedback here..."></textarea>
-          <button type="submit">Submit</button>
+          <button>
+            <input type="submit" name="submit" value="Submit" style="color: white; cursor: pointer;">
+          </button>
         </form>
       </div>
     </section>

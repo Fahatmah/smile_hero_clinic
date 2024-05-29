@@ -9,7 +9,7 @@ if(!isset($_SESSION['adminEmail'])) {
   exit();
 }
 
-$query  = "SELECT * FROM appointments WHERE status = 'request' ";
+$query  = "SELECT * FROM appointments WHERE status = 'request'";
 $result = $conn->query($query);
 $users = [];
 if ($result->num_rows > 0) {
@@ -18,12 +18,23 @@ if ($result->num_rows > 0) {
   }
 }
 
+$query  = "SELECT * FROM appointments WHERE date = NOW()";
+$result = $conn->query($query);
+$todaysAppointment = 0;
+if ($result->num_rows > 0) {
+  while($row = $result->fetch_assoc()) {
+    $todaysAppointment++;
+  }
+}
+
 $query  = "SELECT * FROM users";
 $result = $conn->query($query);
 $usersinfo = [];
+$totalUsers = 0;
 if ($result->num_rows > 0) {
   while($row = $result->fetch_assoc()) {
       $usersinfo[] = $row;
+      $totalUsers++;
   }
 }
 ?>
@@ -58,7 +69,7 @@ if ($result->num_rows > 0) {
       <!-- cards overview -->
       <div class="cards__container">
         <div class="card patients">
-          <h1>20</h1>
+          <h1><?php echo $totalUsers; ?></h1>
           <p>New Patients</p>
           <img src="../assets/admin_images/new_patients.svg" class="card_image" alt="" />
         </div>
@@ -68,7 +79,7 @@ if ($result->num_rows > 0) {
           <img src="../assets/admin_images/doctors.svg" class="card_image" alt="" />
         </div>
         <div class="card appointments">
-          <h3>10</h3>
+          <h3><?php echo $todaysAppointment; ?></h3>
           <p>Today's Appointment</p>
           <img src="../assets/admin_images/todays_appointments.svg" class="card_image" alt="" />
         </div>
@@ -104,7 +115,11 @@ if ($result->num_rows > 0) {
             <!-- body -->
             <tbody>
               <!-- get only 3 appointments to show -->
-              <?php foreach ($users as $user){?>
+              <?php 
+              $count = 0;
+              foreach ($users as $user){
+                if($count >= 3 ) break;
+                ?>
               <tr>
                 <td>
                   <img src="../assets/admin_images/default_image.svg" class="img"
@@ -114,7 +129,7 @@ if ($result->num_rows > 0) {
                 <td><?php echo $user['date']; ?></td>
                 <td><?php echo $user['status']; ?></td>
               </tr>
-              <?php } ?>
+              <?php $count++; } ?>
             </tbody>
           </table>
           <?php if($result->num_rows == 0) { ?>
@@ -183,7 +198,8 @@ if ($result->num_rows > 0) {
             <!-- body -->
             <tbody>
               <!-- get only 3 patients to show -->
-              <?php foreach ($usersinfo as $user){?>
+              <?php foreach ($usersinfo as $user){
+                  if($count >= 3 ) break; ?>
               <tr>
                 <td>
                   <img src="../assets/admin_images/default_image.svg" class="img"
@@ -199,7 +215,7 @@ if ($result->num_rows > 0) {
                   <td><?php echo $user['address'];?></td>
                 <?php }?>
               </tr>
-              <?php } ?>
+              <?php $count++; } ?>
             </tbody>
           </table>
 

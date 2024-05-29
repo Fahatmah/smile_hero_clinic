@@ -85,7 +85,11 @@ if ($result->num_rows > 0) {
                 <td><?php echo htmlspecialchars($user['fullname']); ?></td>
                 <td><?php echo htmlspecialchars($user['email']); ?></td>
                 <td><?php echo htmlspecialchars($user['contact']); ?></td>
-                <td><?php echo htmlspecialchars($user['address']); ?></td>
+                <?php if(strlen($user['address']) === 0){ ?>
+                    <td>No Address</td>
+                <?php }else{?>
+                  <td><?php echo htmlspecialchars($user['address']); ?></td>
+                <?php } ?>
               </tr>
               <?php } ?>
             </tbody>
