@@ -16,44 +16,42 @@
           $errors["login_incorrect"] = "Incorrect Username or Password";
       }
 
-      if (!isUsernameWrong($result) && isPasswordWrong($password, $result["pass"])) {
+      if (!isUsernameWrong($result) && isPasswordWrong($password, $result["pass"])){
           $errors["login_incorrect"] = "Incorrect Username or Password";
+      }
+
+      if ($result["account_activation_hash"] !== NULL) {
+        $errors["account_inactive"] = "Acount activation is needed";
       }
 
       require_once("config_session.inc.php");
 
       if(getAdminEmail($conn, $email) && getAdminpass($conn, $password)) {
-        Header("Location: ../admin/dashboard.php");
-
         $_SESSION["adminEmail"] = getAdminEmail($conn, $email);
         $conn->close();
+        Header("Location: ../admin/dashboard.php");
         die();
       }
 
 
       if ($errors) {
           $_SESSION["errors_login"] = $errors;
-
           header("Location: ../login.php");
           die();
       }
 
       // to create a new session id using the user id to match session id and user session id
-      $newSessionId = session_create_id();
-      $sessionId = $newSessionId . "_" . $result["user_id"];
-      session_id($sessionId);
+      session_regenerate_id(true);
 
       $_SESSION["user_id"] =  $result["user_id"];
       $_SESSION["fullname"] =  $result["fullname"];
       $_SESSION["email"] =  $result["email"];
       $_SESSION["contact"] =  $result["contact"];
       $_SESSION["user_username"] = htmlspecialchars($result["username"]);
-
       $_SESSION["last_regeneration"] = time();
 
-      Header("Location: ../user_pages/profile.php?login=success");
-
       $conn->close();
+      Header("Location: ../user_pages/profile.php?login=success");
       die();
     } else {
       header("Location: ../login.php");

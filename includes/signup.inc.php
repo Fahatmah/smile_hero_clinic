@@ -7,6 +7,9 @@ if ($_SERVER['REQUEST_METHOD'] === "POST") {
     $contact = $_POST["contact"];
     $password = $_POST["password"];
 
+    $activation_token = bin2hex(random_bytes(16));
+    $activation_token_hash = hash("sha256", $activation_token);
+
     require_once("dbh.inc.php");
     require_once("signup_model.inc.php");
     require_once("signup_contr.inc.php");
@@ -50,7 +53,28 @@ if ($_SERVER['REQUEST_METHOD'] === "POST") {
         die();
     }
 
-    createUser($conn, $user_id, $fullname, $email, $contact, $password);
+    createUser($conn, $user_id, $fullname, $email, $contact, $password, $activation_token_hash);
+
+    $mail = require __DIR__ . "/../mailer.php"; 
+    $mail->setFrom("jpvillaruel02@gmail.com");
+    $mail->addAddress($_POST["email"]);
+    $baseUrl = "http://localhost/smile_hero_clinic"; // Replace with your local project folder path
+    $activationUrl = $baseUrl . "/includes/activate_account.php?token=$activation_token";
+    $mail->Subject = "Smile Hero Dental Clinic Account Activation";
+    $mail->Body = <<<END
+
+    <p>Thank you for signing up! Please click the link below to activate your account:</p>
+    <p><a href="$activationUrl">Activate your account</a></p>
+
+    END;
+
+    try {
+        $mail->send();
+    } catch (Exception $e) {
+        echo "Message could not be sent. Mailer error: {$mail->ErrorInfo}";
+        exit;
+    }
+
     echo "<script>alert('Account is created');</script>";
     echo "<script>window.location.href='../login.php?signup=success';</script>";
 

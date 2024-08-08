@@ -18,7 +18,9 @@ if ($result->num_rows > 0) {
   }
 }
 
-$query  = "SELECT * FROM appointments WHERE date = NOW()";
+$dateNow = date('l, d/m/Y');
+
+$query  = "SELECT * FROM appointments WHERE date = '$dateNow'";
 $result = $conn->query($query);
 $todaysAppointment = 0;
 if ($result->num_rows > 0) {
