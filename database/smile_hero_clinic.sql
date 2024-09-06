@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 27, 2024 at 12:31 PM
+-- Generation Time: Sep 06, 2024 at 02:49 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -65,8 +65,28 @@ CREATE TABLE `appointments` (
 --
 
 INSERT INTO `appointments` (`user_id`, `appointment_id`, `name`, `email`, `contact`, `message`, `date`, `time`, `location`, `status`, `created_at`) VALUES
-('SHCf023TCU', 'SHCa31c', 'John Paul Dela Cruz', 'jpvillaruel02@gmail.com', '9070050140', '', 'Friday, 05/31/2024', '4:00 PM', 'Main Street, Makati City', 'accepted', '2024-05-27 18:28:04'),
-('SHC9516TCU', 'SHCf6d7', 'christian jake dela cruz', 'lems.christianjakedelacruz@gmail.com', '9289403281', '', 'Friday, 05/31/2024', '3:00 PM', 'Main Street, Makati City', 'accepted', '2024-05-27 18:21:00');
+('SHC5d4aTCU', 'SHC5f4c', 'jp', 'jpvillaruel02@gmail.com', '9070050140', '', 'Monday, 08/12/2024', '5:00 PM', 'Central Avenue, Quezon City', 'accepted', '2024-08-08 19:09:35');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `feedback`
+--
+
+CREATE TABLE `feedback` (
+  `id` int(11) NOT NULL,
+  `name` varchar(299) NOT NULL,
+  `email` varchar(299) NOT NULL,
+  `feedback_type` varchar(100) NOT NULL,
+  `feedback` varchar(399) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `feedback`
+--
+
+INSERT INTO `feedback` (`id`, `name`, `email`, `feedback_type`, `feedback`) VALUES
+(8, 'John Paul Dela Cruz', 'jpvillaruel02@gmail.com', 'compliment', 'Good clinic will make an appointment again in this clinic so good i think this will gonna be my clinic now and i will recommend this clinic to my freinds and family. The service is very Fantastic hope it will last longer.');
 
 -- --------------------------------------------------------
 
@@ -82,6 +102,7 @@ CREATE TABLE `users` (
   `contact` bigint(11) NOT NULL,
   `address` varchar(255) DEFAULT NULL,
   `pass` varchar(255) NOT NULL,
+  `account_activation_hash` varchar(64) DEFAULT NULL,
   `created_at` datetime NOT NULL DEFAULT curdate()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -89,9 +110,11 @@ CREATE TABLE `users` (
 -- Dumping data for table `users`
 --
 
-INSERT INTO `users` (`id`, `user_id`, `fullname`, `email`, `contact`, `address`, `pass`, `created_at`) VALUES
-(31, 'SHC9516TCU', 'christian jake dela cruz', 'lems.christianjakedelacruz@gmail.com', 9289403281, NULL, '$2y$12$zcDf4JbV2m4mFa.vQrD2JOlr1XL11pxl2JG9MvVR/VQyf8KbfHcg2', '2024-05-27 18:20:47'),
-(32, 'SHCf023TCU', 'John Paul Dela Cruz', 'jpvillaruel02@gmail.com', 9070050140, NULL, '$2y$12$Vk/hlRGNM7G70IwXPxGxXuGQecd9bhvDUts5tWtZi7PFXGgalHq32', '2024-05-27 18:22:07');
+INSERT INTO `users` (`id`, `user_id`, `fullname`, `email`, `contact`, `address`, `pass`, `account_activation_hash`, `created_at`) VALUES
+(31, 'SHC9516TCU', 'christian jake dela cruz', 'lems.christianjakedelacruz@gmail.com', 9289403281, NULL, '$2y$12$zcDf4JbV2m4mFa.vQrD2JOlr1XL11pxl2JG9MvVR/VQyf8KbfHcg2', NULL, '2024-05-27 18:20:47'),
+(33, 'SHCc601TCU', 'Fahatmah Mabang', 'fahatmahmabang9@gmail.com', 9265369733, NULL, '$2y$12$l9s.LxfTZUZ8ZdqutSZJVuQInKzFsfEWkvZbSQtaf.zmZCxVXUUXy', NULL, '2024-05-28 18:27:03'),
+(34, 'SHCf23fTCU', 'Calderon', 'joevilzonc@gmail.com', 91324123122, NULL, '$2y$12$fxiDU3Wnr67bGuRaP.EFF.bU47cnOAf0MHtXi80IPpCbt0HMGs9mO', NULL, '2024-05-28 18:53:23'),
+(42, 'SHC5d4aTCU', 'jp', 'jpvillaruel02@gmail.com', 9070050140, NULL, '$2y$12$DCLdvO7TQ6kjcw9gyygvMOr5v7g6/LJhidEDhoEwlx1GcKKtRYZD.', NULL, '2024-08-08 19:02:13');
 
 --
 -- Indexes for dumped tables
@@ -110,10 +133,17 @@ ALTER TABLE `appointments`
   ADD UNIQUE KEY `appointment_id` (`appointment_id`);
 
 --
+-- Indexes for table `feedback`
+--
+ALTER TABLE `feedback`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `users`
 --
 ALTER TABLE `users`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `account_activation_hash` (`account_activation_hash`);
 
 --
 -- AUTO_INCREMENT for dumped tables
@@ -126,10 +156,16 @@ ALTER TABLE `admin`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
+-- AUTO_INCREMENT for table `feedback`
+--
+ALTER TABLE `feedback`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+
+--
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=43;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
