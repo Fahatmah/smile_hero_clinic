@@ -1,0 +1,215 @@
+@use '../../abstracts' as *;
+body {
+  @include flex();
+  width: 100%;
+  min-height: 100vh;
+  background-color: var(--ntrl-clr-200);
+
+  main {
+    width: min(100% - 12rem, 80rem);
+    margin-inline: auto;
+
+    // nav
+    .navbar {
+      width: 100%;
+      @include flex();
+      justify-content: space-between;
+      padding-block: 1.5rem;
+      border-bottom: 1px solid hsl(0, 0%, 38%, 0.3);
+
+      &__logo {
+        @include flex();
+        background-color: var(--pr-clr-300);
+        border-radius: 50%;
+        a {
+          @include flex();
+          padding: 0.5rem;
+          svg path {
+            fill: white;
+          }
+        }
+      }
+
+      &__menu {
+        @include display-flex($gap: 1rem);
+
+        button {
+          @include flex();
+          border-radius: 8px;
+          overflow: hidden;
+          a {
+            padding: 1rem;
+            color: white;
+          }
+          &#logoutBtn {
+            background-color: hsl(0, 0%, 38%, 0.7);
+
+            &:hover {
+              background-color: var(--ntrl-clr-300);
+            }
+          }
+          &#accountBtn {
+            background-color: var(--pr-clr-100);
+            &:hover {
+              background-color: var(--pr-clr-150);
+            }
+            a {
+              @include display-flex($gap: 8px);
+            }
+          }
+        }
+      }
+    }
+
+    // header
+    .hero {
+      @include display-flex($x: space-between);
+      padding-block: 2rem;
+      border-bottom: 1px solid hsl(0, 0%, 38%, 0.3);
+
+      h1,
+      .circle-span {
+        width: 860px;
+        font-size: 6.25rem;
+        font-weight: 900;
+        color: transparent;
+        letter-spacing: -6px;
+        line-height: 82px;
+        text-transform: uppercase;
+
+        background-image: url(../../../assets/images/mesh_bg.png);
+        background-repeat: no-repeat;
+        background-size: 100%;
+        background-position: center;
+        -webkit-background-clip: text;
+        background-clip: text;
+
+        &.circle-span {
+          position: relative;
+          &::after {
+            content: '';
+            position: absolute;
+            top: -0.5rem;
+            right: 3.7rem;
+            width: 2rem;
+            height: 2rem;
+            border-radius: 50%;
+            background-image: url(../../../assets/mesh-circle.svg);
+          }
+        }
+      }
+
+      &__details {
+        width: 336px;
+        @include display-flex($dir: column, $y: flex-start, $gap: 1rem);
+
+        .contact__info {
+          @include display-flex($gap: 0.625rem, $x: space-between);
+          flex-wrap: wrap;
+          color: var(--ntrl-clr-350);
+
+          li:first-child {
+            width: 100%;
+            flex-grow: 1;
+            font-weight: bold;
+          }
+        }
+
+        .current__date {
+          width: 100%;
+          @include display-flex($gap: 10px);
+          padding: 1rem;
+          border-radius: 2rem;
+          outline: 1px solid var(--ntrl-clr-300);
+
+          font-size: 1.5rem;
+          font-weight: 300;
+          color: var(--ntrl-clr-300);
+        }
+      }
+    }
+
+    // section
+    .about {
+      @include display-flex($x: space-between);
+      padding-block: 2rem;
+
+      &__intro {
+        position: relative;
+        width: 760px;
+        height: 560px;
+        border-radius: 2rem;
+        background-image: url(../../../assets/smile-hero-img.jpg);
+        background-repeat: no-repeat;
+        background-position: center center;
+
+        & > * {
+          width: initial;
+          position: absolute;
+          left: 2rem;
+          right: 2rem;
+          padding: 1rem;
+          font-size: 1.125rem;
+          color: var(--ntrl-clr-350);
+          border-radius: 12px;
+          background-color: hsl(0, 0%, 100%, 0.7);
+          backdrop-filter: blur(6px);
+        }
+
+        #aboutTitle {
+          width: max-content;
+          top: 2rem;
+        }
+
+        .sub-header {
+          bottom: 2rem;
+        }
+      }
+
+      .services {
+        width: 468px;
+
+        #servicesTitle {
+          width: 100%;
+          padding: 1rem;
+          font-size: 3.875rem;
+          font-weight: 900;
+          color: var(--ntrl-clr-200);
+          letter-spacing: -6px;
+          text-align: center;
+          text-transform: uppercase;
+          border-radius: 4rem;
+          background-color: hsl(0, 0%, 38%, 0.7);
+          margin-bottom: 2rem;
+        }
+
+        &__list {
+          @include display-flex($y: flex-start, $dir: column, $gap: 1.125rem);
+          padding-bottom: 2rem;
+          margin-bottom: 2rem;
+          border-bottom: 1px solid hsl(0, 0%, 38%, 0.3);
+
+          li {
+            @include display-flex($gap: 1rem, $x: flex-start);
+          }
+        }
+
+        .appointment__button {
+          @include display-flex($x: space-between);
+          padding: 1.5rem 2rem;
+          font-size: 2.8125rem;
+          font-weight: 900;
+          color: var(--ntrl-clr-200);
+          text-transform: uppercase;
+          letter-spacing: -3px;
+          line-height: 55px;
+          border-radius: 4rem;
+          background-color: var(--pr-clr-150);
+          &:hover {
+            background-color: var(--pr-clr-100);
+          }
+        }
+      }
+    }
+  }
+}

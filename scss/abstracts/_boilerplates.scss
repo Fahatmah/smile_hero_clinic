@@ -27,7 +27,7 @@
   --fs-500: 3.375rem; /* section header 54px*/
   --fs-600: 6rem; /* landing page header 96px*/
 
-  --debug: 1px solid #333;
+  --d: 1px solid #333;
 }
 
 body {
@@ -37,11 +37,12 @@ body {
   font-size: var(--fs-200);
   color: var(--ntrl-clr-400);
   background-color: var(--ntrl-clr-250);
+  position: relative;
 
   main {
-    position: relative;
+    // position: relative;
     width: 100%;
-    min-height: 100vh;
+    // min-height: 100vh;
 
     &.landing__page,
     &.login__page,
