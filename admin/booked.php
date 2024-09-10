@@ -2,22 +2,39 @@
 require_once '../includes/config_session.inc.php';
 require_once '../includes/login_view.inc.php';
 require_once '../includes/dbh.inc.php';
+require_once './includes/pagination.php';
 
-if(!isset($_SESSION['adminEmail'])) {
+if (!isset($_SESSION['adminEmail'])) {
   // Redirect user to login if not logged in
   header("Location: ../login.php?login=failed");
   exit();
 }
 
-$query  = "SELECT * FROM appointments WHERE status = 'accepted' ";
+// Pagination setup
+$limit = 5; // Number of entries to show per page
+$page = isset($_GET['page']) ? (int)$_GET['page'] : 1; // Current page number
+$start = ($page - 1) * $limit; // Calculate the starting row for the query
+
+// Get total number of records for booked meetings
+$totalQuery = "SELECT COUNT(*) AS total FROM appointments WHERE status = 'accepted'";
+$totalResult = $conn->query($totalQuery);
+$totalRow = $totalResult->fetch_assoc();
+$totalRecords = $totalRow['total'];
+
+// Fetch records for the current page
+$query = "SELECT * FROM appointments WHERE status = 'accepted' LIMIT $start, $limit";
 $result = $conn->query($query);
 $users = [];
 if ($result->num_rows > 0) {
-  while($row = $result->fetch_assoc()) {
-      $users[] = $row;
+  while ($row = $result->fetch_assoc()) {
+    $users[] = $row;
   }
 }
+
+// Calculate total pages needed
+$totalPages = ceil($totalRecords / $limit);
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -35,20 +52,20 @@ if ($result->num_rows > 0) {
 </head>
 
 <body>
-  <main>
+  <main class="admin-main">
     <!-- nav header -->
     <?php include("includes/nav.php"); ?>
 
     <!-- side bar -->
     <?php include("includes/side_nav.php"); ?>
 
-    <section class="account__container admin-cards">
+     <section class="account__container admin-cards">
       <!-- appointments -->
       <div class="appointments__container appointments__page">
         <!-- appointment items -->
         <div class="appointments">
           <div class="top_header">
-            <h4>Confirmed Appointments</h4>
+            <h4>Confirmed Appointments (Page <?php echo $page; ?>)</h4>
             <form class="search__bar">
               <input type="text" name="appointment" id="appointment" placeholder="Search..." />
               <button type="submit">
@@ -73,7 +90,6 @@ if ($result->num_rows > 0) {
             </thead>
 
             <!-- body -->
-
             <?php foreach ($users as $user){?>
             <tr>
               <td>
@@ -83,7 +99,7 @@ if ($result->num_rows > 0) {
               <td><?php echo $user['appointment_id']; ?></td>
               <td><?php echo $user['user_id']; ?></td>
               <td><?php echo $user['name']; ?></td>
-              <td><?php echo $user['date']; ?></td>
+              <td><?php echo date('l, m/d/Y', strtotime($user['date'])); ?></td>
               <td><?php echo $user['email']; ?></td>
               <?php if(strlen($user['message']) === 0){ ?>
                 <td>No Message</td>
@@ -96,6 +112,9 @@ if ($result->num_rows > 0) {
           <?php if($result->num_rows == 0) { ?>
           <p>No appointment requests</p>
           <?php } ?>
+
+          <!-- Pagination -->
+          <?php renderPagination($page, $totalPages) ?>
         </div>
       </div>
     </section>

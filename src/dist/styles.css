@@ -1717,7 +1717,7 @@ body main .form_container .header {
   box-shadow: 3px 3px 0px rgba(29, 114, 242, 0.4117647059);
 }
 
-body {
+body.user-homepage {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -1726,11 +1726,11 @@ body {
   min-height: 100vh;
   background-color: var(--ntrl-clr-200);
 }
-body main {
+body.user-homepage main {
   width: min(100% - 12rem, 80rem);
   margin-inline: auto;
 }
-body main .navbar {
+body.user-homepage main .navbar {
   width: 100%;
   display: flex;
   align-items: center;
@@ -1740,7 +1740,7 @@ body main .navbar {
   padding-block: 1.5rem;
   border-bottom: 1px solid hsla(0, 0%, 38%, 0.3);
 }
-body main .navbar__logo {
+body.user-homepage main .navbar__logo {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -1748,24 +1748,24 @@ body main .navbar__logo {
   background-color: var(--pr-clr-300);
   border-radius: 50%;
 }
-body main .navbar__logo a {
+body.user-homepage main .navbar__logo a {
   display: flex;
   align-items: center;
   justify-content: center;
   flex-direction: row;
   padding: 0.5rem;
 }
-body main .navbar__logo a svg path {
+body.user-homepage main .navbar__logo a svg path {
   fill: white;
 }
-body main .navbar__menu {
+body.user-homepage main .navbar__menu {
   display: flex;
   align-items: center;
   justify-content: center;
   flex-direction: row;
   gap: 1rem;
 }
-body main .navbar__menu button {
+body.user-homepage main .navbar__menu button {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -1773,30 +1773,30 @@ body main .navbar__menu button {
   border-radius: 8px;
   overflow: hidden;
 }
-body main .navbar__menu button a {
+body.user-homepage main .navbar__menu button a {
   padding: 1rem;
   color: white;
 }
-body main .navbar__menu button#logoutBtn {
+body.user-homepage main .navbar__menu button#logoutBtn {
   background-color: hsla(0, 0%, 38%, 0.7);
 }
-body main .navbar__menu button#logoutBtn:hover {
+body.user-homepage main .navbar__menu button#logoutBtn:hover {
   background-color: var(--ntrl-clr-300);
 }
-body main .navbar__menu button#accountBtn {
+body.user-homepage main .navbar__menu button#accountBtn {
   background-color: var(--pr-clr-100);
 }
-body main .navbar__menu button#accountBtn:hover {
+body.user-homepage main .navbar__menu button#accountBtn:hover {
   background-color: var(--pr-clr-150);
 }
-body main .navbar__menu button#accountBtn a {
+body.user-homepage main .navbar__menu button#accountBtn a {
   display: flex;
   align-items: center;
   justify-content: center;
   flex-direction: row;
   gap: 8px;
 }
-body main .hero {
+body.user-homepage main .hero {
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -1805,8 +1805,8 @@ body main .hero {
   padding-block: 2rem;
   border-bottom: 1px solid hsla(0, 0%, 38%, 0.3);
 }
-body main .hero h1,
-body main .hero .circle-span {
+body.user-homepage main .hero h1,
+body.user-homepage main .hero .circle-span {
   width: 860px;
   font-size: 6.25rem;
   font-weight: 900;
@@ -1821,12 +1821,12 @@ body main .hero .circle-span {
   -webkit-background-clip: text;
   background-clip: text;
 }
-body main .hero h1.circle-span,
-body main .hero .circle-span.circle-span {
+body.user-homepage main .hero h1.circle-span,
+body.user-homepage main .hero .circle-span.circle-span {
   position: relative;
 }
-body main .hero h1.circle-span::after,
-body main .hero .circle-span.circle-span::after {
+body.user-homepage main .hero h1.circle-span::after,
+body.user-homepage main .hero .circle-span.circle-span::after {
   content: "";
   position: absolute;
   top: -0.5rem;
@@ -1836,7 +1836,7 @@ body main .hero .circle-span.circle-span::after {
   border-radius: 50%;
   background-image: url(../../../assets/mesh-circle.svg);
 }
-body main .hero__details {
+body.user-homepage main .hero__details {
   width: 336px;
   display: flex;
   align-items: flex-start;
@@ -1844,7 +1844,7 @@ body main .hero__details {
   flex-direction: column;
   gap: 1rem;
 }
-body main .hero__details .contact__info {
+body.user-homepage main .hero__details .contact__info {
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -1853,12 +1853,12 @@ body main .hero__details .contact__info {
   flex-wrap: wrap;
   color: var(--ntrl-clr-350);
 }
-body main .hero__details .contact__info li:first-child {
+body.user-homepage main .hero__details .contact__info li:first-child {
   width: 100%;
   flex-grow: 1;
   font-weight: bold;
 }
-body main .hero__details .current__date {
+body.user-homepage main .hero__details .current__date {
   width: 100%;
   display: flex;
   align-items: center;
@@ -1872,7 +1872,7 @@ body main .hero__details .current__date {
   font-weight: 300;
   color: var(--ntrl-clr-300);
 }
-body main .about {
+body.user-homepage main .about {
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -1880,7 +1880,7 @@ body main .about {
   gap: 0;
   padding-block: 2rem;
 }
-body main .about__intro {
+body.user-homepage main .about__intro {
   position: relative;
   width: 760px;
   height: 560px;
@@ -1889,7 +1889,7 @@ body main .about__intro {
   background-repeat: no-repeat;
   background-position: center center;
 }
-body main .about__intro > * {
+body.user-homepage main .about__intro > * {
   width: initial;
   position: absolute;
   left: 2rem;
@@ -1902,18 +1902,18 @@ body main .about__intro > * {
   -webkit-backdrop-filter: blur(6px);
           backdrop-filter: blur(6px);
 }
-body main .about__intro #aboutTitle {
+body.user-homepage main .about__intro #aboutTitle {
   width: -moz-max-content;
   width: max-content;
   top: 2rem;
 }
-body main .about__intro .sub-header {
+body.user-homepage main .about__intro .sub-header {
   bottom: 2rem;
 }
-body main .about .services {
+body.user-homepage main .about .services {
   width: 468px;
 }
-body main .about .services #servicesTitle {
+body.user-homepage main .about .services #servicesTitle {
   width: 100%;
   padding: 1rem;
   font-size: 3.875rem;
@@ -1926,7 +1926,7 @@ body main .about .services #servicesTitle {
   background-color: hsla(0, 0%, 38%, 0.7);
   margin-bottom: 2rem;
 }
-body main .about .services__list {
+body.user-homepage main .about .services__list {
   display: flex;
   align-items: flex-start;
   justify-content: center;
@@ -1936,14 +1936,14 @@ body main .about .services__list {
   margin-bottom: 2rem;
   border-bottom: 1px solid hsla(0, 0%, 38%, 0.3);
 }
-body main .about .services__list li {
+body.user-homepage main .about .services__list li {
   display: flex;
   align-items: center;
   justify-content: flex-start;
   flex-direction: row;
   gap: 1rem;
 }
-body main .about .services .appointment__button {
+body.user-homepage main .about .services .appointment__button {
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -1959,7 +1959,7 @@ body main .about .services .appointment__button {
   border-radius: 4rem;
   background-color: var(--pr-clr-150);
 }
-body main .about .services .appointment__button:hover {
+body.user-homepage main .about .services .appointment__button:hover {
   background-color: var(--pr-clr-100);
 }
 
@@ -1977,6 +1977,11 @@ body main .about .services .appointment__button:hover {
 }
 .admin-sidenav ul li#logout_button .logout__button {
   color: var(--ntrl-clr-100);
+}
+
+main.admin-main {
+  width: min(100% - 2rem, 90rem);
+  margin-inline: auto;
 }
 
 .admin-cards {
@@ -2147,13 +2152,17 @@ body main .about .services .appointment__button:hover {
   padding-inline: 1rem;
 }
 .admin-cards .appointments__container .appointments table tbody tr td .action_button__container {
+  width: 100%;
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: center;
   flex-direction: row;
   gap: 0.5rem;
 }
-.admin-cards .appointments__container .appointments table tbody tr td .action_button__container .button {
+.admin-cards .appointments__container .appointments table tbody tr td .action_button__container form {
+  width: 100%;
+}
+.admin-cards .appointments__container .appointments table tbody tr td .action_button__container form .button {
   width: 100%;
   padding: 0.2rem;
   color: var(--ntrl-clr-100);
@@ -2161,13 +2170,13 @@ body main .about .services .appointment__button:hover {
   overflow: hidden;
   cursor: pointer;
 }
-.admin-cards .appointments__container .appointments table tbody tr td .action_button__container .button.accept {
+.admin-cards .appointments__container .appointments table tbody tr td .action_button__container form .button.accept {
   background-color: var(--pr-clr-300);
 }
-.admin-cards .appointments__container .appointments table tbody tr td .action_button__container .button.cancel {
+.admin-cards .appointments__container .appointments table tbody tr td .action_button__container form .button.cancel {
   background-color: var(--pr-clr-100);
 }
-.admin-cards .appointments__container .appointments table tbody tr td .action_button__container .button:hover {
+.admin-cards .appointments__container .appointments table tbody tr td .action_button__container form .button:hover {
   opacity: 0.8;
 }
 .admin-cards .appointments__container .appointments .see_all__button {
@@ -2322,6 +2331,7 @@ body main .about .services .appointment__button:hover {
   padding-block: 1rem;
 }
 .admin-cards .patients__container .patients table tbody tr td.action_button__container {
+  width: 100%;
   display: flex;
   align-items: center;
   justify-content: flex-start;
@@ -2431,4 +2441,38 @@ body main .about .services .appointment__button:hover {
   padding-block: 1rem;
   padding-inline: 0.5rem;
   outline: 1px solid rgba(29, 114, 242, 0.5215686275);
+}
+
+.pagination {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  align-self: flex-start;
+}
+.pagination .active-page {
+  font-weight: bold;
+  color: #e6e6e6 !important;
+  text-decoration: none;
+  border-radius: 5px;
+  background-color: #1d72f2;
+}
+.pagination .button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 4rem;
+  height: 4rem;
+  padding: 0.5rem 1rem;
+  color: #2c2c2c;
+  text-decoration: none;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+}
+.pagination .button.icon:hover svg path {
+  stroke: #e6e6e6;
+}
+.pagination .button:hover {
+  background-color: #5c9dff;
+  color: #e6e6e6;
 }/*# sourceMappingURL=styles.css.map */

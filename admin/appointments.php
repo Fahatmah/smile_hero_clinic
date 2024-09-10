@@ -2,23 +2,42 @@
 require_once '../includes/config_session.inc.php';
 require_once '../includes/login_view.inc.php';
 require_once '../includes/dbh.inc.php';
+require_once './includes/pagination.php';
 
-if(!isset($_SESSION['adminEmail'])) {
-  // Redirect user to login if not logged in
+if (!isset($_SESSION['adminEmail'])) {
   header("Location: ../login.php?login=failed");
   exit();
 }
 
-$query  = "SELECT * FROM appointments WHERE status = 'request' ";
+// Define how many results per page
+$results_per_page = 5;
+
+// Find out the number of results stored in the database
+$query = "SELECT COUNT(*) AS total FROM appointments";
 $result = $conn->query($query);
+$row = $result->fetch_assoc();
+$number_of_results = $row['total'];
+
+// Determine the total number of pages available
+$totalPages = ceil($number_of_results / $results_per_page);
+
+// Determine which page number visitor is currently on
+$page = isset($_GET['page']) ? (int)$_GET['page'] : 1;
+$page = max(1, $page); // Ensure the page number is at least 1
+
+// Determine the SQL LIMIT starting number for the results on the displaying page
+$this_page_first_result = ($page - 1) * $results_per_page;
+
+$query = "SELECT * FROM appointments WHERE status = 'request' LIMIT $this_page_first_result, $results_per_page";
+$result = $conn->query($query);
+
 $users = [];
 if ($result->num_rows > 0) {
-  while($row = $result->fetch_assoc()) {
-      $users[] = $row;
-  }
+    while ($row = $result->fetch_assoc()) {
+        $users[] = $row;
+    }
 }
 ?>
-
 
 <!DOCTYPE html>
 <html lang="en">
@@ -37,7 +56,7 @@ if ($result->num_rows > 0) {
 </head>
 
 <body>
-  <main>
+  <main class="admin-main">
     <!-- nav header -->
     <?php include("includes/nav.php"); ?>
 
@@ -50,7 +69,7 @@ if ($result->num_rows > 0) {
         <!-- appointment items -->
         <div class="appointments">
           <div class="top_header">
-            <h4>Pending Requests</h4>
+            <h4>Pending Requests (Page <?php echo $page; ?>)</h4>
             <form class="search__bar">
               <input type="text" name="appointment" id="appointment" placeholder="Search..." />
               <button type="submit">
@@ -60,6 +79,7 @@ if ($result->num_rows > 0) {
           </div>
 
           <!-- appointments table -->
+          <?php if (count($users) > 0) { ?>
           <table>
             <!-- head -->
             <thead>
@@ -75,7 +95,6 @@ if ($result->num_rows > 0) {
             </thead>
 
             <!-- body -->
-
             <?php foreach ($users as $user){?>
             <tr>
               <td>
@@ -114,9 +133,13 @@ if ($result->num_rows > 0) {
             </tr>
             <?php } ?>
           </table>
-          <?php if($result->num_rows == 0) { ?>
+          <?php } else { ?>
           <p>No appointment requests</p>
           <?php } ?>
+
+          <!-- Pagination -->
+          <?php renderPagination($page, $totalPages) ?>
+
         </div>
       </div>
     </section>

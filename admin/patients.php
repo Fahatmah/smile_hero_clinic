@@ -2,6 +2,7 @@
 require_once '../includes/config_session.inc.php';
 require_once '../includes/login_view.inc.php';
 require_once '../includes/dbh.inc.php';
+require_once './includes/pagination.php';
 
 if(!isset($_SESSION['adminEmail'])) {
   // Redirect user to login if not logged in
@@ -9,11 +10,31 @@ if(!isset($_SESSION['adminEmail'])) {
   exit();
 }
 
-$query  = "SELECT * FROM users";
+// Define how many results per page
+$results_per_page = 5;
+
+// Find out the number of results stored in the database
+$query = "SELECT COUNT(*) AS total FROM users";
+$result = $conn->query($query);
+$row = $result->fetch_assoc();
+$number_of_results = $row['total'];
+
+// Determine the total number of pages available
+$number_of_pages = ceil($number_of_results / $results_per_page);
+
+// Determine which page number visitor is currently on
+$page = isset($_GET['page']) ? (int)$_GET['page'] : 1;
+$page = max(1, $page); // Ensure the page number is at least 1
+
+// Determine the SQL LIMIT starting number for the results on the displaying page
+$this_page_first_result = ($page - 1) * $results_per_page;
+
+// Retrieve selected results from the database and display them on the page
+$query = "SELECT * FROM users LIMIT $this_page_first_result, $results_per_page";
 $result = $conn->query($query);
 $users = [];
 if ($result->num_rows > 0) {
-    while($row = $result->fetch_assoc()) {
+    while ($row = $result->fetch_assoc()) {
         $users[] = $row;
     }
 }
@@ -36,7 +57,7 @@ if ($result->num_rows > 0) {
 </head>
 
 <body>
-  <main>
+  <main class="admin-main">
     <!-- nav header -->
     <?php include("includes/nav.php"); ?>
 
@@ -49,7 +70,7 @@ if ($result->num_rows > 0) {
       <div class="patients__container">
         <div class="patients">
           <div class="top_header">
-            <h6>Patients</h6>
+            <h6>Patients (Page <?php echo $page; ?>)</h6>
             <form class="search__bar">
               <input type="text" name="patient" id="patient" placeholder="Search..." />
               <button type="submit">
@@ -94,6 +115,10 @@ if ($result->num_rows > 0) {
               <?php } ?>
             </tbody>
           </table>
+
+          <!-- Pagination -->
+          <?php renderPagination($page, $number_of_pages) ?>
+
         </div>
       </div>
     </section>

@@ -65,7 +65,8 @@ CREATE TABLE `appointments` (
 --
 
 INSERT INTO `appointments` (`user_id`, `appointment_id`, `name`, `email`, `contact`, `message`, `date`, `time`, `location`, `status`, `created_at`) VALUES
-('SHC5d4aTCU', 'SHC5f4c', 'jp', 'jpvillaruel02@gmail.com', '9070050140', '', 'Monday, 08/12/2024', '5:00 PM', 'Central Avenue, Quezon City', 'accepted', '2024-08-08 19:09:35');
+('SHC5d4aTCU', 'SHC5f4c', 'jp', 'jpvillaruel02@gmail.com', '9070050140', '', 'Monday, 08/12/2024', '5:00 PM', 'Central Avenue, Quezon City', 'accepted', '2024-08-08 19:09:35'),
+('SHCc601TCU', 'SHC9d60', 'Fahatmah Mabang', 'fahatmahmabang9@gmail.com', '9265369733', '', 'Tuesday, 09/17/2024', '11:00 AM', 'Bayani Road, Taguig City', 'canceled', '2024-09-10 22:00:12');
 
 -- --------------------------------------------------------
 
@@ -159,7 +160,7 @@ ALTER TABLE `admin`
 -- AUTO_INCREMENT for table `feedback`
 --
 ALTER TABLE `feedback`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- AUTO_INCREMENT for table `users`

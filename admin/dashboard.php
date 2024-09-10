@@ -58,7 +58,7 @@ if ($result->num_rows > 0) {
 </head>
 
 <body>
-  <main>
+  <main class="admin-main">
     <!-- nav header -->
     <?php include("includes/nav.php"); ?>
 
