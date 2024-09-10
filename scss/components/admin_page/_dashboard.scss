@@ -1,4 +1,9 @@
-@use "../../abstracts" as *;
+@use '../../abstracts' as *;
+
+main.admin-main {
+  width: min(100% - 2rem, 90rem);
+  margin-inline:auto;
+}
 
 .admin-cards {
   @include display-flex($dir: column, $gap: 1rem);
@@ -176,26 +181,31 @@
               }
 
               .action_button__container {
-                @include display-flex($x: space-between, $gap: 0.5rem);
+                width: 100%;
+                @include display-flex($gap: 0.5rem);
 
-                .button {
+                form {
                   width: 100%;
-                  padding: 0.2rem;
-                  color: var(--ntrl-clr-100);
-                  border-radius: 2px;
-                  overflow: hidden;
-                  cursor: pointer;
 
-                  &.accept {
-                    background-color: var(--pr-clr-300);
-                  }
+                  .button {
+                    width: 100%;
+                    padding: 0.2rem;
+                    color: var(--ntrl-clr-100);
+                    border-radius: 2px;
+                    overflow: hidden;
+                    cursor: pointer;
 
-                  &.cancel {
-                    background-color: var(--pr-clr-100);
-                  }
+                    &.accept {
+                      background-color: var(--pr-clr-300);
+                    }
 
-                  &:hover {
-                    opacity: 0.8;
+                    &.cancel {
+                      background-color: var(--pr-clr-100);
+                    }
+
+                    &:hover {
+                      opacity: 0.8;
+                    }
                   }
                 }
               }
@@ -378,6 +388,7 @@
               // }
 
               &.action_button__container {
+                width: 100%;
                 @include display-flex($gap: 1rem, $x: flex-start);
 
                 .button {

@@ -1,5 +1,5 @@
 @use '../../abstracts' as *;
-body {
+body.user-homepage {
   @include flex();
   width: 100%;
   min-height: 100vh;
