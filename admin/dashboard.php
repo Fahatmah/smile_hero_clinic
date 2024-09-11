@@ -9,6 +9,15 @@ if(!isset($_SESSION['adminEmail'])) {
   exit();
 }
 
+$query = "SELECT * FROM doctors LIMIT 5";
+$result = $conn->query($query);
+$doctors = [];
+if ($result->num_rows > 0) {
+  while ($row = $result->fetch_assoc()) {
+    $doctors[] = $row;
+  }
+}
+
 $query  = "SELECT * FROM appointments WHERE status = 'request'";
 $result = $conn->query($query);
 $users = [];
@@ -120,23 +129,23 @@ if ($result->num_rows > 0) {
               <?php 
               $count = 0;
               foreach ($users as $user){
-                if($count >= 3 ) break;
+                if ($count >= 3) break;
                 ?>
               <tr>
                 <td>
                   <img src="../assets/admin_images/default_image.svg" class="img"
                     style="border-radius: 4rem; width: 2rem; height: 2rem" />
                 </td>
-                <td><?php echo $user['name'];?></td>
+                <td><?php echo $user['name']; ?></td>
                 <td><?php echo $user['date']; ?></td>
                 <td><?php echo $user['status']; ?></td>
               </tr>
               <?php $count++; } ?>
             </tbody>
           </table>
-          <?php if($result->num_rows == 0) { ?>
+          <?php if (empty($users)) { ?>
             <p>No appointment requests</p>
-            <?php } ?>
+          <?php } ?>
 
           <!-- see all button -->
           <a href="../admin/appointments.php" class="see_all__button">See all</a>
@@ -146,26 +155,13 @@ if ($result->num_rows > 0) {
         <div class="doctors__container">
           <h5>Doctors</h5>
           <ul>
+            <!-- Loop through doctors to populate the list -->
+            <?php foreach ($doctors as $doctor) { ?>
             <li>
-              <img src="../assets/admin_images/doctors/d1.jpg" alt="" />
-              <p>Dr. Michael Smith</p>
+              <img src="../assets/images/default_profile_image.png" alt="" />
+              <p><?php echo "Dr. " . $doctor['first_name'] . " " . $doctor['last_name']; ?></p>
             </li>
-            <li>
-              <img src="../assets/admin_images/doctors/d2.jpg" alt="" />
-              <p>Dr. Emily Johnson</p>
-            </li>
-            <li>
-              <img src="../assets/admin_images/doctors/d3.jpg" alt="" />
-              <p>Dr. David Brown</p>
-            </li>
-            <li>
-              <img src="../assets/admin_images/doctors/d4.jpg" alt="" />
-              <p>Dr. Sarah Davis</p>
-            </li>
-            <li>
-              <img src="../assets/admin_images/doctors/d5.jpg" alt="" />
-              <p>Dr. James Wilson</p>
-            </li>
+            <?php } ?>
           </ul>
         </div>
       </div>
