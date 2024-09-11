@@ -2,8 +2,8 @@
 -- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
--- Host: 127.0.0.1
--- Generation Time: Sep 06, 2024 at 02:49 PM
+-- Host: localhost
+-- Generation Time: Sep 11, 2024 at 03:29 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -66,7 +66,35 @@ CREATE TABLE `appointments` (
 
 INSERT INTO `appointments` (`user_id`, `appointment_id`, `name`, `email`, `contact`, `message`, `date`, `time`, `location`, `status`, `created_at`) VALUES
 ('SHC5d4aTCU', 'SHC5f4c', 'jp', 'jpvillaruel02@gmail.com', '9070050140', '', 'Monday, 08/12/2024', '5:00 PM', 'Central Avenue, Quezon City', 'accepted', '2024-08-08 19:09:35'),
-('SHCc601TCU', 'SHC9d60', 'Fahatmah Mabang', 'fahatmahmabang9@gmail.com', '9265369733', '', 'Tuesday, 09/17/2024', '11:00 AM', 'Bayani Road, Taguig City', 'canceled', '2024-09-10 22:00:12');
+('SHCc601TCU', 'SHCbf45', 'Fahatmah Mabang', 'fahatmahmabang9@gmail.com', '9265369733', '', 'Thursday, 09/19/2024', '12:00 PM', 'Bayani Road, Taguig City', 'request', '2024-09-11 09:24:17');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `doctors`
+--
+
+CREATE TABLE `doctors` (
+  `doctor_id` int(11) NOT NULL,
+  `first_name` varchar(50) NOT NULL,
+  `last_name` varchar(50) NOT NULL,
+  `phone_number` varchar(15) DEFAULT NULL,
+  `email` varchar(100) DEFAULT NULL,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `doctors`
+--
+
+INSERT INTO `doctors` (`doctor_id`, `first_name`, `last_name`, `phone_number`, `email`, `created_at`) VALUES
+(1, 'Michael', 'Smith', '91234567890', 'michael.smith@dentalclinic.com', '2024-09-11 00:33:15'),
+(2, 'Emily', 'Johnson', '92345678901', 'emily.johnson@dentalclinic.com', '2024-09-11 00:33:15'),
+(3, 'David', 'Brown', '93456789012', 'david.brown@dentalclinic.com', '2024-09-11 00:33:15'),
+(4, 'Sarah', 'Davis', '94567890123', 'sarah.davis@dentalclinic.com', '2024-09-11 00:33:15'),
+(5, 'James', 'Wilson', '95678901234', 'james.wilson@dentalclinic.com', '2024-09-11 00:33:15'),
+(6, 'Anna', 'White', '91234567891', 'annawhite@dentalclinic.com', '2024-09-11 01:04:34'),
+(7, 'Mark', 'Taylor', '91234567892', 'marktaylor@dentalclinic.com', '2024-09-11 01:04:34');
 
 -- --------------------------------------------------------
 
@@ -134,6 +162,12 @@ ALTER TABLE `appointments`
   ADD UNIQUE KEY `appointment_id` (`appointment_id`);
 
 --
+-- Indexes for table `doctors`
+--
+ALTER TABLE `doctors`
+  ADD PRIMARY KEY (`doctor_id`);
+
+--
 -- Indexes for table `feedback`
 --
 ALTER TABLE `feedback`
@@ -155,6 +189,12 @@ ALTER TABLE `users`
 --
 ALTER TABLE `admin`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT for table `doctors`
+--
+ALTER TABLE `doctors`
+  MODIFY `doctor_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT for table `feedback`
