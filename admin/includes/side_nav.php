@@ -42,6 +42,14 @@
           alt="" style="width: 1.375rem; height: 1.375rem" />Reviews</a>
     </li>
 
+    <!-- doctors -->
+    <li <?php echo ($current_page == 'doctors.php') ? 'class="active__link"' : ''; ?>>
+      <a href="../admin/doctors.php">
+        <img
+          src="../assets/admin_images/doctors/<?php echo ($current_page == 'doctors.php') ? 'doctors-blue.png' : 'doctors-black.png'; ?>"
+          alt="" style="width: 1.375rem; height: 1.375rem" />Doctors</a>
+    </li>
+
     <!-- logout button -->
     <li id="logout_button">
       <a href="../includes/logout.php" class="logout__button">Logout</a>
