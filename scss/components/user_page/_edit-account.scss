@@ -1,0 +1,78 @@
+@use '../../abstracts' as *;
+
+.edit-profile {
+  width: 100%;
+
+  &__form {
+    width: 100%;
+    @include display-flex($gap: 0.5rem, $dir: column);
+    & > * {
+      width: 100%;
+      padding: 1.5rem;
+      border-radius: 0.5rem;
+      background-color: var(--ntrl-clr-100);
+    }
+
+    .edit-profile__header {
+      @include display-flex($x: space-between);
+
+      .edit-profile__title {
+        font-size: 1.5rem;
+        font-weight: bold;
+        color: var(--ntrl-clr-300);
+        text-transform: uppercase;
+      }
+
+      .edit-profile__actions {
+        @include display-flex($gap: 0.5rem);
+
+        & > * {
+          @include display-flex;
+          font-size: 0.875rem;
+          color: var(--ntrl-clr-100);
+          padding: 0.875rem 1rem;
+          border-radius: 4px;
+          cursor: pointer;
+          a {
+            color: var(--ntrl-clr-100);
+          }
+        }
+
+        .edit-profile__save-btn {
+          background-color: var(--pr-clr-300);
+        }
+
+        .edit-profile__cancel-btn {
+          background-color: var(--pr-clr-100);
+        }
+      }
+    }
+
+    .edit-profile__details {
+      @include display-flex($gap: 1.125rem, $dir: column);
+      & > * {
+        width: 100%;
+      }
+
+      .edit-profile__item {
+        width: 100%;
+        @include display-flex($gap: 0.75rem, $dir: column, $y: flex-start);
+        color: var(--ntrl-clr-300);
+
+        .edit-profile__label {
+          font-size: 1.125rem;
+          font-weight: bold;
+        }
+
+        .edit-profile__input {
+          width: 100%;
+          font-size: 0.875rem;
+          color: var(--ntrl-clr-300);
+          padding: 1rem;
+          border-radius: 0.5rem;
+          border: 1px solid hsl(0, 0%, 38%, 0.2);
+        }
+      }
+    }
+  }
+}

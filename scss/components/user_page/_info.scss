@@ -1,140 +1,93 @@
 @use '../../abstracts' as *;
 
-.profile__info {
-  width: 767px;
-  @include display-flex($dir: column, $gap: 2rem, $y: flex-start);
+.user-profile {
+  width: 100%;
+  @include display-flex(
+    $gap: 0.5rem,
+    $dir: column,
+    $x: flex-start,
+    $y: flex-start
+  );
 
-  .info__header {
+  & > * {
     width: 100%;
+    padding: 1.5rem;
+    border-radius: 0.5rem;
+    background-color: var(--ntrl-clr-100);
+  }
+
+  &__header {
     @include display-flex($x: space-between);
+  }
 
-    .details__container {
-      @include display-flex($x: space-between, $gap: 1rem);
+  &__info {
+    @include display-flex($dir: column, $gap: 0.2rem, $y: flex-start);
 
-      .user__details {
-        .user__name {
-          font-size: var(--fs-400);
-          color: var(--pr-clr-300);
-          font-weight: 800;
-        }
-
-        .user__address {
-          color: var(--ntrl-clr-350);
-          font-size: var(--fs-200);
-        }
-      }
+    .user-profile__name {
+      font-size: 1.5rem;
+      font-weight: bold;
+      color: var(--ntrl-clr-300);
+      text-transform: uppercase;
     }
 
-    .button_container {
-      @include display-flex($x: space-between, $gap: 1rem);
-      width: 24rem;
-
-      .button {
-        width: 100%;
-        border-radius: 6px;
-        padding: 1rem;
-        color: var(--ntrl-clr-100);
-        cursor: pointer;
-        transition: 200ms ease-in-out;
-
-        &:hover {
-          font-weight: bold;
-        }
-
-        &.edit {
-          background-color: var(--pr-clr-300);
-
-          &:hover {
-            box-shadow: 3px 3px 0px #1d72f269;
-          }
-        }
-
-        &.delete {
-          background-color: var(--pr-clr-100);
-
-          &:hover {
-            box-shadow: 3px 3px 0px #e846317d;
-          }
-        }
-
-        // does not work and i dont know
-        &:active {
-          background-color: var(--pr-clr-100);
-          transform: scale(0.97);
-        }
-      }
+    .user-profile__address {
+      font-size: 0.875rem;
+      color: var(--ntrl-clr-300);
     }
   }
 
-  // more details container
+  &__actions {
+    @include display-flex($gap: 0.5rem);
 
-  .additional_details__container {
-    width: 100%;
-    @include display-flex($dir: column, $y: flex-start);
-    // padding: 1rem;
-    border: 1px solid var(--pr-clr-300);
-    border-radius: 6px;
-
-    .item {
-      width: 100%;
-      height: 80px;
-      @include display-flex($x: space-between);
-      // padding: 1rem;
+    & > * {
+      @include display-flex;
+      font-size: 0.875rem;
+      color: var(--ntrl-clr-100);
+      border-radius: 4px;
       cursor: pointer;
-      transition: 200ms ease-in-out;
-      overflow: hidden;
-
-      &:not(:last-child) {
-        border-bottom: 1px solid var(--pr-clr-400);
-      }
-
-      &:hover {
-        border: 1px solid var(--pr-clr-300);
-        border-radius: 8px;
-        background-color: var(--ntrl-clr-100);
-        transform: scale(1.08);
-        box-shadow: 0 0 60px #1d72f22a;
-      }
-
-      .details {
-        width: 100%;
-        @include display-flex($dir: column, $y: flex-start, $gap: 0.3rem);
-        padding: 1rem;
-
-        &:hover .detail_content {
-          color: var(--ntrl-clr-350);
-        }
-
-        .detail__header {
-          font-size: var(--fs-300);
-          color: var(--pr-clr-300);
-          font-weight: 600;
-        }
-
-        .detail_content {
-          color: var(--ntrl-clr-300);
-        }
+      a {
+        color: var(--ntrl-clr-100);
+        padding: 0.875rem 1rem;
       }
     }
 
-    .edit__button {
-      width: 100px;
-      height: 100%;
-      color: var(--pr-clr-300);
-      border-left: 1px solid var(--pr-clr-400);
-      cursor: pointer;
+    #edit-btn {
+      background-color: var(--pr-clr-300);
+    }
 
-      &:hover {
-        background-color: #1d72f22a;
+    #delete-btn {
+      padding: 0.875rem 1rem;
+      background-color: var(--pr-clr-100);
+    }
+  }
+
+  &__details {
+    & > * {
+      width: 100%;
+    }
+
+    .user-profile__detail-item {
+      width: 100%;
+      @include display-flex($gap: 0.75rem, $dir: column, $y: flex-start);
+      color: var(--ntrl-clr-300);
+
+      &:not(:first-child) {
+        padding-block-start: 1.125rem;
+      }
+
+      &:not(:last-child) {
+        padding-block-end: 1.125rem;
+        border-bottom: 1px solid hsl(0, 0%, 38%, 0.2);
+      }
+
+      .user-profile__detail-label {
+        font-size: 1.125rem;
         font-weight: bold;
       }
 
-      &:focus {
-        background-color: var(--pr-clr-300);
-        color: var(--ntrl-clr-100);
+      .user-profile__detail-value {
+        font-size: 0.875rem;
       }
-
-      // outline: var(--debug);
     }
   }
 }

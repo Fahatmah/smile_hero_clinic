@@ -37,13 +37,14 @@ if(!isset($_SESSION['user_id'])) {
   <link rel="stylesheet" href="../src/dist/styles.css" />
 </head>
 
-<body>
-  <main>
+<body class="user__page">
+  <main class="user__main">
     <!-- navigation header bar -->
     <?php include('includes/nav.php'); ?>
 
-    <!-- navigation side nav -->
-    <?php include('includes/sidenav.php'); ?>
+    <section class="user-contents">
+      <!-- navigation side nav -->
+      <?php include('includes/sidenav.php'); ?>
 
     <!-- appointment page -->
     <section class="appointment__page account__container">
@@ -74,36 +75,36 @@ if(!isset($_SESSION['user_id'])) {
             <h3>Remove</h3>
           </div>
 
-          <div class="appointments">
-            <div class="item">
-              <!-- header -->
-             
-              <div class="item_header">
-                <p class="appoinment_date" id="appointmentDate">Appointment ID: <?php echo $row["appointment_id"]; ?>
-                </p>
-                <button class="remove__button" id="deleteAccountBtn">
-                  Cancel
-                </button>
-              </div>
-
-              <!--------- Modal --------->
-              <div class="modal_container delete-account">
-                <div class="delete-account">
-                  <div class="header" style="background-color: white;">
-                    <h3>Are you sure you want to cancel your Appointment?</h3>
-                    <p>*This action cannot be undone and all appointment details will be lost.*
-                    </p>
-                  </div>
-                  <div class="button_container">
-                  <button type="submit" id="deleteAccountButton"> 
-                    <form action="" method="get">
-                      <input type="submit" name="submit" value=" Yes, cancel appointment" style="color: white; cursor: pointer;">
-                    </form>
+            <div class="appointments">
+              <div class="item">
+                <!-- header -->
+              
+                <div class="item_header">
+                  <p class="appoinment_date" id="appointmentDate">Appointment ID: <?php echo $row["appointment_id"]; ?>
+                  </p>
+                  <button class="remove__button" id="deleteAccountBtn">
+                    Cancel
                   </button>
-                    <button id="exitButton">No, keep my appointment</button>
+                </div>
+
+                <!--------- Modal --------->
+                <div class="modal_container cancel-appointment">
+                  <div class="delete-account">
+                    <div class="header" style="background-color: white;">
+                      <h3>Are you sure you want to cancel your Appointment?</h3>
+                      <p>*This action cannot be undone and all appointment details will be lost.*
+                      </p>
+                    </div>
+                    <div class="button_container">
+                    <button type="submit" id="deleteAccountButton"> 
+                      <form action="" method="get">
+                        <input type="submit" name="submit" value=" Yes, cancel appointment" style="color: white; cursor: pointer;">
+                      </form>
+                    </button>
+                      <button id="exitButton">No, keep my appointment</button>
+                    </div>
                   </div>
                 </div>
-              </div>
 
               <!-- Cancel Appointment -->
               <?php 
@@ -115,71 +116,65 @@ if(!isset($_SESSION['user_id'])) {
                 $stmt->bind_param("s", $appointment_id);
                 $stmt->execute();
 
-                echo "<script> alert('Appointment is now canceled'); </script>";
-                echo "<script>window.location.href='appointment_page.php';</script>";
-               }
-              ?>
+                  echo "<script> alert('Appointment is now canceled'); </script>";
+                  echo "<script>window.location.href='appointment_page.php';</script>";
+                }
+                ?>
 
-              <!-- appointment container -->
-              <div class="appointment">
-                <!-- appointment header -->
-                <div class="appointment_header">
-                  <p>Personal Details</p>
-                  <p>Preferences</p>
-                </div>
-                <div class="appointment_details">
-                  <div class="details__container">
-                    <div class="details">
-                      <!-- name -->
-                      <div class="detail">
-                        <p class="detail_header">Name</p>
-                        <p class="detail_content" id="appName"><?php echo $row["name"]; ?></p>
-                      </div>
-
-                      <!-- date -->
-                      <div class="detail">
-                        <p class="detail_header">Date</p>
-                        <p class="detail_content" id="appDate"><?php echo $row["date"]; ?></p>
-                      </div>
-
-                      <!-- email -->
-                      <div class="detail">
-                        <p class="detail_header">Email</p>
-                        <p class="detail_content" id="appEmail"><?php echo $row["email"]; ?></p>
-                      </div>
-
-                      <!-- time -->
-                      <div class="detail">
-                        <p class="detail_header">Time</p>
-                        <p class="detail_content" id="appTime"><?php echo $row["time"]; ?></p>
-                      </div>
-
-                      <!-- contact number -->
-                      <div class="detail">
-                        <p class="detail_header">Contact Number</p>
-                        <p class="detail_content" id="appContact"><?php echo $row["contact"]; ?></p>
-                      </div>
-
-                      <!-- location -->
-                      <div class="detail">
-                        <p class="detail_header">Location</p>
-                        <p class="detail_content" id="appLoc"><?php echo $row["location"]; ?></p>
-                      </div>
-
-                      <!-- message/requests -->
-                      <div class="detail">
-                        <p class="detail_header">Message</p>
-                        <p class="detail_content" id="appMessage"><?php echo $row["message"]; ?></p>
+                <!-- appointment container -->
+                <div class="appointment">
+                  <!-- appointment header -->
+                  <div class="appointment_header">
+                    
+                  </div>
+                  <div class="appointment_details">
+                    <div class="details__container">
+                      <div class="details">
+                        <!-- name -->
+                        <div class="detail">
+                          <p class="detail_header">Name</p>
+                          <p class="detail_content" id="appName"><?php echo $row["name"]; ?></p>
+                        </div>
+                        <!-- date -->
+                        <div class="detail">
+                          <p class="detail_header">Date</p>
+                          <p class="detail_content" id="appDate"><?php echo $row["date"]; ?></p>
+                        </div>
+                        <!-- email -->
+                        <div class="detail">
+                          <p class="detail_header">Email</p>
+                          <p class="detail_content" id="appEmail"><?php echo $row["email"]; ?></p>
+                        </div>
+                        <!-- time -->
+                        <div class="detail">
+                          <p class="detail_header">Time</p>
+                          <p class="detail_content" id="appTime"><?php echo $row["time"]; ?></p>
+                        </div>
+                        <!-- contact number -->
+                        <div class="detail">
+                          <p class="detail_header">Contact Number</p>
+                          <p class="detail_content" id="appContact"><?php echo $row["contact"]; ?></p>
+                        </div>
+                        <!-- location -->
+                        <div class="detail">
+                          <p class="detail_header">Location</p>
+                          <p class="detail_content" id="appLoc"><?php echo $row["location"]; ?></p>
+                        </div>
+                        <!-- message/requests -->
+                        <div class="detail">
+                          <p class="detail_header">Message</p>
+                          <p class="detail_content" id="appMessage"><?php echo $row["message"]; ?></p>
+                        </div>
                       </div>
                     </div>
                   </div>
                 </div>
+                <?php } else {
+                  echo "<p> No Appointments Found. </p>";
+                } 
+                
+                $conn->close()?>
               </div>
-              <?php } else {
-                echo "<p> No Appointments Found. </p>";
-              } 
-              
-              $conn->close()?>
             </div>
           </div>
         </div>

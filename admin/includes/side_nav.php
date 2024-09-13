@@ -1,6 +1,6 @@
 <?php $current_page = basename($_SERVER['PHP_SELF']); ?>
 
-<nav class="side__nav admin-sidenav">
+<aside class="aside__sidebar admin-sidenav">
   <ul>
     <!-- dashboard -->
     <li <?php echo ($current_page == 'dashboard.php') ? 'class="active__link"' : ''; ?>>
@@ -55,4 +55,4 @@
       <a href="../includes/logout.php" class="logout__button">Logout</a>
     </li>
   </ul>
-</nav>
+</aside>

@@ -39,10 +39,40 @@ body {
   background-color: var(--ntrl-clr-250);
   position: relative;
 
+  &.user__page {
+    background-color: var(--ntrl-clr-200);
+    background-image: url('../../assets/wave-haikei.svg');
+    background-size: 100%;
+    background-repeat: no-repeat;
+    background-position: bottom;
+  }
+
   main {
-    // position: relative;
-    width: 100%;
-    // min-height: 100vh;
+    &.user__main {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      gap: 0.5rem;
+      width: min(100% - 2rem, 63.75rem);
+      margin-inline: auto;
+
+      & > * {
+        width: 100%;
+      }
+
+      .user-contents {
+        display: flex;
+        align-items: flex-start;
+        justify-content: center;
+        gap: 0.5rem;
+        margin-block-end: 1rem;
+
+        & > * {
+          width: 100%;
+        }
+      }
+    }
 
     &.landing__page,
     &.login__page,
@@ -50,47 +80,6 @@ body {
       background: url(../../assets/images/mesh_bg.png);
       background-size: 100%;
       background-repeat: no-repeat;
-    }
-
-    .account__container {
-      width: 78.3125%;
-      display: flex;
-      align-items: flex-start;
-      justify-content: flex-start;
-      padding-block-start: 1rem;
-      position: relative;
-      left: calc(15.625rem + 1rem);
-      // box-shadow: ;
-      // z-index: 1;
-
-      .account {
-        width: 100%;
-        background-color: var(--ntrl-clr-100);
-        padding: 1rem;
-        display: flex;
-        align-items: flex-start;
-        justify-content: flex-start;
-        flex-direction: column;
-        gap: 2rem;
-        border-radius: 8px;
-        // border: 1px solid var(--pr-clr-350);
-        box-shadow: 0 0 60px #1d72f22a;
-
-        h1 {
-          font-weight: 800;
-          font-size: var(--fs-400);
-          color: var(--pr-clr-300);
-        }
-      }
-    }
-
-    .form_container {
-      .header {
-        align-self: center;
-        font-size: var(--fs-400);
-        color: var(--pr-clr-300);
-        font-weight: 800;
-      }
     }
   }
 }

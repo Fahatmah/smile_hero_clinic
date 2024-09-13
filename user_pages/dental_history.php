@@ -44,13 +44,14 @@ $user_id = $_SESSION['user_id'];
   <link rel="stylesheet" href="../src/dist/styles.css" />
 </head>
 
-<body>
-  <main>
+<body class="user__page">
+  <main class="user__main">
     <!-- navigation header bar -->
     <?php include('includes/nav.php'); ?>
 
-    <!-- navigation side nav -->
-    <?php include('includes/sidenav.php'); ?>
+    <section class="user-contents">
+      <!-- navigation side nav -->
+      <?php include('includes/sidenav.php'); ?>
 
     <!--  -->
     <section class="dental_history__page account__container">

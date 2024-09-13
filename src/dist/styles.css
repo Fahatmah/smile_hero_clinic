@@ -116,7 +116,33 @@ body {
   background-color: var(--ntrl-clr-250);
   position: relative;
 }
-body main {
+body.user__page {
+  background-color: var(--ntrl-clr-200);
+  background-image: url("../../assets/wave-haikei.svg");
+  background-size: 100%;
+  background-repeat: no-repeat;
+  background-position: bottom;
+}
+body main.user__main {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 0.5rem;
+  width: min(100% - 2rem, 63.75rem);
+  margin-inline: auto;
+}
+body main.user__main > * {
+  width: 100%;
+}
+body main.user__main .user-contents {
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  gap: 0.5rem;
+  margin-block-end: 1rem;
+}
+body main.user__main .user-contents > * {
   width: 100%;
 }
 body main.landing__page, body main.login__page, body main.signup__page {
@@ -124,63 +150,45 @@ body main.landing__page, body main.login__page, body main.signup__page {
   background-size: 100%;
   background-repeat: no-repeat;
 }
-body main .account__container {
-  width: 78.3125%;
-  display: flex;
-  align-items: flex-start;
-  justify-content: flex-start;
-  padding-block-start: 1rem;
-  position: relative;
-  left: 16.625rem;
-}
-body main .account__container .account {
-  width: 100%;
-  background-color: var(--ntrl-clr-100);
-  padding: 1rem;
-  display: flex;
-  align-items: flex-start;
-  justify-content: flex-start;
-  flex-direction: column;
-  gap: 2rem;
-  border-radius: 8px;
-  box-shadow: 0 0 60px rgba(29, 114, 242, 0.1647058824);
-}
-body main .account__container .account h1 {
-  font-weight: 800;
-  font-size: var(--fs-400);
-  color: var(--pr-clr-300);
-}
-body main .form_container .header {
-  align-self: center;
-  font-size: var(--fs-400);
-  color: var(--pr-clr-300);
-  font-weight: 800;
-}
 
-.account__header {
-  position: sticky;
-  top: 0;
-  width: 100%;
+.account__header.user-header {
   display: flex;
   align-items: center;
   justify-content: space-between;
   flex-direction: row;
   gap: 0;
-  padding: 1rem;
+  padding: 1.125rem;
+  border-radius: 0.5rem;
   background-color: var(--ntrl-clr-100);
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1058823529);
+  margin-top: 1rem;
 }
-.account__header .logo {
-  width: 1.5rem;
-  height: 1.5rem;
+.account__header.user-header .header__content {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: row;
+  gap: 1rem;
+  font-size: 0.875rem;
 }
-.account__header .account__profile_image {
-  width: 1.5rem;
-  height: 1.5rem;
+.account__header.user-header .header__content > * {
+  color: var(--ntrl-clr-300);
 }
-.account__header .account__profile_image img {
-  width: 100%;
-  height: 100%;
+.account__header.user-header .header__content .header__button.button--appointment a {
+  color: var(--ntrl-clr-300);
+  padding: 0.75rem 1rem;
+  border-radius: 4px;
+  border: 1px solid hsla(0, 0%, 38%, 0.5);
+  cursor: pointer;
+}
+.account__header.user-header .header__content .header__button.button--appointment a:hover {
+  background-color: var(--ntrl-clr-300);
+  color: var(--ntrl-clr-100);
+}
+.account__header.user-header .header__content .header__button.button--appointment:active {
+  background-color: var(--ntrl-clr-100);
+}
+.account__header.user-header .header__content .header__button.button--appointment:active a {
+  color: var(--ntrl-clr-300);
 }
 
 .nav {
@@ -867,203 +875,171 @@ body main .form_container .header {
   text-decoration: underline;
 }
 
-.side__nav {
-  position: fixed;
-  width: 250px;
+.aside__sidebar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 1rem;
+  width: 100%;
   height: 100%;
-  background-color: var(--ntrl-clr-400);
+  max-width: 14.625rem;
+  border-radius: 0.5rem;
+  background-color: var(--ntrl-clr-100);
   padding: 1rem;
 }
-.side__nav ul {
+.aside__sidebar ul {
   width: 100%;
   display: flex;
   align-items: flex-start;
   justify-content: center;
   flex-direction: column;
-  gap: 0.8rem;
+  gap: 0.5rem;
 }
-.side__nav ul li {
+.aside__sidebar ul li {
   width: 100%;
   border-radius: 6px;
 }
-.side__nav ul li.active__link {
-  background-color: var(--ntrl-clr-350);
+.aside__sidebar ul li.active__link {
+  background-color: var(--ntrl-clr-250);
 }
-.side__nav ul li.active__link a {
+.aside__sidebar ul li.active__link a {
   font-family: "DM Sans", sans-serif;
-  color: var(--pr-clr-300);
   font-weight: bold;
+  color: var(--pr-clr-300);
 }
-.side__nav ul li a,
-.side__nav ul li .theme__button {
+.aside__sidebar ul li a,
+.aside__sidebar ul li .theme__button {
   display: flex;
   align-items: center;
   justify-content: flex-start;
   flex-direction: row;
   gap: 12px;
-  color: var(--ntrl-clr-100);
-  font-size: calc(var(--fs-100) + 0.1rem);
+  color: var(--ntrl-clr-300);
+  font-size: 0.875rem;
   padding: 1rem;
-}
-.side__nav ul li a:hover,
-.side__nav ul li .theme__button:hover {
-  background-color: var(--ntrl-clr-350);
   border-radius: 6px;
 }
-.side__nav ul li#logout_button {
-  padding: 0;
-  margin-top: 1rem;
-  text-align: center;
+.aside__sidebar ul li a:hover,
+.aside__sidebar ul li .theme__button:hover {
+  background-color: var(--ntrl-clr-250);
 }
-.side__nav ul li#logout_button .logout__button {
-  justify-content: center;
+.aside__sidebar button {
   width: 100%;
-  padding: 1rem;
+}
+.aside__sidebar button .logout__button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: row;
+  gap: 0;
+  width: 100%;
+  padding: 0.875rem 1rem;
   background-color: var(--pr-clr-300);
-  border-radius: 6px;
+  border-radius: 0.375rem;
   font-family: "DM Sans", sans-serif;
+  color: var(--ntrl-clr-100);
   text-align: center;
 }
-.side__nav ul li#logout_button .logout__button:hover {
+.aside__sidebar button .logout__button:hover {
   background-color: var(--pr-clr-350);
 }
-.side__nav ul li#logout_button .logout__button:active {
+.aside__sidebar button .logout__button:active {
   background-color: var(--pr-clr-300);
 }
 
-.profile__info {
-  width: 767px;
-  display: flex;
-  align-items: flex-start;
-  justify-content: center;
-  flex-direction: column;
-  gap: 2rem;
-}
-.profile__info .info__header {
-  width: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  flex-direction: row;
-  gap: 0;
-}
-.profile__info .info__header .details__container {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  flex-direction: row;
-  gap: 1rem;
-}
-.profile__info .info__header .details__container .user__details .user__name {
-  font-size: var(--fs-400);
-  color: var(--pr-clr-300);
-  font-weight: 800;
-}
-.profile__info .info__header .details__container .user__details .user__address {
-  color: var(--ntrl-clr-350);
-  font-size: var(--fs-200);
-}
-.profile__info .info__header .button_container {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  flex-direction: row;
-  gap: 1rem;
-  width: 24rem;
-}
-.profile__info .info__header .button_container .button {
-  width: 100%;
-  border-radius: 6px;
-  padding: 1rem;
-  color: var(--ntrl-clr-100);
-  cursor: pointer;
-  transition: 200ms ease-in-out;
-}
-.profile__info .info__header .button_container .button:hover {
-  font-weight: bold;
-}
-.profile__info .info__header .button_container .button.edit {
-  background-color: var(--pr-clr-300);
-}
-.profile__info .info__header .button_container .button.edit:hover {
-  box-shadow: 3px 3px 0px rgba(29, 114, 242, 0.4117647059);
-}
-.profile__info .info__header .button_container .button.delete {
-  background-color: var(--pr-clr-100);
-}
-.profile__info .info__header .button_container .button.delete:hover {
-  box-shadow: 3px 3px 0px rgba(232, 70, 49, 0.4901960784);
-}
-.profile__info .info__header .button_container .button:active {
-  background-color: var(--pr-clr-100);
-  transform: scale(0.97);
-}
-.profile__info .additional_details__container {
+.user-profile {
   width: 100%;
   display: flex;
   align-items: flex-start;
-  justify-content: center;
+  justify-content: flex-start;
   flex-direction: column;
-  gap: 0;
-  border: 1px solid var(--pr-clr-300);
-  border-radius: 6px;
+  gap: 0.5rem;
 }
-.profile__info .additional_details__container .item {
+.user-profile > * {
   width: 100%;
-  height: 80px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  flex-direction: row;
-  gap: 0;
-  cursor: pointer;
-  transition: 200ms ease-in-out;
-  overflow: hidden;
-}
-.profile__info .additional_details__container .item:not(:last-child) {
-  border-bottom: 1px solid var(--pr-clr-400);
-}
-.profile__info .additional_details__container .item:hover {
-  border: 1px solid var(--pr-clr-300);
-  border-radius: 8px;
+  padding: 1.5rem;
+  border-radius: 0.5rem;
   background-color: var(--ntrl-clr-100);
-  transform: scale(1.08);
-  box-shadow: 0 0 60px rgba(29, 114, 242, 0.1647058824);
 }
-.profile__info .additional_details__container .item .details {
-  width: 100%;
+.user-profile__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-direction: row;
+  gap: 0;
+}
+.user-profile__info {
   display: flex;
   align-items: flex-start;
   justify-content: center;
   flex-direction: column;
-  gap: 0.3rem;
-  padding: 1rem;
+  gap: 0.2rem;
 }
-.profile__info .additional_details__container .item .details:hover .detail_content {
-  color: var(--ntrl-clr-350);
+.user-profile__info .user-profile__name {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: var(--ntrl-clr-300);
+  text-transform: uppercase;
 }
-.profile__info .additional_details__container .item .details .detail__header {
-  font-size: var(--fs-300);
-  color: var(--pr-clr-300);
-  font-weight: 600;
-}
-.profile__info .additional_details__container .item .details .detail_content {
+.user-profile__info .user-profile__address {
+  font-size: 0.875rem;
   color: var(--ntrl-clr-300);
 }
-.profile__info .additional_details__container .edit__button {
-  width: 100px;
-  height: 100%;
-  color: var(--pr-clr-300);
-  border-left: 1px solid var(--pr-clr-400);
+.user-profile__actions {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: row;
+  gap: 0.5rem;
+}
+.user-profile__actions > * {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: row;
+  gap: 0;
+  font-size: 0.875rem;
+  color: var(--ntrl-clr-100);
+  border-radius: 4px;
   cursor: pointer;
 }
-.profile__info .additional_details__container .edit__button:hover {
-  background-color: rgba(29, 114, 242, 0.1647058824);
+.user-profile__actions > * a {
+  color: var(--ntrl-clr-100);
+  padding: 0.875rem 1rem;
+}
+.user-profile__actions #edit-btn {
+  background-color: var(--pr-clr-300);
+}
+.user-profile__actions #delete-btn {
+  padding: 0.875rem 1rem;
+  background-color: var(--pr-clr-100);
+}
+.user-profile__details > * {
+  width: 100%;
+}
+.user-profile__details .user-profile__detail-item {
+  width: 100%;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  flex-direction: column;
+  gap: 0.75rem;
+  color: var(--ntrl-clr-300);
+}
+.user-profile__details .user-profile__detail-item:not(:first-child) {
+  padding-block-start: 1.125rem;
+}
+.user-profile__details .user-profile__detail-item:not(:last-child) {
+  padding-block-end: 1.125rem;
+  border-bottom: 1px solid hsla(0, 0%, 38%, 0.2);
+}
+.user-profile__details .user-profile__detail-item .user-profile__detail-label {
+  font-size: 1.125rem;
   font-weight: bold;
 }
-.profile__info .additional_details__container .edit__button:focus {
-  background-color: var(--pr-clr-300);
-  color: var(--ntrl-clr-100);
+.user-profile__details .user-profile__detail-item .user-profile__detail-value {
+  font-size: 0.875rem;
 }
 
 .appointment__page {
@@ -1332,150 +1308,161 @@ body main .form_container .header {
   border-left: 1px solid var(--pr-clr-300);
 }
 
-.appointment_form__container {
-  width: 70rem;
+.appointment_form {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 0.5rem;
 }
-.appointment_form__container h1,
-.appointment_form__container h2,
-.appointment_form__container h3 {
-  font-size: var(--fs-400);
-  color: var(--pr-clr-300);
-  font-weight: bold;
-}
-.appointment_form__container .form {
+.appointment_form h1,
+.appointment_form form {
   width: 100%;
+}
+.appointment_form h1 {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: var(--ntrl-clr-300);
+  text-transform: uppercase;
+  padding: 1.5rem;
+  border-radius: 0.5rem;
+  background-color: var(--ntrl-clr-100);
+}
+.appointment_form form {
   display: flex;
   align-items: flex-start;
-  justify-content: center;
+  justify-content: flex-start;
   flex-direction: row;
-  gap: 1rem;
+  gap: 0.5rem;
 }
-.appointment_form__container .form .personal__details,
-.appointment_form__container .form .preferences {
+.appointment_form form > * {
   width: 100%;
   display: flex;
   align-items: flex-start;
   justify-content: center;
   flex-direction: column;
-  gap: 2rem;
-  padding: 2rem;
-  border-radius: 6px;
-  border: 1px solid var(--pr-clr-300);
+  gap: 1.5rem;
+  padding: 1.5rem;
+  border-radius: 0.5rem;
+  background-color: var(--ntrl-clr-100);
 }
-.appointment_form__container .form .personal__details .field,
-.appointment_form__container .form .preferences .field {
+.appointment_form form > * .appointment-form__field {
   width: 100%;
   display: flex;
   align-items: flex-start;
+  justify-content: center;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+.appointment_form form > * .appointment-form__field .appointment-form__label {
+  font-size: 0.75rem;
+  font-weight: bold;
+  color: var(--ntrl-clr-300);
+}
+.appointment_form form > * .appointment-form__field input,
+.appointment_form form > * .appointment-form__field .appointment-form__select {
+  width: 100%;
+  font-size: 0.875rem;
+  color: var(--ntrl-clr-300);
+  padding: 0.875rem 1rem;
+  border: 1px solid hsla(0, 0%, 9%, 0.3);
+  border-radius: 0.25rem;
+}
+.appointment_form form > * .appointment-form__field .appointment-form__select {
+  color: var(--ntrl-clr-300);
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  -ms-appearance: none;
+  background: none;
+}
+.appointment_form form > * .appointment-form__field .appointment-form__select option {
+  color: var(--ntrl-clr-300);
+}
+.appointment_form form > * .appointment-form__field .appointment-form__validation {
+  display: flex;
+  align-items: center;
   justify-content: center;
   flex-direction: column;
   gap: 0;
 }
-.appointment_form__container .form .personal__details .field label,
-.appointment_form__container .form .preferences .field label {
-  color: var(--pr-clr-300);
+.appointment_form form > * .appointment-form__field .appointment-form__validation .appointment-form__text {
+  font-size: 0.875rem;
+  display: none;
 }
-.appointment_form__container .form .personal__details .field input,
-.appointment_form__container .form .preferences .field input {
+.appointment_form form > * .appointment-form__field .appointment-form__validation .appointment-form__text--error {
+  color: var(--pr-clr-100);
+}
+.appointment_form form > * .appointment-form__field .appointment-form__validation .appointment-form__text--valid {
+  color: var(--pr-clr-250);
+}
+.appointment_form form > * .appointment-form__submit-button {
   width: 100%;
-  padding: 1rem 1rem 0.5rem 0;
-  border-bottom: 1px solid var(--pr-clr-400);
-  color: var(--pr-clr-300);
-  font-weight: bold;
+  font-size: 0.875rem;
+  color: var(--ntrl-clr-100);
+  padding-block: 0.75rem;
+  border-radius: 0.375rem;
+  background-color: var(--pr-clr-100);
 }
-.appointment_form__container .form .personal__details .field input::-moz-placeholder, .appointment_form__container .form .preferences .field input::-moz-placeholder {
-  color: var(--pr-clr-400);
-  font-weight: normal;
-}
-.appointment_form__container .form .personal__details .field input::placeholder,
-.appointment_form__container .form .preferences .field input::placeholder {
-  color: var(--pr-clr-400);
-  font-weight: normal;
-}
-.appointment_form__container .form .personal__details .field input:hover, .appointment_form__container .form .personal__details .field input:focus,
-.appointment_form__container .form .preferences .field input:hover,
-.appointment_form__container .form .preferences .field input:focus {
-  border-bottom: 1px solid var(--pr-clr-300);
-}
-.appointment_form__container .form .personal__details .field .text_validation,
-.appointment_form__container .form .preferences .field .text_validation {
+.appointment_form form .modal {
   display: flex;
   align-items: center;
   justify-content: center;
   flex-direction: row;
   gap: 0;
+  width: 100%;
+  min-height: 100vh;
+  position: fixed;
+  left: 0;
+  top: 0;
+  background-color: hsla(0, 0%, 38%, 0.3);
+  -webkit-backdrop-filter: blur(3px);
+          backdrop-filter: blur(3px);
 }
-.appointment_form__container .form .personal__details .field .text_validation .text,
-.appointment_form__container .form .preferences .field .text_validation .text {
-  font-size: var(--fs-100);
-}
-.appointment_form__container .form .personal__details .field .text_validation .text.error,
-.appointment_form__container .form .preferences .field .text_validation .text.error {
-  color: var(--pr-clr-100);
-  display: none;
-}
-.appointment_form__container .form .personal__details .field .text_validation .text.valid,
-.appointment_form__container .form .preferences .field .text_validation .text.valid {
-  color: var(--pr-clr-250);
-  display: none;
-}
-.appointment_form__container .form .preferences {
-  border: 0;
+.appointment_form form .modal__content {
   display: flex;
-  align-items: flex-start;
+  align-items: center;
   justify-content: center;
   flex-direction: column;
   gap: 1rem;
-  padding: 0;
+  padding: 1.5rem;
+  border-radius: 0.5rem;
+  background-color: var(--ntrl-clr-100);
 }
-.appointment_form__container .form .preferences .fields {
-  width: 100%;
+.appointment_form form .modal__content > * {
+  font-size: 0.875rem;
+}
+.appointment_form form .modal__content .modal__header {
   display: flex;
-  align-items: space-between;
+  align-items: center;
   justify-content: center;
   flex-direction: column;
-  gap: 1rem;
-  border: 1px solid var(--pr-clr-300);
-  padding: 32px;
-  border-radius: 6px;
+  gap: 0.5rem;
+  padding-inline: 1rem;
 }
-.appointment_form__container .form .preferences .fields .field select {
-  appearance: none; /* Reset default styles */
-  -webkit-appearance: none; /* For older versions of Chrome and Safari */
-  -moz-appearance: none; /* For older versions of Firefox */
-  -ms-appearance: none; /* For older versions of IE */
-  /* Custom styles */
-  border: 0;
-  outline: 0;
-  background: none;
-  width: 100%;
-  padding: 1rem 1rem 0.5rem 0.5rem;
-  border-bottom: 1px solid var(--pr-clr-400);
-  color: var(--pr-clr-300);
-  cursor: pointer;
-}
-.appointment_form__container .form .preferences .fields .field select:focus {
-  border: 1px solid var(--pr-clr-300);
-  border-radius: 6px;
-}
-.appointment_form__container .form .preferences .text__confirmation {
-  font-size: calc(var(--fs-100) + 0.15rem);
-  font-style: italic;
-  color: var(--pr-clr-100);
-}
-.appointment_form__container .form .preferences .create_appointment__button {
-  padding: 1rem;
-  color: var(--ntrl-clr-100);
+.appointment_form form .modal__content .modal__header #modalStatus {
+  font-size: 1.5rem;
   font-weight: bold;
-  background-color: var(--pr-clr-100);
-  border-radius: 6px;
+  color: var(--ntrl-clr-300);
+  text-align: center;
+  line-height: 1;
+}
+.appointment_form form .modal__content .modal__header #modalMessage {
+  color: var(--pr-clr-100);
+}
+.appointment_form form .modal__button {
+  width: 100%;
+  color: var(--ntrl-clr-100);
+  padding-block: 0.875rem;
+  border-radius: 0.5rem;
+  background-color: var(--pr-clr-300);
   cursor: pointer;
 }
-.appointment_form__container .form .preferences .create_appointment__button:hover {
-  background-color: var(--pr-clr-150);
+.appointment_form form .modal__button:hover {
+  background-color: var(--pr-clr-350);
 }
-.appointment_form__container .form .preferences .create_appointment__button:active {
-  background-color: var(--pr-clr-100);
+.appointment_form form .modal__button:active {
+  background-color: var(--pr-clr-300);
 }
 
 .dental_history__page {
@@ -1637,7 +1624,7 @@ body main .form_container .header {
 }
 
 .modal_container {
-  position: absolute;
+  position: fixed;
   top: 0;
   left: 0;
   transform: translate(-50%, -50%);
@@ -1651,15 +1638,18 @@ body main .form_container .header {
   transform: scale(0);
   transition: 200ms ease-in-out;
   cursor: not-allowed;
+  -webkit-backdrop-filter: blur(3px);
+          backdrop-filter: blur(3px);
+  background-color: hsla(0, 0%, 100%, 0.5) !important;
 }
 .modal_container .delete-account {
-  width: min(100% - 0rem, 35rem);
+  width: 25rem;
   display: flex;
   align-items: center;
   justify-content: center;
   flex-direction: column;
   gap: 1rem;
-  padding: 1.5rem;
+  padding: 1rem;
   border-radius: 8px;
   border: 1px solid var(--pr-clr-100);
   background-color: var(--ntrl-clr-100);
@@ -1681,9 +1671,9 @@ body main .form_container .header {
   line-height: 1.15;
 }
 .modal_container .delete-account p {
-  font-size: var(--fs-100);
   color: var(--pr-clr-100);
   font-weight: 500;
+  font-style: italic !important;
 }
 .modal_container .delete-account .button_container {
   width: 100%;
@@ -1694,27 +1684,30 @@ body main .form_container .header {
   gap: 1rem;
 }
 .modal_container .delete-account .button_container button {
-  width: 100%;
-  padding: 1rem;
+  padding: 0.875rem 1rem;
+  font-size: 0.875rem;
   color: var(--ntrl-clr-100);
-  border-radius: 8px;
+  border-radius: 0.5rem;
   transition: 200ms ease-in-out;
   cursor: pointer;
-}
-.modal_container .delete-account .button_container button:hover {
-  font-weight: bold;
 }
 .modal_container .delete-account .button_container button#deleteAccountButton {
   background-color: var(--pr-clr-100);
 }
 .modal_container .delete-account .button_container button#deleteAccountButton:hover {
-  box-shadow: 3px 3px 0px rgba(232, 70, 49, 0.4901960784);
+  background-color: var(--pr-clr-150);
+}
+.modal_container .delete-account .button_container button#deleteAccountButton:active {
+  background-color: var(--pr-clr-100);
 }
 .modal_container .delete-account .button_container button#exitButton {
   background-color: var(--pr-clr-300);
 }
 .modal_container .delete-account .button_container button#exitButton:hover {
-  box-shadow: 3px 3px 0px rgba(29, 114, 242, 0.4117647059);
+  background-color: var(--pr-clr-350);
+}
+.modal_container .delete-account .button_container button#exitButton:active {
+  background-color: var(--pr-clr-300);
 }
 
 body.user-homepage {
@@ -1961,6 +1954,96 @@ body.user-homepage main .about .services .appointment__button {
 }
 body.user-homepage main .about .services .appointment__button:hover {
   background-color: var(--pr-clr-100);
+}
+
+.edit-profile {
+  width: 100%;
+}
+.edit-profile__form {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+.edit-profile__form > * {
+  width: 100%;
+  padding: 1.5rem;
+  border-radius: 0.5rem;
+  background-color: var(--ntrl-clr-100);
+}
+.edit-profile__form .edit-profile__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-direction: row;
+  gap: 0;
+}
+.edit-profile__form .edit-profile__header .edit-profile__title {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: var(--ntrl-clr-300);
+  text-transform: uppercase;
+}
+.edit-profile__form .edit-profile__header .edit-profile__actions {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: row;
+  gap: 0.5rem;
+}
+.edit-profile__form .edit-profile__header .edit-profile__actions > * {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: row;
+  gap: 0;
+  font-size: 0.875rem;
+  color: var(--ntrl-clr-100);
+  padding: 0.875rem 1rem;
+  border-radius: 4px;
+  cursor: pointer;
+}
+.edit-profile__form .edit-profile__header .edit-profile__actions > * a {
+  color: var(--ntrl-clr-100);
+}
+.edit-profile__form .edit-profile__header .edit-profile__actions .edit-profile__save-btn {
+  background-color: var(--pr-clr-300);
+}
+.edit-profile__form .edit-profile__header .edit-profile__actions .edit-profile__cancel-btn {
+  background-color: var(--pr-clr-100);
+}
+.edit-profile__form .edit-profile__details {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 1.125rem;
+}
+.edit-profile__form .edit-profile__details > * {
+  width: 100%;
+}
+.edit-profile__form .edit-profile__details .edit-profile__item {
+  width: 100%;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  flex-direction: column;
+  gap: 0.75rem;
+  color: var(--ntrl-clr-300);
+}
+.edit-profile__form .edit-profile__details .edit-profile__item .edit-profile__label {
+  font-size: 1.125rem;
+  font-weight: bold;
+}
+.edit-profile__form .edit-profile__details .edit-profile__item .edit-profile__input {
+  width: 100%;
+  font-size: 0.875rem;
+  color: var(--ntrl-clr-300);
+  padding: 1rem;
+  border-radius: 0.5rem;
+  border: 1px solid hsla(0, 0%, 38%, 0.2);
 }
 
 .admin-sidenav {

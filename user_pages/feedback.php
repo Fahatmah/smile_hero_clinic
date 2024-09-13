@@ -25,44 +25,46 @@ if(!isset($_SESSION['user_id'])) {
   <link rel="stylesheet" href="../src/dist/styles.css" />
 </head>
 
-<body>
-  <main>
+<body class="user__page">
+  <main class="user__main">
     <!-- navigation header bar -->
     <?php include('includes/nav.php'); ?>
 
-    <!-- navigation side nav -->
-    <?php include('includes/sidenav.php'); ?>
+    <section class="user-contents">
+      <!-- navigation side nav -->
+      <?php include('includes/sidenav.php'); ?>
 
-    <!--  -->
-    <section class="feedback__page account__container">
-      <div class="account">
-        <h1>Feedback</h1>
+      <!--  -->
+      <div class="feedback__page account__container">
+        <div class="account">
+          <h1>Feedback</h1>
 
-        <form action="includes/send_feedback.php" method="post">
-          <input type="text" name="name" placeholder="Name" value="<?php outputFullName() ?>" required/>
-          <input type="text" name="email" placeholder="Email" value="<?php outputEmail() ?>" required/>
-          <div class="radio-container">
-            <h2>Feedback Type</h2>
-            <div class="radios">
-              <div class="radio-label">
-                <input type="radio" id="compliment" name="choices" value="compliment" required/>
-                <label for="compliment">Compliment</label>
-              </div>
-              <div class="radio-label">
-                <input type="radio" id="suggestion" name="choices" value="suggestion" required/>
-                <label for="suggestion">Suggestion</label>
-              </div>
-              <div class="radio-label">
-                <input type="radio" id="complaint" name="choices" value="complaint" required/>
-                <label for="complaint">Complaint</label>
+          <form action="includes/send_feedback.php" method="post">
+            <input type="text" name="name" placeholder="Name" value="<?php outputFullName() ?>" required/>
+            <input type="text" name="email" placeholder="Email" value="<?php outputEmail() ?>" required/>
+            <div class="radio-container">
+              <h2>Feedback Type</h2>
+              <div class="radios">
+                <div class="radio-label">
+                  <input type="radio" id="compliment" name="choices" value="compliment" required/>
+                  <label for="compliment">Compliment</label>
+                </div>
+                <div class="radio-label">
+                  <input type="radio" id="suggestion" name="choices" value="suggestion" required/>
+                  <label for="suggestion">Suggestion</label>
+                </div>
+                <div class="radio-label">
+                  <input type="radio" id="complaint" name="choices" value="complaint" required/>
+                  <label for="complaint">Complaint</label>
+                </div>
               </div>
             </div>
-          </div>
-          <textarea name="feedback" id="feedback" placeholder="Please type your feedback here..."></textarea>
-          <button>
-            <input type="submit" name="submit" value="Submit" style="color: white; cursor: pointer;">
-          </button>
-        </form>
+            <textarea name="feedback" id="feedback" placeholder="Please type your feedback here..."></textarea>
+            <button>
+              <input type="submit" name="submit" value="Submit" style="color: white; cursor: pointer;">
+            </button>
+          </form>
+        </div>
       </div>
     </section>
   </main>

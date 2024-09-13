@@ -1,7 +1,7 @@
 @use '../../abstracts' as *;
 
 .modal_container {
-  position: absolute;
+  position: fixed;
   top: 0;
   left: 0;
   // top: 50%;
@@ -10,16 +10,17 @@
   width: 100%;
   height: 100%;
   // background-color: #2828282a;
-  // backdrop-filter: blur(3px);
   @include display-flex();
   transform: scale(0);
   transition: 200ms ease-in-out;
   cursor: not-allowed;
-  
+  backdrop-filter: blur(3px);
+  background-color: hsl(0, 0%, 100%, 0.5) !important;
+
   .delete-account {
-    width: min(100% - 0rem, 35rem);
+    width: 25rem;
     @include display-flex($dir: column, $gap: 1rem);
-    padding: 1.5rem;
+    padding: 1rem;
     border-radius: 8px;
     border: 1px solid var(--pr-clr-100);
     background-color: var(--ntrl-clr-100);
@@ -39,9 +40,9 @@
     }
 
     p {
-      font-size: var(--fs-100);
       color: var(--pr-clr-100);
       font-weight: 500;
+      font-style: italic !important;
     }
 
     .button_container {
@@ -49,22 +50,22 @@
       @include display-flex($x: space-between, $gap: 1rem);
 
       button {
-        width: 100%;
-        padding: 1rem;
+        padding: 0.875rem 1rem;
+        font-size: 0.875rem;
         color: var(--ntrl-clr-100);
-        border-radius: 8px;
+        border-radius: 0.5rem;
         transition: 200ms ease-in-out;
         cursor: pointer;
-
-        &:hover {
-          font-weight: bold;
-        }
 
         &#deleteAccountButton {
           background-color: var(--pr-clr-100);
 
           &:hover {
-            box-shadow: 3px 3px 0px #e846317d;
+            background-color: var(--pr-clr-150);
+          }
+
+          &:active {
+            background-color: var(--pr-clr-100);
           }
         }
 
@@ -72,7 +73,11 @@
           background-color: var(--pr-clr-300);
 
           &:hover {
-            box-shadow: 3px 3px 0px #1d72f269;
+            background-color: var(--pr-clr-350);
+          }
+
+          &:active {
+            background-color: var(--pr-clr-300);
           }
         }
       }

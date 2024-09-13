@@ -121,31 +121,127 @@ $current_page = basename($_SERVER['PHP_SELF']);
 
 </head>
 
-<body>
-  <main>
-
+<body class="user__page">
+  <main class="user__main">
     <div id="loading-screen" style="display: none;">
       <div class="spinner"></div>
       <p>Loading...</p>
     </div>
 
-
     <!-- navigation header bar -->
-    <nav class="account__header">
-      <img src="../../assets/images/logoipsum.svg" alt="logo" class="logo" />
-      <div class="account__profile_image">
-        <!-- profile image -->
-        <img src="../../assets/images/default_profile_image.png" alt="account image" />
+    <nav class="account__header user-header">
+      <svg class="header__icon" width="44" height="44" viewBox="0 0 44 44" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <rect width="44" height="44" rx="22" fill="#1D72F2" />
+        <g clip-path="url(#clip0_246_1826)">
+          <path fill-rule="evenodd" clip-rule="evenodd" d="M16 10C19.3137 10 22 12.6863 22 16V10H28C31.3137 10 34 12.6863 34 16C34 19.3137 31.3137 22 28 22C31.3137 22 34 24.6863 34 28C34 29.6454 33.3377 31.1361 32.2651 32.22L32.2427 32.2427L32.2227 32.2625C31.1385 33.3366 29.6468 34 28 34C26.3645 34 24.8817 33.3456 23.7994 32.2843C23.7854 32.2705 23.7713 32.2566 23.7573 32.2427C23.7442 32.2295 23.7311 32.2163 23.7181 32.2031C22.6554 31.1205 22 29.6368 22 28C22 31.3137 19.3137 34 16 34C12.6863 34 10 31.3137 10 28V22H16C12.6863 22 10 19.3137 10 16C10 12.6863 12.6863 10 16 10ZM20.8 16C20.8 18.651 18.651 20.8 16 20.8V11.2C18.651 11.2 20.8 13.349 20.8 16ZM32.8 28C32.8 25.349 30.651 23.2 28 23.2C25.349 23.2 23.2 25.349 23.2 28H32.8ZM11.2 23.2V28C11.2 30.651 13.349 32.8 16 32.8C18.651 32.8 20.8 30.651 20.8 28V23.2H11.2ZM23.2 20.8V11.2H28C30.651 11.2 32.8 13.349 32.8 16C32.8 18.651 30.651 20.8 28 20.8H23.2Z" fill="white" />
+        </g>
+        <defs>
+          <clipPath id="clip0_246_1826">
+            <rect width="24" height="24" fill="white" transform="translate(10 10)" />
+          </clipPath>
+        </defs>
+      </svg>
+
+      <div class="header__content">
+        <div class="header__date">
+          Getting date and time...
+        </div>
       </div>
     </nav>
 
-    <!-- profile info -->
-    <section class="edit_profile profile__info account__container">
+    <section class="edit-profile">
+      <!-- Header -->
+      <form method="post" class="edit-profile__form">
+        <div class="edit-profile__header">
+          <h1 class="edit-profile__title">edit your profile details</h1>
+
+          <div class="edit-profile__actions">
+            <input type="submit" value="Save" class="edit-profile__save-btn" />
+            <button class="edit-profile__cancel-btn" id="cancel-btn" type="button">
+              <a href="../profile.php" class="edit-profile__cancel-link">Cancel</a>
+            </button>
+          </div>
+        </div>
+        <!-- End of Header -->
+
+        <div class="edit-profile__details">
+        <?php if($row = $result->fetch_assoc()) { ?>
+          <div class="edit-profile__item">
+            <p class="edit-profile__label">Name</p>
+            <input type="text" name="fullname" value="<?php echo htmlspecialchars($row["fullname"]); ?>"
+              class="edit-profile__input" id="fullName" style="width: 100%;">
+          </div>
+          <div class="edit-profile__item">
+            <p class="edit-profile__label">Contact Number</p>
+            <input type="text" name="contact" value="<?php echo htmlspecialchars($row["contact"]); ?>"
+              class="edit-profile__input" id="contactNumber" style="width: 100%;">
+          </div>
+          <div class="edit-profile__item">
+            <p class="edit-profile__label">Address</p>
+            <input type="text" name="address" value="<?php echo htmlspecialchars($row["address"]); ?>"
+              placeholder="no address" class="edit-profile__input" id="address" style="width: 100%;">
+          </div>
+          <div class="edit-profile__item">
+            <p class="edit-profile__label">Email</p>
+            <input type="text" name="email" value="<?php echo htmlspecialchars($row["email"]); ?>"
+              class="edit-profile__input" id="email" style="width: 100%;">
+          </div>
+          <div class="edit-profile__item">
+            <p class="edit-profile__label">Enter New Password</p>
+            <input type="password" name="password" placeholder="********" class="edit-profile__input">
+          </div>
+        <?php } ?>
+        </div>
+      </form>
+    </section>
+
+  </main>
+  <script>
+    document.querySelector('form').addEventListener('submit', function(event) {
+      event.preventDefault(); // Prevent the form from submitting immediately
+      document.getElementById('loading-screen').style.display = 'flex';
+
+      // Wait for 3 seconds
+      setTimeout(function() {
+        event.target.submit(); // Submit the form after 3 seconds
+      }, 3000);
+    });
+
+    function getCurrentDateTime() {
+      const date = new Date()
+      const daysOfWeek = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"]
+      const months = [
+        "January", "February", "March", "April", "May", "June",
+        "July", "August", "September", "October", "November", "December"
+      ]
+
+      // get current day, month, date and year
+      const dayOfWeek = daysOfWeek[date.getDay()]
+      const month = months[date.getMonth()]
+      const day = date.getDate()
+      const year = date.getFullYear()
+
+      let hours = date.getHours()
+      let minutes = date.getMinutes().toString().padStart(2, '0')
+
+      const period = hours >= 12 ? 'PM':'AM'
+      hours = hours % 12 || 12
+
+      return document.querySelector('.header__date').innerText = `${dayOfWeek} ${hours}:${minutes} ${period} | ${month} ${day}, ${year}`
+    }
+
+    setInterval(getCurrentDateTime, 1000)
+  </script>
+
+</body>
+</html>
+
+<!-- 
+<section class="edit_profile profile__info account__container">
       <?php if($row= $result->fetch_assoc() ) { ?>
       <div class="account">
         <h1>Edit your account information</h1>
         <div class="info__header">
-          <!-- details -->
           <div class="details__container">
             <img src="../../assets/images/default_profile_image.png" alt="profile image"
               style="width: 90px; height: 90px" />
@@ -162,7 +258,6 @@ $current_page = basename($_SERVER['PHP_SELF']);
             </div>
           </div>
           <form action="" method="post">
-            <!-- action buttons -->
             <div class="button_container">
               <input type="submit" value="Save" class="button edit" id="editAccountBtn">
               <a href="../profile.php" style="text-align: center;" class="button delete" id="deleteAccountBtn">
@@ -171,7 +266,6 @@ $current_page = basename($_SERVER['PHP_SELF']);
             </div>
         </div>
 
-        <!-- more details -->
         <div class="additional_details__container">
           <div class="item">
             <div class="details">
@@ -213,19 +307,4 @@ $current_page = basename($_SERVER['PHP_SELF']);
       </form>
       <?php } ?>
     </section>
-  </main>
-  <script>
-  document.querySelector('form').addEventListener('submit', function(event) {
-    event.preventDefault(); // Prevent the form from submitting immediately
-    document.getElementById('loading-screen').style.display = 'flex';
-
-    // Wait for 3 seconds
-    setTimeout(function() {
-      event.target.submit(); // Submit the form after 3 seconds
-    }, 3000);
-  });
-  </script>
-
-</body>
-
-</html>
+-->
