@@ -57,7 +57,7 @@ if ($_SERVER['REQUEST_METHOD'] === "POST" && isset($_POST["cancel"])){
     $appointment_id = $_POST["app_id"];
     $subject = $_POST["subject"];
     $message = $_POST["message"];
-    $status = "canceled";
+    $status = "rejected";
     
     require "../../vendor/autoload.php";
     

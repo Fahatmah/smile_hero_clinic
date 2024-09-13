@@ -27,7 +27,7 @@ if ($result->num_rows > 0) {
   }
 }
 
-$dateNow = date('l, d/m/Y');
+$dateNow = date('l, m/d/Y');
 
 $query  = "SELECT * FROM appointments WHERE date = '$dateNow'";
 $result = $conn->query($query);

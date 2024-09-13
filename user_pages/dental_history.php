@@ -14,11 +14,18 @@ if(!isset($_SESSION['user_id'])) {
 $user_id = $_SESSION['user_id'];
 
   // Fetch appointments for the user
-  $query = "SELECT * FROM appointments WHERE user_id = ? AND status =  'accepted' ";
+  $query = "SELECT * FROM appointments WHERE user_id = ? AND status != 'request' ORDER BY created_at DESC";
   $stmt = $conn->prepare($query);
   $stmt->bind_param("s", $user_id);
   $stmt->execute();
   $result = $stmt->get_result();
+  $users = [];
+  if ($result->num_rows > 0) {
+      while ($row = $result->fetch_assoc()) {
+          $users[] = $row;
+      }
+  }
+  $stmt->close();
 ?>
 
 <!DOCTYPE html>
@@ -51,39 +58,32 @@ $user_id = $_SESSION['user_id'];
         <div class="header">
           <h1>Dental History</h1>
         </div>
-        <?php if ($row = $result->fetch_assoc()) { ?>
-
         <div class="appointment__container">
           <table>
             <thead>
               <tr>
                 <th>Id</th>
-                <th>Date & Time</th>
-                <th>Location</th>
-                <th>Email</th>
-                <th>Contact Number</th>
-                <th>Name</th>
+                <th>Date</th>
+                <th>Time</th>
+                <th>Request Date</th>
+                <th>Status</th>
               </tr>
             </thead>
 
             <tbody>
+            <?php foreach ($users as $user){ ?>
               <tr>
-                <td><?php echo $row["appointment_id"]; ?></td>
-                <td><?php echo $row['date'] ?></td>
-                <td><?php echo $row["location"]; ?></td>
-                <td><?php echo $row["email"]; ?></td>
-                <td><?php echo $row["contact"]; ?></td>
-                <td><?php echo $row["name"]; ?></td>
+                <td><?php echo htmlspecialchars($user['appointment_id']) ?></td>
+                <td><?php echo htmlspecialchars($user['date'])?> </td>
+                <td><?php echo htmlspecialchars($user['time'])?> </td>
+                <td><?php echo htmlspecialchars($user['created_at'])?> </td>
+                <td><?php echo htmlspecialchars($user['status'])?> </td>
               </tr>
+              <?php } ?>
             </tbody>
           </table>
         </div>
-        <?php } else {
-                echo "<p> No Appointments Found. </p>";
-              } 
-              
-              $conn->close()?>
-
+       
       </div>
     </section>
   </main>

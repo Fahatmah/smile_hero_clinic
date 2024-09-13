@@ -12,14 +12,13 @@ if(!isset($_SESSION['user_id'])) {
 }
   $user_id = $_SESSION['user_id'];
 
+
   // Fetch appointments for the user
   $query = "SELECT * FROM appointments WHERE user_id = ? AND status =  'accepted' ";
   $stmt = $conn->prepare($query);
   $stmt->bind_param("s", $user_id);
   $stmt->execute();
   $result = $stmt->get_result();
-  
-
 ?>
 
 <!DOCTYPE html>
@@ -55,7 +54,20 @@ if(!isset($_SESSION['user_id'])) {
             Create New Appointment
           </a>
         </div>
-        <?php if ($row = $result->fetch_assoc()) { ?>
+        <?php if ($row = $result->fetch_assoc()) {  
+          
+          // update the appointment if it is finished
+          $dateNow = date('l, m/d/Y');
+          $appointment_date = $row['date'];
+          $appointment_id = $row['appointment_id'];
+
+            if( $appointment_date < $dateNow){
+              $query = "UPDATE appointments SET status = 'complete' WHERE appointment_id = ?";
+              $stmt = $conn->prepare($query);
+              $stmt->bind_param("s", $appointment_id);
+              $stmt->execute();
+            }
+          ?>
         <div class="appointment__container">
           <div class="header">
             <h2>Appointment Date: <?php echo $row['date'] ?></h2>
@@ -98,7 +110,7 @@ if(!isset($_SESSION['user_id'])) {
               $appointment_id = $row['appointment_id'];
               
               if(isset($_GET["submit"])) {
-                $query = "DELETE FROM appointments WHERE appointment_id = ?";
+                $query = "UPDATE appointments SET status = 'canceled' WHERE appointment_id = ?";
                 $stmt = $conn->prepare($query);
                 $stmt->bind_param("s", $appointment_id);
                 $stmt->execute();
