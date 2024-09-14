@@ -87,7 +87,8 @@ select {
   --pr-clr-100: #e84531;
   --pr-clr-150: #ff6e5c;
   --pr-clr-200: #faaf0d;
-  --pr-clr-250: #24e40f;
+  --pr-clr-250: #DBFFE5;
+  --pr-clr-270: #2bc757;
   --pr-clr-300: #1d72f2;
   --pr-clr-350: #5c9dff;
   --pr-clr-400: #1d72f285;
@@ -1042,270 +1043,144 @@ body main.landing__page, body main.login__page, body main.signup__page {
   font-size: 0.875rem;
 }
 
-.appointment__page {
-  width: 767px;
-  display: flex;
-  align-items: flex-start;
-  justify-content: center;
-  flex-direction: column;
-  gap: 2rem;
-}
-.appointment__page .header {
-  width: 100%;
+.appointment__page .appointments__container .appointment__item {
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  flex-direction: row;
-  gap: 0;
-}
-.appointment__page .header h1 {
-  font-size: var(--fs-400);
-  color: var(--pr-clr-300);
-  font-weight: bold;
-}
-.appointment__page .header .appointment__button {
-  padding: 1rem;
-  background-color: var(--pr-clr-100);
-  color: var(--ntrl-clr-100);
-  font-weight: bold;
-  border-radius: 6px;
-}
-.appointment__page .header .appointment__button:hover {
-  background-color: var(--pr-clr-150);
-}
-.appointment__page .header .appointment__button:active {
-  background-color: var(--pr-clr-100);
-  transform: scale(0.97);
-}
-.appointment__page .appointment__container {
-  width: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-direction: column;
-  gap: 12px;
-}
-.appointment__page .appointment__container .header {
-  width: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  flex-direction: row;
-  gap: 0;
-  padding: 1rem;
-  background-color: var(--pr-clr-300);
-  border-radius: 6px;
-  color: var(--ntrl-clr-100);
-}
-.appointment__page .appointment__container .header h2,
-.appointment__page .appointment__container .header h3 {
-  font-weight: bold;
-}
-.appointment__page .appointment__container .appointments {
-  width: 100%;
-  border: 1px solid var(--pr-clr-350);
-  border-radius: 6px;
-}
-.appointment__page .appointment__container .appointments .item .item_header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  flex-direction: row;
-  gap: 0;
-  padding: 1rem;
-  border-bottom: 1px solid var(--pr-clr-300);
-  cursor: pointer;
-  transition: 200ms ease-in-out;
-  overflow: hidden;
-}
-.appointment__page .appointment__container .appointments .item .item_header:hover {
-  border: 1px solid var(--pr-clr-300);
-  border-radius: 8px;
-  background-color: var(--ntrl-clr-100);
-  transform: scale(1.09);
-  box-shadow: 0 0 60px rgba(29, 114, 242, 0.1647058824);
-}
-.appointment__page .appointment__container .appointments .item .item_header p,
-.appointment__page .appointment__container .appointments .item .item_header button {
-  color: var(--pr-clr-300);
-  font-weight: bold;
-  cursor: pointer;
-}
-.appointment__page .appointment__container .appointments .item .item_header p:hover,
-.appointment__page .appointment__container .appointments .item .item_header button:hover {
-  text-decoration: underline;
-}
-.appointment__page .appointment__container .appointments .item .appointment .appointment_header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  flex-direction: row;
-  gap: 0;
-}
-.appointment__page .appointment__container .appointments .item .appointment .appointment_header > * {
-  width: 100%;
-  padding: 1rem;
-  color: var(--pr-clr-300);
-  font-weight: bold;
-  border-bottom: 1px solid var(--pr-clr-300);
-}
-.appointment__page .appointment__container .appointments .item .appointment .appointment_header p:nth-child(2) {
-  border-left: 1px solid var(--pr-clr-300);
-}
-.appointment__page .appointment__container .appointments .item .appointment .appointment_details .details {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-direction: row;
-  gap: 0;
-  flex-wrap: wrap;
-}
-.appointment__page .appointment__container .appointments .item .appointment .appointment_details .details .detail {
-  flex: 50%;
-  display: flex;
-  align-items: flex-start;
   justify-content: center;
   flex-direction: column;
   gap: 0.5rem;
-  padding: 1rem;
-  cursor: pointer;
-  transition: 200ms ease-in-out;
-  overflow: hidden;
 }
-.appointment__page .appointment__container .appointments .item .appointment .appointment_details .details .detail:not(:last-child) {
-  border-bottom: 1px solid var(--pr-clr-300);
-}
-.appointment__page .appointment__container .appointments .item .appointment .appointment_details .details .detail:hover {
-  border: 1px solid var(--pr-clr-300);
-  border-radius: 8px;
+.appointment__page .appointments__container .appointment__item > * {
+  width: 100%;
+  color: var(--ntrl-clr-300);
+  padding: 1.5rem;
+  border-radius: 0.5rem;
   background-color: var(--ntrl-clr-100);
-  transform: scale(1.09);
-  box-shadow: 0 0 60px rgba(29, 114, 242, 0.1647058824);
 }
-.appointment__page .appointment__container .appointments .item .appointment .appointment_details .details .detail_header {
-  color: var(--pr-clr-300);
-  font-weight: bold;
-}
-.appointment__page .appointment__container .appointments .item .appointment .appointment_details .details .detail_content {
-  color: var(--ntrl-clr-350);
-}
-.appointment__page .appointment__container .appointments .item .appointment .appointment_details .details .detail:nth-child(2),
-.appointment__page .appointment__container .appointments .item .appointment .appointment_details .details .detail:nth-child(4),
-.appointment__page .appointment__container .appointments .item .appointment .appointment_details .details .detail:nth-child(6) {
-  border-left: 1px solid var(--pr-clr-350);
-}
-.appointment__page .appointment__container {
-  width: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-direction: column;
-  gap: 12px;
-}
-.appointment__page .appointment__container .header {
-  width: 100%;
+.appointment__page .appointments__container .appointment__item .header {
   display: flex;
   align-items: center;
   justify-content: space-between;
   flex-direction: row;
   gap: 0;
-  padding: 1rem;
+}
+.appointment__page .appointments__container .appointment__item .header__body-text .appointment-id {
+  font-size: 0.875rem;
+  color: hsla(0, 0%, 38%, 0.7);
+  margin-bottom: 0.5rem;
+}
+.appointment__page .appointments__container .appointment__item .header__body-text .appointment-date {
+  font-size: 1.5rem;
+  font-weight: bold;
+  text-transform: uppercase;
+}
+.appointment__page .appointments__container .appointment__item .header__body-text .appointment-time {
+  color: var(--pr-clr-300);
+}
+.appointment__page .appointments__container .appointment__item .header__cancel-btn {
+  color: var(--ntrl-clr-100);
+  padding: 0.875rem 1rem;
+  border-radius: 0.25rem;
+  background-color: var(--pr-clr-100);
+  cursor: pointer;
+}
+.appointment__page .appointments__container .appointment__item .header__cancel-btn:hover {
+  background-color: var(--pr-clr-150);
+}
+.appointment__page .appointments__container .appointment__item .appointment__details {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 0;
+}
+.appointment__page .appointments__container .appointment__item .appointment__details .detail {
+  width: 100%;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+.appointment__page .appointments__container .appointment__item .appointment__details .detail:not(:first-child) {
+  padding-top: 1.125rem;
+}
+.appointment__page .appointments__container .appointment__item .appointment__details .detail:not(:last-child) {
+  padding-bottom: 1.125rem;
+  border-bottom: 1px solid hsla(0, 0%, 38%, 0.2);
+}
+.appointment__page .appointments__container .appointment__item .appointment__details .detail__header {
+  font-size: 1.125rem;
+  font-weight: bold;
+}
+.appointment__page .appointments__container .appointment__item .appointment__details .detail__content {
+  font-size: 0.875rem;
+}
+.appointment__page .appointments__container .appointment__item .modal.cancel-appointment {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 0.5rem;
+  position: absolute;
+  width: 100%;
+  min-height: 100vh;
+  top: 0;
+  left: 0;
+  background-color: hsla(0, 0%, 100%, 0.3);
+  -webkit-backdrop-filter: blur(3px);
+          backdrop-filter: blur(3px);
+  transition: 100ms ease-in-out;
+}
+.appointment__page .appointments__container .appointment__item .modal.cancel-appointment > * {
+  width: 26rem;
+  font-size: 0.875rem;
+  color: var(--ntrl-clr-300);
+}
+.appointment__page .appointments__container .appointment__item .modal.cancel-appointment .modal__header {
+  text-align: center;
+  padding: 1.5rem;
+  border-radius: 0.5rem;
+  border: 1px solid var(--pr-clr-100);
+  background-color: var(--ntrl-clr-100);
+}
+.appointment__page .appointments__container .appointment__item .modal.cancel-appointment .modal__header h3 {
+  font-size: 1.5rem;
+  font-weight: bold;
+  line-height: 1;
+}
+.appointment__page .appointments__container .appointment__item .modal.cancel-appointment .modal__header p {
+  font-style: italic;
+  color: var(--pr-clr-100);
+  margin-top: 0.8rem;
+}
+.appointment__page .appointments__container .appointment__item .modal.cancel-appointment .modal__buttons {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+.appointment__page .appointments__container .appointment__item .modal.cancel-appointment .modal__buttons > * {
+  width: 100%;
+  color: var(--ntrl-clr-100);
+  text-align: center;
+  border-radius: 0.5rem;
+  cursor: pointer;
+}
+.appointment__page .appointments__container .appointment__item .modal.cancel-appointment .modal__buttons .confirm-cancel {
+  padding: 0.875rem 1rem;
+  background-color: var(--pr-clr-100);
+}
+.appointment__page .appointments__container .appointment__item .modal.cancel-appointment .modal__buttons .confirm-cancel:hover {
+  background-color: var(--pr-clr-150);
+}
+.appointment__page .appointments__container .appointment__item .modal.cancel-appointment .modal__buttons #exitButton {
+  padding: 0.875rem 1rem;
   background-color: var(--pr-clr-300);
-  border-radius: 6px;
-  color: var(--ntrl-clr-100);
 }
-.appointment__page .appointment__container .appointments {
-  width: 100%;
-  border: 1px solid var(--pr-clr-300);
-  border-radius: 6px;
-}
-.appointment__page .appointment__container .appointments .appointment .date {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  flex-direction: row;
-  gap: 0;
-  padding: 1rem;
-  color: var(--pr-clr-300);
-  transition: 100ms;
-  cursor: pointer;
-}
-.appointment__page .appointment__container .appointments .appointment .date:hover {
-  background-color: var(--pr-clr-400);
-  color: var(--ntrl-clr-100);
-  font-weight: bold;
-}
-.appointment__page .appointment__container .appointments .appointment .date:hover .remove__button {
-  color: var(--ntrl-clr-100);
-}
-.appointment__page .appointment__container .appointments .appointment .date .remove__button {
-  color: var(--pr-clr-300);
-  cursor: pointer;
-}
-.appointment__page .appointment__container .appointments .appointment .date .remove__button:hover {
-  text-decoration: underline;
-}
-.appointment__page .appointment__container .appointments .appointment .details__container {
-  width: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-direction: column;
-  gap: 0;
-  border-top: 1px solid var(--pr-clr-300);
-}
-.appointment__page .appointment__container .appointments .appointment .details__container .detail__header {
-  width: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: flex-start;
-  flex-direction: row;
-  gap: 0;
-  border-bottom: 1px solid var(--pr-clr-300);
-}
-.appointment__page .appointment__container .appointments .appointment .details__container .detail__header p {
-  padding: 1rem;
-  width: 100%;
-  font-family: "DMSans-Bold", sans-serif;
-  font-size: var(--fs-300);
-  color: var(--pr-clr-300);
-}
-.appointment__page .appointment__container .appointments .appointment .details__container .detail__header p:nth-child(2) {
-  border-left: 1px solid var(--pr-clr-300);
-}
-.appointment__page .appointment__container .appointments .appointment .details__container .details {
-  width: 100%;
-  display: flex;
-  align-items: flex-start;
-  justify-content: center;
-  flex-direction: row;
-  gap: 0;
-}
-.appointment__page .appointment__container .appointments .appointment .details__container .details .detail {
-  width: 100%;
-}
-.appointment__page .appointment__container .appointments .appointment .details__container .details .detail .item {
-  display: flex;
-  align-items: flex-start;
-  justify-content: center;
-  flex-direction: column;
-  gap: 6px;
-  padding: 0.5rem 1rem;
-  border-bottom: 1px solid var(--pr-clr-300);
-}
-.appointment__page .appointment__container .appointments .appointment .details__container .details .detail .item p:nth-child(1) {
-  font-family: "DMSans-Bold", sans-serif;
-  font-size: var(--fs-300);
-  color: var(--pr-clr-300);
-}
-.appointment__page .appointment__container .appointments .appointment .details__container .details .detail:nth-child(1) .item p:nth-child(4) {
-  border-width: 0px;
-}
-.appointment__page .appointment__container .appointments .appointment .details__container .details .detail:first-child .item:last-child {
-  border-bottom: 0;
-}
-.appointment__page .appointment__container .appointments .appointment .details__container .details .detail:nth-child(2) .item {
-  border-left: 1px solid var(--pr-clr-300);
+.appointment__page .appointments__container .appointment__item .modal.cancel-appointment .modal__buttons #exitButton:hover {
+  background-color: var(--pr-clr-350);
 }
 
 .appointment_form {
@@ -1394,7 +1269,7 @@ body main.landing__page, body main.login__page, body main.signup__page {
   color: var(--pr-clr-100);
 }
 .appointment_form form > * .appointment-form__field .appointment-form__validation .appointment-form__text--valid {
-  color: var(--pr-clr-250);
+  color: var(--pr-clr-270);
 }
 .appointment_form form > * .appointment-form__submit-button {
   width: 100%;
@@ -1465,162 +1340,277 @@ body main.landing__page, body main.login__page, body main.signup__page {
   background-color: var(--pr-clr-300);
 }
 
-.dental_history__page {
-  width: 767px;
-  display: flex;
-  align-items: flex-start;
-  justify-content: center;
-  flex-direction: column;
-  gap: 2rem;
-}
-.dental_history__page .header {
+.dental-history__page {
+  --light-gray-border: 1px solid hsl(0, 0%, 38%, 0.3);
+  --ff-inter: "Inter", sans-serif;
+  --pending-bg: #fff3d8;
+  --complete-bg: #dbffe5;
+  --accepted-bg: #eef5ff;
+  --rejected-bg: #ffe9e6;
   width: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  flex-direction: row;
-  gap: 0;
+  border-radius: 0.5rem;
+  border: var(--light-gray-border);
+  background-color: var(--ntrl-clr-100);
+  overflow: hidden;
 }
-.dental_history__page .header h1 {
-  font-size: var(--fs-400);
-  color: var(--pr-clr-100) !important;
-  font-weight: bold;
-}
-.dental_history__page .appointment__container {
+.dental-history__page table {
   width: 100%;
-}
-.dental_history__page .appointment__container table {
-  width: 100%;
+  font-family: var(--ff-inter);
   border-collapse: collapse;
 }
-.dental_history__page .appointment__container table th {
-  color: var(--ntrl-clr-100);
-  font-weight: bold;
+.dental-history__page table th,
+.dental-history__page table td {
+  font-size: 0.75rem;
+  color: var(--ntrl-clr-300);
   text-align: left;
-  background-color: var(--pr-clr-100);
-  padding: 0.5rem;
-  border-right: 1px solid var(--ntrl-clr-100);
+  text-transform: uppercase;
+  padding: 0.75rem;
 }
-.dental_history__page .appointment__container table td {
-  padding: 0.5rem;
-  outline: 1px solid var(--pr-clr-100);
+.dental-history__page table th:not(:last-child),
+.dental-history__page table td:not(:last-child) {
+  border-right: var(--light-gray-border);
+}
+.dental-history__page table thead tr th {
+  font-weight: bold;
+  border-bottom: var(--light-gray-border);
+}
+.dental-history__page table thead tr th:nth-child(1) {
+  width: 9.5625rem;
+}
+.dental-history__page table thead tr th:nth-child(2), .dental-history__page table thead tr th:nth-child(4) {
+  width: 117px;
+  width: 206px;
+}
+.dental-history__page table thead tr th:nth-child(3) {
+  width: 95px;
+}
+.dental-history__page table thead tr th:nth-child(5) {
+  width: 117px;
+}
+.dental-history__page table tbody tr:not(:last-child) {
+  border-bottom: var(--light-gray-border);
+}
+.dental-history__page table tbody tr td:first-child {
+  text-transform: unset;
+}
+.dental-history__page table tbody tr td:last-child {
+  text-align: center;
+  text-transform: capitalize;
+}
+.dental-history__page table tbody tr td:last-child .status {
+  width: -moz-min-content;
+  width: min-content;
+  font-size: 0.625rem;
+  font-weight: bold;
+  padding: 0.1875rem 0.5rem;
+  border-radius: 0.25rem;
+}
+.dental-history__page table tbody tr td:last-child .status.pending {
+  color: var(--pr-clr-200);
+  border: 1px solid var(--pr-clr-200);
+  background-color: var(--pending-bg);
+}
+.dental-history__page table tbody tr td:last-child .status.complete {
+  color: var(--pr-clr-270);
+  border: 1px solid var(--pr-clr-270);
+  background-color: var(--complete-bg);
+}
+.dental-history__page table tbody tr td:last-child .status.accepted {
+  color: var(--pr-clr-300);
+  border: 1px solid var(--pr-clr-300);
+  background-color: var(--accepted-bg);
+}
+.dental-history__page table tbody tr td:last-child .status.rejected {
+  color: var(--pr-clr-100);
+  border: 1px solid var(--pr-clr-100);
+  background-color: var(--rejected-bg);
 }
 
-.faq_and_questions__page .account .accordion {
-  width: 40rem;
+.faqs-and-questions__page {
+  width: 100%;
   display: flex;
-  align-items: flex-start;
+  align-items: center;
   justify-content: center;
   flex-direction: column;
-  gap: 1rem;
+  gap: 0.5rem;
 }
-.faq_and_questions__page .account .accordion_item {
+.faqs-and-questions__page > * {
+  width: 100%;
+  border-radius: 0.5rem;
+}
+.faqs-and-questions__page .header {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: var(--pr-clr-300);
+  padding: 1.5rem;
+  background-color: var(--ntrl-clr-100);
+}
+.faqs-and-questions__page .accordion {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+.faqs-and-questions__page .accordion > * {
   width: 100%;
 }
-.faq_and_questions__page .account .accordion_header, .faq_and_questions__page .account .accordion_content {
-  padding: 0.5rem;
+.faqs-and-questions__page .accordion details {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 0.5rem;
 }
-.faq_and_questions__page .account .accordion_header {
+.faqs-and-questions__page .accordion details > * {
+  padding: 1.5rem;
+  border-radius: 0.5rem;
+  background-color: var(--ntrl-clr-100);
+}
+.faqs-and-questions__page .accordion details[open] summary {
+  font-weight: bold;
+  color: var(--pr-clr-300);
+}
+.faqs-and-questions__page .accordion details summary {
   display: flex;
   align-items: center;
   justify-content: space-between;
   flex-direction: row;
   gap: 0;
-  color: var(--ntrl-clr-100);
-  background-color: var(--pr-clr-300);
-  outline: 1px solid var(--pr-clr-350);
-  border-radius: 3px;
+  font-size: 1rem;
+  color: var(--ntrl-clr-300);
+  text-transform: uppercase;
   cursor: pointer;
+  transition: 200ms ease-in-out;
 }
-.faq_and_questions__page .account .accordion_header.active {
-  font-weight: bold;
-}
-.faq_and_questions__page .account .accordion_header img {
-  width: 1rem;
-  height: 1rem;
-}
-.faq_and_questions__page .account .accordion_content {
-  display: none;
+.faqs-and-questions__page .accordion details summary:hover {
   color: var(--pr-clr-300);
-  padding: 1rem;
-  margin-top: 0.5rem;
-  outline: 1px solid var(--pr-clr-350);
-  border-radius: 3px;
-  line-height: 1.3;
 }
-.faq_and_questions__page .account .accordion_content strong {
-  font-weight: bold;
-  text-decoration: underline;
+.faqs-and-questions__page .accordion details summary .arrow-angle {
+  width: 1.0625rem;
+  height: 1.0625rem;
+}
+.faqs-and-questions__page .accordion details .content {
+  font-size: 0.875rem;
+  color: var(--ntrl-clr-300);
+  margin-top: 0.5rem;
+  transition: 200ms ease-in-out;
+  line-height: 140%;
 }
 
-.feedback__page form {
-  width: 30rem;
+.feedback__page {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+.feedback__page > * {
+  width: 100%;
+  padding: 1.5rem;
+  border-radius: 0.5rem;
+  background-color: var(--ntrl-clr-100);
+}
+.feedback__page .header {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: var(--pr-clr-300);
+}
+.feedback__page .form {
+  color: var(--ntrl-clr-300);
   display: flex;
   align-items: flex-start;
   justify-content: center;
   flex-direction: column;
   gap: 1rem;
-  padding: 1rem;
-  border-radius: 3px;
-  outline: 1px solid var(--pr-clr-300);
 }
-.feedback__page form input,
-.feedback__page form textarea {
-  width: 100%;
-  padding: 0.5rem;
-  color: var(--pr-clr-300);
-  font-weight: bold;
-}
-.feedback__page form input::-moz-placeholder, .feedback__page form textarea::-moz-placeholder {
-  color: var(--pr-clr-350);
-  font-weight: normal;
-}
-.feedback__page form input::placeholder,
-.feedback__page form textarea::placeholder {
-  color: var(--pr-clr-350);
-  font-weight: normal;
-}
-.feedback__page form input[type=text] {
-  border-bottom: 1px solid var(--pr-clr-350);
-}
-.feedback__page form input[type=text]:active, .feedback__page form input[type=text]:focus {
-  border-bottom-color: var(--pr-clr-300);
-}
-.feedback__page form .radio-container {
-  color: var(--pr-clr-300);
-}
-.feedback__page form .radio-container h2 {
-  margin-block-end: 0.5rem;
-}
-.feedback__page form .radio-container .radios {
+.feedback__page .form__rating {
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   justify-content: center;
-  flex-direction: row;
+  flex-direction: column;
   gap: 1rem;
 }
-.feedback__page form .radio-container .radios .radio-label {
+.feedback__page .form__rating h2 {
+  font-size: 1.125rem;
+  font-weight: bold;
+}
+.feedback__page .form__rating .rating-container {
   display: flex;
   align-items: center;
   justify-content: center;
   flex-direction: row;
   gap: 0.5rem;
 }
-.feedback__page form .radio-container .radios .radio-label input:active + label {
+.feedback__page .form__rating .rating-container .radio-field label {
+  width: 4.375rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 0.5rem;
+  font-size: 1.5rem;
+  filter: grayscale(100%);
+  padding: 0.75rem 0.5rem;
+  border-radius: 0.5rem;
+  border: 1px solid hsla(0, 0%, 38%, 0.3);
+  cursor: pointer;
+  transition: 200ms ease-in-out;
+}
+.feedback__page .form__rating .rating-container .radio-field label span {
+  font-size: 0.625rem;
   font-weight: bold;
+  color: var(--pr-clr-300);
 }
-.feedback__page form textarea {
+.feedback__page .form__rating .rating-container .radio-field label:hover {
+  background-color: hsla(0, 0%, 38%, 0.1);
+}
+.feedback__page .form__rating .rating-container .radio-field input {
+  display: none;
+}
+.feedback__page .form__rating .rating-container .radio-field input:checked + label {
+  color: var(--pr-clr-300);
+  border-color: var(--pr-clr-300);
+  box-shadow: 0 8px 16px hsla(216, 89%, 53%, 0.2);
+  filter: grayscale(0);
+}
+.feedback__page .form__rating .rating-container .radio-field input:checked + label:hover {
+  background: none;
+}
+.feedback__page .form .feedback-message {
   resize: none;
-  height: 10rem;
-  outline-color: var(--pr-clr-350);
-  border-color: var(--pr-clr-350);
-}
-.feedback__page form button {
   width: 100%;
+  font-size: 1rem;
+  padding: 0.875rem;
+  scroll-padding-block: 1rem;
+  border-radius: 0.5rem;
+  border: 1px solid hsla(0, 0%, 38%, 0.2);
+}
+.feedback__page .form .feedback-message:focus, .feedback__page .form .feedback-message:hover {
+  outline: none;
+  border: none;
+  color: var(--ntrl-clr-300);
+  outline: 1px solid var(--pr-clr-300);
+}
+.feedback__page .form .feedback-message::-moz-placeholder {
+  color: hsla(0, 0%, 38%, 0.5);
+}
+.feedback__page .form .feedback-message::placeholder {
+  color: hsla(0, 0%, 38%, 0.5);
+}
+.feedback__page .form .feedback__submit-btn {
+  width: 10.625rem;
+  align-self: flex-end;
+  font-size: 1rem;
   color: var(--ntrl-clr-100);
+  padding: 0.75rem;
+  border-radius: 0.5rem;
   background-color: var(--pr-clr-100);
-  padding: 1rem;
-  border-radius: 3px;
+  cursor: pointer;
+}
+.feedback__page .form .feedback__submit-btn:hover {
+  background-color: var(--pr-clr-150);
 }
 
 .modal_container {
@@ -1966,6 +1956,7 @@ body.user-homepage main .about .services .appointment__button:hover {
   justify-content: center;
   flex-direction: column;
   gap: 0.5rem;
+  margin-bottom: 2rem;
 }
 .edit-profile__form > * {
   width: 100%;
@@ -2001,14 +1992,15 @@ body.user-homepage main .about .services .appointment__button:hover {
   gap: 0;
   font-size: 0.875rem;
   color: var(--ntrl-clr-100);
-  padding: 0.875rem 1rem;
   border-radius: 4px;
   cursor: pointer;
 }
 .edit-profile__form .edit-profile__header .edit-profile__actions > * a {
   color: var(--ntrl-clr-100);
+  padding: 0.875rem 1rem;
 }
 .edit-profile__form .edit-profile__header .edit-profile__actions .edit-profile__save-btn {
+  padding: 0.875rem 1rem;
   background-color: var(--pr-clr-300);
 }
 .edit-profile__form .edit-profile__header .edit-profile__actions .edit-profile__cancel-btn {

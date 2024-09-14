@@ -36,38 +36,58 @@ if(!isset($_SESSION['user_id'])) {
 
       <!--  -->
       <div class="feedback__page account__container">
-        <div class="account">
-          <h1>Feedback</h1>
+        <h1 class="header">We’d love to hear your feedback</h1>
 
-          <form action="includes/send_feedback.php" method="post">
-            <input type="text" name="name" placeholder="Name" value="<?php outputFullName() ?>" required/>
-            <input type="text" name="email" placeholder="Email" value="<?php outputEmail() ?>" required/>
-            <div class="radio-container">
-              <h2>Feedback Type</h2>
-              <div class="radios">
-                <div class="radio-label">
-                  <input type="radio" id="compliment" name="choices" value="compliment" required/>
-                  <label for="compliment">Compliment</label>
-                </div>
-                <div class="radio-label">
-                  <input type="radio" id="suggestion" name="choices" value="suggestion" required/>
-                  <label for="suggestion">Suggestion</label>
-                </div>
-                <div class="radio-label">
-                  <input type="radio" id="complaint" name="choices" value="complaint" required/>
-                  <label for="complaint">Complaint</label>
-                </div>
+        <form action="includes/send_feedback.php" method="post" class="form">
+          <div class="form__rating">
+            <h2>How would you rate our service?</h2>
+
+            <div class="rating-container">
+              <div class="radio-field">
+                <input type="radio" name="rating" id="terrible" value="terrible" required>
+                <label for="terrible">😡 <span>Terrible</span></label>
+              </div>
+
+              <div class="radio-field">
+                <input type="radio" name="rating" id="bad" value="bad" required>
+                <label for="bad">😟 <span>Bad</span></label>
+              </div>
+
+              <div class="radio-field">
+                <input type="radio" name="rating" id="okay" value="okay" required> 
+                <label for="okay">😐 <span>Okay</span></label>
+              </div>
+
+              <div class="radio-field">
+                <input type="radio" name="rating" id="good" value="good" required>
+                <label for="good">🙂 <span>Good</span></label>
+              </div>
+
+              <div class="radio-field">
+                <input type="radio" name="rating" id="awesome" value="awesome" required>
+                <label for="awesome">😁 <span>Awesome</span></label>
               </div>
             </div>
-            <textarea name="feedback" id="feedback" placeholder="Please type your feedback here..."></textarea>
-            <button>
-              <input type="submit" name="submit" value="Submit" style="color: white; cursor: pointer;">
-            </button>
-          </form>
-        </div>
+          </div>
+
+          <textarea class="feedback-message" name="feedback" id="feedback" placeholder="Please write your feedback here..." rows="3" required></textarea>
+
+          <input type="submit" name="submit" value="Submit" class="feedback__submit-btn">
+        </form>
       </div>
     </section>
   </main>
 </body>
+<script>
+  const feedbackMsg = document.getElementById('feedback')
 
+  const adjustHeight = () => {
+    feedbackMsg.style.height = 'auto'
+    feedbackMsg.style.height = `${feedbackMsg.scrollHeight}px`
+  }
+
+  feedbackMsg.addEventListener('input', adjustHeight)
+
+  adjustHeight()
+</script>
 </html>

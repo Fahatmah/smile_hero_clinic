@@ -6,6 +6,8 @@
   &__form {
     width: 100%;
     @include display-flex($gap: 0.5rem, $dir: column);
+    margin-bottom: 2rem;
+
     & > * {
       width: 100%;
       padding: 1.5rem;
@@ -30,15 +32,17 @@
           @include display-flex;
           font-size: 0.875rem;
           color: var(--ntrl-clr-100);
-          padding: 0.875rem 1rem;
           border-radius: 4px;
           cursor: pointer;
+
           a {
             color: var(--ntrl-clr-100);
+            padding: 0.875rem 1rem;
           }
         }
 
         .edit-profile__save-btn {
+          padding: 0.875rem 1rem;
           background-color: var(--pr-clr-300);
         }
 

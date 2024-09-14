@@ -1,267 +1,139 @@
 @use '../../abstracts' as *;
 
 .appointment__page {
-  width: 767px;
-  @include display-flex($dir: column, $y: flex-start, $gap: 2rem);
+  .appointments__container {
+    .appointment__item {
+      @include display-flex($dir: column, $gap: 0.5rem);
 
-  .header {
-    width: 100%;
-    @include display-flex($x: space-between);
-
-    h1 {
-      font-size: var(--fs-400);
-      color: var(--pr-clr-300);
-      font-weight: bold;
-    }
-
-    .appointment__button {
-      padding: 1rem;
-      background-color: var(--pr-clr-100);
-      color: var(--ntrl-clr-100);
-      font-weight: bold;
-      border-radius: 6px;
-
-      &:hover {
-        background-color: var(--pr-clr-150);
+      & > * {
+        width: 100%;
+        color: var(--ntrl-clr-300);
+        padding: 1.5rem;
+        border-radius: 0.5rem;
+        background-color: var(--ntrl-clr-100);
       }
 
-      // does not work and i dont know
-      &:active {
-        background-color: var(--pr-clr-100);
-        transform: scale(0.97);
-      }
-    }
-  }
+      .header {
+        @include display-flex($x: space-between);
 
-  .appointment__container {
-    width: 100%;
-    @include display-flex($gap: 12px, $dir: column);
-
-    .header {
-      width: 100%;
-      @include display-flex($x: space-between);
-      padding: 1rem;
-      background-color: var(--pr-clr-300);
-      border-radius: 6px;
-      color: var(--ntrl-clr-100);
-
-      h2,
-      h3 {
-        font-weight: bold;
-      }
-    }
-
-    .appointments {
-      width: 100%;
-      border: 1px solid var(--pr-clr-350);
-      border-radius: 6px;
-      // overflow: hidden;
-
-      // item header
-      .item {
-        .item_header {
-          @include display-flex($x: space-between);
-          padding: 1rem;
-          border-bottom: 1px solid var(--pr-clr-300);
-          cursor: pointer;
-          transition: 200ms ease-in-out;
-          overflow: hidden;
-
-          &:hover {
-            border: 1px solid var(--pr-clr-300);
-            border-radius: 8px;
-            background-color: var(--ntrl-clr-100);
-            transform: scale(1.09);
-            box-shadow: 0 0 60px #1d72f22a;
+        &__body-text {
+          .appointment-id {
+            font-size: 0.875rem;
+            color: hsl(0, 0%, 38%, 0.7);
+            margin-bottom: 0.5rem;
           }
 
-          p,
-          button {
-            color: var(--pr-clr-300);
+          .appointment-date {
+            font-size: 1.5rem;
             font-weight: bold;
-            cursor: pointer;
+            text-transform: uppercase;
+          }
 
-            &:hover {
-              text-decoration: underline;
-            }
+          .appointment-time {
+            color: var(--pr-clr-300);
           }
         }
 
-        // appointment container
-        .appointment {
-          .appointment_header {
-            @include display-flex($x: space-between);
-
-            & > * {
-              width: 100%;
-              padding: 1rem;
-              color: var(--pr-clr-300);
-              font-weight: bold;
-              border-bottom: 1px solid var(--pr-clr-300);
-            }
-
-            & p:nth-child(2) {
-              border-left: 1px solid var(--pr-clr-300);
-            }
-          }
-
-          .appointment_details {
-            .details {
-              @include display-flex;
-              flex-wrap: wrap;
-
-              .detail {
-                flex: 50%;
-                @include display-flex(
-                  $dir: column,
-                  $y: flex-start,
-                  $gap: 0.5rem
-                );
-                padding: 1rem;
-                cursor: pointer;
-                transition: 200ms ease-in-out;
-                overflow: hidden;
-
-                &:not(:last-child) {
-                  border-bottom: 1px solid var(--pr-clr-300);
-                }
-
-                &:hover {
-                  border: 1px solid var(--pr-clr-300);
-                  border-radius: 8px;
-                  background-color: var(--ntrl-clr-100);
-                  transform: scale(1.09);
-                  box-shadow: 0 0 60px #1d72f22a;
-                }
-
-                &_header {
-                  color: var(--pr-clr-300);
-                  font-weight: bold;
-                }
-
-                &_content {
-                  color: var(--ntrl-clr-350);
-                }
-              }
-              .detail:nth-child(2),
-              .detail:nth-child(4),
-              .detail:nth-child(6) {
-                border-left: 1px solid var(--pr-clr-350);
-              }
-            }
-          }
-        }
-      }
-    }
-  }
-
-  .appointment__container {
-    width: 100%;
-    @include display-flex($gap: 12px, $dir: column);
-
-    .header {
-      width: 100%;
-      @include display-flex($x: space-between);
-      padding: 1rem;
-      background-color: var(--pr-clr-300);
-      border-radius: 6px;
-      color: var(--ntrl-clr-100);
-    }
-
-    .appointments {
-      width: 100%;
-      border: 1px solid var(--pr-clr-300);
-      border-radius: 6px;
-
-      .appointment {
-        .date {
-          @include display-flex($x: space-between);
-          padding: 1rem;
-          color: var(--pr-clr-300);
-          transition: 100ms;
+        &__cancel-btn {
+          color: var(--ntrl-clr-100);
+          padding: 0.875rem 1rem;
+          border-radius: 0.25rem;
+          background-color: var(--pr-clr-100);
           cursor: pointer;
 
           &:hover {
-            background-color: var(--pr-clr-400);
-            color: var(--ntrl-clr-100);
-            font-weight: bold;
-
-            .remove__button {
-              color: var(--ntrl-clr-100);
-            }
-          }
-
-          .remove__button {
-            color: var(--pr-clr-300);
-            cursor: pointer;
-
-            &:hover {
-              text-decoration: underline;
-            }
+            background-color: var(--pr-clr-150);
           }
         }
+      }
 
-        .details__container {
+      .appointment__details {
+        @include display-flex($dir: column);
+
+        .detail {
           width: 100%;
-          @include display-flex($dir: column);
-          border-top: 1px solid var(--pr-clr-300);
+          @include display-flex($dir: column, $gap: 0.75rem, $y: flex-start);
 
-          .detail__header {
+          &:not(:first-child) {
+            padding-top: 1.125rem;
+          }
+
+          &:not(:last-child) {
+            padding-bottom: 1.125rem;
+            border-bottom: 1px solid hsl(0, 0%, 38%, 0.2);
+          }
+
+          &__header {
+            font-size: 1.125rem;
+            font-weight: bold;
+          }
+
+          &__content {
+            font-size: 0.875rem;
+          }
+        }
+      }
+
+      .modal.cancel-appointment {
+        @include display-flex($dir: column, $gap: 0.5rem);
+        position: absolute;
+        width: 100%;
+        min-height: 100vh;
+        top: 0;
+        left: 0;
+        background-color: hsl(0, 0%, 100%, 0.3);
+        backdrop-filter: blur(3px);
+        transition: 100ms ease-in-out;
+
+        & > * {
+          width: 26rem;
+          font-size: 0.875rem;
+          color: var(--ntrl-clr-300);
+        }
+
+        .modal__header {
+          text-align: center;
+          padding: 1.5rem;
+          border-radius: 0.5rem;
+          border: 1px solid var(--pr-clr-100);
+          background-color: var(--ntrl-clr-100);
+
+          h3 {
+            font-size: 1.5rem;
+            font-weight: bold;
+            line-height: 1;
+          }
+          p {
+            font-style: italic;
+            color: var(--pr-clr-100);
+            margin-top: 0.8rem;
+          }
+        }
+
+        .modal__buttons {
+          @include display-flex($dir: column, $gap: 0.5rem);
+
+          & > * {
             width: 100%;
-            @include display-flex($x: flex-start);
-            border-bottom: 1px solid var(--pr-clr-300);
+            color: var(--ntrl-clr-100);
+            text-align: center;
+            border-radius: 0.5rem;
+            cursor: pointer;
+          }
 
-            p {
-              padding: 1rem;
-              width: 100%;
-              font-family: 'DMSans-Bold', sans-serif;
-              font-size: var(--fs-300);
-              color: var(--pr-clr-300);
-            }
-
-            p:nth-child(2) {
-              border-left: 1px solid var(--pr-clr-300);
+          .confirm-cancel {
+            padding: 0.875rem 1rem;
+            background-color: var(--pr-clr-100);
+            &:hover {
+              background-color: var(--pr-clr-150);
             }
           }
 
-          .details {
-            width: 100%;
-            @include display-flex($y: flex-start);
-
-            .detail {
-              width: 100%;
-
-              .item {
-                @include display-flex($dir: column, $y: flex-start, $gap: 6px);
-                padding: 0.5rem 1rem;
-                border-bottom: 1px solid var(--pr-clr-300);
-
-                p:nth-child(1) {
-                  font-family: 'DMSans-Bold', sans-serif;
-                  font-size: var(--fs-300);
-                  color: var(--pr-clr-300);
-                }
-              }
-
-              &:nth-child(1) {
-                .item {
-                  p:nth-child(4) {
-                    border-width: 0px;
-                  }
-                }
-              }
-            }
-
-            .detail:first-child {
-              .item:last-child {
-                border-bottom: 0;
-              }
-            }
-
-            .detail:nth-child(2) {
-              .item {
-                border-left: 1px solid var(--pr-clr-300);
-              }
+          #exitButton {
+            padding: 0.875rem 1rem;
+            background-color: var(--pr-clr-300);
+            &:hover {
+              background-color: var(--pr-clr-350);
             }
           }
         }

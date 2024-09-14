@@ -41,6 +41,7 @@ $user_id = $_SESSION['user_id'];
   <link
     href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&display=swap"
     rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css?family=Inter:100,200,300,regular,500,600,700,800,900,100italic,200italic,300italic,italic,500italic,600italic,700italic,800italic,900italic" rel="stylesheet" />
   <link rel="stylesheet" href="../src/dist/styles.css" />
 </head>
 
@@ -54,40 +55,40 @@ $user_id = $_SESSION['user_id'];
       <?php include('includes/sidenav.php'); ?>
 
     <!--  -->
-    <section class="dental_history__page account__container">
-      <div class="account">
-        <div class="header">
-          <h1>Dental History</h1>
-        </div>
-        <div class="appointment__container">
-          <table>
-            <thead>
-              <tr>
-                <th>Id</th>
-                <th>Date</th>
-                <th>Time</th>
-                <th>Request Date</th>
-                <th>Status</th>
-              </tr>
-            </thead>
+    <section class="dental-history__page account__container">
+      <table>
+        <thead>
+          <tr>
+            <th>Appointment ID</th>
+            <th>Date</th>
+            <th>Time</th>
+            <th>Request Date</th>
+            <th>Status</th>
+          </tr>
+        </thead>
 
-            <tbody>
-            <?php foreach ($users as $user){ ?>
-              <tr>
-                <td><?php echo htmlspecialchars($user['appointment_id']) ?></td>
-                <td><?php echo htmlspecialchars($user['date'])?> </td>
-                <td><?php echo htmlspecialchars($user['time'])?> </td>
-                <td><?php echo htmlspecialchars($user['created_at'])?> </td>
-                <td><?php echo htmlspecialchars($user['status'])?> </td>
-              </tr>
-              <?php } ?>
-            </tbody>
-          </table>
-        </div>
-       
-      </div>
+        <tbody>
+        <?php foreach ($users as $user){ ?>
+          <tr>
+            <td><?php echo htmlspecialchars($user['appointment_id']) ?></td>
+            <td><?php echo htmlspecialchars($user['date'])?> </td>
+            <td><?php echo htmlspecialchars($user['time'])?> </td>
+            <td><?php echo htmlspecialchars($user['created_at'])?> </td>
+            <td>
+              <p class="status">
+                <?php echo htmlspecialchars($user['status'])?> 
+              </p>
+            </td>
+          </tr>
+          <?php } ?>
+        </tbody>
+      </table>
     </section>
   </main>
 </body>
+<script>
+  const setStatusStyles = (statusElement, statusText) => statusElement.classList.add(statusText === 'pending' ? 'pending' :  statusText === 'complete' ? 'complete' : statusText === 'accepted' ? 'accepted' : 'rejected')
+  document.querySelectorAll('.status').forEach((status) => setStatusStyles(status, status.innerText.toLowerCase()))
+</script>
 
 </html>

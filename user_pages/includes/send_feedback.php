@@ -7,7 +7,7 @@ if($_SERVER['REQUEST_METHOD'] === "POST" && !empty($_POST['name']) && !empty($_P
 
     $name = $_POST['name'];
     $email = $_POST['email'];
-    $feedback_type = $_POST['choices'];
+    $feedback_type = $_POST['rating'];
     $feedback = $_POST['feedback'];
 
     $query = "INSERT INTO feedback (name, email, feedback_type, feedback) VALUES (?, ?, ? ,?)";

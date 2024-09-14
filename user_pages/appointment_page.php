@@ -48,13 +48,6 @@ if(!isset($_SESSION['user_id'])) {
 
     <!-- appointment page -->
     <section class="appointment__page account__container">
-      <div class="account">
-        <div class="header">
-          <h1>Your appointment</h1>
-          <a class="appointment__button" href="../user_pages/appointment_form_page.php" target="_blank">
-            Create New Appointment
-          </a>
-        </div>
         <?php if ($row = $result->fetch_assoc()) {  
           
           // update the appointment if it is finished
@@ -69,47 +62,35 @@ if(!isset($_SESSION['user_id'])) {
               $stmt->execute();
             }
           ?>
-        <div class="appointment__container">
-          <div class="header">
-            <h2>Appointment Date: <?php echo $row['date'] ?></h2>
-            <h3>Remove</h3>
-          </div>
+        <div class="appointments__container">
+          <div class="appointment__item">
+            <div class="header">
+              <div class="header__body-text">
+                <p class="appointment-id">Appointment ID: <?php echo $row["appointment_id"]; ?></p>
+                <h2 class="appointment-date"><?php echo $row['date'] ?></h2>
+                <p class="appointment-time">at <?php echo $row["time"]; ?></p>
+              </div>
 
-            <div class="appointments">
-              <div class="item">
-                <!-- header -->
-              
-                <div class="item_header">
-                  <p class="appoinment_date" id="appointmentDate">Appointment ID: <?php echo $row["appointment_id"]; ?>
-                  </p>
-                  <button class="remove__button" id="deleteAccountBtn">
-                    Cancel
-                  </button>
-                </div>
+              <button class="header__cancel-btn" id="cancelAppointmentBtn">Cancel Appointment</button>
+            </div>  
+            <div class="modal cancel-appointment" style="transform: scale(0)">
+              <div class="modal__header">
+                <h3>Are you sure you want to cancel your Appointment?</h3>
+                <p>*This action cannot be undone and all appointment details will be lost.*
+                </p>
+              </div>
 
-                <!--------- Modal --------->
-                <div class="modal_container cancel-appointment">
-                  <div class="delete-account">
-                    <div class="header" style="background-color: white;">
-                      <h3>Are you sure you want to cancel your Appointment?</h3>
-                      <p>*This action cannot be undone and all appointment details will be lost.*
-                      </p>
-                    </div>
-                    <div class="button_container">
-                    <button type="submit" id="deleteAccountButton"> 
-                      <form action="" method="get">
-                        <input type="submit" name="submit" value=" Yes, cancel appointment" style="color: white; cursor: pointer;">
-                      </form>
-                    </button>
-                      <button id="exitButton">No, keep my appointment</button>
-                    </div>
-                  </div>
-                </div>
+              <div class="modal__buttons">
+                <form action="" method="get" class="confirm-cancel">
+                  <input type="submit" name="submit" value=" Yes, cancel appointment" style="color: white; cursor: pointer;">
+                </form>
 
-              <!-- Cancel Appointment -->
-              <?php 
+                <button id="exitButton">No, keep my appointment</button>
+              </div>
+            </div>
+
+            <?php 
               $appointment_id = $row['appointment_id'];
-              
               if(isset($_GET["submit"])) {
                 $query = "UPDATE appointments SET status = 'canceled' WHERE appointment_id = ?";
                 $stmt = $conn->prepare($query);
@@ -118,64 +99,52 @@ if(!isset($_SESSION['user_id'])) {
 
                   echo "<script> alert('Appointment is now canceled'); </script>";
                   echo "<script>window.location.href='appointment_page.php';</script>";
-                }
-                ?>
+              }?>
 
-                <!-- appointment container -->
-                <div class="appointment">
-                  <!-- appointment header -->
-                  <div class="appointment_header">
-                    
-                  </div>
-                  <div class="appointment_details">
-                    <div class="details__container">
-                      <div class="details">
-                        <!-- name -->
-                        <div class="detail">
-                          <p class="detail_header">Name</p>
-                          <p class="detail_content" id="appName"><?php echo $row["name"]; ?></p>
-                        </div>
-                        <!-- date -->
-                        <div class="detail">
-                          <p class="detail_header">Date</p>
-                          <p class="detail_content" id="appDate"><?php echo $row["date"]; ?></p>
-                        </div>
-                        <!-- email -->
-                        <div class="detail">
-                          <p class="detail_header">Email</p>
-                          <p class="detail_content" id="appEmail"><?php echo $row["email"]; ?></p>
-                        </div>
-                        <!-- time -->
-                        <div class="detail">
-                          <p class="detail_header">Time</p>
-                          <p class="detail_content" id="appTime"><?php echo $row["time"]; ?></p>
-                        </div>
-                        <!-- contact number -->
-                        <div class="detail">
-                          <p class="detail_header">Contact Number</p>
-                          <p class="detail_content" id="appContact"><?php echo $row["contact"]; ?></p>
-                        </div>
-                        <!-- location -->
-                        <div class="detail">
-                          <p class="detail_header">Location</p>
-                          <p class="detail_content" id="appLoc"><?php echo $row["location"]; ?></p>
-                        </div>
-                        <!-- message/requests -->
-                        <div class="detail">
-                          <p class="detail_header">Message</p>
-                          <p class="detail_content" id="appMessage"><?php echo $row["message"]; ?></p>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
+              <div class="appointment__details">
+                <div class="detail">
+                  <p class="detail__header">Name</p>
+                  <p class="detail__content" id="appName"><?php echo $row["name"]; ?></p>
                 </div>
-                <?php } else {
-                  echo "<p> No Appointments Found. </p>";
-                } 
-                
-                $conn->close()?>
-              </div>
+                <div class="detail">
+                      <p class="detail__header">Date</p>
+                      <p class="detail__content" id="appDate"><?php echo $row["date"]; ?></p>
+                </div>
+                <div class="detail">
+                      <p class="detail__header">Email</p>
+                      <p class="detail__content" id="appEmail"><?php echo $row["email"]; ?></p>
+                </div>
+                <div class="detail">
+                      <p class="detail__header">Time</p>
+                      <p class="detail__content" id="appTime"><?php echo $row["time"]; ?></p>
+                </div>
+                <div class="detail">
+                      <p class="detail__header">Contact Number</p>
+                      <p class="detail__content" id="appContact"><?php echo $row["contact"]; ?></p>
+                </div>
+                <div class="detail">
+                      <p class="detail__header">Location</p>
+                      <p class="detail__content" id="appLoc"><?php echo $row["location"]; ?></p>
+                </div>
+                <div class="detail">
+                      <p class="detail__header">Message</p>
+                      <p class="detail__content" id="appMessage"><?php echo $row["message"]; ?></p>
+                </div>
             </div>
+            <?php } else {
+                  echo "<p class='no-appointment-message' 
+                  style='width: 100%;
+                         font-size: 1.5rem;
+                         font-weight: bold;
+                         color: #616161;
+                         text-align: center;
+                         padding: 1.5rem;
+                         border-radius: 0.5rem;
+                         background-color: var(--ntrl-clr-100);'
+                         >No appointments scheduled yet.</p>";
+            } 
+
+            $conn->close()?>
           </div>
         </div>
       </div>
@@ -184,23 +153,17 @@ if(!isset($_SESSION['user_id'])) {
 </body>
 
 <script>
-const openModalBtn = document.getElementById("deleteAccountBtn");
-const modalContainer = document.querySelector(".modal_container.delete-account");
-const exitBtn = document.getElementById("exitButton");
-const deleteAccountBtn = document.getElementById("deleteAccountButton");
+  const modalContainer = document.querySelector(".cancel-appointment");
+  const cancelAppointmentBtn = document.getElementById("cancelAppointmentBtn");
+  const exitBtn = document.getElementById("exitButton");
 
-openModalBtn.addEventListener("click", () => {
-  modalContainer.style.transform = "scale(1)";
-})
+  cancelAppointmentBtn.addEventListener("click", () => {
+    modalContainer.style.transform = "scale(1)";
+  })
 
-exitBtn.addEventListener("click", () => {
-  modalContainer.style.transform = "scale(0)";
-})
-
-// AJAX request to delete user when confirmation is clicked
-deleteAccountBtn.addEventListener("click", () => {
-  console.log("Delete Account Button Clicked!");
-});
+  exitBtn.addEventListener("click", () => {
+    modalContainer.style.transform = "scale(0)";
+  })
 </script>
 
 </html>
