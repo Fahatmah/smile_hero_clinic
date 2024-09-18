@@ -56,16 +56,15 @@ if ($result->num_rows > 0) {
     rel="stylesheet" />
 </head>
 
-<body>
-  <main class="admin-main">
+<body class="admin__page">
+  <main class="admin__main">
     <!-- nav header -->
     <?php include("includes/nav.php"); ?>
 
-    <!-- side bar -->
-    <?php include("includes/side_nav.php"); ?>
-
     <!-- patients container -->
-    <section class="account__container admin-cards">
+    <section class="admin__content">
+      <!-- side bar -->
+      <?php include("includes/side_nav.php"); ?>
       <!-- patients -->
       <div class="patients__container">
         <div class="patients">

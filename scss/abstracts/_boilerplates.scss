@@ -4,7 +4,7 @@
   --pr-clr-100: #e84531;
   --pr-clr-150: #ff6e5c;
   --pr-clr-200: #faaf0d;
-  --pr-clr-250: #DBFFE5;
+  --pr-clr-250: #dbffe5;
   --pr-clr-270: #2bc757;
   --pr-clr-300: #1d72f2;
   --pr-clr-350: #5c9dff;
@@ -37,15 +37,21 @@ body {
   font-family: 'DM Sans', sans-serif;
   font-size: var(--fs-200);
   color: var(--ntrl-clr-400);
-  background-color: var(--ntrl-clr-250);
+  background-color: var(--ntrl-clr-200);
   position: relative;
 
   &.user__page {
-    background-color: var(--ntrl-clr-200);
     background-image: url('../../assets/wave-haikei.svg');
     background-size: 100%;
     background-repeat: no-repeat;
     background-position: bottom;
+  }
+
+  &.admin__page {
+    width: 100%;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
   }
 
   main {
@@ -72,6 +78,24 @@ body {
         & > * {
           width: 100%;
         }
+      }
+    }
+
+    &.admin__main {
+      display: flex;
+      align-items: flex-start;
+      justify-content: flex-start;
+      flex-direction: column;
+      gap: 1.25rem;
+      width: min(100% - 4rem, 78.25rem);
+      margin-block: 1.25rem;
+
+      .admin__content {
+        width: 100%;
+        display: flex;
+        align-items: flex-start;
+        justify-content: flex-start;
+        gap: 1.25rem;
       }
     }
 

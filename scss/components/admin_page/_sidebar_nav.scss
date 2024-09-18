@@ -1,27 +1,58 @@
 @use '../../abstracts' as *;
 
 .admin-sidenav {
+  @include display-flex($dir: column, $x: space-between);
+  width: 100%;
+  max-width: 18.25rem;
+  height: 100%;
+  min-height: 100vh;
+  // max-height: 55.5rem;
+  padding: 1.5rem;
+  border-radius: 1.25rem;
   background-color: var(--ntrl-clr-100);
 
   ul {
+    @include display-flex($dir: column, $gap: 0.5rem);
+    width: 100%;
     li {
+      width: 100%;
+      border-radius: 0.5rem;
       &.active__link {
         background-color: var(--ntrl-clr-250);
+
+        a {
+          font-weight: bold;
+          color: var(--pr-clr-300);
+        }
       }
 
       a {
-        color: var(--ntrl-clr-400);
+        width: 100%;
+        @include display-flex($x: space-between, $dir: row-reverse);
+        padding: 1rem;
+        color: var(--ntrl-clr-300);
+        letter-spacing: -1px;
+        border-radius: 0.5rem;
 
         &:hover {
           background-color: var(--ntrl-clr-250);
         }
       }
+    }
+  }
 
-      &#logout_button {
-        .logout__button {
-          color: var(--ntrl-clr-100);
-        }
-      }
+  #logout_button {
+    width: 100%;
+    @include display-flex();
+    border-radius: 0.5rem;
+    margin-top: 1rem;
+    a {
+      width: 100%;
+      color: var(--ntrl-clr-100);
+      padding: 1rem;
+      letter-spacing: -1px;
+      border-radius: 0.5rem;
+      background-color: var(--pr-clr-300);
     }
   }
 }
