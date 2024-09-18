@@ -83,6 +83,114 @@ select {
     scroll-behavior: auto !important;
   }
 }
+@font-face {
+  font-family: "DM Sans";
+  src: url("../../assets/fonts/dm-sans/DMSans-Black.ttf") format("truetype");
+  font-weight: 900;
+  font-style: normal;
+}
+@font-face {
+  font-family: "DM Sans";
+  src: url("../../assets/fonts/dm-sans/DMSans-Bold.ttf") format("truetype");
+  font-weight: 700;
+  font-style: normal;
+}
+@font-face {
+  font-family: "DM Sans";
+  src: url("../../assets/fonts/dm-sans/DMSans-ExtraBold.ttf") format("truetype");
+  font-weight: 800;
+  font-style: normal;
+}
+@font-face {
+  font-family: "DM Sans";
+  src: url("../../assets/fonts/dm-sans/DMSans-ExtraLight.ttf") format("truetype");
+  font-weight: 200;
+  font-style: normal;
+}
+@font-face {
+  font-family: "DM Sans";
+  src: url("../../assets/fonts/dm-sans/DMSans-Light.ttf") format("truetype");
+  font-weight: 300;
+  font-style: normal;
+}
+@font-face {
+  font-family: "DM Sans";
+  src: url("../../assets/fonts/dm-sans/DMSans-Medium.ttf") format("truetype");
+  font-weight: 500;
+  font-style: normal;
+}
+@font-face {
+  font-family: "DM Sans";
+  src: url("../../assets/fonts/dm-sans/DMSans-Regular.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+}
+@font-face {
+  font-family: "DM Sans";
+  src: url("../../assets/fonts/dm-sans/DMSans-SemiBold.ttf") format("truetype");
+  font-weight: 600;
+  font-style: normal;
+}
+@font-face {
+  font-family: "DM Sans";
+  src: url("../../assets/fonts/dm-sans/DMSans-Thin.ttf") format("truetype");
+  font-weight: 100;
+  font-style: normal;
+}
+@font-face {
+  font-family: "Inter";
+  src: url("../../assets/fonts/inter/Inter_18pt-Black.ttf") format("truetype");
+  font-weight: 900;
+  font-style: normal;
+}
+@font-face {
+  font-family: "Inter";
+  src: url("../../assets/fonts/inter/Inter_18pt-Bold.ttf") format("truetype");
+  font-weight: 700;
+  font-style: normal;
+}
+@font-face {
+  font-family: "Inter";
+  src: url("../../assets/fonts/inter/Inter_18pt-ExtraBold.ttf") format("truetype");
+  font-weight: 800;
+  font-style: normal;
+}
+@font-face {
+  font-family: "Inter";
+  src: url("../../assets/fonts/inter/Inter_18pt-ExtraLight.ttf") format("truetype");
+  font-weight: 200;
+  font-style: normal;
+}
+@font-face {
+  font-family: "Inter";
+  src: url("../../assets/fonts/inter/Inter_18pt-Light.ttf") format("truetype");
+  font-weight: 300;
+  font-style: normal;
+}
+@font-face {
+  font-family: "Inter";
+  src: url("../../assets/fonts/inter/Inter_18pt-Medium.ttf") format("truetype");
+  font-weight: 500;
+  font-style: normal;
+}
+@font-face {
+  font-family: "Inter";
+  src: url("../../assets/fonts/inter/Inter_18pt-Regular.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+}
+@font-face {
+  font-family: "Inter";
+  src: url("../../assets/fonts/inter/Inter_18pt-SemiBold.ttf") format("truetype");
+  font-weight: 600;
+  font-style: normal;
+}
+@font-face {
+  font-family: "Inter";
+  src: url("../../assets/fonts/inter/Inter_18pt-Thin.ttf") format("truetype");
+  font-weight: 100;
+  font-style: normal;
+}
 :root {
   --pr-clr-100: #e84531;
   --pr-clr-150: #ff6e5c;
@@ -1679,7 +1787,7 @@ body.user-homepage main {
   width: min(100% - 12rem, 80rem);
   margin-inline: auto;
 }
-body.user-homepage main .navbar {
+body.user-homepage main .navbar__user {
   width: 100%;
   display: flex;
   align-items: center;
@@ -1689,7 +1797,7 @@ body.user-homepage main .navbar {
   padding-block: 1.5rem;
   border-bottom: 1px solid hsla(0, 0%, 38%, 0.3);
 }
-body.user-homepage main .navbar__logo {
+body.user-homepage main .navbar__user-logo {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -1697,24 +1805,24 @@ body.user-homepage main .navbar__logo {
   background-color: var(--pr-clr-300);
   border-radius: 50%;
 }
-body.user-homepage main .navbar__logo a {
+body.user-homepage main .navbar__user-logo a {
   display: flex;
   align-items: center;
   justify-content: center;
   flex-direction: row;
   padding: 0.5rem;
 }
-body.user-homepage main .navbar__logo a svg path {
+body.user-homepage main .navbar__user-logo a svg path {
   fill: white;
 }
-body.user-homepage main .navbar__menu {
+body.user-homepage main .navbar__user-menu {
   display: flex;
   align-items: center;
   justify-content: center;
   flex-direction: row;
   gap: 1rem;
 }
-body.user-homepage main .navbar__menu button {
+body.user-homepage main .navbar__user-menu button {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -1722,23 +1830,23 @@ body.user-homepage main .navbar__menu button {
   border-radius: 8px;
   overflow: hidden;
 }
-body.user-homepage main .navbar__menu button a {
+body.user-homepage main .navbar__user-menu button a {
   padding: 1rem;
   color: white;
 }
-body.user-homepage main .navbar__menu button#logoutBtn {
+body.user-homepage main .navbar__user-menu button#logoutBtn {
   background-color: hsla(0, 0%, 38%, 0.7);
 }
-body.user-homepage main .navbar__menu button#logoutBtn:hover {
+body.user-homepage main .navbar__user-menu button#logoutBtn:hover {
   background-color: var(--ntrl-clr-300);
 }
-body.user-homepage main .navbar__menu button#accountBtn {
+body.user-homepage main .navbar__user-menu button#accountBtn {
   background-color: var(--pr-clr-100);
 }
-body.user-homepage main .navbar__menu button#accountBtn:hover {
+body.user-homepage main .navbar__user-menu button#accountBtn:hover {
   background-color: var(--pr-clr-150);
 }
-body.user-homepage main .navbar__menu button#accountBtn a {
+body.user-homepage main .navbar__user-menu button#accountBtn a {
   display: flex;
   align-items: center;
   justify-content: center;

@@ -49,11 +49,7 @@ if ($result->num_rows > 0) {
   <link rel="shortcut icon" href="../assets/images/logoipsum.svg" type="image/x-icon" />
   <title>Patients | Admin</title>
   <link rel="stylesheet" href="../src/dist/styles.css" />
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link
-    href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&display=swap"
-    rel="stylesheet" />
+  
 </head>
 
 <body class="admin__page">

@@ -3,19 +3,15 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link
-      href="https://fonts.googleapis.com/css?family=DM+Sans:100,200,300,regular,500,600,700,800,900,100italic,200italic,300italic,italic,500italic,600italic,700italic,800italic,900italic"
-      rel="stylesheet"
-    />
     <title>Homepage | Smile Hero Clinic</title>
     <link rel="stylesheet" href="../src/dist/styles.css" />
   </head>
   <body class="user-homepage">
     <main>
       <!-- user navigation -->
-      <nav class="navbar" aria-label="Main Navigation">
+      <nav class="navbar__user" aria-label="Main Navigation">
         <!-- logo -->
-        <div class="navbar__logo">
+        <div class="navbar__user-logo">
           <a href="#" aria-label="Smile Hero Clinic Homepage">
             <svg
               width="40"
@@ -39,7 +35,7 @@
         </div>
         <!-- end of logo -->
 
-        <div class="navbar__menu" role="menu">
+        <div class="navbar__user-menu" role="menu">
           <button
             type="button"
             class="menu__button"

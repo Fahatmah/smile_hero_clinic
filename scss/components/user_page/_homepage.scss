@@ -10,14 +10,14 @@ body.user-homepage {
     margin-inline: auto;
 
     // nav
-    .navbar {
+    .navbar__user {
       width: 100%;
       @include flex();
       justify-content: space-between;
       padding-block: 1.5rem;
       border-bottom: 1px solid hsl(0, 0%, 38%, 0.3);
 
-      &__logo {
+      &-logo {
         @include flex();
         background-color: var(--pr-clr-300);
         border-radius: 50%;
@@ -30,7 +30,7 @@ body.user-homepage {
         }
       }
 
-      &__menu {
+      &-menu {
         @include display-flex($gap: 1rem);
 
         button {
