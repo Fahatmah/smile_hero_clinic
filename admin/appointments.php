@@ -60,86 +60,84 @@ if ($result->num_rows > 0) {
       <!-- side bar -->
       <?php include("includes/side_nav.php"); ?>
       
-      <!-- appointments -->
       <div class="appointments__container appointments__page">
-        <!-- appointment items -->
-        <div class="appointments">
-          <div class="top_header">
-            <h4>Pending Requests (Page <?php echo $page; ?>)</h4>
-            <form class="search__bar">
-              <input type="text" name="appointment" id="appointment" placeholder="Search..." />
-              <button type="submit">
-                <img src="../assets/admin_images/search.svg" alt="search icon" />
-              </button>
-            </form>
-          </div>
+        <div class="appointments__table">
+          <h1 class="table-heading">pending appointments <span class="table-item-count">13</span></h1>
 
-          <!-- appointments table -->
           <?php if (count($users) > 0) { ?>
           <table>
-            <!-- head -->
             <thead>
               <tr>
-                <th class="patient_img">IMG</th>
-                <th class="patient_appointment">APPOINTMENT ID</th>
-                <th class="patient_name">PATIENT NAME</th>
-                <th class="patient_time">TIME</th>
-                <th class="patient_email">EMAIL</th>
-                <th class="patient_message">MESSAGE</th>
-                <th class="actions">ACTIONS</th>
+                <th>patient id #</th>
+                <th>patient name</th>
+                <th>phone</th>
+                <th>time</th>
+                <th>date</th>
+                <th>message</th>
+                <th>actions</th>
               </tr>
             </thead>
 
-            <!-- body -->
             <?php foreach ($users as $user){?>
-            <tr>
-              <td>
-                <img src="../assets/admin_images/default_image.svg" class="img"
-                  style="border-radius: 4rem; width: 2rem; height: 2rem" />
-              </td>
-              <td><?php echo $user['appointment_id']; ?></td>
-              <td><?php echo $user['name']; ?></td>
-              <td><?php echo $user['date']; ?></td>
-              <td><?php echo $user['email']; ?></td>
-              <td><?php echo $user['message']; ?></td>
-              <td>
-                <div class="action_button__container">
-                  <!-- accepts appointment -->
-                  <form action="includes/send_email.php" method="post">
-                    <input type="hidden" name="app_id" value="<?php echo $user['appointment_id'];?>">
-                    <input type="hidden" name="name" value="<?php echo $user['name'];?>">
-                    <input type="hidden" name="email" value="<?php echo $user['email'];?>">
-                    <input type="hidden" name="subject" value="Smile Hero Dental Clinic Appointment">
-                    <input type="hidden" name="message"
-                      value="Good Day <?php echo $user['name']; ?> this is Smile Hero Dental Clinic your appointment on <?php echo $user['date']; ?> at <?php echo $user['time']; ?> has been accept. Here is your Appointment ID : <?php echo $user['appointment_id']; ?> ">
-                    <input type="submit" value="Accept" name="accept" class="button accept">
-                  </form>
+            <tbody>
+              <tr>
+                <td class="patient-cell id">
+                  <?php echo $user['appointment_id']; ?>
+                </td>
+                <td class="patient-cell name">
+                  <p class="patient-name" title="<?php echo $user['name']; ?>"><?php echo $user['name']; ?></p>
+                  <p class="patient-email" title="<?php echo $user['email']; ?>"><?php echo $user['email']; ?></p>
+                </td>
+                <td class="patient-cell phone"> 
+                  <?php echo $user['contact']; ?>
+                </td>
+                <td class="patient-cell time"><?php echo $user['time']; ?></td>
+                <td class="patient-cell date"><?php echo $user['date']; ?></td>
+                <td class="patient-cell message">
+                  <!-- <button class="view-message-btn">View Message</button> -->
+                  <p class="message-text" title="<?php echo $user['message']; ?>">
+                    <?php echo $user['message']; ?>
+                  </p>
+                </td>
+                <td class="patient-cell actions">
+                  <div class="button-container">
+                    <!-- accepts appointment -->
+                    <form action="includes/send_email.php" method="post">
+                      <input type="hidden" name="app_id" value="<?php echo $user['appointment_id'];?>">
+                      <input type="hidden" name="name" value="<?php echo $user['name'];?>">
+                      <input type="hidden" name="email" value="<?php echo $user['email'];?>">
+                      <input type="hidden" name="subject" value="Smile Hero Dental Clinic Appointment">
+                      <input type="hidden" name="message"
+                        value="Good Day <?php echo $user['name']; ?> this is Smile Hero Dental Clinic your appointment on <?php echo $user['date']; ?> at <?php echo $user['time']; ?> has been accept. Here is your Appointment ID : <?php echo $user['appointment_id']; ?> ">
+                      <input type="submit" value="Accept" name="accept" class="button accept">
+                    </form>
 
-                  <!-- cancel appointment -->
-                  <form action="includes/send_email.php" method="post">
-                    <input type="hidden" name="app_id" value="<?php echo $user['appointment_id'];?>">
-                    <input type="hidden" name="name" value="<?php echo $user['name'];?>">
-                    <input type="hidden" name="email" value="<?php echo $user['email'];?>">
-                    <input type="hidden" name="subject" value="Smile Hero Dental Clinic Appointment">
-                    <input type="hidden" name="message"
-                      value="Good Day <?php echo $user['name']; ?> this is Smile Hero Dental Clinic we are afraid to tell you that your appointment on <?php echo $user['date']; ?> at <?php echo $user['time']; ?> has been Canceled. Please try your appointment request on another day.">
-                    <input type="submit" value="Cancel" name="cancel" class="button cancel">
-                </div>
-              </td>
-            </tr>
+                    <!-- cancel appointment -->
+                    <form action="includes/send_email.php" method="post">
+                      <input type="hidden" name="app_id" value="<?php echo $user['appointment_id'];?>">
+                      <input type="hidden" name="name" value="<?php echo $user['name'];?>">
+                      <input type="hidden" name="email" value="<?php echo $user['email'];?>">
+                      <input type="hidden" name="subject" value="Smile Hero Dental Clinic Appointment">
+                      <input type="hidden" name="message"
+                        value="Good Day <?php echo $user['name']; ?> this is Smile Hero Dental Clinic we are afraid to tell you that your appointment on <?php echo $user['date']; ?> at <?php echo $user['time']; ?> has been Canceled. Please try your appointment request on another day.">
+                      <input type="submit" value="Cancel" name="cancel" class="button cancel">
+                  </div>
+                </td>
+              </tr>
+            </tbody>
             <?php } ?>
           </table>
           <?php } else { ?>
-          <p>No appointment requests</p>
+            <p>No appointment requests</p>
           <?php } ?>
+        </div>
 
           <!-- Pagination -->
-          <?php renderPagination($page, $totalPages) ?>
-
-        </div>
+        <?php renderPagination($page, $totalPages) ?>
       </div>
     </section>
   </main>
 </body>
 
 </html>
+

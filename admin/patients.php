@@ -11,7 +11,7 @@ if(!isset($_SESSION['adminEmail'])) {
 }
 
 // Define how many results per page
-$results_per_page = 5;
+$results_per_page = 20;
 
 // Find out the number of results stored in the database
 $query = "SELECT COUNT(*) AS total FROM users";
@@ -63,61 +63,89 @@ if ($result->num_rows > 0) {
       <?php include("includes/side_nav.php"); ?>
       <!-- patients -->
       <div class="patients__container">
-        <div class="patients">
-          <div class="top_header">
-            <h6>Patients (Page <?php echo $page; ?>)</h6>
-            <form class="search__bar">
-              <input type="text" name="patient" id="patient" placeholder="Search..." />
-              <button type="submit">
-                <img src="../assets/admin_images/search.svg" alt="search icon" />
-              </button>
-            </form>
-          </div>
+        <div class="patients__table">
+          <h1 class="table-heading">Patients <span class="table-item-count">13</span></h1>
 
-          <!-- patients table -->
           <table>
-            <!-- head -->
             <thead>
               <tr>
-                <th class="patient_img">IMG</th>
-                <th class="patient_id">USER ID</th>
-                <th class="patient_name">PATIENT NAME</th>
-                <th class="patient_email">EMAIL</th>
-                <th class="patient_contact">CONTACT</th>
-                <th class="patient_address">ADDRESS</th>
+                <th>id #</th>
+                <th>name & email</th>
+                <th>gender</th>
+                <th>birthdate</th>
+                <th>phone #</th>
+                <th>address</th>
+                <th>reg. date</th>
               </tr>
             </thead>
 
-            <!-- body -->
             <tbody>
-              <!-- get only 3 patients to show -->
               <?php foreach ($users as $user){ ?>
               <tr>
-                <td>
-                  <img src="../assets/admin_images/default_image.svg" class="img"
-                    style="border-radius: 4rem; width: 2rem; height: 2rem" />
+                <td class="patient-cell id">
+                  <?php echo htmlspecialchars($user['user_id']); ?>
                 </td>
-                <td><?php echo htmlspecialchars($user['user_id']); ?></td>
-                <td><?php echo htmlspecialchars($user['fullname']); ?></td>
-                <td><?php echo htmlspecialchars($user['email']); ?></td>
-                <td><?php echo htmlspecialchars($user['contact']); ?></td>
-                <?php if(strlen($user['address']) === 0){ ?>
-                    <td>No Address</td>
-                <?php }else{?>
-                  <td><?php echo htmlspecialchars($user['address']); ?></td>
-                <?php } ?>
+
+                <td class="patient-cell name-email">
+                  <p class="patient-name" title="<?php echo $user['fullname']; ?>">
+                    <?php echo htmlspecialchars($user['fullname']); ?>
+                  </p>
+                  <p class="patient-email" title="<?php echo $user['email']; ?>">
+                    <?php echo htmlspecialchars($user['email']); ?>
+                  </p>
+                </td>
+
+                <td class="patient-cell gender">
+                  
+                </td>
+
+                <td class="patient-cell birthdate">
+                  09-19-1989
+                </td>
+
+                <td class="patient-cell phone">
+                  <?php echo htmlspecialchars($user['contact']); ?>
+                </td>
+
+                <td class="patient-cell address">
+                  <?php if(strlen($user['address']) === 0){
+                    echo "No Address";
+                   } else {
+                  echo htmlspecialchars($user['address']); 
+                 } ?>
+                </td>
+
+                <td class="patient-cell regdate">
+                  <?php echo htmlspecialchars($user['created_at']); ?>
+                </td>
               </tr>
               <?php } ?>
             </tbody>
           </table>
-
-          <!-- Pagination -->
-          <?php renderPagination($page, $number_of_pages) ?>
-
         </div>
+        <!-- Pagination -->
+        <?php renderPagination($page, $number_of_pages) ?>
       </div>
     </section>
   </main>
 </body>
+<script>
+  const registrationDates = document.querySelectorAll('.patient-cell.regdate')
+  
+  function sliceRegistrationDate(dateObjs){   
+    return Array.from(dateObjs).map(dateObj => {
+      let dateText = dateObj.textContent.trim()
+      let date = dateText.slice(0, 11) // remove time and get date
+      dateObj.textContent = date
+    })
+  }
+  sliceRegistrationDate(registrationDates)
+
+  // temp gender
+  const genderTexts = document.querySelectorAll('.patient-cell.gender')
+  let genderArray = ["Male", "Female"]
+  const displayGender = () => Math.floor(Math.random() * genderArray.length)
+  genderTexts.forEach(gender => gender.textContent = genderArray[displayGender()])
+</script>
 
 </html>

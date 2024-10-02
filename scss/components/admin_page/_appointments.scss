@@ -1,66 +1,153 @@
 @use '../../abstracts' as *;
 
 .appointments__container.appointments__page {
+  --ff-inter: 'Inter', sans-serif;
+  --tbl-border: 1px solid hsl(0, 0%, 38%, 0.2);
+  --cancel-btn-clr: #ff6e5c;
+  --charcoal-gray: hsl(0, 0%, 38%, 0.7);
+  --transparent-gray: hsl(0, 0%, 38%, 0.1);
+
+  @include display-flex($dir: column, $gap: 1.25rem, $y: flex-start);
   width: 100%;
 
-  .appointments {
+  .appointments__table {
     width: 100%;
+    @include display-flex($dir: column, $gap: 1.25rem, $y: flex-start);
+
+    color: var(--ntrl-clr-300);
+    letter-spacing: -1px;
+    padding: 1.5rem;
+    border-radius: 1.25rem;
+    background-color: var(--ntrl-clr-100);
+
+    .table-heading {
+      @include display-flex($gap: 0.5rem);
+      font-size: 1.5rem;
+      font-family: var(--ff-inter);
+      text-transform: uppercase;
+
+      .table-item-count {
+        @include display-flex();
+        width: 1.25rem;
+        height: 1.25rem;
+        font-size: 0.875rem;
+        color: var(--ntrl-clr-100);
+        padding: 0.25rem;
+        border-radius: 50%;
+        background-color: var(--pr-clr-100);
+      }
+    }
 
     table {
       width: 100%;
       border-collapse: collapse;
 
-      // head
+      th,
+      td {
+        padding: 0.875rem 0.75rem;
+      }
+
       thead {
         tr {
+          border-top: var(--tbl-border);
+          border-bottom: var(--tbl-border);
           th {
-            padding: 0.5rem;
-            font-size: calc(var(--fs-100) + 0.10rem);
+            font-weight: bold;
             color: var(--pr-clr-300);
-            outline: 1px solid var(--pr-clr-400);
+            text-transform: capitalize;
+            text-align: left;
 
-            &.patient_img {
-              width: 1rem;
-            }
-
-            &.patient_appointment {
-              width: 2rem;
-            }
-
-            &.patient_name {
-              width: 10rem;
-            }
-
-            &.patient_time {
-              width: 6rem;
-            }
-
-            &.patient_email {
-              width: 6rem;
-            }
-
-            &.patient_message {
-              width: 10rem;
-            }
-
-            &.patient_location {
-              width: 14rem;
-            }
-
-            &.actions {
-              width: 0.5rem;
+            &:first-child {
+              padding-inline-start: 0;
             }
           }
         }
       }
-      // body
+
       tbody {
         tr {
+          border-bottom: var(--tbl-border);
+          cursor: pointer;
+
           td {
-            font-size: calc(var(--fs-100) + 0.10rem);
-            padding-block: 1rem;
-            padding-inline: 0.5rem;
-            outline: 1px solid var(--pr-clr-400);
+            font-size: 0.875rem;
+            padding: 1.5rem 0.75rem;
+
+            &.patient-cell {
+              &.id {
+                width: 5.8rem;
+                padding-inline-start: 0;
+              }
+              &.name {
+                @include display-flex($dir: column, $y: flex-start);
+                & > * {
+                  width: 10rem;
+                  white-space: nowrap;
+                  text-overflow: ellipsis;
+                  overflow: hidden;
+                }
+                .patient-name {
+                  font-size: 1.2rem;
+                  font-weight: 600;
+                }
+                .patient-email {
+                  font-family: var(--ff-inter);
+                  font-size: 0.875rem;
+                  color: var(--charcoal-gray);
+                }
+              }
+              &.phone {
+                width: 8.5rem;
+              }
+              &.time {
+                width: 5rem;
+              }
+              &.date {
+                width: 6rem;
+              }
+              &.message {
+                // width: 1rem;
+                // white-space: nowrap;
+                // text-overflow: ellipsis;
+                // overflow: hidden;
+                // .view-message-btn {
+                //   color: var(--ntrl-clr-300);
+                //   cursor: pointer;
+
+                //   &:hover {
+                //     text-decoration: underline;
+                //   }
+                // }
+                .message-text {
+                  width: 4rem;
+                  white-space: nowrap;
+                  text-overflow: ellipsis;
+                  overflow: hidden;
+                  text-transform: none;
+                }
+              }
+            }
+
+            &:last-child {
+              width: 9rem;
+              font-weight: 600;
+
+              .button-container {
+                @include display-flex($gap: 1rem, $x: flex-start);
+                .button {
+                  cursor: pointer;
+                  &:hover {
+                    text-decoration: underline;
+                  }
+                  &.accept {
+                    color: var(--pr-clr-350);
+                  }
+                  &.cancel {
+                    color: var(--cancel-btn-clr);
+                  }
+                }
+              }
+            }
           }
         }
       }

@@ -54,6 +54,7 @@
       </svg>
       <!-- end of calendar icon -->
     </div>
+    <hr>
     <!-- Time -->
     <div class="navbar__time">
       <div id="timeEl" class="navbar__time-numbers">

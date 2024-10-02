@@ -22,7 +22,7 @@ function renderPagination($currentPage, $totalPages) {
     // Next button
     if ($currentPage < $totalPages) {
         echo '<a href="?page=' . ($currentPage + 1) . '" class="button icon">
-                <svg width="33" height="33" viewBox="0 0 33 33" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
                   <path d="M12.036 8.00655L20.0426 16.0131L12.036 24.0197" stroke="#1D72F2" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                 </svg>
               </a>';

@@ -16,13 +16,13 @@ $page = isset($_GET['page']) ? (int)$_GET['page'] : 1; // Current page number
 $start = ($page - 1) * $limit; // Calculate the starting row for the query
 
 // Get total number of records for booked meetings
-$totalQuery = "SELECT COUNT(*) AS total FROM appointments WHERE status = 'accepted'";
+$totalQuery = "SELECT COUNT(*) AS total FROM appointments WHERE status = 'accepted' OR status = 'rescheduled'";
 $totalResult = $conn->query($totalQuery);
 $totalRow = $totalResult->fetch_assoc();
 $totalRecords = $totalRow['total'];
 
 // Fetch records for the current page
-$query = "SELECT * FROM appointments WHERE status = 'accepted' LIMIT $start, $limit";
+$query = "SELECT * FROM appointments WHERE status = 'accepted' OR status = 'rescheduled' LIMIT $start, $limit";
 $result = $conn->query($query);
 $users = [];
 if ($result->num_rows > 0) {
@@ -53,68 +53,157 @@ $totalPages = ceil($totalRecords / $limit);
     <?php include("includes/nav.php"); ?>
 
      <section class="admin__content">
-       <!-- side bar -->
-       <?php include("includes/side_nav.php"); ?>
+      <!-- side bar -->
+      <?php include("includes/side_nav.php"); ?>
        
-      <!-- appointments -->
-      <div class="appointments__container appointments__page">
-        <!-- appointment items -->
-        <div class="appointments">
-          <div class="top_header">
-            <h4>Confirmed Appointments (Page <?php echo $page; ?>)</h4>
-            <form class="search__bar">
-              <input type="text" name="appointment" id="appointment" placeholder="Search..." />
-              <button type="submit">
-                <img src="../assets/admin_images/search.svg" alt="search icon" />
-              </button>
-            </form>
-          </div>
+      <!-- booked appointments -->
+      <div class="booked__container">
+        <div class="booked-appointments__table">
+          <h1 class="table-heading">booked appointments <span class="table-item-count">13</span></h1>
 
-          <!-- appointments table -->
           <table>
-            <!-- head -->
             <thead>
               <tr>
-                <th class="patient_img">IMG</th>
-                <th class="patient_name" style="width: 7.5rem">APPOINTMENT ID</th>
-                <th class="patient_id" style="width: 2rem">USER ID</th>
-                <th class="patient_name">PATIENT NAME</th>
-                <th class="patient_time">TIME</th>
-                <th class="patient_email">EMAIL</th>
-                <th class="patient_message">MESSAGE</th>
+                <th>
+                  date 
+                  <div class="dropdown-container">
+                    <button class="filter-btn">
+                    <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M5.22488 3.35999L3.36487 1.5L1.50488 3.35999" stroke="#616161" stroke-width="0.75" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M3.36499 10.5V1.5" stroke="#616161" stroke-width="0.75" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M6.77466 8.64001L8.63467 10.5L10.4947 8.64001" stroke="#616161" stroke-width="0.75" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M8.63379 1.5V10.5" stroke="#616161" stroke-width="0.75" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                    </button>
+
+                    <ul class="dropdown">
+                      <li><button>today</button></li>
+                      <li><button>this week</button></li>
+                      <li><button>this month</button></li>
+                      <li><button>custom date range</button></li>
+                    </ul>
+                  </div>
+                </th>
+                <th>
+                  time 
+                </th>
+                <th>
+                  patient name
+                  <div class="dropdown-container">
+                    <button class="filter-btn">
+                    <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M5.22488 3.35999L3.36487 1.5L1.50488 3.35999" stroke="#616161" stroke-width="0.75" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M3.36499 10.5V1.5" stroke="#616161" stroke-width="0.75" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M6.77466 8.64001L8.63467 10.5L10.4947 8.64001" stroke="#616161" stroke-width="0.75" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M8.63379 1.5V10.5" stroke="#616161" stroke-width="0.75" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                    </button>
+                    <ul class="dropdown">
+                      <li><button>all patients</button></li>
+                      <li><button>new patients</button></li>
+                      <li><button>regular patients</button></li>
+                    </ul>
+                  </div>
+
+                </th>
+                <th>phone #</th>
+                <th>id #</th>
+                <th>
+                  action 
+                  <div class="dropdown-container">
+                    <button class="filter-btn">
+                    <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M5.22488 3.35999L3.36487 1.5L1.50488 3.35999" stroke="#616161" stroke-width="0.75" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M3.36499 10.5V1.5" stroke="#616161" stroke-width="0.75" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M6.77466 8.64001L8.63467 10.5L10.4947 8.64001" stroke="#616161" stroke-width="0.75" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M8.63379 1.5V10.5" stroke="#616161" stroke-width="0.75" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                    </button>
+
+                    <ul class="dropdown">
+                      <li><button>updated</button></li>
+                      <li><button>accepted</button></li>
+                    </ul>
+                  </div>
+                </th>
               </tr>
             </thead>
 
-            <!-- body -->
-            <?php foreach ($users as $user){?>
-            <tr>
-              <td>
-                <img src="../assets/admin_images/default_image.svg" class="img"
-                  style="border-radius: 4rem; width: 2rem; height: 2rem" />
-              </td>
-              <td><?php echo $user['appointment_id']; ?></td>
-              <td><?php echo $user['user_id']; ?></td>
-              <td><?php echo $user['name']; ?></td>
-              <td><?php echo date('l, m/d/Y', strtotime($user['date'])); ?></td>
-              <td><?php echo $user['email']; ?></td>
-              <?php if(strlen($user['message']) === 0){ ?>
-                <td>No Message</td>
-              <?php } else {?>
-                <td><?php echo $user['message']; ?></td>
+            <tbody>
+              <?php foreach ($users as $user){?>
+              <tr class="appointment-row"
+                data-date="<?php echo date('Y-m-d', strtotime($user['date'])); ?>">
+                <td class="patient-cell date">
+                  <?php echo date('l, m/d/Y', strtotime($user['date'])); ?>
+                </td>
+
+                <td class="patient-cell time">
+                  <?php echo $user['time']; ?>
+                </td>
+
+                <td class="patient-cell name-email">
+                  <p class="patient-name" title="<?php echo $user['name']; ?>">
+                    <?php echo $user['name']; ?>
+                  </p>
+                  <p class="patient-email" title="<?php echo $user['email']; ?>">
+                    <?php echo $user['email']; ?>
+                  </p>
+                </td>
+
+                <td class="patient-cell contact">
+                  <?php echo $user['contact']; ?>
+                </td>
+
+                <td class="patient-cell apt-id">
+                  <?php echo $user['appointment_id']; ?>
+                </td>
+
+                <td class="patient-cell action" data-status="<?php echo $user['status']; ?>">
+
+                </td>
+              </tr>
               <?php } ?>
-            </tr>
-            <?php } ?>
+            </tbody>
           </table>
           <?php if($result->num_rows == 0) { ?>
           <p>No appointment requests</p>
           <?php } ?>
-
-          <!-- Pagination -->
-          <?php renderPagination($page, $totalPages) ?>
         </div>
+
+        <!-- Pagination -->
+        <?php renderPagination($page, $number_of_pages) ?>
       </div>
     </section>
   </main>
 </body>
+<script>
+  const actions = document.querySelectorAll('.patient-cell.action')
+  const actBtns = ["Reschedule", "View History"]
+  actions.forEach(action => {
+    action.innerHTML = `<button class="reschedule-btn">${action.dataset.status === 'accepted'? 'Reschedule': 'View History'}</button>`
+    
+    const button = action.querySelector('button')
+    let actionText = button.textContent.trim()
+    
+    if(actionText === 'Reschedule') 
+      button.style.color = 'var(--cancel-btn-clr)'
+  })
 
+  const dropdownContainers = document.querySelectorAll('.dropdown-container')
+  dropdownContainers.forEach(container => {
+    container.addEventListener('click', e => {   
+      if(e.target.closest('.filter-btn')) {
+        const dropdown = container.querySelector('.dropdown')
+        dropdown.style.display = dropdown.style.display === 'flex' ? 'none' : 'flex'
+      } 
+    })
+  })
+
+  document.addEventListener('click', e => {
+    if(!e.target.closest('.filter-btn'))
+     document.querySelectorAll('.dropdown').forEach(dropdown => {
+      dropdown.style.display = 'none'
+     })
+  })
+</script>
 </html>

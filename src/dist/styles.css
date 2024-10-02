@@ -2114,6 +2114,7 @@ body.user-homepage main .about .services .appointment__button:hover {
 
 .navbar {
   --ff-inter: "Inter", sans-serif;
+  width: 100%;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -2147,6 +2148,7 @@ body.user-homepage main .about .services .appointment__button:hover {
   text-transform: capitalize;
 }
 .navbar__datetime {
+  width: 20rem;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -2157,7 +2159,6 @@ body.user-homepage main .about .services .appointment__button:hover {
   text-transform: uppercase;
 }
 .navbar__datetime .navbar__date {
-  position: relative;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -2165,15 +2166,13 @@ body.user-homepage main .about .services .appointment__button:hover {
   gap: 0.75rem;
   font-size: 0.875rem;
 }
-.navbar__datetime .navbar__date::after {
-  content: "";
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  height: 3rem;
+.navbar__datetime hr {
+  outline: 0;
+  border: 0;
+  background: none;
   width: 1px;
-  right: -0.5rem;
-  background-color: hsla(0, 0%, 38%, 0.4);
+  height: 100%;
+  background-color: hsla(0, 0%, 38%, 0.3);
 }
 .navbar__datetime .navbar__time {
   display: flex;
@@ -2636,122 +2635,466 @@ body.user-homepage main .about .services .appointment__button:hover {
 }
 
 .appointments__container.appointments__page {
+  --ff-inter: "Inter", sans-serif;
+  --tbl-border: 1px solid hsl(0, 0%, 38%, 0.2);
+  --cancel-btn-clr: #ff6e5c;
+  --charcoal-gray: hsl(0, 0%, 38%, 0.7);
+  --transparent-gray: hsl(0, 0%, 38%, 0.1);
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  flex-direction: column;
+  gap: 1.25rem;
   width: 100%;
 }
-.appointments__container.appointments__page .appointments {
+.appointments__container.appointments__page .appointments__table {
   width: 100%;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  flex-direction: column;
+  gap: 1.25rem;
+  color: var(--ntrl-clr-300);
+  letter-spacing: -1px;
+  padding: 1.5rem;
+  border-radius: 1.25rem;
+  background-color: var(--ntrl-clr-100);
 }
-.appointments__container.appointments__page .appointments table {
-  width: 100%;
-  border-collapse: collapse;
-}
-.appointments__container.appointments__page .appointments table thead tr th {
-  padding: 0.5rem;
-  font-size: calc(var(--fs-100) + 0.1rem);
-  color: var(--pr-clr-300);
-  outline: 1px solid var(--pr-clr-400);
-}
-.appointments__container.appointments__page .appointments table thead tr th.patient_img {
-  width: 1rem;
-}
-.appointments__container.appointments__page .appointments table thead tr th.patient_appointment {
-  width: 2rem;
-}
-.appointments__container.appointments__page .appointments table thead tr th.patient_name {
-  width: 10rem;
-}
-.appointments__container.appointments__page .appointments table thead tr th.patient_time {
-  width: 6rem;
-}
-.appointments__container.appointments__page .appointments table thead tr th.patient_email {
-  width: 6rem;
-}
-.appointments__container.appointments__page .appointments table thead tr th.patient_message {
-  width: 10rem;
-}
-.appointments__container.appointments__page .appointments table thead tr th.patient_location {
-  width: 14rem;
-}
-.appointments__container.appointments__page .appointments table thead tr th.actions {
-  width: 0.5rem;
-}
-.appointments__container.appointments__page .appointments table tbody tr td {
-  font-size: calc(var(--fs-100) + 0.1rem);
-  padding-block: 1rem;
-  padding-inline: 0.5rem;
-  outline: 1px solid var(--pr-clr-400);
-}
-
-.patients__container {
-  width: 100%;
-}
-.patients__container .patients {
-  width: 100%;
-}
-.patients__container .patients table {
-  width: 100%;
-  border-collapse: collapse;
-}
-.patients__container .patients table thead tr th {
-  font-size: calc(var(--fs-100) + 0.1rem);
-  padding: 0.5rem;
-  color: var(--pr-clr-300) !important;
-  outline: 1px solid rgba(29, 114, 242, 0.5215686275);
-}
-.patients__container .patients table thead tr th.patient_img {
-  width: 1rem;
-}
-.patients__container .patients table thead tr th.patient_name {
-  width: 16rem;
-}
-.patients__container .patients table thead tr th.patient_email {
-  width: 3rem;
-}
-.patients__container .patients table thead tr th.patient_contact {
-  width: 8rem;
-}
-.patients__container .patients table thead tr th.patient_address {
-  width: 12rem;
-}
-.patients__container .patients table tbody tr td {
-  font-size: calc(var(--fs-100) + 0.1rem);
-  padding-block: 1rem;
-  padding-inline: 0.5rem;
-  outline: 1px solid rgba(29, 114, 242, 0.5215686275);
-}
-
-.pagination {
+.appointments__container.appointments__page .appointments__table .table-heading {
   display: flex;
   align-items: center;
   justify-content: center;
+  flex-direction: row;
   gap: 0.5rem;
+  font-size: 1.5rem;
+  font-family: var(--ff-inter);
+  text-transform: uppercase;
+}
+.appointments__container.appointments__page .appointments__table .table-heading .table-item-count {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: row;
+  gap: 0;
+  width: 1.25rem;
+  height: 1.25rem;
+  font-size: 0.875rem;
+  color: var(--ntrl-clr-100);
+  padding: 0.25rem;
+  border-radius: 50%;
+  background-color: var(--pr-clr-100);
+}
+.appointments__container.appointments__page .appointments__table table {
+  width: 100%;
+  border-collapse: collapse;
+}
+.appointments__container.appointments__page .appointments__table table th,
+.appointments__container.appointments__page .appointments__table table td {
+  padding: 0.875rem 0.75rem;
+}
+.appointments__container.appointments__page .appointments__table table thead tr {
+  border-top: var(--tbl-border);
+  border-bottom: var(--tbl-border);
+}
+.appointments__container.appointments__page .appointments__table table thead tr th {
+  font-weight: bold;
+  color: var(--pr-clr-300);
+  text-transform: capitalize;
+  text-align: left;
+}
+.appointments__container.appointments__page .appointments__table table thead tr th:first-child {
+  padding-inline-start: 0;
+}
+.appointments__container.appointments__page .appointments__table table tbody tr {
+  border-bottom: var(--tbl-border);
+  cursor: pointer;
+}
+.appointments__container.appointments__page .appointments__table table tbody tr td {
+  font-size: 0.875rem;
+  padding: 1.5rem 0.75rem;
+}
+.appointments__container.appointments__page .appointments__table table tbody tr td.patient-cell.id {
+  width: 5.8rem;
+  padding-inline-start: 0;
+}
+.appointments__container.appointments__page .appointments__table table tbody tr td.patient-cell.name {
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  flex-direction: column;
+  gap: 0;
+}
+.appointments__container.appointments__page .appointments__table table tbody tr td.patient-cell.name > * {
+  width: 10rem;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+.appointments__container.appointments__page .appointments__table table tbody tr td.patient-cell.name .patient-name {
+  font-size: 1.2rem;
+  font-weight: 600;
+}
+.appointments__container.appointments__page .appointments__table table tbody tr td.patient-cell.name .patient-email {
+  font-family: var(--ff-inter);
+  font-size: 0.875rem;
+  color: var(--charcoal-gray);
+}
+.appointments__container.appointments__page .appointments__table table tbody tr td.patient-cell.phone {
+  width: 8.5rem;
+}
+.appointments__container.appointments__page .appointments__table table tbody tr td.patient-cell.time {
+  width: 5rem;
+}
+.appointments__container.appointments__page .appointments__table table tbody tr td.patient-cell.date {
+  width: 6rem;
+}
+.appointments__container.appointments__page .appointments__table table tbody tr td.patient-cell.message .message-text {
+  width: 4rem;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  text-transform: none;
+}
+.appointments__container.appointments__page .appointments__table table tbody tr td:last-child {
+  width: 9rem;
+  font-weight: 600;
+}
+.appointments__container.appointments__page .appointments__table table tbody tr td:last-child .button-container {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  flex-direction: row;
+  gap: 1rem;
+}
+.appointments__container.appointments__page .appointments__table table tbody tr td:last-child .button-container .button {
+  cursor: pointer;
+}
+.appointments__container.appointments__page .appointments__table table tbody tr td:last-child .button-container .button:hover {
+  text-decoration: underline;
+}
+.appointments__container.appointments__page .appointments__table table tbody tr td:last-child .button-container .button.accept {
+  color: var(--pr-clr-350);
+}
+.appointments__container.appointments__page .appointments__table table tbody tr td:last-child .button-container .button.cancel {
+  color: var(--cancel-btn-clr);
+}
+
+.booked__container {
+  --ff-inter: "Inter", sans-serif;
+  --tbl-border: 1px solid hsl(0, 0%, 38%, 0.2);
+  --cancel-btn-clr: #ff6e5c;
+  --charcoal-gray: hsl(0, 0%, 38%, 0.7);
+  --dropdown-bdr: 1px solid hsl(0, 0%, 38%, 0.3);
+  --transparent-gray: hsl(0, 0%, 38%, 0.1);
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  flex-direction: column;
+  gap: 1.25rem;
+  width: 100%;
+}
+.booked__container .booked-appointments__table {
+  width: 100%;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  flex-direction: column;
+  gap: 1.25rem;
+  color: var(--ntrl-clr-300);
+  letter-spacing: -1px;
+  padding: 1.5rem;
+  border-radius: 1.25rem;
+  background-color: var(--ntrl-clr-100);
+}
+.booked__container .booked-appointments__table .table-heading {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: row;
+  gap: 0.5rem;
+  font-size: 1.5rem;
+  font-family: var(--ff-inter);
+  text-transform: uppercase;
+}
+.booked__container .booked-appointments__table .table-heading .table-item-count {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: row;
+  gap: 0;
+  width: 1.25rem;
+  height: 1.25rem;
+  font-size: 0.875rem;
+  color: var(--ntrl-clr-100);
+  padding: 0.25rem;
+  border-radius: 50%;
+  background-color: var(--pr-clr-100);
+}
+.booked__container .booked-appointments__table table {
+  width: 100%;
+  border-collapse: collapse;
+}
+.booked__container .booked-appointments__table table th,
+.booked__container .booked-appointments__table table td {
+  padding: 0.875rem 0.75rem;
+}
+.booked__container .booked-appointments__table table thead tr {
+  background-color: hsla(0, 0%, 92%, 0.3);
+  border-top: var(--tbl-border);
+  border-bottom: var(--tbl-border);
+}
+.booked__container .booked-appointments__table table thead tr th {
+  font-weight: bold;
+  color: var(--pr-clr-300);
+  text-transform: capitalize;
+  text-align: left;
+}
+.booked__container .booked-appointments__table table thead tr th:not(:last-child) {
+  border-right: 1px solid hsla(0, 0%, 36%, 0.2);
+}
+.booked__container .booked-appointments__table table thead tr th .dropdown-container {
+  position: relative;
+  width: -moz-min-content;
+  width: min-content;
+  margin-left: 0.5rem;
+  display: inline-block;
+}
+.booked__container .booked-appointments__table table thead tr th .dropdown-container .filter-btn {
+  width: 100%;
+  cursor: pointer;
+}
+.booked__container .booked-appointments__table table thead tr th .dropdown-container .dropdown {
+  position: absolute;
+  top: 3rem;
+  left: 0;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  flex-direction: column;
+  gap: 0;
+  border: var(--dropdown-bdr);
+  border-radius: 0.5rem;
+  background-color: var(--ntrl-clr-100);
+  overflow: hidden;
+  z-index: 1;
+  box-shadow: 4px 4px 16px hsla(0, 0%, 38%, 0.1);
+  display: none;
+}
+.booked__container .booked-appointments__table table thead tr th .dropdown-container .dropdown li {
+  width: 100%;
+}
+.booked__container .booked-appointments__table table thead tr th .dropdown-container .dropdown li:hover {
+  background-color: var(--transparent-gray);
+}
+.booked__container .booked-appointments__table table thead tr th .dropdown-container .dropdown li:not(:last-child) {
+  border-bottom: var(--dropdown-bdr);
+}
+.booked__container .booked-appointments__table table thead tr th .dropdown-container .dropdown li button {
+  width: -moz-max-content;
+  width: max-content;
+  font-size: 0.875rem;
+  font-weight: normal;
+  color: var(--ntrl-clr-300);
+  padding: 1rem;
+  margin: 0;
+  text-transform: capitalize;
+}
+.booked__container .booked-appointments__table table tbody tr {
+  border-bottom: var(--tbl-border);
+  cursor: pointer;
+}
+.booked__container .booked-appointments__table table tbody tr td {
+  font-size: 0.875rem;
+  padding: 1.5rem 0.75rem;
+}
+.booked__container .booked-appointments__table table tbody tr td.date, .booked__container .booked-appointments__table table tbody tr td.time {
+  width: 8rem;
+  font-size: 1rem;
+  font-weight: bold;
+}
+.booked__container .booked-appointments__table table tbody tr td.name-email {
+  width: 18rem;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  flex-direction: column;
+  gap: 0;
+}
+.booked__container .booked-appointments__table table tbody tr td.name-email > * {
+  width: 10rem;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+.booked__container .booked-appointments__table table tbody tr td.name-email .patient-name {
+  font-size: 1.2rem;
+  font-weight: 600;
+}
+.booked__container .booked-appointments__table table tbody tr td.name-email .patient-email {
+  font-family: var(--ff-inter);
+  font-size: 0.875rem;
+  color: var(--charcoal-gray);
+}
+.booked__container .booked-appointments__table table tbody tr td.action {
+  width: 8rem;
+}
+.booked__container .booked-appointments__table table tbody tr td.action button {
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--ntrl-clr-300);
+  cursor: pointer;
+}
+.booked__container .booked-appointments__table table tbody tr td.action button:hover {
+  text-decoration: underline;
+}
+
+.patients__container {
+  --ff-inter: "Inter", sans-serif;
+  --tbl-border: 1px solid hsl(0, 0%, 38%, 0.2);
+  --cancel-btn-clr: #ff6e5c;
+  --charcoal-gray: hsl(0, 0%, 38%, 0.7);
+  --transparent-gray: hsl(0, 0%, 38%, 0.1);
+  width: 100%;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+.patients__container .patients__table {
+  width: 100%;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  flex-direction: column;
+  gap: 1.25rem;
+  color: var(--ntrl-clr-300);
+  letter-spacing: -1px;
+  padding: 1.5rem;
+  border-radius: 1.25rem;
+  background-color: var(--ntrl-clr-100);
+}
+.patients__container .patients__table .table-heading {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: row;
+  gap: 0.5rem;
+  font-size: 1.5rem;
+  font-family: var(--ff-inter);
+  text-transform: uppercase;
+}
+.patients__container .patients__table .table-heading .table-item-count {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: row;
+  gap: 0;
+  width: 1.25rem;
+  height: 1.25rem;
+  font-size: 0.875rem;
+  color: var(--ntrl-clr-100);
+  padding: 0.25rem;
+  border-radius: 50%;
+  background-color: var(--pr-clr-100);
+}
+.patients__container .patients__table table {
+  width: 100%;
+  border-collapse: collapse;
+}
+.patients__container .patients__table table th,
+.patients__container .patients__table table td {
+  padding: 0.875rem 0.75rem;
+}
+.patients__container .patients__table table thead tr {
+  border-top: var(--tbl-border);
+  border-bottom: var(--tbl-border);
+}
+.patients__container .patients__table table thead tr th {
+  font-weight: bold;
+  color: var(--pr-clr-300);
+  text-transform: capitalize;
+  text-align: left;
+}
+.patients__container .patients__table table thead tr th:first-child {
+  padding-inline-start: 0;
+}
+.patients__container .patients__table table tbody tr {
+  border-bottom: var(--tbl-border);
+  cursor: pointer;
+}
+.patients__container .patients__table table tbody tr td {
+  font-size: 0.875rem;
+  padding: 1.5rem 0.75rem;
+}
+.patients__container .patients__table table tbody tr td.patient-cell.id {
+  font-size: 0.625rem;
+  letter-spacing: normal;
+  padding-inline-start: 0;
+}
+.patients__container .patients__table table tbody tr td.patient-cell.name-email {
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  flex-direction: column;
+  gap: 0;
+}
+.patients__container .patients__table table tbody tr td.patient-cell.name-email > * {
+  width: 10rem;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+.patients__container .patients__table table tbody tr td.patient-cell.name-email .patient-name {
+  font-size: 1.2rem;
+  font-weight: 600;
+}
+.patients__container .patients__table table tbody tr td.patient-cell.name-email .patient-email {
+  font-family: var(--ff-inter);
+  font-size: 0.875rem;
+  color: var(--charcoal-gray);
+}
+
+.pagination {
+  --ff-inter: "Inter", sans-serif;
+  --charcoal-gray: hsl(0, 0%, 38%, 0.7);
+  --transparent-gray: hsl(0, 0%, 38%, 0.1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: row;
+  gap: 0;
   align-self: flex-start;
+  padding: 0.5rem 0.875rem;
+  border-radius: 8rem;
+  background-color: var(--ntrl-clr-100);
 }
 .pagination .active-page {
-  font-weight: bold;
-  color: #e6e6e6 !important;
+  color: var(--ntrl-clr-100) !important;
   text-decoration: none;
   border-radius: 5px;
-  background-color: #1d72f2;
+  background-color: var(--pr-clr-350);
 }
 .pagination .button {
   display: flex;
   align-items: center;
   justify-content: center;
+  flex-direction: row;
+  gap: 0;
   width: 4rem;
   height: 4rem;
   padding: 0.5rem 1rem;
-  color: #2c2c2c;
+  font-family: var(--ff-inter);
+  color: var(--ntrl-clr-300);
   text-decoration: none;
-  border: 1px solid #ddd;
-  border-radius: 5px;
+  border-radius: 50%;
 }
-.pagination .button.icon:hover svg path {
-  stroke: #e6e6e6;
+.pagination .button.icon svg path {
+  stroke: var(--pr-clr-300);
 }
-.pagination .button:hover {
-  background-color: #5c9dff;
-  color: #e6e6e6;
+.pagination .button:hover:not(.active-page) {
+  border: 1px solid var(--charcoal-gray);
+  background-color: var(--transparent-gray);
 }
 
 .doctors-page {

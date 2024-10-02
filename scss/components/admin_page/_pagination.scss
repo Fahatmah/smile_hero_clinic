@@ -1,37 +1,44 @@
+@use '../../abstracts' as *;
+
 .pagination {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 0.5rem;
+  --ff-inter: 'Inter', sans-serif;
+  --charcoal-gray: hsl(0, 0%, 38%, 0.7);
+  --transparent-gray: hsl(0, 0%, 38%, 0.1);
+
+  @include display-flex();
   align-self: flex-start;
+  padding: 0.5rem 0.875rem;
+  border-radius: 8rem;
+  background-color: var(--ntrl-clr-100);
 
   .active-page {
-    font-weight: bold;
-    color: #e6e6e6 !important;
+    // font-weight: 600;
+    color: var(--ntrl-clr-100) !important;
     text-decoration: none;
     border-radius: 5px;
-    background-color: #1d72f2;
+    background-color: var(--pr-clr-350);
   }
 
   .button {
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    @include display-flex();
     width: 4rem;
     height: 4rem;
     padding: 0.5rem 1rem;
-    color: #2c2c2c;
+    font-family: var(--ff-inter);
+    color: var(--ntrl-clr-300);
     text-decoration: none;
-    border: 1px solid #ddd;
-    border-radius: 5px;
+    border-radius: 50%;
 
-    &.icon:hover svg path {
-      stroke: #e6e6e6;
+    &.icon {
+      svg {
+        path {
+          stroke: var(--pr-clr-300);
+        }
+      }
     }
-
-    &:hover {
-      background-color: #5c9dff;
-      color: #e6e6e6;
+    &:hover:not(.active-page) {
+      border: 1px solid var(--charcoal-gray);
+      background-color: var(--transparent-gray);
     }
   }
 }

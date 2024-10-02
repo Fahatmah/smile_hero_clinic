@@ -2,7 +2,7 @@
 
 .navbar {
   --ff-inter: 'Inter', sans-serif;
-
+  width: 100%;
   @include display-flex($gap: 1rem, $x: space-between);
 
   & > * {
@@ -33,26 +33,36 @@
   }
 
   &__datetime {
+    width: 20rem;
     @include display-flex($gap: 1rem);
     font-family: var(--ff-inter);
     color: var(--ntrl-clr-300);
     text-transform: uppercase;
 
     .navbar__date {
-      position: relative;
+      // position: relative;
       @include display-flex($gap: 0.75rem);
       font-size: 0.875rem;
 
-      &::after {
-        content: '';
-        position: absolute;
-        top: 50%;
-        transform: translateY(-50%);
-        height: 3rem;
-        width: 1px;
-        right: -0.5rem;
-        background-color: hsl(0, 0%, 38%, 0.4);
-      }
+      // &::after {
+      //   content: '';
+      //   position: absolute;
+      //   top: 50%;
+      //   transform: translateY(-50%);
+      //   height: 3rem;
+      //   width: 1px;
+      //   right: -0.5rem;
+      //   background-color: hsl(0, 0%, 38%, 0.4);
+      // }
+    }
+
+    hr {
+      outline: 0;
+      border: 0;
+      background: none;
+      width: 1px;
+      height: 100%;
+      background-color: hsl(0, 0%, 38%, 0.3);
     }
 
     .navbar__time {
