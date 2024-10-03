@@ -69,7 +69,10 @@ if ($result->num_rows > 0) {
       <!-- booked appointments -->
       <div class="booked__container">
         <div class="booked-appointments__table">
-          <h1 class="table-heading">booked appointments <span class="table-item-count"><?php echo $totalAppointments ?></span></h1>
+          <div class="table-heading__container">
+            <h1 class="table-heading">booked appointments <span class="table-item-count"><?php echo $totalAppointments ?></span></h1>
+            <?php include("includes/search.php"); ?>
+          </div>
 
           <table>
             <thead>
@@ -140,12 +143,12 @@ if ($result->num_rows > 0) {
               </tr>
             </thead>
 
-            <tbody>
+            <tbody id="items">
               <tr class="no-appointment-message" style="display:none;">
                 <td colspan="6" style="text-align: center;">There's no such appointment in this section</td>
               </tr>
               <?php foreach ($users as $user){?>
-              <tr class="appointment-row"
+              <tr class="item-row appointment-row"
                 data-date="<?php echo date('Y-m-d', strtotime($user['date'])); ?>">
                 <td class="patient-cell date" data-date="<?php echo $user['date'] ?>">
                   <?php echo date('l, m/d/Y', strtotime($user['date'])); ?>
@@ -164,7 +167,7 @@ if ($result->num_rows > 0) {
                   </p>
                 </td>
 
-                <td class="patient-cell contact">
+                <td class="patient-cell phone">
                   <?php echo $user['contact']; ?>
                 </td>
 

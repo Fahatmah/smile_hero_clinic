@@ -72,7 +72,10 @@ if ($result->num_rows > 0) {
       
       <div class="appointments__container appointments__page">
         <div class="appointments__table">
-          <h1 class="table-heading">pending appointments <span class="table-item-count"><?php echo $totalAppointments ?></span></h1>
+          <div class="table-heading__container">
+            <h1 class="table-heading">pending appointments <span class="table-item-count"><?php echo $totalAppointments ?></span></h1>
+            <?php include("includes/search.php"); ?>
+          </div>
 
           <?php if (count($users) > 0) { ?>
           <table>
@@ -124,12 +127,12 @@ if ($result->num_rows > 0) {
               </tr>
             </thead>
 
-            <tbody>
+            <tbody id="items">
               <tr class="no-appointment-message" style="display:none;">
                 <td colspan="6" style="text-align: center;">There's no such appointment in this section</td>
               </tr>
               <?php foreach ($users as $user){?>
-              <tr class="appointment-row"
+              <tr class="item-row appointment-row"
                 data-date="<?php echo date('Y-m-d', strtotime($user['date'])); ?>">
                 <td class="patient-cell id">
                   <?php echo $user['appointment_id']; ?>

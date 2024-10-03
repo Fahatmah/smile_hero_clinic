@@ -64,7 +64,10 @@ if ($result->num_rows > 0) {
       <!-- patients -->
       <div class="patients__container">
         <div class="patients__table">
-          <h1 class="table-heading">Patients <span class="table-item-count">13</span></h1>
+          <div class="table-heading__container">
+            <h1 class="table-heading">pending appointments <span class="table-item-count">13</span></h1>
+            <?php include("includes/search.php"); ?>
+          </div>
 
           <table>
             <thead>
@@ -97,12 +100,12 @@ if ($result->num_rows > 0) {
               </tr>
             </thead>
 
-            <tbody>
+            <tbody id="items">
               <tr class="no-appointment-message" style="display:none;">
                 <td colspan="6" style="text-align: center;">There's no such appointment in this section</td>
               </tr>
               <?php foreach ($users as $user){ ?>
-              <tr>
+              <tr class="item-row appointment-row">
                 <td class="patient-cell id">
                   <?php echo htmlspecialchars($user['user_id']); ?>
                 </td>
@@ -136,7 +139,7 @@ if ($result->num_rows > 0) {
                  } ?>
                 </td>
 
-                <td class="patient-cell regdate">
+                <td class="patient-cell date">
                   <?php echo htmlspecialchars($user['created_at']); ?>
                 </td>
               </tr>
@@ -151,7 +154,7 @@ if ($result->num_rows > 0) {
   </main>
 </body>
 <script>
-  const registrationDates = document.querySelectorAll('.patient-cell.regdate')
+  const registrationDates = document.querySelectorAll('.patient-cell.date')
   
   function sliceRegistrationDate(dateObjs){   
     return Array.from(dateObjs).map(dateObj => {

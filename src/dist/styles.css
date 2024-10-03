@@ -2661,7 +2661,15 @@ body.user-homepage main .about .services .appointment__button:hover {
   border-radius: 1.25rem;
   background-color: var(--ntrl-clr-100);
 }
-.appointments__container.appointments__page .appointments__table .table-heading {
+.appointments__container.appointments__page .appointments__table .table-heading__container {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-direction: row;
+  gap: 0;
+}
+.appointments__container.appointments__page .appointments__table .table-heading__container .table-heading {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -2671,7 +2679,7 @@ body.user-homepage main .about .services .appointment__button:hover {
   font-family: var(--ff-inter);
   text-transform: uppercase;
 }
-.appointments__container.appointments__page .appointments__table .table-heading .table-item-count {
+.appointments__container.appointments__page .appointments__table .table-heading__container .table-heading .table-item-count {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -2684,6 +2692,28 @@ body.user-homepage main .about .services .appointment__button:hover {
   padding: 0.25rem;
   border-radius: 50%;
   background-color: var(--pr-clr-100);
+}
+.appointments__container.appointments__page .appointments__table .table-heading__container .search__container {
+  width: 25rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-direction: row;
+  gap: 0;
+  padding: 0.75rem 1rem;
+  border-radius: 2rem;
+  background-color: #f8f8f8;
+  outline: 1px solid hsla(0, 0%, 38%, 0.3);
+}
+.appointments__container.appointments__page .appointments__table .table-heading__container .search__container input {
+  width: 100%;
+  color: var(--ntrl-clr-300);
+}
+.appointments__container.appointments__page .appointments__table .table-heading__container .search__container input::-moz-placeholder {
+  color: hsla(0, 0%, 38%, 0.5);
+}
+.appointments__container.appointments__page .appointments__table .table-heading__container .search__container input::placeholder {
+  color: hsla(0, 0%, 38%, 0.5);
 }
 .appointments__container.appointments__page .appointments__table table {
   width: 100%;
@@ -2854,7 +2884,15 @@ body.user-homepage main .about .services .appointment__button:hover {
   border-radius: 1.25rem;
   background-color: var(--ntrl-clr-100);
 }
-.booked__container .booked-appointments__table .table-heading {
+.booked__container .booked-appointments__table .table-heading__container {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-direction: row;
+  gap: 0;
+}
+.booked__container .booked-appointments__table .table-heading__container .table-heading {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -2864,7 +2902,7 @@ body.user-homepage main .about .services .appointment__button:hover {
   font-family: var(--ff-inter);
   text-transform: uppercase;
 }
-.booked__container .booked-appointments__table .table-heading .table-item-count {
+.booked__container .booked-appointments__table .table-heading__container .table-heading .table-item-count {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -2877,6 +2915,28 @@ body.user-homepage main .about .services .appointment__button:hover {
   padding: 0.25rem;
   border-radius: 50%;
   background-color: var(--pr-clr-100);
+}
+.booked__container .booked-appointments__table .table-heading__container .search__container {
+  width: 25rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-direction: row;
+  gap: 0;
+  padding: 0.75rem 1rem;
+  border-radius: 2rem;
+  background-color: #f8f8f8;
+  outline: 1px solid hsla(0, 0%, 38%, 0.3);
+}
+.booked__container .booked-appointments__table .table-heading__container .search__container input {
+  width: 100%;
+  color: var(--ntrl-clr-300);
+}
+.booked__container .booked-appointments__table .table-heading__container .search__container input::-moz-placeholder {
+  color: hsla(0, 0%, 38%, 0.5);
+}
+.booked__container .booked-appointments__table .table-heading__container .search__container input::placeholder {
+  color: hsla(0, 0%, 38%, 0.5);
 }
 .booked__container .booked-appointments__table table {
   width: 100%;
@@ -3023,7 +3083,15 @@ body.user-homepage main .about .services .appointment__button:hover {
   border-radius: 1.25rem;
   background-color: var(--ntrl-clr-100);
 }
-.patients__container .patients__table .table-heading {
+.patients__container .patients__table .table-heading__container {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-direction: row;
+  gap: 0;
+}
+.patients__container .patients__table .table-heading__container .table-heading {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -3033,7 +3101,7 @@ body.user-homepage main .about .services .appointment__button:hover {
   font-family: var(--ff-inter);
   text-transform: uppercase;
 }
-.patients__container .patients__table .table-heading .table-item-count {
+.patients__container .patients__table .table-heading__container .table-heading .table-item-count {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -3046,6 +3114,28 @@ body.user-homepage main .about .services .appointment__button:hover {
   padding: 0.25rem;
   border-radius: 50%;
   background-color: var(--pr-clr-100);
+}
+.patients__container .patients__table .table-heading__container .search__container {
+  width: 25rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-direction: row;
+  gap: 0;
+  padding: 0.75rem 1rem;
+  border-radius: 2rem;
+  background-color: #f8f8f8;
+  outline: 1px solid hsla(0, 0%, 38%, 0.3);
+}
+.patients__container .patients__table .table-heading__container .search__container input {
+  width: 100%;
+  color: var(--ntrl-clr-300);
+}
+.patients__container .patients__table .table-heading__container .search__container input::-moz-placeholder {
+  color: hsla(0, 0%, 38%, 0.5);
+}
+.patients__container .patients__table .table-heading__container .search__container input::placeholder {
+  color: hsla(0, 0%, 38%, 0.5);
 }
 .patients__container .patients__table table {
   width: 100%;
