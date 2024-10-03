@@ -141,6 +141,9 @@ if ($result->num_rows > 0) {
             </thead>
 
             <tbody>
+              <tr class="no-appointment-message" style="display:none;">
+                <td colspan="6" style="text-align: center;">There's no such appointment in this section</td>
+              </tr>
               <?php foreach ($users as $user){?>
               <tr class="appointment-row"
                 data-date="<?php echo date('Y-m-d', strtotime($user['date'])); ?>">
@@ -232,6 +235,8 @@ if ($result->num_rows > 0) {
     const startOfMonth = new Date(today.getFullYear(), today.getMonth(), 1); // start of the current month
     const endOfMonth = new Date(today.getFullYear(), today.getMonth() + 1, 0); // end of the current month
 
+    let visibleRows = 0
+
     appointmentRows.forEach(row => {
       const appointmentDate = new Date(row.querySelector('.patient-cell.date').getAttribute('data-date'))
 
@@ -242,7 +247,9 @@ if ($result->num_rows > 0) {
       else if (filterType === 'this month') showRow = isDateRange(appointmentDate, startOfMonth, endOfMonth)
 
       row.style.display = showRow ? '' : 'none'
+      if (showRow) visibleRows++
     })
+    document.querySelector('.no-appointment-message').style.display = visibleRows === 0 ? '' : 'none'
   }
 
   dateDropdown.addEventListener('click', e => {
@@ -254,11 +261,15 @@ if ($result->num_rows > 0) {
   const actionsDropdown = document.querySelector('.dropdown.actions')
   const appointmentRows = document.querySelectorAll('.appointment-row')
   function filterAppointments(filterType) {
+    let visibleRows = 0
     appointmentRows.forEach(row => {
       const status = row.querySelector('.patient-cell.action').getAttribute('data-status')
-      if(filterType === 'all' || status === filterType)  row.style.display = ''
-      else row.style.display = 'none'
+      const showRow = filterType === 'all' || status === filterType;
+      row.style.display = showRow ? '' : 'none';
+      
+      if (showRow) visibleRows++
     })
+    document.querySelector('.no-appointment-message').style.display = visibleRows === 0 ? '' : 'none'
   }
 
   actionsDropdown.addEventListener('click', e => {

@@ -2640,6 +2640,7 @@ body.user-homepage main .about .services .appointment__button:hover {
   --cancel-btn-clr: #ff6e5c;
   --charcoal-gray: hsl(0, 0%, 38%, 0.7);
   --transparent-gray: hsl(0, 0%, 38%, 0.1);
+  --dropdown-bdr: 1px solid hsl(0, 0%, 38%, 0.3);
   display: flex;
   align-items: flex-start;
   justify-content: center;
@@ -2704,6 +2705,53 @@ body.user-homepage main .about .services .appointment__button:hover {
 }
 .appointments__container.appointments__page .appointments__table table thead tr th:first-child {
   padding-inline-start: 0;
+}
+.appointments__container.appointments__page .appointments__table table thead tr th .dropdown-container {
+  position: relative;
+  width: -moz-min-content;
+  width: min-content;
+  margin-left: 0.5rem;
+  display: inline-block;
+}
+.appointments__container.appointments__page .appointments__table table thead tr th .dropdown-container .filter-btn {
+  width: 100%;
+  cursor: pointer;
+}
+.appointments__container.appointments__page .appointments__table table thead tr th .dropdown-container .dropdown {
+  position: absolute;
+  top: 3rem;
+  left: 0;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  flex-direction: column;
+  gap: 0;
+  border: var(--dropdown-bdr);
+  border-radius: 0.5rem;
+  background-color: var(--ntrl-clr-100);
+  overflow: hidden;
+  z-index: 1;
+  box-shadow: 4px 4px 16px hsla(0, 0%, 38%, 0.1);
+  display: none;
+}
+.appointments__container.appointments__page .appointments__table table thead tr th .dropdown-container .dropdown li {
+  width: 100%;
+}
+.appointments__container.appointments__page .appointments__table table thead tr th .dropdown-container .dropdown li:hover {
+  background-color: var(--transparent-gray);
+}
+.appointments__container.appointments__page .appointments__table table thead tr th .dropdown-container .dropdown li:not(:last-child) {
+  border-bottom: var(--dropdown-bdr);
+}
+.appointments__container.appointments__page .appointments__table table thead tr th .dropdown-container .dropdown li button {
+  width: -moz-max-content;
+  width: max-content;
+  font-size: 0.875rem;
+  font-weight: normal;
+  color: var(--ntrl-clr-300);
+  padding: 1rem;
+  margin: 0;
+  text-transform: capitalize;
 }
 .appointments__container.appointments__page .appointments__table table tbody tr {
   border-bottom: var(--tbl-border);
@@ -2954,6 +3002,7 @@ body.user-homepage main .about .services .appointment__button:hover {
   --cancel-btn-clr: #ff6e5c;
   --charcoal-gray: hsl(0, 0%, 38%, 0.7);
   --transparent-gray: hsl(0, 0%, 38%, 0.1);
+  --dropdown-bdr: 1px solid hsl(0, 0%, 38%, 0.3);
   width: 100%;
   display: flex;
   align-items: flex-start;
@@ -3019,6 +3068,53 @@ body.user-homepage main .about .services .appointment__button:hover {
 .patients__container .patients__table table thead tr th:first-child {
   padding-inline-start: 0;
 }
+.patients__container .patients__table table thead tr th .dropdown-container {
+  position: relative;
+  width: -moz-min-content;
+  width: min-content;
+  margin-left: 0.5rem;
+  display: inline-block;
+}
+.patients__container .patients__table table thead tr th .dropdown-container .filter-btn {
+  width: 100%;
+  cursor: pointer;
+}
+.patients__container .patients__table table thead tr th .dropdown-container .dropdown {
+  position: absolute;
+  top: 3rem;
+  left: 0;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  flex-direction: column;
+  gap: 0;
+  border: var(--dropdown-bdr);
+  border-radius: 0.5rem;
+  background-color: var(--ntrl-clr-100);
+  overflow: hidden;
+  z-index: 1;
+  box-shadow: 4px 4px 16px hsla(0, 0%, 38%, 0.1);
+  display: none;
+}
+.patients__container .patients__table table thead tr th .dropdown-container .dropdown li {
+  width: 100%;
+}
+.patients__container .patients__table table thead tr th .dropdown-container .dropdown li:hover {
+  background-color: var(--transparent-gray);
+}
+.patients__container .patients__table table thead tr th .dropdown-container .dropdown li:not(:last-child) {
+  border-bottom: var(--dropdown-bdr);
+}
+.patients__container .patients__table table thead tr th .dropdown-container .dropdown li button {
+  width: -moz-max-content;
+  width: max-content;
+  font-size: 0.875rem;
+  font-weight: normal;
+  color: var(--ntrl-clr-300);
+  padding: 1rem;
+  margin: 0;
+  text-transform: capitalize;
+}
 .patients__container .patients__table table tbody tr {
   border-bottom: var(--tbl-border);
   cursor: pointer;
@@ -3061,6 +3157,7 @@ body.user-homepage main .about .services .appointment__button:hover {
   --cancel-btn-clr: #ff6e5c;
   --charcoal-gray: hsl(0, 0%, 38%, 0.7);
   --transparent-gray: hsl(0, 0%, 38%, 0.1);
+  --dropdown-bdr: 1px solid hsl(0, 0%, 38%, 0.3);
   display: flex;
   align-items: flex-start;
   justify-content: center;
@@ -3126,6 +3223,54 @@ body.user-homepage main .about .services .appointment__button:hover {
 .feedbacks__container .feedbacks__table table thead tr th:first-child {
   padding-inline-start: 0;
 }
+.feedbacks__container .feedbacks__table table thead tr th .dropdown-container {
+  position: relative;
+  width: -moz-min-content;
+  width: min-content;
+  margin-left: 0.5rem;
+  display: inline-block;
+}
+.feedbacks__container .feedbacks__table table thead tr th .dropdown-container .filter-btn {
+  width: 100%;
+  cursor: pointer;
+}
+.feedbacks__container .feedbacks__table table thead tr th .dropdown-container .dropdown {
+  width: 6rem;
+  position: absolute;
+  top: 3rem;
+  left: 0;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  flex-direction: column;
+  gap: 0;
+  border: var(--dropdown-bdr);
+  border-radius: 0.5rem;
+  background-color: var(--ntrl-clr-100);
+  overflow: hidden;
+  z-index: 1;
+  box-shadow: 4px 4px 16px hsla(0, 0%, 38%, 0.1);
+  display: none;
+}
+.feedbacks__container .feedbacks__table table thead tr th .dropdown-container .dropdown li {
+  width: 100%;
+}
+.feedbacks__container .feedbacks__table table thead tr th .dropdown-container .dropdown li:hover {
+  background-color: var(--transparent-gray);
+}
+.feedbacks__container .feedbacks__table table thead tr th .dropdown-container .dropdown li:not(:last-child) {
+  border-bottom: var(--dropdown-bdr);
+}
+.feedbacks__container .feedbacks__table table thead tr th .dropdown-container .dropdown li button {
+  width: -moz-max-content;
+  width: max-content;
+  font-size: 0.875rem;
+  font-weight: normal;
+  color: var(--ntrl-clr-300);
+  padding: 1rem;
+  margin: 0;
+  text-transform: capitalize;
+}
 .feedbacks__container .feedbacks__table table tbody tr {
   border-bottom: var(--tbl-border);
   cursor: pointer;
@@ -3142,6 +3287,10 @@ body.user-homepage main .about .services .appointment__button:hover {
 }
 .feedbacks__container .feedbacks__table table tbody tr td.name, .feedbacks__container .feedbacks__table table tbody tr td.rating, .feedbacks__container .feedbacks__table table tbody tr td.message {
   font-weight: bold;
+}
+.feedbacks__container .feedbacks__table table tbody tr td.rating {
+  width: 6rem;
+  text-align: center;
 }
 
 .pagination {

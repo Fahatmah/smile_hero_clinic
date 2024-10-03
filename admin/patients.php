@@ -71,7 +71,25 @@ if ($result->num_rows > 0) {
               <tr>
                 <th>id #</th>
                 <th>name & email</th>
-                <th>gender</th>
+                <th>
+                  gender
+                  <div class="dropdown-container">
+                    <button class="filter-btn">
+                    <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M5.22488 3.35999L3.36487 1.5L1.50488 3.35999" stroke="#616161" stroke-width="0.75" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M3.36499 10.5V1.5" stroke="#616161" stroke-width="0.75" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M6.77466 8.64001L8.63467 10.5L10.4947 8.64001" stroke="#616161" stroke-width="0.75" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M8.63379 1.5V10.5" stroke="#616161" stroke-width="0.75" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                    </button>
+
+                    <ul class="dropdown gender">
+                      <li><button>all</button></li>
+                      <li><button>male</button></li>
+                      <li><button>female</button></li>
+                    </ul>
+                  </div>
+                </th>
                 <th>birthdate</th>
                 <th>phone #</th>
                 <th>address</th>
@@ -80,6 +98,9 @@ if ($result->num_rows > 0) {
             </thead>
 
             <tbody>
+              <tr class="no-appointment-message" style="display:none;">
+                <td colspan="6" style="text-align: center;">There's no such appointment in this section</td>
+              </tr>
               <?php foreach ($users as $user){ ?>
               <tr>
                 <td class="patient-cell id">
@@ -146,6 +167,49 @@ if ($result->num_rows > 0) {
   let genderArray = ["Male", "Female"]
   const displayGender = () => Math.floor(Math.random() * genderArray.length)
   genderTexts.forEach(gender => gender.textContent = genderArray[displayGender()])
+
+  const dropdownContainers = document.querySelectorAll('.dropdown-container')
+  dropdownContainers.forEach(container => {
+    container.addEventListener('click', e => {   
+      if(e.target.closest('.filter-btn')) {
+        const dropdown = container.querySelector('.dropdown')
+        dropdown.style.display = dropdown.style.display === 'flex' ? 'none' : 'flex'
+      } 
+    })
+  })
+
+  document.addEventListener('click', e => {
+    if(!e.target.closest('.filter-btn'))
+     document.querySelectorAll('.dropdown').forEach(dropdown => {
+      dropdown.style.display = 'none'
+     })
+  })
+
+  const filterByGender = (gender) => {
+    const rows = document.querySelectorAll('.patients__table tbody tr:not(.no-appointment-message)');
+    let visibleRows = 0
+    let showRow = false
+
+    rows.forEach(row => {
+      const userGender = row.querySelector('.patient-cell.gender').textContent.trim();
+      if (gender === 'all' || userGender.toLowerCase() === gender.toLowerCase()) {
+        row.style.display = '';
+        showRow = true
+      } else {
+        row.style.display = 'none';
+      }
+      if (showRow) visibleRows++
+    });
+    document.querySelector('.no-appointment-message').style.display = visibleRows === 0 ? '' : 'none'
+  };
+
+  const genderButtons = document.querySelectorAll('.dropdown.gender button');
+  genderButtons.forEach(button => {
+    button.addEventListener('click', (e) => {
+      const selectedGender = e.target.textContent.toLowerCase();
+      filterByGender(selectedGender);
+    });
+  });
 </script>
 
 </html>

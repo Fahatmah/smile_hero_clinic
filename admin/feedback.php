@@ -11,7 +11,7 @@ if (!isset($_SESSION['adminEmail'])) {
 }
 
 // Pagination setup
-$limit = 5; // Number of entries to show per page
+$limit = 10; // Number of entries to show per page
 $page = isset($_GET['page']) ? (int)$_GET['page'] : 1; // Current page number
 $start = ($page - 1) * $limit; // Calculate the starting row for the query
 
@@ -66,13 +66,37 @@ $totalPages = ceil($totalRecords / $limit);
                 <th>feedback id</th>
                 <th>client name</th>
                 <th>email</th>
-                <th>rating</th>
+                <th>
+                  rating
+                  <div class="dropdown-container">
+                    <button class="filter-btn">
+                    <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M5.22488 3.35999L3.36487 1.5L1.50488 3.35999" stroke="#616161" stroke-width="0.75" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M3.36499 10.5V1.5" stroke="#616161" stroke-width="0.75" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M6.77466 8.64001L8.63467 10.5L10.4947 8.64001" stroke="#616161" stroke-width="0.75" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M8.63379 1.5V10.5" stroke="#616161" stroke-width="0.75" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                    </button>
+
+                    <ul class="dropdown rating">
+                      <li><button>all</button></li>
+                      <li><button>1</button></li>
+                      <li><button>2</button></li>
+                      <li><button>3</button></li>
+                      <li><button>4</button></li>
+                      <li><button>5</button></li>
+                    </ul>
+                  </div>
+                </th>
                 <th>message</th>
                 <th>date</th>
               </tr>
             </thead>
 
             <tbody>
+              <tr class="no-appointment-message" style="display:none;">
+                <td colspan="6" style="text-align: center;">There's no such appointment in this section</td>
+              </tr>
               <?php foreach($users as $user){?>
               <tr>
                 <td class="patient-cell id">FB00  <?php echo $user['id']?></td>
@@ -93,5 +117,61 @@ $totalPages = ceil($totalRecords / $limit);
     </section>
   </main>
 </body>
+<script>
+  const registrationDates = document.querySelectorAll('.patient-cell.date')
+  
+  function sliceRegistrationDate(dateObjs){   
+    return Array.from(dateObjs).map(dateObj => {
+      let dateText = dateObj.textContent.trim()
+      let date = dateText.slice(0, 11) // remove time and get date
+      dateObj.textContent = date
+    })
+  }
+  sliceRegistrationDate(registrationDates)
 
+  const dropdownContainers = document.querySelectorAll('.dropdown-container')
+  dropdownContainers.forEach(container => {
+    container.addEventListener('click', e => {   
+      if(e.target.closest('.filter-btn')) {
+        const dropdown = container.querySelector('.dropdown')
+        dropdown.style.display = dropdown.style.display === 'flex' ? 'none' : 'flex'
+      } 
+    })
+  })
+
+  document.addEventListener('click', e => {
+    if(!e.target.closest('.filter-btn'))
+     document.querySelectorAll('.dropdown').forEach(dropdown => {
+      dropdown.style.display = 'none'
+     })
+  })
+
+  // Rating filter function
+  const filterByRating = (rating) => {
+    const rows = document.querySelectorAll('.feedbacks__table tbody tr');
+
+    rows.forEach(row => {
+      const ratingCell = row.querySelector('.patient-cell.rating');
+      if (rating === 'all' || (ratingCell && ratingCell.textContent.trim() === rating)) {
+        row.style.display = '';
+      } else {
+        row.style.display = 'none';
+      }
+    });
+
+    // Show/hide no appointment message
+    const noAppointmentMessage = document.querySelector('.no-appointment-message');
+    const anyVisible = [...rows].some(row => row.style.display !== 'none');
+    noAppointmentMessage.style.display = anyVisible ? 'none' : 'table-row';
+  };
+
+  // Add event listeners for dropdown buttons
+  const ratingButtons = document.querySelectorAll('.dropdown.rating button');
+  ratingButtons.forEach(button => {
+    button.addEventListener('click', (e) => {
+      const selectedRating = e.target.textContent.trim();
+      filterByRating(selectedRating);
+    });
+  });
+</script>
 </html>
