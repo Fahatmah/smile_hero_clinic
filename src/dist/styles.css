@@ -3055,6 +3055,95 @@ body.user-homepage main .about .services .appointment__button:hover {
   color: var(--charcoal-gray);
 }
 
+.feedbacks__container {
+  --ff-inter: "Inter", sans-serif;
+  --tbl-border: 1px solid hsl(0, 0%, 38%, 0.2);
+  --cancel-btn-clr: #ff6e5c;
+  --charcoal-gray: hsl(0, 0%, 38%, 0.7);
+  --transparent-gray: hsl(0, 0%, 38%, 0.1);
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  flex-direction: column;
+  gap: 1.25rem;
+  width: 100%;
+}
+.feedbacks__container .feedbacks__table {
+  width: 100%;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  flex-direction: column;
+  gap: 1.25rem;
+  color: var(--ntrl-clr-300);
+  letter-spacing: -1px;
+  padding: 1.5rem;
+  border-radius: 1.25rem;
+  background-color: var(--ntrl-clr-100);
+}
+.feedbacks__container .feedbacks__table .table-heading {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: row;
+  gap: 0.5rem;
+  font-size: 1.5rem;
+  font-family: var(--ff-inter);
+  text-transform: uppercase;
+}
+.feedbacks__container .feedbacks__table .table-heading .table-item-count {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: row;
+  gap: 0;
+  width: 1.25rem;
+  height: 1.25rem;
+  font-size: 0.875rem;
+  color: var(--ntrl-clr-100);
+  padding: 0.25rem;
+  border-radius: 50%;
+  background-color: var(--pr-clr-100);
+}
+.feedbacks__container .feedbacks__table table {
+  width: 100%;
+  border-collapse: collapse;
+}
+.feedbacks__container .feedbacks__table table th,
+.feedbacks__container .feedbacks__table table td {
+  padding: 0.875rem 0.75rem;
+}
+.feedbacks__container .feedbacks__table table thead tr {
+  border-top: var(--tbl-border);
+  border-bottom: var(--tbl-border);
+}
+.feedbacks__container .feedbacks__table table thead tr th {
+  font-weight: bold;
+  color: var(--pr-clr-300);
+  text-transform: capitalize;
+  text-align: left;
+}
+.feedbacks__container .feedbacks__table table thead tr th:first-child {
+  padding-inline-start: 0;
+}
+.feedbacks__container .feedbacks__table table tbody tr {
+  border-bottom: var(--tbl-border);
+  cursor: pointer;
+}
+.feedbacks__container .feedbacks__table table tbody tr td {
+  font-size: 0.875rem;
+  padding: 1.5rem 0.75rem;
+}
+.feedbacks__container .feedbacks__table table tbody tr td.id, .feedbacks__container .feedbacks__table table tbody tr td.date {
+  width: 7rem;
+}
+.feedbacks__container .feedbacks__table table tbody tr td.name {
+  width: 12rem;
+}
+.feedbacks__container .feedbacks__table table tbody tr td.name, .feedbacks__container .feedbacks__table table tbody tr td.rating, .feedbacks__container .feedbacks__table table tbody tr td.message {
+  font-weight: bold;
+}
+
 .pagination {
   --ff-inter: "Inter", sans-serif;
   --charcoal-gray: hsl(0, 0%, 38%, 0.7);
@@ -3097,137 +3186,101 @@ body.user-homepage main .about .services .appointment__button:hover {
   background-color: var(--transparent-gray);
 }
 
-.doctors-page {
-  width: 100%;
-}
-.doctors-page__content {
+.doctors__container {
+  --ff-inter: "Inter", sans-serif;
+  --tbl-border: 1px solid hsl(0, 0%, 38%, 0.2);
+  --cancel-btn-clr: #ff6e5c;
+  --charcoal-gray: hsl(0, 0%, 38%, 0.7);
+  --transparent-gray: hsl(0, 0%, 38%, 0.1);
   display: flex;
   align-items: flex-start;
   justify-content: center;
   flex-direction: column;
-  gap: 1rem;
+  gap: 1.25rem;
   width: 100%;
-  padding: 2rem;
-  border-radius: 8px;
+}
+.doctors__container .doctors__table {
+  width: 100%;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  flex-direction: column;
+  gap: 1.25rem;
+  color: var(--ntrl-clr-300);
+  letter-spacing: -1px;
+  padding: 1.5rem;
+  border-radius: 1.25rem;
   background-color: var(--ntrl-clr-100);
 }
-.doctors-page__content > *:not(:last-child) {
-  width: 100%;
-}
-.doctors-page__content-header {
+.doctors__container .doctors__table .table-heading {
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: center;
   flex-direction: row;
-  gap: 0;
-  width: 100%;
+  gap: 0.5rem;
+  font-size: 1.5rem;
+  font-family: var(--ff-inter);
+  text-transform: uppercase;
 }
-.doctors-page__content-header h1 {
-  font-size: var(--fs-400);
-  color: var(--pr-clr-300);
-  font-weight: bold;
-}
-.doctors-page__content-header-search-bar {
-  position: relative;
-  width: 350px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  flex-direction: row;
-  gap: 0;
-  background-color: var(--ntrl-clr-250);
-  border-radius: 6px;
-  overflow: hidden;
-}
-.doctors-page__content-header-search-bar input {
-  padding: 1rem;
-  width: 100%;
-  color: var(--ntrl-clr-300);
-}
-.doctors-page__content-header-search-bar button {
-  position: absolute;
-  right: 0;
-  padding: 1rem;
+.doctors__container .doctors__table .table-heading .table-item-count {
   display: flex;
   align-items: center;
   justify-content: center;
   flex-direction: row;
   gap: 0;
-  cursor: pointer;
+  width: 1.25rem;
+  height: 1.25rem;
+  font-size: 0.875rem;
+  color: var(--ntrl-clr-100);
+  padding: 0.25rem;
+  border-radius: 50%;
+  background-color: var(--pr-clr-100);
 }
-.doctors-page__content-header-search-bar button img {
-  width: 1rem;
-  height: 1rem;
-}
-.doctors-page__content table {
+.doctors__container .doctors__table table {
   width: 100%;
   border-collapse: collapse;
 }
-.doctors-page__content table > * {
-  width: 100%;
+.doctors__container .doctors__table table th,
+.doctors__container .doctors__table table td {
+  padding: 0.875rem 0.75rem;
 }
-.doctors-page__content table thead {
-  border: 1px solid var(--pr-clr-300);
+.doctors__container .doctors__table table thead tr {
+  border-top: var(--tbl-border);
+  border-bottom: var(--tbl-border);
 }
-.doctors-page__content table thead tr {
-  border: 1px solid var(--pr-clr-300);
-}
-.doctors-page__content table thead tr th {
+.doctors__container .doctors__table table thead tr th {
   font-weight: bold;
   color: var(--pr-clr-300);
+  text-transform: capitalize;
   text-align: left;
-  padding-inline-start: 1rem;
-  padding-block: 1rem;
-  border: 1px solid var(--pr-clr-300);
 }
-.doctors-page__content table thead tr th:last-child {
-  text-align: center;
-  padding-inline-end: 1rem;
+.doctors__container .doctors__table table thead tr th:first-child {
+  padding-inline-start: 0;
 }
-.doctors-page__content table thead tr th:last-child button {
-  color: var(--ntrl-clr-100);
-  padding: 0.5rem 1rem;
-  border-radius: 2px;
-  background-color: var(--pr-clr-300);
+.doctors__container .doctors__table table tbody tr {
+  border-bottom: var(--tbl-border);
   cursor: pointer;
 }
-.doctors-page__content table thead tr th:last-child button:hover {
-  background-color: var(--pr-clr-350);
+.doctors__container .doctors__table table tbody tr td {
+  font-size: 0.875rem;
+  padding: 1.5rem 0.75rem;
 }
-.doctors-page__content table tbody {
-  width: 100%;
-}
-.doctors-page__content table tbody tr {
-  width: 100%;
-  border: 1px solid var(--pr-clr-300);
-}
-.doctors-page__content table tbody tr td {
-  border: 1px solid var(--pr-clr-300);
-  padding: 1rem;
-  color: var(--ntrl-clr-350);
-}
-.doctors-page__content table tbody tr td .button__container {
+.doctors__container .doctors__table table tbody tr td.name-email {
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   justify-content: center;
-  flex-direction: row;
-  gap: 1rem;
+  flex-direction: column;
+  gap: 0;
 }
-.doctors-page__content table tbody tr td .button__container button {
-  color: var(--ntrl-clr-100);
-  padding: 0.5rem 1rem;
-  border-radius: 2px;
-  cursor: pointer;
+.doctors__container .doctors__table table tbody tr td.name-email > * {
+  width: 10rem;
 }
-.doctors-page__content table tbody tr td .button__container .edit-btn {
-  background-color: var(--pr-clr-300);
+.doctors__container .doctors__table table tbody tr td.name-email .name {
+  font-size: 1.2rem;
+  font-weight: 600;
 }
-.doctors-page__content table tbody tr td .button__container .edit-btn:hover {
-  background-color: var(--pr-clr-350);
-}
-.doctors-page__content table tbody tr td .button__container .delete-btn {
-  background-color: var(--pr-clr-100);
-}
-.doctors-page__content table tbody tr td .button__container .delete-btn:hover {
-  background-color: var(--pr-clr-150);
+.doctors__container .doctors__table table tbody tr td.name-email .email {
+  font-family: var(--ff-inter);
+  font-size: 0.875rem;
+  color: var(--charcoal-gray);
 }/*# sourceMappingURL=styles.css.map */

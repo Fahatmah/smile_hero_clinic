@@ -56,59 +56,47 @@ $totalPages = ceil($totalRecords / $limit);
       <?php include("includes/side_nav.php"); ?>
       
       <!-- doctors -->
-      <div class="doctors-page">
-        <div class="doctors-page__content">
-          <!-- header -->
-          <div class="doctors-page__content-header">
-              <h1>Doctors</h1>
-              <form class="doctors-page__content-header-search-bar">
-                <input type="text" name="appointment" id="appointment" placeholder="Search..." />
-                <button type="submit">
-                  <img src="../assets/admin_images/search.svg" alt="search icon" />
-                </button>
-              </form>
-          </div>
-          <!-- end of header -->
+      <div class="doctors__container">
+        <div class="doctors__table">
+          <h1 class="table-heading">
+            doctors <span class="table-item-count">7</span>
+          </h1>
 
-          <!-- table -->
           <table>
-              <thead>
-                <tr>
-                  <th>FIRST NAME</th>
-                  <th>LAST NAME</th>
-                  <th>PHONE NUMBER</th>
-                  <th>EMAIL</th>
-                  <th><button>ADD DOCTOR</button></th>
-                </tr>
-              </thead>
+            <thead>
+              <tr>
+                <th>doctor id</th>
+                <th>name & email</th>
+                <th>contact #</th>
+                <th>status</th>
+              </tr>
+            </thead>
 
-              <tbody>
-                <?php if (!empty($doctors)): ?>
-                  <?php foreach ($doctors as $doctor): ?>
-                    <tr>
-                      <td><?php echo htmlspecialchars($doctor['first_name']); ?></td>
-                      <td><?php echo htmlspecialchars($doctor['last_name']); ?></td>
-                      <td><?php echo htmlspecialchars($doctor['phone_number']); ?></td>
-                      <td><?php echo htmlspecialchars($doctor['email']); ?></td>
-                      <td>
-                        <div class="button__container">
-                          <button class="edit-btn">Edit</button>
-                          <button class="delete-btn">Delete</button>
-                        </div>
-                      </td>
-                    </tr>
-                  <?php endforeach; ?>
+            <tbody>
+              <?php if (!empty($doctors)): ?>
+                <?php foreach ($doctors as $doctor): ?>
+              <tr>
+                <td><?php echo htmlspecialchars($doctor['doctor_id']); ?></td>
+                <td class="patient-cell name-email">
+                  <p class="name" title="<?php echo $doctor['last_name'] ." ". $doctor['first_name'] ?>">
+                    <?php echo htmlspecialchars($doctor['last_name']); ?>
+                    <?php echo htmlspecialchars($doctor['first_name']); ?>
+                  </p>
+                  <p class="email" title="<?php echo $doctor['email'] ?>">
+                    <?php echo htmlspecialchars($doctor['email']); ?>
+                  </p>
+                </td>
+                <td><?php echo htmlspecialchars($doctor['phone_number']); ?></td>
+                <td>On Duty</td>
+              </tr>
+                <?php endforeach; ?>
                 <?php else: ?>
-                  <tr>
+                <tr>
                     <td colspan="5">No doctors found.</td>
                   </tr>
                 <?php endif; ?>
-              </tbody>
+            </tbody>
           </table>
-          <!-- end of table -->
-
-          <!-- Pagination -->
-          <?php renderPagination($page, $totalPages) ?>
         </div>
       </div>
       

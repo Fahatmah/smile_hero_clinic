@@ -1,6 +1,6 @@
 @use '../../abstracts' as *;
 
-.doctors__container {
+.feedbacks__container {
   --ff-inter: 'Inter', sans-serif;
   --tbl-border: 1px solid hsl(0, 0%, 38%, 0.2);
   --cancel-btn-clr: #ff6e5c;
@@ -10,7 +10,7 @@
   @include display-flex($dir: column, $gap: 1.25rem, $y: flex-start);
   width: 100%;
 
-  .doctors__table {
+  .feedbacks__table {
     width: 100%;
     @include display-flex($dir: column, $gap: 1.25rem, $y: flex-start);
 
@@ -73,23 +73,19 @@
             font-size: 0.875rem;
             padding: 1.5rem 0.75rem;
 
-            &.name-email {
-              @include display-flex($dir: column, $y: flex-start);
-              & > * {
-                width: 10rem;
-                // white-space: nowrap;
-                // text-overflow: ellipsis;
-                // overflow: hidden;
-              }
-              .name {
-                font-size: 1.2rem;
-                font-weight: 600;
-              }
-              .email {
-                font-family: var(--ff-inter);
-                font-size: 0.875rem;
-                color: var(--charcoal-gray);
-              }
+            &.id,
+            &.date {
+              width: 7rem;
+            }
+
+            &.name {
+              width: 12rem;
+            }
+
+            &.name,
+            &.rating,
+            &.message {
+              font-weight: bold;
             }
           }
         }

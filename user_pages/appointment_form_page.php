@@ -141,10 +141,10 @@ if (isset($_SESSION['appointment_status'])) {
             <div class="appointment-form__field">
               <label for="location" class="appointment-form__label">Location</label>
               <select name="location" id="location" class="appointment-form__select">
-                  <option value="-">Select location</option>
-                  <option value="Bayani Road, Taguig City">Bayani Road, Taguig City</option>
-                  <option value="Main Street, Makati City">Main Street, Makati City</option>
-                  <option value="Central Avenue, Quezon City">Central Avenue, Quezon City</option>
+                  <!-- <option value="-">Select location</option> -->
+                  <option value="Bayani Road, Taguig City" selected>Bayani Road, Taguig City</option>
+                  <!-- <option value="Main Street, Makati City">Main Street, Makati City</option>
+                  <option value="Central Avenue, Quezon City">Central Avenue, Quezon City</option> -->
               </select>
               <div class="appointment-form__validation">
                 <p class="appointment-form__text appointment-form__text--error">Error</p>

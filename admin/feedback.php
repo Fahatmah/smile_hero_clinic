@@ -56,40 +56,39 @@ $totalPages = ceil($totalRecords / $limit);
       <!-- side bar -->
       <?php include("includes/side_nav.php"); ?>
       
-      <!-- appointments -->
-      <div class="appointments__container appointments__page">
-        <!-- appointment items -->
-        <div class="appointments">
-          <div class="top_header">
-            <h4>Client Reviews (Page <?php echo $page; ?>)</h4>
-
-          </div>
+      <div class="feedbacks__container">
+        <div class="feedbacks__table">
+          <h1 class="table-heading">feedbacks<span class="table-item-count">10</span></h1>
 
           <table>
-            <!-- head -->
             <thead>
               <tr>
-                <th>Name</th>
-                <th>Email</th>
-                <th>Feedback Type</th>
-                <th>Feedback</th>
+                <th>feedback id</th>
+                <th>client name</th>
+                <th>email</th>
+                <th>rating</th>
+                <th>message</th>
+                <th>date</th>
               </tr>
             </thead>
 
-            <!-- body -->
-            <?php foreach($users as $user){?>
-            <tr>
-              <td><?php echo $user['name']?></td>
-              <td><?php echo $user['email']?></td>
-              <td><?php echo $user['feedback_type']?></td>
-              <td><?php echo $user['feedback']?></td>
-            </tr>
-            <?php } ?>
+            <tbody>
+              <?php foreach($users as $user){?>
+              <tr>
+                <td class="patient-cell id">FB00  <?php echo $user['id']?></td>
+                <td class="patient-cell name"><?php echo $user['name']?></td>
+                <td class="patient-cell email"><?php echo $user['email']?></td>
+                <td class="patient-cell rating"><?php echo $user['rating']?></td>
+                <td class="patient-cell message"><?php echo $user['feedback']?></td>
+                <td class="patient-cell date"><?php echo $user['created_at']?></td>
+              </tr>
+              <?php } ?>
+            </tbody>
           </table>
-
-          <!-- Pagination -->
-          <?php renderPagination($page, $totalPages) ?>
         </div>
+
+        <!-- Pagination -->
+        <?php renderPagination($page, $totalPages) ?>
       </div>
     </section>
   </main>

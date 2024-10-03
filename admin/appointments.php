@@ -13,7 +13,7 @@ if (!isset($_SESSION['adminEmail'])) {
 $results_per_page = 5;
 
 // Find out the number of results stored in the database
-$query = "SELECT COUNT(*) AS total FROM appointments";
+$query = "SELECT COUNT(*) AS total FROM appointments WHERE status = 'request'";
 $result = $conn->query($query);
 $row = $result->fetch_assoc();
 $number_of_results = $row['total'];
@@ -35,6 +35,16 @@ $users = [];
 if ($result->num_rows > 0) {
     while ($row = $result->fetch_assoc()) {
         $users[] = $row;
+    }
+}
+
+$query = "SELECT * FROM appointments WHERE status = 'request'";
+$result = $conn->query($query);
+
+$totalAppointments = 0;
+if ($result->num_rows > 0) {
+    while ($row = $result->fetch_assoc()) {
+        $totalAppointments++;
     }
 }
 ?>
@@ -62,7 +72,7 @@ if ($result->num_rows > 0) {
       
       <div class="appointments__container appointments__page">
         <div class="appointments__table">
-          <h1 class="table-heading">pending appointments <span class="table-item-count">13</span></h1>
+          <h1 class="table-heading">pending appointments <span class="table-item-count"><?php echo $totalAppointments ?></span></h1>
 
           <?php if (count($users) > 0) { ?>
           <table>

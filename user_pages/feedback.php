@@ -40,27 +40,27 @@ if(!isset($_SESSION['user_id'])) {
 
             <div class="rating-container">
               <div class="radio-field">
-                <input type="radio" name="rating" id="terrible" value="terrible" required>
+                <input type="radio" name="rating" id="terrible" value="1" required>
                 <label for="terrible">😡 <span>Terrible</span></label>
               </div>
 
               <div class="radio-field">
-                <input type="radio" name="rating" id="bad" value="bad" required>
+                <input type="radio" name="rating" id="bad" value="2" required>
                 <label for="bad">😟 <span>Bad</span></label>
               </div>
 
               <div class="radio-field">
-                <input type="radio" name="rating" id="okay" value="okay" required> 
+                <input type="radio" name="rating" id="okay" value="3" required> 
                 <label for="okay">😐 <span>Okay</span></label>
               </div>
 
               <div class="radio-field">
-                <input type="radio" name="rating" id="good" value="good" required>
+                <input type="radio" name="rating" id="good" value="4" required>
                 <label for="good">🙂 <span>Good</span></label>
               </div>
 
               <div class="radio-field">
-                <input type="radio" name="rating" id="awesome" value="awesome " required>
+                <input type="radio" name="rating" id="awesome" value="5" required>
                 <label for="awesome">😁 <span>Awesome</span></label>
               </div>
             </div>

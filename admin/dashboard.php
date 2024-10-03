@@ -258,7 +258,7 @@ if ($result->num_rows > 0) {
           <section class="charts-container">
             <article>
               <!-- line chart -->
-              <p class="chart-header daily">daily<span>114</span></p>
+              <p class="chart-header daily">weekly<span>114</span></p>
               <div class="daily chart">
                 <canvas id="lineChart" width="200" height="104" style="display: unset"></canvas>
               </div>
