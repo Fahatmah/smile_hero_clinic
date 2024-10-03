@@ -11,7 +11,7 @@ if (!isset($_SESSION['adminEmail'])) {
 }
 
 // Pagination setup
-$limit = 5; // Number of entries to show per page
+$limit = 10; // Number of entries to show per page
 $page = isset($_GET['page']) ? (int)$_GET['page'] : 1; // Current page number
 $start = ($page - 1) * $limit; // Calculate the starting row for the query
 
@@ -76,11 +76,11 @@ $totalPages = ceil($totalRecords / $limit);
                     </svg>
                     </button>
 
-                    <ul class="dropdown">
+                    <ul class="dropdown date">
+                      <li><button>all</button></li>
                       <li><button>today</button></li>
                       <li><button>this week</button></li>
                       <li><button>this month</button></li>
-                      <li><button>custom date range</button></li>
                     </ul>
                   </div>
                 </th>
@@ -98,7 +98,7 @@ $totalPages = ceil($totalRecords / $limit);
                     <path d="M8.63379 1.5V10.5" stroke="#616161" stroke-width="0.75" stroke-linecap="round" stroke-linejoin="round"/>
                     </svg>
                     </button>
-                    <ul class="dropdown">
+                    <ul class="dropdown patients">
                       <li><button>all patients</button></li>
                       <li><button>new patients</button></li>
                       <li><button>regular patients</button></li>
@@ -120,7 +120,8 @@ $totalPages = ceil($totalRecords / $limit);
                     </svg>
                     </button>
 
-                    <ul class="dropdown">
+                    <ul class="dropdown actions">
+                      <li><button>all</button></li>
                       <li><button>updated</button></li>
                       <li><button>accepted</button></li>
                     </ul>
@@ -133,7 +134,7 @@ $totalPages = ceil($totalRecords / $limit);
               <?php foreach ($users as $user){?>
               <tr class="appointment-row"
                 data-date="<?php echo date('Y-m-d', strtotime($user['date'])); ?>">
-                <td class="patient-cell date">
+                <td class="patient-cell date" data-date="<?php echo $user['date'] ?>">
                   <?php echo date('l, m/d/Y', strtotime($user['date'])); ?>
                 </td>
 
@@ -171,14 +172,14 @@ $totalPages = ceil($totalRecords / $limit);
         </div>
 
         <!-- Pagination -->
-        <?php renderPagination($page, $number_of_pages) ?>
+        <?php renderPagination($page, $totalPages) ?>
       </div>
     </section>
   </main>
 </body>
 <script>
+  // actions styles
   const actions = document.querySelectorAll('.patient-cell.action')
-  const actBtns = ["Reschedule", "View History"]
   actions.forEach(action => {
     action.innerHTML = `<button class="reschedule-btn">${action.dataset.status === 'accepted'? 'Reschedule': 'View History'}</button>`
     
@@ -204,6 +205,57 @@ $totalPages = ceil($totalRecords / $limit);
      document.querySelectorAll('.dropdown').forEach(dropdown => {
       dropdown.style.display = 'none'
      })
+  })
+
+  // filter date
+  const dateDropdown = document.querySelector('.dropdown.date')
+  function isDateRange(date, startDate, endDate) {
+    return date >= startDate && date <= endDate
+  }
+
+  function filterByDate(filterType) {
+    const today = new Date()
+    const startOfWeek = new Date(today);
+    const endOfWeek = new Date(startOfWeek)
+    startOfWeek.setDate(today.getDate() - today.getDay()); // start of the week - Sunday
+    endOfWeek.setDate(startOfWeek.getDate() + 6) // end of the week saturday
+    const startOfMonth = new Date(today.getFullYear(), today.getMonth(), 1); // start of the current month
+    const endOfMonth = new Date(today.getFullYear(), today.getMonth() + 1, 0); // end of the current month
+
+    appointmentRows.forEach(row => {
+      const appointmentDate = new Date(row.querySelector('.patient-cell.date').getAttribute('data-date'))
+
+      let showRow = false
+      if (filterType === 'all') showRow = true
+      else if (filterType === 'today') showRow = today.toDateString() === appointmentDate.toDateString()
+      else if (filterType === 'this week') showRow = isDateRange(appointmentDate, startOfWeek, endOfWeek)
+      else if (filterType === 'this month') showRow = isDateRange(appointmentDate, startOfMonth, endOfMonth)
+
+      row.style.display = showRow ? '' : 'none'
+    })
+  }
+
+  dateDropdown.addEventListener('click', e => {
+    const filterType = e.target.textContent.trim().toLowerCase()
+    filterByDate(filterType)
+  })
+  
+  // filter accepted or rescheduled appointments
+  const actionsDropdown = document.querySelector('.dropdown.actions')
+  const appointmentRows = document.querySelectorAll('.appointment-row')
+  function filterAppointments(filterType) {
+    appointmentRows.forEach(row => {
+      const status = row.querySelector('.patient-cell.action').getAttribute('data-status')
+      if(filterType === 'all' || status === filterType)  row.style.display = ''
+      else row.style.display = 'none'
+    })
+  }
+
+  actionsDropdown.addEventListener('click', e => {
+    const filterType = e.target.textContent.trim().toLowerCase()
+    if(filterType === 'updated') filterAppointments('rescheduled')
+    else if (filterType === 'accepted') filterAppointments('accepted')
+    else filterAppointments('all')
   })
 </script>
 </html>
