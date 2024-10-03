@@ -18,9 +18,11 @@ require_once "includes/signup_view.inc.php"
   <style>
   .error_container {
     position: absolute;
-    display: block;
     display: flex;
-    top: 37em;
+    justify-content: center;
+    bottom: -1.5em;
+    column-gap: 3px;
+    width: 100%;
   }
 
   .form_error {
@@ -28,7 +30,7 @@ require_once "includes/signup_view.inc.php"
     font-size: .75rem;
   }
 
-  .login-form__section {
+  .error_handler {
     position: relative;
   }
   </style>
@@ -56,16 +58,14 @@ require_once "includes/signup_view.inc.php"
           <input type="tel" placeholder="e.g. 09000000000" id="contact" name="contact" required />
           <label for="contact">Contact Number</label>
         </div>
-        <div class="field">
+        <div class="field error_handler">
           <input type="password" placeholder="e.g. password" id="password" name="password" required />
           <label for="password">Password</label>
-        </div>
 
-        <div class="error_container">
-          <?php
-      //classs name of text is form_error
-       checkSignupErrors();
-      ?>
+            <div class="error_container">
+              <?php //classs name of text is form_error
+                checkSignupErrors();?>
+            </div>
         </div>
 
 

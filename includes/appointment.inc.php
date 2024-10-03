@@ -23,13 +23,14 @@ if ($_SERVER['REQUEST_METHOD'] === "POST" && isset($_SESSION['user_id'])) {
         header("Location: ../user_pages/appointment_form_page.php");
         die();
     }
-
-    createAppointment($conn, $user_id, $appointmentId, $name, $email, $contact, $message, $appointmentDate, $appointmentTime, $location, $status);
-    $_SESSION['appointment_status'] = 'created';
-    
-    $conn->close();
-    header("Location: ../user_pages/appointment_form_page.php");
-    die();
+    else{
+        createAppointment($conn, $user_id, $appointmentId, $name, $email, $contact, $message, $appointmentDate, $appointmentTime, $location, $status);
+        $_SESSION['appointment_status'] = 'created';
+        
+        $conn->close();
+        header("Location: ../user_pages/appointment_form_page.php");
+        die();
+    }
     } else {
         $_SESSION['appointment_status'] = 'failed';
         header("Location: ../user_pages/appointment_form_page.php");

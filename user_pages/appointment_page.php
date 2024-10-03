@@ -51,13 +51,6 @@ if(!isset($_SESSION['user_id'])) {
           $dateNow = date('l, m/d/Y');
           $appointment_date = $row['date'];
           $appointment_id = $row['appointment_id'];
-
-            if( $appointment_date < $dateNow){
-              $query = "UPDATE appointments SET status = 'complete' WHERE appointment_id = ?";
-              $stmt = $conn->prepare($query);
-              $stmt->bind_param("s", $appointment_id);
-              $stmt->execute();
-            }
           ?>
         <div class="appointments__container">
           <div class="appointment__item">

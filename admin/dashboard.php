@@ -9,16 +9,27 @@ if(!isset($_SESSION['adminEmail'])) {
   exit();
 }
 
-$query = "SELECT * FROM doctors LIMIT 5";
+$query = "SELECT * FROM doctors";
 $result = $conn->query($query);
-$doctors = [];
+$doctors = 0;
 if ($result->num_rows > 0) {
   while ($row = $result->fetch_assoc()) {
-    $doctors[] = $row;
+    $doctors++;
   }
 }
 
-$query  = "SELECT * FROM appointments WHERE status = 'request'";
+$query = "SELECT * FROM appointments ORDER BY created_at DESC LIMIT 3";
+$result = $conn->query($query);
+$allStats = [];
+if ($result->num_rows > 0) {
+  while($row = $result->fetch_assoc()){
+    $allStats[] = $row;
+  }
+}
+
+$dateNow = date('Y-m-d, l'); 
+
+$query  = "SELECT * FROM appointments WHERE status = 'accepted' AND date > '$dateNow'";
 $result = $conn->query($query);
 $users = [];
 if ($result->num_rows > 0) {
@@ -27,9 +38,7 @@ if ($result->num_rows > 0) {
   }
 }
 
-$dateNow = date('l, m/d/Y');
-
-$query  = "SELECT * FROM appointments WHERE date = '$dateNow'";
+$query  = "SELECT * FROM appointments WHERE date = '$dateNow' AND status = 'accepted'";
 $result = $conn->query($query);
 $todaysAppointment = 0;
 if ($result->num_rows > 0) {
@@ -37,6 +46,7 @@ if ($result->num_rows > 0) {
     $todaysAppointment++;
   }
 }
+
 
 $query  = "SELECT * FROM users";
 $result = $conn->query($query);
@@ -94,7 +104,7 @@ if ($result->num_rows > 0) {
                  <path d="M14.2943 19.7H14.3033" stroke="white"     stroke-width="2" stroke-linecap="round"     stroke-linejoin="round"/>
                  <path d="M14.2943 22.7H14.3033" stroke="white"     stroke-width="2" stroke-linecap="round"     stroke-linejoin="round"/>
                </svg>
-               <p class="overview__value">6</p>
+               <p class="overview__value"><?php echo $todaysAppointment; ?></p>
              </div>
            </section>
 
@@ -111,7 +121,7 @@ if ($result->num_rows > 0) {
               <path d="M15.7567 23.7799C14.3467 24.7199 14.3467 26.2599 15.7567 27.1999C17.3567 28.2699 19.9767 28.2699 21.5767 27.1999C22.9867 26.2599 22.9867 24.7199 21.5767 23.7799C19.9867 22.7199 17.3567 22.7199 15.7567 23.7799Z" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
               </svg>
 
-               <p class="overview__value">8</p>
+               <p class="overview__value"><?php echo $totalUsers; ?></p>
              </div>
            </section>
 
@@ -126,7 +136,7 @@ if ($result->num_rows > 0) {
               <path d="M15.3334 21V15" stroke="white" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
               </svg>
 
-               <p class="overview__value">7</p>
+               <p class="overview__value"><?php echo $doctors ?></p>
              </div>
            </section>
 
@@ -163,11 +173,12 @@ if ($result->num_rows > 0) {
                 </thead>
 
                 <tbody>
+                  <?php foreach ($users as $user){?>
                   <tr>
-                    <td>Dela Cruz, Juan</td>
-                    <td>9234 - 567 - 890</td>
-                    <td>11:00 AM</td>
-                    <td>09/16/2024</td>
+                   <td><?php echo $user['name'] ?></td>
+                    <td><?php echo $user['contact'] ?></td>
+                    <td><?php echo $user['time'] ?></td>
+                    <td><?php echo $user['date'] ?></td>
                     <td>
                       <div class="appointments-actions">
                         <button type="button" class="reschedule-btn">resched</button>
@@ -175,32 +186,7 @@ if ($result->num_rows > 0) {
                       </div>
                     </td>
                   </tr>
-
-                  <tr>
-                    <td>Protacio, Luzviminda Garcia</td>
-                    <td>9456 - 789 - 012</td>
-                    <td>04:00 PM</td>
-                    <td>09/16/2024</td>
-                    <td>
-                      <div class="appointments-actions">
-                        <button type="button" class="reschedule-btn">resched</button>
-                        <button type="button" class="cancel-btn">cancel</button>
-                      </div>
-                    </td>
-                  </tr>
-
-                  <tr>
-                    <td>Reyes, Andres Bonifacio</td>
-                    <td>9567 - 890 - 123</td>
-                    <td>08:00 AM</td>
-                    <td>09/26/2024</td>
-                    <td>
-                      <div class="appointments-actions">
-                        <button type="button" class="reschedule-btn">resched</button>
-                        <button type="button" class="cancel-btn">cancel</button>
-                      </div>
-                    </td>
-                  </tr>
+              <?php  } ?>
                 </tbody>
               </table>
             </section>
@@ -229,29 +215,37 @@ if ($result->num_rows > 0) {
                 </thead>
 
                 <tbody>
+                  <?php foreach($allStats as $allStat){  ?>
                   <tr>
-                    <td>11:00 AM</td>
-                    <td>09/16/2024</td>
-                    <td>
-                      <p class="appointment-status missed">missed</p>
-                    </td>
-                  </tr>
+                    <td><?php echo $allStat['time']?></td>
 
-                  <tr>
-                    <td>11:00 AM</td>
-                    <td>09/16/2024</td>
+                    <?php
+                    $dateFromDatabase = $allStat['date'];
+                    $dateOnly = explode(',', $dateFromDatabase)[0];
+                    
+                    $date = DateTime::createFromFormat('Y-m-d', $dateOnly);
+                    $formattedDate = $date->format('m/d/Y');
+                     ?>
+                     
+                    <td><?php echo $formattedDate?></td>
                     <td>
-                      <p class="appointment-status canceled">canceled</p>
+                    <?php switch ($allStat['status']) { 
+                      case 'rejected': ?>
+                        <p class="appointment-status rejected"><?php echo $allStat['status']?></p>
+                      <?php  break;
+                      case 'canceled': ?>
+                        <p class="appointment-status canceled"><?php echo $allStat['status']?></p>
+                      <?php break; 
+                      case 'missed': ?>
+                        <p class="appointment-status missed"><?php echo $allStat['status']?></p>
+                      <?php break; 
+                      default: ?>
+                         <p class="appointment-status accepted"><?php echo $allStat['status']?></p>
+                      <?php break;
+                        } ?>
                     </td>
                   </tr>
-
-                  <tr>
-                    <td>04:00 PM</td>
-                    <td>09/16/2024</td>
-                    <td>
-                      <p class="appointment-status rejected">rejected</p>
-                    </td>
-                  </tr>
+                  <?php } ?>
                 </tbody>
               </table>
             </section>
@@ -263,12 +257,14 @@ if ($result->num_rows > 0) {
 
           <section class="charts-container">
             <article>
+              <!-- line chart -->
               <p class="chart-header daily">daily<span>114</span></p>
               <div class="daily chart">
                 <canvas id="lineChart" width="200" height="104" style="display: unset"></canvas>
               </div>
             </article>
             <article>
+              <!-- bar chart -->
               <p class="chart-header monthly">monthly<span>114</span></p>
               <div class="monthly chart">
                 <canvas id="barChart" width="200" height="104" style="display: unset"></canvas>
@@ -282,171 +278,125 @@ if ($result->num_rows > 0) {
 </body>
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script>
-  const lineCtx = document.getElementById('lineChart').getContext('2d')
-  const barCtx = document.getElementById('barChart').getContext('2d')
+// Canvas contexts
+const lineCtx = document.getElementById('lineChart').getContext('2d');
+const barCtx = document.getElementById('barChart').getContext('2d');
 
-  const gradient = lineCtx.createLinearGradient(0, 0, 0, 400) 
-  gradient.addColorStop(0, 'hsla(216, 89%, 53%, 0.35)') 
-  gradient.addColorStop(1, 'hsla(0, 0%, 100%, 0)')
+// Gradient for the line chart
+const gradient = lineCtx.createLinearGradient(0, 0, 0, 400);
+gradient.addColorStop(0, 'hsla(216, 89%, 53%, 0.35)');
+gradient.addColorStop(1, 'hsla(0, 0%, 100%, 0)');
 
-  const lineGraphData = {
-    labels: [
-      'Mon',
-      'Tue',
-      'Wed',
-      'Thu',
-      'Fri',
-      'Sat',
-      'Sun',
-    ], 
-    datasets: [
-      {
-        label: 'Daily Appointments', 
-        data: [6, 21, 18, 25, 11, 5, 28],
-        fill: true, 
-        backgroundColor: gradient, 
-        borderColor: '#1D72F2', 
-        borderWidth: 2, 
-        pointBackgroundColor: '#fff', 
-        pointBorderColor: '#1D72F2', 
-        tension: 0.45, 
-      },
-    ],
-  }
+// Fetch daily appointments (weekdays)
+fetch('includes/getAppointmentsPerWeekday.php')
+  .then(response => response.json())
+  .then(data => {
+    const weekdays = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
+    const appointmentsPerDay = new Array(7).fill(0);
 
-  const lineConfig = {
-    type: 'line', 
-    data: lineGraphData, 
-    options: {
-      responsive: true, 
-      plugins: {
-        legend: {
-          display: false, 
+    data.forEach(item => {
+      appointmentsPerDay[item.weekday - 1] = item.count;
+    });
+
+    const lineGraphData = {
+      labels: weekdays,
+      datasets: [{
+        label: 'Daily Appointments',
+        data: appointmentsPerDay,
+        fill: true,
+        backgroundColor: gradient,
+        borderColor: '#1D72F2',
+        borderWidth: 2,
+        pointBackgroundColor: '#fff',
+        pointBorderColor: '#1D72F2',
+        tension: 0.45,
+      }]
+    };
+
+    const lineConfig = {
+      type: 'line',
+      data: lineGraphData,
+      options: {
+        responsive: true,
+        plugins: {
+          legend: { display: false }
         },
-      },
-      scales: {
-        x: {
-          ticks: {
-            font: {
-              family: 'DM Sans, sans-serif',
-              
-            },
+        scales: {
+          x: {
+            ticks: {
+              font: { family: 'DM Sans, sans-serif' }
+            }
           },
-          title: {
-            display: false,
-            text: 'Days', 
-          },
-        },
-        y: {
-          beginAtZero: true, 
-          max: 30,
-          ticks: {
-            stepSize: 6,
-            font: {
-              family: 'DM Sans, sans-serif',
-            },
-          },
-          title: {
-            display: false,
-            text: 'Daily Appointments', 
+          y: {
+            beginAtZero: true,
+            max: 30,
+            ticks: {
+              stepSize: 6,
+              font: { family: 'DM Sans, sans-serif' }
+            }
+          }
+        }
+      }
+    };
 
-            font: {
-              family: 'DM Sans, sans-serif',
-            },
-          },
-        },
-      },
-    },
-  }
+    new Chart(lineCtx, lineConfig);
+  })
+  .catch(error => console.error('Error fetching daily appointments data:', error));
 
-  
-  const barGraphData = {
-    labels: [
-      'Jan',
-      'Feb',
-      'Mar',
-      'Apr',
-      'May',
-      'Jun',
-      'Jul',
-      'Aug',
-      'Sep',
-      'Oct',
-      'Nov',
-      'Dec',
-    ], 
-    datasets: [
-      {
-        label: 'Monthly Appointments', 
-        data: [40, 88, 60, 88, 6, 32, 75, 47, 81, 23, 62, 31],
+// Fetch monthly appointments
+fetch('includes/getAppointmentsPerMonth.php')
+  .then(response => response.json())
+  .then(data => {
+    const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+    const appointmentsPerMonth = new Array(12).fill(0);
+
+    data.forEach(item => {
+      appointmentsPerMonth[item.month - 1] = item.count;
+    });
+
+    const barGraphData = {
+      labels: months,
+      datasets: [{
+        label: 'Monthly Appointments',
+        data: appointmentsPerMonth,
         backgroundColor: [
-          '#616161',
-          '#1D72F2',
-          '#FAAF0D',
-          '#1D72F2',
-          '#E84531',
-          '#616161',
-          '#1D72F2',
-          '#FAAF0D',
-          '#1D72F2',
-          '#E84531',
-          '#FAAF0D',
-          '#616161',
-        ], 
-        borderColor: 'transparent', 
+          '#616161', '#1D72F2', '#FAAF0D', '#1D72F2', '#E84531', '#616161', '#1D72F2', 
+          '#FAAF0D', '#1D72F2', '#E84531', '#FAAF0D', '#616161'
+        ],
+        borderColor: 'transparent',
         borderRadius: 20,
-      },
-    ],
-  }
+      }]
+    };
 
-  
-  const barConfig = {
-    type: 'bar', 
-    data: barGraphData, 
-    options: {
-      responsive: true, 
-      plugins: {
-        legend: {
-          display: false, 
+    const barConfig = {
+      type: 'bar',
+      data: barGraphData,
+      options: {
+        responsive: true,
+        plugins: {
+          legend: { display: false }
         },
-      },
-      scales: {
-        x: {
-          ticks: {
-            font: {
-              family: 'DM Sans, sans-serif',
-            },
+        scales: {
+          x: {
+            ticks: {
+              font: { family: 'DM Sans, sans-serif' }
+            }
           },
-          title: {
-            display: false,
-            text: 'Days', 
-          },
-        },
-        y: {
-          beginAtZero: true, 
-          max: 100,
-          ticks: {
-            stepSize: 25,
-            font: {
-              family: 'DM Sans, sans-serif',
-            },
-          },
-          title: {
-            display: false,
-            text: 'Monthly Appointments', 
+          y: {
+            beginAtZero: true,
+            max: 100,
+            ticks: {
+              stepSize: 25,
+              font: { family: 'DM Sans, sans-serif' }
+            }
+          }
+        }
+      }
+    };
 
-            font: {
-              family: 'DM Sans, sans-serif',
-            },
-          },
-        },
-      },
-    },
-  }
-
-  new Chart(lineCtx, lineConfig)
-  new Chart(barCtx, barConfig)
-
+    new Chart(barCtx, barConfig);
+  })
+  .catch(error => console.error('Error fetching monthly appointments data:', error));
 </script>
 
 </html>

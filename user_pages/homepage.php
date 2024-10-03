@@ -1,3 +1,15 @@
+<?php
+require_once '../includes/config_session.inc.php';
+require_once '../includes/login_view.inc.php';
+require_once '../includes/dbh.inc.php';
+
+if(!isset($_SESSION['user_id'])) {
+   // Redirect user to login if not logged in
+   header("Location: ../login.php");
+   exit();
+} 
+?>
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -42,7 +54,7 @@
             id="logoutBtn"
             role="menuitem"
           >
-            <a href="#">Logout</a>
+            <a href="../includes/logout.php">Logout</a>
           </button>
           <button
             type="button"
@@ -50,7 +62,7 @@
             role="menuitem"
             id="accountBtn"
           >
-            <a href="#"
+            <a href="profile.php"
               >Account
               <img
                 src="../assets/icons/user_account/arrow-up-small.svg"
@@ -130,7 +142,7 @@
               Emergency dental services
             </li>
           </ul>
-          <a class="appointment__button" href="#" role="button">
+          <a class="appointment__button" href="appointment_form_page.php" role="button">
             Book Your Appointment
             <img
               src="../assets/icons/user_account/arrow-up-large.svg"

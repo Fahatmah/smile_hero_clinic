@@ -23,16 +23,16 @@ if ($_SERVER['REQUEST_METHOD'] === "POST") {
         // $errors["emptyInput"] = "Fill in all fields!";
     }
     if (isNameTaken($conn, $fullname)) {
-        $errors["nameTaken"] = "Name is already taken";
+        $errors["nameTaken"] = "Name is already taken. ";
     }
     if (isEmailInvalid($email)) {
-        $errors["invalidEmail"] = "Email is invalid!";
+        $errors["invalidEmail"] = "Email is invalid!. ";
     }
     if (iscontactTaken($conn, $contact)) {
-        $errors["contactTaken"] = "contact is already taken";
+        $errors["contactTaken"] = "Contact is already taken. ";
     }
     if (isEmailRegistered($conn, $email)) {
-        $errors["emailRegistered"] = "Email is already registered";
+        $errors["emailRegistered"] = "Email is already registered. ";
     }
 
     require_once("config_session.inc.php");

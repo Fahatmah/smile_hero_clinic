@@ -3,10 +3,10 @@ require_once '../../includes/config_session.inc.php';
 require_once '../../includes/login_view.inc.php';
 require_once '../../includes/dbh.inc.php';
 
-if($_SERVER['REQUEST_METHOD'] === "POST" && !empty($_POST['name']) && !empty($_POST['email']) && !empty($_POST['feedback'])){
+if($_SERVER['REQUEST_METHOD'] === "POST" && !empty($_POST['feedback']) && !empty($_POST['rating'])){
 
-    $name = $_POST['name'];
-    $email = $_POST['email'];
+    $name = $_SESSION['fullname'];
+    $email = $_SESSION['email'];
     $feedback_type = $_POST['rating'];
     $feedback = $_POST['feedback'];
 

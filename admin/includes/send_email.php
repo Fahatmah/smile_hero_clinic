@@ -4,8 +4,8 @@ require_once '../../includes/config_session.inc.php';
 require_once '../../includes/login_view.inc.php';
 require_once '../../includes/dbh.inc.php';
 
-use PHPMailer\PHPMailer\PHPMailer;
-use PHPMailer\PHPMailer\SMTP;
+// use PHPMailer\PHPMailer\PHPMailer;
+// use PHPMailer\PHPMailer\SMTP;
 
 if ($_SERVER['REQUEST_METHOD'] === "POST" && isset($_POST["accept"])){
 
@@ -16,20 +16,7 @@ if ($_SERVER['REQUEST_METHOD'] === "POST" && isset($_POST["accept"])){
     $message = $_POST["message"];
     $status = "accepted";
     
-    require "../../vendor/autoload.php";
-    
-    $mail = new PHPMailer(true);
-    
-    $mail->isSMTP();
-    $mail->SMTPAuth = true;
-    
-    $mail->Host = "smtp.gmail.com";
-    $mail->SMTPSecure = PHPMAiler::ENCRYPTION_STARTTLS;
-    $mail->Port = 587;
-    
-    $mail->Username = "jpvillaruel02@gmail.com";
-    $mail->Password = "vfng rcwc dhon tovf";
-    $mail->isHTML(true);
+    $mail = require __DIR__ . "/../../mailer.php"; 
     $mail->setFrom("jpvillaruel02@gmail.com");
     $mail->addAddress($email, $name);
     
@@ -59,20 +46,7 @@ if ($_SERVER['REQUEST_METHOD'] === "POST" && isset($_POST["cancel"])){
     $message = $_POST["message"];
     $status = "rejected";
     
-    require "../../vendor/autoload.php";
-    
-    $mail = new PHPMailer(true);
-    
-    $mail->isSMTP();
-    $mail->SMTPAuth = true;
-    
-    $mail->Host = "smtp.gmail.com";
-    $mail->SMTPSecure = PHPMAiler::ENCRYPTION_STARTTLS;
-    $mail->Port = 587;
-    
-    $mail->Username = "jpvillaruel02@gmail.com";
-    $mail->Password = "vfng rcwc dhon tovf";
-    $mail->isHTML(true);
+    $mail = require __DIR__ . "/../../mailer.php"; 
     $mail->setFrom("jpvillaruel02@gmail.com");
     $mail->addAddress($email, $name);
     

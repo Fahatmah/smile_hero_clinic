@@ -17,18 +17,22 @@ require_once 'includes/login_view.inc.php';
   
   <!-- stylesheets -->
   <link rel="stylesheet" href="src/dist/styles.css" />
-
   <style>
-    .form_error {
+ .error_container {
     position: absolute;
-    display: block;
-    top: 34em;
-    left: 45em;
+    display: flex;
+    justify-content: center;
+    bottom: -1.5em;
+    column-gap: 3px;
+    width: 100%;
+  }
+
+  .form_error {
     color: red;
     font-size: .75rem;
   }
 
-  .login-form__section {
+  .error_handler {
     position: relative;
   }
   </style>
@@ -48,14 +52,15 @@ require_once 'includes/login_view.inc.php';
           <input type="email" placeholder="fahatmahmabang@gmail.com" id="email" name="email" required autofocus />
           <label for="email">Email</label>
         </div>
-        <div class="field">
+        <div class="field error_handler">
           <input type="password" placeholder="********" id="password" name="password" required />
           <label for="password">Password</label>
+
+            <div class="error_container">
+              <?php //classs name of text is form_error
+                checkLoginErrors();?>
+            </div>
         </div>
-        <?php
-          //classs name of text is form_error
-          checkLoginErrors();
-        ?>
         <!-- submit button -->
         <button type="submit" class="submit__button">Login</button>
         <!-- signup form link -->

@@ -21,7 +21,7 @@
       }
 
       if ($result["account_activation_hash"] !== NULL) {
-        $errors["account_inactive"] = "Acount activation is needed";
+        $errors["account_inactive"] = "Account activation is needed";
       }
 
       require_once("config_session.inc.php");
@@ -51,7 +51,7 @@
       $_SESSION["last_regeneration"] = time();
 
       $conn->close();
-      Header("Location: ../user_pages/profile.php?login=success");
+      Header("Location: ../user_pages/homepage.php?login=success");
       die();
     } else {
       header("Location: ../login.php");

@@ -60,7 +60,7 @@ if(!isset($_SESSION['user_id'])) {
               </div>
 
               <div class="radio-field">
-                <input type="radio" name="rating" id="awesome" value="awesome" required>
+                <input type="radio" name="rating" id="awesome" value="awesome " required>
                 <label for="awesome">😁 <span>Awesome</span></label>
               </div>
             </div>

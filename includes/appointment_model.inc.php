@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 function getUserid(mysqli $conn, string $name) {
-    $query = "SELECT user_id FROM appointments WHERE name = ? AND (status = 'accepted')";
+    $query = "SELECT user_id FROM appointments WHERE name = ? AND (status != 'rejected') AND (status != 'canceled')";
     $stmt = $conn->prepare($query); 
     $stmt->bind_param("s", $name);
     $stmt->execute();
