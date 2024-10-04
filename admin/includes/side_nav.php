@@ -51,8 +51,30 @@
     </li>
   </ul>
 
-  <!-- logout button -->
-  <button id="logout_button">
-    <a href="../includes/logout.php">Logout</a>
-  </button>
+
+  <div class="bottom-links">
+    <ul>
+      <li <?php echo ($current_page == 'new-appointment.php') ? 'class="active__link"' : ''; ?>>
+        <a href="../admin/new-appointment.php">
+          New appointment
+        </a>
+      </li>
+
+      <li <?php echo ($current_page == 'new-doctor.php') ? 'class="active__link"' : ''; ?>>
+        <a href="../admin/new-doctor.php">
+          New doctor
+        </a>
+      </li>
+
+      <li <?php echo ($current_page == 'admin-settings.php') ? 'class="active__link"' : ''; ?>>
+        <a href="../admin/admin-settings.php">
+          Settings
+        </a>
+      </li>
+    </ul>
+    <!-- logout button -->
+    <button id="logout_button">
+      <a href="../includes/logout.php">Logout</a>
+    </button>
+  </div>
 </aside>

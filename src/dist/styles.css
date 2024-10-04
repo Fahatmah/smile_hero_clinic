@@ -2272,7 +2272,23 @@ body.user-homepage main .about .services .appointment__button:hover {
 .admin-sidenav ul li a:hover {
   background-color: var(--ntrl-clr-250);
 }
-.admin-sidenav #logout_button {
+.admin-sidenav .bottom-links {
+  width: 100%;
+  background-color: var();
+}
+.admin-sidenav .bottom-links ul {
+  gap: 0;
+  border-radius: 0.5rem;
+  background-color: hsla(0, 0%, 92%, 0.4);
+  overflow: hidden;
+}
+.admin-sidenav .bottom-links ul li a {
+  font-size: 0.875rem;
+  flex-direction: row;
+  justify-content: flex-start;
+  gap: 0.625rem;
+}
+.admin-sidenav .bottom-links #logout_button {
   width: 100%;
   display: flex;
   align-items: center;
@@ -2282,7 +2298,7 @@ body.user-homepage main .about .services .appointment__button:hover {
   border-radius: 0.5rem;
   margin-top: 1rem;
 }
-.admin-sidenav #logout_button a {
+.admin-sidenav .bottom-links #logout_button a {
   width: 100%;
   color: var(--ntrl-clr-100);
   padding: 1rem;
