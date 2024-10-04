@@ -33,16 +33,6 @@ if ($result->num_rows > 0) {
 
 // Calculate total pages needed
 $totalPages = ceil($totalRecords / $limit);
-
-$query = "SELECT * FROM appointments";
-$result = $conn->query($query);
-
-$totalAppointments = 0;
-if ($result->num_rows > 0) {
-    while ($row = $result->fetch_assoc()) {
-        $totalAppointments++;
-    }
-}
 ?>
 
 <!DOCTYPE html>
@@ -70,7 +60,7 @@ if ($result->num_rows > 0) {
       <div class="booked__container">
         <div class="booked-appointments__table">
           <div class="table-heading__container">
-            <h1 class="table-heading">booked appointments <span class="table-item-count"><?php echo $totalAppointments ?></span></h1>
+            <h1 class="table-heading">booked appointments <span class="table-item-count"><?php echo $totalRecords ?></span></h1>
             <?php include("includes/search.php"); ?>
           </div>
 

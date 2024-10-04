@@ -130,7 +130,7 @@ if (isset($_SESSION['appointment_status'])) {
                   <option value="1:00 PM">01:00 PM</option>
                   <option value="2:00 PM">02:00 PM</option>
                   <option value="3:00 PM">03:00 PM</option>
-                  <option value="4:00 PM">04:00 PM</option>http://localhost/smile_hero_clinic/user_pages/appointment_form_page.php
+                  <option value="4:00 PM">04:00 PM</option>
                   <option value="5:00 PM">05:00 PM</option>
               </select>
               <div class="appointment-form__validation">
@@ -226,6 +226,10 @@ if (isset($_SESSION['appointment_status'])) {
           {
             id: 'location',
             errorMessage: 'Please select a location'
+          },
+          {
+            id: 'dentalService',
+            errorMessage: 'Please select a service'
           },
         ];
 

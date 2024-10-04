@@ -4,6 +4,7 @@ require_once '../includes/login_view.inc.php';
 require_once '../includes/appointment_view.inc.php';
 
 require_once '../includes/dbh.inc.php';
+require_once 'includes/user_model.inc.php';
 
 if(!isset($_SESSION['user_id'])) {
   // Redirect user to login if not logged in
@@ -26,6 +27,21 @@ $user_id = $_SESSION['user_id'];
       }
   }
   $stmt->close();
+
+  $totalAppointment = isValidRegularPatient($conn, $user_id);
+
+  if($totalAppointment >= 5){
+    $query = "UPDATE users SET label = 'regular' WHERE user_id = ?";
+    $stmt = $conn->prepare($query);
+    $stmt->bind_param("s",$user_id);
+    $stmt->execute();
+  }else{
+    $query = "UPDATE users SET label = 'new' WHERE user_id = ?";
+    $stmt = $conn->prepare($query);
+    $stmt->bind_param("s",$user_id);
+    $stmt->execute();
+  }
+  
 ?>
 
 <!DOCTYPE html>
@@ -61,7 +77,6 @@ $user_id = $_SESSION['user_id'];
             <th>Status</th>
           </tr>
         </thead>
-
         <tbody>
         <?php foreach ($users as $user){ ?>
           <tr>

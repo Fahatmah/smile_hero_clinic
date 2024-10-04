@@ -18,7 +18,17 @@ if ($result->num_rows > 0) {
   }
 }
 
-$query = "SELECT * FROM appointments ORDER BY created_at DESC LIMIT 3";
+$query = "SELECT * FROM appointments WHERE status = 'rejected' OR status = 'canceled'";
+$result = $conn->query($query);
+$countStats = 0;
+if ($result->num_rows > 0) {
+  while($row = $result->fetch_assoc()){
+    $countStats++;
+  }
+}
+
+$query = "SELECT * FROM appointments WHERE status = 'rejected' OR status = 'canceled' 
+  ORDER BY created_at DESC LIMIT 3";
 $result = $conn->query($query);
 $allStats = [];
 if ($result->num_rows > 0) {
@@ -27,14 +37,24 @@ if ($result->num_rows > 0) {
   }
 }
 
-$dateNow = date('Y-m-d, l'); 
+$dateNow = date('Y-m-d, l');
 
-$query  = "SELECT * FROM appointments WHERE status = 'accepted' AND date > '$dateNow'";
+
+$query  = "SELECT * FROM appointments WHERE status = 'accepted' AND date > '$dateNow' ORDER BY time DESC LIMIT 3";
 $result = $conn->query($query);
 $users = [];
 if ($result->num_rows > 0) {
   while($row = $result->fetch_assoc()) {
       $users[] = $row;
+  }
+}
+
+$query  = "SELECT * FROM appointments WHERE status = 'accepted' AND date > '$dateNow'";
+$result = $conn->query($query);
+$totalAppointments = 0;
+if ($result->num_rows > 0) {
+  while($row = $result->fetch_assoc()) {
+      $totalAppointments++;
   }
 }
 
@@ -58,6 +78,29 @@ if ($result->num_rows > 0) {
       $totalUsers++;
   }
 }
+
+$query = "SELECT MONTH(created_at) as month, COUNT(*) as count FROM appointments
+            GROUP BY MONTH(created_at)";
+$result = $conn->query($query);
+$totalAppointmentsPerMonth = 0;
+if($result->num_rows > 0){
+  while($row = $result->fetch_assoc()){
+    $totalAppointmentsPerMonth++;
+  }
+}
+
+$query = "SELECT WEEKDAY(created_at) + 1 as weekday, COUNT(*) as count
+        FROM appointments
+        GROUP BY WEEKDAY(created_at)
+        ORDER BY weekday";
+$result = $conn->query($query);
+$totalAppointmentsPerWeek = 0;
+if($result->num_rows > 0){
+  while($row = $result->fetch_assoc()){
+    $totalAppointmentsPerWeek++;
+  }
+}
+
 ?>
 
 <!DOCTYPE html>
@@ -149,7 +192,10 @@ if ($result->num_rows > 0) {
           <div class="appointments-content">
             <section class="upcoming__appointments">
               <header class="appointments-header">
-                <p>Upcoming<span class="upcoming appointments-count">6</span></p>
+                <p>Upcoming<span class="upcoming appointments-count">
+                  <?php if($todaysAppointment === "0"){ ?>0
+                 <?php }else{ echo $totalAppointments; }?>
+                </span></p>
                 <button type="button">
                   <a href="#">
                     See all 
@@ -193,7 +239,7 @@ if ($result->num_rows > 0) {
 
             <section class="missed__appointments">
               <header class="appointments-header">
-                <p>missed/ <br> canceled/rejected<span class="missed appointments-count">3</span></p>
+                <p>missed/ <br> canceled/rejected<span class="missed appointments-count"><?php echo $countStats?></span></p>
                 <button type="button">
                   <a href="#">
                     view
@@ -258,14 +304,14 @@ if ($result->num_rows > 0) {
           <section class="charts-container">
             <article>
               <!-- line chart -->
-              <p class="chart-header daily">weekly<span>114</span></p>
+              <p class="chart-header daily">weekly<span><?php echo $totalAppointmentsPerWeek?></span></p>
               <div class="daily chart">
                 <canvas id="lineChart" width="200" height="104" style="display: unset"></canvas>
               </div>
             </article>
             <article>
               <!-- bar chart -->
-              <p class="chart-header monthly">monthly<span>114</span></p>
+              <p class="chart-header monthly">monthly<span><?php echo $totalAppointmentsPerMonth?></span></p>
               <div class="monthly chart">
                 <canvas id="barChart" width="200" height="104" style="display: unset"></canvas>
               </div>

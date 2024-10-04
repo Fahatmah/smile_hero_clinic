@@ -58,7 +58,7 @@ $totalPages = ceil($totalRecords / $limit);
       
       <div class="feedbacks__container">
         <div class="feedbacks__table">
-          <h1 class="table-heading">feedbacks<span class="table-item-count">10</span></h1>
+          <h1 class="table-heading">feedbacks<span class="table-item-count"><?php echo $totalRecords ?></span></h1>
 
           <table>
             <thead>

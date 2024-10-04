@@ -59,7 +59,7 @@ $totalPages = ceil($totalRecords / $limit);
       <div class="doctors__container">
         <div class="doctors__table">
           <h1 class="table-heading">
-            doctors <span class="table-item-count">7</span>
+            doctors <span class="table-item-count"><?php echo $totalRecords?></span>
           </h1>
 
           <table>

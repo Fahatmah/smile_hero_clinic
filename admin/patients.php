@@ -18,6 +18,7 @@ $query = "SELECT COUNT(*) AS total FROM users";
 $result = $conn->query($query);
 $row = $result->fetch_assoc();
 $number_of_results = $row['total'];
+$totalOfPatients = $row['total'];
 
 // Determine the total number of pages available
 $number_of_pages = ceil($number_of_results / $results_per_page);
@@ -65,7 +66,7 @@ if ($result->num_rows > 0) {
       <div class="patients__container">
         <div class="patients__table">
           <div class="table-heading__container">
-            <h1 class="table-heading">pending appointments <span class="table-item-count">13</span></h1>
+            <h1 class="table-heading">pending appointments <span class="table-item-count"><?php echo $number_of_results?></span></h1>
             <?php include("includes/search.php"); ?>
           </div>
 
@@ -120,11 +121,25 @@ if ($result->num_rows > 0) {
                 </td>
 
                 <td class="patient-cell gender">
-                  
+
+                <?php if(empty($user['gender'])){?>
+                  N/a
+                  <?php } else{
+                    echo htmlspecialchars(ucfirst($user['gender']));
+                  }?>
                 </td>
 
+                <!-- change the date format -->
+                <?php
+                    $date = DateTime::createFromFormat('Y-m-d', $user['birthdate']);
+                    $formattedBirthDate = $date->format('m-d-Y');
+                ?>
                 <td class="patient-cell birthdate">
-                  09-19-1989
+                  <?php if($user['birthdate'] === "0000-00-00"){?>
+                  N/a
+                  <?php } else{
+                    echo $formattedBirthDate;
+                  }?>
                 </td>
 
                 <td class="patient-cell phone">
@@ -167,9 +182,6 @@ if ($result->num_rows > 0) {
 
   // temp gender
   const genderTexts = document.querySelectorAll('.patient-cell.gender')
-  let genderArray = ["Male", "Female"]
-  const displayGender = () => Math.floor(Math.random() * genderArray.length)
-  genderTexts.forEach(gender => gender.textContent = genderArray[displayGender()])
 
   const dropdownContainers = document.querySelectorAll('.dropdown-container')
   dropdownContainers.forEach(container => {

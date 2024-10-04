@@ -13,14 +13,18 @@ if(isset($_SESSION['user_id']) && isset($_SESSION["email"])) {
     $contact = trim($_POST['contact']);
     $address = $_POST['address'];
     $password = trim($_POST['password']);
+    $birthdate = $_POST['bday'];
+    $gender = $_POST['gender'];
 
     require_once("../../includes/signup_model.inc.php");
     require_once("../../includes/signup_contr.inc.php");
 
-    if (!isInputEmpty($fullname, $email, $contact, $address)) {
+    if (!isInputEmpty($fullname, $email, $contact, $address, $birthdate, $gender)) {
       $fullname = htmlspecialchars($fullname);
       $contact = htmlspecialchars($contact);
       $address = htmlspecialchars($address);
+      $birthdate = htmlspecialchars($birthdate);
+      $gender = htmlspecialchars($gender);
       $email = filter_var($email, FILTER_SANITIZE_EMAIL);
 
       if (isUpdatedEmailIsValid($conn, $email, $currentEmail)) {
@@ -30,9 +34,9 @@ if(isset($_SESSION['user_id']) && isset($_SESSION["email"])) {
       }
 
       if (!isEmailInvalid($email)) {
-        $query = "UPDATE users SET fullname = ?, email = ?, contact = ?, address = ? WHERE user_id = ?";
+        $query = "UPDATE users SET fullname = ?, birthdate = ?, gender = ?, email = ?, contact = ?, address = ? WHERE user_id = ?";
         $stmt = $conn->prepare($query);
-        $stmt->bind_param("ssiss", $fullname, $email, $contact, $address, $user_id);
+        $stmt->bind_param("ssssiss", $fullname,$birthdate, $gender, $email, $contact, $address, $user_id);
         $stmt->execute();
 
           if (!empty($password)) {
@@ -168,6 +172,26 @@ $current_page = basename($_SERVER['PHP_SELF']);
               class="edit-profile__input" id="fullName" style="width: 100%;">
           </div>
           <div class="edit-profile__item">
+            <p class="edit-profile__label">Birthdate</p>
+            <input type="date" placeholder="N/a" name="bday" value="<?php echo htmlspecialchars($row["birthdate"]); ?>"
+              class="edit-profile__input" id="bday" style="width: 100%;">
+          </div>
+          <div class="edit-profile__item">
+            <p class="edit-profile__label">Gender</p>
+            <select name="gender" class="edit-profile__input" id="gender" style="width: 100%;">
+                <option value="N/a">
+                <?php if(strlen($row["gender"])===0) { ?>
+                  N/a
+                  <?php }else {
+                    echo ucfirst($row["gender"]);
+                  } ?>
+              </p>
+                </option>
+                <option value="male">Male</option>
+                <option value="female">Female</option>
+              </select>
+          </div>
+          <div class="edit-profile__item">
             <p class="edit-profile__label">Contact Number</p>
             <input type="text" name="contact" value="<?php echo htmlspecialchars($row["contact"]); ?>"
               class="edit-profile__input" id="contactNumber" style="width: 100%;">
@@ -231,76 +255,3 @@ $current_page = basename($_SERVER['PHP_SELF']);
 
 </body>
 </html>
-
-<!-- 
-<section class="edit_profile profile__info account__container">
-      <?php if($row= $result->fetch_assoc() ) { ?>
-      <div class="account">
-        <h1>Edit your account information</h1>
-        <div class="info__header">
-          <div class="details__container">
-            <img src="../../assets/images/default_profile_image.png" alt="profile image"
-              style="width: 90px; height: 90px" />
-            <div class="user__details">
-              <h2 class="user__name" id="headerUserName">
-                <?php echo htmlspecialchars($row["fullname"]); ?> </h2>
-              <p class="user__address" id="headerUserAddress">
-                <?php if(strlen($row["address"])===0) { ?>
-                No Address
-                <?php }else {
-                  echo $row["address"];
-                } ?>
-              </p>
-            </div>
-          </div>
-          <form action="" method="post">
-            <div class="button_container">
-              <input type="submit" value="Save" class="button edit" id="editAccountBtn">
-              <a href="../profile.php" style="text-align: center;" class="button delete" id="deleteAccountBtn">
-                Cancel
-              </a>
-            </div>
-        </div>
-
-        <div class="additional_details__container">
-          <div class="item">
-            <div class="details">
-              <p class="detail__header">Name</p>
-              <input type="text" name="fullname" value="<?php echo htmlspecialchars($row["fullname"]); ?>"
-                class="full__name detail_content" id="fullName" style="width: 100%;">
-            </div>
-          </div>
-          <div class="item">
-            <div class="details">
-              <p class="detail__header">Contact Number</p>
-              <input type="text" name="contact" value="<?php echo htmlspecialchars($row["contact"]); ?>"
-                class="contact__number detail_content" id="contactNumber" style="width: 100%;">
-            </div>
-          </div>
-          <div class="item">
-            <div class="details">
-              <p class="detail__header">Address</p>
-              <input type="text" name="address" value="<?php echo htmlspecialchars($row["address"]); ?>"
-                placeholder="no address" name="address" class="address detail_content" id="address"
-                style="width: 100%;">
-            </div>
-          </div>
-          <div class="item">
-            <div class="details">
-              <p class="detail__header">Email</p>
-              <input type="text" name="email" value="<?php echo htmlspecialchars($row["email"]); ?>"
-                class="email detail_content" id="email" style="width: 100%;">
-            </div>
-          </div>
-          <div class="item">
-            <div class="details">
-              <p class="detail__header">Enter New Password</p>
-              <input type="password" name="password" placeholder="********">
-            </div>
-          </div>
-        </div>
-      </div>
-      </form>
-      <?php } ?>
-    </section>
--->

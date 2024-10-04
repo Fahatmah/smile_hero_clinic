@@ -11,6 +11,7 @@ if ($_SERVER['REQUEST_METHOD'] === "POST" && isset($_SESSION['user_id'])) {
     $appointmentDate = $_POST['appointmentDate'];
     $appointmentTime = $_POST['appointmentTime'];
     $location = $_POST['location'];
+    $dentalService = $_POST['dentalService'];
     $status = 'request';
 
     require_once("dbh.inc.php");
@@ -24,7 +25,7 @@ if ($_SERVER['REQUEST_METHOD'] === "POST" && isset($_SESSION['user_id'])) {
         die();
     }
     else{
-        createAppointment($conn, $user_id, $appointmentId, $name, $email, $contact, $message, $appointmentDate, $appointmentTime, $location, $status);
+        createAppointment($conn, $user_id, $appointmentId, $name, $email, $contact, $message, $appointmentDate, $appointmentTime, $dentalService, $location, $status);
         $_SESSION['appointment_status'] = 'created';
         
         $conn->close();

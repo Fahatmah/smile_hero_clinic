@@ -66,7 +66,7 @@ if(!isset($_SESSION['user_id'])) {
             </div>
           </div>
 
-          <textarea class="feedback-message" name="feedback" id="feedback" placeholder="Please write your feedback here..." rows="3" required></textarea>
+          <textarea class="feedback-message" name="feedback" id="feedback" placeholder="Write your feedback here..." rows="3"></textarea>
 
           <input type="submit" name="submit" value="Submit" class="feedback__submit-btn">
         </form>

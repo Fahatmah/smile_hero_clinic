@@ -2,8 +2,8 @@
 
 declare(strict_types=1);
 
-function isInputEmpty(string $fullname, string $email, string $contact, string $password) {
-    return empty($fullname) || empty($email) || empty($contact) || empty($password);
+function isInputEmpty(string $fullname, string $email, string $contact, string $password, string $birthdate, string $gender) {
+    return empty($fullname) || empty($email) || empty($contact) || empty($password) || empty($birthdate) || empty($gender);
 }
 
 function isEmailInvalid(string $email) {

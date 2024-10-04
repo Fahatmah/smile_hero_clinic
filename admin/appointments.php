@@ -37,16 +37,6 @@ if ($result->num_rows > 0) {
         $users[] = $row;
     }
 }
-
-$query = "SELECT * FROM appointments WHERE status = 'request'";
-$result = $conn->query($query);
-
-$totalAppointments = 0;
-if ($result->num_rows > 0) {
-    while ($row = $result->fetch_assoc()) {
-        $totalAppointments++;
-    }
-}
 ?>
 
 <!DOCTYPE html>
@@ -73,7 +63,7 @@ if ($result->num_rows > 0) {
       <div class="appointments__container appointments__page">
         <div class="appointments__table">
           <div class="table-heading__container">
-            <h1 class="table-heading">pending appointments <span class="table-item-count"><?php echo $totalAppointments ?></span></h1>
+            <h1 class="table-heading">pending appointments <span class="table-item-count"><?php echo $number_of_results ?></span></h1>
             <?php include("includes/search.php"); ?>
           </div>
 
@@ -148,14 +138,14 @@ if ($result->num_rows > 0) {
                 <td class="patient-cell date" data-date="<?php echo $user['date'] ?>"><?php echo $user['date']; ?></td>
                 <td class="patient-cell message">
                   <!-- <button class="view-message-btn">View Message</button> -->
-                  <p class="message-text" title="<?php echo $user['message']; ?>">
-                    <?php echo $user['message']; ?>
+                  <p class="message-text" title="<?php echo $user['service'] . " " . $user['message']?>">
+                    <?php echo $user['service'] . " " . $user['message']; ?>
                   </p>
                 </td>
                 <td class="patient-cell actions">
                   <div class="button-container">
                     <!-- accepts appointment -->
-                    <form action="includes/send_email.php" method="post">
+                    <form action="includes/accept_appointment.php" method="post">
                       <input type="hidden" name="app_id" value="<?php echo $user['appointment_id'];?>">
                       <input type="hidden" name="name" value="<?php echo $user['name'];?>">
                       <input type="hidden" name="email" value="<?php echo $user['email'];?>">
@@ -166,7 +156,7 @@ if ($result->num_rows > 0) {
                     </form>
 
                     <!-- cancel appointment -->
-                    <form action="includes/send_email.php" method="post">
+                    <form action="includes/cancel_appointment.php" method="post">
                       <input type="hidden" name="app_id" value="<?php echo $user['appointment_id'];?>">
                       <input type="hidden" name="name" value="<?php echo $user['name'];?>">
                       <input type="hidden" name="email" value="<?php echo $user['email'];?>">

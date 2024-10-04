@@ -93,6 +93,31 @@ $stmt->execute(); $result = $stmt->get_result(); ?>
               <p class="user-profile__detail-value"><?php echo $row["fullname"]; ?></p>
             </li>
             <li class="user-profile__detail-item">
+              <p class="user-profile__detail-label">Birthdate</p>
+
+                <?php
+                    $date = DateTime::createFromFormat('Y-m-d', $row['birthdate']);
+                    $formattedBirthDate = $date->format('m-d-Y');
+                ?>
+              <p class="user-profile__detail-value">
+              <?php if($row['birthdate'] === "0000-00-00"){?>
+                  N/a
+                  <?php } else{
+                    echo $formattedBirthDate;
+                  }?>
+              </p>
+            </li>
+            <li class="user-profile__detail-item">
+              <p class="user-profile__detail-label">Gender</p>
+              <p class="user-profile__detail-value">
+              <?php if(strlen($row["gender"])===0) { ?>
+                  N/a
+                  <?php }else {
+                    echo ucfirst($row["gender"]);
+                  } ?>
+              </p>
+            </li>
+            <li class="user-profile__detail-item">
               <p class="user-profile__detail-label">Contact Number</p>
               <p class="user-profile__detail-value"><?php echo $row["contact"]; ?></p>
             </li>
