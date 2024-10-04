@@ -139,6 +139,25 @@ if (isset($_SESSION['appointment_status'])) {
               </div>
             </div>
             <div class="appointment-form__field">
+              <label for="dentalService" class="appointment-form__label">Service</label>
+              <select name="dentalService" id="dentalService" class="appointment-form__select">
+                <option value="-">Select service</option>
+                <option value="cleaning">Teeth Cleaning</option>
+                <option value="whitening">Teeth Whitening</option>
+                <option value="extraction">Tooth Extraction</option>
+                <option value="filling">Dental Filling</option>
+                <option value="checkup">Routine Check-up</option>
+                <option value="braces">Braces Consultation</option>
+                <option value="root_canal">Root Canal Treatment</option>
+                <option value="implants">Dental Implants</option>
+              </select>
+              <div class="appointment-form__validation">
+                <p class="appointment-form__text appointment-form__text--error">Error</p>
+                <p class="appointment-form__text appointment-form__text--valid">Valid</p>
+              </div>
+            </div>
+
+            <div class="appointment-form__field">
               <label for="location" class="appointment-form__label">Location</label>
               <select name="location" id="location" class="appointment-form__select">
                   <!-- <option value="-">Select location</option> -->
@@ -302,6 +321,7 @@ if (isset($_SESSION['appointment_status'])) {
     }
 
     setInterval(getCurrentDateTime, 1000)
+  
   </script>
 </body>
 
