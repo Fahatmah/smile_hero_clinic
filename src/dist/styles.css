@@ -2193,6 +2193,11 @@ body.user-homepage main .about .services .appointment__button:hover {
   line-height: 1.6rem;
 }
 .navbar .btn.btn--primary {
+  padding: 0;
+}
+.navbar .btn.btn--primary a {
+  width: 100%;
+  height: 4.75rem;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -2202,9 +2207,13 @@ body.user-homepage main .about .services .appointment__button:hover {
   font-family: var(--ff-inter);
   color: var(--ntrl-clr-300);
   text-transform: uppercase;
+  padding: 0.875rem 1rem;
+  border-radius: 1.25rem;
+  border: 1px solid hsla(0, 0%, 38%, 0.2);
+  background-color: var(--ntrl-clr-100);
   cursor: pointer;
 }
-.navbar .btn.btn--primary:hover {
+.navbar .btn.btn--primary a:hover {
   background-color: hsla(0, 0%, 92%, 0.4);
 }
 .navbar__actions {
