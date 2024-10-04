@@ -66,8 +66,8 @@
         </a>
       </li>
 
-      <li <?php echo ($current_page == 'admin-settings.php') ? 'class="active__link"' : ''; ?>>
-        <a href="../admin/admin-settings.php">
+      <li <?php echo ($current_page == 'settings.php') ? 'class="active__link"' : ''; ?>>
+        <a href="../admin/settings.php">
           Settings
         </a>
       </li>
