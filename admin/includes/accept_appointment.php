@@ -1,38 +1,37 @@
 <?php
-
 require_once '../../includes/config_session.inc.php';
 require_once '../../includes/login_view.inc.php';
 require_once '../../includes/dbh.inc.php';
 
-// use PHPMailer\PHPMailer\PHPMailer;
-// use PHPMailer\PHPMailer\SMTP;
-
-if ($_SERVER['REQUEST_METHOD'] === "POST" && isset($_POST["accept"])){
-
+if ($_SERVER['REQUEST_METHOD'] === "POST" && isset($_POST["accept"])) {
     $name = $_POST["name"];
     $email = $_POST["email"];
     $appointment_id = $_POST["app_id"];
     $subject = $_POST["subject"];
     $message = $_POST["message"];
     $status = "accepted";
-    
+
+    // Mail setup
     $mail = require __DIR__ . "/../../mailer.php"; 
     $mail->setFrom("jpvillaruel02@gmail.com");
     $mail->addAddress($email, $name);
-    
+
     $mail->Subject = $subject;
     $mail->Body = $message;
-    
-    $mail->send();
 
-    $query = "UPDATE appointments SET status = ? WHERE appointment_id = ? ";
-    $stmt = $conn->prepare($query);
-    $stmt->bind_param("ss", $status, $appointment_id);
-    $stmt->execute();
+    if ($mail->send()) {
+        // Update appointment status to accepted
+        $query = "UPDATE appointments SET status = ? WHERE appointment_id = ?";
+        $stmt = $conn->prepare($query);
+        $stmt->bind_param("ss", $status, $appointment_id);
+        $stmt->execute();
 
-    echo "<script> alert('Appointment has been confirmed.')</script>";
-    echo "<script>window.location.href='../appointments.php';</script>";
+        echo "<script>alert('Appointment has been confirmed.')</script>";
+        echo "<script>window.location.href='../appointments.php';</script>";
+    } else {
+        echo "<script>alert('Failed to send confirmation email.')</script>";
+    }
 
     $conn->close();
-    die();  
+    die();
 }

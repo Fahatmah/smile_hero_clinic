@@ -146,24 +146,25 @@ if ($result->num_rows > 0) {
                   <div class="button-container">
                     <!-- accepts appointment -->
                     <form action="includes/accept_appointment.php" method="post">
-                      <input type="hidden" name="app_id" value="<?php echo $user['appointment_id'];?>">
-                      <input type="hidden" name="name" value="<?php echo $user['name'];?>">
-                      <input type="hidden" name="email" value="<?php echo $user['email'];?>">
+                      <input type="hidden" name="app_id" value="<?php echo $user['appointment_id']; ?>">
+                      <input type="hidden" name="name" value="<?php echo $user['name']; ?>">
+                      <input type="hidden" name="email" value="<?php echo $user['email']; ?>">
                       <input type="hidden" name="subject" value="Smile Hero Dental Clinic Appointment">
                       <input type="hidden" name="message"
-                        value="Good Day <?php echo $user['name']; ?> this is Smile Hero Dental Clinic your appointment on <?php echo $user['date']; ?> at <?php echo $user['time']; ?> has been accept. Here is your Appointment ID : <?php echo $user['appointment_id']; ?> ">
+                        value="Good Day <?php echo $user['name']; ?>, your appointment on <?php echo $user['date']; ?> at <?php echo $user['time']; ?> has been accepted. Appointment ID: <?php echo $user['appointment_id']; ?>">
                       <input type="submit" value="Accept" name="accept" class="button accept">
                     </form>
 
                     <!-- cancel appointment -->
                     <form action="includes/cancel_appointment.php" method="post">
-                      <input type="hidden" name="app_id" value="<?php echo $user['appointment_id'];?>">
-                      <input type="hidden" name="name" value="<?php echo $user['name'];?>">
-                      <input type="hidden" name="email" value="<?php echo $user['email'];?>">
+                      <input type="hidden" name="app_id" value="<?php echo $user['appointment_id']; ?>">
+                      <input type="hidden" name="name" value="<?php echo $user['name']; ?>">
+                      <input type="hidden" name="email" value="<?php echo $user['email']; ?>">
                       <input type="hidden" name="subject" value="Smile Hero Dental Clinic Appointment">
                       <input type="hidden" name="message"
-                        value="Good Day <?php echo $user['name']; ?> this is Smile Hero Dental Clinic we are afraid to tell you that your appointment on <?php echo $user['date']; ?> at <?php echo $user['time']; ?> has been Canceled. Please try your appointment request on another day.">
+                        value="Good Day <?php echo $user['name']; ?>, your appointment on <?php echo $user['date']; ?> at <?php echo $user['time']; ?> has been canceled. Please try again on another day.">
                       <input type="submit" value="Cancel" name="cancel" class="button cancel">
+                    </form>
                   </div>
                 </td>
               </tr>
