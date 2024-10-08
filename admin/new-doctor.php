@@ -1,3 +1,22 @@
+<?php
+require_once '../includes/config_session.inc.php';
+require_once '../includes/login_view.inc.php';
+require_once './includes/pagination.php';
+
+if (!isset($_SESSION['adminEmail'])) {
+  // Redirect user to login if not logged in
+  header("Location: ../login.php?login=failed");
+  exit();
+}
+
+$showModal = false;
+if (isset($_SESSION['doctors_process'])) {
+    if ($_SESSION['doctors_process'] === 'created') {
+        $showModal = true;
+    }
+    unset($_SESSION['doctors_process']);
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -23,7 +42,7 @@
         <div class="new-doctor__container">
           <h1>Add Doctor</h1>
 
-          <form action="" id="doctorForm">
+          <form action="includes/add_doctor.php" method="post" id="doctorForm">
             <section
               class="doctor-form__section doctor-form__section--personal-details"
             >
@@ -121,6 +140,7 @@
               />
             </section>
 
+            <!-- modal -->
             <div class="modal" style="display: none">
               <div class="modal__content">
                 <div class="body-text">
@@ -129,7 +149,7 @@
                       New Doctor <br> successfully <br> Added
                     </h3>
                     <p id="modalMessage" class="modal__message">
-                      <a href="">
+                      <a href="doctors.php">
                         Go to doctors
                         <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
                           <path d="M9.62 3.95337L13.6667 8.00004L9.62 12.0467" stroke="#E84531" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
@@ -217,23 +237,13 @@
   </body>
   <script>
     document.addEventListener('DOMContentLoaded', () => {
-      const doctorForm = document.getElementById('doctorForm')
-      const modalContainer = document.querySelector('.modal')
-      const exitBtn = modalContainer.querySelector('#exitButton')
-      const modalStatus = modalContainer.querySelector('#modalStatus')
-      const modalMessage = modalContainer.querySelector('#modalMessage')
-
-      // Check if the modal should be displayed
-      <?php if ($showModal) : ?>
-      modalStatus.innerText = "<?php echo $modalStatus; ?>";
-      modalMessage.innerText = "<?php echo $modalMessage; ?>";
-      modalContainer.style.display = 'flex'
-      modalContainer.style.transform = 'scale(1)'
-      <?php endif; ?>
-      exitBtn.addEventListener('click', () => {
-        modalContainer.style.transform = 'scale(0)'
-        window.close()
-      })
+      const doctorForm = document.getElementById('doctorForm');
+      const modalContainer = document.querySelector(".modal");
+      const exitBtn = modalContainer.querySelector("#exitButton");
+      
+    <?php if ($showModal) : ?>
+      modalContainer.style.display = "flex";
+    <?php endif; ?>
 
       doctorForm.addEventListener('submit', (e) => {
         e.preventDefault()
@@ -241,50 +251,47 @@
         const fields = [
           {
             id: 'firstname',
-            errorMessage: 'First name cannot be empty',
+            errorMessage: 'First name cannot be empty'
           },
           {
             id: 'lastname',
-            errorMessage: 'Last name cannot be empty',
+            errorMessage: 'Last name cannot be empty'
           },
           {
             id: 'email',
-            errorMessage: 'Email cannot be empty',
+            errorMessage: 'Email cannot be empty'
           },
           {
             id: 'contactnumber',
-            errorMessage: 'Contact number cannot be empty',
+            errorMessage: 'Contact number cannot be empty'
           },
         ]
 
         let isValid = true
         fields.forEach((field) => {
-          const fieldElement = document.getElementById(field.id)
-          const errorElement = fieldElement.nextElementSibling.querySelector(
-            '.doctor-form__text--error'
-          )
-          const validElement = fieldElement.nextElementSibling.querySelector(
-            '.doctor-form__text--valid'
-          )
+          const fieldElement = document.getElementById(field.id);
+          const errorElement = fieldElement.nextElementSibling.querySelector('.doctor-form__text--error');
+          const validElement = fieldElement.nextElementSibling.querySelector('.doctor-form__text--valid');
 
-          if (
-            fieldElement.value.trim() === '-' ||
-            fieldElement.value.trim() === ''
-          ) {
-            errorElement.innerText = field.errorMessage
-            errorElement.style.display = 'block' // Show error message
-            validElement.style.display = 'none' // Hide valid message
-            isValid = false
+          if (fieldElement.value.trim() === '-' || fieldElement.value.trim() === '') {
+            errorElement.innerText = field.errorMessage;
+            errorElement.style.display = 'block'; // Show error message
+            validElement.style.display = 'none'; // Hide valid message
+            isValid = false;
           } else {
-            errorElement.style.display = 'none' // Hide error message
-            validElement.style.display = 'block' // Show valid message
+            errorElement.style.display = 'none'; // Hide error message
+            validElement.style.display = 'block'; // Show valid message
           }
         })
 
         if (isValid) {
-          HTMLFormElement.prototype.submit.call(doctorForm)
+          HTMLFormElement.prototype.submit.call(doctorForm);
         }
-      })
-    })     
+      });
+        // Close modal when exit button is clicked
+        exitBtn.addEventListener("click", () => {
+            modalContainer.style.transform = "scale(0)";
+        });
+    });   
   </script>
 </html>
