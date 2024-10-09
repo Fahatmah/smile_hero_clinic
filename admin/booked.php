@@ -102,12 +102,11 @@ $totalPages = ceil($totalRecords / $limit);
                     </svg>
                     </button>
                     <ul class="dropdown patients">
-                      <li><button>all patients</button></li>
-                      <li><button>new patients</button></li>
-                      <li><button>regular patients</button></li>
+                      <li><button>all</button></li>
+                      <li><button>new</button></li>
+                      <li><button>regular</button></li>
                     </ul>
                   </div>
-
                 </th>
                 <th>phone #</th>
                 <th>id #</th>
@@ -148,7 +147,7 @@ $totalPages = ceil($totalRecords / $limit);
                   <?php echo $user['time']; ?>
                 </td>
 
-                <td class="patient-cell name-email">
+                <td class="patient-cell name-email" data-label="<?php echo $user['label'] ?>">
                   <p class="patient-name" title="<?php echo $user['name']; ?>">
                     <?php echo $user['name']; ?>
                   </p>
@@ -212,6 +211,36 @@ $totalPages = ceil($totalRecords / $limit);
       dropdown.style.display = 'none'
      })
   })
+
+  const filterByLabel = (label) => {
+  const rows = document.querySelectorAll('.patients__table tbody tr:not(.no-appointment-message)');
+  let visibleRows = 0;
+  let showRow = false;
+
+  rows.forEach(row => {
+    const userLabel = row.querySelector('.patient-cell.name-email').dataset.label.trim();
+    console.log(label);
+    console.log(userLabel);
+    
+    if (label === 'all' || userLabel.toLowerCase() === label.toLowerCase()) {
+      row.style.display = '';
+      showRow = true;
+    } else {
+      row.style.display = 'none';
+    }
+    if (showRow) visibleRows++;
+  });
+
+  document.querySelector('.no-appointment-message').style.display = visibleRows === 0 ? '' : 'none';
+  };
+
+  const labelButtons = document.querySelectorAll('.dropdown.patients button');
+  labelButtons.forEach(button => {
+    button.addEventListener('click', (e) => {
+      const selectedLabel = e.target.textContent.toLowerCase().replace(' ', '');
+      filterByLabel(selectedLabel);
+    });
+  });
 
   // filter date
   const dateDropdown = document.querySelector('.dropdown.date')

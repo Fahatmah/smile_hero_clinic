@@ -66,7 +66,7 @@ if ($result->num_rows > 0) {
       <div class="patients__container">
         <div class="patients__table">
           <div class="table-heading__container">
-            <h1 class="table-heading">pending appointments <span class="table-item-count"><?php echo $number_of_results?></span></h1>
+            <h1 class="table-heading">clients/patients <span class="table-item-count"><?php echo $number_of_results?></span></h1>
             <?php include("includes/search.php"); ?>
           </div>
 
@@ -74,7 +74,24 @@ if ($result->num_rows > 0) {
             <thead>
               <tr>
                 <th>id #</th>
-                <th>name & email</th>
+                <th>
+                  name & email
+                  <div class="dropdown-container">
+                    <button class="filter-btn">
+                    <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M5.22488 3.35999L3.36487 1.5L1.50488 3.35999" stroke="#616161" stroke-width="0.75" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M3.36499 10.5V1.5" stroke="#616161" stroke-width="0.75" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M6.77466 8.64001L8.63467 10.5L10.4947 8.64001" stroke="#616161" stroke-width="0.75" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M8.63379 1.5V10.5" stroke="#616161" stroke-width="0.75" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                    </button>
+                    <ul class="dropdown patients">
+                      <li><button>all</button></li>
+                      <li><button>new</button></li>
+                      <li><button>regular</button></li>
+                    </ul>
+                  </div>
+                </th>
                 <th>
                   gender
                   <div class="dropdown-container">
@@ -103,7 +120,7 @@ if ($result->num_rows > 0) {
 
             <tbody id="items">
               <tr class="no-appointment-message" style="display:none;">
-                <td colspan="6" style="text-align: center;">There's no such appointment in this section</td>
+                <td colspan="6" style="text-align: center;">There's no such user in this section</td>
               </tr>
               <?php foreach ($users as $user){ ?>
               <tr class="item-row appointment-row">
@@ -111,7 +128,7 @@ if ($result->num_rows > 0) {
                   <?php echo htmlspecialchars($user['user_id']); ?>
                 </td>
 
-                <td class="patient-cell name-email">
+                <td class="patient-cell name-email" data-label="<?php echo htmlspecialchars($user['label']); ?>">
                   <p class="patient-name" title="<?php echo $user['fullname']; ?>">
                     <?php echo htmlspecialchars($user['fullname']); ?>
                   </p>
@@ -199,6 +216,36 @@ if ($result->num_rows > 0) {
       dropdown.style.display = 'none'
      })
   })
+
+  const filterByLabel = (label) => {
+  const rows = document.querySelectorAll('.patients__table tbody tr:not(.no-appointment-message)');
+  let visibleRows = 0;
+  let showRow = false;
+
+  rows.forEach(row => {
+    const userLabel = row.querySelector('.patient-cell.name-email').dataset.label.trim();
+    console.log(label);
+    console.log(userLabel);
+    
+    if (label === 'all' || userLabel.toLowerCase() === label.toLowerCase()) {
+      row.style.display = '';
+      showRow = true;
+    } else {
+      row.style.display = 'none';
+    }
+    if (showRow) visibleRows++;
+  });
+
+  document.querySelector('.no-appointment-message').style.display = visibleRows === 0 ? '' : 'none';
+  };
+
+  const labelButtons = document.querySelectorAll('.dropdown.patients button');
+  labelButtons.forEach(button => {
+    button.addEventListener('click', (e) => {
+      const selectedLabel = e.target.textContent.toLowerCase().replace(' ', '');
+      filterByLabel(selectedLabel);
+    });
+  });
 
   const filterByGender = (gender) => {
     const rows = document.querySelectorAll('.patients__table tbody tr:not(.no-appointment-message)');

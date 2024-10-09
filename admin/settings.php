@@ -213,7 +213,7 @@
                 />
               </section>
 
-              <div class="modal" style="">
+              <div class="modal" style="display: none">
                 <div class="modal__content">
                   <div class="body-text">
                     <div class="modal__header">
