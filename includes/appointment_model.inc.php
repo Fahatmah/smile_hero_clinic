@@ -14,12 +14,12 @@ function getUserid(mysqli $conn, string $name) {
     return $user;
 }
 
-function createAppointment(mysqli $conn, string $user_id, string $appointmentId, string $name, string $email, string $contact, string $message, string $appointmentDate, string $appointmentTime,string  $dentalService, string $location, string $status) {
+function createAppointment(mysqli $conn, string $user_id, string $appointmentId, string $label, string $name, string $email, string $contact, string $message, string $appointmentDate, string $appointmentTime,string  $dentalService, string $location, string $status) {
 
-    $query = "INSERT INTO appointments (user_id, appointment_id, name, email, contact, message, date, time, service, location, status, created_at) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, NOW())";
+    $query = "INSERT INTO appointments (user_id, appointment_id, label, name, email, contact, message, date, time, service, location, status, created_at) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?,?, NOW())";
 
     $stmt = $conn->prepare($query);
-    $stmt->bind_param("sssssssssss", $user_id, $appointmentId, $name, $email, $contact, $message, $appointmentDate, $appointmentTime,  $dentalService, $location, $status);
+    $stmt->bind_param("ssssssssssss", $user_id, $appointmentId, $label, $name, $email, $contact, $message, $appointmentDate, $appointmentTime,  $dentalService, $location, $status);
     $stmt->execute();
 
     return $stmt->affected_rows > 0;

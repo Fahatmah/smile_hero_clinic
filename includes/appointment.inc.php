@@ -4,6 +4,7 @@ require_once '../includes/login_view.inc.php';
 
 if ($_SERVER['REQUEST_METHOD'] === "POST" && isset($_SESSION['user_id'])) {
     $user_id = $_SESSION['user_id'];
+    $label = $_SESSION['label'];
     $name = $_POST['name'];
     $email = $_POST['email'];
     $contact = $_POST['contactnumber'];     
@@ -25,7 +26,7 @@ if ($_SERVER['REQUEST_METHOD'] === "POST" && isset($_SESSION['user_id'])) {
         die();
     }
     else{
-        createAppointment($conn, $user_id, $appointmentId, $name, $email, $contact, $message, $appointmentDate, $appointmentTime, $dentalService, $location, $status);
+        createAppointment($conn, $user_id, $appointmentId, $label, $name, $email, $contact, $message, $appointmentDate, $appointmentTime, $dentalService, $location, $status);
         $_SESSION['appointment_status'] = 'created';
         
         $conn->close();

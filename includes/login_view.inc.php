@@ -58,6 +58,17 @@ function outputContact(){
         // echo"you are not logged in";
     }
 }
+function outputLabel(){
+    if(isset($_SESSION["label"])){
+      $label = $_SESSION["label"];
+      echo $label;
+        // Header("Location: ../userpage.php?login=success");
+
+    }else{
+        Header("Location: ../login.php?login=failed");
+        // echo"you are not logged in";
+    }
+}
 
 function checkLoginErrors(){
     if (isset($_SESSION["errors_login"])) {

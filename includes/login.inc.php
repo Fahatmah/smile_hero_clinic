@@ -47,6 +47,7 @@
       $_SESSION["fullname"] =  $result["fullname"];
       $_SESSION["email"] =  $result["email"];
       $_SESSION["contact"] =  $result["contact"];
+      $_SESSION["label"] = $result["label"];
       $_SESSION["user_username"] = htmlspecialchars($result["username"]);
       $_SESSION["last_regeneration"] = time();
 
