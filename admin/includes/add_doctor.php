@@ -10,23 +10,32 @@ if ($_SERVER['REQUEST_METHOD'] === "POST"){
     $contactnumber = $_POST['contactnumber'];
 
     require_once "../../includes/dbh.inc.php";
-    $doctor_id = generateAppoinmentID($conn);
+    $doctor_id = generateDoctorID($conn);
 
     if(isEmailInvalid($email)){
-        header("Location: ../new-doctor.php");
+        header("Location: ../new-doctor.php?error=invalid_email");
+        exit();
+    } else {
+        $query = "INSERT INTO doctors (doctor_id, first_name, last_name, phone_number, email, created_at) VALUES (?, ?, ?, ?, ?, Now())";
+        $stmt = $conn->prepare($query);
+        $stmt->bind_param("sssss", $doctor_id, $fname, $lname, $contactnumber, $email);
+
+        try {
+            if($stmt->execute()){
+                $_SESSION['doctors_process'] = 'created';
+            }
+        } catch (\Throwable $th) {
+            // Ideally, log the error to a file instead of showing it directly
+            error_log($th->getMessage());
+            die("Something went wrong. Please try again later.");
+        }
+
+        $conn->close();
+        header("Location: ../new-doctor.php?success=1");
         exit();
     }
 
-    $query = "INSERT INTO doctors (doctor_id, first_name, last_name, phone_number, email, created_at) VALUES (?, ?, ?, ?, ?, Now())";
-    $stmt = $conn->prepare($query);
-    $stmt->bind_param("sssis", $doctor_id, $fname, $lname, $contactnumber, $email);
-    $stmt->execute();
-
-    $_SESSION['doctors_process'] = 'created';
-    $conn->close();
-    header("Location: ../new-doctor.php");
-    die();
-}else{
+} else {
     echo "<script>alert('Adding Doctor : Failed');</script>";
     echo "<script>window.location.href='../new-doctor';</script>";
 }
@@ -35,22 +44,29 @@ function isEmailInvalid(string $email) {
     return !filter_var($email, FILTER_VALIDATE_EMAIL);
 }
 
-function generateAppoinmentID(mysqli $conn) {
+function generateDoctorID(mysqli $conn) {
     $unique = false;
-    $appointmentID = '';
-    while (!$unique) {
+    $doctorID = '';
+    $attempts = 0; // limit to avoid infinite loops
+    $maxAttempts = 10;
+
+    while (!$unique && $attempts < $maxAttempts) {
         $randString = strval(mt_rand());
-        $appointmentID = 'SHC' . substr(md5(uniqid($randString, true)), 0, 4);
-        $query = "SELECT appointment_id FROM appointments WHERE appointment_id = ?";
+        $doctorID = 'SHC' . substr(md5(uniqid($randString, true)), 0, 4);
+        $query = "SELECT doctor_id FROM doctors WHERE doctor_id = ?";
         $stmt = $conn->prepare($query);
-        $stmt->bind_param('s', $appointmentID);
+        $stmt->bind_param('s', $doctorID);
         $stmt->execute();
         $stmt->store_result();
         if ($stmt->num_rows === 0) {
             $unique = true;
         }
+        $attempts++;
     }
-    return $appointmentID;
+
+    if (!$unique) {
+        die("Error: Unable to generate a unique Doctor ID.");
+    }
+
+    return $doctorID;
 }
-
-
