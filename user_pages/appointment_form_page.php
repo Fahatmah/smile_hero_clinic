@@ -197,7 +197,7 @@ if (isset($_SESSION['appointment_status'])) {
       <?php endif; ?>
       exitBtn.addEventListener("click", () => {
         modalContainer.style.transform = "scale(0)";
-        window.close()
+        // window.close()
       });
 
       appointmentForm.addEventListener('submit', (e) => {

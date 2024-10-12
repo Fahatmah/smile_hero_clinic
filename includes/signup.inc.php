@@ -3,6 +3,8 @@
 if ($_SERVER['REQUEST_METHOD'] === "POST") {
 
     $fullname = $_POST["fullname"];
+    $birthdate = $_POST["birthdate"];
+    $gender = $_POST["gender"];
     $email = $_POST["email"];
     $contact = $_POST["contact"];
     $password = $_POST["password"];
@@ -19,7 +21,7 @@ if ($_SERVER['REQUEST_METHOD'] === "POST") {
     // ERROR HANDLERS
     $errors = [];
 
-    if (isInputEmpty($fullname, $email, $contact, $password)) {
+    if (isInputEmpty($fullname, $email, $contact, $password, $birthdate, $gender)) {
         // $errors["emptyInput"] = "Fill in all fields!";
     }
     if (isNameTaken($conn, $fullname)) {
@@ -53,7 +55,7 @@ if ($_SERVER['REQUEST_METHOD'] === "POST") {
         die();
     }
 
-    createUser($conn, $user_id, $fullname, $email, $contact, $password, $activation_token_hash);
+    createUser($conn, $user_id, $fullname, $birthdate, $gender, $email, $contact, $password, $activation_token_hash);
 
     $mail = require __DIR__ . "/../mailer.php"; 
     $mail->setFrom("jpvillaruel02@gmail.com");

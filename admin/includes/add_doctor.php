@@ -52,7 +52,7 @@ function generateDoctorID(mysqli $conn) {
 
     while (!$unique && $attempts < $maxAttempts) {
         $randString = strval(mt_rand());
-        $doctorID = 'SHC' . substr(md5(uniqid($randString, true)), 0, 4);
+        $doctorID = 'DOC' . substr(md5(uniqid($randString, true)), 0, 4);
         $query = "SELECT doctor_id FROM doctors WHERE doctor_id = ?";
         $stmt = $conn->prepare($query);
         $stmt->bind_param('s', $doctorID);
