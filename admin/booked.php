@@ -245,6 +245,7 @@ $totalPages = ceil($totalRecords / $limit);
   // filter date
   const dateDropdown = document.querySelector('.dropdown.date')
   function isDateRange(date, startDate, endDate) {
+    console.log(date >= startDate && date <= endDate);
     return date >= startDate && date <= endDate
   }
 

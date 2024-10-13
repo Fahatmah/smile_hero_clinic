@@ -11,7 +11,7 @@ if(!isset($_SESSION['adminEmail'])) {
 }
 
 // Define how many results per page
-$results_per_page = 20;
+$results_per_page = 10;
 
 // Find out the number of results stored in the database
 $query = "SELECT COUNT(*) AS total FROM users";

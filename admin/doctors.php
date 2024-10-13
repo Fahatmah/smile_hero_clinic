@@ -98,6 +98,9 @@ $totalPages = ceil($totalRecords / $limit);
             </tbody>
           </table>
         </div>
+
+        <!-- Pagination -->
+        <?php renderPagination($page, $totalPages) ?>
       </div>
       
     </section>

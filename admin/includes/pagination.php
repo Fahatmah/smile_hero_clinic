@@ -2,7 +2,8 @@
 function renderPagination($currentPage, $totalPages) {
     if ($totalPages <= 1) return; // No pagination needed if there is only one page
 
-    echo '<div class="pagination">';
+    echo '<div class="pagination">
+            <div class="container">';
 
     // Previous button
     if ($currentPage > 1) {
@@ -28,5 +29,6 @@ function renderPagination($currentPage, $totalPages) {
               </a>';
     }
 
-    echo '</div>';
+    echo '</div>
+    </div>';
 }
