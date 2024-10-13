@@ -50,8 +50,8 @@ function getName(mysqli $conn, string $fullname) {
     return $user;
 }
 
-function setUser(mysqli $conn, string $userid, string $fullname, string $birhdate, string $gender, string $email, string $contact, string $password, string  $activation_token_hash) {
-    $query = "INSERT INTO users (user_id, fullname, birthdate, gender, email, contact, pass, account_activation_hash, created_at) VALUES (?, ?, ?, ?, ?, ?, ?, ?, NOW())";
+function setUser(mysqli $conn, string $userid, string $fullname, string $email, string $contact, string $password, string  $activation_token_hash) {
+    $query = "INSERT INTO users (user_id, fullname, email, contact, pass, account_activation_hash, created_at) VALUES (?, ?, ?, ?, ?, ?, NOW())";
     $stmt = $conn->prepare($query);
 
     $options = [
@@ -59,7 +59,7 @@ function setUser(mysqli $conn, string $userid, string $fullname, string $birhdat
     ];
     $hashedPassword = password_hash($password, PASSWORD_BCRYPT, $options);
 
-    $stmt->bind_param("ssssssss", $userid, $fullname, $birhdate, $gender, $email, $contact, $hashedPassword,  $activation_token_hash);
+    $stmt->bind_param("ssssss", $userid, $fullname, $email, $contact, $hashedPassword,  $activation_token_hash);
     $stmt->execute();
 
     return $stmt->affected_rows > 0;

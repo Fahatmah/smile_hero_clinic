@@ -1,6 +1,14 @@
 <?php
 require_once "includes/config_session.inc.php";
-require_once "includes/signup_view.inc.php"
+require_once "includes/signup_view.inc.php";
+
+$showModal = false;
+if (isset($_SESSION['signup_process'])) {
+    if ($_SESSION['signup_process'] === 'created') {
+        $showModal = true;
+    }
+    unset($_SESSION['signup_process']);
+}
 ?>
 
 <!DOCTYPE html>
@@ -35,8 +43,6 @@ require_once "includes/signup_view.inc.php"
   }
   </style>
 </head>
-
-<body>
   <main class="signup__page">
     <!-- navigation bar -->
     <?php include('nav.php') ?>
@@ -50,18 +56,18 @@ require_once "includes/signup_view.inc.php"
           <input type="text" placeholder="e.g. Fahatmah Mabang" id="fullname" name="fullname" required autofocus />
           <label for="fullname">Name</label>
         </div>
-        <div class="field">
+        <!-- <div class="field">
           <input type="date" placeholder="e.g. Fahatmah Mabang" id="birthdate" name="birthdate" required autofocus />
           <label for="birthdate">Birhday</label>
-        </div>
-        <div class="field">
+        </div> -->
+        <!-- <div class="field">
           <select name="gender" id="gender">
             <option value="null">--</option>
             <option value="male">Male</option>
             <option value="female">Female</option>
           </select>
           <label for="gender">Gender</label>
-        </div>
+        </div> -->
         <div class="field">
           <input type="email" placeholder="e.g. fahatmahmabang@gmail.com" id="email" name="email" required />
           <label for="email">Email</label>
@@ -96,15 +102,13 @@ require_once "includes/signup_view.inc.php"
              <h3 id="modalStatus" class="modal__status">
                You have <br> successfully <br> registered
              </h3>
-             <p id="modalMessage" class="modal__message">
-               <a href="doctors.php">
-                 Activate your account by clicking the button below.
-               </a>
+             <p id="modalMessage" class="modal__message" style="color: red;"> 
+                 We Sent an Email to Activate your account.
              </p>
            </div>
-           <button type="button" id="exitButton" class="modal__button">
-             ACTIVATE MY ACCOUNT
-           </button>
+           <a href="https://mail.google.com/mail/u/0/" target="_blank" id="exitButton" class="modal__button" style="text-align: center;">
+               GO TO EMAIL
+           </a>
          </div>
          <div class="illustration__container">
            <svg width="369" height="369" viewBox="0 0 369 369" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -163,6 +167,22 @@ require_once "includes/signup_view.inc.php"
   </main>
   <!-- footer -->
   <?php include('footer.php') ?>
+
+  <script>
+     document.addEventListener('DOMContentLoaded', () => {
+    const modalContainer = document.querySelector(".modal");
+    const exitBtn = modalContainer.querySelector("#exitButton");
+
+    <?php if ($showModal) : ?>
+      modalContainer.style.display = "flex";
+    <?php endif; ?>
+
+     // Close modal when exit button is clicked
+     exitBtn.addEventListener("click", () => {
+            modalContainer.style.transform = "scale(0)";
+        });
+    });
+  </script>
 </body>
 
 </html>

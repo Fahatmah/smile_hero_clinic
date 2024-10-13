@@ -37,6 +37,19 @@ if ($result->num_rows > 0) {
         $users[] = $row;
     }
 }
+
+$showModal = false;
+$modalStatus = '';
+if (isset($_SESSION['pending_appointment'])) {
+    if ($_SESSION['pending_appointment'] === 'accept') {
+        $showModal = true;
+        $modalStatus = 'The Requested Appointment is Accepted.';
+    } elseif ($_SESSION['pending_appointment'] === 'reject') {
+        $showModal = true;
+        $modalStatus = 'The Requested Appointment is Rejected.';
+    }
+    unset($_SESSION['pending_appointment']);
+}
 ?>
 
 <!DOCTYPE html>
@@ -182,7 +195,6 @@ if ($result->num_rows > 0) {
                 <div class="body-text">
                   <div class="modal__header">
                     <h3 id="modalStatus" class="modal__status">
-                      Appointment with <br> id of <span class="appointment-id">SHC13ht</span> has <br> been updated.
                     </h3>
                     <p id="modalMessage" class="modal__message">
                       <a href="doctors.php">
@@ -263,6 +275,23 @@ if ($result->num_rows > 0) {
   </main>
 </body>
 <script>
+
+document.addEventListener('DOMContentLoaded', () => {
+      const modalContainer = document.querySelector(".modal");
+      const exitBtn = modalContainer.querySelector("#exitButton");
+      const modalStatus = modalContainer.querySelector("#modalStatus");
+
+      // Check if the modal should be displayed
+      <?php if ($showModal) : ?>
+      modalStatus.innerText = "<?php echo $modalStatus; ?>";
+      modalContainer.style.display = "flex";
+      <?php endif; ?>
+      exitBtn.addEventListener("click", () => {
+        modalContainer.style.transform = "scale(0)";
+      });
+    });
+
+
   const dropdownContainers = document.querySelectorAll('.dropdown-container')
   dropdownContainers.forEach(container => {
     container.addEventListener('click', e => {   

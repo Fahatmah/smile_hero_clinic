@@ -47,8 +47,10 @@ if(isset($_SESSION['user_id']) && isset($_SESSION["email"])) {
               $password_stmt->execute();
             }
 
-          echo "<script>alert('Successfully Updated');</script>";
-          echo "<script>window.location.href='../profile.php';</script>";
+          // echo "<script>alert('Successfully Updated');</script>";
+          $_SESSION['edit_process'] = "success";
+          header("Location: edit_profile.php");
+          die();
         }else{
           echo "<script>alert('Invalid email format!');</script>";
         }
@@ -69,6 +71,14 @@ if(isset($_SESSION['user_id']) && isset($_SESSION["email"])) {
 }
 
 $current_page = basename($_SERVER['PHP_SELF']);
+
+$showModal = false;
+if (isset($_SESSION['edit_process'])) {
+    if ($_SESSION['edit_process'] === 'success') {
+        $showModal = true;
+    }
+    unset($_SESSION['edit_process']);
+}
 ?>
 
 <!DOCTYPE html>
@@ -179,13 +189,12 @@ $current_page = basename($_SERVER['PHP_SELF']);
           <div class="edit-profile__item">
             <p class="edit-profile__label">Gender</p>
             <select name="gender" class="edit-profile__input" id="gender" style="width: 100%;">
-                <option value="N/a">
+                <option value="<?php echo ucfirst($row["gender"]) ?>">
                 <?php if(strlen($row["gender"])===0) { ?>
                   N/a
                   <?php }else {
                     echo ucfirst($row["gender"]);
                   } ?>
-              </p>
                 </option>
                 <option value="male">Male</option>
                 <option value="female">Female</option>
@@ -223,7 +232,7 @@ $current_page = basename($_SERVER['PHP_SELF']);
                 Your profile is <br> successfully <br> updated
               </h3>
               <p id="modalMessage" class="modal__message">
-                <a href="doctors.php">
+                <a href="../profile.php">
                   Go to profile
                   <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path d="M9.62 3.95337L13.6667 8.00004L9.62 12.0467" stroke="#E84531" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
@@ -318,6 +327,23 @@ $current_page = basename($_SERVER['PHP_SELF']);
         event.target.submit(); // Submit the form after 3 seconds
       }, 3000);
     });
+
+    document.addEventListener('DOMContentLoaded', () => {
+    const doctorForm = document.getElementById('edit-profile__form');
+    const modalContainer = document.querySelector(".modal");
+    const exitBtn = modalContainer.querySelector("#exitButton");
+
+    <?php if ($showModal) : ?>
+      modalContainer.style.display = "flex";
+    <?php endif; ?>
+
+     // Close modal when exit button is clicked
+     exitBtn.addEventListener("click", () => {
+            modalContainer.style.transform = "scale(0)";
+        });
+    });
+
+
 
     function getCurrentDateTime() {
       const date = new Date()

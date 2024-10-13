@@ -26,8 +26,8 @@ if ($_SERVER['REQUEST_METHOD'] === "POST" && isset($_POST["cancel"])) {
         $stmt->bind_param("ss", $status, $appointment_id);
         $stmt->execute();
 
-        echo "<script>alert('Appointment has been canceled.')</script>";
-        echo "<script>window.location.href='../appointments.php';</script>";
+        $_SESSION['pending_appointment'] = 'reject';
+        header("Location: ../appointments.php");
     } else {
         echo "<script>alert('Failed to send cancellation email.')</script>";
     }

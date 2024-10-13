@@ -2,9 +2,9 @@
 
 if ($_SERVER['REQUEST_METHOD'] === "POST") {
 
-    $fullname = $_POST["fullname"];
-    $birthdate = $_POST["birthdate"];
-    $gender = $_POST["gender"];
+    $fullname = ucfirst($_POST["fullname"]);
+    $birthdate = "null";
+    $gender = "null";
     $email = $_POST["email"];
     $contact = $_POST["contact"];
     $password = $_POST["password"];
@@ -55,7 +55,7 @@ if ($_SERVER['REQUEST_METHOD'] === "POST") {
         die();
     }
 
-    createUser($conn, $user_id, $fullname, $birthdate, $gender, $email, $contact, $password, $activation_token_hash);
+    createUser($conn, $user_id, $fullname, $email, $contact, $password, $activation_token_hash);
 
     $mail = require __DIR__ . "/../mailer.php"; 
     $mail->setFrom("jpvillaruel02@gmail.com");
@@ -77,9 +77,8 @@ if ($_SERVER['REQUEST_METHOD'] === "POST") {
         exit;
     }
 
-    echo "<script>alert('Account is created');</script>";
-    echo "<script>window.location.href='../login.php?signup=success';</script>";
-
+    $_SESSION["signup_process"] = "created";
+    header("Location: ../signup.php");
     $conn->close();
     die();
 } else {
