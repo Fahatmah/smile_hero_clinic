@@ -1,3 +1,27 @@
+<?php
+require_once '../includes/config_session.inc.php';
+require_once '../includes/login_view.inc.php';
+require_once '../includes/appointment_view.inc.php';
+
+if (!isset($_SESSION['adminID'])) {
+  // Redirect user to login if not logged in
+  header("Location: ../login.php?login=failed");
+  exit();
+}
+
+$showModal = false;
+$modalStatus = '';
+if (isset($_SESSION['appointment_status'])) {
+    if ($_SESSION['appointment_status'] === 'created') {
+        $showModal = true;
+        $modalStatus = 'Appointment Successfully Created.';
+    } elseif ($_SESSION['appointment_status'] === 'exists') {
+        $showModal = true;
+        $modalStatus = 'The patient already has an appointment.';
+    }
+    unset($_SESSION['appointment_status']);
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -23,7 +47,7 @@
         <div class="new-appointment__container">
           <h1>create new appointment</h1>
 
-          <form action="" id="appointmentForm">
+          <form action="includes/admin_appointment.php" method="post" id="appointmentForm">
             <section
               class="appointment-form__section appointment-form__section--personal-details"
             >
@@ -120,15 +144,13 @@
               </div>
             </section>
 
-            <div class="modal" style="display: none">
+            <div class="modal" style="display: none;">
               <div class="modal__content">
                 <div class="body-text">
                   <div class="modal__header">
-                    <h3 id="modalStatus" class="modal__status">
-                      appointment <br> successfully <br> created
-                    </h3>
+                    <h3 id="modalStatus" class="modal__status"></h3>
                     <p id="modalMessage" class="modal__message">
-                      <a href="">
+                      <a href="appointments.php">
                         Go to appointments
                         <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
                           <path d="M9.62 3.95337L13.6667 8.00004L9.62 12.0467" stroke="#E84531" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
@@ -313,132 +335,149 @@
   </body>
   <script>
     document.addEventListener('DOMContentLoaded', () => {
-      const appointmentForm = document.getElementById('appointmentForm')
-      const modalContainer = document.querySelector('.modal')
-      const exitBtn = modalContainer.querySelector('#exitButton')
-      const modalStatus = modalContainer.querySelector('#modalStatus')
-      const modalMessage = modalContainer.querySelector('#modalMessage')
-      const appointmentDateSelect = document.getElementById('appointmentDate')
+      const appointmentForm = document.getElementById('appointmentForm');
+      const modalContainer = document.querySelector(".modal");
+      const exitBtn = modalContainer.querySelector("#exitButton");
+      const modalStatus = modalContainer.querySelector("#modalStatus");
+      const modalMessage = modalContainer.querySelector("#modalMessage");
+      const appointmentDateSelect = document.getElementById('appointmentDate');
 
       // Check if the modal should be displayed
       <?php if ($showModal) : ?>
       modalStatus.innerText = "<?php echo $modalStatus; ?>";
-      modalMessage.innerText = "<?php echo $modalMessage; ?>";
-      modalContainer.style.display = 'flex'
-      modalContainer.style.transform = 'scale(1)'
+      modalContainer.style.display = "flex";
+      modalContainer.style.transform = "scale(1)";
       <?php endif; ?>
-      exitBtn.addEventListener('click', () => {
-        modalContainer.style.transform = 'scale(0)'
-        window.close()
-      })
+      exitBtn.addEventListener("click", () => {
+        modalContainer.style.transform = "scale(0)";
+        // window.close()
+      });
 
       appointmentForm.addEventListener('submit', (e) => {
-        e.preventDefault()
+        e.preventDefault();
 
-        const fields = [
-          {
+        const fields = [{
             id: 'name',
-            errorMessage: 'Name cannot be empty',
+            errorMessage: 'Name cannot be empty'
           },
           {
             id: 'email',
-            errorMessage: 'Email cannot be empty',
+            errorMessage: 'Email cannot be empty'
           },
           {
             id: 'contactnumber',
-            errorMessage: 'Contact number cannot be empty',
+            errorMessage: 'Contact number cannot be empty'
           },
           {
             id: 'appointmentDate',
-            errorMessage: 'Please select a date',
+            errorMessage: 'Please select a date'
           },
           {
             id: 'appointmentTime',
-            errorMessage: 'Please select a time',
+            errorMessage: 'Please select a time'
           },
           {
             id: 'location',
-            errorMessage: 'Please select a location',
+            errorMessage: 'Please select a location'
           },
-        ]
+          {
+            id: 'dentalService',
+            errorMessage: 'Please select a service'
+          },
+        ];
 
-        let isValid = true
+        let isValid = true;
         fields.forEach((field) => {
-          const fieldElement = document.getElementById(field.id)
-          const errorElement = fieldElement.nextElementSibling.querySelector(
-            '.appointment-form__text--error'
-          )
-          const validElement = fieldElement.nextElementSibling.querySelector(
-            '.appointment-form__text--valid'
-          )
+          const fieldElement = document.getElementById(field.id);
+          const errorElement = fieldElement.nextElementSibling.querySelector('.appointment-form__text--error');
+          const validElement = fieldElement.nextElementSibling.querySelector('.appointment-form__text--valid');
 
-          if (
-            fieldElement.value.trim() === '-' ||
-            fieldElement.value.trim() === ''
-          ) {
-            errorElement.innerText = field.errorMessage
-            errorElement.style.display = 'block' // Show error message
-            validElement.style.display = 'none' // Hide valid message
-            isValid = false
+          if (fieldElement.value.trim() === '-' || fieldElement.value.trim() === '') {
+            errorElement.innerText = field.errorMessage;
+            errorElement.style.display = 'block'; // Show error message
+            validElement.style.display = 'none'; // Hide valid message
+            isValid = false;
           } else {
-            errorElement.style.display = 'none' // Hide error message
-            validElement.style.display = 'block' // Show valid message
+            errorElement.style.display = 'none'; // Hide error message
+            validElement.style.display = 'block'; // Show valid message
           }
-        })
+        });
 
         if (isValid) {
-          HTMLFormElement.prototype.submit.call(appointmentForm)
+          HTMLFormElement.prototype.submit.call(appointmentForm);
         }
-      })
+      });
 
       function generateWeekdayOptions() {
-        const today = new Date()
-        const options = []
-        let addedDays = 0 // To count the weekdays added
+        const today = new Date();
+        const options = [];
+        let addedDays = 0; // To count the weekdays added
 
-        while (options.length < 5) {
-          // We need 5 weekdays
-          const currentDay = new Date()
-          currentDay.setDate(today.getDate() + addedDays + 1) // Increment by 1, then 2, etc.
-          const dayOfWeek = currentDay.getDay()
+        while (options.length < 5) { // We need 5 weekdays
+          const currentDay = new Date();
+          currentDay.setDate(today.getDate() + addedDays + 1); // Increment by 1, then 2, etc.
+          const dayOfWeek = currentDay.getDay();
 
-          if (dayOfWeek >= 1 && dayOfWeek <= 5) {
-            // Only weekdays (Monday to Friday)
-            const formattedDate = currentDay.toISOString().split('T')[0] // Format as YYYY-MM-DD
-            const weekdayName = currentDay.toLocaleString('en-US', {
-              weekday: 'long',
-            }) // Get the weekday name
+          if (dayOfWeek >= 1 && dayOfWeek <= 5) { // Only weekdays (Monday to Friday)
+            const formattedDate = currentDay.toISOString().split('T')[0]; // Format as YYYY-MM-DD
+            const weekdayName = currentDay.toLocaleString('en-US', { weekday: 'long' }); // Get the weekday name
 
             // Combine formatted date and weekday name
-            const formattedDateWithWeekday = `${formattedDate}, ${weekdayName}`
+            const formattedDateWithWeekday = `${formattedDate}, ${weekdayName}`;
 
-            options.push(formattedDateWithWeekday)
+            options.push(formattedDateWithWeekday);
           }
 
-          addedDays++ // Increment days to move to the next date
+          addedDays++; // Increment days to move to the next date
         }
 
         // Clear existing options and add new ones
-        appointmentDateSelect.innerHTML = '' // Clear existing options
+        appointmentDateSelect.innerHTML = ''; // Clear existing options
 
         // Add the placeholder option
-        const placeholderOption = document.createElement('option')
-        placeholderOption.value = ''
-        placeholderOption.textContent = 'Select date'
-        placeholderOption.disabled = true // Make it unselectable
-        placeholderOption.selected = true // Make it the default selected option
-        appointmentDateSelect.appendChild(placeholderOption)
+        const placeholderOption = document.createElement('option');
+        placeholderOption.value = '';
+        placeholderOption.textContent = 'Select date';
+        placeholderOption.disabled = true; // Make it unselectable
+        placeholderOption.selected = true; // Make it the default selected option
+        appointmentDateSelect.appendChild(placeholderOption);
 
         // Add generated date options
         options.forEach((date) => {
-          const option = document.createElement('option')
-          option.value = date
-          option.textContent = date
-          appointmentDateSelect.appendChild(option)
-        })
+          const option = document.createElement('option');
+          option.value = date;
+          option.textContent = date;
+          appointmentDateSelect.appendChild(option);
+        });
       }
 
-      generateWeekdayOptions()
-    })     
+      generateWeekdayOptions();
+    });
+
+    function getCurrentDateTime() {
+      const date = new Date()
+      const daysOfWeek = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"]
+      const months = [
+        "January", "February", "March", "April", "May", "June",
+        "July", "August", "September", "October", "November", "December"
+      ]
+
+      // get current day, month, date and year
+      const dayOfWeek = daysOfWeek[date.getDay()]
+      const month = months[date.getMonth()]
+      const day = date.getDate()
+      const year = date.getFullYear()
+
+      let hours = date.getHours()
+      let minutes = date.getMinutes().toString().padStart(2, '0')
+
+      const period = hours >= 12 ? 'PM':'AM'
+      hours = hours % 12 || 12
+
+      return document.querySelector('.header__date').innerText = `${dayOfWeek} ${hours}:${minutes} ${period} | ${month} ${day}, ${year}`
+    }
+
+    setInterval(getCurrentDateTime, 1000)
+  
   </script>
 </html>

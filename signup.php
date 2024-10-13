@@ -51,6 +51,18 @@ require_once "includes/signup_view.inc.php"
           <label for="fullname">Name</label>
         </div>
         <div class="field">
+          <input type="date" placeholder="e.g. Fahatmah Mabang" id="birthdate" name="birthdate" required autofocus />
+          <label for="birthdate">Birhday</label>
+        </div>
+        <div class="field">
+          <select name="gender" id="gender">
+            <option value="null">--</option>
+            <option value="male">Male</option>
+            <option value="female">Female</option>
+          </select>
+          <label for="gender">Gender</label>
+        </div>
+        <div class="field">
           <input type="email" placeholder="e.g. fahatmahmabang@gmail.com" id="email" name="email" required />
           <label for="email">Email</label>
         </div>

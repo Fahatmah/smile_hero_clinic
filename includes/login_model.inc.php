@@ -14,25 +14,14 @@ function getUser(mysqli $conn, string $email) {
     return $user;
 }
 
-function getAdminEmail(mysqli $conn, string $email) {
-    $query = "SELECT email FROM admin WHERE email = ?;";
+function getAdmin(mysqli $conn, string $email) {
+    $query = "SELECT * FROM admin WHERE email = ?;";
     $stmt = $conn->prepare($query);
     $stmt->bind_param("s", $email);
     $stmt->execute();
 
     $result = $stmt->get_result();
-    $user = $result->fetch_assoc();
+    $admin = $result->fetch_assoc();
 
-    return $user;
-}
-function getAdminPass(mysqli $conn, string $password) {
-    $query = "SELECT password FROM admin WHERE password = ?;";
-    $stmt = $conn->prepare($query);
-    $stmt->bind_param("s", $password);
-    $stmt->execute();
-
-    $result = $stmt->get_result();
-    $user = $result->fetch_assoc();
-
-    return $user;
+    return $admin;
 }

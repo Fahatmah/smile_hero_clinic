@@ -4,7 +4,7 @@ require_once '../includes/login_view.inc.php';
 require_once '../includes/dbh.inc.php';
 require_once './includes/pagination.php';
 
-if(!isset($_SESSION['adminEmail'])) {
+if(!isset($_SESSION['adminID'])) {
   // Redirect user to login if not logged in
   header("Location: ../login.php?login=failed");
   exit();

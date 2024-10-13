@@ -14,3 +14,4 @@ function isPasswordWrong(string $password, string $hashedPassword) {
     return !password_verify($password, $hashedPassword);
 }
 
+

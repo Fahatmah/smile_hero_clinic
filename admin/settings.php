@@ -1,3 +1,24 @@
+<?php
+require_once '../includes/config_session.inc.php';
+require_once '../includes/login_view.inc.php';
+require_once '../includes/appointment_view.inc.php';
+
+if (!isset($_SESSION['adminID'])) {
+  // Redirect user to login if not logged in
+  header("Location: ../login.php?login=failed");
+  exit();
+}
+
+$showModal = false;
+if (isset($_SESSION['admin_process'])) {
+    if ($_SESSION['admin_process'] === 'created') {
+        $showModal = true;
+    }
+    unset($_SESSION['admin_process']);
+}
+?>
+
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -48,10 +69,9 @@
                   <p class="profile-details__phone">091234567890</p>
                 </div>
               </div>
-
             </div>
 
-            <form action="" id="adminForm">
+            <form action="includes/admin_setting_update.php" method="post" id="adminForm">
               <section
                 class="admin-form__section admin-form__section--personal-details"
               >
@@ -307,8 +327,17 @@
     </main>
   </body>
   <script>
-    const profileImageInput = document.getElementById('profileImage')
-    const profileDisplay = document.getElementById('profileDisplay')
+
+document.addEventListener('DOMContentLoaded', () => {
+    const doctorForm = document.getElementById('adminForm');
+    const modalContainer = document.querySelector(".modal");
+    const exitBtn = modalContainer.querySelector("#exitButton");
+    const profileImageInput = document.getElementById('profileImage');
+    const profileDisplay = document.getElementById('profileDisplay');
+
+    <?php if ($showModal) : ?>
+      modalContainer.style.display = "flex";
+    <?php endif; ?>
 
     profileImageInput.addEventListener('change', function (e) {
       const file = e.target.files[0]
@@ -320,6 +349,12 @@
         }
         reader.readAsDataURL(file)
       }
-    })
+    });
+       // Close modal when exit button is clicked
+       exitBtn.addEventListener("click", () => {
+            modalContainer.style.transform = "scale(0)";
+        });
+
+  });
   </script>
   </html>

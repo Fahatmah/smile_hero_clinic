@@ -11,6 +11,7 @@
       $errors = [];
 
       $result = getUser($conn, $email);
+      $getAdminResult = getAdmin($conn, $email);
 
       if (isUsernameWrong($result)) {
           $errors["login_incorrect"] = "Incorrect Username or Password";
@@ -26,12 +27,12 @@
 
       require_once("config_session.inc.php");
 
-      if(getAdminEmail($conn, $email) && getAdminpass($conn, $password)) {
-        $_SESSION["adminEmail"] = getAdminEmail($conn, $email);
+      if (!isUsernameWrong($getAdminResult['email']) && !isPasswordWrong($password, $getAdminResult['password'])) {
+        $_SESSION["adminID"] = $getAdminResult['admin_id'];
         $conn->close();
-        Header("Location: ../admin/dashboard.php");
+        header("Location: ../admin/dashboard.php");
         die();
-      }
+    }
 
 
       if ($errors) {
@@ -48,7 +49,6 @@
       $_SESSION["email"] =  $result["email"];
       $_SESSION["contact"] =  $result["contact"];
       $_SESSION["label"] = $result["label"];
-      $_SESSION["user_username"] = htmlspecialchars($result["username"]);
       $_SESSION["last_regeneration"] = time();
 
       $conn->close();

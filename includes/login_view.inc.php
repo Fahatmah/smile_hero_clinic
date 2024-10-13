@@ -35,10 +35,10 @@ function outputEmail(){
         // echo"you are not logged in";
     }
 }
-function outputAdminEmail(){
-    if(isset($_SESSION['adminEmail'])){
-      $email = $_SESSION['adminEmail'];
-      echo $email;
+function outputAdminId(){
+    if(isset($_SESSION['adminID'])){
+      $admin_id = $_SESSION['adminID'];
+      echo $admin_id;
         // Header("Location: ../userpage.php?login=success");
 
     }else{
