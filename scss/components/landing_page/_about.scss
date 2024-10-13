@@ -1,10 +1,13 @@
 @use '../../abstracts' as *;
 
 .about_us_section {
+  --letter-spacing: -1px;
+
   width: min(100% - 0rem, 80rem);
   margin-block: 2rem;
   margin-inline: auto;
   line-height: 1.5;
+  letter-spacing: var(--letter-spacing);
 
   span {
         color: var(--pr-clr-100);

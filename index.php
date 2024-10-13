@@ -32,7 +32,7 @@
 
     <!-- header -->
     <header class="hero__section">
-      <h1 class="header">Seamless smiles begin here</h1>
+      <h1 class="header">Seamless smiles <br> begin here</h1>
       <p class="sub__header">
         Streamlined dental appointments for your convenience
       </p>
@@ -47,55 +47,6 @@
       <div class="hero__image">
       </div>
     </header>
-
-    <!-- branches -->
-    <section class="branches__section" id="branchesSection">
-      <h2 class="header">Smile Hero Branches</h2>
-      <article class="branches__container">
-        <!-- branch -->
-        <div class="branch">
-          <div class="header__container">
-            <p>Bayani Road,Taguig</p>
-          </div>
-          <div class="branch__details">
-            <p class="branch__title">Main Clinic</p>
-            <p class="branch__desc">
-              Explore comprehensive dental services at our flagship clinic,
-              backed by advanced technology and a skilled team.
-            </p>
-            <button>Sign up</button>
-          </div>
-        </div>
-        <!-- branch -->
-        <div class="branch">
-          <div class="header__container">
-            <p>Signal,Taguig</p>
-          </div>
-          <div class="branch__details">
-            <p class="branch__title">Cosmetic Center</p>
-            <p class="branch__desc">
-              Transform your smile at our Cosmetic Dentistry Center,
-              specializing in makeovers and teeth whitening.
-            </p>
-            <button>Sign up</button>
-          </div>
-        </div>
-        <!-- branch -->
-        <div class="branch">
-          <div class="header__container">
-            <p>BGC, Taguig</p>
-          </div>
-          <div class="branch__details">
-            <p class="branch__title">Family Dentistry</p>
-            <p class="branch__desc">
-              Gentle Family Care. Experience personalized and gentle dental
-              care for all ages at our Family Dentistry branch.
-            </p>
-            <button>Sign up</button>
-          </div>
-        </div>
-      </article>
-    </section>
 
     <!-- services -->
     <article class="services__section">

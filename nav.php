@@ -8,11 +8,11 @@
         <a href="index.php">Home</a>
       </button>
     </li>
-    <li>
+    <!-- <li>
       <button>
         <a href="index.php#branchesSection">Branches</a>
       </button>
-    </li>
+    </li> -->
     <li>
       <button>
         <a href="about.php">About Us</a>
@@ -23,9 +23,9 @@
         <a href="login.php">Login</a>
       </button>
     </li>
-    <li class="signup_button">
+    <li>
       <button>
-        <a href="signup.php">Sign Up</a>
+        <a href="signup.php" class="signup_button">Sign Up</a>
       </button>
     </li>
   </ul>

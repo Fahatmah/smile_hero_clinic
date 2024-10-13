@@ -1,12 +1,14 @@
 @use '../../abstracts' as *;
 
 .hero__section {
+  --letter-spacing: -1px;
   @include display-flex;
   flex-direction: column;
   // background: url(/images/images/mesh_bg.png);
   background-repeat: no-repeat;
   background-size: 100%;
   overflow: hidden;
+  letter-spacing: var(--letter-spacing);
 
   .header {
     color: var(--ntrl-clr-100);
@@ -14,6 +16,7 @@
     font-weight: 800;
     text-align: center;
     line-height: 6.2rem;
+    letter-spacing: -7px;
     max-width: 60rem;
     margin-top: 40px;
   }

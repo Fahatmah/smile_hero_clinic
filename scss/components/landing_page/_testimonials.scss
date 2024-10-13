@@ -1,8 +1,10 @@
 @use '../../abstracts' as *;
 
 .testimonials__section {
+  --letter-spacing: -1px;
   @include display-flex($gap: 32px, $dir: column);
   padding-block: 100px;
+  letter-spacing: var(--letter-spacing);
 
   .header {
     font-size: var(--fs-500);
