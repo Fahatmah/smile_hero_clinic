@@ -2,9 +2,10 @@
 
 if ($_SERVER['REQUEST_METHOD'] === "POST") {
 
-    $fullname = ucfirst($_POST["fullname"]);
-    $birthdate = "null";
-    $gender = "null";
+    $fname = ucwords(htmlspecialchars($_POST["fname"]));
+    $mname = ucwords(htmlspecialchars($_POST["mname"]));
+    $lname = ucwords(htmlspecialchars($_POST["lname"]));
+    $suffix = ucwords(htmlspecialchars($_POST["suffix"]));
     $email = $_POST["email"];
     $contact = $_POST["contact"];
     $password = $_POST["password"];
@@ -21,10 +22,7 @@ if ($_SERVER['REQUEST_METHOD'] === "POST") {
     // ERROR HANDLERS
     $errors = [];
 
-    if (isInputEmpty($fullname, $email, $contact, $password, $birthdate, $gender)) {
-        // $errors["emptyInput"] = "Fill in all fields!";
-    }
-    if (isNameTaken($conn, $fullname)) {
+    if (isNameTaken($conn,$fname, $mname, $lname, $suffix)) {
         $errors["nameTaken"] = "Name is already taken. ";
     }
     if (isEmailInvalid($email)) {
@@ -41,21 +39,22 @@ if ($_SERVER['REQUEST_METHOD'] === "POST") {
 
     if ($errors) {
         $_SESSION["errors_signup"] = $errors;
+        $_SESSION["signup_data"] = [
+            "fname" => isset($errors['nameTaken']) ? '' : $fname,
+            "mname" => isset($errors['nameTaken']) ? '' : $mname,
+            "lname" => isset($errors['nameTaken']) ? '' : $lname,
+            "suffix" => $suffix,
+            "email" => isset($errors['emailRegistered']) || isset($errors['invalidEmail']) ? '' : $email,
+            "contact" => isset($errors['contactTaken']) ? '' : $contact
+        ];
 
-        // to not erase the input if have errors in signup
-        // $signupData = [
-        //     "name" => $name,
-        //     "email" => $email,
-        //     "contact" => $contact
-        // ];
-
-        // $_SESSION["signup_data"] = $signupData;
+       
 
         header("Location: ../signup.php");
         die();
     }
 
-    createUser($conn, $user_id, $fullname, $email, $contact, $password, $activation_token_hash);
+    createUser($conn, $user_id, $fname, $mname, $lname, $suffix, $email, $contact, $password, $activation_token_hash);
 
     $mail = require __DIR__ . "/../mailer.php"; 
     $mail->setFrom("jpvillaruel02@gmail.com");
@@ -65,7 +64,7 @@ if ($_SERVER['REQUEST_METHOD'] === "POST") {
     $mail->Subject = "Smile Hero Dental Clinic Account Activation";
     $mail->Body = <<<END
 
-    <p>Thank you for signing up! Please click the link below to activate your account:</p>
+    <p>Hello $fname $mname $lname $suffix Thank you for signing up! Please click the link below to activate your account:</p>
     <p><a href="$activationUrl">Activate your account</a></p>
 
     END;
@@ -78,6 +77,7 @@ if ($_SERVER['REQUEST_METHOD'] === "POST") {
     }
 
     $_SESSION["signup_process"] = "created";
+    unset($_SESSION["signup_data"]);
     header("Location: ../signup.php");
     $conn->close();
     die();

@@ -3,73 +3,101 @@ require_once '../../includes/config_session.inc.php';
 require_once '../../includes/login_view.inc.php';
 require_once '../../includes/dbh.inc.php';
 
-if(isset($_SESSION['user_id']) && isset($_SESSION["email"])) {
-  $user_id = $_SESSION['user_id'];
-  $currentEmail = $_SESSION['email'];
+if (isset($_SESSION['user_id']) && isset($_SESSION['email'])) {
+    $user_id = $_SESSION['user_id'];
+    $currentEmail = $_SESSION['email'];
 
-  if($_SERVER["REQUEST_METHOD"] == "POST"){
-    $fullname = $_POST['fullname'];
-    $email = trim($_POST['email']);
-    $contact = trim($_POST['contact']);
-    $address = $_POST['address'];
-    $password = trim($_POST['password']);
-    $birthdate = $_POST['bday'];
-    $gender = $_POST['gender'];
+    if ($_SERVER["REQUEST_METHOD"] == "POST") {
+        // Collect and sanitize input
+        $fname = ucwords(htmlspecialchars(trim($_POST['fname'])));
+        $mname = ucwords(htmlspecialchars(trim($_POST['mname'])));
+        $lname = ucwords(htmlspecialchars(trim($_POST['lname'])));
+        $suffix = htmlspecialchars(trim($_POST['suffix']));
+        $email = filter_var(trim($_POST['email']), FILTER_SANITIZE_EMAIL);
+        $contact = htmlspecialchars(trim($_POST['contact']));
+        $address = htmlspecialchars(trim($_POST['address']));
+        $birthdate = htmlspecialchars(trim($_POST['bday']));
+        $gender = htmlspecialchars(trim($_POST['gender']));
+        $oldPass = $_POST['oPass'];
+        $newPass = $_POST['nPass'];
+        $confirmPass = $_POST['cPass'];
 
-    require_once("../../includes/signup_model.inc.php");
-    require_once("../../includes/signup_contr.inc.php");
+        require_once '../../includes/signup_model.inc.php';
+        require_once '../../includes/signup_contr.inc.php';
 
-    if (!isInputEmpty($fullname, $email, $contact, $address, $birthdate, $gender)) {
-      $fullname = htmlspecialchars($fullname);
-      $contact = htmlspecialchars($contact);
-      $address = htmlspecialchars($address);
-      $birthdate = htmlspecialchars($birthdate);
-      $gender = htmlspecialchars($gender);
-      $email = filter_var($email, FILTER_SANITIZE_EMAIL);
-
-      if (isUpdatedEmailIsValid($conn, $email, $currentEmail)) {
-        echo "<script> alert('Email is already in used') </script>";
-        echo "<script>window.location.href='edit_profile.php';</script>";
-        die();
-      }
-
-      if (!isEmailInvalid($email)) {
-        $query = "UPDATE users SET fullname = ?, birthdate = ?, gender = ?, email = ?, contact = ?, address = ? WHERE user_id = ?";
-        $stmt = $conn->prepare($query);
-        $stmt->bind_param("ssssiss", $fullname,$birthdate, $gender, $email, $contact, $address, $user_id);
-        $stmt->execute();
-
-          if (!empty($password)) {
-              $hashed_password = password_hash($password, PASSWORD_DEFAULT);
-              $password_query = "UPDATE users SET pass = ? WHERE user_id = ?";
-              $password_stmt = $conn->prepare($password_query);
-              $password_stmt->bind_param("ss", $hashed_password, $user_id);
-              $password_stmt->execute();
+        // Check if all required fields are filled
+        if (!isInputEmpty($fname, $mname, $lname, $email, $contact, $address, $birthdate, $gender)) {
+            
+            // Check if the new email is valid and not already in use
+            if (isUpdatedEmailIsValid($conn, $email, $currentEmail)) {
+                echo "<script>alert('Email is already in use'); window.location.href='edit_profile.php';</script>";
+                exit();
             }
 
-          // echo "<script>alert('Successfully Updated');</script>";
-          $_SESSION['edit_process'] = "success";
-          header("Location: edit_profile.php");
-          die();
-        }else{
-          echo "<script>alert('Invalid email format!');</script>";
+            if (filter_var($email, FILTER_VALIDATE_EMAIL)) {
+                // Update user details in the database
+                $query = "UPDATE users SET 
+                          first_name = ?, middle_name = ?, last_name = ?, suffix = ?, 
+                          birthdate = ?, gender = ?, email = ?, contact = ?, address = ? 
+                          WHERE user_id = ?";
+                $stmt = $conn->prepare($query);
+                $stmt->bind_param(
+                    "ssssssssss", 
+                    $fname, $mname, $lname, $suffix, 
+                    $birthdate, $gender, $email, $contact, $address, $user_id
+                );
+                $stmt->execute();
+
+                // Check if password fields are provided for password update
+                if (!empty($oldPass) && !empty($newPass) && !empty($confirmPass)) {
+                    $currPass = getUserPass($conn, $user_id);
+                    
+                    if ($currPass !== null && password_verify($oldPass, $currPass)) {
+                        if ($newPass === $confirmPass) {
+                            $hashed_password = password_hash($newPass, PASSWORD_DEFAULT);
+                            $password_query = "UPDATE users SET pass = ? WHERE user_id = ?";
+                            $password_stmt = $conn->prepare($password_query);
+                            $password_stmt->bind_param("ss", $hashed_password, $user_id);
+                            $password_stmt->execute();
+                        } else {
+                            echo "<script>alert('New passwords do not match');</script>";
+                            echo "<script>window.location.href = 'edit_profile.php' </script>";
+                            exit();
+                        }
+                    } else {
+                        echo "<script>alert('Incorrect old password');</script>";
+                        echo "<script>window.location.href = 'edit_profile.php' </script>";
+                        exit();
+                    }
+                }
+
+                $_SESSION['edit_process'] = "success";
+                header("Location: edit_profile.php");
+                exit();
+            } else {
+                echo "<script>alert('Invalid email format!');</script>";
+                echo "<script>window.location.href = 'edit_profile.php' </script>";
+            }
+        } else {
+            echo "<script>alert('Please fill in all fields!');</script>";
+            echo "<script>window.location.href = 'edit_profile.php' </script>";
         }
-    }else{
-      echo "<script>alert('Please fill in all fields!');</script>";
     }
-    }
-    // Fetch user details from users table
+
+    // Fetch user details to display in the form
     $user_query = "SELECT * FROM users WHERE user_id = ?";
     $stmt = $conn->prepare($user_query);
     $stmt->bind_param("s", $user_id);
     $stmt->execute();
     $result = $stmt->get_result();
+
 } else {
-  // Redirect user to login if not logged in
-  header("Location: ../../login.php");
-  exit();
+    // Redirect to login page if not logged in
+    header("Location: ../../login.php");
+    exit();
 }
 
+// Handle success modal display
 $current_page = basename($_SERVER['PHP_SELF']);
 
 $showModal = false;
@@ -80,6 +108,7 @@ if (isset($_SESSION['edit_process'])) {
     unset($_SESSION['edit_process']);
 }
 ?>
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -177,9 +206,28 @@ if (isset($_SESSION['edit_process'])) {
         <div class="edit-profile__details">
         <?php if($row = $result->fetch_assoc()) { ?>
           <div class="edit-profile__item">
-            <p class="edit-profile__label">Name</p>
-            <input type="text" name="fullname" value="<?php echo htmlspecialchars($row["fullname"]); ?>"
-              class="edit-profile__input" id="fullName" style="width: 100%;">
+            <p class="edit-profile__label">Firstname</p>
+            <input type="text" name="fname" value="<?php echo htmlspecialchars($row["first_name"]); ?>"
+              class="edit-profile__input" id="fname" style="width: 100%;">
+          </div>
+          <div class="edit-profile__item">
+            <p class="edit-profile__label">Middlename</p>
+            <input type="text" name="mname" value="<?php echo htmlspecialchars($row["middle_name"]); ?>"
+              class="edit-profile__input" id="mname" style="width: 100%;">
+          </div>
+          <div class="edit-profile__item">
+            <p class="edit-profile__label">Lastname</p>
+            <input type="text" name="lname" value="<?php echo htmlspecialchars($row["last_name"]); ?>"
+              class="edit-profile__input" id="lname" style="width: 100%;">
+          </div>
+          <?php if($row["suffix"] === ""){ ?>
+            <div class="edit-profile__item" style="display: none;">
+         <?php } else { ?>
+          <div class="edit-profile__item"">
+          <?php } ?>
+            <p class="edit-profile__label">Suffix</p>
+            <input type="text" name="suffix" value="<?php echo htmlspecialchars($row["suffix"]); ?>"
+              class="edit-profile__input" id="suffix" style="width: 100%;">
           </div>
           <div class="edit-profile__item">
             <p class="edit-profile__label">Birthdate</p>
@@ -216,8 +264,16 @@ if (isset($_SESSION['edit_process'])) {
               class="edit-profile__input" id="email" style="width: 100%;">
           </div>
           <div class="edit-profile__item">
+            <p class="edit-profile__label">Old Password</p>
+            <input type="password" name="oPass" placeholder="********" class="edit-profile__input">
+          </div>
+          <div class="edit-profile__item">
             <p class="edit-profile__label">Enter New Password</p>
-            <input type="password" name="password" placeholder="********" class="edit-profile__input">
+            <input type="password" name="nPass" placeholder="********" class="edit-profile__input">
+          </div>
+          <div class="edit-profile__item">
+            <p class="edit-profile__label">Confirm New Password</p>
+            <input type="password" name="cPass" placeholder="********" class="edit-profile__input">
           </div>
         <?php } ?>
         </div>
@@ -342,8 +398,6 @@ if (isset($_SESSION['edit_process'])) {
             modalContainer.style.transform = "scale(0)";
         });
     });
-
-
 
     function getCurrentDateTime() {
       const date = new Date()

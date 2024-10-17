@@ -129,8 +129,8 @@ if ($result->num_rows > 0) {
                 </td>
 
                 <td class="patient-cell name-email" data-label="<?php echo htmlspecialchars($user['label']); ?>">
-                  <p class="patient-name" title="<?php echo $user['fullname']; ?>">
-                    <?php echo htmlspecialchars($user['fullname']); ?>
+                  <p class="patient-name" title="<?php echo $user['first_name'] ." ". $user['middle_name'] ." ". $user['last_name'] ." ". $user['suffix']; ?>">
+                    <?php echo htmlspecialchars(string: $user['first_name'] ." ". $user['middle_name'] ." ". $user['last_name'] ." ". $user['suffix']); ?>
                   </p>
                   <p class="patient-email" title="<?php echo $user['email']; ?>">
                     <?php echo htmlspecialchars($user['email']); ?>

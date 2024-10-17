@@ -2,12 +2,17 @@
 require_once "includes/config_session.inc.php";
 require_once "includes/signup_view.inc.php";
 
+// unset($_SESSION["signup_data"]);
+
 $showModal = false;
 if (isset($_SESSION['signup_process'])) {
     if ($_SESSION['signup_process'] === 'created') {
         $showModal = true;
+
+        // Clear session data after successful signup
+        unset($_SESSION['signup_data']);  // Clear the form data session
     }
-    unset($_SESSION['signup_process']);
+    unset($_SESSION['signup_process']);  // Clear the signup process session
 }
 ?>
 
@@ -40,6 +45,7 @@ if (isset($_SESSION['signup_process'])) {
 
   .error_handler {
     position: relative;
+    padding-bottom: 1em;
   }
   </style>
 </head>
@@ -51,48 +57,51 @@ if (isset($_SESSION['signup_process'])) {
     <section class="signup form_container">
       <h1 class="header">Create new account</h1>
       <!-- form -->
-      <form action="includes/signup.inc.php" method="post" class="signup__form">
-        <div class="field">
-          <input type="text" placeholder="e.g. Fahatmah Mabang" id="fullname" name="fullname" required autofocus />
-          <label for="fullname">Name</label>
-        </div>
-        <!-- <div class="field">
-          <input type="date" placeholder="e.g. Fahatmah Mabang" id="birthdate" name="birthdate" required autofocus />
-          <label for="birthdate">Birhday</label>
-        </div> -->
-        <!-- <div class="field">
-          <select name="gender" id="gender">
-            <option value="null">--</option>
-            <option value="male">Male</option>
-            <option value="female">Female</option>
-          </select>
-          <label for="gender">Gender</label>
-        </div> -->
-        <div class="field">
-          <input type="email" placeholder="e.g. fahatmahmabang@gmail.com" id="email" name="email" required />
-          <label for="email">Email</label>
-        </div>
-        <div class="field">
-          <input type="tel" placeholder="e.g. 09000000000" id="contact" name="contact" required />
-          <label for="contact">Contact Number</label>
-        </div>
-        <div class="field error_handler">
-          <input type="password" placeholder="e.g. password" id="password" name="password" required />
-          <label for="password">Password</label>
+      
+      <form action="includes/signup.inc.php" onsubmit="return validate()" method="post" class="signup__form">
+    <div class="field">
+        <input type="text" placeholder="e.g. Dela Cruz" id="fname" name="fname" value="<?php echo isset($_SESSION['signup_data']['fname']) ? $_SESSION['signup_data']['fname'] : ''; ?>" autofocus />
+        <label for="fname">Firstname</label>
+    </div>
+    <div class="field">
+        <input type="text" placeholder="e.g. Juan" id="mname" name="mname" value="<?php echo isset($_SESSION['signup_data']['mname']) ? $_SESSION['signup_data']['mname'] : ''; ?>" autofocus />
+        <label for="mname">Middlename</label>
+    </div>
+    <div class="field">
+        <input type="text" placeholder="e.g. Victorio" id="lname" name="lname" value="<?php echo isset($_SESSION['signup_data']['lname']) ? $_SESSION['signup_data']['lname'] : ''; ?>" autofocus />
+        <label for="lname">Lastname</label>
+    </div>
+    <div class="field">
+        <input type="text" placeholder="e.g. Sr./ III" id="suff" name="suffix" value="<?php echo isset($_SESSION['signup_data']['suffix']) ? $_SESSION['signup_data']['suffix'] : ''; ?>" autofocus />
+        <label for="suff">Suffix</label>
+    </div>
+    <div class="field">
+        <input type="email" placeholder="e.g. juandelacruz@gmail.com" id="email" name="email" value="<?php echo isset($_SESSION['signup_data']['email']) ? $_SESSION['signup_data']['email'] : ''; ?>" />
+        <label for="email">Email</label>
+    </div>
+    <div class="field">
+        <input type="tel" onkeypress="isNumber(event)" placeholder="e.g. 09000000000" id="contact" name="contact" value="<?php echo isset($_SESSION['signup_data']['contact']) ? $_SESSION['signup_data']['contact'] : ''; ?>" />
+        <label for="contact">Contact Number</label>
+    </div>
+    <div class="field">
+        <input type="password" placeholder="e.g. password" id="password" name="password" />
+        <label for="password">Password</label>
+    </div>
+    <div class="field error_handler">
+        <input type="password" placeholder="e.g. confirm password" id="Cpassword" name="Cpassword" />
+        <label for="Cpassword">Confirm Password</label>
 
-            <div class="error_container">
-              <?php //classs name of text is form_error
-                checkSignupErrors();?>
-            </div>
+        <div class="error_container">
+            <?php //class name of text is form_error
+                checkSignupErrors();
+            ?>
+            <p id="error_msg" class="form_error"></p>
         </div>
+    </div>
+    <button type="submit" class="submit__button">Signup</button>
+    <a href="login.php" rel="noopener noreferrer" class="login__link">Already have an account? Login</a>
+</form>
 
-
-        <!-- submit button -->
-        <button type="submit" class="submit__button">Signup</button>
-        <!-- login form link -->
-        <a href="login.php" rel="noopener noreferrer" class="login__link">Already have an account?
-          Login</a>
-      </form>
 
       <!-- modal -->
       <div class="modal" style="display: none">
@@ -182,6 +191,77 @@ if (isset($_SESSION['signup_process'])) {
             modalContainer.style.transform = "scale(0)";
         });
     });
+
+
+    function isNumber(evt) {
+    var input = evt.target.value;
+
+    // Ensure only digits are entered
+    var contactNum = String.fromCharCode(evt.which);
+    if (!(/[0-9]/.test(contactNum))) {
+        evt.preventDefault();
+        return;
+    }
+
+    // Check if the input starts with "09" and length is less than 11 digits
+    if (input.length === 0 && contactNum !== '0') {
+        evt.preventDefault();
+    } else if (input.length === 1 && contactNum !== '9') {
+        evt.preventDefault();
+    } else if (input.length >= 11) {
+        evt.preventDefault();
+    }
+  } 
+
+  function validate(){
+
+    var fname = document.getElementById("fname"); 
+    var mname = document.getElementById("mname");
+    var lname = document.getElementById("lname");
+    var email = document.getElementById("email");
+    var contact = document.getElementById("contact");
+    var password = document.getElementById("password");
+    var Cpassword = document.getElementById("Cpassword");
+
+    notValid = false;
+
+    var passwordRegex = /^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[!@#$%^&*])[A-Za-z\d!@#$%^&*]{8,}$/;
+
+    var error_msg =  document.getElementById("error_msg");
+
+
+    if (fname.value == "" || mname.value == "" || lname.value == "" || email.value == "" || contact.value == "" || password.value == "" || Cpassword.value == "") {
+        error_msg.innerHTML = "Please fill up the form";
+        error_msg.style.opacity = 1;
+
+        setTimeout(() => {
+          error_msg.style.opacity = 0;
+            }, 3000);
+
+        return false; // prevent form submission
+    } else if (password.value !== Cpassword.value) {
+        error_msg.innerHTML = "Passwords do not match";
+        error_msg.style.opacity = 1;
+
+        setTimeout(() => {
+          error_msg.style.opacity = 0;
+            }, 3000);
+
+        return false; // prevent form submission
+    } else if (!passwordRegex.test(password.value)) {
+        error_msg.innerHTML = "Password must be at least 8 characters long, include one uppercase letter, one lowercase letter, one digit, and one special character. e.g !@#$%^&*";
+        error_msg.style.opacity = 1;
+
+        // setTimeout(() => {
+        //   error_msg.style.opacity = 0;
+        //     }, 5000);
+
+        return false; // prevent form submission
+    }
+
+    return true; // allow form submission if all checks pass
+      }
+
   </script>
 </body>
 

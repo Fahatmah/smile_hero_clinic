@@ -44,7 +44,7 @@ $stmt->execute(); $result = $stmt->get_result(); ?>
           <!-- header -->
           <div class="user-profile__header">
             <div class="user-profile__info">
-              <h1 class="user-profile__name"><?php echo $row["fullname"]; ?></h1>
+              <h1 class="user-profile__name"><?php echo $row["first_name"] ." ". $row["middle_name"] ." ". $row["last_name"] ." ". $row["suffix"] ?></h1>
               <p class="user-profile__address">
                 <?php if(strlen($row["address"])===0) { ?>
                   No Address
@@ -90,7 +90,7 @@ $stmt->execute(); $result = $stmt->get_result(); ?>
           <ul class="user-profile__details">
             <li class="user-profile__detail-item">
               <p class="user-profile__detail-label">Name</p>
-              <p class="user-profile__detail-value"><?php echo $row["fullname"]; ?></p>
+              <p class="user-profile__detail-value"><?php echo $row["first_name"] ." ". $row["middle_name"] ." ". $row["last_name"] ." ". $row["suffix"] ?></p>
             </li>
             <li class="user-profile__detail-item">
               <p class="user-profile__detail-label">Birthdate</p>

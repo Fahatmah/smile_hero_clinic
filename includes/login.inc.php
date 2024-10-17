@@ -45,7 +45,10 @@
       session_regenerate_id(true);
 
       $_SESSION["user_id"] =  $result["user_id"];
-      $_SESSION["fullname"] =  $result["fullname"];
+      $_SESSION["fname"] =  $result["first_name"];
+      $_SESSION["mname"] =  $result["middle_name"];
+      $_SESSION["lname"] =  $result["last_name"];
+      $_SESSION["suffix"] =  $result["suffix"];
       $_SESSION["email"] =  $result["email"];
       $_SESSION["contact"] =  $result["contact"];
       $_SESSION["label"] = $result["label"];

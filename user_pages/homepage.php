@@ -8,6 +8,24 @@ if(!isset($_SESSION['user_id'])) {
    header("Location: ../login.php");
    exit();
 } 
+
+require_once 'includes/user_model.inc.php';
+
+$user_id = $_SESSION['user_id'];
+
+$totalAppointment = isValidRegularPatient($conn, $user_id);
+
+if($totalAppointment >= 5){
+  $query = "UPDATE users SET label = 'regular' WHERE user_id = ?";
+  $stmt = $conn->prepare($query);
+  $stmt->bind_param("s",$user_id);
+  $stmt->execute();
+}else{
+  $query = "UPDATE users SET label = 'new' WHERE user_id = ?";
+  $stmt = $conn->prepare($query);
+  $stmt->bind_param("s",$user_id);
+  $stmt->execute();
+}
 ?>
 
 <!DOCTYPE html>

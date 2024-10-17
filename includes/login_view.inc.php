@@ -13,17 +13,68 @@ function outputUserId(){
         // echo"you are not logged in";
     }
 }
-function outputFullName(){
-    if(isset($_SESSION["fullname"])){
-      $fullname = $_SESSION["fullname"];
-      echo $fullname;
-        // Header("Location: ../userpage.php?login=success");
 
+function outputFullName(){
+    if(isset($_SESSION["fname"]) && isset($_SESSION["mname"]) && isset($_SESSION["lname"]) && isset($_SESSION["suffix"])){
+        $fname = $_SESSION["fname"];
+        $mname = $_SESSION["mname"];
+        $lname = $_SESSION["lname"];
+        $suffix = $_SESSION["suffix"];
+
+        echo "$fname $mname $lname $suffix";
     }else{
-        Header("Location: ../login.php?login=failed");
-        // echo"you are not logged in";
-    }
+            Header("Location: ../login.php?login=failed");
+            // echo"you are not logged in";
+        } 
 }
+
+// function outputFName(){
+//     if(isset($_SESSION["fname"])){
+//       $fname = $_SESSION["fname"];
+//       echo $fname;
+//         // Header("Location: ../userpage.php?login=success");
+
+//     }else{
+//         Header("Location: ../login.php?login=failed");
+//         // echo"you are not logged in";
+//     }
+// }
+
+// function outputMName(){
+//     if(isset($_SESSION["mname"])){
+//         $fname = $_SESSION["fname"];
+//       echo $mname;
+//         // Header("Location: ../userpage.php?login=success");
+
+//     }else{
+//         Header("Location: ../login.php?login=failed");
+//         // echo"you are not logged in";
+//     }
+// }
+// function outputLName(){
+//     if(isset($_SESSION["lname"])){
+//         $fname = $_SESSION["fname"];
+//       echo $lname;
+//         // Header("Location: ../userpage.php?login=success");
+
+//     }else{
+//         Header("Location: ../login.php?login=failed");
+//         // echo"you are not logged in";
+//     }
+// }
+// function outputSuffix(){
+//     if(isset($_SESSION["suffix"])){
+//       $suffix = $_SESSION["suffix"];
+//       echo $suffix;
+//         // Header("Location: ../userpage.php?login=success");
+
+//     }else{
+//         Header("Location: ../login.php?login=failed");
+//         // echo"you are not logged in";
+//     }
+// }
+
+
 function outputEmail(){
     if(isset($_SESSION["email"])){
       $email = $_SESSION["email"];

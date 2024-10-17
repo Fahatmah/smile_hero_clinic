@@ -36,16 +36,15 @@ declare(strict_types= 1);
 //     echo'<input type="password" placeholder="e.g. password" id="password" name="password" />';
 // }
     
-function checkSignupErrors(){
+function checkSignupErrors() {
     if (isset($_SESSION["errors_signup"])) {
         $errors = $_SESSION["errors_signup"];
 
-        foreach ($errors as $error) {
-            echo '<p class="form_error">' . $error . ' </p>';
-        }   
+        foreach ($errors as $index => $error) {
+            echo '<p class="form_error" id="form_error">' . $error . ' </p>';
+        }
         unset($_SESSION["errors_signup"]);
-    }else if (isset($_GET["signup"]) && $_GET["signup"] === "success" ) {
-        // echo "<br>";
-        // echo '<p class="form_success"> Signup Success </p>';
+    } else if (isset($_GET["signup"]) && $_GET["signup"] === "success") {
+        // Handle success case here
     }
 }
