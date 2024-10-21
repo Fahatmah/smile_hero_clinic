@@ -45,63 +45,171 @@ if (isset($_SESSION['signup_process'])) {
 
   .error_handler {
     position: relative;
-    padding-bottom: 1em;
   }
   </style>
 </head>
+
+<body class="homepage">
   <main class="signup__page">
     <!-- navigation bar -->
     <?php include('nav.php') ?>
 
     <!-- sign up form -->
     <section class="signup form_container">
-      <h1 class="header">Create new account</h1>
       <!-- form -->
-      
       <form action="includes/signup.inc.php" onsubmit="return validate()" method="post" class="signup__form">
-    <div class="field">
-        <input type="text" placeholder="e.g. Dela Cruz" id="fname" name="fname" value="<?php echo isset($_SESSION['signup_data']['fname']) ? $_SESSION['signup_data']['fname'] : ''; ?>" autofocus />
-        <label for="fname">Firstname</label>
-    </div>
-    <div class="field">
-        <input type="text" placeholder="e.g. Juan" id="mname" name="mname" value="<?php echo isset($_SESSION['signup_data']['mname']) ? $_SESSION['signup_data']['mname'] : ''; ?>" autofocus />
-        <label for="mname">Middlename</label>
-    </div>
-    <div class="field">
-        <input type="text" placeholder="e.g. Victorio" id="lname" name="lname" value="<?php echo isset($_SESSION['signup_data']['lname']) ? $_SESSION['signup_data']['lname'] : ''; ?>" autofocus />
-        <label for="lname">Lastname</label>
-    </div>
-    <div class="field">
-        <input type="text" placeholder="e.g. Sr./ III" id="suff" name="suffix" value="<?php echo isset($_SESSION['signup_data']['suffix']) ? $_SESSION['signup_data']['suffix'] : ''; ?>" autofocus />
-        <label for="suff">Suffix</label>
-    </div>
-    <div class="field">
-        <input type="email" placeholder="e.g. juandelacruz@gmail.com" id="email" name="email" value="<?php echo isset($_SESSION['signup_data']['email']) ? $_SESSION['signup_data']['email'] : ''; ?>" />
-        <label for="email">Email</label>
-    </div>
-    <div class="field">
-        <input type="tel" onkeypress="isNumber(event)" placeholder="e.g. 09000000000" id="contact" name="contact" value="<?php echo isset($_SESSION['signup_data']['contact']) ? $_SESSION['signup_data']['contact'] : ''; ?>" />
-        <label for="contact">Contact Number</label>
-    </div>
-    <div class="field">
-        <input type="password" placeholder="e.g. password" id="password" name="password" />
-        <label for="password">Password</label>
-    </div>
-    <div class="field error_handler">
-        <input type="password" placeholder="e.g. confirm password" id="Cpassword" name="Cpassword" />
-        <label for="Cpassword">Confirm Password</label>
+        <h1 class="header">Create new account</h1>
+        
+        <div class="field-group-container">
+          <div class="group-field">
+            <div class="field">
+                <input type="text" placeholder="e.g. Dela Cruz" id="fname" name="fname" value="<?php echo isset($_SESSION['signup_data']['fname']) ? $_SESSION['signup_data']['fname'] : ''; ?>" autofocus />
+                <label for="fname">Firstname</label>
+              </div>
+              <div class="field">
+                  <input type="text" placeholder="e.g. Juan" id="mname" name="mname" value="<?php echo isset($_SESSION['signup_data']['mname']) ? $_SESSION['signup_data']['mname'] : ''; ?>" autofocus />
+                  <label for="mname">Middlename</label>
+              </div>
+          </div>
 
-        <div class="error_container">
-            <?php //class name of text is form_error
-                checkSignupErrors();
-            ?>
-            <p id="error_msg" class="form_error"></p>
+          <div class="group-field">
+            <div class="field">
+                <input type="text" placeholder="e.g. Victorio" id="lname" name="lname" value="<?php echo isset($_SESSION['signup_data']['lname']) ? $_SESSION['signup_data']['lname'] : ''; ?>" autofocus />
+                <label for="lname">Lastname</label>
+            </div>
+            <div class="field">
+                <input type="text" placeholder="e.g. Sr./ III" id="suff" name="suffix" value="<?php echo isset($_SESSION['signup_data']['suffix']) ? $_SESSION['signup_data']['suffix'] : ''; ?>" autofocus />
+                <label for="suff">Suffix</label>
+            </div>
+          </div>
+
+          <div class="group-field">
+            <div class="field">
+                <input type="email" placeholder="e.g. juandelacruz@gmail.com" id="email" name="email" value="<?php echo isset($_SESSION['signup_data']['email']) ? $_SESSION['signup_data']['email'] : ''; ?>" />
+                <label for="email">Email</label>
+            </div>
+            <div class="field">
+                <input type="tel" onkeypress="isNumber(event)" placeholder="e.g. 09000000000" id="contact" name="contact" value="<?php echo isset($_SESSION['signup_data']['contact']) ? $_SESSION['signup_data']['contact'] : ''; ?>" />
+                <label for="contact">Contact Number</label>
+            </div>
+          </div>
+
+          <div class="group-field">
+            <div class="field">
+                <input type="password" placeholder="" id="password" name="password" />
+                <label for="password">Password</label>
+            </div>
+            <div class="field error_handler">
+                <input type="password" placeholder="" id="Cpassword" name="Cpassword" />
+                <label for="Cpassword">Confirm Password</label>
+
+                <div class="error_container">
+                    <?php //class name of text is form_error
+                        checkSignupErrors();
+                    ?>
+                    <p id="error_msg" class="form_error"></p>
+                </div>
+            </div> 
+          </div>
+
         </div>
-    </div>
-    <button type="submit" class="submit__button">Signup</button>
-    <a href="login.php" rel="noopener noreferrer" class="login__link">Already have an account? Login</a>
-</form>
 
+        <div class="terms-and-conditions-container">
+          <input type="checkbox" name="tnc" id="tnc" class="terms-and-conditions">
+          <label for="tnc">Terms and Conditions</label>
+          <p class="tnc-button" id="tncBtn">Terms and Conditions</p>
+
+          <div class="tnc-text-container">
+            <div class="contents">
+              <button><img src="././assets/landing-page/close-circle.svg" alt="" class="close-tnc" id="closeTNC"></button>
+              <div class="texts">
+                <p class="tnc-header">Terms and Conditions</p>
+
+                <div class="paragraphs">
+                  <div class="group-text">
+                    <p class="heading">Introduction</p>
+                    <p class="desc">
+                      Smile Hero Dental Clinic, We collect and use personal data to provide you
+                      with quality dental care. By using our services, you agree to the
+                      collection and use of your information as described here.
+                    </p>
+                  </div>
+
+                  <div class="group-text">
+                    <p class="heading">Data Collection</p>
+                    <p class="desc">
+                      We collect necessary personal details such as your name, contact
+                      information, medical history, and insurance details to ensure proper
+                      treatment, billing, and communication.
+                    </p>
+                  </div>
+
+                  <div class="group-text">
+                    <p class="heading">Data Use and Security</p>
+                    <p class="desc">
+                      Your information is used solely for dental care, appointment scheduling,
+                      billing, and insurance purposes. We safeguard your data through
+                      encryption, secure storage, and restricted access to authorized personnel
+                      only.
+                    </p>
+                  </div>
+
+                  <div class="group-text">
+                    <p class="heading">Data Privacy Law</p>
+                    <p class="desc">
+                      According to Republic Act 10173, or Data Privacy Law 2012. Section 8.
+                      Confidentiality. – The Commission shall ensure at all times the
+                      confidentiality of any personal information that comes to its knowledge
+                      and possession.
+                    </p>
+                  </div>
+
+                  <div class="group-text">
+                    <p class="heading">Sharing of Information</p>
+                    <p class="desc">
+                      Your data will only be shared with relevant medical professionals, your
+                      insurance provider, or as required by law. We do not sell or rent your
+                      personal information.
+                    </p>
+                  </div>
+
+                  <div class="group-text">
+                    <p class="heading">Your Rights</p>
+                    <p class="desc">
+                      You have the right to access, correct, or request the deletion of your
+                      personal information.
+                    </p>
+                  </div>
+
+                  <div class="group-text">
+                    <p class="heading">Changes and Contact</p>
+                    <p class="desc">
+                      We may update these terms as needed. For any concerns, please contact us
+                      at <a href="mailto:smilehero@gmail.com">smilehero@gmail.com</a>, or
+                      09123456789.
+                    </p>
+                  </div>
+
+                  <div class="group-text">
+                    <p class="desc">
+                      By using our services, you acknowledge and accept these terms.
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-links">
+          <button type="submit" class="submit__button">Signup</button>
+          <a href="login.php" rel="noopener noreferrer" class="login__link">Already have an account? Login</a>
+        </div>
+      </form>
+
+      <div class="image-container">
+        <img src="././assets/landing-page/form-bg.jpg" alt="dental clinic room">
+      </div>
 
       <!-- modal -->
       <div class="modal" style="display: none">
@@ -174,9 +282,11 @@ if (isset($_SESSION['signup_process'])) {
       </div>
     </section>
   </main>
-  <!-- footer -->
-  <?php include('footer.php') ?>
 
+  <!-- <?php include("footer.php"); ?> -->
+</body>
+
+  <script src="././js/nav.js"></script>
   <script>
      document.addEventListener('DOMContentLoaded', () => {
     const modalContainer = document.querySelector(".modal");
@@ -262,6 +372,18 @@ if (isset($_SESSION['signup_process'])) {
     return true; // allow form submission if all checks pass
       }
 
+      // terms and conditons
+      const tncContainer = document.querySelector('.tnc-text-container')
+      const tncCloseBtn = document.getElementById('closeTNC')
+      const tncOpenBtn = document.getElementById('tncBtn')
+
+      tncOpenBtn.addEventListener('click', e => {
+        tncContainer.style.display = 'flex'
+      })
+
+      tncCloseBtn.addEventListener('click', e => {
+        tncContainer.style.display = 'none'
+      })
   </script>
 </body>
 

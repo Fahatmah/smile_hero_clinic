@@ -14,11 +14,13 @@
 @use 'components/footer';
 
 // landing page
+@use 'components/landing_page/navigation';
 @use 'components/landing_page/header';
 @use 'components/landing_page/about';
 @use 'components/landing_page/branches';
 @use 'components/landing_page/services';
 @use 'components/landing_page/testimonials';
+@use 'components/landing_page/homepage-footer';
 
 // signup page | form
 @use 'components/signup_page/signup_form';

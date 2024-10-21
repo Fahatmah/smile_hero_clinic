@@ -5,87 +5,156 @@
   @include flex($dir: column, $x: flex-start);
 
   .login {
-    @include display-flex($dir: column, $gap: 42px, $y: flex-start);
-    width: 414px;
-    background-color: var(--ntrl-clr-100);
-    padding: 2rem;
-    margin-block: 4rem;
-    border-radius: 8px;
+    width: 100%;
+    // max-width: 75rem;
+    padding: 4rem 1.5rem;
+    @include display-flex($dir: column, $gap: 2rem, $y: flex-start);
     overflow: hidden;
 
     .header {
-      font-size: 2.5rem;
-      font-weight: bold;
-      letter-spacing: -1px;
+      font-size: 1.5rem;
+      font-size: clamp(1.5rem, 0.6197rem + 3.7559vw, 4rem);
+      font-weight: 900;
+      letter-spacing: -2px;
       color: var(--pr-clr-300);
+      text-transform: uppercase;
     }
 
     .login__form {
       width: 100%;
-      @include display-flex($dir: column, $gap: 2rem, $y: flex-start);
+      @include display-flex($dir: column, $gap: 1rem, $y: flex-start);
 
-      .field {
+      .group-field {
         width: 100%;
-        @include display-flex($dir: column-reverse, $y: flex-start);
+        @include display-flex($dir: column, $gap: 1rem);
 
-        // &:hover label,
-        // &:active label,
-        // &:focus label {
-        //   font-weight: bold;
-        //   color: var(--pr-clr-300);
-        // }
-
-        label {
-          font-size: var(--fs-200);
-          color: var(--pr-clr-400);
-        }
-
-        input {
+        .field {
           width: 100%;
-          padding: 8px;
-          border-bottom: 1px solid var(--pr-clr-400);
-          font-size: var(--fs-200);
-          color: var(--pr-clr-300);
+          @include display-flex(
+            $dir: column-reverse,
+            $y: flex-start,
+            $gap: 0.375rem
+          );
 
-          &:hover + label,
-          &:active + label,
-          &:focus + label,
-          &:not(:placeholder-shown) + label {
-            font-weight: bold;
-            color: var(--pr-clr-300);
-          }
+          // &:hover label,
+          // &:active label,
+          // &:focus label {
+          //   font-weight: bold;
+          //   color: var(--pr-clr-300);
+          // }
 
-          &::placeholder {
-            font-size: var(--fs-200);
+          label {
+            font-size: 0.875rem;
             color: var(--pr-clr-400);
           }
 
-          &:hover,
-          &:active,
-          &:focus {
-            border-color: var(--pr-clr-300);
+          input {
+            width: 100%;
+            padding: 8px;
+            border-radius: 0.25rem;
+            border: 1px solid var(--pr-clr-400);
+            font-size: var(--fs-200);
+            color: var(--pr-clr-300);
+
+            &:hover + label,
+            &:active + label,
+            &:focus + label,
+            &:not(:placeholder-shown) + label {
+              font-weight: bold;
+              color: var(--pr-clr-300);
+            }
+
+            &::placeholder {
+              font-size: var(--fs-200);
+              color: var(--pr-clr-400);
+            }
+
+            &:hover,
+            &:active,
+            &:focus {
+              border-color: var(--pr-clr-300);
+            }
+          }
+        }
+      }
+
+      .form-links {
+        width: 100%;
+        @include display-flex($dir: column-reverse, $gap: 2rem);
+
+        .submit__button {
+          width: 100%;
+          font-weight: bold;
+          font-size: var(--fs-200);
+          color: var(--ntrl-clr-100);
+          text-transform: uppercase;
+          background-color: var(--pr-clr-300);
+          padding: 1rem;
+          border-radius: 6px;
+          cursor: pointer;
+        }
+
+        .signup__link {
+          align-self: center;
+          font-size: var(--fs-200);
+          color: var(--pr-clr-100);
+
+          &:hover {
+            text-decoration: underline;
           }
         }
       }
     }
 
-    .submit__button {
-      width: 100%;
-      font-size: var(--fs-200);
-      color: var(--ntrl-clr-100);
-      background-color: var(--pr-clr-300);
-      padding: 1rem;
-      border-radius: 6px;
-      cursor: pointer;
+    .image-container {
+      display: none;
     }
+  }
+}
 
-    .signup__link {
-      align-self: center;
-      font-size: var(--fs-200);
-      color: var(--pr-clr-300);
+@media screen and (min-width: 40rem) {
+  .login__page {
+    .login {
+      padding-inline: 5rem;
+    }
+  }
+}
 
-      &:hover {
-        text-decoration: underline;
+@media screen and (min-width: 60rem) {
+  .login__page {
+    .login {
+      width: 100%;
+      padding: 0;
+      flex-direction: row;
+      gap: 5rem;
+
+      .login__form {
+        padding-inline-start: 5rem;
+        padding-block-start: 4rem;
+        flex-wrap: wrap;
+        .field-group-container {
+          .group-field {
+            flex-direction: row;
+          }
+        }
+        .form-links {
+          width: 100%;
+          justify-content: space-between;
+          flex-direction: row;
+
+          .submit__button {
+            max-width: min-content;
+          }
+        }
+      }
+      .image-container {
+        display: flex;
+        width: 60rem;
+        min-height: 100vh;
+
+        img {
+          object-fit: cover;
+        }
       }
     }
   }

@@ -1,46 +1,33 @@
- <!-- footer -->
- <footer class="footer__section">
-   <div class="footer__header">
-     <div class="heading">
-       <h5 class="header">Ready for a new smile?</h5>
-       <p>Create an account for a new appointment.</p>
-     </div>
-     <form action="">
-       <input type="email" name="email" id="email" placeholder="name@email.com" />
-       <button type="submit">Subscribe</button>
-     </form>
-   </div>
+<footer>
+  <section class="form-section">
+    <p class="footer-header">Ready for a new smile?</p>
 
-   <div class="contacts__container">
-     <div class="contact">
-       <img src="assets/icons/landing_page/location-dot-solid.svg" alt="" style="width: 2rem; height: 2rem" />
-       <p>01 Bayani Road, Philippines</p>
-     </div>
-     <div class="contact">
-       <img src="assets/icons/landing_page/envelope-solid.svg" alt="" style="width: 2rem; height: 2rem" />
-       <p>smilehero@gmail.com</p>
-     </div>
-     <div class="contact">
-       <img src="assets/icons/landing_page/phone-solid.svg" alt="" style="width: 2rem; height: 2rem" />
-       <p>0987 4560 321</p>
-     </div>
-   </div>
+    <ul class="form-links">
+      <li>
+        <a href="./signup.php"class="signup-link">Signup</a>
+      </li>
+      <li>
+        <a href="./login.php">Login</a>
+      </li>
+    </ul>
+  </section>
 
-   <div class="social-media__container">
-     <p>
-       Stay connected on our social media for updates on appointments,
-       monthly adjustments, and checkups at our dental clinic.
-     </p>
+  <section class="contact-section">
+    <p class="footer-header">
+      Contact Us
+    </p>
 
-     <div class="social-medias">
-       <a href=""><img src="assets/icons/landing_page/square-instagram.svg" alt="instagram"
-           style="width: 2rem; height: 2rem" />
-       </a>
-       <a href=""><img src="assets/icons/landing_page/square-facebook.svg" alt="facebook"
-           style="width: 2rem; height: 2rem" />
-       </a>
-       <a href=""><img src="assets/icons/landing_page/linkedin.svg" alt="linkedin" style="width: 2rem; height: 2rem" />
-       </a>
-     </div>
-   </div>
- </footer>
+    <ul class="contact-list">
+      <li><a href="#"> <img src="././assets/landing-page/footer/sms.svg" alt="sms"> smilehero@gmail.com</a></li>
+      <li><a href="#"> <img src="././assets/landing-page/footer/location.svg" alt="location">01 Bayani Road, Taguig, Philippines</a></li>
+      <li><a href="#"> <img src="././assets/landing-page/footer/call.svg" alt="call"> 09876543212</a></li>
+    </ul>
+
+    <div class="footer-info">
+      <p class="footer-info__text">
+        Stay connected on our social media for updates on appointments, monthly adjustments, and checkups at our dental clinic.
+      </p>
+      <p class="footer-info__credits">2024 - 2025 Capstone for SMILE HERO CLINIC</p>
+    </div>
+  </section>
+</footer>
