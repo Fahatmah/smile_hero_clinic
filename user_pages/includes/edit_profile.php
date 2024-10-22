@@ -50,7 +50,16 @@ if (isset($_SESSION['user_id']) && isset($_SESSION['email'])) {
 
                 // Check if password fields are provided for password update
                 if (!empty($oldPass) && !empty($newPass) && !empty($confirmPass)) {
-                    $currPass = getUserPass($conn, $user_id);
+
+                  $passwordRegex ='/^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[!@#$%^&*])[A-Za-z\d!@#$%^&*]{8,}$/';
+
+                  if(!preg_match($passwordRegex, $newPass)){
+                    echo "<script>alert('Password must be at least 8 characters long, include one uppercase letter, one lowercase letter, one digit, and one special character. e.g !@#$%^&*');</script>";
+                    echo "<script>window.location.href = 'edit_profile.php' </script>";
+                    exit();
+                  }
+                  
+                  $currPass = getUserPass($conn, $user_id);
                     
                     if ($currPass !== null && password_verify($oldPass, $currPass)) {
                         if ($newPass === $confirmPass) {

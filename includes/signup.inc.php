@@ -79,6 +79,7 @@ if ($_SERVER['REQUEST_METHOD'] === "POST") {
     $_SESSION["signup_process"] = "created";
     unset($_SESSION["signup_data"]);
     header("Location: ../signup.php");
+    $stmt->close();
     $conn->close();
     die();
 } else {

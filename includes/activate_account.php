@@ -1,4 +1,8 @@
 <?php
+if (!isset($_GET["token"])) {
+    die("No token provided.");
+}
+
 $token = $_GET["token"];
 $token_hash = hash("sha256", $token);
 
@@ -12,22 +16,31 @@ $result = $stmt->get_result();
 $user = $result->fetch_assoc();
 
 if ($user === null) {
-    die("Invalid or expired token.");
+    // Redirect or display a friendly error message
+    echo "<script>alert('Invalid or expired token.'); window.close();</script>";
+    exit;
 }
 
-$sql = "UPDATE users SET account_activation_hash = NULL WHERE user_id = ?";
+// Handle the form submission
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    // Activate the account
+    $sql = "UPDATE users SET account_activation_hash = NULL WHERE user_id = ?";
+    $stmt = $mysqli->prepare($sql);
+    $stmt->bind_param("s", $user["user_id"]); // Assuming user_id is an integer
+    $stmt->execute();
 
-$stmt = $mysqli->prepare($sql);
-$stmt->bind_param("s", $user["user_id"]);
-$stmt->execute();
+    // Redirect to a success page
+    header("Location: ../login.php");
+    exit;
+}
 ?>
 
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Activation</title>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Activation</title>
     <link rel="stylesheet" href="../src/dist/styles.css" />
     <style>
         .fl-c {
@@ -136,7 +149,9 @@ $stmt->execute();
                 <h1>Activate your account</h1>
                 <p>Please activate your account by clicking<br>the button below. </p>
             </div>
-            <button class="activate-button"><a href="../login.php">activate</a></button>
+            <form method="post">
+                <input type="submit" name="submit" value="Activate">
+            </form>
         </div>
     </main>
 </body>
