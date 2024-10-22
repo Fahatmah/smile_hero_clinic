@@ -30,12 +30,14 @@ if (isset($_SESSION['signup_process'])) {
   <link rel="stylesheet" href="src/dist/styles.css" />
   <style>
   .error_container {
-    position: absolute;
     display: flex;
+    flex-direction: column;
     justify-content: center;
-    bottom: -1.5em;
-    column-gap: 3px;
+    align-items: center;
+    text-align: center;
+    gap: 5px;
     width: 100%;
+    z-index: -999;
   }
 
   .form_error {
@@ -43,9 +45,7 @@ if (isset($_SESSION['signup_process'])) {
     font-size: .75rem;
   }
 
-  .error_handler {
-    position: relative;
-  }
+
   </style>
 </head>
 
@@ -57,7 +57,7 @@ if (isset($_SESSION['signup_process'])) {
     <!-- sign up form -->
     <section class="signup form_container">
       <!-- form -->
-      <form action="includes/signup.inc.php" onsubmit="return validate()" method="post" class="signup__form">
+      <form action="includes/signup.inc.php" onsubmit="return validate()" method="post" class="signup__form error_handler">
         <h1 class="header">Create new account</h1>
         
         <div class="field-group-container">
@@ -99,17 +99,20 @@ if (isset($_SESSION['signup_process'])) {
                 <input type="password" placeholder="" id="password" name="password" />
                 <label for="password">Password</label>
             </div>
-            <div class="field error_handler">
-                <input type="password" placeholder="" id="Cpassword" name="Cpassword" />
-                <label for="Cpassword">Confirm Password</label>
 
-                <div class="error_container">
-                    <?php //class name of text is form_error
-                        checkSignupErrors();
-                    ?>
-                    <p id="error_msg" class="form_error"></p>
-                </div>
+            <div class="field">
+              <input type="password" placeholder="" id="Cpassword" name="Cpassword" />
+              <label for="Cpassword">Confirm Password</label>
             </div> 
+          </div>
+          
+          <div class="error_container">
+          <!-- //class name of text is form_error -->
+              <?php checkSignupErrors() ;?>
+              <p id="error_msg" class="form_error">
+                <!-- Password must be at least 8 characters long, include one uppercase letter, one lowercase letter, one digit, and one special character. e.g !@#$%^&* -->
+              </p>
+
           </div>
 
         </div>
@@ -338,39 +341,47 @@ if (isset($_SESSION['signup_process'])) {
     var passwordRegex = /^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[!@#$%^&*])[A-Za-z\d!@#$%^&*]{8,}$/;
 
     var error_msg =  document.getElementById("error_msg");
-
+    var form_error =  document.getElementById("form_error");
 
     if (fname.value == "" || mname.value == "" || lname.value == "" || email.value == "" || contact.value == "" || password.value == "" || Cpassword.value == "") {
         error_msg.innerHTML = "Please fill up the form";
-        error_msg.style.opacity = 1;
+        error_msg.style.display = "flex";
+        error_msg.style.position = "absolute";
 
         setTimeout(() => {
-          error_msg.style.opacity = 0;
+          error_msg.style.display = "none";
+          error_msg.style.position = "static";
             }, 3000);
 
         return false; // prevent form submission
     } else if (password.value !== Cpassword.value) {
         error_msg.innerHTML = "Passwords do not match";
-        error_msg.style.opacity = 1;
+        error_msg.style.display = "flex";
+        error_msg.style.position = "absolute";
 
         setTimeout(() => {
-          error_msg.style.opacity = 0;
+          error_msg.style.display = "none";
+          error_msg.style.position = "static";
             }, 3000);
 
         return false; // prevent form submission
     } else if (!passwordRegex.test(password.value)) {
         error_msg.innerHTML = "Password must be at least 8 characters long, include one uppercase letter, one lowercase letter, one digit, and one special character. e.g !@#$%^&*";
-        error_msg.style.opacity = 1;
+        error_msg.style.display = "flex";
+        error_msg.style.position = "absolute";
+        error_msg.style.width = "28%";
 
-        // setTimeout(() => {
-        //   error_msg.style.opacity = 0;
-        //     }, 5000);
+        setTimeout(() => {
+          error_msg.style.display = "none";
+          error_msg.style.position = "static";
+          error_msg.style.width = "fit-content";
+            }, 5000);
 
         return false; // prevent form submission
     }
 
     return true; // allow form submission if all checks pass
-      }
+    }
 
       // terms and conditons
       const tncContainer = document.querySelector('.tnc-text-container')

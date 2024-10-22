@@ -2,6 +2,7 @@
 require_once '../includes/config_session.inc.php';
 require_once '../includes/login_view.inc.php';
 require_once '../includes/appointment_view.inc.php';
+require_once '../includes/dbh.inc.php';
 
 if (!isset($_SESSION['adminID'])) {
   // Redirect user to login if not logged in
@@ -16,6 +17,14 @@ if (isset($_SESSION['admin_process'])) {
     }
     unset($_SESSION['admin_process']);
 }
+
+$admin_id = $_SESSION['adminID'];
+
+$query = "SELECT * FROM admin WHERE admin_id = ?";
+$stmt = $conn->prepare(query: $query);
+$stmt->bind_param("s", $admin_id);
+$stmt->execute();
+$result = $stmt->get_result();
 ?>
 
 
@@ -44,6 +53,7 @@ if (isset($_SESSION['admin_process'])) {
         <div class="admin-settings__container">
           <h1>Profile Settings</h1>
 
+          <?php if($row = $result->fetch_assoc()){?>
           <div class="admin-settings">
             <div class="current-profile__container">
               <div class="profile-image__container">
@@ -64,9 +74,9 @@ if (isset($_SESSION['admin_process'])) {
                 <h2 class="profile-details__role">System Administrator</h2>
 
                 <div class="profile-details">
-                  <h3 class="profile-details__name">Fahatmah Mabang</h3>
-                  <p class="profile-details__email">fahatmahamabang@gmail.com</p>
-                  <p class="profile-details__phone">091234567890</p>
+                  <h3 class="profile-details__name"><?php echo $row['first_name'] ." ". $row['last_name'] ?></h3>
+                  <p class="profile-details__email"><?php echo $row['email']?></p>
+                  <p class="profile-details__phone">0<?php echo $row['contact']?></p>
                 </div>
               </div>
             </div>
@@ -82,6 +92,7 @@ if (isset($_SESSION['admin_process'])) {
                     name="firstname"
                     id="firstname"
                     placeholder="e.g. Juan"
+                    value="<?php echo $row['first_name']?>"
                     class="admin-form__input"
                   />
                   <div class="admin-form__validation">
@@ -104,6 +115,7 @@ if (isset($_SESSION['admin_process'])) {
                     name="lastname"
                     id="lastname"
                     placeholder="e.g. Dela Cruz"
+                     value="<?php echo $row['last_name']?>"
                     class="admin-form__input"
                   />
                   <div class="admin-form__validation">
@@ -122,6 +134,7 @@ if (isset($_SESSION['admin_process'])) {
                     name="email"
                     id="email"
                     placeholder="e.g. juandelacruz@gmail.com"
+                     value="<?php echo $row['email']?>"
                     class="admin-form__input"
                   />
                   <div class="admin-form__validation">
@@ -145,7 +158,9 @@ if (isset($_SESSION['admin_process'])) {
                     type="tel"
                     name="contactnumber"
                     id="contactnumber"
+                    onkeypress="isNumber(event)"
                     placeholder="e.g. 09123456789"
+                    value="0<?php echo $row['contact']?>"
                     class="admin-form__input"
                   />
                   <div class="admin-form__validation">
@@ -162,6 +177,8 @@ if (isset($_SESSION['admin_process'])) {
                   </div>
                 </div>
               </section>
+            
+            <?php }?>
 
               <section
                 class="admin-form__section admin-form__section--personal-details"
@@ -329,7 +346,7 @@ if (isset($_SESSION['admin_process'])) {
   <script>
 
 document.addEventListener('DOMContentLoaded', () => {
-    const doctorForm = document.getElementById('adminForm');
+    const adminForm = document.getElementById('adminForm');
     const modalContainer = document.querySelector(".modal");
     const exitBtn = modalContainer.querySelector("#exitButton");
     const profileImageInput = document.getElementById('profileImage');
@@ -338,6 +355,32 @@ document.addEventListener('DOMContentLoaded', () => {
     <?php if ($showModal) : ?>
       modalContainer.style.display = "flex";
     <?php endif; ?>
+
+           // Close modal when exit button is clicked
+           exitBtn.addEventListener("click", () => {
+            modalContainer.style.transform = "scale(0)";
+        });
+  });
+
+  function isNumber(evt) {
+    var input = evt.target.value;
+
+    // Ensure only digits are entered
+    var contactNum = String.fromCharCode(evt.which);
+    if (!(/[0-9]/.test(contactNum))) {
+        evt.preventDefault();
+        return;
+    }
+
+    // Check if the input starts with "09" and length is less than 11 digits
+    if (input.length === 0 && contactNum !== '0') {
+        evt.preventDefault();
+    } else if (input.length === 1 && contactNum !== '9') {
+        evt.preventDefault();
+    } else if (input.length >= 11) {
+        evt.preventDefault();
+    }
+  } 
 
     profileImageInput.addEventListener('change', function (e) {
       const file = e.target.files[0]
@@ -350,11 +393,6 @@ document.addEventListener('DOMContentLoaded', () => {
         reader.readAsDataURL(file)
       }
     });
-       // Close modal when exit button is clicked
-       exitBtn.addEventListener("click", () => {
-            modalContainer.style.transform = "scale(0)";
-        });
 
-  });
   </script>
   </html>

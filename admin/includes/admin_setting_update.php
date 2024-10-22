@@ -24,27 +24,44 @@ if($_SERVER["REQUEST_METHOD"] === "POST"){
 
         if(!empty($password) && !empty($newPassword)){
 
+            $passwordRegex ='/^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[!@#$%^&*])[A-Za-z\d!@#$%^&*]{8,}$/';
+
             $Pass = currPassword($conn,$admin_id);
             $currPass = $Pass['password'];
             
-            if(password_verify($password, $currPass)){
-                if($newPassword === $confirmPassword){
-                    $hashedPassword = password_hash($newPassword, PASSWORD_DEFAULT);
-                    $query = "UPDATE admin SET password = ? WHERE admin_id = ?";
-                    $stmt = $conn->prepare($query);
-                    $stmt->bind_param("ss", $hashedPassword, $admin_id);
-                    $stmt->execute();
-
-                    $_SESSION['admin_process'] = 'created';
-                }
+            if(!password_verify($password, $currPass)){
+                echo "<script>alert('Incorrect old password');</script>";
+                echo "<script>window.location.href = '../settings.php' </script>";
+                exit();
             }
+
+            if(!preg_match($passwordRegex, $newPassword)){
+                echo "<script>alert('Password must be at least 8 characters long, include one uppercase letter, one lowercase letter, one digit, and one special character. e.g !@#$%^&*');</script>";
+                echo "<script>window.location.href = '../settings.php' </script>";
+                exit();
+              }
+  
+            if($newPassword !== $confirmPassword){
+                echo "<script>alert('New passwords do not match');</script>";
+                echo "<script>window.location.href = '../settings.php' </script>";
+                exit();
+            }
+
+            $hashedPassword = password_hash($newPassword, PASSWORD_DEFAULT);
+            $query = "UPDATE admin SET password = ? WHERE admin_id = ?";
+            $stmt = $conn->prepare($query);
+            $stmt->bind_param("ss", $hashedPassword, $admin_id);
+            $stmt->execute();
+
+            $_SESSION['admin_process'] = 'created';
         }
         $_SESSION['admin_process'] = 'created';
         header("Location: ../settings.php");
-        die();
+        exit();
     } else {
-        header("Location: ../settings.php?failed");
-        die();
+        echo "<script>alert('Failed to update');</script>";
+        echo "<script>window.location.href = '../settings.php' </script>";
+        exit();
     }
 } else {
     header("Location: ../settings.php?failed");
