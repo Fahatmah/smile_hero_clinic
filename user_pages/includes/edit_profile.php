@@ -259,7 +259,7 @@ if (isset($_SESSION['edit_process'])) {
           </div>
           <div class="edit-profile__item">
             <p class="edit-profile__label">Contact Number</p>
-            <input type="text" onkeypress="isNumber(event)" name="contact" value="0<?php echo htmlspecialchars($row["contact"]); ?>"
+            <input type="text" onkeypress="isNumber(event)" name="contact" value="<?php echo htmlspecialchars($row["contact"]); ?>"
               class="edit-profile__input" id="contactNumber" style="width: 100%;">
           </div>
           <div class="edit-profile__item">

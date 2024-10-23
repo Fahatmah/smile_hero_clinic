@@ -12,15 +12,25 @@ if($_SERVER["REQUEST_METHOD"] === "POST"){
     $password = trim($_POST['password']);
     $newPassword = trim($_POST['newPassword']);
     $confirmPassword = trim($_POST['confirmPassword']);
+
+    $fileName = $_FILES['profileImage']['name'];
+    $tempName = $_FILES['profileImage']['tmp_name'];
+    $folder = 'images/'.$fileName;
     
     require_once "../../includes/dbh.inc.php";
     
     if(!empty($fname) && !empty($lname) && !empty($email) && !empty($contact)){
 
-        $query = "UPDATE admin SET first_name = ?, last_name = ?, email = ?, contact = ? WHERE admin_id = ?";
+        $query = "UPDATE admin SET first_name = ?, last_name = ?, email = ?, contact = ?, profile_image = ? WHERE admin_id = ?";
         $stmt = $conn->prepare($query);
-        $stmt->bind_param("sssss", $fname, $lname, $email, $contact, $admin_id);
+        $stmt->bind_param("ssssss", $fname, $lname, $email, $contact, $fileName, $admin_id);
         $stmt->execute();
+
+        if (file_exists($folder)) {
+            unlink($folder); // Delete the existing file
+        }
+
+        move_uploaded_file($tempName, $folder);
 
         if(!empty($password) && !empty($newPassword)){
 

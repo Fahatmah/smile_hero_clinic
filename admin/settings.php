@@ -57,7 +57,7 @@ $result = $stmt->get_result();
           <div class="admin-settings">
             <div class="current-profile__container">
               <div class="profile-image__container">
-                <img src="" alt="profile image" class="profile-image" id="profileDisplay" >
+                <img src="includes/images/<?php echo $row['profile_image'] ?>" alt="profile image" class="profile-image" id="profileDisplay" >
 
                 <label for="profileImage" class="upload-label">
                   <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -67,7 +67,7 @@ $result = $stmt->get_result();
                     <path d="M5.99998 18.6675H18" stroke="white" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
                   </svg>
                 </label>
-                <input type="file" name="profileImage" id="profileImage" accept="image/*">
+                <!-- <input type="file" name="profileImage" id="profileImage" accept="image/*"> -->
               </div>
 
               <div class="current-profile__details">
@@ -76,16 +76,17 @@ $result = $stmt->get_result();
                 <div class="profile-details">
                   <h3 class="profile-details__name"><?php echo $row['first_name'] ." ". $row['last_name'] ?></h3>
                   <p class="profile-details__email"><?php echo $row['email']?></p>
-                  <p class="profile-details__phone">0<?php echo $row['contact']?></p>
+                  <p class="profile-details__phone"><?php echo $row['contact']?></p>
                 </div>
               </div>
             </div>
 
-            <form action="includes/admin_setting_update.php" method="post" id="adminForm">
-              <section
-                class="admin-form__section admin-form__section--personal-details"
-              >
-                <div class="admin-form__field">
+            <form action="includes/admin_setting_update.php" method="post" enctype="multipart/form-data" id="adminForm">
+              <section class="admin-form__section admin-form__section--personal-details">
+
+              <input type="file" style="display: none;" name="profileImage" id="profileImage" accept="image/*">
+              
+              <div class="admin-form__field">
                   <label for="firstname" class="admin-form__label">First Name</label>
                   <input
                     type="text"
@@ -95,18 +96,6 @@ $result = $stmt->get_result();
                     value="<?php echo $row['first_name']?>"
                     class="admin-form__input"
                   />
-                  <div class="admin-form__validation">
-                    <p
-                      class="admin-form__text admin-form__text--error"
-                    >
-                      Error
-                    </p>
-                    <p
-                      class="admin-form__text admin-form__text--valid"
-                    >
-                      Valid
-                    </p>
-                  </div>
                 </div>
                 <div class="admin-form__field">
                   <label for="lastname" class="admin-form__label">Last Name</label>
@@ -137,18 +126,6 @@ $result = $stmt->get_result();
                      value="<?php echo $row['email']?>"
                     class="admin-form__input"
                   />
-                  <div class="admin-form__validation">
-                    <p
-                      class="admin-form__text admin-form__text--error"
-                    >
-                      Error
-                    </p>
-                    <p
-                      class="admin-form__text admin-form__text--valid"
-                    >
-                      Valid
-                    </p>
-                  </div>
                 </div>
                 <div class="admin-form__field">
                   <label for="contactnumber" class="admin-form__label"
@@ -160,21 +137,9 @@ $result = $stmt->get_result();
                     id="contactnumber"
                     onkeypress="isNumber(event)"
                     placeholder="e.g. 09123456789"
-                    value="0<?php echo $row['contact']?>"
+                    value="<?php echo $row['contact']?>"
                     class="admin-form__input"
                   />
-                  <div class="admin-form__validation">
-                    <p
-                      class="admin-form__text admin-form__text--error"
-                    >
-                      Error
-                    </p>
-                    <p
-                      class="admin-form__text admin-form__text--valid"
-                    >
-                      Valid
-                    </p>
-                  </div>
                 </div>
               </section>
             
@@ -191,18 +156,6 @@ $result = $stmt->get_result();
                     id="password"
                     class="admin-form__input"
                   />
-                  <div class="admin-form__validation">
-                    <p
-                      class="admin-form__text admin-form__text--error"
-                    >
-                      Error
-                    </p>
-                    <p
-                      class="admin-form__text admin-form__text--valid"
-                    >
-                      Valid
-                    </p>
-                  </div>
                 </div>
                 <div class="admin-form__field">
                   <label for="newPassword" class="admin-form__label">New Password</label>
@@ -229,18 +182,6 @@ $result = $stmt->get_result();
                     id="confirmPassword"
                     class="admin-form__input"
                   />
-                  <div class="admin-form__validation">
-                    <p
-                      class="admin-form__text admin-form__text--error"
-                    >
-                      Error
-                    </p>
-                    <p
-                      class="admin-form__text admin-form__text--valid"
-                    >
-                      Valid
-                    </p>
-                  </div>
                 </div>
                 <input
                   type="submit"
@@ -356,10 +297,22 @@ document.addEventListener('DOMContentLoaded', () => {
       modalContainer.style.display = "flex";
     <?php endif; ?>
 
-           // Close modal when exit button is clicked
-           exitBtn.addEventListener("click", () => {
-            modalContainer.style.transform = "scale(0)";
+      // Close modal when exit button is clicked
+      exitBtn.addEventListener("click", () => {
+      modalContainer.style.transform = "scale(0)";
         });
+
+      profileImageInput.addEventListener('change', function (e) {
+      const file = e.target.files[0];
+      if (file) {
+          const reader = new FileReader();
+
+          reader.onload = function (e) {
+              profileDisplay.src = e.target.result;
+          }
+          reader.readAsDataURL(file);
+      }
+    });
   });
 
   function isNumber(evt) {
@@ -382,17 +335,5 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   } 
 
-    profileImageInput.addEventListener('change', function (e) {
-      const file = e.target.files[0]
-      if(file) {
-        const reader = new FileReader()
-
-        reader.onload = function (e) {
-          profileDisplay.src = e.target.result
-        }
-        reader.readAsDataURL(file)
-      }
-    });
-
-  </script>
-  </html>
+</script>
+</html>

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 12, 2024 at 10:07 AM
+-- Generation Time: Oct 23, 2024 at 05:42 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -33,8 +33,9 @@ CREATE TABLE `admin` (
   `first_name` varchar(100) NOT NULL,
   `last_name` varchar(100) NOT NULL,
   `email` varchar(255) NOT NULL,
-  `contact` bigint(20) NOT NULL,
+  `contact` varchar(20) NOT NULL,
   `password` varchar(255) NOT NULL,
+  `profile_image` varchar(299) NOT NULL,
   `created_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -42,8 +43,8 @@ CREATE TABLE `admin` (
 -- Dumping data for table `admin`
 --
 
-INSERT INTO `admin` (`id`, `admin_id`, `first_name`, `last_name`, `email`, `contact`, `password`, `created_at`) VALUES
-(3, 'ADMIN5376', 'Victor', 'Andress', 'admin@gmail.com', 9089132321, '$2y$10$.BH.IQUOpn80URHlA7rNTOwwxx/FQU6J3NHzHHb9efcVqdiAhKeZS', '2024-10-12 08:06:05');
+INSERT INTO `admin` (`id`, `admin_id`, `first_name`, `last_name`, `email`, `contact`, `password`, `profile_image`, `created_at`) VALUES
+(3, 'ADMIN5376', 'Leon', 'Manansala', 'admin@gmail.com', '09112233442', '$2y$10$Lw4SW0.ngP5GTIWSE.Cw2OMjkWKvdbSNV4uoLgRQyZpHMFplhelua', '125242687_365670124698131_3446407587757504268_n.jpg', '2024-10-23 03:38:12');
 
 -- --------------------------------------------------------
 
@@ -73,7 +74,18 @@ CREATE TABLE `appointments` (
 --
 
 INSERT INTO `appointments` (`user_id`, `doctor_id`, `appointment_id`, `label`, `name`, `email`, `contact`, `message`, `date`, `time`, `service`, `location`, `status`, `created_at`) VALUES
-('SHC9d72TCU', NULL, 'SHC3753', 'new', 'John Paul Dela Cruz', 'jpvillaruel02@gmail.com', '9070050140', '', '2024-10-16, Wednesday', '11:00 AM', 'cleaning', 'Bayani Road, Taguig City', 'canceled', '2024-10-11 13:20:30');
+('SHC786fTCU', NULL, 'SHC0395', '', 'Cj dela cruz', 'lems.christianjakedelacruz@gmail.com', '9989878778', '', '2024-10-14, Monday', '11:00 AM', 'filling', 'Bayani Road, Taguig City', 'canceled', '2024-10-13 15:42:28'),
+('SHC786fTCU', NULL, 'SHC2522', 'new', 'Cj dela cruz', 'lems.christianjakedelacruz@gmail.com', '9989878778', '', '2024-10-15, Tuesday', '10:00 AM', 'whitening', 'Bayani Road, Taguig City', 'accepted', '2024-10-13 15:48:27'),
+('Walk-in', NULL, 'SHC27ed', 'Walk-in', 'Test', 'test@gmail.com', '09312312331', '', '2024-10-14, Monday', '11:00 AM', 'whitening', 'Bayani Road, Taguig City', 'rejected', '2024-10-13 15:12:10'),
+('SHC9d72TCU', NULL, 'SHC3753', 'new', 'John Paul Dela Cruz', 'jpvillaruel02@gmail.com', '9070050140', '', '2024-10-16, Wednesday', '11:00 AM', 'cleaning', 'Bayani Road, Taguig City', 'canceled', '2024-10-11 13:20:30'),
+('SHC1677TCU', NULL, 'SHC5ba0', 'new', 'John Paul Villaruel Dela Cruz ', 'jpvillaruel02@gmail.com', '9070050140', '', '2024-10-21, Monday', '10:00 AM', 'whitening', 'Bayani Road, Taguig City', 'accepted', '2024-10-17 17:07:03'),
+('SHC9d72TCU', NULL, 'SHC77f6', 'new', 'John Paul Dela Cruz', 'jpvillaruel02@gmail.com', '9070050140', '', '2024-10-14, Monday', '9:00 AM', 'extraction', 'Bayani Road, Taguig City', 'accepted', '2024-10-13 15:09:24'),
+('Walk-in', NULL, 'SHC79d6', 'Walk-in', 'Jop', 'jp@gmail.om', '091823354555', '', '2024-10-17, Thursday', '9:00 AM', 'extraction', 'Bayani Road, Taguig City', 'request', '2024-10-14 10:49:19'),
+('SHC0141TCU', NULL, 'SHC846e', '', 'Dave pesco', 'pdavemarc@gmail.com', '12354678911', '', '2024-10-15, Tuesday', '1:00 PM', 'cleaning', 'Bayani Road, Taguig City', 'accepted', '2024-10-14 10:32:18'),
+('Walk-in', NULL, 'SHC8a31', 'Walk-in', 'Test', 'test@gmail.com', '09314234546', '', '2024-10-15, Tuesday', '11:00 AM', 'extraction', 'Bayani Road, Taguig City', 'rejected', '2024-10-13 15:49:39'),
+('Walk-in', NULL, 'SHCbde4', 'Walk-in', 'Test3', 'test3@gmail.com', '09859454343', '', '2024-10-14, Monday', '9:00 AM', 'extraction', 'Bayani Road, Taguig City', 'accepted', '2024-10-13 15:27:01'),
+('Walk-in', NULL, 'SHCc293', 'Walk-in', 'Test2', 'tes2@gmail.com', '09031349434', '', '2024-10-16, Wednesday', '10:00 AM', 'whitening', 'Bayani Road, Taguig City', 'rejected', '2024-10-13 15:26:32'),
+('SHC786fTCU', NULL, 'SHCc618', '', 'Cj dela cruz', 'lems.christianjakedelacruz@gmail.com', '9989878778', '', '2024-10-16, Wednesday', '9:00 AM', 'whitening', 'Bayani Road, Taguig City', 'rejected', '2024-10-13 15:41:10');
 
 -- --------------------------------------------------------
 
@@ -96,7 +108,8 @@ CREATE TABLE `doctors` (
 
 INSERT INTO `doctors` (`doctor_id`, `first_name`, `last_name`, `phone_number`, `email`, `created_at`) VALUES
 ('DOCcab8', 'April', 'Gonzales', '09332244634', 'DocAprilG@gmail.com', '2024-10-12 06:38:18'),
-('DOCdc43', 'Pablo', 'Escobar', '09454741547', 'Pab@gmail.com', '2024-10-11 05:15:49');
+('DOCdc43', 'Pablo', 'Escobar', '09454741547', 'Pab@gmail.com', '2024-10-11 05:15:49'),
+('DOCe86d', 'Louise', 'Manzano', '09987873454', 'DocLMan@gmail.com', '2024-10-13 07:46:58');
 
 -- --------------------------------------------------------
 
@@ -119,6 +132,13 @@ CREATE TABLE `feedback` (
 -- Dumping data for table `feedback`
 --
 
+INSERT INTO `feedback` (`id`, `user_id`, `doctor_id`, `name`, `email`, `feedback`, `rating`, `created_at`) VALUES
+(4, 'SHC9d72TCU', NULL, 'John Paul Dela Cruz', 'jpvillaruel02@gmail.com', 'testing to\r\n', '4', '2024-10-12 16:08:51'),
+(5, 'SHC786fTCU', NULL, 'Cj dela cruz', 'lems.christianjakedelacruz@gmail.com', 'Great Services', '5', '2024-10-13 15:40:33'),
+(6, 'SHC0141TCU', NULL, 'Dave pesco', 'pdavemarc@gmail.com', 'good ', '5', '2024-10-14 10:26:19'),
+(7, 'SHC1677TCU', NULL, 'John Paul Villaruel Dela Cruz ', 'jpvillaruel02@gmail.com', 'greate service', '5', '2024-10-17 17:05:04'),
+(8, 'SHC1677TCU', NULL, 'John Paul Villaruel Dela Cruz ', 'jpvillaruel02@gmail.com', '', '4', '2024-10-17 21:38:20');
+
 -- --------------------------------------------------------
 
 --
@@ -127,24 +147,31 @@ CREATE TABLE `feedback` (
 
 CREATE TABLE `users` (
   `user_id` varchar(100) NOT NULL,
-  `fullname` varchar(100) NOT NULL,
+  `first_name` varchar(255) NOT NULL,
+  `middle_name` varchar(255) NOT NULL,
+  `last_name` varchar(255) NOT NULL,
+  `suffix` varchar(100) NOT NULL,
   `birthdate` date NOT NULL,
   `gender` set('male','female') DEFAULT NULL,
   `email` varchar(255) NOT NULL,
-  `contact` bigint(11) NOT NULL,
+  `contact` varchar(11) NOT NULL,
   `address` varchar(255) DEFAULT NULL,
   `pass` varchar(255) NOT NULL,
   `label` varchar(100) NOT NULL,
   `account_activation_hash` varchar(64) DEFAULT NULL,
-  `created_at` datetime NOT NULL
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `users`
 --
 
-INSERT INTO `users` (`user_id`, `fullname`, `birthdate`, `gender`, `email`, `contact`, `address`, `pass`, `label`, `account_activation_hash`, `created_at`) VALUES
-('SHC9d72TCU', 'John Paul Dela Cruz', '2002-08-18', '', 'jpvillaruel02@gmail.com', 9070050140, '10 everlasting st. zone 6 south signal village taguig city', '$2y$12$Eq.pBctIxUZoztGSHJcH/eYVPTguRsT3qPDdVbctDoU4BV0lNMu9e', 'new', NULL, '2024-10-11 13:12:18');
+INSERT INTO `users` (`user_id`, `first_name`, `middle_name`, `last_name`, `suffix`, `birthdate`, `gender`, `email`, `contact`, `address`, `pass`, `label`, `account_activation_hash`, `created_at`) VALUES
+('SHC1677TCU', 'John Paul', 'Villaruel', 'Dela Cruz', '', '2002-02-18', 'male', 'jpvillaruel02@gmail.com', '9070050140', '10 everlasting st. taguig city', '$2y$10$bgT9YeRs9fMfn68ccVcldulrpTa7hFg8FnLiVfIsMl1u47Urj9AHu', 'new', NULL, '2024-10-18 08:17:11'),
+('SHC61bbTCU', 'NewTest', 'NewTest', 'NewTest', '', '0000-00-00', NULL, 'newTest@gmail.com', '9454114555', NULL, '$2y$12$YKv8RcPlWuQ3vqgWQFofjelZSgRgZBjcog3.hP3d/Q/eeASUQIS.u', 'new', NULL, '2024-10-23 02:05:05'),
+('SHC8f29TCU', 'Test', 'Test', 'Test', '', '0000-00-00', NULL, 'test@gmail.com', '9341232333', NULL, '$2y$12$LEhlAp.S/K9FsiUSYrjVzO3PWMocgnSTdXBVJCzkNr6JiCt7VplC2', 'new', NULL, '2024-10-18 07:26:53'),
+('SHCc83eTCU', 'Test2', 'Test2', 'Test2', '', '0000-00-00', NULL, 'test2@gmail.com', '9423232223', NULL, '$2y$12$N36WvwOq8t.ULNUqSUbtPOpyp0Y6QW09BcXLkRsAAxyu3rw22f3Ry', 'new', NULL, '2024-10-18 07:21:21'),
+('SHCdec3TCU', 'Test3', 'Test3', 'Test3', '', '0000-00-00', NULL, 'test3@gmail.com', '9314123121', NULL, '$2y$12$z2Nrw9/VeaeIBZxnG81AQu07ViDY4LVHh6.IkH0uHp/TAAQ7Vjo8S', '', NULL, '2024-10-18 07:30:44');
 
 --
 -- Indexes for dumped tables
@@ -198,7 +225,7 @@ ALTER TABLE `admin`
 -- AUTO_INCREMENT for table `feedback`
 --
 ALTER TABLE `feedback`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
