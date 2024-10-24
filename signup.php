@@ -119,8 +119,10 @@ if (isset($_SESSION['signup_process'])) {
 
         <div class="terms-and-conditions-container">
           <input type="checkbox" name="tnc" id="tnc" class="terms-and-conditions">
-          <label for="tnc">Terms and Conditions</label>
-          <p class="tnc-button" id="tncBtn">Terms and Conditions</p>
+          <div class="group">
+            <label for="tnc">I agree with the</label>
+            <p class="tnc-button" id="tncBtn">Terms and Conditions</p>
+          </div>
 
           <div class="tnc-text-container">
             <div class="contents">
@@ -286,7 +288,7 @@ if (isset($_SESSION['signup_process'])) {
     </section>
   </main>
 
-  <!-- <?php include("footer.php"); ?> -->
+  <?php include("footer.php"); ?>
 </body>
 
   <script src="././js/nav.js"></script>

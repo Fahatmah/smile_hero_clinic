@@ -64,6 +64,14 @@ require_once 'includes/login_view.inc.php';
           </div>
         </div>
 
+        <div class="forgot-password-container">
+          <button class="fp-btn" id="fpBtn" type="button">
+            <a href="./forgot-pass.html" target="_blank">
+              Forgot Password?
+            </a>
+          </button>
+        </div>
+
         <div class="form-links">
           <!-- submit button -->
           <button type="submit" class="submit__button">Login</button>
@@ -79,6 +87,7 @@ require_once 'includes/login_view.inc.php';
       </div>
     </section>
   </main>
+  <?php include("footer.php"); ?>
 </body>
 <script src="././js/nav.js"></script>
 </html>

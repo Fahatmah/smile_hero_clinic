@@ -27,6 +27,7 @@
 
 // login page | form
 @use 'components/login_page/login_form';
+@use 'components/login_page/forgot_pass';
 
 // account page
 @use 'components/user_page/side_nav';

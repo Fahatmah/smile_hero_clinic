@@ -975,6 +975,7 @@ footer .form-section .form-links {
   justify-content: center;
   flex-direction: column;
   gap: 0.625rem;
+  margin-top: 1rem;
 }
 footer .form-section .form-links li {
   width: 100%;
@@ -1032,16 +1033,17 @@ footer .contact-section .footer-info__credits {
 }
 
 @media screen and (min-width: 40rem) {
-  footer {
-    flex-direction: row;
-    align-items: flex-start;
-  }
   footer > * {
     gap: 1rem;
   }
   footer > * .footer-header {
     font-size: 3.125rem;
     line-height: 1;
+  }
+  footer .form-section {
+    height: 100%;
+    justify-content: flex-start;
+    padding-top: 2rem;
   }
   footer .form-section .form-links {
     flex-direction: row;
@@ -1053,6 +1055,9 @@ footer .contact-section .footer-info__credits {
   footer .contact-section .contact-list {
     gap: 0.5rem;
     align-items: flex-start;
+  }
+  footer .contact-section .contact-list li a {
+    text-align: left;
   }
   footer .contact-section .footer-info {
     align-items: flex-start;
@@ -1077,9 +1082,11 @@ footer .contact-section .footer-info__credits {
     gap: 1rem;
     flex-wrap: wrap;
     justify-content: flex-start;
+    text-align: left;
   }
 }
 .signup__page {
+  --ff-inter: "Inter", sans-serif;
   width: 100%;
   display: flex;
   align-items: center;
@@ -1089,6 +1096,7 @@ footer .contact-section .footer-info__credits {
 .signup__page .signup {
   width: 100%;
   padding: 4rem 1.5rem;
+  font-family: var(--ff-inter);
   display: flex;
   align-items: flex-start;
   justify-content: center;
@@ -1201,13 +1209,22 @@ footer .contact-section .footer-info__credits {
   background: url("../../assets/landing-page/tick-square.svg") no-repeat;
   background-size: 100%;
 }
-.signup__page .signup .signup__form .terms-and-conditions-container label {
-  display: none;
+.signup__page .signup .signup__form .terms-and-conditions-container .group {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: row;
+  gap: 0.4rem;
+  font-size: 0.875rem;
+  color: var(--ntrl-clr-300);
 }
-.signup__page .signup .signup__form .terms-and-conditions-container .tnc-button {
+.signup__page .signup .signup__form .terms-and-conditions-container .group label {
+  cursor: pointer;
+}
+.signup__page .signup .signup__form .terms-and-conditions-container .group .tnc-button {
   color: var(--pr-clr-300);
 }
-.signup__page .signup .signup__form .terms-and-conditions-container .tnc-button:hover {
+.signup__page .signup .signup__form .terms-and-conditions-container .group .tnc-button:hover {
   text-decoration: underline;
 }
 .signup__page .signup .signup__form .terms-and-conditions-container .tnc-text-container {
@@ -1322,7 +1339,11 @@ footer .contact-section .footer-info__credits {
   text-decoration: underline;
 }
 .signup__page .signup .image-container {
+  height: 38rem;
   display: none;
+}
+.signup__page .signup .image-container img {
+  width: 100%;
 }
 .signup__page .modal {
   display: flex;
@@ -1462,6 +1483,7 @@ footer .contact-section .footer-info__credits {
   }
 }
 .login__page {
+  --ff-inter: "Inter", sans-serif;
   width: 100%;
   display: flex;
   align-items: center;
@@ -1471,8 +1493,9 @@ footer .contact-section .footer-info__credits {
 .login__page .login {
   width: 100%;
   padding: 4rem 1.5rem;
+  font-family: var(--ff-inter);
   display: flex;
-  align-items: flex-start;
+  align-items: center;
   justify-content: center;
   flex-direction: column;
   gap: 2rem;
@@ -1486,7 +1509,7 @@ footer .contact-section .footer-info__credits {
   color: var(--pr-clr-300);
   text-transform: uppercase;
 }
-.login__page .login .login__form {
+.login__page .login__form {
   width: 100%;
   display: flex;
   align-items: flex-start;
@@ -1494,7 +1517,7 @@ footer .contact-section .footer-info__credits {
   flex-direction: column;
   gap: 1rem;
 }
-.login__page .login .login__form .group-field {
+.login__page .login__form .group-field {
   width: 100%;
   display: flex;
   align-items: center;
@@ -1502,7 +1525,7 @@ footer .contact-section .footer-info__credits {
   flex-direction: column;
   gap: 1rem;
 }
-.login__page .login .login__form .group-field .field {
+.login__page .login__form .group-field .field {
   width: 100%;
   display: flex;
   align-items: flex-start;
@@ -1510,11 +1533,11 @@ footer .contact-section .footer-info__credits {
   flex-direction: column-reverse;
   gap: 0.375rem;
 }
-.login__page .login .login__form .group-field .field label {
+.login__page .login__form .group-field .field label {
   font-size: 0.875rem;
   color: var(--pr-clr-400);
 }
-.login__page .login .login__form .group-field .field input {
+.login__page .login__form .group-field .field input {
   width: 100%;
   padding: 8px;
   border-radius: 0.25rem;
@@ -1522,26 +1545,37 @@ footer .contact-section .footer-info__credits {
   font-size: var(--fs-200);
   color: var(--pr-clr-300);
 }
-.login__page .login .login__form .group-field .field input:not(:-moz-placeholder-shown) + label {
+.login__page .login__form .group-field .field input:not(:-moz-placeholder-shown) + label {
   font-weight: bold;
   color: var(--pr-clr-300);
 }
-.login__page .login .login__form .group-field .field input:hover + label, .login__page .login .login__form .group-field .field input:active + label, .login__page .login .login__form .group-field .field input:focus + label, .login__page .login .login__form .group-field .field input:not(:placeholder-shown) + label {
+.login__page .login__form .group-field .field input:hover + label, .login__page .login__form .group-field .field input:active + label, .login__page .login__form .group-field .field input:focus + label, .login__page .login__form .group-field .field input:not(:placeholder-shown) + label {
   font-weight: bold;
   color: var(--pr-clr-300);
 }
-.login__page .login .login__form .group-field .field input::-moz-placeholder {
+.login__page .login__form .group-field .field input::-moz-placeholder {
   font-size: var(--fs-200);
   color: var(--pr-clr-400);
 }
-.login__page .login .login__form .group-field .field input::placeholder {
+.login__page .login__form .group-field .field input::placeholder {
   font-size: var(--fs-200);
   color: var(--pr-clr-400);
 }
-.login__page .login .login__form .group-field .field input:hover, .login__page .login .login__form .group-field .field input:active, .login__page .login .login__form .group-field .field input:focus {
+.login__page .login__form .group-field .field input:hover, .login__page .login__form .group-field .field input:active, .login__page .login__form .group-field .field input:focus {
   border-color: var(--pr-clr-300);
 }
-.login__page .login .login__form .form-links {
+.login__page .login__form .forgot-password-container {
+  margin-bottom: 1rem;
+}
+.login__page .login__form .forgot-password-container .fp-btn a {
+  font-size: 0.875rem;
+  color: var(--pr-clr-300);
+  cursor: pointer;
+}
+.login__page .login__form .forgot-password-container .fp-btn a:hover {
+  text-decoration: underline;
+}
+.login__page .login__form .form-links {
   width: 100%;
   display: flex;
   align-items: center;
@@ -1549,7 +1583,7 @@ footer .contact-section .footer-info__credits {
   flex-direction: column-reverse;
   gap: 2rem;
 }
-.login__page .login .login__form .form-links .submit__button {
+.login__page .login__form .form-links .submit__button {
   width: 100%;
   font-weight: bold;
   font-size: var(--fs-200);
@@ -1560,21 +1594,28 @@ footer .contact-section .footer-info__credits {
   border-radius: 6px;
   cursor: pointer;
 }
-.login__page .login .login__form .form-links .signup__link {
+.login__page .login__form .form-links .signup__link {
   align-self: center;
   font-size: var(--fs-200);
   color: var(--pr-clr-100);
 }
-.login__page .login .login__form .form-links .signup__link:hover {
+.login__page .login__form .form-links .signup__link:hover {
   text-decoration: underline;
 }
 .login__page .login .image-container {
+  height: 38rem;
   display: none;
+}
+.login__page .login .image-container img {
+  width: 100%;
 }
 
 @media screen and (min-width: 40rem) {
   .login__page .login {
     padding-inline: 5rem;
+  }
+  .login__page .login__form {
+    width: 30rem;
   }
 }
 @media screen and (min-width: 60rem) {
@@ -1582,7 +1623,9 @@ footer .contact-section .footer-info__credits {
     width: 100%;
     padding: 0;
     flex-direction: row;
-    gap: 5rem;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 15rem;
   }
   .login__page .login .login__form {
     padding-inline-start: 5rem;
@@ -1603,14 +1646,94 @@ footer .contact-section .footer-info__credits {
   }
   .login__page .login .image-container {
     display: flex;
-    width: 60rem;
-    min-height: 100vh;
+    width: 40rem;
   }
   .login__page .login .image-container img {
     -o-object-fit: cover;
        object-fit: cover;
   }
 }
+.form-modal {
+  --ff-inter: "Inter", sans-serif;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  flex-direction: row;
+  gap: 0;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  font-family: var(--ff-inter);
+  background-color: #f0f3f9;
+  z-index: 1000;
+}
+.form-modal .forgot-pass-form {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 2rem;
+  width: min(100% - 1.5rem, 30rem);
+  margin-inline: auto;
+  margin-block-start: 4rem;
+  padding: 2rem;
+  background-color: var(--ntrl-clr-100);
+  box-shadow: 5px 5px 40px 5px hsla(0, 0%, 38%, 0.03);
+  border-radius: 1rem;
+}
+.form-modal .forgot-pass-form .form-header {
+  font-size: clamp(1.2rem, 1.0944rem + 0.4507vw, 1.5rem);
+  color: var(--pr-clr-300);
+  font-weight: 600;
+  text-align: center;
+}
+.form-modal .forgot-pass-form .field {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 0.5rem;
+  width: 100%;
+}
+.form-modal .forgot-pass-form .field > * {
+  width: 100%;
+  border-radius: 0.5rem;
+}
+.form-modal .forgot-pass-form .field label {
+  display: none;
+}
+.form-modal .forgot-pass-form .field input {
+  color: var(--pr-clr-300);
+  font-weight: 600;
+  padding: 0.875rem 1rem;
+  background-color: var(--ntrl-clr-100);
+  outline: 1px solid var(--pr-clr-300);
+}
+.form-modal .forgot-pass-form .field input::-moz-placeholder {
+  font-weight: normal;
+  opacity: 0.5;
+}
+.form-modal .forgot-pass-form .field input::placeholder {
+  font-weight: normal;
+  opacity: 0.5;
+}
+.form-modal .forgot-pass-form .field button {
+  color: var(--ntrl-clr-100);
+  padding: 1rem;
+  background-color: var(--pr-clr-300);
+  cursor: pointer;
+}
+.form-modal .forgot-pass-form .field button:hover {
+  background-color: var(--pr-clr-350);
+}
+.form-modal .forgot-pass-form .form-note {
+  color: var(--ntrl-clr-300);
+  font-size: 0.875rem;
+  text-align: center;
+}
+
 .aside__sidebar {
   display: flex;
   align-items: center;
@@ -1970,7 +2093,8 @@ footer .contact-section .footer-info__credits {
   color: var(--ntrl-clr-300);
 }
 .appointment_form form > * .appointment-form__field input,
-.appointment_form form > * .appointment-form__field .appointment-form__select {
+.appointment_form form > * .appointment-form__field .appointment-form__select,
+.appointment_form form > * .appointment-form__field .appointment-form__checkbox-group {
   width: 100%;
   font-size: 0.875rem;
   color: var(--ntrl-clr-300);
@@ -1988,6 +2112,48 @@ footer .contact-section .footer-info__credits {
 }
 .appointment_form form > * .appointment-form__field .appointment-form__select option {
   color: var(--ntrl-clr-300);
+}
+.appointment_form form > * .appointment-form__field .appointment-form__checkbox-group {
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  flex-direction: column;
+  gap: 0;
+  padding: 0;
+}
+.appointment_form form > * .appointment-form__field .appointment-form__checkbox-group div {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  flex-direction: row;
+  gap: 1rem;
+  padding: 0.5rem 1rem;
+  transition: 50ms ease-in-out;
+}
+.appointment_form form > * .appointment-form__field .appointment-form__checkbox-group div:hover {
+  background-color: hsl(0, 0%, 38%);
+  color: var(--ntrl-clr-100);
+}
+.appointment_form form > * .appointment-form__field .appointment-form__checkbox-group div:hover label .service-price {
+  color: var(--ntrl-clr-100);
+}
+.appointment_form form > * .appointment-form__field .appointment-form__checkbox-group div input {
+  width: 1rem;
+  height: 1rem;
+}
+.appointment_form form > * .appointment-form__field .appointment-form__checkbox-group div label {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-direction: row;
+  gap: 0;
+  padding-block: 0.5rem;
+  cursor: pointer;
+}
+.appointment_form form > * .appointment-form__field .appointment-form__checkbox-group div label .service-price {
+  color: var(--pr-clr-300);
 }
 .appointment_form form > * .appointment-form__field .appointment-form__validation {
   display: flex;
