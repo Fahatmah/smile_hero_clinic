@@ -101,6 +101,22 @@ if($result->num_rows > 0){
   }
 }
 
+// Get today's date in the correct format
+$dateNow = date('Y-m-d, l');
+
+// Count the number of walk-in and online appointments for today
+$query = "SELECT 
+            SUM(CASE WHEN label = 'walk-in' THEN 1 ELSE 0 END) as walkInCount,
+            SUM(CASE WHEN label = 'online' THEN 1 ELSE 0 END) as onlineCount
+          FROM appointments 
+          WHERE date = '$dateNow' AND status = 'accepted'";
+
+$result = $conn->query($query);
+$counts = $result->fetch_assoc();
+
+$walkInCount = $counts['walkInCount'] ?? 0; // Default to 0 if NULL
+$onlineCount = $counts['onlineCount'] ?? 0; // Default to 0 if NULL
+
 ?>
 
 <!DOCTYPE html>
@@ -132,7 +148,25 @@ if($result->num_rows > 0){
 
           <div class="overview__content">
            <section class="overview__item">
-             <p class="overview__label">Today's Schedule</p>
+            <div class="header">
+              <p class="overview__label">Today's Schedule</p>
+              <button class="more-btn" id="moreBtn">
+                <svg width="25" height="12" viewBox="0 0 25 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <circle cx="6.66666" cy="6" r="2" fill="#616161"/>
+                <circle cx="12.6667" cy="6" r="2" fill="#616161"/>
+                <circle cx="18.6667" cy="6" r="2" fill="#616161"/>
+                </svg>
+              </button>
+
+              <div class="appointment-summary" id="appointmentSummary">
+                <p class="summary-title">Number of appointments</p>
+                <hr>
+                <div class="appointment-types">
+                  <p class="appointment-type">Walk-ins<span class="appointment-count"><?php echo $walkInCount; ?></span></p>
+                  <p class="appointment-type">Online<span class="appointment-count"><?php echo $onlineCount; ?></span></p>
+                </div>
+              </div>
+            </div>
              <div class="overview__icon-wrapper">
                <svg width="36" height="36" viewBox="0 0 36 36"      fill="none" xmlns="http://www.w3.org/2000/svg"    aria-label="Today's Schedule Icon">
                  <rect width="36" height="36" rx="18"     fill="#1D72F2" />
@@ -324,125 +358,133 @@ if($result->num_rows > 0){
 </body>
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script>
-// Canvas contexts
-const lineCtx = document.getElementById('lineChart').getContext('2d');
-const barCtx = document.getElementById('barChart').getContext('2d');
+  // Canvas contexts
+  const lineCtx = document.getElementById('lineChart').getContext('2d');
+  const barCtx = document.getElementById('barChart').getContext('2d');
 
-// Gradient for the line chart
-const gradient = lineCtx.createLinearGradient(0, 0, 0, 400);
-gradient.addColorStop(0, 'hsla(216, 89%, 53%, 0.35)');
-gradient.addColorStop(1, 'hsla(0, 0%, 100%, 0)');
+  // Gradient for the line chart
+  const gradient = lineCtx.createLinearGradient(0, 0, 0, 400);
+  gradient.addColorStop(0, 'hsla(216, 89%, 53%, 0.35)');
+  gradient.addColorStop(1, 'hsla(0, 0%, 100%, 0)');
 
-// Fetch daily appointments (weekdays)
-fetch('includes/getAppointmentsPerWeekday.php')
-  .then(response => response.json())
-  .then(data => {
-    const weekdays = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
-    const appointmentsPerDay = new Array(7).fill(0);
+  // Fetch daily appointments (weekdays)
+  fetch('includes/getAppointmentsPerWeekday.php')
+    .then(response => response.json())
+    .then(data => {
+      const weekdays = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
+      const appointmentsPerDay = new Array(7).fill(0);
 
-    data.forEach(item => {
-      appointmentsPerDay[item.weekday - 1] = item.count;
-    });
+      data.forEach(item => {
+        appointmentsPerDay[item.weekday - 1] = item.count;
+      });
 
-    const lineGraphData = {
-      labels: weekdays,
-      datasets: [{
-        label: 'Daily Appointments',
-        data: appointmentsPerDay,
-        fill: true,
-        backgroundColor: gradient,
-        borderColor: '#1D72F2',
-        borderWidth: 2,
-        pointBackgroundColor: '#fff',
-        pointBorderColor: '#1D72F2',
-        tension: 0.45,
-      }]
-    };
+      const lineGraphData = {
+        labels: weekdays,
+        datasets: [{
+          label: 'Daily Appointments',
+          data: appointmentsPerDay,
+          fill: true,
+          backgroundColor: gradient,
+          borderColor: '#1D72F2',
+          borderWidth: 2,
+          pointBackgroundColor: '#fff',
+          pointBorderColor: '#1D72F2',
+          tension: 0.45,
+        }]
+      };
 
-    const lineConfig = {
-      type: 'line',
-      data: lineGraphData,
-      options: {
-        responsive: true,
-        plugins: {
-          legend: { display: false }
-        },
-        scales: {
-          x: {
-            ticks: {
-              font: { family: 'DM Sans, sans-serif' }
-            }
+      const lineConfig = {
+        type: 'line',
+        data: lineGraphData,
+        options: {
+          responsive: true,
+          plugins: {
+            legend: { display: false }
           },
-          y: {
-            beginAtZero: true,
-            max: 30,
-            ticks: {
-              stepSize: 6,
-              font: { family: 'DM Sans, sans-serif' }
+          scales: {
+            x: {
+              ticks: {
+                font: { family: 'DM Sans, sans-serif' }
+              }
+            },
+            y: {
+              beginAtZero: true,
+              max: 30,
+              ticks: {
+                stepSize: 6,
+                font: { family: 'DM Sans, sans-serif' }
+              }
             }
           }
         }
-      }
-    };
+      };
 
-    new Chart(lineCtx, lineConfig);
-  })
-  .catch(error => console.error('Error fetching daily appointments data:', error));
+      new Chart(lineCtx, lineConfig);
+    })
+    .catch(error => console.error('Error fetching daily appointments data:', error));
 
-// Fetch monthly appointments
-fetch('includes/getAppointmentsPerMonth.php')
-  .then(response => response.json())
-  .then(data => {
-    const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
-    const appointmentsPerMonth = new Array(12).fill(0);
+  // Fetch monthly appointments
+  fetch('includes/getAppointmentsPerMonth.php')
+    .then(response => response.json())
+    .then(data => {
+      const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+      const appointmentsPerMonth = new Array(12).fill(0);
 
-    data.forEach(item => {
-      appointmentsPerMonth[item.month - 1] = item.count;
-    });
+      data.forEach(item => {
+        appointmentsPerMonth[item.month - 1] = item.count;
+      });
 
-    const barGraphData = {
-      labels: months,
-      datasets: [{
-        label: 'Monthly Appointments',
-        data: appointmentsPerMonth,
-        backgroundColor: [
-          '#616161', '#1D72F2', '#FAAF0D', '#1D72F2', '#E84531', '#616161', '#1D72F2', 
-          '#FAAF0D', '#1D72F2', '#E84531', '#FAAF0D', '#616161'
-        ],
-        borderColor: 'transparent',
-        borderRadius: 20,
-      }]
-    };
+      const barGraphData = {
+        labels: months,
+        datasets: [{
+          label: 'Monthly Appointments',
+          data: appointmentsPerMonth,
+          backgroundColor: [
+            '#616161', '#1D72F2', '#FAAF0D', '#1D72F2', '#E84531', '#616161', '#1D72F2', 
+            '#FAAF0D', '#1D72F2', '#E84531', '#FAAF0D', '#616161'
+          ],
+          borderColor: 'transparent',
+          borderRadius: 20,
+        }]
+      };
 
-    const barConfig = {
-      type: 'bar',
-      data: barGraphData,
-      options: {
-        responsive: true,
-        plugins: {
-          legend: { display: false }
-        },
-        scales: {
-          x: {
-            ticks: {
-              font: { family: 'DM Sans, sans-serif' }
-            }
+      const barConfig = {
+        type: 'bar',
+        data: barGraphData,
+        options: {
+          responsive: true,
+          plugins: {
+            legend: { display: false }
           },
-          y: {
-            beginAtZero: true,
-            max: 100,
-            ticks: {
-              stepSize: 25,
-              font: { family: 'DM Sans, sans-serif' }
+          scales: {
+            x: {
+              ticks: {
+                font: { family: 'DM Sans, sans-serif' }
+              }
+            },
+            y: {
+              beginAtZero: true,
+              max: 100,
+              ticks: {
+                stepSize: 25,
+                font: { family: 'DM Sans, sans-serif' }
+              }
             }
           }
         }
-      }
-    };
+      };
 
-    new Chart(barCtx, barConfig);
-  })
-  .catch(error => console.error('Error fetching monthly appointments data:', error));
+      new Chart(barCtx, barConfig);
+    })
+    .catch(error => console.error('Error fetching monthly appointments data:', error));
+
+    // overview pop up
+    const summary = document.getElementById('appointmentSummary')
+    const moreBtn = document.getElementById('moreBtn')
+
+    moreBtn.addEventListener('click', (e) => {
+      summary.classList.toggle('active')
+    })
 </script>
 
 </html>

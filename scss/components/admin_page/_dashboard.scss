@@ -46,6 +46,103 @@
             background-color: hsl(0, 0%, 92%, 0.3);
           }
 
+          .header {
+            position: relative;
+            width: 100%;
+            @include display-flex($x: space-between);
+
+            .more-btn {
+              cursor: pointer;
+
+              svg {
+                cursor: pointer;
+
+                &:hover {
+                  circle {
+                    fill: hsl(0, 0%, 38%, 0.5);
+                  }
+                }
+
+                &:active {
+                  circle {
+                    fill: var(--ntrl-clr-300);
+                  }
+                }
+              }
+            }
+
+            .appointment-summary {
+              width: 10rem;
+              position: absolute;
+              top: 1rem;
+              right: -10rem;
+              @include display-flex($dir: column, $y: flex-start);
+              border-radius: 1.25rem;
+              border-top-left-radius: 0;
+              border: 1px solid var(--clr-dim-gray);
+              background-color: var(--ntrl-clr-100);
+              transform-origin: top left;
+              box-shadow: -6px 6px 15px hsl(0, 0%, 38%, 0.2);
+              scale: 0;
+              transition: 200ms ease-in-out;
+
+              &.active {
+                scale: 1;
+              }
+
+              .summary-title {
+                font-size: 1.25rem;
+                font-weight: 700;
+                color: var(--pr-clr-300);
+                line-height: 1.2;
+                padding: 1rem;
+              }
+
+              hr {
+                width: min(100% - 1rem);
+                margin-inline: auto;
+                background: none;
+                border-color: hsl(0, 0%, 38%, 0.2);
+              }
+
+              .appointment-types {
+                width: 100%;
+                @include display-flex(
+                  $dir: column,
+                  $y: flex-start,
+                  $gap: 0.5rem
+                );
+                padding: 1rem;
+
+                & > * {
+                  width: 100%;
+                  @include display-flex($x: space-between);
+
+                  .appointment-count {
+                    @include display-flex();
+                    width: 1.5rem;
+                    height: 1.5rem;
+                    font-weight: 700;
+                    color: var(--ntrl-clr-100);
+                    border-radius: 50%;
+                  }
+                }
+
+                & p:nth-child(1) {
+                  .appointment-count {
+                    background-color: var(--pr-clr-300);
+                  }
+                }
+
+                & p:nth-child(2) {
+                  .appointment-count {
+                    background-color: var(--pr-clr-100);
+                  }
+                }
+              }
+            }
+          }
+
           .overview__label {
             font-weight: 700;
           }
