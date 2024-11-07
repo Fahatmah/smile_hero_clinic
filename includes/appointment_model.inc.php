@@ -14,10 +14,10 @@ function getUserid(mysqli $conn, string $name) {
     return $user;
 }
 
-function getAccount(mysqli $conn, $email, string $name){
-    $query = "SELECT * FROM users WHERE fullname = ? AND email = ?";
+function getAccount(mysqli $conn, $email, string $fname, string $mname, string $lname, string $suffix){
+    $query = "SELECT * FROM users WHERE first_name = ? AND middle_name = ? AND last_name = ? AND suffix = ? AND email = ?";
     $stmt = $conn->prepare($query); 
-    $stmt->bind_param("ss", $name, $email);
+    $stmt->bind_param("sssss", $fname, $mname, $lname, $suffix, $email);
     $stmt->execute();
 
     $result = $stmt->get_result();

@@ -52,25 +52,55 @@ if (isset($_SESSION['appointment_status'])) {
               class="appointment-form__section appointment-form__section--personal-details"
             >
               <div class="appointment-form__field">
-                <label for="name" class="appointment-form__label">Name</label>
+                <label for="fname" class="appointment-form__label">Firstname</label>
                 <input
                   type="text"
-                  name="name"
-                  id="name"
-                  placeholder="e.g. Fahatmah Mabang"
-                  class="appointment-form__input"
-                />
+                  name="fname"
+                  id="fname"
+                  placeholder="e.g. Juan"
+                  class="appointment-form__input"/>
                 <div class="appointment-form__validation">
-                  <p
-                    class="appointment-form__text appointment-form__text--error"
-                  >
-                    Error
-                  </p>
-                  <p
-                    class="appointment-form__text appointment-form__text--valid"
-                  >
-                    Valid
-                  </p>
+                  <p class="appointment-form__text appointment-form__text--error">Error</p>
+                  <p class="appointment-form__text appointment-form__text--valid">Valid</p>
+                </div>
+              </div>
+              <div class="appointment-form__field">
+                <label for="mname" class="appointment-form__label">Middlename</label>
+                <input
+                  type="text"
+                  name="mname"
+                  id="mname"
+                  placeholder="e.g. Manuel"
+                  class="appointment-form__input"/>
+                <div class="appointment-form__validation">
+                  <p class="appointment-form__text appointment-form__text--error">Error</p>
+                  <p class="appointment-form__text appointment-form__text--valid">Valid</p>
+                </div>
+              </div>
+              <div class="appointment-form__field">
+                <label for="lname" class="appointment-form__label">Lastname</label>
+                <input
+                  type="text"
+                  name="lname"
+                  id="lname"
+                  placeholder="e.g. Dela Cruz"
+                  class="appointment-form__input"/>
+                <div class="appointment-form__validation">
+                  <p class="appointment-form__text appointment-form__text--error">Error</p>
+                  <p class="appointment-form__text appointment-form__text--valid">Valid</p>
+                </div>
+              </div>
+              <div class="appointment-form__field">
+                <label for="suffix" class="appointment-form__label">Suffix</label>
+                <input
+                  type="text"
+                  name="suffix"
+                  id="suffix"
+                  placeholder="Sr. / Jr."
+                  class="appointment-form__input"/>
+                <div class="appointment-form__validation">
+                  <p class="appointment-form__text appointment-form__text--error">Error</p>
+                  <p class="appointment-form__text appointment-form__text--valid">Valid</p>
                 </div>
               </div>
               <div class="appointment-form__field">
@@ -80,66 +110,36 @@ if (isset($_SESSION['appointment_status'])) {
                   name="email"
                   id="email"
                   placeholder="e.g. fahatmahmabang@gmail.com"
-                  class="appointment-form__input"
-                />
+                  class="appointment-form__input"/>
                 <div class="appointment-form__validation">
-                  <p
-                    class="appointment-form__text appointment-form__text--error"
-                  >
-                    Error
-                  </p>
-                  <p
-                    class="appointment-form__text appointment-form__text--valid"
-                  >
-                    Valid
-                  </p>
+                  <p class="appointment-form__text appointment-form__text--error">Error</p>
+                  <p class="appointment-form__text appointment-form__text--valid">Valid</p>
                 </div>
               </div>
               <div class="appointment-form__field">
-                <label for="contactnumber" class="appointment-form__label"
-                  >Contact Number</label
-                >
+                <label for="contactnumber" class="appointment-form__label">Contact Number</label>
                 <input
                   type="tel"
+                  onkeypress="isNumber(event)"
                   name="contactnumber"
                   id="contactnumber"
                   placeholder="e.g. 09123456789"
-                  class="appointment-form__input"
-                />
+                  class="appointment-form__input"/>
                 <div class="appointment-form__validation">
-                  <p
-                    class="appointment-form__text appointment-form__text--error"
-                  >
-                    Error
-                  </p>
-                  <p
-                    class="appointment-form__text appointment-form__text--valid"
-                  >
-                    Valid
-                  </p>
+                  <p class="appointment-form__text appointment-form__text--error">Error</p>
+                  <p class="appointment-form__text appointment-form__text--valid">Valid</p>
                 </div>
               </div>
               <div class="appointment-form__field">
-                <label for="message" class="appointment-form__label"
-                  >Message/Requests</label
-                >
+                <label for="message" class="appointment-form__label">Message/Requests</label>
                 <input
                   type="text"
                   name="message"
                   id="message"
-                  class="appointment-form__input"
-                />
+                  class="appointment-form__input"/>
                 <div class="appointment-form__validation">
-                  <p
-                    class="appointment-form__text appointment-form__text--error"
-                  >
-                    Error
-                  </p>
-                  <p
-                    class="appointment-form__text appointment-form__text--valid"
-                  >
-                    Valid
-                  </p>
+                  <p class="appointment-form__text appointment-form__text--error">Error</p>
+                  <p class="appointment-form__text appointment-form__text--valid">Valid</p>
                 </div>
               </div>
             </section>
@@ -222,31 +222,19 @@ if (isset($_SESSION['appointment_status'])) {
               class="appointment-form__section appointment-form__section--preferences"
             >
               <div class="appointment-form__field">
-                <label for="appointmentDate" class="appointment-form__label">
-                  Date
-                </label>
+                <label for="appointmentDate" class="appointment-form__label">Date</label>
                 <select
                   name="appointmentDate"
                   id="appointmentDate"
                   class="appointment-form__select"
                 ></select>
                 <div class="appointment-form__validation">
-                  <p
-                    class="appointment-form__text appointment-form__text--error"
-                  >
-                    Error
-                  </p>
-                  <p
-                    class="appointment-form__text appointment-form__text--valid"
-                  >
-                    Valid
-                  </p>
+                  <p class="appointment-form__text appointment-form__text--error">Error</p>
+                  <p class="appointment-form__text appointment-form__text--valid">Valid</p>
                 </div>
               </div>
               <div class="appointment-form__field">
-                <label for="appointmentTime" class="appointment-form__label">
-                  Time
-                </label>
+                <label for="appointmentTime" class="appointment-form__label">Time</label>
                 <select
                   name="appointmentTime"
                   id="appointmentTime"
@@ -264,16 +252,8 @@ if (isset($_SESSION['appointment_status'])) {
                   <option value="5:00 PM">05:00 PM</option>
                 </select>
                 <div class="appointment-form__validation">
-                  <p
-                    class="appointment-form__text appointment-form__text--error"
-                  >
-                    Error
-                  </p>
-                  <p
-                    class="appointment-form__text appointment-form__text--valid"
-                  >
-                    Valid
-                  </p>
+                  <p class="appointment-form__text appointment-form__text--error">Error</p>
+                  <p class="appointment-form__text appointment-form__text--valid">Valid</p>
                 </div>
               </div>
               <div class="appointment-form__field">
@@ -309,16 +289,8 @@ if (isset($_SESSION['appointment_status'])) {
                   </option>
                 </select>
                 <div class="appointment-form__validation">
-                  <p
-                    class="appointment-form__text appointment-form__text--error"
-                  >
-                    Error
-                  </p>
-                  <p
-                    class="appointment-form__text appointment-form__text--valid"
-                  >
-                    Valid
-                  </p>
+                  <p class="appointment-form__text appointment-form__text--error">Error</p>
+                  <p class="appointment-form__text appointment-form__text--valid">Valid</p>
                 </div>
               </div>
               <input
@@ -357,8 +329,16 @@ if (isset($_SESSION['appointment_status'])) {
         e.preventDefault();
 
         const fields = [{
-            id: 'name',
-            errorMessage: 'Name cannot be empty'
+            id: 'fname',
+            errorMessage: 'Firstname cannot be empty'
+          },
+          {
+            id: 'mname',
+            errorMessage: 'Middlename cannot be empty'
+          },
+          {
+            id: 'lname',
+            errorMessage: 'Lastname cannot be empty'
           },
           {
             id: 'email',
@@ -453,6 +433,26 @@ if (isset($_SESSION['appointment_status'])) {
 
       generateWeekdayOptions();
     });
+
+    function isNumber(evt) {
+    var input = evt.target.value;
+
+    // Ensure only digits are entered
+    var contactNum = String.fromCharCode(evt.which);
+    if (!(/[0-9]/.test(contactNum))) {
+        evt.preventDefault();
+        return;
+    }
+
+    // Check if the input starts with "09" and length is less than 11 digits
+    if (input.length === 0 && contactNum !== '0') {
+        evt.preventDefault();
+    } else if (input.length === 1 && contactNum !== '9') {
+        evt.preventDefault();
+    } else if (input.length >= 11) {
+        evt.preventDefault();
+    }
+  } 
 
     function getCurrentDateTime() {
       const date = new Date()

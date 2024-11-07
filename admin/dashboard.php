@@ -107,7 +107,7 @@ $dateNow = date('Y-m-d, l');
 // Count the number of walk-in and online appointments for today
 $query = "SELECT 
             SUM(CASE WHEN label = 'walk-in' THEN 1 ELSE 0 END) as walkInCount,
-            SUM(CASE WHEN label = 'online' THEN 1 ELSE 0 END) as onlineCount
+            SUM(CASE WHEN label != 'walk-in' THEN 1 ELSE 0 END) as onlineCount
           FROM appointments 
           WHERE date = '$dateNow' AND status = 'accepted'";
 

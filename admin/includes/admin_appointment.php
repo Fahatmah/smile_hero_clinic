@@ -4,7 +4,11 @@ require_once '../../includes/login_view.inc.php';
 
 if($_SERVER["REQUEST_METHOD"] === "POST"){
 
-    $name = ucfirst($_POST['name']);
+    $fname = ucwords($_POST['fname']);
+    $mname = ucwords($_POST['mname']);
+    $lname = ucwords($_POST['lname']);
+    $suffix = ucwords($_POST['suffix']);
+    $name = strval($fname ) ." ". strval($mname )  ." ". strval($lname )  ." ". strval($suffix );
     $email = $_POST['email'];
     $contact = $_POST['contactnumber'];     
     $message = $_POST['message'];
@@ -14,12 +18,15 @@ if($_SERVER["REQUEST_METHOD"] === "POST"){
     $dentalService = $_POST['dentalService'];
     $status = 'request';
 
+    $subject = "Smile Hero Dental Clinic Appointment";
+    $message = "Good Day $name, your appointment on $appointmentDate at $appointmentTime has been accepted. Thanks for Choosing Smile Hero Dental Clinic";
+    
     require_once "../../includes/dbh.inc.php";
     require_once "../../includes/appointment_model.inc.php";
 
     $appointmentId = generateAppoinmentID($conn);
 
-    $result = haveAccount($conn, $email, $name);
+    $result = haveAccount($conn, $email, $fname, $mname , $lname, $suffix);
 
     if ($result) {
         $user_id = $result['user_id'];
@@ -36,12 +43,25 @@ if($_SERVER["REQUEST_METHOD"] === "POST"){
         header("Location: ../new-appointment.php");
         die();
     }else{
+
+        $mail = require __DIR__ . "/../../mailer.php"; 
+        $mail->setFrom("jpvillaruel02@gmail.com");
+        $mail->addAddress($email, $name);
+    
+        $mail->Subject = $subject;
+        $mail->Body = $message;
+    
+        if ($mail->send()) {
+        $status = 'accepted';
+
         createAppointment($conn, $user_id, $appointmentId, $label, $name, $email, $contact, $message, $appointmentDate, $appointmentTime, $dentalService, $location, $status);
-       
+
+        }
+        
         if(disableForeignKeyChecks($conn) === false){
             enableForeignKeyChecks($conn);
         }
-        
+
         $_SESSION['appointment_status'] = 'created';
     
         $conn->close();
@@ -60,8 +80,8 @@ if($_SERVER["REQUEST_METHOD"] === "POST"){
         return $user !== null;
     }
 
-    function haveAccount(mysqli $conn, string $email, string $name){
-        $account = getAccount($conn, $email, $name);
+    function haveAccount(mysqli $conn, string $email, string $fname, string $mname, string $lname, string $suffix){
+        $account = getAccount($conn, $email, $fname, $mname, $lname, $suffix);
         return $account;
     }
     

@@ -45,6 +45,15 @@ if (isset($_SESSION['signup_process'])) {
     font-size: .75rem;
   }
 
+  @keyframes shake {
+    0%, 100% { transform: translateX(0); }
+    20%, 60% { transform: translateX(-5px); }
+    40%, 80% { transform: translateX(5px); }
+  }
+
+  .shake {
+      animation: shake 0.3s ease;
+  }
 
   </style>
 </head>
@@ -337,7 +346,10 @@ if (isset($_SESSION['signup_process'])) {
     var contact = document.getElementById("contact");
     var password = document.getElementById("password");
     var Cpassword = document.getElementById("Cpassword");
+    var tnc = document.getElementById("tnc");
+    var tncGroup = document.querySelector(".group");
 
+    
     notValid = false;
 
     var passwordRegex = /^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[!@#$%^&*])[A-Za-z\d!@#$%^&*]{8,}$/;
@@ -348,37 +360,37 @@ if (isset($_SESSION['signup_process'])) {
     if (fname.value == "" || mname.value == "" || lname.value == "" || email.value == "" || contact.value == "" || password.value == "" || Cpassword.value == "") {
         error_msg.innerHTML = "Please fill up the form";
         error_msg.style.display = "flex";
-        error_msg.style.position = "absolute";
 
         setTimeout(() => {
           error_msg.style.display = "none";
-          error_msg.style.position = "static";
-            }, 3000);
+            }, 2000);
 
         return false; // prevent form submission
     } else if (password.value !== Cpassword.value) {
         error_msg.innerHTML = "Passwords do not match";
         error_msg.style.display = "flex";
-        error_msg.style.position = "absolute";
 
         setTimeout(() => {
           error_msg.style.display = "none";
-          error_msg.style.position = "static";
-            }, 3000);
+            }, 2000);
 
         return false; // prevent form submission
     } else if (!passwordRegex.test(password.value)) {
         error_msg.innerHTML = "Password must be at least 8 characters long, include one uppercase letter, one lowercase letter, one digit, and one special character. e.g !@#$%^&*";
         error_msg.style.display = "flex";
-        error_msg.style.position = "absolute";
-        error_msg.style.width = "28%";
+        error_msg.style.width = "50%";
 
         setTimeout(() => {
           error_msg.style.display = "none";
-          error_msg.style.position = "static";
           error_msg.style.width = "fit-content";
-            }, 5000);
+            }, 4000);
 
+        return false; // prevent form submission
+    }  else if (!tnc.checked) {
+        tncGroup.classList.add("shake"); // Add the shake class to the group
+        setTimeout(() => {
+            tncGroup.classList.remove("shake"); // Remove the shake class after animation
+        }, 300);
         return false; // prevent form submission
     }
 
