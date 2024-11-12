@@ -31,6 +31,82 @@
 
     .overview {
       gap: 1.5rem;
+
+      .overview__header {
+        position: relative;
+        @include display-flex($gap: 1rem);
+        
+        .filter-btn {
+          svg {
+            cursor: pointer;
+
+            &:hover {
+              circle {
+                fill: hsl(0, 0%, 38%, 0.5);
+              }
+            }
+
+            &:active {
+              circle {
+                fill: var(--ntrl-clr-300);
+              }
+            }
+          }
+        }
+
+        .filter-summary {
+          width: 10rem;
+          position: absolute;
+          top: 1rem;
+          right: -10rem;
+          @include display-flex($dir: column, $y: flex-start);
+          border-radius: 1.25rem;
+          border-top-left-radius: 0;
+          border: 1px solid var(--clr-dim-gray);
+          background-color: var(--ntrl-clr-100);
+          transform-origin: top left;
+          box-shadow: -6px 6px 15px hsl(0, 0%, 38%, 0.2);
+          scale: 0;
+          transition: 200ms ease-in-out;
+
+          &.active {
+            scale: 1;
+          }
+
+          .filter-types {
+            width: 100%;
+            @include display-flex($dir: column, $y: flex-start, $gap: 0.4rem);
+            padding: 0.4rem;
+
+            & > * {
+              width: 100%;
+              @include display-flex($x: space-between);
+              padding: 0.5rem 0.8rem;
+              outline: 1px solid var(--clr-dim-gray);
+              border-radius: 1rem;
+              font-size: 1rem;
+              font-weight: 400;
+              color: var(--ntrl-clr-300);
+              letter-spacing: -1px;
+              cursor: pointer;
+
+              &:hover {
+                outline-color: hsl(0, 0%, 38%, 0.7);
+                background-color: hsl(0, 0%, 38%, 0.1);
+              }
+
+              &:active {
+                background-color: hsl(0, 0%, 38%, 0.2);
+              }
+
+              input {
+                display: none;
+              }
+            }
+          }
+        }
+      }
+
       &__content {
         width: 100%;
         @include display-flex($gap: 1rem);

@@ -54,6 +54,12 @@
 
   <div class="bottom-links">
     <ul>
+      <li <?php echo ($current_page == 'set-dates.php') ? 'class="active__link"' : ''; ?>>
+        <a href="../admin/set-dates.php">
+          Set Appointment Dates
+        </a>
+      </li>
+
       <li <?php echo ($current_page == 'new-appointment.php') ? 'class="active__link"' : ''; ?>>
         <a href="../admin/new-appointment.php">
           New appointment

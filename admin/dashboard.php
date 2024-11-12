@@ -117,6 +117,22 @@ $counts = $result->fetch_assoc();
 $walkInCount = $counts['walkInCount'] ?? 0; // Default to 0 if NULL
 $onlineCount = $counts['onlineCount'] ?? 0; // Default to 0 if NULL
 
+$filter = isset($_GET['filter']) ? $_GET['filter'] : 'today';
+$dateNow = date('Y-m-d');
+$startOfWeek = date('Y-m-d', strtotime('monday this week'));
+$startOfMonth = date('Y-m-01');
+
+// Determine the query based on the filter value
+if ($filter === 'today') {
+    $query = "SELECT * FROM appointments WHERE date = '$dateNow' AND status = 'accepted'";
+} elseif ($filter === 'weekly') {
+    $query = "SELECT * FROM appointments WHERE date BETWEEN '$startOfWeek' AND '$dateNow' AND status = 'accepted'";
+} elseif ($filter === 'monthly') {
+    $query = "SELECT * FROM appointments WHERE date BETWEEN '$startOfMonth' AND '$dateNow' AND status = 'accepted'";
+} else {
+    // Default to showing all appointments if no specific filter is applied
+    $query = "SELECT * FROM appointments WHERE status = 'accepted'";
+}
 ?>
 
 <!DOCTYPE html>
@@ -144,8 +160,35 @@ $onlineCount = $counts['onlineCount'] ?? 0; // Default to 0 if NULL
 
       <div class="cards">
         <article class="overview">
-          <h1 class="overview__title">Today's Overview</h1>
+          <div class="overview__header">
 
+            <h1 class="overview__title">Today's Overview</h1>
+              
+            <button class="filter-btn" id="filterBtn">
+              <svg width="25" height="12" viewBox="0 0 25 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <circle cx="6.66666" cy="6" r="2" fill="#616161"/>
+                <circle cx="12.6667" cy="6" r="2" fill="#616161"/>
+                <circle cx="18.6667" cy="6" r="2" fill="#616161"/>
+              </svg>
+            </button>    
+            <div class="filter-summary" id="filterSummary">
+              <div class="filter-types">
+                <label id="todayBtn">
+                  Today
+                  <input type="radio" name="filterType" value="today" onclick="scaleDownFilterSummary()" readonly/>
+                </label>
+                <label id="weeklyBtn">
+                  Weekly
+                  <input type="radio" name="filterType" value="weekly" onclick="scaleDownFilterSummary()" readonly/>
+                </label>
+                <label id="monthlyBtn">
+                  Monthly
+                  <input type="radio" name="filterType" value="monthly" onclick="scaleDownFilterSummary()" readonly/>
+                </label>
+              </div>
+            </div>
+          </div>
+          
           <div class="overview__content">
            <section class="overview__item">
             <div class="header">
@@ -181,7 +224,7 @@ $onlineCount = $counts['onlineCount'] ?? 0; // Default to 0 if NULL
                  <path d="M14.2943 19.7H14.3033" stroke="white"     stroke-width="2" stroke-linecap="round"     stroke-linejoin="round"/>
                  <path d="M14.2943 22.7H14.3033" stroke="white"     stroke-width="2" stroke-linecap="round"     stroke-linejoin="round"/>
                </svg>
-               <p class="overview__value"><?php echo $todaysAppointment; ?></p>
+               <p class="overview__value" id="todaysSchedule"><?php echo $todaysAppointment; ?></p>
              </div>
            </section>
 
@@ -198,7 +241,7 @@ $onlineCount = $counts['onlineCount'] ?? 0; // Default to 0 if NULL
               <path d="M15.7567 23.7799C14.3467 24.7199 14.3467 26.2599 15.7567 27.1999C17.3567 28.2699 19.9767 28.2699 21.5767 27.1999C22.9867 26.2599 22.9867 24.7199 21.5767 23.7799C19.9867 22.7199 17.3567 22.7199 15.7567 23.7799Z" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
               </svg>
 
-               <p class="overview__value"><?php echo $totalUsers; ?></p>
+               <p class="overview__value" id="newPatients"><?php echo $totalUsers; ?></p>
              </div>
            </section>
 
@@ -213,7 +256,7 @@ $onlineCount = $counts['onlineCount'] ?? 0; // Default to 0 if NULL
               <path d="M15.3334 21V15" stroke="white" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
               </svg>
 
-               <p class="overview__value"><?php echo $doctors ?></p>
+               <p class="overview__value" id="doctorsOnDuty"><?php echo $doctors ?></p>
              </div>
            </section>
 
@@ -485,6 +528,83 @@ $onlineCount = $counts['onlineCount'] ?? 0; // Default to 0 if NULL
     moreBtn.addEventListener('click', (e) => {
       summary.classList.toggle('active')
     })
+
+    const filterSummary = document.getElementById('filterSummary')
+    const filterBtn = document.getElementById('filterBtn')
+
+    filterBtn.addEventListener('click', (e) => {
+      filterSummary.classList.toggle('active')
+    })
+
+    // Assuming you have data objects for each filter type
+    const data = {
+      today: {
+        label: "Today's Overview",
+        scheduleLabel: "Today's Schedule",
+        walkInCount: 5,
+        onlineCount: 3,
+        totalAppointments: 8,
+        newPatients: 2,
+        doctorsOnDuty: 4
+      },
+      weekly: {
+        label: "Weekly Overview",
+        scheduleLabel: "This Week's Schedule",
+        walkInCount: 20,
+        onlineCount: 15,
+        totalAppointments: 35,
+        newPatients: 10,
+        doctorsOnDuty: 6
+      },
+      monthly: {
+        label: "Monthly Overview",
+        scheduleLabel: "This Month's Schedule",
+        walkInCount: 80,
+        onlineCount: 60,
+        totalAppointments: 140,
+        newPatients: 25,
+        doctorsOnDuty: 10
+      }
+    };
+
+    const overviewLabel = document.querySelector(".overview__header .overview__title");
+    const scheduleLabel = document.querySelector(".overview__content .overview__label");
+    const walkInCountElem = document.querySelector(".appointment-type span.appointment-count");
+    const onlineCountElem = document.querySelector(".appointment-type:nth-child(2) span.appointment-count");
+    const totalAppointmentsElem = document.querySelector(".overview__value"); 
+    const newPatientsElem = document.querySelectorAll(".overview__value")[1]; 
+    const doctorsOnDutyElem = document.querySelectorAll(".overview__value")[2]; 
+
+    function updateOverview(filterType) {
+      const filterData = data[filterType];
+      
+      overviewLabel.textContent = filterData.label;
+      scheduleLabel.textContent = filterData.scheduleLabel;
+      
+      walkInCountElem.textContent = filterData.walkInCount;
+      onlineCountElem.textContent = filterData.onlineCount;
+      
+      totalAppointmentsElem.textContent = filterData.totalAppointments;
+      newPatientsElem.textContent = filterData.newPatients;
+      doctorsOnDutyElem.textContent = filterData.doctorsOnDuty;
+    }
+
+    // Event listeners for filter buttons
+    document.getElementById("todayBtn").addEventListener("click", () => updateOverview("today"));
+    document.getElementById("weeklyBtn").addEventListener("click", () => updateOverview("weekly"));
+    document.getElementById("monthlyBtn").addEventListener("click", () => updateOverview("monthly"));
+
+    function scaleDownFilterSummary() {
+      const filterSummary = document.getElementById('filterSummary');
+      filterSummary.classList.remove('active');
+    }
+
+
+    // Optionally, add an event listener to reset scale when the filter summary container is clicked again
+    document.getElementById('filterSummary').addEventListener('click', function() {
+        scaleDownFilterSummary();  // Apply scale-down when clicked
+    });
+
 </script>
 
 </html>

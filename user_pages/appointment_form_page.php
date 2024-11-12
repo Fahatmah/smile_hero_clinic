@@ -25,6 +25,8 @@ if (isset($_SESSION['appointment_status'])) {
     }
     unset($_SESSION['appointment_status']);
 }
+
+$availableDates = ["2024-10-28", "2024-10-29", "2024-10-30", "2024-10-31", "2024-11-01"];
 ?>
 
 <!DOCTYPE html>
@@ -35,9 +37,44 @@ if (isset($_SESSION['appointment_status'])) {
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <link rel="shortcut icon" href="../assets/images/logoipsum.svg" type="image/x-icon">
   <title>Create an appointment | Smile Hero Clinic</title>
-  
+
+  <style>
+    .flatpickr-calendar {
+      font-family: 'Inter', sans-serif !important;
+      font-size: 0.68rem !important;
+      color: #616161 !important;
+      background-color: #fff !important;
+      border: 1px solid #ccc;
+      border-radius: .5rem !important;
+      overflow: hidden !important;
+    }
+
+    .flatpickr-calendar > * {
+      color: #616161 !important;
+      letter-spacing: -1px !important;
+    }
+
+    .flatpickr-day.today {
+      background-color: hsl(0, 0%, 38%, 0.6) !important;
+      color: #fff !important;
+      font-weight: 600 !important;
+    }
+
+    .flatpickr-day.selected {
+      background-color: #1D72F2 !important;
+      color: #fff !important; 
+      font-weight: 600 !important;
+    }
+
+    .flatpickr-month {
+      font-weight: 600 !important;
+      letter-spacing: -1px !important;
+    }
+  </style>
   
   <link rel="stylesheet" href="../src/dist/styles.css" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
 </head>
 
 <body class="user__page">
@@ -119,14 +156,23 @@ if (isset($_SESSION['appointment_status'])) {
           </div>
           <!-- Preferences Section -->
           <section class="appointment-form__section appointment-form__section--preferences">
-            <div class="appointment-form__field">
+            <!-- <div class="appointment-form__field">
               <label for="appointmentDate" class="appointment-form__label">Date</label>
               <select name="appointmentDate" id="appointmentDate" class="appointment-form__select"></select>
               <div class="appointment-form__validation">
                 <p class="appointment-form__text appointment-form__text--error">Error</p>
                 <p class="appointment-form__text appointment-form__text--valid">Valid</p>
               </div>
+            </div> -->
+            <div class="appointment-form__field">
+              <label for="appointmentDate" class="appointment-form__label">Date</label>
+              <input type="text" name="appointmentDate" id="appointmentDate" class="appointment-form__input" placeholder="Select a date">
+              <div class="appointment-form__validation">
+                <p class="appointment-form__text appointment-form__text--error">Error</p>
+                <p class="appointment-form__text appointment-form__text--valid">Valid</p>
+              </div>
             </div>
+
             <div class="appointment-form__field">
               <label for="appointmentTime" class="appointment-form__label">Time</label>
               <select name="appointmentTime" id="appointmentTime" class="appointment-form__select">
@@ -185,29 +231,11 @@ if (isset($_SESSION['appointment_status'])) {
             </div>
 
               
-              <div class="appointment-form__validation">
+              <!-- <div class="appointment-form__validation">
                 <p class="appointment-form__text appointment-form__text--error">Error</p>
                 <p class="appointment-form__text appointment-form__text--valid">Valid</p>
-              </div>
+              </div> -->
             </div>
-            <!-- <div class="appointment-form__field">
-              <label for="dentalService" class="appointment-form__label">Service</label>
-              <select name="dentalService" id="dentalService" class="appointment-form__select">
-                <option value="-">Select service</option>
-                <option value="cleaning">Teeth Cleaning</option>
-                <option value="whitening">Teeth Whitening</option>
-                <option value="extraction">Tooth Extraction</option>
-                <option value="filling">Dental Filling</option>
-                <option value="checkup">Routine Check-up</option>
-                <option value="braces">Braces Consultation</option>
-                <option value="root_canal">Root Canal Treatment</option>
-                <option value="implants">Dental Implants</option>
-              </select>
-              <div class="appointment-form__validation">
-                <p class="appointment-form__text appointment-form__text--error">Error</p>
-                <p class="appointment-form__text appointment-form__text--valid">Valid</p>
-              </div>
-            </div> -->
 
             <div class="appointment-form__field">
               <label for="location" class="appointment-form__label">Location</label>
@@ -279,10 +307,10 @@ if (isset($_SESSION['appointment_status'])) {
             id: 'location',
             errorMessage: 'Please select a location'
           },
-          {
-            id: 'dentalService',
-            errorMessage: 'Please select a service'
-          },
+          // {
+          //   id: 'selectedServices',
+          //   errorMessage: 'Please select a service'
+          // },
         ];
 
         let isValid = true;
@@ -307,50 +335,50 @@ if (isset($_SESSION['appointment_status'])) {
         }
       });
 
-      function generateWeekdayOptions() {
-        const today = new Date();
-        const options = [];
-        let addedDays = 0; // To count the weekdays added
+      // function generateWeekdayOptions() {
+      //   const today = new Date();
+      //   const options = [];
+      //   let addedDays = 0; // To count the weekdays added
 
-        while (options.length < 5) { // We need 5 weekdays
-          const currentDay = new Date();
-          currentDay.setDate(today.getDate() + addedDays + 1); // Increment by 1, then 2, etc.
-          const dayOfWeek = currentDay.getDay();
+      //   while (options.length < 5) { // We need 5 weekdays
+      //     const currentDay = new Date();
+      //     currentDay.setDate(today.getDate() + addedDays + 1); // Increment by 1, then 2, etc.
+      //     const dayOfWeek = currentDay.getDay();
 
-          if (dayOfWeek >= 1 && dayOfWeek <= 5) { // Only weekdays (Monday to Friday)
-            const formattedDate = currentDay.toISOString().split('T')[0]; // Format as YYYY-MM-DD
-            const weekdayName = currentDay.toLocaleString('en-US', { weekday: 'long' }); // Get the weekday name
+      //     if (dayOfWeek >= 1 && dayOfWeek <= 5) { // Only weekdays (Monday to Friday)
+      //       const formattedDate = currentDay.toISOString().split('T')[0]; // Format as YYYY-MM-DD
+      //       const weekdayName = currentDay.toLocaleString('en-US', { weekday: 'long' }); // Get the weekday name
 
-            // Combine formatted date and weekday name
-            const formattedDateWithWeekday = `${formattedDate}, ${weekdayName}`;
+      //       // Combine formatted date and weekday name
+      //       const formattedDateWithWeekday = `${formattedDate}, ${weekdayName}`;
 
-            options.push(formattedDateWithWeekday);
-          }
+      //       options.push(formattedDateWithWeekday);
+      //     }
 
-          addedDays++; // Increment days to move to the next date
-        }
+      //     addedDays++; // Increment days to move to the next date
+      //   }
 
-        // Clear existing options and add new ones
-        appointmentDateSelect.innerHTML = ''; // Clear existing options
+      //   // Clear existing options and add new ones
+      //   appointmentDateSelect.innerHTML = ''; // Clear existing options
 
-        // Add the placeholder option
-        const placeholderOption = document.createElement('option');
-        placeholderOption.value = '';
-        placeholderOption.textContent = 'Select date';
-        placeholderOption.disabled = true; // Make it unselectable
-        placeholderOption.selected = true; // Make it the default selected option
-        appointmentDateSelect.appendChild(placeholderOption);
+      //   // Add the placeholder option
+      //   const placeholderOption = document.createElement('option');
+      //   placeholderOption.value = '';
+      //   placeholderOption.textContent = 'Select date';
+      //   placeholderOption.disabled = true; // Make it unselectable
+      //   placeholderOption.selected = true; // Make it the default selected option
+      //   appointmentDateSelect.appendChild(placeholderOption);
 
-        // Add generated date options
-        options.forEach((date) => {
-          const option = document.createElement('option');
-          option.value = date;
-          option.textContent = date;
-          appointmentDateSelect.appendChild(option);
-        });
-      }
+      //   // Add generated date options
+      //   options.forEach((date) => {
+      //     const option = document.createElement('option');
+      //     option.value = date;
+      //     option.textContent = date;
+      //     appointmentDateSelect.appendChild(option);
+      //   });
+      // }
 
-      generateWeekdayOptions();
+      // generateWeekdayOptions();
     });
 
     function getCurrentDateTime() {
@@ -420,6 +448,18 @@ if (isset($_SESSION['appointment_status'])) {
       </ul>
       `
     }
+
+    // Pass PHP data to JavaScript
+    const availableDates = <?php echo json_encode($availableDates); ?>;
+
+    // Initialize Flatpickr
+    document.addEventListener("DOMContentLoaded", function() {
+      flatpickr("#appointmentDate", {
+        dateFormat: "Y-m-d",
+        enable: availableDates
+      });
+      
+    });
   </script>
 </body>
 

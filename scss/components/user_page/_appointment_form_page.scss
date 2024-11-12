@@ -64,7 +64,7 @@
             font-weight: 600;
             color: var(--ntrl-clr-300);
           }
-          
+
           ul {
             @include display-flex($gap: 0.5rem, $x: flex-start);
             flex-wrap: wrap;
