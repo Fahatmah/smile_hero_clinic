@@ -12,7 +12,7 @@ if ($_SERVER['REQUEST_METHOD'] === "POST" && isset($_SESSION['user_id'])) {
     $appointmentDate = $_POST['appointmentDate'];
     $appointmentTime = $_POST['appointmentTime'];
     $location = $_POST['location'];
-    $dentalService = $_POST['dentalService'];
+    $dentalService = implode(', ', $_POST['dentalService']);
     $status = 'request';
 
     require_once("dbh.inc.php");

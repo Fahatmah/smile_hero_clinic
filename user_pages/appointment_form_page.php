@@ -2,7 +2,7 @@
 require_once '../includes/config_session.inc.php';
 require_once '../includes/login_view.inc.php';
 require_once '../includes/appointment_view.inc.php';
-
+require_once '../includes/dbh.inc.php';
 
 if(!isset($_SESSION['user_id'])) {
   // Redirect user to login if not logged in
@@ -26,7 +26,23 @@ if (isset($_SESSION['appointment_status'])) {
     unset($_SESSION['appointment_status']);
 }
 
-$availableDates = ["2024-10-28", "2024-10-29", "2024-10-30", "2024-10-31", "2024-11-01"];
+$query = "SELECT available_dates FROM appointment_dates WHERE available_dates >= CURDATE()";
+$result = $conn->query($query);
+
+$availableDates = [];
+while ($row = $result->fetch_assoc()) {
+    $availableDates[] = $row['available_dates'];
+}
+
+// Fetch dates with 5 or more appointments
+$disabledDatesQuery = "SELECT date FROM appointments GROUP BY date HAVING COUNT(*) >= 20 ";
+$disabledDatesResult = $conn->query($disabledDatesQuery);
+
+$disabledDates = [];
+while ($row = $disabledDatesResult->fetch_assoc()) {
+    $disabledDates[] = $row['date'];
+}
+
 ?>
 
 <!DOCTYPE html>
@@ -69,6 +85,13 @@ $availableDates = ["2024-10-28", "2024-10-29", "2024-10-30", "2024-10-31", "2024
     .flatpickr-month {
       font-weight: 600 !important;
       letter-spacing: -1px !important;
+    }
+
+    .flatpickr-day.disabled {
+      background-color: 	hsla(216, 89%, 53%, 0.5);
+        color: white !important;
+        pointer-events: none;
+        cursor: progress;
     }
   </style>
   
@@ -197,35 +220,35 @@ $availableDates = ["2024-10-28", "2024-10-29", "2024-10-30", "2024-10-31", "2024
               <div class="selected-services" id="selectedServices"></div>
               <div class="appointment-form__checkbox-group">
                 <div class="checkbox-container">
-                    <input type="checkbox" id="cleaning" name="dentalService" value="teeth cleaning  ₱2,800">
+                    <input type="checkbox" id="cleaning" name="dentalService[]" value="teeth cleaning  ₱2,800">
                     <label for="cleaning">Teeth Cleaning <span class="service-price">₱2,800</span></label>
                 </div>
                 <div class="checkbox-container">
-                    <input type="checkbox" id="whitening" name="dentalService" value="teeth whitening  ₱8,400">
+                    <input type="checkbox" id="whitening" name="dentalService[]" value="teeth whitening  ₱8,400">
                     <label for="whitening">Teeth Whitening <span class="service-price">₱8,400</span></label>
                 </div>
                 <div class="checkbox-container">
-                    <input type="checkbox" id="extraction" name="dentalService" value="tooth extraction  ₱4,200">
+                    <input type="checkbox" id="extraction" name="dentalService[]" value="tooth extraction  ₱4,200">
                     <label for="extraction">Tooth Extraction <span class="service-price">₱4,200</span></label>
                 </div>
                 <div class="checkbox-container">
-                    <input type="checkbox" id="filling" name="dentalService" value="dental filling  ₱6,700">
+                    <input type="checkbox" id="filling" name="dentalService[]" value="dental filling  ₱6,700">
                     <label for="filling">Dental Filling <span class="service-price">₱6,700</span></label>
                 </div>
                 <div class="checkbox-container">
-                    <input type="checkbox" id="checkup" name="dentalService" value="routine checkup-up ₱2,200">
+                    <input type="checkbox" id="checkup" name="dentalService[]" value="routine checkup-up ₱2,200">
                     <label for="checkup">Routine Check-up <span class="service-price">₱2,200</span></label>
                 </div>
                 <div class="checkbox-container">
-                    <input type="checkbox" id="braces" name="dentalService" value="braces consultation  ₱5,600">
+                    <input type="checkbox" id="braces" name="dentalService[]" value="braces consultation  ₱5,600">
                     <label for="braces">Braces Consultation <span class="service-price">₱5,600</span></label>
                 </div>
                 <div class="checkbox-container">
-                    <input type="checkbox" id="root_canal" name="dentalService" value="root canal treatment ₱16,800">
+                    <input type="checkbox" id="root_canal" name="dentalService[]" value="root canal treatment ₱16,800">
                     <label for="root_canal">Root Canal Treatment <span class="service-price">₱16,800</span></label>
                 </div>
                 <div class="checkbox-container">
-                    <input type="checkbox" id="implants" name="dentalService" value="dental implants  ₱56,000">
+                    <input type="checkbox" id="implants" name="dentalService[]" value="dental implants  ₱56,000">
                     <label for="implants">Dental Implants <span class="service-price">₱56,000</span></label>
                 </div>
             </div>
@@ -449,17 +472,28 @@ $availableDates = ["2024-10-28", "2024-10-29", "2024-10-30", "2024-10-31", "2024
       `
     }
 
-    // Pass PHP data to JavaScript
-    const availableDates = <?php echo json_encode($availableDates); ?>;
+  // Pass PHP array to JavaScript
+  const availableDates = <?php echo json_encode($availableDates); ?>;
+const disabledDates = <?php echo json_encode($disabledDates); ?>;
 
-    // Initialize Flatpickr
-    document.addEventListener("DOMContentLoaded", function() {
-      flatpickr("#appointmentDate", {
+document.addEventListener('DOMContentLoaded', function() {
+    flatpickr("#appointmentDate", {
         dateFormat: "Y-m-d",
-        enable: availableDates
-      });
-      
+        minDate: "today",
+        enable: availableDates,  // Enable only available dates
+        onDayCreate: function(dObj, dStr, fp, dayElem) {
+            // Disable the days that are in the disabledDates array
+            const date = dayElem.dateObj.toISOString().split('T')[0]; // Get the date in 'Y-m-d' format
+
+            if (disabledDates.includes(date)) {
+                dayElem.classList.add('disabled'); // Add 'disabled' class to disable the date
+                dayElem.setAttribute('aria-disabled', 'true'); // Add aria-disabled for accessibility
+                dayElem.style.pointerEvents = 'none'; // Prevent interaction
+            }
+        }
     });
+});
+
   </script>
 </body>
 

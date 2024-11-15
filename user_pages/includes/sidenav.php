@@ -1,6 +1,25 @@
 <?php
-// require_once '../includes/config_session.inc.php';
-// require_once '../includes/login_view.inc.php';
+require_once '../includes/config_session.inc.php';
+require_once '../includes/dbh.inc.php';
+
+
+$userid = $_SESSION['user_id'];
+$status = "accepted";
+
+// Prepare and execute query to check appointments
+$qry = "SELECT * FROM appointments WHERE user_id = ?";
+$stmts = $conn->prepare($qry);
+
+if ($stmts) {  // Check if prepare was successful
+    $stmts->bind_param("s", $userid);
+    $stmts->execute();
+    $qryRes = $stmts->get_result();
+    $hasAppointments = ($qryRes->num_rows > 0);
+    $qryRes->free();  // Free the result set
+    $stmts->close();  // Close the prepared statement
+} else {
+    $hasAppointments = false; // Fallback if query fails
+}
 
 // Function to resolve the correct path
 // function require_with_fallback($relativePath1, $relativePath2) {
@@ -56,12 +75,14 @@
           alt="" style="width: 1.375rem; height: 1.375rem" />FAQs &
         Questions</a>
     </li>
-    <li <?php echo ($current_page == 'feedback.php') ? 'class="active__link"' : ''; ?>>
-      <a href="../user_pages/feedback.php">
-        <img
-          src="../assets/icons/user_account/<?php echo ($current_page == 'feedback.php') ? 'feedback-icon-active.png' : 'feedback.png'; ?>"
-          alt="" style="width: 1.375rem; height: 1.375rem" />Feedback</a>
+
+    <li <?php echo ($current_page == 'feedback.php') ? 'class="active__link"' : ''; ?> style="display: <?php echo ($hasAppointments ? 'block' : 'none'); ?>;">
+        <a href="../user_pages/feedback.php">
+            <img src="../assets/icons/user_account/<?php echo ($current_page == 'feedback.php') ? 'feedback-icon-active.png' : 'feedback.png'; ?>" 
+              alt="" style="width: 1.375rem; height: 1.375rem" />Feedback
+        </a>
     </li>
+
   </ul>
   <button id="logout_button" <?php echo ($current_page == '../includes/logout.php') ? 'class="active__link"' : ''; ?>><a
         href="../includes/logout.php" class="logout__button">Logout</a></button>

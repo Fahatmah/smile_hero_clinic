@@ -101,9 +101,6 @@ if($result->num_rows > 0){
   }
 }
 
-// Get today's date in the correct format
-$dateNow = date('Y-m-d, l');
-
 // Count the number of walk-in and online appointments for today
 $query = "SELECT 
             SUM(CASE WHEN label = 'walk-in' THEN 1 ELSE 0 END) as walkInCount,
@@ -121,18 +118,6 @@ $filter = isset($_GET['filter']) ? $_GET['filter'] : 'today';
 $dateNow = date('Y-m-d');
 $startOfWeek = date('Y-m-d', strtotime('monday this week'));
 $startOfMonth = date('Y-m-01');
-
-// Determine the query based on the filter value
-if ($filter === 'today') {
-    $query = "SELECT * FROM appointments WHERE date = '$dateNow' AND status = 'accepted'";
-} elseif ($filter === 'weekly') {
-    $query = "SELECT * FROM appointments WHERE date BETWEEN '$startOfWeek' AND '$dateNow' AND status = 'accepted'";
-} elseif ($filter === 'monthly') {
-    $query = "SELECT * FROM appointments WHERE date BETWEEN '$startOfMonth' AND '$dateNow' AND status = 'accepted'";
-} else {
-    // Default to showing all appointments if no specific filter is applied
-    $query = "SELECT * FROM appointments WHERE status = 'accepted'";
-}
 ?>
 
 <!DOCTYPE html>
@@ -229,7 +214,7 @@ if ($filter === 'today') {
            </section>
 
            <section class="overview__item">
-             <p class="overview__label">New Patients</p>
+             <p class="overview__label">Total Patients</p>
              <div class="overview__icon-wrapper">
                <svg width="37" height="36" viewBox="0 0 37 36" fill="none" xmlns="http://www.w3.org/2000/svg">
               <rect x="0.666656" width="36" height="36" rx="18" fill="#E84531"/>
@@ -536,36 +521,68 @@ if ($filter === 'today') {
       filterSummary.classList.toggle('active')
     })
 
+    // Function to fetch data based on selected period (today, weekly, or monthly)
+  function fetchData(period) {
+    fetch(`includes/get_appointments_data.php?period=${period}`)
+      .then(response => response.json())
+      .then(dataFromDB => {
+        if (period === 'today') {
+          data.today = dataFromDB;
+        } else if (period === 'weekly') {
+          data.weekly = dataFromDB;
+        } else if (period === 'monthly') {
+          data.monthly = dataFromDB;
+        }
+
+        // Update the UI with the new data (this will depend on your HTML structure)
+        updateDashboard(period);
+      })
+      .catch(error => console.error('Error fetching data:', error));
+    }
+
     // Assuming you have data objects for each filter type
     const data = {
       today: {
         label: "Today's Overview",
         scheduleLabel: "Today's Schedule",
-        walkInCount: 5,
-        onlineCount: 3,
-        totalAppointments: 8,
-        newPatients: 2,
-        doctorsOnDuty: 4
+        walkInCount: 0,
+        onlineCount: 0,
+        totalAppointments: 0,
+        newPatients: 0,
+        doctorsOnDuty: 0
       },
       weekly: {
         label: "Weekly Overview",
         scheduleLabel: "This Week's Schedule",
-        walkInCount: 20,
-        onlineCount: 15,
-        totalAppointments: 35,
-        newPatients: 10,
-        doctorsOnDuty: 6
+        walkInCount: 0,
+        onlineCount: 0,
+        totalAppointments: 0,
+        newPatients: 0,
+        doctorsOnDuty: 0
       },
       monthly: {
         label: "Monthly Overview",
         scheduleLabel: "This Month's Schedule",
-        walkInCount: 80,
-        onlineCount: 60,
-        totalAppointments: 140,
-        newPatients: 25,
-        doctorsOnDuty: 10
+        walkInCount: 0,
+        onlineCount: 0,
+        totalAppointments: 0,
+        newPatients: 0,
+        doctorsOnDuty: 0
       }
     };
+
+    // Event listener for radio button changes
+    document.querySelectorAll('input[name="filterType"]').forEach(button => {
+      button.addEventListener('change', function() {
+        fetchData(this.value);
+      });
+    });
+
+    // Initial data fetch
+    fetchData('today');
+    fetchData('weekly');
+    fetchData('monthly');
+
 
     const overviewLabel = document.querySelector(".overview__header .overview__title");
     const scheduleLabel = document.querySelector(".overview__content .overview__label");
