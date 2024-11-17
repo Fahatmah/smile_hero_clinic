@@ -17,7 +17,21 @@ if ($_SERVER['REQUEST_METHOD'] === "POST" && isset($_SESSION['user_id'])) {
 
     require_once("dbh.inc.php");
     require_once("appointment_model.inc.php");
+    
 
+    if (isDateReachedLimit($conn, $appointmentDate)) {
+        $_SESSION['date_limit'] = 'invalid';
+        $_SESSION['selectAppointmentDate'] = $appointmentDate;
+        header("Location: ../user_pages/appointment_form_page.php");
+        die();
+    }
+
+    if (isTimeReachedLimit($conn, $appointmentDate, $appointmentTime)) {
+        $_SESSION['time_limit'] = 'invalid';
+        header("Location: ../user_pages/appointment_form_page.php");
+        die();
+    }
+    
     $appointmentId = generateAppoinmentID($conn);
 
     if (haveAppointment($conn, $name)) {

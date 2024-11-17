@@ -12,25 +12,25 @@ $response = [];
 // SQL queries for different periods
 if ($period == 'today') {
     $sql = "SELECT 
-            (SELECT COUNT(*) FROM appointments WHERE label = 'walk-in' AND DATE(created_at) = NOW()) AS walkInCount,
-            (SELECT COUNT(*) FROM appointments WHERE label != 'walk-in' AND DATE(created_at) = NOW()) AS onlineCount,
-            (SELECT COUNT(*) FROM appointments WHERE DATE(created_at) = NOW()) AS totalAppointments,
-            (SELECT COUNT(*) FROM users WHERE DATE(created_at) = NOW()) AS newPatients,
-            (SELECT COUNT(*) FROM doctors WHERE DATE(created_at) = NOW()) AS doctorsOnDuty";
+            (SELECT COUNT(*) FROM appointments WHERE label = 'walk-in' AND DATE(date) = CURDATE()) AS walkInCount,
+            (SELECT COUNT(*) FROM appointments WHERE label != 'walk-in' AND DATE(date) = CURDATE()) AS onlineCount,
+            (SELECT COUNT(*) FROM appointments WHERE DATE(date) = CURDATE()) AS totalAppointments,
+            (SELECT COUNT(*) FROM users WHERE created_at = CURDATE()) AS newPatients,
+            (SELECT COUNT(*) FROM doctors WHERE created_at = CURDATE()) AS doctorsOnDuty";
 } elseif ($period == 'weekly') {
     $sql = "SELECT 
-            (SELECT COUNT(*) FROM appointments WHERE label = 'walk-in' AND WEEK(created_at) = WEEK(NOW())) AS walkInCount,
-            (SELECT COUNT(*) FROM appointments WHERE label != 'walk-in' AND WEEK(created_at) = WEEK(NOW())) AS onlineCount,
-            (SELECT COUNT(*) FROM appointments WHERE WEEK(created_at) = WEEK(NOW())) AS totalAppointments,
-            (SELECT COUNT(*) FROM users WHERE WEEK(created_at) = WEEK(NOW())) AS newPatients,
-            (SELECT COUNT(*) FROM doctors WHERE WEEK(created_at) = WEEK(NOW())) AS doctorsOnDuty;";
+            (SELECT COUNT(*) FROM appointments WHERE label = 'walk-in' AND WEEK(date) = WEEK(CURDATE())) AS walkInCount,
+            (SELECT COUNT(*) FROM appointments WHERE label != 'walk-in' AND WEEK(date) = WEEK(CURDATE())) AS onlineCount,
+            (SELECT COUNT(*) FROM appointments WHERE WEEK(date) = WEEK(CURDATE())) AS totalAppointments,
+            (SELECT COUNT(*) FROM users WHERE WEEK(created_at) = WEEK(CURDATE())) AS newPatients,
+            (SELECT COUNT(*) FROM doctors WHERE WEEK(created_at) = WEEK(CURDATE())) AS doctorsOnDuty;";
 } elseif ($period == 'monthly') {
     $sql = "SELECT
-            (SELECT COUNT(*) FROM appointments WHERE label = 'walk-in' AND MONTH(created_at) = MONTH(NOW())) AS walkInCount,
-            (SELECT COUNT(*) FROM appointments WHERE label != 'walk-in' AND MONTH(created_at) = MONTH(NOW())) AS onlineCount,
-            (SELECT COUNT(*) FROM appointments WHERE MONTH(created_at) = MONTH(NOW())) AS totalAppointments,
-            (SELECT COUNT(*) FROM users WHERE MONTH(created_at) = MONTH(NOW())) AS newPatients,
-            (SELECT COUNT(*) FROM doctors WHERE MONTH(created_at) = MONTH(NOW())) AS doctorsOnDuty";
+            (SELECT COUNT(*) FROM appointments WHERE label = 'walk-in' AND MONTH(date) = MONTH(CURDATE())) AS walkInCount,
+            (SELECT COUNT(*) FROM appointments WHERE label != 'walk-in' AND MONTH(date) = MONTH(CURDATE())) AS onlineCount,
+            (SELECT COUNT(*) FROM appointments WHERE MONTH(date) = MONTH(CURDATE())) AS totalAppointments,
+            (SELECT COUNT(*) FROM users WHERE MONTH(created_at) = MONTH(CURDATE())) AS newPatients,
+            (SELECT COUNT(*) FROM doctors WHERE MONTH(created_at) = MONTH(CURDATE())) AS doctorsOnDuty";
 } else {
     $response['error'] = 'Invalid period';
     echo json_encode($response);

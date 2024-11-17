@@ -9,6 +9,10 @@ if (!isset($_SESSION['adminID'])) {
   exit();
 }
 
+// Delete dates older than the current date
+$deleteQuery = "DELETE FROM appointment_dates WHERE available_dates < CURDATE()";
+$conn->query($deleteQuery);
+
 $query = "SELECT available_dates FROM appointment_dates WHERE available_dates >= CURDATE()";
 $result = $conn->query($query);
 

@@ -36,3 +36,31 @@ function createAppointment(mysqli $conn, string $user_id, string $appointmentId,
 
     return $stmt->affected_rows > 0;
 }
+
+function isTimeReachedLimit(mysqli $conn, string $appointmentDate, string $appointmentTime){
+    $query = "SELECT COUNT(*) as timeLimit FROM appointments WHERE date = ? AND time = ?";
+
+    $stmt = $conn->prepare($query);
+    $stmt->bind_param("ss", $appointmentDate, $appointmentTime);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    $row = $result->fetch_assoc();
+
+    $timeLimit = (int) $row['timeLimit'];
+
+    return $timeLimit >= 5;
+}
+
+function isDateReachedLimit(mysqli $conn, string $appointmentDate){
+    $query = "SELECT COUNT(*) as dateLimit FROM appointments WHERE date = ?";
+
+    $stmt = $conn->prepare($query);
+    $stmt->bind_param("s", $appointmentDate);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    $row = $result->fetch_assoc();
+
+    $dateLimit = (int) $row['dateLimit'];
+
+    return $dateLimit >= 40;
+}

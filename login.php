@@ -19,10 +19,8 @@ require_once 'includes/login_view.inc.php';
   <link rel="stylesheet" href="src/dist/styles.css" />
   <style>
  .error_container {
-    position: absolute;
     display: flex;
     justify-content: center;
-    bottom: -1.5em;
     column-gap: 3px;
     width: 100%;
   }
@@ -30,10 +28,6 @@ require_once 'includes/login_view.inc.php';
   .form_error {
     color: red;
     font-size: .75rem;
-  }
-
-  .error_handler {
-    position: relative;
   }
   </style>
 </head>
@@ -54,13 +48,14 @@ require_once 'includes/login_view.inc.php';
             <label for="email">Email</label>
           </div>
           <div class="field error_handler">
-            <input type="password" placeholder="********" id="password" name="password" required />
-            <label for="password">Password</label>
 
-              <div class="error_container">
+          <div class="error_container">
                 <?php //classs name of text is form_error
                   checkLoginErrors();?>
               </div>
+
+            <input type="password" placeholder="********" id="password" name="password" required />
+            <label for="password">Password</label>
           </div>
         </div>
 

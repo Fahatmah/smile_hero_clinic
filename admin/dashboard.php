@@ -40,7 +40,7 @@ if ($result->num_rows > 0) {
 $dateNow = date('Y-m-d, l');
 
 
-$query  = "SELECT * FROM appointments WHERE status = 'accepted' AND date > '$dateNow' ORDER BY time DESC LIMIT 3";
+$query  = "SELECT * FROM appointments WHERE status = 'accepted' AND date > CURDATE() ORDER BY time DESC LIMIT 3";
 $result = $conn->query($query);
 $users = [];
 if ($result->num_rows > 0) {
@@ -49,7 +49,7 @@ if ($result->num_rows > 0) {
   }
 }
 
-$query  = "SELECT * FROM appointments WHERE status = 'accepted' AND date > '$dateNow'";
+$query  = "SELECT * FROM appointments WHERE status = 'accepted' AND date > CURDATE()";
 $result = $conn->query($query);
 $totalAppointments = 0;
 if ($result->num_rows > 0) {
@@ -58,7 +58,7 @@ if ($result->num_rows > 0) {
   }
 }
 
-$query  = "SELECT * FROM appointments WHERE date = '$dateNow' AND status = 'accepted'";
+$query  = "SELECT * FROM appointments WHERE date = CURDATE() AND status = 'accepted'";
 $result = $conn->query($query);
 $todaysAppointment = 0;
 if ($result->num_rows > 0) {
@@ -259,7 +259,7 @@ $startOfMonth = date('Y-m-01');
                  <?php }else{ echo $totalAppointments; }?>
                 </span></p>
                 <button type="button">
-                  <a href="#">
+                  <a href="appointments.php">
                     See all 
                     <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
                       <path d="M9.62 3.95337L13.6667 8.00004L9.62 12.0467" stroke="#616161" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>

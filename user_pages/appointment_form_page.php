@@ -13,17 +13,36 @@ if(!isset($_SESSION['user_id'])) {
 $showModal = false;
 $modalStatus = '';
 $modalMessage = '';
+$modalMessage1 = '';
 if (isset($_SESSION['appointment_status'])) {
     if ($_SESSION['appointment_status'] === 'created') {
         $showModal = true;
-        $modalStatus = 'Appointment has been requested.';
-        $modalMessage = '*Wait for our email for the confirmation of your appointment.*';
+        $modalStatus = 'Your appointment request has been successfully submitted.';
+        $modalMessage1 = '*Please allow 3 to 4 hours for processing and confirmation.*';
+        $modalMessage = '*Kindly await an email notification for the confirmation of your appointment.*';
     } elseif ($_SESSION['appointment_status'] === 'exists') {
         $showModal = true;
-        $modalStatus = 'You already requested an appointment.';
-        $modalMessage = '*Please wait for our email for confirmation*';
+        $modalStatus = 'You already submitted an appointment.';
+        $modalMessage1 = '*Please wait for processing and confirmation.*';
+        $modalMessage = '*Kindly await an email notification for the confirmation of your appointment.*';
     }
     unset($_SESSION['appointment_status']);
+}
+
+$TimeMessageError = '';
+if (isset($_SESSION['time_limit'])) {
+    if ($_SESSION['time_limit'] === 'invalid') { 
+        $TimeMessageError = 'Sorry, the selected time on your selected date is fully booked.';
+    }
+    unset($_SESSION['time_limit']);
+}
+
+$DateMessageError = '';
+if (isset($_SESSION['date_limit'])) {
+    if ($_SESSION['date_limit'] === 'invalid') { 
+        $DateMessageError = 'Sorry, the selected time is fully booked.';
+    }
+    unset($_SESSION['date_limit']);
 }
 
 $query = "SELECT available_dates FROM appointment_dates WHERE available_dates >= CURDATE()";
@@ -34,14 +53,14 @@ while ($row = $result->fetch_assoc()) {
     $availableDates[] = $row['available_dates'];
 }
 
-// Fetch dates with 5 or more appointments
-$disabledDatesQuery = "SELECT date FROM appointments GROUP BY date HAVING COUNT(*) >= 20 ";
-$disabledDatesResult = $conn->query($disabledDatesQuery);
+// Fetch dates with 20 or more appointments
+// $disabledDatesQuery = "SELECT date FROM appointments GROUP BY date HAVING COUNT(*) >= 20 ";
+// $disabledDatesResult = $conn->query($disabledDatesQuery);
 
-$disabledDates = [];
-while ($row = $disabledDatesResult->fetch_assoc()) {
-    $disabledDates[] = $row['date'];
-}
+// $disabledDates = [];
+// while ($row = $disabledDatesResult->fetch_assoc()) {
+//     $disabledDates[] = $row['date'];
+// }
 
 ?>
 
@@ -55,6 +74,11 @@ while ($row = $disabledDatesResult->fetch_assoc()) {
   <title>Create an appointment | Smile Hero Clinic</title>
 
   <style>
+    .time_error{
+      color: red;
+      font-size: 0.875rem;
+    }
+
     .flatpickr-calendar {
       font-family: 'Inter', sans-serif !important;
       font-size: 0.68rem !important;
@@ -129,7 +153,7 @@ while ($row = $disabledDatesResult->fetch_assoc()) {
 
       <!-- appointment form -->
       <div class="appointment_form">
-        <h1>Schedule fresh meeting</h1>
+        <h1>Schedule fresh meeting</h1> 
 
         <form action="../includes/appointment.inc.php" method="post" id="appointmentForm">
           <!-- Personal Details Section -->
@@ -168,10 +192,11 @@ while ($row = $disabledDatesResult->fetch_assoc()) {
             </div>
           </section> 
           <!-- Modal -->
-          <div class="modal" style="display: none">
+          <div class="modal" style="display: none; z-index: 1;">
             <div class="modal__content">
               <div class="modal__header">
                 <h3 id="modalStatus" class="modal__status"></h3>
+                <p id="modalMessage1" class="modal__message"></p>
                 <p id="modalMessage" class="modal__message"></p>
               </div>
               <button type="button" id="exitButton" class="modal__button">Okay, got it!</button>
@@ -189,11 +214,13 @@ while ($row = $disabledDatesResult->fetch_assoc()) {
             </div> -->
             <div class="appointment-form__field">
               <label for="appointmentDate" class="appointment-form__label">Date</label>
-              <input type="text" name="appointmentDate" id="appointmentDate" class="appointment-form__input" placeholder="Select a date">
+              <input type="text" name="appointmentDate" id="appointmentDate" class="appointment-form__input" placeholder="Select a date" 
+                      value="<?php echo (isset( $_SESSION['selectAppointmentDate']) ? $_SESSION['selectAppointmentDate'] : ''); ?>">
               <div class="appointment-form__validation">
                 <p class="appointment-form__text appointment-form__text--error">Error</p>
                 <p class="appointment-form__text appointment-form__text--valid">Valid</p>
               </div>
+              <p class="time_error"><?php echo $DateMessageError ?></p>
             </div>
 
             <div class="appointment-form__field">
@@ -213,6 +240,7 @@ while ($row = $disabledDatesResult->fetch_assoc()) {
                 <p class="appointment-form__text appointment-form__text--error">Error</p>
                 <p class="appointment-form__text appointment-form__text--valid">Valid</p>
               </div>
+              <p class="time_error"><?php echo $TimeMessageError ?></p>
             </div>
             <div class="appointment-form__field">
               <label class="appointment-form__label">Service</label>
@@ -288,12 +316,14 @@ while ($row = $disabledDatesResult->fetch_assoc()) {
       const modalContainer = document.querySelector(".modal");
       const exitBtn = modalContainer.querySelector("#exitButton");
       const modalStatus = modalContainer.querySelector("#modalStatus");
+      const modalMessage1 = modalContainer.querySelector("#modalMessage1");
       const modalMessage = modalContainer.querySelector("#modalMessage");
       const appointmentDateSelect = document.getElementById('appointmentDate');
 
       // Check if the modal should be displayed
       <?php if ($showModal) : ?>
       modalStatus.innerText = "<?php echo $modalStatus; ?>";
+      modalMessage1.innerText = "<?php echo $modalMessage1; ?>";
       modalMessage.innerText = "<?php echo $modalMessage; ?>";
       modalContainer.style.display = "flex";
       modalContainer.style.transform = "scale(1)";
@@ -474,25 +504,35 @@ while ($row = $disabledDatesResult->fetch_assoc()) {
 
   // Pass PHP array to JavaScript
   const availableDates = <?php echo json_encode($availableDates); ?>;
-const disabledDates = <?php echo json_encode($disabledDates); ?>;
+  // const disabledDates = <?php 
+  // echo json_encode($disabledDates)
+  ; ?>;
 
-document.addEventListener('DOMContentLoaded', function() {
-    flatpickr("#appointmentDate", {
-        dateFormat: "Y-m-d",
-        minDate: "today",
-        enable: availableDates,  // Enable only available dates
-        onDayCreate: function(dObj, dStr, fp, dayElem) {
-            // Disable the days that are in the disabledDates array
-            const date = dayElem.dateObj.toISOString().split('T')[0]; // Get the date in 'Y-m-d' format
+  document.addEventListener('DOMContentLoaded', function() {
+      flatpickr("#appointmentDate", {
+          dateFormat: "Y-m-d",
+          minDate: "today",
+          enable: availableDates,
+      });
+  });
 
-            if (disabledDates.includes(date)) {
-                dayElem.classList.add('disabled'); // Add 'disabled' class to disable the date
-                dayElem.setAttribute('aria-disabled', 'true'); // Add aria-disabled for accessibility
-                dayElem.style.pointerEvents = 'none'; // Prevent interaction
-            }
-        }
-    });
-});
+  // document.addEventListener('DOMContentLoaded', function() {
+  //     flatpickr("#appointmentDate", {
+  //         dateFormat: "Y-m-d",
+  //         minDate: "today",
+  //         enable: availableDates,  // Enable only available dates
+  //         onDayCreate: function(dObj, dStr, fp, dayElem) {
+  //             // Disable the days that are in the disabledDates array
+  //             const date = dayElem.dateObj.toISOString().split('T')[0]; // Get the date in 'Y-m-d' format
+
+  //             if (disabledDates.includes(date)) {
+  //                 dayElem.classList.add('disabled'); // Add 'disabled' class to disable the date
+  //                 dayElem.setAttribute('aria-disabled', 'true'); // Add aria-disabled for accessibility
+  //                 dayElem.style.pointerEvents = 'none'; // Prevent interaction
+  //             }
+  //         }
+  //     });
+  // });
 
   </script>
 </body>
