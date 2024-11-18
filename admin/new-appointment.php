@@ -21,6 +21,8 @@ if (isset($_SESSION['appointment_status'])) {
     }
     unset($_SESSION['appointment_status']);
 }
+
+$availableDates = ["2024-11-20", "2024-11-21", "2024-11-22", "2024-11-25", "2024-11-19"];
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -33,7 +35,56 @@ if (isset($_SESSION['appointment_status'])) {
       type="image/x-icon"
     />
     <title>Create Appointment | Admin</title>
+
+    <style>
+      .time_error{
+        color: red;
+        font-size: 0.875rem;
+      }
+
+      .flatpickr-calendar {
+        font-family: 'Inter', sans-serif !important;
+        font-size: 0.68rem !important;
+        color: #616161 !important;
+        background-color: #fff !important;
+        border: 1px solid #ccc;
+        border-radius: .5rem !important;
+        overflow: hidden !important;
+      }
+
+      .flatpickr-calendar > * {
+        color: #616161 !important;
+        letter-spacing: -1px !important;
+      }
+
+      .flatpickr-day.today {
+        background-color: hsl(0, 0%, 38%, 0.6) !important;
+        color: #fff !important;
+        font-weight: 600 !important;
+      }
+
+      .flatpickr-day.selected {
+        background-color: #1D72F2 !important;
+        color: #fff !important; 
+        font-weight: 600 !important;
+      }
+
+      .flatpickr-month {
+        font-weight: 600 !important;
+        letter-spacing: -1px !important;
+      }
+
+      .flatpickr-day.disabled {
+        background-color: 	hsla(216, 89%, 53%, 0.5);
+          color: white !important;
+          pointer-events: none;
+          cursor: progress;
+      }
+    </style>
+
     <link rel="stylesheet" href="../src/dist/styles.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
   </head>
   <body class="admin__page">
     <main class="admin__main">
@@ -223,11 +274,7 @@ if (isset($_SESSION['appointment_status'])) {
             >
               <div class="appointment-form__field">
                 <label for="appointmentDate" class="appointment-form__label">Date</label>
-                <select
-                  name="appointmentDate"
-                  id="appointmentDate"
-                  class="appointment-form__select"
-                ></select>
+                <input type="text" name="appointmentDate" id="appointmentDate" class="appointment-form__input" placeholder="Select a date">
                 <div class="appointment-form__validation">
                   <p class="appointment-form__text appointment-form__text--error">Error</p>
                   <p class="appointment-form__text appointment-form__text--valid">Valid</p>
@@ -248,7 +295,6 @@ if (isset($_SESSION['appointment_status'])) {
                   <option value="2:00 PM">02:00 PM</option>
                   <option value="3:00 PM">03:00 PM</option>
                   <option value="4:00 PM">04:00 PM</option>
-                  http://localhost/smile_hero_clinic/user_pages/appointment_form_page.php
                   <option value="5:00 PM">05:00 PM</option>
                 </select>
                 <div class="appointment-form__validation">
@@ -257,22 +303,45 @@ if (isset($_SESSION['appointment_status'])) {
                 </div>
               </div>
               <div class="appointment-form__field">
-                <label for="dentalService" class="appointment-form__label">Service</label>
-                <select name="dentalService" id="dentalService" class="appointment-form__select">
-                  <option value="-">Select service</option>
-                  <option value="cleaning">Teeth Cleaning</option>
-                  <option value="whitening">Teeth Whitening</option>
-                  <option value="extraction">Tooth Extraction</option>
-                  <option value="filling">Dental Filling</option>
-                  <option value="checkup">Routine Check-up</option>
-                  <option value="braces">Braces Consultation</option>
-                  <option value="root_canal">Root Canal Treatment</option>
-                  <option value="implants">Dental Implants</option>
-                </select>
-                <div class="appointment-form__validation">
-                  <p class="appointment-form__text appointment-form__text--error">Error</p>
-                  <p class="appointment-form__text appointment-form__text--valid">Valid</p>
+              <label class="appointment-form__label">Service</label>
+              <input type="button" value="Select service" class="services-btn" id="servicesBtn">
+              <div class="selected-services" id="selectedServices"></div>
+              <div class="appointment-form__checkbox-group">
+                <div class="checkbox-container">
+                    <input type="checkbox" id="cleaning" name="dentalService[]" value="teeth cleaning  ₱2,800">
+                    <label for="cleaning">Teeth Cleaning <span class="service-price">₱2,800</span></label>
                 </div>
+                <div class="checkbox-container">
+                    <input type="checkbox" id="whitening" name="dentalService[]" value="teeth whitening  ₱8,400">
+                    <label for="whitening">Teeth Whitening <span class="service-price">₱8,400</span></label>
+                </div>
+                <div class="checkbox-container">
+                    <input type="checkbox" id="extraction" name="dentalService[]" value="tooth extraction  ₱4,200">
+                    <label for="extraction">Tooth Extraction <span class="service-price">₱4,200</span></label>
+                </div>
+                <div class="checkbox-container">
+                    <input type="checkbox" id="filling" name="dentalService[]" value="dental filling  ₱6,700">
+                    <label for="filling">Dental Filling <span class="service-price">₱6,700</span></label>
+                </div>
+                <div class="checkbox-container">
+                    <input type="checkbox" id="checkup" name="dentalService[]" value="routine checkup-up ₱2,200">
+                    <label for="checkup">Routine Check-up <span class="service-price">₱2,200</span></label>
+                </div>
+                <div class="checkbox-container">
+                    <input type="checkbox" id="braces" name="dentalService[]" value="braces consultation  ₱5,600">
+                    <label for="braces">Braces Consultation <span class="service-price">₱5,600</span></label>
+                </div>
+                <div class="checkbox-container">
+                    <input type="checkbox" id="root_canal" name="dentalService[]" value="root canal treatment ₱16,800">
+                    <label for="root_canal">Root Canal Treatment <span class="service-price">₱16,800</span></label>
+                </div>
+                <div class="checkbox-container">
+                    <input type="checkbox" id="implants" name="dentalService[]" value="dental implants  ₱56,000">
+                    <label for="implants">Dental Implants <span class="service-price">₱56,000</span></label>
+                </div>
+            </div>
+            
+            <div id="selectedServicesError" class="appointment-form__text--error" style="display: none; color: red; font-size: 14px; "></div>
               </div>
 
               <div class="appointment-form__field">
@@ -360,10 +429,10 @@ if (isset($_SESSION['appointment_status'])) {
             id: 'location',
             errorMessage: 'Please select a location'
           },
-          {
-            id: 'dentalService',
-            errorMessage: 'Please select a service'
-          },
+          // {
+          //   id: 'dentalService',
+          //   errorMessage: 'Please select a service'
+          // },
         ];
 
         let isValid = true;
@@ -383,55 +452,24 @@ if (isset($_SESSION['appointment_status'])) {
           }
         });
 
+        // Validate dentalService checkboxes
+        const serviceCheckboxes = document.querySelectorAll('input[name="dentalService[]"]');
+        const selectedServicesError = document.getElementById('selectedServicesError');
+        const anyServiceSelected = Array.from(serviceCheckboxes).some(checkbox => checkbox.checked);
+
+        if (!anyServiceSelected) {
+          selectedServicesError.innerText = 'Please select at least one service';
+          selectedServicesError.style.display = 'block'; // Show error message
+          isValid = false;
+        } else {
+          selectedServicesError.style.display = 'none'; // Hide error message
+        }
+
         if (isValid) {
           HTMLFormElement.prototype.submit.call(appointmentForm);
         }
       });
 
-      function generateWeekdayOptions() {
-        const today = new Date();
-        const options = [];
-        let addedDays = 0; // To count the weekdays added
-
-        while (options.length < 5) { // We need 5 weekdays
-          const currentDay = new Date();
-          currentDay.setDate(today.getDate() + addedDays + 1); // Increment by 1, then 2, etc.
-          const dayOfWeek = currentDay.getDay();
-
-          if (dayOfWeek >= 1 && dayOfWeek <= 5) { // Only weekdays (Monday to Friday)
-            const formattedDate = currentDay.toISOString().split('T')[0]; // Format as YYYY-MM-DD
-            const weekdayName = currentDay.toLocaleString('en-US', { weekday: 'long' }); // Get the weekday name
-
-            // Combine formatted date and weekday name
-            const formattedDateWithWeekday = `${formattedDate}, ${weekdayName}`;
-
-            options.push(formattedDateWithWeekday);
-          }
-
-          addedDays++; // Increment days to move to the next date
-        }
-
-        // Clear existing options and add new ones
-        appointmentDateSelect.innerHTML = ''; // Clear existing options
-
-        // Add the placeholder option
-        const placeholderOption = document.createElement('option');
-        placeholderOption.value = '';
-        placeholderOption.textContent = 'Select date';
-        placeholderOption.disabled = true; // Make it unselectable
-        placeholderOption.selected = true; // Make it the default selected option
-        appointmentDateSelect.appendChild(placeholderOption);
-
-        // Add generated date options
-        options.forEach((date) => {
-          const option = document.createElement('option');
-          option.value = date;
-          option.textContent = date;
-          appointmentDateSelect.appendChild(option);
-        });
-      }
-
-      generateWeekdayOptions();
     });
 
     function isNumber(evt) {
@@ -454,30 +492,62 @@ if (isset($_SESSION['appointment_status'])) {
     }
   } 
 
-    function getCurrentDateTime() {
-      const date = new Date()
-      const daysOfWeek = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"]
-      const months = [
-        "January", "February", "March", "April", "May", "June",
-        "July", "August", "September", "October", "November", "December"
-      ]
+    document.querySelector('.services-btn').addEventListener('click', function() {
+      const checkboxGroup = document.querySelector('.appointment-form__checkbox-group')
+      checkboxGroup.classList.toggle('active')
+    })
 
-      // get current day, month, date and year
-      const dayOfWeek = daysOfWeek[date.getDay()]
-      const month = months[date.getMonth()]
-      const day = date.getDate()
-      const year = date.getFullYear()
+    const checkBoxContainers = document.querySelectorAll('.checkbox-container')
+    const servicesBtn = document.getElementById('servicesBtn')
+    const selectedServicesContainer = document.getElementById('selectedServices')
+    let selectedServices = []
+    
+    checkBoxContainers.forEach(container => {
+      const inputEl = container.querySelector('input')
+      
+      inputEl.addEventListener('change', () => {
+        selectedServices = []
+        
+        checkBoxContainers.forEach(checkBoxContainer => {
+          const checkbox = checkBoxContainer.querySelector('input')
+          const label = checkBoxContainer.querySelector('label')
 
-      let hours = date.getHours()
-      let minutes = date.getMinutes().toString().padStart(2, '0')
+          if(checkbox.checked) {
+            checkBoxContainer.style.backgroundColor = '#1d72f2'
+            label.classList.add('active')
+            selectedServices.push(checkbox.value)            
+          } else {
+            checkBoxContainer.style.backgroundColor = ''
+            label.classList.remove('active')
+          }
+        })
+        showSelectedServices()
+      })
+    })
 
-      const period = hours >= 12 ? 'PM':'AM'
-      hours = hours % 12 || 12
-
-      return document.querySelector('.header__date').innerText = `${dayOfWeek} ${hours}:${minutes} ${period} | ${month} ${day}, ${year}`
+    function showSelectedServices() {
+      selectedServicesContainer.innerHTML = `
+      <ul>
+        ${selectedServices.map(service => {
+          return `<li>${service}</li>`
+        }).join('')}
+      </ul>
+      `
     }
 
-    setInterval(getCurrentDateTime, 1000)
+    // Pass PHP array to JavaScript
+    const availableDates = <?php echo json_encode($availableDates); ?>;
+    // const disabledDates = <?php 
+    // echo json_encode($disabledDates)
+    ; ?>;
+
+    document.addEventListener('DOMContentLoaded', function() {
+      flatpickr("#appointmentDate", {
+          dateFormat: "Y-m-d",
+          minDate: "today",
+          enable: availableDates,
+      });
+    });
   
   </script>
 </html>

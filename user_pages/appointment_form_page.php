@@ -204,14 +204,6 @@ while ($row = $result->fetch_assoc()) {
           </div>
           <!-- Preferences Section -->
           <section class="appointment-form__section appointment-form__section--preferences">
-            <!-- <div class="appointment-form__field">
-              <label for="appointmentDate" class="appointment-form__label">Date</label>
-              <select name="appointmentDate" id="appointmentDate" class="appointment-form__select"></select>
-              <div class="appointment-form__validation">
-                <p class="appointment-form__text appointment-form__text--error">Error</p>
-                <p class="appointment-form__text appointment-form__text--valid">Valid</p>
-              </div>
-            </div> -->
             <div class="appointment-form__field">
               <label for="appointmentDate" class="appointment-form__label">Date</label>
               <input type="text" name="appointmentDate" id="appointmentDate" class="appointment-form__input" placeholder="Select a date" 
@@ -282,10 +274,7 @@ while ($row = $result->fetch_assoc()) {
             </div>
 
               
-              <!-- <div class="appointment-form__validation">
-                <p class="appointment-form__text appointment-form__text--error">Error</p>
-                <p class="appointment-form__text appointment-form__text--valid">Valid</p>
-              </div> -->
+              <div id="selectedServicesError" class="appointment-form__text--error" style="display: none; color: red; font-size: 14px; "></div>
             </div>
 
             <div class="appointment-form__field">
@@ -383,55 +372,23 @@ while ($row = $result->fetch_assoc()) {
           }
         });
 
+        // Validate dentalService checkboxes
+        const serviceCheckboxes = document.querySelectorAll('input[name="dentalService[]"]');
+        const selectedServicesError = document.getElementById('selectedServicesError');
+        const anyServiceSelected = Array.from(serviceCheckboxes).some(checkbox => checkbox.checked);
+
+        if (!anyServiceSelected) {
+          selectedServicesError.innerText = 'Please select at least one service';
+          selectedServicesError.style.display = 'block'; // Show error message
+          isValid = false;
+        } else {
+          selectedServicesError.style.display = 'none'; // Hide error message
+        }
+
         if (isValid) {
           HTMLFormElement.prototype.submit.call(appointmentForm);
         }
       });
-
-      // function generateWeekdayOptions() {
-      //   const today = new Date();
-      //   const options = [];
-      //   let addedDays = 0; // To count the weekdays added
-
-      //   while (options.length < 5) { // We need 5 weekdays
-      //     const currentDay = new Date();
-      //     currentDay.setDate(today.getDate() + addedDays + 1); // Increment by 1, then 2, etc.
-      //     const dayOfWeek = currentDay.getDay();
-
-      //     if (dayOfWeek >= 1 && dayOfWeek <= 5) { // Only weekdays (Monday to Friday)
-      //       const formattedDate = currentDay.toISOString().split('T')[0]; // Format as YYYY-MM-DD
-      //       const weekdayName = currentDay.toLocaleString('en-US', { weekday: 'long' }); // Get the weekday name
-
-      //       // Combine formatted date and weekday name
-      //       const formattedDateWithWeekday = `${formattedDate}, ${weekdayName}`;
-
-      //       options.push(formattedDateWithWeekday);
-      //     }
-
-      //     addedDays++; // Increment days to move to the next date
-      //   }
-
-      //   // Clear existing options and add new ones
-      //   appointmentDateSelect.innerHTML = ''; // Clear existing options
-
-      //   // Add the placeholder option
-      //   const placeholderOption = document.createElement('option');
-      //   placeholderOption.value = '';
-      //   placeholderOption.textContent = 'Select date';
-      //   placeholderOption.disabled = true; // Make it unselectable
-      //   placeholderOption.selected = true; // Make it the default selected option
-      //   appointmentDateSelect.appendChild(placeholderOption);
-
-      //   // Add generated date options
-      //   options.forEach((date) => {
-      //     const option = document.createElement('option');
-      //     option.value = date;
-      //     option.textContent = date;
-      //     appointmentDateSelect.appendChild(option);
-      //   });
-      // }
-
-      // generateWeekdayOptions();
     });
 
     function getCurrentDateTime() {
@@ -515,24 +472,6 @@ while ($row = $result->fetch_assoc()) {
           enable: availableDates,
       });
   });
-
-  // document.addEventListener('DOMContentLoaded', function() {
-  //     flatpickr("#appointmentDate", {
-  //         dateFormat: "Y-m-d",
-  //         minDate: "today",
-  //         enable: availableDates,  // Enable only available dates
-  //         onDayCreate: function(dObj, dStr, fp, dayElem) {
-  //             // Disable the days that are in the disabledDates array
-  //             const date = dayElem.dateObj.toISOString().split('T')[0]; // Get the date in 'Y-m-d' format
-
-  //             if (disabledDates.includes(date)) {
-  //                 dayElem.classList.add('disabled'); // Add 'disabled' class to disable the date
-  //                 dayElem.setAttribute('aria-disabled', 'true'); // Add aria-disabled for accessibility
-  //                 dayElem.style.pointerEvents = 'none'; // Prevent interaction
-  //             }
-  //         }
-  //     });
-  // });
 
   </script>
 </body>

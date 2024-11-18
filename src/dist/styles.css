@@ -4880,6 +4880,7 @@ body.user-homepage main .about .services .appointment__button:hover {
   background-color: var(--ntrl-clr-100);
 }
 .new-appointment__container form > * .appointment-form__field {
+  position: relative;
   width: 100%;
   display: flex;
   align-items: flex-start;
@@ -4892,8 +4893,44 @@ body.user-homepage main .about .services .appointment__button:hover {
   font-weight: bold;
   color: var(--ntrl-clr-300);
 }
+.new-appointment__container form > * .appointment-form__field .services-btn {
+  width: 100%;
+  text-align: left;
+  cursor: pointer;
+}
+.new-appointment__container form > * .appointment-form__field .services-btn:hover {
+  background-color: hsla(0, 0%, 38%, 0.2);
+}
+.new-appointment__container form > * .appointment-form__field .services-btn:active {
+  background: none;
+}
+.new-appointment__container form > * .appointment-form__field .selected-services {
+  width: 100%;
+}
+.new-appointment__container form > * .appointment-form__field .selected-services p {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--ntrl-clr-300);
+}
+.new-appointment__container form > * .appointment-form__field .selected-services ul {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  flex-direction: row;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+.new-appointment__container form > * .appointment-form__field .selected-services ul li {
+  font-size: 0.8rem;
+  color: var(--ntrl-clr-300);
+  text-transform: capitalize;
+  border-radius: 0.25rem;
+  padding: 0.25rem;
+  outline: 1px solid var(--ntrl-clr-300);
+}
 .new-appointment__container form > * .appointment-form__field input,
-.new-appointment__container form > * .appointment-form__field .appointment-form__select {
+.new-appointment__container form > * .appointment-form__field .appointment-form__select,
+.new-appointment__container form > * .appointment-form__field .appointment-form__checkbox-group {
   width: 100%;
   font-size: 0.875rem;
   color: var(--ntrl-clr-300);
@@ -4911,6 +4948,70 @@ body.user-homepage main .about .services .appointment__button:hover {
 }
 .new-appointment__container form > * .appointment-form__field .appointment-form__select option {
   color: var(--ntrl-clr-300);
+}
+.new-appointment__container form > * .appointment-form__field .appointment-form__checkbox-group {
+  width: 16rem;
+  position: absolute;
+  bottom: 0;
+  right: -4rem;
+  z-index: 1000;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  flex-direction: column;
+  gap: 0;
+  padding: 0;
+  background-color: var(--ntrl-clr-100);
+  scale: 0;
+  transform-origin: bottom left;
+  transition: 200ms ease-in-out;
+}
+.new-appointment__container form > * .appointment-form__field .appointment-form__checkbox-group.active {
+  scale: 1;
+}
+.new-appointment__container form > * .appointment-form__field .appointment-form__checkbox-group .checkbox-container {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  flex-direction: row;
+  gap: 0.5rem;
+  transition: 50ms ease-in-out;
+}
+.new-appointment__container form > * .appointment-form__field .appointment-form__checkbox-group .checkbox-container:hover {
+  background-color: hsl(0, 0%, 38%);
+  color: var(--ntrl-clr-100);
+}
+.new-appointment__container form > * .appointment-form__field .appointment-form__checkbox-group .checkbox-container:hover label .service-price {
+  color: var(--ntrl-clr-100);
+}
+.new-appointment__container form > * .appointment-form__field .appointment-form__checkbox-group .checkbox-container input {
+  width: 1rem;
+  height: 1rem;
+  margin-left: 1rem;
+}
+.new-appointment__container form > * .appointment-form__field .appointment-form__checkbox-group .checkbox-container label {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-direction: row;
+  gap: 0;
+  letter-spacing: -1px;
+  padding-block: 0.5rem;
+  padding-inline-end: 1rem;
+  cursor: pointer;
+}
+.new-appointment__container form > * .appointment-form__field .appointment-form__checkbox-group .checkbox-container label .service-price {
+  color: var(--pr-clr-300);
+}
+.new-appointment__container form > * .appointment-form__field .appointment-form__checkbox-group .checkbox-container label.active {
+  background-color: var(--pr-clr-300);
+  color: var(--ntrl-clr-100);
+  font-weight: 600;
+}
+.new-appointment__container form > * .appointment-form__field .appointment-form__checkbox-group .checkbox-container label.active .service-price {
+  color: var(--ntrl-clr-100);
 }
 .new-appointment__container form > * .appointment-form__field .appointment-form__validation {
   display: flex;
