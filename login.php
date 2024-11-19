@@ -61,7 +61,7 @@ require_once 'includes/login_view.inc.php';
 
         <div class="forgot-password-container">
           <button class="fp-btn" id="fpBtn" type="button">
-            <a href="./forgot-pass.html" target="_blank">
+            <a href="./forgot-pass.php" target="_blank">
               Forgot Password?
             </a>
           </button>

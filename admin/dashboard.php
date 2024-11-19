@@ -106,7 +106,7 @@ $query = "SELECT
             SUM(CASE WHEN label = 'walk-in' THEN 1 ELSE 0 END) as walkInCount,
             SUM(CASE WHEN label != 'walk-in' THEN 1 ELSE 0 END) as onlineCount
           FROM appointments 
-          WHERE date = '$dateNow' AND status = 'accepted'";
+          WHERE date = CURDATE() AND status = 'accepted'";
 
 $result = $conn->query($query);
 $counts = $result->fetch_assoc();

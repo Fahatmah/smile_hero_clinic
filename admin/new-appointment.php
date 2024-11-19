@@ -2,6 +2,7 @@
 require_once '../includes/config_session.inc.php';
 require_once '../includes/login_view.inc.php';
 require_once '../includes/appointment_view.inc.php';
+require_once '../includes/dbh.inc.php';
 
 if (!isset($_SESSION['adminID'])) {
   // Redirect user to login if not logged in
@@ -22,7 +23,13 @@ if (isset($_SESSION['appointment_status'])) {
     unset($_SESSION['appointment_status']);
 }
 
-$availableDates = ["2024-11-20", "2024-11-21", "2024-11-22", "2024-11-25", "2024-11-19"];
+$query = "SELECT available_dates FROM appointment_dates WHERE available_dates >= CURDATE()";
+$result = $conn->query($query);
+
+$availableDates = [];
+while ($row = $result->fetch_assoc()) {
+    $availableDates[] = $row['available_dates'];
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">

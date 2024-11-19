@@ -14,7 +14,7 @@
    </head>
   <body>
     <main class="form-modal f-c">
-      <form class="forgot-pass-form f-c">
+      <form method="post" action="includes/send_password_reset.php" class="forgot-pass-form f-c">
         <p class="form-header">
           Enter your email below, and we’ll send you a reset link
         </p>

@@ -1,6 +1,7 @@
 <?php
 if (!isset($_GET["token"])) {
-    die("No token provided.");
+    echo "<script>alert('Invalid or expired token.'); window.close();</script>";
+    exit;
 }
 
 $token = $_GET["token"];

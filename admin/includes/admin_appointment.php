@@ -15,7 +15,7 @@ if($_SERVER["REQUEST_METHOD"] === "POST"){
     $appointmentDate = $_POST['appointmentDate'];
     $appointmentTime = $_POST['appointmentTime'];
     $location = $_POST['location'];
-    $dentalService = $_POST['dentalService'];
+    $dentalService = implode(', ', $_POST['dentalService']);
     $status = 'request';
 
     $subject = "Smile Hero Dental Clinic Appointment";
