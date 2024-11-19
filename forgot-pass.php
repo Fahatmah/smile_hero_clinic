@@ -34,6 +34,28 @@
           folder or try again.
         </p>
       </form>
+
+      <!-- modal -->
+      <div class="modal" style="display: none ">
+       <div class="modal__content">
+         <div class="body-text">
+           <div class="modal__header">
+             <h3 id="modalStatus" class="modal__status">
+               Reset link is <br> sent to your <br> email
+             </h3>
+             <p id="modalMessage" class="modal__message" style="color: #616161;"> 
+                Please check your email inbox, if you didn't receive, please try resetting your password again
+             </p>
+           </div>
+           <a href="#" target="_blank" id="exitButton" class="modal__button" style="text-align: center;">
+               OPEN YOUR EMAIL
+           </a>
+         </div>
+         <div class="illustration__container" style="display: flex;  align-items: flex-end;">
+          <img src="assets/email-sent.svg" alt="">
+        </div>
+       </div>
+      </div>
     </main>
   </body>
 </html>
