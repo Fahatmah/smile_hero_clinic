@@ -1,4 +1,5 @@
 <?php 
+require_once "config_session.inc.php";
 
 if($_SERVER["REQUEST_METHOD"] = "POST"){
 
@@ -37,7 +38,80 @@ if($_SERVER["REQUEST_METHOD"] = "POST"){
     $stmt = $mysqli->prepare($qryUpdatePass);
     $stmt->bind_param("ss", $hashedPassword, $user["user_id"]);
     $stmt->execute();
+ 
+    $_SESSION["reset_pass_process"] = "success";
 
-    echo "password reset successfully";
+    $mysqli->close();
+    $stmt->close();
+    
+   
+
+    $showModal = false;
+        if (isset($_SESSION['reset_pass_process'])) {
+        if ($_SESSION['reset_pass_process'] === 'success') {
+            $showModal = true;
+        }
+        unset($_SESSION['reset_pass_process']);  // Clear the signup process session
+    }
 }
+?>
 
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link
+      rel="shortcut icon"
+      href="../assets/images/logoipsum.svg"
+      type="image/x-icon"
+    />
+    <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/water.css@2/out/water.css"> -->
+    <title>Smile Hero Dental Clinic</title>
+    <!-- stylesheets -->
+    <link rel="stylesheet" href="../src/dist/styles.css" />
+</head>
+<body>
+      <!-- modal -->
+      <div class="modal" style="display: none">
+       <div class="modal__content">
+         <div class="body-text">
+           <div class="modal__header">
+             <h3 id="modalStatus" class="modal__status">
+               You have <br> successfully reset <br> your password!
+             </h3>
+             <p id="modalMessage" class="modal__message" style="color: #616161;"> 
+                 You can now login and enter your new password
+             </p>
+           </div>
+           <a href="../login.php" target="_blank" id="exitButton" class="modal__button" style="text-align: center;">
+               LOG IN
+           </a>
+         </div>
+         <div class="illustration__container">
+          <img src="../assets/reset-password.svg" alt="">
+         </div>
+       </div>
+      </div>
+    </main>
+</body>
+
+<script>
+
+  document.addEventListener('DOMContentLoaded', () => {
+    const modalContainer = document.querySelector(".modal");
+    const exitBtn = modalContainer.querySelector("#exitButton");
+
+    <?php if ($showModal) : ?>
+      modalContainer.style.display = "flex";
+    <?php endif; ?>
+
+     // Close modal when exit button is clicked
+     exitBtn.addEventListener("click", () => {
+            modalContainer.style.transform = "scale(0)";
+             window.close()
+        });
+    });
+</script>
+</html>

@@ -1,3 +1,17 @@
+<?php
+require_once "includes/config_session.inc.php";
+
+$showModal = false;
+if (isset($_SESSION['email_process'])) {
+    if ($_SESSION['email_process'] === 'sent') {
+        $showModal = true;
+    }
+    unset($_SESSION['email_process']);  // Clear the signup process session
+}
+
+?>
+
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -47,7 +61,7 @@
                 Please check your email inbox, if you didn't receive, please try resetting your password again
              </p>
            </div>
-           <a href="#" target="_blank" id="exitButton" class="modal__button" style="text-align: center;">
+           <a href="https://mail.google.com/mail/u/0/" target="_blank" id="exitButton" class="modal__button" style="text-align: center;">
                OPEN YOUR EMAIL
            </a>
          </div>
@@ -58,4 +72,22 @@
       </div>
     </main>
   </body>
+
+  <script>
+      document.addEventListener('DOMContentLoaded', () => {
+    const modalContainer = document.querySelector(".modal");
+    const exitBtn = modalContainer.querySelector("#exitButton");
+
+    <?php if ($showModal) : ?>
+      modalContainer.style.display = "flex";
+    <?php endif; ?>
+
+     // Close modal when exit button is clicked
+     exitBtn.addEventListener("click", () => {
+            modalContainer.style.transform = "scale(0)";
+             window.close()
+        });
+    });
+
+  </script>
 </html>
