@@ -89,6 +89,40 @@
 
         & > * {
           width: 100%;
+
+          .header {
+            width: max-content;
+            @include display-flex($gap: 0.5rem);
+            font-size: 0.8rem;
+            font-weight: bold;
+            color: var(--ntrl-clr-100);
+            text-transform: capitalize;
+            border-radius: 1rem;
+
+            span {
+              padding: 0.2rem 0.5rem;
+              border-radius: 50%;
+              // background-color: var(--ntrl-clr-100);
+            }
+
+            &.daily {
+              color: var(--ntrl-clr-350);
+              // background-color: var(--pr-clr-100);
+
+              span {
+                color: var(--pr-clr-100);
+              }
+            }
+
+            &.monthly {
+              color: var(--ntrl-clr-350);
+              // background-color: var(--pr-clr-300);
+
+              span {
+                color: var(--pr-clr-300);
+              }
+            }
+          }
         }
       }
     }

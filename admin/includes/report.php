@@ -118,7 +118,8 @@ $startOfMonth = date('Y-m-01');
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="../../src/dist/styles.css" />
-    <title>Generated Report</title>
+    <link rel="shortcut icon" href="../../assets/images/logoipsum.svg" type="image/x-icon" />
+    <title>Smile Hero Clinic Report - <span id="currentDate"></span></title>
 </head>
 <body class="dashboard-report">
   <main class="dashboard-report-container">
@@ -366,6 +367,15 @@ $startOfMonth = date('Y-m-01');
       new Chart(barCtx, barConfig);
     })
     .catch(error => console.error('Error fetching monthly appointments data:', error));
+    
+    // Get the current date
+    const date = new Date();
+    
+    // Format the date (example: "November 20, 2024")
+    const formattedDate = date.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
+    
+    // Update the title with the date
+    document.title = `Smile Hero Clinic Report ${formattedDate}`;
 </script>
 </body>
 </html>

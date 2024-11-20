@@ -5846,4 +5846,34 @@ body.user-homepage main .about .services .appointment__button:hover {
 }
 .dashboard-report-container .performance-summary .charts-container > * {
   width: 100%;
+}
+.dashboard-report-container .performance-summary .charts-container > * .header {
+  width: -moz-max-content;
+  width: max-content;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: row;
+  gap: 0.5rem;
+  font-size: 0.8rem;
+  font-weight: bold;
+  color: var(--ntrl-clr-100);
+  text-transform: capitalize;
+  border-radius: 1rem;
+}
+.dashboard-report-container .performance-summary .charts-container > * .header span {
+  padding: 0.2rem 0.5rem;
+  border-radius: 50%;
+}
+.dashboard-report-container .performance-summary .charts-container > * .header.daily {
+  color: var(--ntrl-clr-350);
+}
+.dashboard-report-container .performance-summary .charts-container > * .header.daily span {
+  color: var(--pr-clr-100);
+}
+.dashboard-report-container .performance-summary .charts-container > * .header.monthly {
+  color: var(--ntrl-clr-350);
+}
+.dashboard-report-container .performance-summary .charts-container > * .header.monthly span {
+  color: var(--pr-clr-300);
 }/*# sourceMappingURL=styles.css.map */
