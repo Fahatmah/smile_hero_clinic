@@ -147,31 +147,35 @@ $startOfMonth = date('Y-m-01');
         <article class="overview">
           <div class="overview__header">
 
-            <h1 class="overview__title">Today's Overview</h1>
-              
-            <button class="filter-btn" id="filterBtn">
-              <svg width="25" height="12" viewBox="0 0 25 12" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <circle cx="6.66666" cy="6" r="2" fill="#616161"/>
-                <circle cx="12.6667" cy="6" r="2" fill="#616161"/>
-                <circle cx="18.6667" cy="6" r="2" fill="#616161"/>
-              </svg>
-            </button>    
-            <div class="filter-summary" id="filterSummary">
-              <div class="filter-types">
-                <label id="todayBtn">
-                  Today
-                  <input type="radio" name="filterType" value="today" onclick="scaleDownFilterSummary()" readonly/>
-                </label>
-                <label id="weeklyBtn">
-                  Weekly
-                  <input type="radio" name="filterType" value="weekly" onclick="scaleDownFilterSummary()" readonly/>
-                </label>
-                <label id="monthlyBtn">
-                  Monthly
-                  <input type="radio" name="filterType" value="monthly" onclick="scaleDownFilterSummary()" readonly/>
-                </label>
+            <div class="overview_details">
+              <h1 class="overview__title">Today's Overview</h1>
+                
+              <button class="filter-btn" id="filterBtn">
+                <svg width="25" height="12" viewBox="0 0 25 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <circle cx="6.66666" cy="6" r="2" fill="#616161"/>
+                  <circle cx="12.6667" cy="6" r="2" fill="#616161"/>
+                  <circle cx="18.6667" cy="6" r="2" fill="#616161"/>
+                </svg>
+              </button>    
+              <div class="filter-summary" id="filterSummary">
+                <div class="filter-types">
+                  <label id="todayBtn">
+                    Today
+                    <input type="radio" name="filterType" value="today" onclick="scaleDownFilterSummary()" readonly/>
+                  </label>
+                  <label id="weeklyBtn">
+                    Weekly
+                    <input type="radio" name="filterType" value="weekly" onclick="scaleDownFilterSummary()" readonly/>
+                  </label>
+                  <label id="monthlyBtn">
+                    Monthly
+                    <input type="radio" name="filterType" value="monthly" onclick="scaleDownFilterSummary()" readonly/>
+                  </label>
+                </div>
               </div>
             </div>
+
+            <a href="includes/report.php" class="generate-report-btn" target="_blank">Generate Report</a>
           </div>
           
           <div class="overview__content">
