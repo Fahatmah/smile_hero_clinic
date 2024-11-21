@@ -145,17 +145,11 @@ if ($result->num_rows > 0) {
                     echo htmlspecialchars(ucfirst($user['gender']));
                   }?>
                 </td>
-
-                <!-- change the date format -->
-                <?php
-                    $date = DateTime::createFromFormat('Y-m-d', $user['birthdate']);
-                    $formattedBirthDate = $date->format('m-d-Y');
-                ?>
                 <td class="patient-cell birthdate">
-                  <?php if($user['birthdate'] === "0000-00-00"){?>
+                  <?php if($user['birthdate'] === null){?>
                   N/a
                   <?php } else{
-                    echo $formattedBirthDate;
+                    echo $user['birthdate'];
                   }?>
                 </td>
 

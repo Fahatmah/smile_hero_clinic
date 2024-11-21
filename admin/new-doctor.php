@@ -114,6 +114,7 @@ if (isset($_SESSION['doctors_process'])) {
                 >
                 <input
                   type="tel"
+                  onkeypress="isNumber(event)"
                   name="contactnumber"
                   id="contactnumber"
                   placeholder="e.g. 09123456789"
@@ -293,5 +294,25 @@ if (isset($_SESSION['doctors_process'])) {
             modalContainer.style.transform = "scale(0)";
         });
     });   
+
+    function isNumber(evt) {
+    var input = evt.target.value;
+
+    // Ensure only digits are entered
+    var contactNum = String.fromCharCode(evt.which);
+    if (!(/[0-9]/.test(contactNum))) {
+        evt.preventDefault();
+        return;
+    }
+
+    // Check if the input starts with "09" and length is less than 11 digits
+    if (input.length === 0 && contactNum !== '0') {
+        evt.preventDefault();
+    } else if (input.length === 1 && contactNum !== '9') {
+        evt.preventDefault();
+    } else if (input.length >= 11) {
+        evt.preventDefault();
+    }
+  } 
   </script>
 </html>

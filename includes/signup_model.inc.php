@@ -64,8 +64,8 @@ function getUserPass($conn, $user_id) {
     return null; // Return null if no result found
 }
 
-function setUser(mysqli $conn, string $userid,string $fname, string $mname, string $lname, string $suffix, string $email, string $contact, string $password, string  $activation_token_hash) {
-    $query = "INSERT INTO users (user_id, first_name, middle_name, last_name, suffix, email, contact, pass, account_activation_hash, created_at) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, NOW())";
+function setUser(mysqli $conn, string $userid,string $fname, string $mname, string $lname, string $suffix, string $email, string $contact, string $password, string $label, string  $activation_token_hash) {
+    $query = "INSERT INTO users (user_id, first_name, middle_name, last_name, suffix, email, contact, pass, label, account_activation_hash, created_at) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, NOW())";
     $stmt = $conn->prepare($query);
 
     $options = [
@@ -73,7 +73,7 @@ function setUser(mysqli $conn, string $userid,string $fname, string $mname, stri
     ];
     $hashedPassword = password_hash($password, PASSWORD_BCRYPT, $options);
 
-    $stmt->bind_param("sssssssss", $userid, $fname, $mname, $lname, $suffix, $email, $contact, $hashedPassword,  $activation_token_hash);
+    $stmt->bind_param("ssssssssss", $userid, $fname, $mname, $lname, $suffix, $email, $contact, $hashedPassword, $label, $activation_token_hash);
     $stmt->execute();
 
     return $stmt->affected_rows > 0;

@@ -30,8 +30,8 @@ function isUpdatedEmailIsValid(mysqli $conn, string $email, $currentEmail) {
     return $user == null;
 }
 
-function createUser(mysqli $conn, string $userid, string $fname, string $mname, string $lname, string $suffix, string $email, string $contact, string $password, string  $activation_token_hash) {
-    setUser($conn, $userid, $fname, $mname, $lname, $suffix, $email, $contact, $password, $activation_token_hash);
+function createUser(mysqli $conn, string $userid, string $fname, string $mname, string $lname, string $suffix, string $email, string $contact, string $password, string $label, string  $activation_token_hash) {
+    setUser($conn, $userid, $fname, $mname, $lname, $suffix, $email, $contact, $password, $label, $activation_token_hash);
 }
 
 function generateUserID(mysqli $conn) {

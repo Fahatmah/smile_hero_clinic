@@ -8,7 +8,7 @@ error_reporting(E_ALL);
 
 if ($_SERVER['REQUEST_METHOD'] === "POST" && isset($_SESSION['user_id'])) {
     $user_id = $_SESSION['user_id'];
-    $label = "new";
+    $label = $_SESSION["label"];
     $name = $_POST['name'];
     $email = $_POST['email'];
     $contact = $_POST['contactnumber'];     

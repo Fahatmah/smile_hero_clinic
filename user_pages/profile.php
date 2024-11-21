@@ -98,7 +98,7 @@ $stmt->execute(); $result = $stmt->get_result(); ?>
               <?php if($row['birthdate'] === null){?>
                   N/a
                   <?php } else{
-                    echo $formattedBirthDate;
+                    echo $row['birthdate'];
                   }?>
               </p>
             </li>

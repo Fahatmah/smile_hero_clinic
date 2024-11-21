@@ -10,6 +10,7 @@ if ($_SERVER['REQUEST_METHOD'] === "POST") {
     $mname = ucwords(htmlspecialchars($_POST["mname"]));
     $lname = ucwords(htmlspecialchars($_POST["lname"]));
     $suffix = ucwords(htmlspecialchars($_POST["suffix"]));
+    $label = "new";
     $email = $_POST["email"];
     $contact = $_POST["contact"];
     $password = $_POST["password"];
@@ -58,7 +59,7 @@ if ($_SERVER['REQUEST_METHOD'] === "POST") {
         die();
     }
 
-    createUser($conn, $user_id, $fname, $mname, $lname, $suffix, $email, $contact, $password, $activation_token_hash);
+    createUser($conn, $user_id, $fname, $mname, $lname, $suffix, $email, $contact, $password, $label, $activation_token_hash);
 
     $mail = require __DIR__ . "/../mailer.php"; 
     $mail->setFrom("jpvillaruel02@gmail.com");

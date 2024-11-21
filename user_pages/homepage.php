@@ -20,11 +20,6 @@ if($totalAppointment >= 5){
   $stmt = $conn->prepare($query);
   $stmt->bind_param("s",$user_id);
   $stmt->execute();
-}else{
-  $query = "UPDATE users SET label = 'new' WHERE user_id = ?";
-  $stmt = $conn->prepare($query);
-  $stmt->bind_param("s",$user_id);
-  $stmt->execute();
 }
 ?>
 
