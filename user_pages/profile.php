@@ -94,13 +94,8 @@ $stmt->execute(); $result = $stmt->get_result(); ?>
             </li>
             <li class="user-profile__detail-item">
               <p class="user-profile__detail-label">Birthdate</p>
-
-                <?php
-                    $date = DateTime::createFromFormat('Y-m-d', $row['birthdate']);
-                    $formattedBirthDate = $date->format('m-d-Y');
-                ?>
               <p class="user-profile__detail-value">
-              <?php if($row['birthdate'] === "0000-00-00"){?>
+              <?php if($row['birthdate'] === null){?>
                   N/a
                   <?php } else{
                     echo $formattedBirthDate;

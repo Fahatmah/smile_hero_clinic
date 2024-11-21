@@ -2,8 +2,8 @@
 -- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
--- Host: localhost
--- Generation Time: Nov 21, 2024 at 07:32 AM
+-- Host: 127.0.0.1
+-- Generation Time: Nov 19, 2024 at 10:35 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -75,7 +75,6 @@ CREATE TABLE `appointments` (
 
 INSERT INTO `appointments` (`user_id`, `doctor_id`, `appointment_id`, `label`, `name`, `email`, `contact`, `message`, `date`, `time`, `service`, `location`, `status`, `created_at`) VALUES
 ('SHC1677TCU', NULL, 'SHC1315', 'new', 'John Paul Villaruel Dela Cruz ', 'jpvillaruel02@gmail.com', '09070050140', '', '2024-11-19', '1:00 PM', 'dental filling  ₱6,700, braces consultation  ₱5,600, root canal treatment ₱16,800', 'Bayani Road, Taguig City', 'canceled', '2024-11-16 00:30:42'),
-('SHC779bTCU', NULL, 'SHC2429', 'new', 'Fahatmah Takulanga Mabang ', 'fahatmahmabang9@gmail.com', '09265369733', '', '2024-11-22', '2:00 PM', 'dental filling  ₱6,700', 'Bayani Road, Taguig City', 'request', '2024-11-21 14:29:04'),
 ('SHC1677TCU', NULL, 'SHC34c4', 'new', 'John Paul Villaruel Dela Cruz ', 'jpvillaruel02@gmail.com', '09070050140', '', '2024-11-18', '11:00 AM', 'tooth extraction  ₱4,200, routine checkup-up ₱2,200, braces consultation  ₱5,600', 'Bayani Road, Taguig City', 'accepted', '2024-11-17 21:07:10'),
 ('SHC1677TCU', NULL, 'SHC6572', 'new', 'John Paul Villaruel Dela Cruz ', 'jpvillaruel02@gmail.com', '09070050140', '', '2024-11-15', '11:00 AM', 'dental filling  ₱6,700, routine checkup-up ₱2,200, braces consultation  ₱5,600', 'Bayani Road, Taguig City', 'canceled', '2024-11-14 15:56:40'),
 ('Walk-in', NULL, 'SHC8554', 'Walk-in', 'Leonel Martinez Constantino Sr.', 'LeonelSr@gmail.com', '09978545678', 'Good Day Leonel Martinez Constantino Sr., your appointment on 2024-12-18 at 10:00 AM has been accepted. Thanks for Choosing Smile Hero Dental Clinic', '2024-12-18', '10:00 AM', 'teeth whitening  ₱8,400, tooth extraction  ₱4,200, routine checkup-up ₱2,200, root canal treatment ₱', 'Bayani Road, Taguig City', 'accepted', '2024-11-19 15:08:53'),
@@ -158,9 +157,12 @@ CREATE TABLE `appointment_dates` (
 --
 
 INSERT INTO `appointment_dates` (`id`, `available_dates`, `created_at`) VALUES
+(2, '2024-11-19', '2024-11-12 23:32:17'),
 (4, '2024-11-21', '2024-11-12 23:32:17'),
 (5, '2024-11-27', '2024-11-12 23:32:17'),
 (6, '2024-11-26', '2024-11-12 23:32:17'),
+(9, '2024-11-19', '2024-11-12 23:45:23'),
+(10, '2024-11-20', '2024-11-12 23:45:23'),
 (11, '2024-12-10', '2024-11-12 23:45:23'),
 (12, '2024-12-11', '2024-11-12 23:45:23'),
 (13, '2024-12-18', '2024-11-12 23:45:23'),
@@ -230,14 +232,7 @@ INSERT INTO `appointment_dates` (`id`, `available_dates`, `created_at`) VALUES
 (81, '2025-02-28', '2024-11-15 23:25:21'),
 (82, '2025-01-07', '2024-11-15 23:25:21'),
 (83, '2025-01-31', '2024-11-15 23:25:21'),
-(84, '2024-12-02', '2024-11-15 23:25:21'),
-(85, '2025-03-16', '2024-11-21 14:12:41'),
-(86, '2025-03-11', '2024-11-21 14:12:41'),
-(87, '2025-03-20', '2024-11-21 14:12:41'),
-(88, '2025-03-12', '2024-11-21 14:12:41'),
-(89, '2025-03-19', '2024-11-21 14:12:41'),
-(90, '2025-03-18', '2024-11-21 14:12:41'),
-(91, '2025-03-14', '2024-11-21 14:12:41');
+(84, '2024-12-02', '2024-11-15 23:25:21');
 
 -- --------------------------------------------------------
 
@@ -304,13 +299,13 @@ CREATE TABLE `users` (
   `middle_name` varchar(255) NOT NULL,
   `last_name` varchar(255) NOT NULL,
   `suffix` varchar(100) NOT NULL,
-  `birthdate` date DEFAULT NULL,
+  `birthdate` date NOT NULL,
   `gender` set('male','female') DEFAULT NULL,
   `email` varchar(255) NOT NULL,
   `contact` varchar(11) NOT NULL,
   `address` varchar(255) DEFAULT NULL,
   `pass` varchar(255) NOT NULL,
-  `label` varchar(100) DEFAULT NULL,
+  `label` varchar(100) NOT NULL,
   `account_activation_hash` varchar(64) DEFAULT NULL,
   `reset_token_hash` varchar(64) DEFAULT NULL,
   `reset_token_expires_at` datetime DEFAULT NULL,
@@ -323,7 +318,6 @@ CREATE TABLE `users` (
 
 INSERT INTO `users` (`user_id`, `first_name`, `middle_name`, `last_name`, `suffix`, `birthdate`, `gender`, `email`, `contact`, `address`, `pass`, `label`, `account_activation_hash`, `reset_token_hash`, `reset_token_expires_at`, `created_at`) VALUES
 ('SHC1677TCU', 'John Paul', 'Villaruel', 'Dela Cruz', '', '2002-02-18', 'male', 'jpvillaruel02@gmail.com', '09070050140', '10 everlasting st. taguig city', '$2y$10$bgT9YeRs9fMfn68ccVcldulrpTa7hFg8FnLiVfIsMl1u47Urj9AHu', 'new', NULL, NULL, NULL, '2024-10-23 03:46:57'),
-('SHC779bTCU', 'Fahatmah', 'Takulanga', 'Mabang', '', NULL, NULL, 'fahatmahmabang9@gmail.com', '09265369733', NULL, '$2y$12$s24fbUW.CZS29q4RLxuV9u0c.AgYpxWxxtZ4IemUBUlB6k9ZiDxSO', 'new', NULL, NULL, NULL, '2024-11-21 06:10:58'),
 ('SHCA1B2CTCU', 'Sophia', 'L.', 'Wilson', '', '1990-07-15', 'female', 'sophia.wilson@example.com', '09191234567', '456 Maple St, Taguig City', 'password123', 'new', NULL, NULL, NULL, '2024-11-19 09:16:17'),
 ('SHCAG12TCU', 'Jane', 'Marie', 'Smith', '', '1995-08-20', 'female', 'jane.smith@example.com', '09181234567', '56 Oak Road, Makati, Philippines', 'hashedpassword456', 'regular', NULL, '0e4e415b13549ee5e5f6dbff983c08e16233f727e96244a48913cd5089d15b01', '2024-11-19 09:08:28', '2024-11-19 09:15:34'),
 ('SHCAY99TCU', 'Henry', 'Isaac', 'Clark', '', '1990-01-17', 'male', 'henry.clark@example.com', '09161234567', '888 Birch Lane, Manila, Philippines', '$2y$12$rCSTmDp62DrE0E9j8N8RBeGBCvMWhmsqDciZ3VugivAcpVspO0zTS', 'new', NULL, NULL, NULL, '2024-11-19 09:13:18'),
@@ -448,7 +442,7 @@ ALTER TABLE `admin`
 -- AUTO_INCREMENT for table `appointment_dates`
 --
 ALTER TABLE `appointment_dates`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=92;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=85;
 
 --
 -- AUTO_INCREMENT for table `feedback`
