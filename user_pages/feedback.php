@@ -40,27 +40,27 @@ if(!isset($_SESSION['user_id'])) {
 
             <div class="rating-container">
               <div class="radio-field">
-                <input type="radio" name="rating" id="terrible" value="1" required>
+                <input type="radio" name="rating" id="terrible" value="1">
                 <label for="terrible">😡 <span>Terrible</span></label>
               </div>
 
               <div class="radio-field">
-                <input type="radio" name="rating" id="bad" value="2" required>
+                <input type="radio" name="rating" id="bad" value="2">
                 <label for="bad">😟 <span>Bad</span></label>
               </div>
 
               <div class="radio-field">
-                <input type="radio" name="rating" id="okay" value="3" required> 
+                <input type="radio" name="rating" id="okay" value="3"> 
                 <label for="okay">😐 <span>Okay</span></label>
               </div>
 
               <div class="radio-field">
-                <input type="radio" name="rating" id="good" value="4" required>
+                <input type="radio" name="rating" id="good" value="4">
                 <label for="good">🙂 <span>Good</span></label>
               </div>
 
               <div class="radio-field">
-                <input type="radio" name="rating" id="awesome" value="5" required>
+                <input type="radio" name="rating" id="awesome" value="5">
                 <label for="awesome">😁 <span>Awesome</span></label>
               </div>
             </div>
@@ -68,12 +68,12 @@ if(!isset($_SESSION['user_id'])) {
 
           <textarea class="feedback-message" name="feedback" id="feedback" placeholder="Write your feedback here..." rows="3"></textarea>
 
-          <input type="submit" name="submit" value="Submit" class="feedback__submit-btn">
+          <input type="submit" name="submit" value="Submit" class="feedback__submit-btn" id="submitBtn">
         </form>
       </div>
 
       <!-- modal -->
-      <div class="modal" style="display: none">
+      <div class="feedback-modal" style="display: none">
         <div class="modal__content">
           <div class="body-text">
             <div class="modal__header">
@@ -82,13 +82,6 @@ if(!isset($_SESSION['user_id'])) {
               </h3>
               <p id="modalMessage" class="modal__message">
                 Your feedback helps us improve and serve you better!
-                <!-- <a href="doctors.php">
-                  Go to booked appointments
-                  <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M9.62 3.95337L13.6667 8.00004L9.62 12.0467" stroke="#E84531" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
-                    <path d="M2.33333 8H13.5533" stroke="#E84531" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
-                  </svg>
-                </a> -->
               </p>
             </div>
             <button type="button" id="exitButton" class="modal__button">
@@ -116,11 +109,33 @@ if(!isset($_SESSION['user_id'])) {
   adjustHeight()
 
   document.addEventListener('DOMContentLoaded', () => {
-    const modalContainer = document.querySelector(".modal");
+    const modalContainer = document.querySelector(".feedback-modal");
+    const submitBtn = document.getElementById('submitBtn');
     const exitBtn = modalContainer.querySelector("#exitButton");
-    // modalContainer.style.display = "flex";
+    const feedbackMsg = document.getElementById('feedback');
+    const form = document.querySelector(".form");
+
+    const clearInputs = () => {
+      form.reset();
+      feedbackMsg.style.height = "auto";
+    };
+
+    form.addEventListener('submit', (e) => {  
+      const rating = form.querySelector('input[name="rating"]:checked');
+      const feedback = feedbackMsg.value.trim();
+
+      if (!rating || feedback === "") {
+        e.preventDefault(); 
+        alert("Please select a rating and provide feedback.");
+      } else {
+        e.preventDefault(); 
+        modalContainer.style.display = "flex"; 
+        clearInputs(); 
+      }
+    });
+    
     exitBtn.addEventListener("click", () => {
-      modalContainer.style.transform = "scale(0)";
+      modalContainer.style.display = "none"; 
     });
   });
 </script>
