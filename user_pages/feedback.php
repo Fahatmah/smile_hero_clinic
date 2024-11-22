@@ -7,6 +7,14 @@ if(!isset($_SESSION['user_id'])) {
   header("Location: ../login.php");
   exit();
 }
+
+$showModal = false;
+if (isset($_SESSION['feedback_proccess'])) {
+    if ($_SESSION['feedback_proccess'] === 'created') {
+        $showModal = true;
+    }
+    unset($_SESSION['feedback_proccess']);  // Clear the signup process session
+}
 ?>
 
 <!DOCTYPE html>
@@ -115,11 +123,6 @@ if(!isset($_SESSION['user_id'])) {
     const feedbackMsg = document.getElementById('feedback');
     const form = document.querySelector(".form");
 
-    const clearInputs = () => {
-      form.reset();
-      feedbackMsg.style.height = "auto";
-    };
-
     form.addEventListener('submit', (e) => {  
       const rating = form.querySelector('input[name="rating"]:checked');
       const feedback = feedbackMsg.value.trim();
@@ -127,12 +130,12 @@ if(!isset($_SESSION['user_id'])) {
       if (!rating || feedback === "") {
         e.preventDefault(); 
         alert("Please select a rating and provide feedback.");
-      } else {
-        e.preventDefault(); 
-        modalContainer.style.display = "flex"; 
-        clearInputs(); 
-      }
+      } 
     });
+
+    <?php if ($showModal) : ?>
+      modalContainer.style.display = "flex";
+    <?php endif; ?>
     
     exitBtn.addEventListener("click", () => {
       modalContainer.style.display = "none"; 

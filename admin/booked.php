@@ -16,13 +16,13 @@ $page = isset($_GET['page']) ? (int)$_GET['page'] : 1; // Current page number
 $start = ($page - 1) * $limit; // Calculate the starting row for the query
 
 // Get total number of records for booked meetings
-$totalQuery = "SELECT COUNT(*) AS total FROM appointments WHERE status = 'accepted' OR status = 'rescheduled'";
+$totalQuery = "SELECT COUNT(*) AS total FROM appointments WHERE status = 'accepted' OR status = 'completed'";
 $totalResult = $conn->query($totalQuery);
 $totalRow = $totalResult->fetch_assoc();
 $totalRecords = $totalRow['total'];
 
 // Fetch records for the current page
-$query = "SELECT * FROM appointments WHERE status = 'accepted' OR status = 'rescheduled' LIMIT $start, $limit";
+$query = "SELECT * FROM appointments WHERE status = 'accepted' OR status = 'completed' LIMIT $start, $limit";
 $result = $conn->query($query);
 $users = [];
 if ($result->num_rows > 0) {
@@ -166,7 +166,7 @@ $totalPages = ceil($totalRecords / $limit);
 
                 <td class="patient-cell action" data-status="<?php echo $user['status']; ?>">
                   <button type="button">
-                    <a href="appointment-details.php">
+                    <a href="appointment-details.php?aptId=<?php echo $user['appointment_id'] ?>">
                       View Details
                     </a>
                   </td>

@@ -21,6 +21,8 @@ if($_SERVER['REQUEST_METHOD'] === "POST" && !empty($_POST['rating'])){
     $stmt->execute();
 
     $conn->close();
+
+    $_SESSION['feedback_proccess'] = 'created';
     header("Location: ../feedback.php?success");
     die();
 }else{

@@ -1,3 +1,40 @@
+<?php
+require_once '../includes/config_session.inc.php';
+require_once '../includes/login_view.inc.php';
+require_once '../includes/dbh.inc.php';
+
+if (!isset($_SESSION['adminID'])) {
+  // Redirect user to login if not logged in
+  header("Location: ../login.php?login=failed");
+  exit();
+}
+
+
+if(!isset($_GET['aptId'])){
+  header("Location: booked.php");
+  exit;
+}
+
+$aptId = $_GET['aptId'];
+
+$query = "SELECT * FROM appointments WHERE appointment_id = ?";
+$stmt = $conn->prepare($query);
+$stmt->bind_param("s", $aptId);
+$stmt->execute();
+$aptDetailesResult = $stmt->get_result();
+
+
+$query = "SELECT available_dates FROM appointment_dates WHERE available_dates >= CURDATE()";
+$result = $conn->query($query);
+
+$availableDates = [];
+while ($row = $result->fetch_assoc()) {
+    $availableDates[] = $row['available_dates'];
+}
+$conn->close();
+?>
+
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -21,6 +58,8 @@
         <!-- side bar -->
         <?php include("includes/side_nav.php"); ?>
 
+        <?php if($aptResult =  $aptDetailesResult->fetch_assoc()){ ?>
+
         <div class="appointment-details-cont">
           <header>
             <div class="header-and-btn">
@@ -37,35 +76,44 @@
                   </p>
                   <p class="apt-date" id="date">
                     <!-- return mo lang dito is apt date (ex. 2024-11-18) -->
-                    2024-11-18
+                    <?php echo $aptResult['date']; ?>
                   </p>
                 </div>
                 <!-- time apt-id -->
                 <div class="time-apt-id">
                   <p class="time">
                     <img src="../assets/admin_assets/icons/clock.svg" alt="">
-                    11:00 AM
+                    <?php echo $aptResult['time']; ?>
                   </p>
                   <p class="apt-id">
                     <img src="../assets/admin_assets/icons/book.svg" alt="">
-                    SHC34c4
+                    <?php echo $aptResult['appointment_id']; ?>
                   </p>
                 </div>
                 <!-- services -->
                 <div class="service-message">
                   <p class="service">
                     <img src="../assets/admin_assets/icons/note-text.svg" alt="">
-                    Routine Check-up
+                    <?php echo $aptResult['date']; ?>
                   </p>
                   <p class="message">
                     <img src="../assets/admin_assets/icons/message-text.svg" alt="">
-                    I would like a routine checkup
+                    <?php echo ucfirst($aptResult['label']) != "walk-in" ? "Online Appointment" : "Walk-in Appointment" ?>
                   </p>
                 </div>
               </div>
               <div class="actions">
-                <button type="button" class="complete-btn" id="completeBtn">Complete</button>
-                <button type="button" class="reschedule-btn" id="rescheduleBtn">Reschedule</button>
+                <?php if($aptResult['status'] != "completed"){ ?>
+                <form action="includes/complete_apt.php" method="post">
+                  <input type="hidden" name="appointmentId" value= <?php echo $aptResult['appointment_id']; ?>>
+                  <button type="submit" class="complete-btn" id="completeBtn" name="completeBtn" value="complete">Complete</button>
+                </form>
+                  <button type="button" class="reschedule-btn" id="rescheduleBtn" style="display: <?php $tomorrow = date("Y-m-d", strtotime("+1 day")); echo ($aptResult['date'] <= $tomorrow) ? 'none' : '' ?>;">
+                    Reschedule
+                  </button>
+                <?php }else{ ?>
+                  <p class="complete-text">Completed ✓</p>
+                <?php } ?>
               </div>
             </div>
           </header>
@@ -75,19 +123,19 @@
               <tbody>
                 <tr>
                   <td>Name</td>
-                  <td>John Paul Villaruel Dela Cruz</td>
+                  <td><?php echo $aptResult['name']; ?></td>
                 </tr>
                 <tr>
                   <td>Email</td>
-                  <td>jpvillaruel02@gmail.com</td>
+                  <td> <?php echo $aptResult['email']; ?></td>
                 </tr>
                 <tr>
                   <td>Contact Number</td>
-                  <td>09070050140</td>
+                  <td> <?php echo $aptResult['contact']; ?></td>
                 </tr>
                 <tr>
                   <td>Label</td>
-                  <td>Online</td>
+                  <td> <?php echo $aptResult['label']; ?></td>
                 </tr>
                 <tr>
                   <td>Location</td>
@@ -95,34 +143,35 @@
                 </tr>
                 <tr>
                   <td>Services</td>
-                  <td>Routine Check-up</td>
+                  <td> <?php echo $aptResult['service']; ?></td>
                 </tr>
                 <tr>
                   <td>Message</td>
-                  <td>I would like a routine checkup</td>
+                  <td> <?php echo empty($aptResult['message']) ? "No Message" : $aptResult['message']?></td>
                 </tr>
                 <tr>
                   <td>Status</td>
-                  <td>In Progress</td>
+                  <td><?php echo $aptResult['status']; ?></td>
                 </tr>
                 <tr>
                   <td>Appointment Date</td>
-                  <td>2024-11-29</td>
+                  <td><?php echo $aptResult['date']; ?></td>
                 </tr>
                 <tr>
                   <td>Appointment Time</td>
-                  <td>11:00 AM</td>
+                  <td><?php echo $aptResult['time']; ?></td>
                 </tr>
               </tbody>
             </table>
           </div>
         </div>
+        <?php } ?>
       </section>
     </main>
     <!-- modals -->
     <section class="reschedule-modal" id="rescheduleModal" style="display: none;">
       <div class="content">
-        <form action="" id="rescheduleForm">
+        <form action="includes/reschedule.php" method="post"  id="rescheduleForm">
           <section>
             <div class="appointment-form__field">
               <label for="appointmentDate" class="appointment-form__label">Date</label>
@@ -132,7 +181,7 @@
                 <p class="appointment-form__text appointment-form__text--error">Error</p>
                 <p class="appointment-form__text appointment-form__text--valid">Valid</p>
               </div>
-              <p class="time_error"><?php echo $DateMessageError ?></p>
+              <p class="time_error"></p>
             </div>
             <div class="appointment-form__field">
               <label for="appointmentTime" class="appointment-form__label">Time</label>
@@ -151,10 +200,10 @@
                 <p class="appointment-form__text appointment-form__text--error">Error</p>
                 <p class="appointment-form__text appointment-form__text--valid">Valid</p>
               </div>
-              <p class="time_error"><?php echo $TimeMessageError ?></p>
+              <p class="time_error"></p>
             </div>
             <div class="appointment-form__field">
-              <label class="appointment-form__label">Service</label>
+              <label for="servicesBtn" class="appointment-form__label">Service</label>
               <input type="button" value="Select service" class="services-btn" id="servicesBtn">
               <div class="selected-services" id="selectedServices"></div>
               <div class="appointment-form__checkbox-group">
@@ -192,7 +241,7 @@
                 </div>
               </div>
 
-                
+
               <div id="selectedServicesError" class="appointment-form__text--error" style="display: none; color: red; font-size: 14px; "></div>
             </div>
             <div class="btn-container">
@@ -230,30 +279,44 @@
         const rescheduleModal = document.getElementById('rescheduleModal')
         const completeBtn = document.getElementById('completeBtn')
         const rescheduleBtn = document.getElementById('rescheduleBtn')
-        const actions = document.querySelector('.actions') 
+        const actions = document.querySelector('.actions')
         const alertModal = document.querySelector('.alert-modal') 
+        const form = document.querySelector('form[action="includes/complete_apt.php"]')
 
-        completeBtn.addEventListener('click', () => {
-          alertModal.style.right = '1rem'
+        completeBtn.addEventListener('click', (e) => {
+          e.preventDefault(); // Prevent form submission
+
+          // Submit the form using JavaScript after the animation delay
+          form.submit();
+
+          // Show the "Appointment Completed" alert modal
+          alertModal.style.right = '1rem';
 
           setTimeout(() => {
-            alertModal.style.animation = 'fadeInOut 3s ease-in-out'
-
+            alertModal.style.animation = 'fadeInOut 3s ease-in-out';
+            
             alertModal.addEventListener('animationend', () => {
-              alertModal.style.display = 'none'; 
+              alertModal.style.display = 'none';
             }, { once: true });
-          }, 3000)
+          }, 3000);
 
-          while(actions.firstChild){
-            actions.removeChild(actions.firstChild)
+          // Update the button text after completion
+          while (actions.firstChild) {
+            actions.removeChild(actions.firstChild);
           }
 
-          const completeText = document.createElement('p')
-          completeText.textContent = 'Completed ✓'
-          completeText.classList = 'complete-text'
+          const completeText = document.createElement('p');
+          completeText.textContent = 'Completed ✓';
+          completeText.classList = 'complete-text';
 
-          actions.appendChild(completeText)
-        })
+          actions.appendChild(completeText);
+        });
+
+        rescheduleBtn.addEventListener('click', () => {
+          // Show reschedule modal
+          const rescheduleModal = document.getElementById('rescheduleModal');
+          rescheduleModal.style.display = 'flex';
+        });
 
         rescheduleBtn.addEventListener('click', () => {
           rescheduleModal.style.display = 'flex'
@@ -357,11 +420,7 @@
       }
 
       // Pass PHP array to JavaScript
-      // const availableDates = <?php echo json_encode($availableDates); ?>;
-      const availableDates = ["2024-11-22","2024-11-25","2024-11-26","2024-11-27","2024-11-28","2024-11-29"]
-      // const disabledDates = <?php 
-      // echo json_encode($disabledDates)
-      ; ?>;
+      const availableDates = <?php echo json_encode($availableDates); ?>;
 
       document.addEventListener('DOMContentLoaded', function() {
           flatpickr("#appointmentDate", {
