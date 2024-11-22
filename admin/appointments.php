@@ -276,20 +276,20 @@ if (isset($_SESSION['pending_appointment'])) {
 </body>
 <script>
 
-document.addEventListener('DOMContentLoaded', () => {
-      const modalContainer = document.querySelector(".modal");
-      const exitBtn = modalContainer.querySelector("#exitButton");
-      const modalStatus = modalContainer.querySelector("#modalStatus");
+  document.addEventListener('DOMContentLoaded', () => {
+    const modalContainer = document.querySelector(".modal");
+    const exitBtn = modalContainer.querySelector("#exitButton");
+    const modalStatus = modalContainer.querySelector("#modalStatus");
 
-      // Check if the modal should be displayed
-      <?php if ($showModal) : ?>
-      modalStatus.innerText = "<?php echo $modalStatus; ?>";
-      modalContainer.style.display = "flex";
-      <?php endif; ?>
-      exitBtn.addEventListener("click", () => {
-        modalContainer.style.transform = "scale(0)";
-      });
+    // Check if the modal should be displayed
+    <?php if ($showModal) : ?>
+    modalStatus.innerText = "<?php echo $modalStatus; ?>";
+    modalContainer.style.display = "flex";
+    <?php endif; ?>
+    exitBtn.addEventListener("click", () => {
+      modalContainer.style.transform = "scale(0)";
     });
+  });
 
 
   const dropdownContainers = document.querySelectorAll('.dropdown-container')

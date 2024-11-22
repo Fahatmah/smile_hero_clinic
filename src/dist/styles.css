@@ -1799,7 +1799,7 @@ footer .contact-section .footer-info__credits {
   cursor: pointer;
 }
 
-.modal {
+.reset-pass.modal {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -1815,7 +1815,7 @@ footer .contact-section .footer-info__credits {
           backdrop-filter: blur(3px);
   z-index: 1;
 }
-.modal__content {
+.reset-pass.modal__content {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -1826,11 +1826,11 @@ footer .contact-section .footer-info__credits {
   outline: var(--ntrl-clr-300);
   overflow: hidden;
 }
-.modal__content > * {
+.reset-pass.modal__content > * {
   width: 370px;
   height: 370px;
 }
-.modal__content .body-text {
+.reset-pass.modal__content .body-text {
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -1838,7 +1838,7 @@ footer .contact-section .footer-info__credits {
   gap: 1rem;
   padding: 2rem;
 }
-.modal__content .body-text .modal__header {
+.reset-pass.modal__content .body-text .modal__header {
   width: 100%;
   display: flex;
   align-items: flex-start;
@@ -1846,17 +1846,17 @@ footer .contact-section .footer-info__credits {
   flex-direction: column;
   gap: 0.5rem;
 }
-.modal__content .body-text .modal__header #modalStatus {
+.reset-pass.modal__content .body-text .modal__header #modalStatus {
   font-size: 2.3rem;
   font-weight: bold;
   color: var(--ntrl-clr-300);
   text-align: left;
   letter-spacing: -2px;
 }
-.modal__content .body-text .modal__header #modalStatus .appointment-id {
+.reset-pass.modal__content .body-text .modal__header #modalStatus .appointment-id {
   color: var(--pr-clr-100);
 }
-.modal__content .body-text .modal__header #modalMessage a {
+.reset-pass.modal__content .body-text .modal__header #modalMessage a {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -1865,17 +1865,17 @@ footer .contact-section .footer-info__credits {
   font-weight: 500;
   color: var(--pr-clr-100);
 }
-.modal__content .body-text .modal__header #modalMessage a:hover {
+.reset-pass.modal__content .body-text .modal__header #modalMessage a:hover {
   text-decoration: underline;
 }
-.modal__content .illustration__container {
+.reset-pass.modal__content .illustration__container {
   overflow: hidden;
 }
-.modal__content .illustration__container svg {
+.reset-pass.modal__content .illustration__container svg {
   width: 100%;
   height: 100%;
 }
-.modal__button {
+.reset-pass.modal__button {
   width: 100%;
   color: var(--ntrl-clr-100);
   text-transform: capitalize;
@@ -1884,10 +1884,10 @@ footer .contact-section .footer-info__credits {
   background-color: var(--pr-clr-300);
   cursor: pointer;
 }
-.modal__button:hover {
+.reset-pass.modal__button:hover {
   background-color: var(--pr-clr-350);
 }
-.modal__button:active {
+.reset-pass.modal__button:active {
   background-color: var(--pr-clr-300);
 }
 
@@ -2545,7 +2545,7 @@ footer .contact-section .footer-info__credits {
 .faqs-and-questions__page {
   width: 100%;
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   justify-content: center;
   flex-direction: column;
   gap: 0.5rem;
@@ -2563,17 +2563,17 @@ footer .contact-section .footer-info__credits {
 }
 .faqs-and-questions__page .accordion {
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   justify-content: center;
   flex-direction: column;
   gap: 0.5rem;
 }
 .faqs-and-questions__page .accordion > * {
-  width: 100%;
+  width: 100% !important;
 }
 .faqs-and-questions__page .accordion details {
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   justify-content: center;
   flex-direction: column;
   gap: 0.5rem;
@@ -2588,6 +2588,7 @@ footer .contact-section .footer-info__credits {
   color: var(--pr-clr-300);
 }
 .faqs-and-questions__page .accordion details summary {
+  width: 100%;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -2727,6 +2728,21 @@ footer .contact-section .footer-info__credits {
 }
 .feedback__page .form .feedback__submit-btn:hover {
   background-color: var(--pr-clr-150);
+}
+
+.modal__content .illustration__container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: row;
+  gap: 0;
+  border-left: 1px solid var(--ntrl-clr-300);
+}
+.modal__content .illustration__container img {
+  width: 100%;
+  height: 100%;
+  -o-object-fit: cover;
+     object-fit: cover;
 }
 
 .modal_container {
@@ -4479,14 +4495,19 @@ body.user-homepage main .about .services .appointment__button:hover {
 .booked__container .booked-appointments__table table tbody tr td.action {
   width: 8rem;
 }
-.booked__container .booked-appointments__table table tbody tr td.action button {
-  font-size: 1rem;
-  font-weight: 600;
+.booked__container .booked-appointments__table table tbody tr td.action button a {
   color: var(--ntrl-clr-300);
+  padding: 0.2rem 0.4rem;
+  border-radius: 0.3rem;
   cursor: pointer;
 }
-.booked__container .booked-appointments__table table tbody tr td.action button:hover {
-  text-decoration: underline;
+.booked__container .booked-appointments__table table tbody tr td.action button a:hover {
+  outline: 1px solid hsla(0, 0%, 38%, 0.3);
+  background-color: hsla(0, 0%, 38%, 0.1);
+}
+.booked__container .booked-appointments__table table tbody tr td.action button a:active {
+  color: var(--ntrl-clr-100);
+  background-color: hsla(0, 0%, 38%, 0.3);
 }
 
 .patients__container {
@@ -5876,4 +5897,428 @@ body.user-homepage main .about .services .appointment__button:hover {
 }
 .dashboard-report-container .performance-summary .charts-container > * .header.monthly span {
   color: var(--pr-clr-300);
+}
+
+.appointment-details-cont {
+  --ff-inter: "Inter", sans-serif;
+  --tbl-border: 1px solid hsl(0, 0%, 38%, 0.2);
+  --cancel-btn-clr: #ff6e5c;
+  --charcoal-gray: hsl(0, 0%, 38%, 0.7);
+  --dropdown-bdr: 1px solid hsl(0, 0%, 38%, 0.3);
+  --transparent-gray: hsl(0, 0%, 38%, 0.1);
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  flex-direction: column;
+  gap: 1.25rem;
+  width: 100%;
+  color: var(--ntrl-clr-300);
+  letter-spacing: -1px;
+  padding: 1.5rem;
+  border-radius: 1.25rem;
+  background-color: var(--ntrl-clr-100);
+}
+.appointment-details-cont header {
+  width: 100%;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  flex-direction: column;
+  gap: 1rem;
+}
+.appointment-details-cont header .header-and-btn {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-direction: row;
+  gap: 0;
+}
+.appointment-details-cont header .header-and-btn h1 {
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+.appointment-details-cont header .header-and-btn a {
+  color: var(--ntrl-clr-300);
+}
+.appointment-details-cont header .overview-details {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-direction: row;
+  gap: 0;
+  width: 100%;
+  padding: 1.5rem;
+  border-radius: 1.1rem;
+  outline: 1px solid var(--charcoal-gray);
+}
+.appointment-details-cont header .overview-details .details {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: row;
+  gap: 2rem;
+  letter-spacing: normal;
+}
+.appointment-details-cont header .overview-details .details > * {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 0;
+}
+.appointment-details-cont header .overview-details .details .date {
+  gap: 0.6rem;
+  border-right: 1px solid var(--charcoal-gray);
+  padding-right: 1.5rem;
+}
+.appointment-details-cont header .overview-details .details .date > * {
+  font-weight: 900;
+  color: var(--pr-clr-100);
+}
+.appointment-details-cont header .overview-details .details .date .day {
+  font-size: 1.3rem;
+}
+.appointment-details-cont header .overview-details .details .date .apt-date {
+  font-size: 3rem;
+  line-height: 1;
+}
+.appointment-details-cont header .overview-details .details .time-apt-id,
+.appointment-details-cont header .overview-details .details .service-message {
+  align-items: flex-start;
+  gap: 1.2rem;
+}
+.appointment-details-cont header .overview-details .details .time-apt-id > *,
+.appointment-details-cont header .overview-details .details .service-message > * {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: row;
+  gap: 0.5rem;
+}
+.appointment-details-cont header .overview-details .actions {
+  width: 10rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+.appointment-details-cont header .overview-details .actions > * {
+  width: 100%;
+  color: var(--ntrl-clr-300);
+  padding: 0.4rem 1rem;
+  border-radius: 1rem;
+  cursor: pointer;
+}
+.appointment-details-cont header .overview-details .actions .reschedule-btn {
+  color: hsla(0, 0%, 38%, 0.5);
+  outline: 1px solid hsla(0, 0%, 38%, 0.5);
+}
+.appointment-details-cont header .overview-details .actions .reschedule-btn:hover {
+  color: var(--ntrl-clr-100);
+  background-color: hsla(0, 0%, 38%, 0.8);
+}
+.appointment-details-cont header .overview-details .actions .complete-btn {
+  color: var(--ntrl-clr-100);
+  background-color: var(--pr-clr-270);
+}
+.appointment-details-cont header .overview-details .actions .complete-btn:hover {
+  background-color: hsla(137, 64%, 47%, 0.8);
+}
+.appointment-details-cont header .overview-details .actions .complete-text {
+  justify-self: flex-end;
+  font-size: 1.1rem;
+  font-weight: bold;
+  color: var(--pr-clr-270);
+  text-align: right;
+  padding: 0;
+}
+.appointment-details-cont .table-cont {
+  width: 100%;
+  padding: 1rem;
+  border-radius: 1.1rem;
+  outline: 1px solid var(--charcoal-gray);
+  overflow: hidden;
+}
+.appointment-details-cont .table-cont table {
+  width: 100%;
+  border-collapse: collapse;
+  letter-spacing: -0.5px;
+}
+.appointment-details-cont .table-cont table th,
+.appointment-details-cont .table-cont table td {
+  padding: 0.5rem 1rem;
+}
+.appointment-details-cont .table-cont table tbody tr td:first-child {
+  font-weight: bold;
+  border-right: var(--tbl-border);
+}
+.appointment-details-cont .table-cont table tbody tr td {
+  border-bottom: var(--tbl-border);
+}
+.appointment-details-cont .table-cont table tbody tr:last-child td {
+  border-bottom: 0;
+}
+
+.reschedule-modal {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: row;
+  gap: 0;
+  width: 100%;
+  min-height: 100vh;
+  position: fixed;
+  left: 0;
+  top: 0;
+  background-color: hsla(0, 0%, 38%, 0.3);
+  -webkit-backdrop-filter: blur(3px);
+          backdrop-filter: blur(3px);
+  z-index: 1;
+}
+.reschedule-modal .content {
+  width: 30rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: row;
+  gap: 0;
+  border-radius: 1.25rem;
+  background-color: var(--ntrl-clr-100);
+  outline: var(--ntrl-clr-300);
+}
+.reschedule-modal .content form {
+  width: 100%;
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-start;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+.reschedule-modal .content form > * {
+  width: 100%;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  flex-direction: column;
+  gap: 1.5rem;
+  padding: 1.5rem;
+  border-radius: 0.5rem;
+  background-color: var(--ntrl-clr-100);
+}
+.reschedule-modal .content form > * .appointment-form__field {
+  position: relative;
+  width: 100%;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+.reschedule-modal .content form > * .appointment-form__field .appointment-form__label {
+  font-size: 0.75rem;
+  font-weight: bold;
+  color: var(--ntrl-clr-300);
+}
+.reschedule-modal .content form > * .appointment-form__field .services-btn {
+  width: 100%;
+  text-align: left;
+  cursor: pointer;
+}
+.reschedule-modal .content form > * .appointment-form__field .services-btn:hover {
+  background-color: hsla(0, 0%, 38%, 0.2);
+}
+.reschedule-modal .content form > * .appointment-form__field .services-btn:active {
+  background: none;
+}
+.reschedule-modal .content form > * .appointment-form__field .selected-services {
+  width: 100%;
+}
+.reschedule-modal .content form > * .appointment-form__field .selected-services p {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--ntrl-clr-300);
+}
+.reschedule-modal .content form > * .appointment-form__field .selected-services ul {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  flex-direction: row;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+.reschedule-modal .content form > * .appointment-form__field .selected-services ul li {
+  font-size: 0.8rem;
+  color: var(--ntrl-clr-300);
+  text-transform: capitalize;
+  border-radius: 0.25rem;
+  padding: 0.25rem;
+  outline: 1px solid var(--ntrl-clr-300);
+}
+.reschedule-modal .content form > * .appointment-form__field input,
+.reschedule-modal .content form > * .appointment-form__field .appointment-form__select,
+.reschedule-modal .content form > * .appointment-form__field .appointment-form__checkbox-group {
+  width: 100%;
+  font-size: 0.875rem;
+  color: var(--ntrl-clr-300);
+  padding: 0.875rem 1rem;
+  border: 1px solid hsla(0, 0%, 9%, 0.3);
+  border-radius: 0.25rem;
+}
+.reschedule-modal .content form > * .appointment-form__field .appointment-form__select {
+  color: var(--ntrl-clr-300);
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  -ms-appearance: none;
+  background: none;
+}
+.reschedule-modal .content form > * .appointment-form__field .appointment-form__select option {
+  color: var(--ntrl-clr-300);
+}
+.reschedule-modal .content form > * .appointment-form__field .appointment-form__checkbox-group {
+  width: 16rem;
+  position: absolute;
+  bottom: 0;
+  right: -4rem;
+  z-index: 1000;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  flex-direction: column;
+  gap: 0;
+  padding: 0;
+  background-color: var(--ntrl-clr-100);
+  scale: 0;
+  transform-origin: bottom left;
+  transition: 200ms ease-in-out;
+}
+.reschedule-modal .content form > * .appointment-form__field .appointment-form__checkbox-group.active {
+  scale: 1;
+}
+.reschedule-modal .content form > * .appointment-form__field .appointment-form__checkbox-group .checkbox-container {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  flex-direction: row;
+  gap: 0.5rem;
+  transition: 50ms ease-in-out;
+}
+.reschedule-modal .content form > * .appointment-form__field .appointment-form__checkbox-group .checkbox-container:hover {
+  background-color: hsl(0, 0%, 38%);
+  color: var(--ntrl-clr-100);
+}
+.reschedule-modal .content form > * .appointment-form__field .appointment-form__checkbox-group .checkbox-container:hover label .service-price {
+  color: var(--ntrl-clr-100);
+}
+.reschedule-modal .content form > * .appointment-form__field .appointment-form__checkbox-group .checkbox-container input {
+  width: 1rem;
+  height: 1rem;
+  margin-left: 1rem;
+}
+.reschedule-modal .content form > * .appointment-form__field .appointment-form__checkbox-group .checkbox-container label {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-direction: row;
+  gap: 0;
+  letter-spacing: -1px;
+  padding-block: 0.5rem;
+  padding-inline-end: 1rem;
+  cursor: pointer;
+}
+.reschedule-modal .content form > * .appointment-form__field .appointment-form__checkbox-group .checkbox-container label .service-price {
+  color: var(--pr-clr-300);
+}
+.reschedule-modal .content form > * .appointment-form__field .appointment-form__checkbox-group .checkbox-container label.active {
+  background-color: var(--pr-clr-300);
+  color: var(--ntrl-clr-100);
+  font-weight: 600;
+}
+.reschedule-modal .content form > * .appointment-form__field .appointment-form__checkbox-group .checkbox-container label.active .service-price {
+  color: var(--ntrl-clr-100);
+}
+.reschedule-modal .content form > * .appointment-form__field .appointment-form__validation {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 0;
+}
+.reschedule-modal .content form > * .appointment-form__field .appointment-form__validation .appointment-form__text {
+  font-size: 0.875rem;
+  display: none;
+}
+.reschedule-modal .content form > * .appointment-form__field .appointment-form__validation .appointment-form__text--error {
+  color: var(--pr-clr-100);
+}
+.reschedule-modal .content form > * .appointment-form__field .appointment-form__validation .appointment-form__text--valid {
+  color: var(--pr-clr-270);
+}
+.reschedule-modal .content form > * .btn-container {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-direction: row;
+  gap: 0.5rem;
+}
+.reschedule-modal .content form > * .btn-container > * {
+  width: 100%;
+  font-size: 0.875rem;
+  padding-block: 0.75rem;
+  border-radius: 0.375rem;
+  cursor: pointer;
+}
+.reschedule-modal .content form > * .btn-container .appointment-form__submit-button {
+  color: var(--ntrl-clr-100);
+  background-color: var(--pr-clr-300);
+}
+.reschedule-modal .content form > * .btn-container .appointment-form__submit-button:hover {
+  background-color: var(--pr-clr-350);
+}
+.reschedule-modal .content form > * .btn-container .appointment-form__submit-button:active {
+  background-color: var(--pr-clr-300);
+}
+.reschedule-modal .content form > * .btn-container .appointment-form__cancel-button {
+  color: var(--ntrl-clr-300);
+}
+.reschedule-modal .content form > * .btn-container .appointment-form__cancel-button:hover {
+  outline: 1px solid hsla(0, 0%, 38%, 0.5);
+}
+.reschedule-modal .content form > * .btn-container .appointment-form__cancel-button:active {
+  background-color: hsla(0, 0%, 38%, 0.1);
+}
+
+.alert-modal {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: row;
+  gap: 0;
+  position: fixed;
+  right: -20rem;
+  bottom: 1rem;
+  transition: 200ms ease-in-out;
+  z-index: 1;
+}
+@keyframes fadeInOut {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+.alert-modal .container {
+  padding: 1rem;
+  border-radius: 0.5rem;
+  background-color: var(--pr-clr-270);
+}
+.alert-modal .container .body-text {
+  font-weight: bold;
+  color: var(--ntrl-clr-100);
 }/*# sourceMappingURL=styles.css.map */

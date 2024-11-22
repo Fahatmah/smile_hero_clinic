@@ -176,12 +176,20 @@
             &.action {
               width: 8rem;
               button {
-                font-size: 1rem;
-                font-weight: 600;
-                color: var(--ntrl-clr-300);
-                cursor: pointer;
-                &:hover {
-                  text-decoration: underline;
+                a {
+                  color: var(--ntrl-clr-300);
+                  padding: 0.2rem 0.4rem;
+                  border-radius: 0.3rem;
+                  cursor: pointer;
+                  &:hover {
+                    outline: 1px solid hsl(0, 0%, 38%, 0.3);
+                    background-color: hsl(0, 0%, 38%, 0.1);
+                  }
+
+                  &:active {
+                    color: var(--ntrl-clr-100);
+                    background-color: hsl(0, 0%, 38%, 0.3);
+                  }
                 }
               }
             }

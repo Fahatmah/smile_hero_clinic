@@ -2,7 +2,7 @@
 
 .faqs-and-questions__page {
   width: 100%;
-  @include display-flex($dir: column, $gap: 0.5rem);
+  @include display-flex($dir: column, $y: flex-start, $gap: 0.5rem);
 
   & > * {
     width: 100%;
@@ -18,14 +18,14 @@
   }
 
   .accordion {
-    @include display-flex($dir: column, $gap: 0.5rem);
+    @include display-flex($dir: column, $y: flex-start, $gap: 0.5rem);
 
     & > * {
-      width: 100%;
+      width: 100% !important;
     }
 
     details {
-      @include display-flex($dir: column, $gap: 0.5rem);
+      @include display-flex($dir: column, $y: flex-start, $gap: 0.5rem);
 
       & > * {
         padding: 1.5rem;
@@ -39,6 +39,7 @@
       }
 
       summary {
+        width: 100%;
         @include display-flex($x: space-between);
         font-size: 1rem;
         color: var(--ntrl-clr-300);

@@ -110,3 +110,19 @@
     }
   }
 }
+
+.modal {
+  &__content {
+    .illustration__container {
+      @include display-flex();
+      border-left: 1px solid var(--ntrl-clr-300);
+
+      img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        // transform: scaleX(-1);
+      }
+    }
+  }
+}

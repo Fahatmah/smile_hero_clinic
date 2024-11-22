@@ -112,7 +112,7 @@ $totalPages = ceil($totalRecords / $limit);
                 <th>id #</th>
                 <th>
                   action 
-                  <div class="dropdown-container">
+                  <!-- <div class="dropdown-container">
                     <button class="filter-btn">
                     <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path d="M5.22488 3.35999L3.36487 1.5L1.50488 3.35999" stroke="#616161" stroke-width="0.75" stroke-linecap="round" stroke-linejoin="round"/>
@@ -127,7 +127,7 @@ $totalPages = ceil($totalRecords / $limit);
                       <li><button>updated</button></li>
                       <li><button>accepted</button></li>
                     </ul>
-                  </div>
+                  </div> -->
                 </th>
               </tr>
             </thead>
@@ -165,8 +165,12 @@ $totalPages = ceil($totalRecords / $limit);
                 </td>
 
                 <td class="patient-cell action" data-status="<?php echo $user['status']; ?>">
-
-                </td>
+                  <button type="button">
+                    <a href="appointment-details.php">
+                      View Details
+                    </a>
+                  </td>
+                </button>
               </tr>
               <?php } ?>
             </tbody>
@@ -184,16 +188,16 @@ $totalPages = ceil($totalRecords / $limit);
 </body>
 <script>
   // actions styles
-  const actions = document.querySelectorAll('.patient-cell.action')
-  actions.forEach(action => {
-    action.innerHTML = `<button class="reschedule-btn">${action.dataset.status === 'accepted'? 'Reschedule': 'View History'}</button>`
+  // const actions = document.querySelectorAll('.patient-cell.action')
+  // actions.forEach(action => {
+  //   action.innerHTML = `<button class="reschedule-btn">${action.dataset.status === 'accepted'? 'Reschedule': 'View History'}</button>`
     
-    const button = action.querySelector('button')
-    let actionText = button.textContent.trim()
+  //   const button = action.querySelector('button')
+  //   let actionText = button.textContent.trim()
     
-    if(actionText === 'Reschedule') 
-      button.style.color = 'var(--cancel-btn-clr)'
-  })
+  //   if(actionText === 'Reschedule') 
+  //     button.style.color = 'var(--cancel-btn-clr)'
+  // })
 
   const dropdownContainers = document.querySelectorAll('.dropdown-container')
   dropdownContainers.forEach(container => {

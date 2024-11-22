@@ -70,7 +70,7 @@ if (strtotime($user["reset_token_expires_at"]) <= time()){
       </form>
 
       <!-- modal -->
-      <div class="modal" style="display: none">
+      <div class="reset-pass modal" style="display: none">
        <div class="modal__content">
          <div class="body-text">
            <div class="modal__header">
