@@ -103,16 +103,20 @@ $conn->close();
                 </div>
               </div>
               <div class="actions">
-                <?php if($aptResult['status'] != "completed"){ ?>
-                <form action="includes/complete_apt.php" method="post">
-                  <input type="hidden" name="appointmentId" value= <?php echo $aptResult['appointment_id']; ?>>
-                  <button type="submit" class="complete-btn" id="completeBtn" name="completeBtn" value="complete">Complete</button>
-                </form>
-                  <button type="button" class="reschedule-btn" id="rescheduleBtn" style="display: <?php $tomorrow = date("Y-m-d", strtotime("+1 day")); echo ($aptResult['date'] <= $tomorrow) ? 'none' : '' ?>;">
-                    Reschedule
-                  </button>
-                <?php }else{ ?>
+                <?php if($aptResult['status'] === "completed"){ ?>
                   <p class="complete-text">Completed ✓</p>
+                <?php }else{ ?>
+                  <div class="btn-container">
+                     <form action="includes/complete_apt.php" method="post">
+                        <input type="hidden" name="appointmentId" value= <?php echo $aptResult['appointment_id']; ?>>
+                        <button type="submit" class="complete-btn" id="completeBtn" name="completeBtn" value="complete">Complete</button>
+                      </form>
+
+                      <button type="button" class="reschedule-btn" id="rescheduleBtn" style="display: <?php $tomorrow = date("Y-m-d", strtotime("+1 day")); echo ($aptResult['date'] <= $tomorrow) ? 'none' : '' ?>;">
+                        Reschedule
+                      </button>
+                  </div>
+                  <!-- <p class="complete-text">Completed ✓</p> -->
                 <?php } ?>
               </div>
             </div>
@@ -171,6 +175,7 @@ $conn->close();
     <!-- modals -->
     <section class="reschedule-modal" id="rescheduleModal" style="display: none;">
       <div class="content">
+        <p class="header">Reschedule Appointment</p>
         <form action="includes/reschedule.php" method="post"  id="rescheduleForm">
           <section>
             <div class="appointment-form__field">
@@ -202,48 +207,7 @@ $conn->close();
               </div>
               <p class="time_error"></p>
             </div>
-            <div class="appointment-form__field">
-              <label for="servicesBtn" class="appointment-form__label">Service</label>
-              <input type="button" value="Select service" class="services-btn" id="servicesBtn">
-              <div class="selected-services" id="selectedServices"></div>
-              <div class="appointment-form__checkbox-group">
-                <div class="checkbox-container">
-                    <input type="checkbox" id="cleaning" name="dentalService[]" value="teeth cleaning  ₱2,800">
-                    <label for="cleaning">Teeth Cleaning <span class="service-price">₱2,800</span></label>
-                </div>
-                <div class="checkbox-container">
-                    <input type="checkbox" id="whitening" name="dentalService[]" value="teeth whitening  ₱8,400">
-                    <label for="whitening">Teeth Whitening <span class="service-price">₱8,400</span></label>
-                </div>
-                <div class="checkbox-container">
-                    <input type="checkbox" id="extraction" name="dentalService[]" value="tooth extraction  ₱4,200">
-                    <label for="extraction">Tooth Extraction <span class="service-price">₱4,200</span></label>
-                </div>
-                <div class="checkbox-container">
-                    <input type="checkbox" id="filling" name="dentalService[]" value="dental filling  ₱6,700">
-                    <label for="filling">Dental Filling <span class="service-price">₱6,700</span></label>
-                </div>
-                <div class="checkbox-container">
-                    <input type="checkbox" id="checkup" name="dentalService[]" value="routine checkup-up ₱2,200">
-                    <label for="checkup">Routine Check-up <span class="service-price">₱2,200</span></label>
-                </div>
-                <div class="checkbox-container">
-                    <input type="checkbox" id="braces" name="dentalService[]" value="braces consultation  ₱5,600">
-                    <label for="braces">Braces Consultation <span class="service-price">₱5,600</span></label>
-                </div>
-                <div class="checkbox-container">
-                    <input type="checkbox" id="root_canal" name="dentalService[]" value="root canal treatment ₱16,800">
-                    <label for="root_canal">Root Canal Treatment <span class="service-price">₱16,800</span></label>
-                </div>
-                <div class="checkbox-container">
-                    <input type="checkbox" id="implants" name="dentalService[]" value="dental implants  ₱56,000">
-                    <label for="implants">Dental Implants <span class="service-price">₱56,000</span></label>
-                </div>
-              </div>
-
-
-              <div id="selectedServicesError" class="appointment-form__text--error" style="display: none; color: red; font-size: 14px; "></div>
-            </div>
+            
             <div class="btn-container">
               <input type="submit" name="submit" value="Reschedule" class="appointment-form__submit-button">
               <input type="button" value="Cancel" class="appointment-form__cancel-button" id="cancelBtn">
@@ -253,13 +217,25 @@ $conn->close();
         </form>
       </div>
     </section>
-    <section class="alert-modal">
-      <div class="container">
-        <p class="body-text">
-          Appointment Completed ✓
-        </p>
+
+    <section class="complete-modal" id="completeModal" style="display: none;">
+      <div class="content">
+        <div class="body-text">
+          <p class="header">
+            Appointment Completed ✓
+          </p>
+
+          <button type="button" class="close-btn" id="closeBtn">
+            Close
+          </button>
+        </div>
+          
+       <div class="illustration-container">
+         <img src="../assets/admin_assets/complete.svg" alt="illustration of complete appointment">
+       </div>
       </div>
     </section>
+
     <script>
       const weekdayText = document.getElementById('weekday')
       const dateEl = document.getElementById('date')
@@ -277,50 +253,47 @@ $conn->close();
         const rescheduleForm = document.getElementById('rescheduleForm');
         const cancelBtn = document.getElementById('cancelBtn')
         const rescheduleModal = document.getElementById('rescheduleModal')
-        const completeBtn = document.getElementById('completeBtn')
-        const rescheduleBtn = document.getElementById('rescheduleBtn')
         const actions = document.querySelector('.actions')
-        const alertModal = document.querySelector('.alert-modal') 
         const form = document.querySelector('form[action="includes/complete_apt.php"]')
+        const completeModal = document.getElementById('completeModal')
+        const closeBtn = document.getElementById('closeBtn')
 
-        completeBtn.addEventListener('click', (e) => {
-          e.preventDefault(); // Prevent form submission
+        actions.addEventListener('click', (e) => {
+          const completeBtn = e.target.closest('#completeBtn');
+          const rescheduleBtn = e.target.closest('#rescheduleBtn')
 
-          // Submit the form using JavaScript after the animation delay
-          form.submit();
+          if (completeBtn) {
+            e.preventDefault();
 
-          // Show the "Appointment Completed" alert modal
-          alertModal.style.right = '1rem';
+            const formData = new FormData(form); // Collect form data
+            fetch(form.action, {
+              method: 'POST',
+              body: formData,
+            })
+              .then((response) => {
+                if (response.ok) return response.text();
+                else throw new Error('Failed to complete the appointment.');
+              })
+              .then((data) => {
+                while (actions.firstChild) actions.removeChild(actions.firstChild);
 
-          setTimeout(() => {
-            alertModal.style.animation = 'fadeInOut 3s ease-in-out';
-            
-            alertModal.addEventListener('animationend', () => {
-              alertModal.style.display = 'none';
-            }, { once: true });
-          }, 3000);
-
-          // Update the button text after completion
-          while (actions.firstChild) {
-            actions.removeChild(actions.firstChild);
+                const completeText = document.createElement('p');
+                completeText.textContent = 'Completed ✓';
+                completeText.classList = 'complete-text';
+                
+                actions.appendChild(completeText);                
+                completeModal.style.display = 'flex';
+              })
+              .catch((error) => {
+                console.error('Error:', error);
+                alert('An error occurred while completing the appointment.');
+              });
           }
 
-          const completeText = document.createElement('p');
-          completeText.textContent = 'Completed ✓';
-          completeText.classList = 'complete-text';
-
-          actions.appendChild(completeText);
+          if (rescheduleBtn) {
+            rescheduleModal.style.display = 'flex'
+          }
         });
-
-        rescheduleBtn.addEventListener('click', () => {
-          // Show reschedule modal
-          const rescheduleModal = document.getElementById('rescheduleModal');
-          rescheduleModal.style.display = 'flex';
-        });
-
-        rescheduleBtn.addEventListener('click', () => {
-          rescheduleModal.style.display = 'flex'
-        })
 
         cancelBtn.addEventListener('click', () => {
           if(rescheduleModal.style.display == 'flex') rescheduleModal.style.display = 'none'
@@ -356,78 +329,26 @@ $conn->close();
               validElement.style.display = 'block'; // Show valid message
             }
           });
-
-          // Validate dentalService checkboxes
-          const serviceCheckboxes = document.querySelectorAll('input[name="dentalService[]"]');
-          const selectedServicesError = document.getElementById('selectedServicesError');
-          const anyServiceSelected = Array.from(serviceCheckboxes).some(checkbox => checkbox.checked);
-
-          if (!anyServiceSelected) {
-            selectedServicesError.innerText = 'Please select at least one service';
-            selectedServicesError.style.display = 'block'; // Show error message
-            isValid = false;
-          } else {
-            selectedServicesError.style.display = 'none'; // Hide error message
-          }
-
+        
           if (isValid) {
             HTMLFormElement.prototype.submit.call(rescheduleForm);
           }
         });
-      });
 
-      document.querySelector('.services-btn').addEventListener('click', function() {
-        const checkboxGroup = document.querySelector('.appointment-form__checkbox-group')
-        checkboxGroup.classList.toggle('active')
-      })
-
-      const checkBoxContainers = document.querySelectorAll('.checkbox-container')
-      const servicesBtn = document.getElementById('servicesBtn')
-      const selectedServicesContainer = document.getElementById('selectedServices')
-      let selectedServices = []
-      
-      checkBoxContainers.forEach(container => {
-        const inputEl = container.querySelector('input')
-        
-        inputEl.addEventListener('change', () => {
-          selectedServices = []
-          
-          checkBoxContainers.forEach(checkBoxContainer => {
-            const checkbox = checkBoxContainer.querySelector('input')
-            const label = checkBoxContainer.querySelector('label')
-
-            if(checkbox.checked) {
-              checkBoxContainer.style.backgroundColor = '#1d72f2'
-              label.classList.add('active')
-              selectedServices.push(checkbox.value)            
-            } else {
-              checkBoxContainer.style.backgroundColor = ''
-              label.classList.remove('active')
-            }
-          })
-          showSelectedServices()
+        closeBtn.addEventListener('click', () => {
+          completeModal.style.display = 'none'
         })
-      })
-
-      function showSelectedServices() {
-        selectedServicesContainer.innerHTML = `
-        <ul>
-          ${selectedServices.map(service => {
-            return `<li>${service}</li>`
-          }).join('')}
-        </ul>
-        `
-      }
+      });
 
       // Pass PHP array to JavaScript
       const availableDates = <?php echo json_encode($availableDates); ?>;
 
       document.addEventListener('DOMContentLoaded', function() {
-          flatpickr("#appointmentDate", {
-              dateFormat: "Y-m-d",
-              minDate: "today",
-              enable: availableDates,
-          });
+        flatpickr("#appointmentDate", {
+            dateFormat: "Y-m-d",
+            minDate: "today",
+            enable: availableDates,
+        });
       });
     </script>
   </body>

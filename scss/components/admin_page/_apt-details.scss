@@ -80,35 +80,6 @@
 
       .actions {
         width: 10rem;
-        @include display-flex($gap: 0.5rem, $dir: column);
-
-        & > * {
-          width: 100%;
-          color: var(--ntrl-clr-300);
-          padding: 0.4rem 1rem;
-          border-radius: 1rem;
-          cursor: pointer;
-        }
-
-        .reschedule-btn {
-          color: hsl(0, 0%, 38%, 0.5);
-          outline: 1px solid hsl(0, 0%, 38%, 0.5);
-          // background-color: hsl(0, 0%, 38%);
-
-          &:hover {
-            color: var(--ntrl-clr-100);
-            background-color: hsl(0, 0%, 38%, 0.8);
-          }
-        }
-
-        .complete-btn {
-          color: var(--ntrl-clr-100);
-          background-color: var(--pr-clr-270);
-
-          &:hover {
-            background-color: hsl(137, 64%, 47%, 0.8);
-          }
-        }
 
         .complete-text {
           justify-self: flex-end;
@@ -117,6 +88,41 @@
           color: var(--pr-clr-270);
           text-align: right;
           padding: 0;
+        }
+
+        .btn-container {
+          width: 100%;
+          @include display-flex($gap: 0.5rem, $dir: column);
+
+          form {
+            width: 100%;
+            .complete-btn {
+              width: 100%;
+              color: var(--ntrl-clr-100);
+              background-color: var(--pr-clr-270);
+              padding: 0.4rem 1rem;
+              border-radius: 1rem;
+              cursor: pointer;
+
+              &:hover {
+                background-color: hsl(137, 64%, 47%, 0.8);
+              }
+            }
+          }
+
+          .reschedule-btn {
+            width: 100%;
+            color: hsl(0, 0%, 38%, 0.5);
+            outline: 1px solid hsl(0, 0%, 38%, 0.5);
+            padding: 0.4rem 1rem;
+            border-radius: 1rem;
+            cursor: pointer;
+
+            &:hover {
+              color: var(--ntrl-clr-100);
+              background-color: hsl(0, 0%, 38%, 0.8);
+            }
+          }
         }
       }
     }
@@ -176,11 +182,19 @@
 
   .content {
     width: 30rem;
-    @include display-flex();
+    @include display-flex($dir: column, $y: flex-start, $gap: 1rem);
+    padding: 1.5rem;
     border-radius: 1.25rem;
     background-color: var(--ntrl-clr-100);
     outline: var(--ntrl-clr-300);
     // overflow: hidden;
+
+    .header {
+      font-size: 1.2rem;
+      font-weight: bold;
+      color: var(--ntrl-clr-300);
+      letter-spacing: -1px;
+    }
 
     form {
       width: 100%;
@@ -193,7 +207,6 @@
       & > * {
         width: 100%;
         @include display-flex($dir: column, $y: flex-start, $gap: 1.5rem);
-        padding: 1.5rem;
         border-radius: 0.5rem;
         background-color: var(--ntrl-clr-100);
 
@@ -397,32 +410,66 @@
   }
 }
 
-.alert-modal {
+.complete-modal {
   @include display-flex();
+  width: 100%;
+  min-height: 100vh;
   position: fixed;
-  right: -20rem;
-  bottom: 1rem;
-  transition: 200ms ease-in-out;
-  // animation: fadeInOut 3s ease-in-out;
+  left: 0;
+  top: 0;
+  background-color: hsla(0, 0%, 38%, 0.3);
+  backdrop-filter: blur(3px);
   z-index: 1;
 
-  @keyframes fadeInOut {
-    0% {
-      opacity: 1;
-    }
-    100% {
-      opacity: 0;
-    }
-  }
+  .content {
+    width: max-content;
+    // height: 17rem;
+    @include display-flex($y: flex-start);
+    border-radius: 1.25rem;
+    background-color: var(--ntrl-clr-100);
+    outline: var(--ntrl-clr-300);
+    overflow: hidden;
 
-  .container {
-    padding: 1rem;
-    border-radius: 0.5rem;
-    background-color: var(--pr-clr-270);
+    & > * {
+      width: 250px;
+      height: 250px;
+      padding: 1rem;
+    }
 
     .body-text {
-      font-weight: bold;
-      color: var(--ntrl-clr-100);
+      @include display-flex($dir: column, $x: space-between, $y: flex-start);
+
+      & > * {
+        color: var(--ntrl-clr-300);
+        letter-spacing: -1px;
+      }
+
+      .header {
+        font-size: 2rem;
+        font-weight: bold;
+      }
+
+      .close-btn {
+        width: 100%;
+        color: var(--ntrl-clr-100);
+        padding: 0.5rem;
+        border-radius: 1rem;
+        background-color: var(--pr-clr-300);
+      }
+    }
+
+    .illustration-container {
+      position: relative;
+      @include display-flex();
+      background-color: var(--ntrl-clr-250);
+
+      img {
+        width: 100%;
+        height: 100%;
+        // object-fit: cover;
+        // position: absolute;
+        // left: 2rem;
+      }
     }
   }
 }

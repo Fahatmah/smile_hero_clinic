@@ -6097,33 +6097,6 @@ body.user-homepage main .about .services .appointment__button:hover {
 }
 .appointment-details-cont header .overview-details .actions {
   width: 10rem;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-direction: column;
-  gap: 0.5rem;
-}
-.appointment-details-cont header .overview-details .actions > * {
-  width: 100%;
-  color: var(--ntrl-clr-300);
-  padding: 0.4rem 1rem;
-  border-radius: 1rem;
-  cursor: pointer;
-}
-.appointment-details-cont header .overview-details .actions .reschedule-btn {
-  color: hsla(0, 0%, 38%, 0.5);
-  outline: 1px solid hsla(0, 0%, 38%, 0.5);
-}
-.appointment-details-cont header .overview-details .actions .reschedule-btn:hover {
-  color: var(--ntrl-clr-100);
-  background-color: hsla(0, 0%, 38%, 0.8);
-}
-.appointment-details-cont header .overview-details .actions .complete-btn {
-  color: var(--ntrl-clr-100);
-  background-color: var(--pr-clr-270);
-}
-.appointment-details-cont header .overview-details .actions .complete-btn:hover {
-  background-color: hsla(137, 64%, 47%, 0.8);
 }
 .appointment-details-cont header .overview-details .actions .complete-text {
   justify-self: flex-end;
@@ -6132,6 +6105,40 @@ body.user-homepage main .about .services .appointment__button:hover {
   color: var(--pr-clr-270);
   text-align: right;
   padding: 0;
+}
+.appointment-details-cont header .overview-details .actions .btn-container {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+.appointment-details-cont header .overview-details .actions .btn-container form {
+  width: 100%;
+}
+.appointment-details-cont header .overview-details .actions .btn-container form .complete-btn {
+  width: 100%;
+  color: var(--ntrl-clr-100);
+  background-color: var(--pr-clr-270);
+  padding: 0.4rem 1rem;
+  border-radius: 1rem;
+  cursor: pointer;
+}
+.appointment-details-cont header .overview-details .actions .btn-container form .complete-btn:hover {
+  background-color: hsla(137, 64%, 47%, 0.8);
+}
+.appointment-details-cont header .overview-details .actions .btn-container .reschedule-btn {
+  width: 100%;
+  color: hsla(0, 0%, 38%, 0.5);
+  outline: 1px solid hsla(0, 0%, 38%, 0.5);
+  padding: 0.4rem 1rem;
+  border-radius: 1rem;
+  cursor: pointer;
+}
+.appointment-details-cont header .overview-details .actions .btn-container .reschedule-btn:hover {
+  color: var(--ntrl-clr-100);
+  background-color: hsla(0, 0%, 38%, 0.8);
 }
 .appointment-details-cont .table-cont {
   width: 100%;
@@ -6179,13 +6186,20 @@ body.user-homepage main .about .services .appointment__button:hover {
 .reschedule-modal .content {
   width: 30rem;
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   justify-content: center;
-  flex-direction: row;
-  gap: 0;
+  flex-direction: column;
+  gap: 1rem;
+  padding: 1.5rem;
   border-radius: 1.25rem;
   background-color: var(--ntrl-clr-100);
   outline: var(--ntrl-clr-300);
+}
+.reschedule-modal .content .header {
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: var(--ntrl-clr-300);
+  letter-spacing: -1px;
 }
 .reschedule-modal .content form {
   width: 100%;
@@ -6202,7 +6216,6 @@ body.user-homepage main .about .services .appointment__button:hover {
   justify-content: center;
   flex-direction: column;
   gap: 1.5rem;
-  padding: 1.5rem;
   border-radius: 0.5rem;
   background-color: var(--ntrl-clr-100);
 }
@@ -6392,32 +6405,72 @@ body.user-homepage main .about .services .appointment__button:hover {
   background-color: hsla(0, 0%, 38%, 0.1);
 }
 
-.alert-modal {
+.complete-modal {
   display: flex;
   align-items: center;
   justify-content: center;
   flex-direction: row;
   gap: 0;
+  width: 100%;
+  min-height: 100vh;
   position: fixed;
-  right: -20rem;
-  bottom: 1rem;
-  transition: 200ms ease-in-out;
+  left: 0;
+  top: 0;
+  background-color: hsla(0, 0%, 38%, 0.3);
+  -webkit-backdrop-filter: blur(3px);
+          backdrop-filter: blur(3px);
   z-index: 1;
 }
-@keyframes fadeInOut {
-  0% {
-    opacity: 1;
-  }
-  100% {
-    opacity: 0;
-  }
+.complete-modal .content {
+  width: -moz-max-content;
+  width: max-content;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  flex-direction: row;
+  gap: 0;
+  border-radius: 1.25rem;
+  background-color: var(--ntrl-clr-100);
+  outline: var(--ntrl-clr-300);
+  overflow: hidden;
 }
-.alert-modal .container {
+.complete-modal .content > * {
+  width: 250px;
+  height: 250px;
   padding: 1rem;
-  border-radius: 0.5rem;
-  background-color: var(--pr-clr-270);
 }
-.alert-modal .container .body-text {
+.complete-modal .content .body-text {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  flex-direction: column;
+  gap: 0;
+}
+.complete-modal .content .body-text > * {
+  color: var(--ntrl-clr-300);
+  letter-spacing: -1px;
+}
+.complete-modal .content .body-text .header {
+  font-size: 2rem;
   font-weight: bold;
+}
+.complete-modal .content .body-text .close-btn {
+  width: 100%;
   color: var(--ntrl-clr-100);
+  padding: 0.5rem;
+  border-radius: 1rem;
+  background-color: var(--pr-clr-300);
+}
+.complete-modal .content .illustration-container {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: row;
+  gap: 0;
+  background-color: var(--ntrl-clr-250);
+}
+.complete-modal .content .illustration-container img {
+  width: 100%;
+  height: 100%;
 }/*# sourceMappingURL=styles.css.map */
