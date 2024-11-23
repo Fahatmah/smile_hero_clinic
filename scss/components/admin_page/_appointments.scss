@@ -218,6 +218,174 @@
                     color: var(--cancel-btn-clr);
                   }
                 }
+
+                .set-doctor-modal {
+                  @include display-flex();
+                  width: 100%;
+                  min-height: 100vh;
+                  position: fixed;
+                  left: 0;
+                  top: 0;
+                  background-color: hsla(0, 0%, 38%, 0.3);
+                  backdrop-filter: blur(3px);
+                  z-index: 1000;
+
+                  .content {
+                    width: 30rem;
+                    @include display-flex(
+                      $dir: column,
+                      $y: flex-start,
+                      $gap: 1rem
+                    );
+                    padding: 1.5rem;
+                    border-radius: 1.25rem;
+                    background-color: var(--ntrl-clr-100);
+                    outline: var(--ntrl-clr-300);
+                    // overflow: hidden;
+
+                    .header {
+                      font-size: 1.2rem;
+                      font-weight: bold;
+                      color: var(--ntrl-clr-300);
+                      letter-spacing: -1px;
+                    }
+
+                    form {
+                      width: 100%;
+                      @include display-flex(
+                        $x: flex-start,
+                        $y: flex-start,
+                        $dir: column,
+                        $gap: 0.5rem
+                      );
+                      & > * {
+                        width: 100%;
+                        @include display-flex(
+                          $dir: column,
+                          $y: flex-start,
+                          $gap: 1.5rem
+                        );
+                        border-radius: 0.5rem;
+                        background-color: var(--ntrl-clr-100);
+
+                        .appointment-form__field {
+                          position: relative;
+                          width: 100%;
+                          @include display-flex(
+                            $dir: column,
+                            $gap: 0.5rem,
+                            $y: flex-start
+                          );
+
+                          .appointment-form__label {
+                            font-size: 0.75rem;
+                            font-weight: bold;
+                            color: var(--ntrl-clr-300);
+                          }
+
+                          .services-btn {
+                            width: 100%;
+                            text-align: left;
+                            cursor: pointer;
+
+                            &:hover {
+                              background-color: hsl(0, 0%, 38%, 0.2);
+
+                              // & + .appointment-form__checkbox-group {
+                              //   display: flex;
+                              // }
+                            }
+
+                            &:active {
+                              background: none;
+                            }
+                          }
+
+                          input,
+                          .appointment-form__select,
+                          .appointment-form__checkbox-group {
+                            width: 100%;
+                            font-size: 0.875rem;
+                            color: var(--ntrl-clr-300);
+                            padding: 0.875rem 1rem;
+                            border: 1px solid hsl(0, 0%, 9%, 0.3);
+                            border-radius: 0.25rem;
+                          }
+
+                          .appointment-form__select {
+                            color: var(--ntrl-clr-300);
+                            appearance: none;
+                            -webkit-appearance: none;
+                            -moz-appearance: none;
+                            -ms-appearance: none;
+                            background: none;
+
+                            option {
+                              color: var(--ntrl-clr-300);
+                            }
+                          }
+
+                          .appointment-form__validation {
+                            @include display-flex($dir: column);
+
+                            .appointment-form__text {
+                              font-size: 0.875rem;
+                              display: none;
+
+                              &--error {
+                                color: var(--pr-clr-100);
+                              }
+
+                              &--valid {
+                                color: var(--pr-clr-270);
+                              }
+                            }
+                          }
+                        }
+
+                        .btn-container {
+                          width: 100%;
+                          @include display-flex(
+                            $x: space-between,
+                            $gap: 0.5rem
+                          );
+
+                          & > * {
+                            width: 100%;
+                            font-size: 0.875rem;
+                            padding-block: 0.75rem;
+                            border-radius: 0.375rem;
+                            cursor: pointer;
+                          }
+                          .appointment-form__submit-button {
+                            color: var(--ntrl-clr-100);
+                            background-color: var(--pr-clr-300);
+
+                            &:hover {
+                              background-color: var(--pr-clr-350);
+                            }
+
+                            &:active {
+                              background-color: var(--pr-clr-300);
+                            }
+                          }
+
+                          .appointment-form__cancel-button {
+                            color: var(--ntrl-clr-300);
+
+                            &:hover {
+                              outline: 1px solid hsl(0, 0%, 38%, 0.5);
+                            }
+
+                            &:active {
+                              background-color: hsl(0, 0%, 38%, 0.1);
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
               }
             }
           }

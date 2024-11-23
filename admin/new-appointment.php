@@ -309,6 +309,26 @@ while ($row = $result->fetch_assoc()) {
                   <p class="appointment-form__text appointment-form__text--valid">Valid</p>
                 </div>
               </div>
+
+              <div class="appointment-form__field">
+                <label for="appointmentDoctor" class="appointment-form__label">Doctor</label>
+                <select
+                  name="appointmentDoctor"
+                  id="appointmentDoctor"
+                  class="appointment-form__select"
+                >
+                  <option value="-">Select doctor</option>
+                  <option value="9:00 AM">Leon Manansala</option>
+                  <option value="10:00 AM">April Gonzales</option>
+                  <option value="11:00 AM">Pablo Escobar</option>
+                  <option value="11:00 AM">Louise Manzano</option>
+                </select>
+                <div class="appointment-form__validation">
+                  <p class="appointment-form__text appointment-form__text--error">Error</p>
+                  <p class="appointment-form__text appointment-form__text--valid">Valid</p>
+                </div>
+              </div>
+
               <div class="appointment-form__field">
               <label class="appointment-form__label">Service</label>
               <input type="button" value="Select service" class="services-btn" id="servicesBtn">
@@ -431,6 +451,10 @@ while ($row = $result->fetch_assoc()) {
           {
             id: 'appointmentTime',
             errorMessage: 'Please select a time'
+          },
+          {
+            id: 'appointmentDoctor',
+            errorMessage: 'Please select a doctor'
           },
           {
             id: 'location',

@@ -22,7 +22,8 @@ $totalRow = $totalResult->fetch_assoc();
 $totalRecords = $totalRow['total'];
 
 // Fetch records for the current page
-$query = "SELECT * FROM doctors LIMIT $start, $limit";
+// $query = "SELECT * FROM doctors LIMIT $start, $limit";
+$query = "SELECT doctor_id, first_name, last_name, phone_number, email, availability FROM doctors LIMIT $start, $limit";
 $result = $conn->query($query);
 $doctors = [];
 if ($result->num_rows > 0) {
@@ -69,6 +70,7 @@ $totalPages = ceil($totalRecords / $limit);
                 <th>name & email</th>
                 <th>contact #</th>
                 <th>status</th>
+                <th>actions</th>
               </tr>
             </thead>
 
@@ -87,7 +89,15 @@ $totalPages = ceil($totalRecords / $limit);
                   </p>
                 </td>
                 <td><?php echo htmlspecialchars($doctor['phone_number']); ?></td>
-                <td>On Duty</td>
+                <td><?php echo htmlspecialchars($doctor['availability']); ?></td>
+                <td>
+                  <form class="status-toggle-form" method="POST">
+                    <input type="hidden" name="doctor_id" value="<?php echo $doctor['doctor_id']; ?>">
+                    <button type="submit" name="toggle" value="<?php echo $doctor['availability'] === 'On Duty' ? 'Off Duty' : 'On Duty'; ?>">
+                      Set <?php echo $doctor['availability'] === 'On Duty' ? 'Off Duty' : 'On Duty'; ?>
+                    </button>
+                  </form>
+                </td>
               </tr>
                 <?php endforeach; ?>
                 <?php else: ?>
@@ -99,12 +109,52 @@ $totalPages = ceil($totalRecords / $limit);
           </table>
         </div>
 
+        <div class="status-modal">
+          <p class="status-message">
+            Doctor Status Updated
+          </p>
+        </div>
+
         <!-- Pagination -->
         <?php renderPagination($page, $totalPages) ?>
       </div>
       
     </section>
   </main>
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      const forms = document.querySelectorAll('.status-toggle-form');
+
+      forms.forEach(form => {
+        form.addEventListener('submit', function(event) {
+          event.preventDefault();
+
+          const formData = new FormData(form);
+          const doctorId = formData.get('doctor_id');
+          const newStatus = formData.get('toggle');
+
+          const xhr = new XMLHttpRequest();
+          xhr.open('POST', 'includes/update_doctor_availability.php', true);
+          xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+          
+          xhr.send(`doctor_id=${doctorId}&new_status=${newStatus}`);
+
+          xhr.onload = function() {
+            if (xhr.status === 200) {
+              const modal = document.querySelector('.status-modal');
+              modal.style.top = '2rem'; 
+
+              setTimeout(() => {
+                modal.style.top = '-100%'; 
+              }, 3000); 
+            } else {
+              alert('An error occurred while updating the status.');
+            }
+          };
+        });
+      });
+    });
+  </script>
 </body>
 
 </html>

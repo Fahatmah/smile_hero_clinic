@@ -91,9 +91,46 @@
                 color: var(--charcoal-gray);
               }
             }
+
+            .status-toggle-form {
+              button {
+                color: var(--ntrl-clr-300);
+                padding: 0.2rem 0.8rem;
+                border-radius: 0.2rem;
+                outline: 1px solid var(--charcoal-gray);
+                cursor: pointer;
+
+                &:hover {
+                  background-color: hsl(0, 0%, 38%, 0.2);
+                }
+
+                &:active {
+                  background-color: red;
+                }
+              }
+            }
           }
         }
       }
+    }
+  }
+
+  .status-modal {
+    position: absolute;
+    top: -100%;
+    left: 50%;
+    transform: translateX(-50%);
+    border-radius: 0.8rem;
+    overflow: hidden;
+    transition: 500ms ease-in-out;
+    z-index: 1;
+
+    .status-message {
+      font-weight: bold;
+      color: var(--ntrl-clr-100);
+      letter-spacing: -1px;
+      padding: 0.8rem 1rem;
+      background-color: var(--pr-clr-300);
     }
   }
 }

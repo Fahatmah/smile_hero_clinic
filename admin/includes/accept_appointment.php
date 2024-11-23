@@ -3,7 +3,7 @@ require_once '../../includes/config_session.inc.php';
 require_once '../../includes/login_view.inc.php';
 require_once '../../includes/dbh.inc.php';
 
-if ($_SERVER['REQUEST_METHOD'] === "POST" && isset($_POST["accept"])) {
+if ($_SERVER['REQUEST_METHOD'] === "POST" && isset($_POST["Set Doctor"])) {
     $name = $_POST["name"];
     $email = $_POST["email"];
     $appointment_id = $_POST["app_id"];

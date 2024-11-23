@@ -90,6 +90,7 @@ $totalPages = ceil($totalRecords / $limit);
                 <th>
                   time 
                 </th>
+                <th>doctor</th>
                 <th>
                   patient name
                   <div class="dropdown-container">
@@ -145,6 +146,11 @@ $totalPages = ceil($totalRecords / $limit);
 
                 <td class="patient-cell time">
                   <?php echo $user['time']; ?>
+                </td>
+
+                <td class="patient-cell doctor">
+                  <!-- lagay mo dito yung name ng doctor -->
+                  <?php echo $user['doctor_id']; ?>
                 </td>
 
                 <td class="patient-cell name-email" data-label="<?php echo $user['label'] ?>">
