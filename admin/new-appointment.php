@@ -208,7 +208,7 @@ while ($row = $result->fetch_assoc()) {
                   <div class="modal__header">
                     <h3 id="modalStatus" class="modal__status"></h3>
                     <p id="modalMessage" class="modal__message">
-                      <a href="appointments.php">
+                      <a href="booked.php">
                         Go to appointments
                         <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
                           <path d="M9.62 3.95337L13.6667 8.00004L9.62 12.0467" stroke="#E84531" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
@@ -310,18 +310,33 @@ while ($row = $result->fetch_assoc()) {
                 </div>
               </div>
 
+              <?php
+                  // Fetch appointments for the doctor that are on-duty
+                  $query = "SELECT * FROM doctors";
+                  $stmt = $conn->prepare($query);
+                  $stmt->execute();
+                  $onDutyResult = $stmt->get_result();
+                  $onDutyDoctors = [];
+                  if ($onDutyResult->num_rows > 0) {
+                      while ($row = $onDutyResult->fetch_assoc()) {
+                          $onDutyDoctors[] = $row;
+                      }
+                  }
+              ?>
+
               <div class="appointment-form__field">
                 <label for="appointmentDoctor" class="appointment-form__label">Doctor</label>
                 <select
                   name="appointmentDoctor"
                   id="appointmentDoctor"
-                  class="appointment-form__select"
-                >
+                  class="appointment-form__select">
+
                   <option value="-">Select doctor</option>
-                  <option value="9:00 AM">Leon Manansala</option>
-                  <option value="10:00 AM">April Gonzales</option>
-                  <option value="11:00 AM">Pablo Escobar</option>
-                  <option value="11:00 AM">Louise Manzano</option>
+                  <?php foreach($onDutyDoctors as $onDutyDoctor) { ?>
+                    <option value="<?php echo $onDutyDoctor['doctor_id']; ?>">
+                      Doc. <?php echo $onDutyDoctor['first_name'] . ' ' . $onDutyDoctor['last_name'] .' ('. $onDutyDoctor['availability'] . ')';?>
+                    </option>
+                  <?php } ?>
                 </select>
                 <div class="appointment-form__validation">
                   <p class="appointment-form__text appointment-form__text--error">Error</p>

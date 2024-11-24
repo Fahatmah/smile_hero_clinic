@@ -89,11 +89,13 @@ $totalPages = ceil($totalRecords / $limit);
                   </p>
                 </td>
                 <td><?php echo htmlspecialchars($doctor['phone_number']); ?></td>
-                <td><?php echo htmlspecialchars($doctor['availability']); ?></td>
+                <td><?php echo htmlspecialchars($doctor['availability']);?></td>
                 <td>
                   <form class="status-toggle-form" method="POST">
                     <input type="hidden" name="doctor_id" value="<?php echo $doctor['doctor_id']; ?>">
-                    <button type="submit" name="toggle" value="<?php echo $doctor['availability'] === 'On Duty' ? 'Off Duty' : 'On Duty'; ?>">
+                    <input type="hidden" name="newStatus" value="<?php echo $doctor['availability'] === 'On Duty' ? 'Off Duty' : 'On Duty'; ?>">
+                    
+                    <button type="submit" name="toggle" value="update">
                       Set <?php echo $doctor['availability'] === 'On Duty' ? 'Off Duty' : 'On Duty'; ?>
                     </button>
                   </form>
@@ -131,22 +133,27 @@ $totalPages = ceil($totalRecords / $limit);
 
           const formData = new FormData(form);
           const doctorId = formData.get('doctor_id');
-          const newStatus = formData.get('toggle');
+          const newStatus = formData.get('newStatus');
 
           const xhr = new XMLHttpRequest();
           xhr.open('POST', 'includes/update_doctor_availability.php', true);
           xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-          
+
+          console.log(`doctor_id=${doctorId}&new_status=${newStatus}`); // Debugging
           xhr.send(`doctor_id=${doctorId}&new_status=${newStatus}`);
 
           xhr.onload = function() {
             if (xhr.status === 200) {
               const modal = document.querySelector('.status-modal');
               modal.style.top = '2rem'; 
-
+              
               setTimeout(() => {
                 modal.style.top = '-100%'; 
               }, 3000); 
+
+              setTimeout(() => {
+               location.reload(); 
+              }, 3125); 
             } else {
               alert('An error occurred while updating the status.');
             }

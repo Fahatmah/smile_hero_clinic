@@ -149,27 +149,45 @@ if (isset($_SESSION['pending_appointment'])) {
                   <div class="button-container">
                     <!-- accepts appointment -->
                     <form action="includes/accept_appointment.php" method="post">
-                      <input type="hidden" name="app_id" value="<?php echo $user['appointment_id']; ?>">
-                      <input type="hidden" name="name" value="<?php echo $user['name']; ?>">
-                      <input type="hidden" name="email" value="<?php echo $user['email']; ?>">
-                      <input type="hidden" name="subject" value="Smile Hero Dental Clinic Appointment">
-                      <input type="hidden" name="message"
-                        value="Good Day <?php echo $user['name']; ?>, your appointment on <?php echo $user['date']; ?> at <?php echo $user['time']; ?> has been accepted. Appointment ID: <?php echo $user['appointment_id']; ?>">
                       <input type="button" value="Accept" name="accept" class="button accept" id="acceptBtn">
                     </form>
+
+                    <?php
+                        // Fetch appointments for the doctor that are on-duty
+                        $query = "SELECT * FROM doctors";
+                        $stmt = $conn->prepare($query);
+                        $stmt->execute();
+                        $onDutyResult = $stmt->get_result();
+                        $onDutyDoctors = [];
+                        if ($onDutyResult->num_rows > 0) {
+                            while ($row = $onDutyResult->fetch_assoc()) {
+                                $onDutyDoctors[] = $row;
+                            }
+                        }
+                    ?>
 
                     <div class="set-doctor-modal" id="setDoctorModal" style="display: none;">
                       <div class="content">
                         <p class="header">Set Doctor for Patient <?php echo $user['name']; ?></p>
-                        <form action="" method="post" id="setDoctorForm">
+                        <form action="includes/accept_appointment.php" method="post" id="setDoctorForm">
+                              <input type="hidden" name="app_id" value="<?php echo $user['appointment_id']; ?>">
+                              <input type="hidden" name="name" value="<?php echo $user['name']; ?>">
+                              <input type="hidden" name="email" value="<?php echo $user['email']; ?>">
+                              <input type="hidden" name="subject" value="Smile Hero Dental Clinic Appointment">
+                              <input type="hidden" name="message"
+                                value="Good Day <?php echo $user['name']; ?>, your appointment on <?php echo $user['date']; ?> at <?php echo $user['time']; ?> has been accepted. Appointment ID: <?php echo $user['appointment_id']; ?>">
                           <div>
                             <div class="appointment-form__field">
-                              <label for="appointmentDate" class="appointment-form__label">Doctor</label>
-                              <select name="doctor" id="doctor" class="appointment-form__select ">
-                                <option value="Doctor 1">Doctor 1</option>
-                                <option value="Doctor 1">Doctor 2</option>
-                                <option value="Doctor 1">Doctor 3</option>
-                                <option value="Doctor 1">Doctor 4</option>
+                              <label for="doctor" class="appointment-form__label">Doctor</label>
+                              <select name="selected_doctor" id="doctor" class="appointment-form__select ">
+                              <option value="">Select a Doctor</option>
+
+                                <?php foreach($onDutyDoctors as $onDutyDoctor) { ?>
+                                    <option value="<?php echo $onDutyDoctor['doctor_id']; ?>">
+                                        Doc. <?php echo $onDutyDoctor['first_name'] . ' ' . $onDutyDoctor['last_name'] .' ('. $onDutyDoctor['availability'] . ')';?>
+                                    </option>
+                                <?php } ?>
+
                               </select>
                               <div class="appointment-form__validation">
                                 <p class="appointment-form__text appointment-form__text--error">Error</p>
@@ -217,7 +235,7 @@ if (isset($_SESSION['pending_appointment'])) {
                     <h3 id="modalStatus" class="modal__status">
                     </h3>
                     <p id="modalMessage" class="modal__message">
-                      <a href="doctors.php">
+                      <a href="appointments.php">
                         Go to booked appointments
                         <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
                           <path d="M9.62 3.95337L13.6667 8.00004L9.62 12.0467" stroke="#E84531" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>

@@ -31,7 +31,20 @@ $availableDates = [];
 while ($row = $result->fetch_assoc()) {
     $availableDates[] = $row['available_dates'];
 }
-$conn->close();
+
+$showModal = false;
+$modalmessage = '';
+if (isset($_SESSION['complete_process'])) {
+    if ($_SESSION['complete_process'] === 'success') {
+      $showModal = true;
+      $modalmessage = "Appointment Completed ✓";
+    }
+    if ($_SESSION['complete_process'] === 'rescheduled') {
+      $showModal = true;
+      $modalmessage = "Rescheduling Completed ✓";
+    }
+    unset($_SESSION['complete_process']);
+}
 ?>
 
 
@@ -98,7 +111,7 @@ $conn->close();
                   </p>
                   <p class="message">
                     <img src="../assets/admin_assets/icons/message-text.svg" alt="">
-                    <?php echo ucfirst($aptResult['label']) != "walk-in" ? "Online Appointment" : "Walk-in Appointment" ?>
+                    <?php echo $aptResult['label'] != "walk-in" ? "Online Appointment" : "Walk-in Appointment" ?>
                   </p>
                 </div>
               </div>
@@ -145,10 +158,36 @@ $conn->close();
                   <td>Location</td>
                   <td>Bayani Road, Taguig City</td>
                 </tr>
+
+                <?php
+                // Get Doctor Name
+                $doctorName = $aptResult['doctor_id'] ?? null;
+
+                if ($doctorName) {
+                    $doctor_query = "SELECT * FROM doctors WHERE doctor_id = ?";
+                    $stmt = $conn->prepare($doctor_query);
+                    $stmt->bind_param("s", $doctorName);
+                    $stmt->execute(); 
+                    $resultDoctorName = $stmt->get_result();
+                    $rowDoctors = $resultDoctorName->fetch_assoc();
+                
+                    $rowDoctors ?  $doctorFullName = "Doc. " . htmlspecialchars($rowDoctors['first_name']) . " " . 
+                                                               htmlspecialchars($rowDoctors['last_name']) 
+                                :  $doctorFullName = "Doctor not found.";  
+                } else {
+                    $doctorFullName = "Doctor information unavailable.";
+                }
+                ?>
+                <tr>
+                    <td>Dentist</td>
+                    <td><?php echo $doctorFullName; ?></td>
+                </tr>
+                
                 <tr>
                   <td>Services</td>
                   <td> <?php echo $aptResult['service']; ?></td>
                 </tr>
+              
                 <tr>
                   <td>Message</td>
                   <td> <?php echo empty($aptResult['message']) ? "No Message" : $aptResult['message']?></td>
@@ -169,7 +208,6 @@ $conn->close();
             </table>
           </div>
         </div>
-        <?php } ?>
       </section>
     </main>
     <!-- modals -->
@@ -178,10 +216,15 @@ $conn->close();
         <p class="header">Reschedule Appointment</p>
         <form action="includes/reschedule.php" method="post"  id="rescheduleForm">
           <section>
+            <input type="hidden" name="aptID" value="<?php echo $aptResult['appointment_id'] ?>">
+            <input type="hidden" name="email" value="<?php echo $aptResult['email'] ?>">
+            <input type="hidden" name="name" value="<?php echo $aptResult['name'] ?>">
+            <input type="hidden" name="date" value="<?php echo $aptResult['date'] ?>">
+            <input type="hidden" name="time" value="<?php echo $aptResult['time'] ?>">
             <div class="appointment-form__field">
               <label for="appointmentDate" class="appointment-form__label">Date</label>
               <input type="text" name="appointmentDate" id="appointmentDate" class="appointment-form__input" placeholder="Select a date" 
-                      value="<?php echo (isset( $_SESSION['selectAppointmentDate']) ? $_SESSION['selectAppointmentDate'] : ''); ?>">
+                      value="<?php echo $aptResult['date'] ?>">
               <div class="appointment-form__validation">
                 <p class="appointment-form__text appointment-form__text--error">Error</p>
                 <p class="appointment-form__text appointment-form__text--valid">Valid</p>
@@ -191,16 +234,26 @@ $conn->close();
             <div class="appointment-form__field">
               <label for="appointmentTime" class="appointment-form__label">Time</label>
               <select name="appointmentTime" id="appointmentTime" class="appointment-form__select">
-                  <option value="-">Select time</option>
-                  <option value="9:00 AM">09:00 AM</option>
-                  <option value="10:00 AM">10:00 AM</option>
-                  <option value="11:00 AM">11:00 AM</option>
-                  <option value="1:00 PM">01:00 PM</option>
-                  <option value="2:00 PM">02:00 PM</option>
-                  <option value="3:00 PM">03:00 PM</option>
-                  <option value="4:00 PM">04:00 PM</option>
-                  <option value="5:00 PM">05:00 PM</option>
+                  <option value="--"> Select time</option>
+                  <option value="9:00 AM" <?php echo ($aptResult['time'] == '9:00 AM') ? 'selected' : ''; ?>>09:00 AM</option>
+                  <option value="10:00 AM" <?php echo ($aptResult['time'] == '10:00 AM') ? 'selected' : ''; ?>>10:00 AM</option>
+                  <option value="11:00 AM" <?php echo ($aptResult['time'] == '11:00 AM') ? 'selected' : ''; ?>>11:00 AM</option>
+                  <option value="1:00 PM" <?php echo ($aptResult['time'] == '1:00 PM') ? 'selected' : ''; ?>>01:00 PM</option>
+                  <option value="2:00 PM" <?php echo ($aptResult['time'] == '2:00 PM') ? 'selected' : ''; ?>>02:00 PM</option>
+                  <option value="3:00 PM" <?php echo ($aptResult['time'] == '3:00 PM') ? 'selected' : ''; ?>>03:00 PM</option>
+                  <option value="4:00 PM" <?php echo ($aptResult['time'] == '4:00 PM') ? 'selected' : ''; ?>>04:00 PM</option>
+                  <option value="5:00 PM" <?php echo ($aptResult['time'] == '5:00 PM') ? 'selected' : ''; ?>>05:00 PM</option>
               </select>
+              <div class="appointment-form__validation">
+                <p class="appointment-form__text appointment-form__text--error">Error</p>
+                <p class="appointment-form__text appointment-form__text--valid">Valid</p>
+              </div>
+              <p class="time_error"></p>
+            </div>
+
+            <div class="appointment-form__field">
+              <label for="reason_message" class="appointment-form__label">Reason</label>
+              <textarea id="reason_message" name="reason_message" class="appointment-form__select rows="10" cols="50" style="resize: none;"></textarea>
               <div class="appointment-form__validation">
                 <p class="appointment-form__text appointment-form__text--error">Error</p>
                 <p class="appointment-form__text appointment-form__text--valid">Valid</p>
@@ -213,18 +266,15 @@ $conn->close();
               <input type="button" value="Cancel" class="appointment-form__cancel-button" id="cancelBtn">
             </div>
           </section>
-
         </form>
+        <?php } ?>
       </div>
     </section>
 
     <section class="complete-modal" id="completeModal" style="display: none;">
       <div class="content">
         <div class="body-text">
-          <p class="header">
-            Appointment Completed ✓
-          </p>
-
+          <p class="header" id="modalMessage">Appointment Completed ✓</p>
           <button type="button" class="close-btn" id="closeBtn">
             Close
           </button>
@@ -237,6 +287,25 @@ $conn->close();
     </section>
 
     <script>
+      document.addEventListener('DOMContentLoaded', () => {
+        const modalContainer = document.querySelector(".complete-modal");
+        const exitBtn = modalContainer.querySelector("#closeBtn");
+        const modalMessage = modalContainer.querySelector("#modalMessage");
+
+      <?php if ($showModal) : ?>
+        modalMessage.innerText = "<?php echo $modalmessage; ?>";
+        modalContainer.style.display = "flex";
+      <?php endif; ?>
+
+      // Close modal when exit button is clicked
+      exitBtn.addEventListener("click", () => {
+              modalContainer.style.transform = "scale(0)";
+          });
+      });
+
+
+
+
       const weekdayText = document.getElementById('weekday')
       const dateEl = document.getElementById('date')
       const dateText = dateEl.textContent.trim()
@@ -310,6 +379,10 @@ $conn->close();
             {
               id: 'appointmentTime',
               errorMessage: 'Please select a time'
+            },
+            {
+              id: 'reason_message',
+              errorMessage: 'Please indicate a reason'
             },
           ];
 

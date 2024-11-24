@@ -14,12 +14,13 @@ if($_SERVER["REQUEST_METHOD"] === "POST"){
     $message = $_POST['message'];
     $appointmentDate = $_POST['appointmentDate'];
     $appointmentTime = $_POST['appointmentTime'];
+    $appointmentDoctor = $_POST['appointmentDoctor'];
     $location = $_POST['location'];
     $dentalService = implode(', ', $_POST['dentalService']);
     $status = 'request';
 
     $subject = "Smile Hero Dental Clinic Appointment";
-    $message = "Good Day $name, your appointment on $appointmentDate at $appointmentTime has been accepted. Thanks for Choosing Smile Hero Dental Clinic";
+    $Emailmessage = "Good Day $name, your appointment on $appointmentDate at $appointmentTime has been accepted. Thanks for Choosing Smile Hero Dental Clinic";
     
     require_once "../../includes/dbh.inc.php";
     require_once "../../includes/appointment_model.inc.php";
@@ -32,8 +33,8 @@ if($_SERVER["REQUEST_METHOD"] === "POST"){
         $user_id = $result['user_id'];
         $label =  $result['label'];
     }else{
-        $user_id = "Walk-in";
-        $label = "Walk-in";
+        $user_id = "walk-in";
+        $label = "walk-in";
       
         disableForeignKeyChecks($conn);
     }
@@ -49,12 +50,12 @@ if($_SERVER["REQUEST_METHOD"] === "POST"){
         $mail->addAddress($email, $name);
     
         $mail->Subject = $subject;
-        $mail->Body = $message;
+        $mail->Body = $Emailmessage;
     
         if ($mail->send()) {
         $status = 'accepted';
 
-        createAppointment($conn, $user_id, $appointmentId, $label, $name, $email, $contact, $message, $appointmentDate, $appointmentTime, $dentalService, $location, $status);
+        createAppointment($conn, $user_id, $appointmentId, $label, $name, $email, $contact, $message, $appointmentDate, $appointmentTime, $appointmentDoctor, $dentalService, $location, $status);
 
         }
         

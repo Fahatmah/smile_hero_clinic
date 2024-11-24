@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 function getUserid(mysqli $conn, string $name) {
-    $query = "SELECT user_id FROM appointments WHERE name = ? AND (status != 'rejected') AND (status != 'canceled')";
+    $query = "SELECT user_id FROM appointments WHERE name = ? AND (status != 'rejected') AND (status != 'canceled') AND (status != 'missed')";
     $stmt = $conn->prepare($query); 
     $stmt->bind_param("s", $name);
     $stmt->execute();
@@ -26,12 +26,12 @@ function getAccount(mysqli $conn, $email, string $fname, string $mname, string $
     return $account;
 }
 
-function createAppointment(mysqli $conn, string $user_id, string $appointmentId, string $label, string $name, string $email, string $contact, string $message, string $appointmentDate, string $appointmentTime,string  $dentalService, string $location, string $status) {
+function createAppointment(mysqli $conn, string $user_id, string $appointmentId, string $label, string $name, string $email, string $contact, string $message, string $appointmentDate, string $appointmentTime, string $appointmentDoctor , string  $dentalService, string $location, string $status) {
 
-    $query = "INSERT INTO appointments (user_id, appointment_id, label, name, email, contact, message, date, time, service, location, status, created_at) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?,?, NOW())";
+    $query = "INSERT INTO appointments (user_id, doctor_id, appointment_id, label, name, email, contact, message, date, time, service, location, status, created_at) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?,?, NOW())";
 
     $stmt = $conn->prepare($query);
-    $stmt->bind_param("ssssssssssss", $user_id, $appointmentId, $label, $name, $email, $contact, $message, $appointmentDate, $appointmentTime,  $dentalService, $location, $status);
+    $stmt->bind_param("sssssssssssss", $user_id,$appointmentDoctor ,$appointmentId, $label, $name, $email, $contact, $message, $appointmentDate, $appointmentTime,  $dentalService, $location, $status);
     $stmt->execute();
 
     return $stmt->affected_rows > 0;

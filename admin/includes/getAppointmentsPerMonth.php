@@ -5,19 +5,19 @@ if ($mysqli->connect_error) {
     die("Connection failed: " . $mysqli->connect_error);    
 }
 
-// User registrations per month
-$query = "SELECT MONTH(created_at) as month, COUNT(*) as count
-            FROM appointments
-            GROUP BY MONTH(created_at)";
 
+// Appointments per month
+$query = "SELECT MONTH(date) as month, COUNT(*) as count
+          FROM appointments
+          WHERE YEAR(date) = YEAR(CURDATE())
+          GROUP BY month";
 $result = $mysqli->query($query);
 
-$registrationData = array();
+$appointmentData = array();
 while($row = $result->fetch_assoc()) {
-    $registrationData[] = $row;
+    $appointmentData[] = $row;
 }
 
-echo json_encode($registrationData);
+echo json_encode($appointmentData);
 
 $mysqli->close();
-

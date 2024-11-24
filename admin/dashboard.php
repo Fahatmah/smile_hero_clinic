@@ -9,7 +9,7 @@ if(!isset($_SESSION['adminID'])) {
   exit();
 }
 
-$query = "SELECT * FROM doctors";
+$query = "SELECT * FROM doctors WHERE availability = 'On Duty'";
 $result = $conn->query($query);
 $doctors = 0;
 if ($result->num_rows > 0) {
@@ -263,7 +263,7 @@ $startOfMonth = date('Y-m-01');
                  <?php }else{ echo $totalAppointments; }?>
                 </span></p>
                 <button type="button">
-                  <a href="appointments.php">
+                  <a href="booked.php">
                     See all 
                     <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
                       <path d="M9.62 3.95337L13.6667 8.00004L9.62 12.0467" stroke="#616161" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
@@ -401,59 +401,59 @@ $startOfMonth = date('Y-m-01');
 
   // Fetch daily appointments (weekdays)
   fetch('includes/getAppointmentsPerWeekday.php')
-    .then(response => response.json())
-    .then(data => {
-      const weekdays = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
-      const appointmentsPerDay = new Array(7).fill(0);
+  .then(response => response.json())
+  .then(data => {
+    const weekdays = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+    const appointmentsPerDay = new Array(7).fill(0);
 
-      data.forEach(item => {
-        appointmentsPerDay[item.weekday - 1] = item.count;
-      });
+    data.forEach(item => {
+      appointmentsPerDay[item.weekday - 1] = item.count;
+    });
 
-      const lineGraphData = {
-        labels: weekdays,
-        datasets: [{
-          label: 'Daily Appointments',
-          data: appointmentsPerDay,
-          fill: true,
-          backgroundColor: gradient,
-          borderColor: '#1D72F2',
-          borderWidth: 2,
-          pointBackgroundColor: '#fff',
-          pointBorderColor: '#1D72F2',
-          tension: 0.45,
-        }]
-      };
+    const lineGraphData = {
+      labels: weekdays,
+      datasets: [{
+        label: 'Daily Appointments',
+        data: appointmentsPerDay,
+        fill: true,
+        backgroundColor: gradient,
+        borderColor: '#1D72F2',
+        borderWidth: 2,
+        pointBackgroundColor: '#fff',
+        pointBorderColor: '#1D72F2',
+        tension: 0.45,
+      }]
+    };
 
-      const lineConfig = {
-        type: 'line',
-        data: lineGraphData,
-        options: {
-          responsive: true,
-          plugins: {
-            legend: { display: false }
+    const lineConfig = {
+      type: 'line',
+      data: lineGraphData,
+      options: {
+        responsive: true,
+        plugins: {
+          legend: { display: false }
+        },
+        scales: {
+          x: {
+            ticks: {
+              font: { family: 'DM Sans, sans-serif' }
+            }
           },
-          scales: {
-            x: {
-              ticks: {
-                font: { family: 'DM Sans, sans-serif' }
-              }
-            },
-            y: {
-              beginAtZero: true,
-              max: 30,
-              ticks: {
-                stepSize: 6,
-                font: { family: 'DM Sans, sans-serif' }
-              }
+          y: {
+            beginAtZero: true,
+            max: Math.max(...appointmentsPerDay) + 16, // Adjust Y-axis dynamically
+            ticks: {
+              stepSize: 5,
+              font: { family: 'DM Sans, sans-serif' }
             }
           }
         }
-      };
+      }
+    };
 
-      new Chart(lineCtx, lineConfig);
-    })
-    .catch(error => console.error('Error fetching daily appointments data:', error));
+    new Chart(lineCtx, lineConfig);
+  })
+  .catch(error => console.error('Error fetching daily appointments data:', error));
 
   // Fetch monthly appointments
   fetch('includes/getAppointmentsPerMonth.php')
@@ -496,11 +496,11 @@ $startOfMonth = date('Y-m-01');
             },
             y: {
               beginAtZero: true,
-              max: 100,
-              ticks: {
-                stepSize: 25,
-                font: { family: 'DM Sans, sans-serif' }
-              }
+            max: Math.max(...appointmentsPerMonth) + 9, // Adjust Y-axis dynamically
+            ticks: {
+              stepSize: 10,
+              font: { family: 'DM Sans, sans-serif' }
+            }
             }
           }
         }

@@ -17,6 +17,9 @@ if($_SERVER['REQUEST_METHOD'] === "POST"){
     $conn->close();
 
     // Redirect back to appointment details page
+
+     $_SESSION['complete_process'] = 'success';
+
     header("Location: ../appointment-details.php?aptId=" . urlencode($aptID));
     exit;
 }
