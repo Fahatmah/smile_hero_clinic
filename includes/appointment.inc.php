@@ -8,6 +8,7 @@ error_reporting(E_ALL);
 
 if ($_SERVER['REQUEST_METHOD'] === "POST" && isset($_SESSION['user_id'])) {
     $user_id = $_SESSION['user_id'];
+    $doctor_id = '';
     $label = $_SESSION["label"];
     $name = $_POST['name'];
     $email = $_POST['email'];
@@ -44,7 +45,7 @@ if ($_SERVER['REQUEST_METHOD'] === "POST" && isset($_SESSION['user_id'])) {
         die();
     }
     else{
-        createAppointment($conn, $user_id, $appointmentId, $label, $name, $email, $contact, $message, $appointmentDate, $appointmentTime, $dentalService, $location, $status);
+        createAppointment($conn, $user_id, $appointmentId, $label, $name, $email, $contact, $message, $appointmentDate, $appointmentTime, $doctor_id,  $dentalService, $location, $status);
         $_SESSION['appointment_status'] = 'created';
         
         $conn->close();

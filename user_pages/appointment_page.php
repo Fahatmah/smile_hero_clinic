@@ -61,7 +61,7 @@ if(!isset($_SESSION['user_id'])) {
                 <p class="appointment-time">at <?php echo $row["time"]; ?></p>
               </div>
 
-              <button class="header__cancel-btn" id="cancelAppointmentBtn">Cancel Appointment</button>
+              <button class="header__cancel-btn" id="cancelAppointmentBtn" style="display: <?php $tomorrow = date("Y-m-d", strtotime("+1 day")); echo ($row['date'] <= $tomorrow) ? 'none' : '' ?>;">Cancel Appointment</button>
             </div>  
             <div class="modal cancel-appointment" style="transform: scale(0)">
               <div class="modal__header">

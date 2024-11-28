@@ -105,12 +105,12 @@ if (isset($_SESSION['signup_process'])) {
 
           <div class="group-field">
             <div class="field">
-                <input type="password" placeholder="" id="password" name="password" />
+                <input type="password" placeholder="" id="password" onkeypress="return event.charCode != 32" name="password" />
                 <label for="password">Password</label>
             </div>
 
             <div class="field">
-              <input type="password" placeholder="" id="Cpassword" name="Cpassword" />
+              <input type="password" placeholder="" id="Cpassword" onkeypress="return event.charCode != 32" name="Cpassword" />
               <label for="Cpassword">Confirm Password</label>
             </div> 
           </div>

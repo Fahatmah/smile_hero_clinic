@@ -16,13 +16,13 @@ $page = isset($_GET['page']) ? (int)$_GET['page'] : 1; // Current page number
 $start = ($page - 1) * $limit; // Calculate the starting row for the query
 
 // Get total number of records for booked meetings
-$totalQuery = "SELECT COUNT(*) AS total FROM appointments WHERE status = 'accepted' OR status = 'completed'";
+$totalQuery = "SELECT COUNT(*) AS total FROM appointments WHERE status = 'accepted' OR status = 'completed' ";
 $totalResult = $conn->query($totalQuery);
 $totalRow = $totalResult->fetch_assoc();
 $totalRecords = $totalRow['total'];
 
 // Fetch records for the current page
-$query = "SELECT * FROM appointments WHERE status = 'accepted' OR status = 'completed' LIMIT $start, $limit";
+$query = "SELECT * FROM appointments WHERE status = 'accepted' OR status = 'completed' OR  status = 'canceled' OR status = 'missed' LIMIT $start, $limit";
 $result = $conn->query($query);
 $users = [];
 if ($result->num_rows > 0) {
@@ -44,6 +44,22 @@ $totalPages = ceil($totalRecords / $limit);
   <link rel="shortcut icon" href="../assets/images/logoipsum.svg" type="image/x-icon" />
   <title>Reports | Admin</title>
   <link rel="stylesheet" href="../src/dist/styles.css" />
+
+  <style>
+
+    .appointment-row{
+      position: relative;
+    }
+
+    .identifier{
+      position: absolute;
+      width: 3px;
+      height: 100%;
+      top: 0;
+      right: 0;
+      border-radius: 5px 0 0 5px;
+    }
+  </style>
   
 </head>
 
@@ -138,7 +154,7 @@ $totalPages = ceil($totalRecords / $limit);
                 <td colspan="6" style="text-align: center;">There's no such appointment in this section</td>
               </tr>
               <?php foreach ($users as $user){?>
-              <tr class="item-row appointment-row"
+              <tr class="item-row appointment-row" 
                 data-date="<?php echo date('Y-m-d', strtotime($user['date'])); ?>">
                 <td class="patient-cell date" data-date="<?php echo $user['date'] ?>">
                   <?php echo date('l, m/d/Y', strtotime($user['date'])); ?>
@@ -175,8 +191,34 @@ $totalPages = ceil($totalRecords / $limit);
                     <a href="appointment-details.php?aptId=<?php echo $user['appointment_id'] ?>">
                       View Details
                     </a>
-                  </td>
-                </button>
+                  </button>
+                </td>
+
+                <?php
+                $bgColor = '';
+                  switch ($user['status']) {
+                    case 'accepted':
+                      $bgColor = '#1d72f2';
+                      break;
+                    case 'canceled':
+                      $bgColor = 'red';
+                      break;
+                    case 'missed':
+                      $bgColor = 'orange';
+                      break;
+                    case 'completed':
+                      $bgColor = '#2bc757';
+                      break;
+                    
+                    default:
+                      $bgColor = '';
+                      break;
+                  }
+                ?>
+
+                <td>
+                  <div class="identifier" style=" background-color:<?php echo $bgColor ?>; "></div>
+                </td>
               </tr>
               <?php } ?>
             </tbody>

@@ -11,7 +11,14 @@ if ($_SERVER['REQUEST_METHOD'] === "POST" && isset($_POST["cancel"])) {
     $message = $_POST["message"];
     $status = "rejected";
 
-    // Mail setup
+    // Update appointment status to rejected
+    $query = "UPDATE appointments SET status = ? WHERE appointment_id = ?";
+    $stmt = $conn->prepare($query);
+    $stmt->bind_param("ss", $status, $appointment_id);
+     
+
+    if ( $stmt->execute()) {
+         // Mail setup
     $mail = require __DIR__ . "/../../mailer.php"; 
     $mail->setFrom("jpvillaruel02@gmail.com");
     $mail->addAddress($email, $name);
@@ -19,19 +26,13 @@ if ($_SERVER['REQUEST_METHOD'] === "POST" && isset($_POST["cancel"])) {
     $mail->Subject = $subject;
     $mail->Body = $message;
 
-    if ($mail->send()) {
-        // Update appointment status to rejected
-        $query = "UPDATE appointments SET status = ? WHERE appointment_id = ?";
-        $stmt = $conn->prepare($query);
-        $stmt->bind_param("ss", $status, $appointment_id);
-        $stmt->execute();
 
-        $_SESSION['pending_appointment'] = 'reject';
+    $mail->send();
+    $_SESSION['pending_appointment'] = 'reject';
         header("Location: ../appointments.php");
+        die();
     } else {
-        echo "<script>alert('Failed to send cancellation email.')</script>";
+        echo "Error: " . $stmt->error;
     }
-
     $conn->close();
-    die();
 }

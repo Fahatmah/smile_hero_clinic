@@ -2,8 +2,8 @@
 
 declare(strict_types=1);
 
-function isInputEmpty(string $fname, string $mname, string $lname, string $email, string $contact, string $password, string $birthdate, string $gender) {
-    return empty($fname) || empty($mname) || empty($lname) || empty($email) || empty($contact) || empty($password) || empty($birthdate) || empty($gender);
+function isInputEmpty(string $fname, string $mname, string $lname, string $contact, string $password, string $birthdate, string $gender) {
+    return empty($fname) || empty($mname) || empty($lname) || empty($contact) || empty($password) || empty($birthdate) || empty($gender);
 }
 
 function isEmailInvalid(string $email) {
@@ -23,11 +23,6 @@ function isNameTaken(mysqli $conn, string $fname, string $mname, string $lname, 
 function isEmailRegistered(mysqli $conn, string $email) {
     $user = getEmail($conn, $email);
     return $user !== null;
-}
-
-function isUpdatedEmailIsValid(mysqli $conn, string $email, $currentEmail) {
-    $user = isEmailUnique($conn, $email, $currentEmail);
-    return $user == null;
 }
 
 function createUser(mysqli $conn, string $userid, string $fname, string $mname, string $lname, string $suffix, string $email, string $contact, string $password, string $label, string  $activation_token_hash) {

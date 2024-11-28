@@ -125,6 +125,7 @@ $result = $stmt->get_result();
                     placeholder="e.g. juandelacruz@gmail.com"
                      value="<?php echo $row['email']?>"
                     class="admin-form__input"
+                    readonly
                   />
                 </div>
                 <div class="admin-form__field">
@@ -164,6 +165,7 @@ $result = $stmt->get_result();
                     name="newPassword"
                     id="newPassword"
                     class="admin-form__input"
+                    onkeypress="return event.charCode != 32"
                   />
                   <div class="admin-form__validation">
                     <p class="admin-form__text admin-form__text--error">
@@ -181,6 +183,7 @@ $result = $stmt->get_result();
                     name="confirmPassword"
                     id="confirmPassword"
                     class="admin-form__input"
+                    onkeypress="return event.charCode != 32"
                   />
                 </div>
                 <input

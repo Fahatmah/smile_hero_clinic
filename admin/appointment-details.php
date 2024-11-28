@@ -118,6 +118,10 @@ if (isset($_SESSION['complete_process'])) {
               <div class="actions">
                 <?php if($aptResult['status'] === "completed"){ ?>
                   <p class="complete-text">Completed ✓</p>
+                <?php } elseif($aptResult['status'] === "canceled"){ ?>
+                  <p class="complete-text" style="color: red;">Canceled</p>
+                <?php } elseif($aptResult['status'] === "missed"){ ?>
+                  <p class="complete-text" style="color: orange;">Missed</p>
                 <?php }else{ ?>
                   <div class="btn-container">
                      <form action="includes/complete_apt.php" method="post">

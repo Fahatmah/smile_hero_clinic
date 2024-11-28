@@ -4,14 +4,14 @@ require_once '../includes/dbh.inc.php';
 
 
 $userid = $_SESSION['user_id'];
-$status = "accepted";
+$status = "completed";
 
 // Prepare and execute query to check appointments
-$qry = "SELECT * FROM appointments WHERE user_id = ?";
+$qry = "SELECT * FROM appointments WHERE user_id = ? AND status = ?";
 $stmts = $conn->prepare($qry);
 
 if ($stmts) {  // Check if prepare was successful
-    $stmts->bind_param("s", $userid);
+    $stmts->bind_param("ss", $userid, $status);
     $stmts->execute();
     $qryRes = $stmts->get_result();
     $hasAppointments = ($qryRes->num_rows > 0);

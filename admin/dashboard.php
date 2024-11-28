@@ -280,7 +280,7 @@ $startOfMonth = date('Y-m-01');
                     <th>phone #</th>
                     <th>time</th>
                     <th>date</th>
-                    <th>actions</th>
+                    <!-- <th>actions</th> -->
                   </tr>
                 </thead>
 
@@ -291,12 +291,12 @@ $startOfMonth = date('Y-m-01');
                     <td><?php echo $user['contact'] ?></td>
                     <td><?php echo $user['time'] ?></td>
                     <td><?php echo $user['date'] ?></td>
-                    <td>
+                    <!-- <td>
                       <div class="appointments-actions">
                         <button type="button" class="reschedule-btn">resched</button>
                         <button type="button" class="cancel-btn">cancel</button>
                       </div>
-                    </td>
+                    </td> -->
                   </tr>
               <?php  } ?>
                 </tbody>
@@ -306,7 +306,7 @@ $startOfMonth = date('Y-m-01');
             <section class="missed__appointments">
               <header class="appointments-header">
                 <p>missed/ <br> canceled/rejected<span class="missed appointments-count"><?php echo $countStats?></span></p>
-                <button type="button">
+                <!-- <button type="button">
                   <a href="#">
                     view
                     <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -314,7 +314,7 @@ $startOfMonth = date('Y-m-01');
                       <path d="M2.33333 8H13.5533" stroke="#616161" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
                     </svg>
                   </a>
-                </button>
+                </button> -->
               </header>
 
               <table class="appointments-table">

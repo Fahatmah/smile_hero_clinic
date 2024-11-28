@@ -13,7 +13,6 @@ if (isset($_SESSION['user_id']) && isset($_SESSION['email'])) {
         $mname = ucwords(htmlspecialchars(trim($_POST['mname'])));
         $lname = ucwords(htmlspecialchars(trim($_POST['lname'])));
         $suffix = htmlspecialchars(trim($_POST['suffix']));
-        $email = filter_var(trim($_POST['email']), FILTER_SANITIZE_EMAIL);
         $contact = htmlspecialchars(trim($_POST['contact']));
         $address = htmlspecialchars(trim($_POST['address']));
         $birthdate = htmlspecialchars(trim($_POST['bday']));
@@ -26,19 +25,12 @@ if (isset($_SESSION['user_id']) && isset($_SESSION['email'])) {
         require_once '../../includes/signup_contr.inc.php';
 
         // Check if all required fields are filled
-        if (!isInputEmpty($fname, $mname, $lname, $email, $contact, $address, $birthdate, $gender)) {
+        if (!isInputEmpty($fname, $mname, $lname, $contact, $address, $birthdate, $gender)) {
             
-            // Check if the new email is valid and not already in use
-            if (isUpdatedEmailIsValid($conn, $email, $currentEmail)) {
-                echo "<script>alert('Email is already in use'); window.location.href='edit_profile.php';</script>";
-                exit();
-            }
-
-            if (filter_var($email, FILTER_VALIDATE_EMAIL)) {
                 // Update user details in the database
                 $query = "UPDATE users SET 
                           first_name = ?, middle_name = ?, last_name = ?, suffix = ?, 
-                          birthdate = ?, gender = ?, email = ?, contact = ?, address = ? 
+                          birthdate = ?, gender = ?, contact = ?, address = ? 
                           WHERE user_id = ?";
                 $stmt = $conn->prepare($query);
                 $stmt->bind_param(
@@ -83,10 +75,6 @@ if (isset($_SESSION['user_id']) && isset($_SESSION['email'])) {
                 $_SESSION['edit_process'] = "success";
                 header("Location: edit_profile.php");
                 exit();
-            } else {
-                echo "<script>alert('Invalid email format!');</script>";
-                echo "<script>window.location.href = 'edit_profile.php' </script>";
-            }
         } else {
             echo "<script>alert('Please fill in all fields!');</script>";
             echo "<script>window.location.href = 'edit_profile.php' </script>";
@@ -268,21 +256,16 @@ if (isset($_SESSION['edit_process'])) {
               placeholder="no address" class="edit-profile__input" id="address" style="width: 100%;">
           </div>
           <div class="edit-profile__item">
-            <p class="edit-profile__label">Email</p>
-            <input type="text" name="email" value="<?php echo htmlspecialchars($row["email"]); ?>"
-              class="edit-profile__input" id="email" style="width: 100%;">
-          </div>
-          <div class="edit-profile__item">
             <p class="edit-profile__label">Old Password</p>
             <input type="password" name="oPass" placeholder="********" class="edit-profile__input">
           </div>
           <div class="edit-profile__item">
             <p class="edit-profile__label">Enter New Password</p>
-            <input type="password" name="nPass" placeholder="********" class="edit-profile__input">
+            <input type="password" name="nPass" placeholder="********" onkeypress="return event.charCode != 32" class="edit-profile__input">
           </div>
           <div class="edit-profile__item">
             <p class="edit-profile__label">Confirm New Password</p>
-            <input type="password" name="cPass" placeholder="********" class="edit-profile__input">
+            <input type="password" name="cPass" placeholder="********" onkeypress="return event.charCode != 32" class="edit-profile__input">
           </div>
         <?php } ?>
         </div>
