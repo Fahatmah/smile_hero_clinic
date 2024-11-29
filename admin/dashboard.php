@@ -175,7 +175,10 @@ $startOfMonth = date('Y-m-01');
               </div>
             </div>
 
-            <a href="includes/report.php" class="generate-report-btn" target="_blank">Generate Report</a>
+            <div>
+              <a href="includes/report.php" class="generate-report-btn" target="_blank">Generate Report</a>
+              <a href="raw_report.php" class="generate-report-btn" target="_blank">Raw Report</a>
+            </div>
           </div>
           
           <div class="overview__content">
