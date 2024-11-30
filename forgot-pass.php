@@ -50,7 +50,7 @@ if (isset($_SESSION['email_process'])) {
       </form>
 
       <!-- modal -->
-      <div class="modal" style="display: none ">
+      <div class="forgot-pass-modal" style="display: none">
        <div class="modal__content">
          <div class="body-text">
            <div class="modal__header">
@@ -75,19 +75,20 @@ if (isset($_SESSION['email_process'])) {
 
   <script>
       document.addEventListener('DOMContentLoaded', () => {
-    const modalContainer = document.querySelector(".modal");
-    const exitBtn = modalContainer.querySelector("#exitButton");
+        const modalContainer = document.querySelector(".modal");
+        const exitBtn = modalContainer.querySelector("#exitButton");
 
-    <?php if ($showModal) : ?>
-      modalContainer.style.display = "flex";
-    <?php endif; ?>
+        <?php if ($showModal) : ?>
+          modalContainer.style.display = "flex";
+        <?php endif; ?>
 
-     // Close modal when exit button is clicked
-     exitBtn.addEventListener("click", () => {
+        if(exitBtn) {
+          exitBtn.addEventListener("click", () => {
             modalContainer.style.transform = "scale(0)";
-             window.close()
-        });
-    });
+            window.close()
+          });
+        }
+      });
 
   </script>
 </html>
