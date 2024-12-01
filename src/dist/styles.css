@@ -3830,7 +3830,37 @@ body.user-homepage main .about .services .appointment__button:hover {
 .dashboard .cards .overview__content .overview__item .header .more-btn svg:active circle {
   fill: var(--ntrl-clr-300);
 }
-.dashboard .cards .overview__content .overview__item .header .appointment-summary {
+.dashboard .cards .overview__content .overview__item .header .doctors-on-duty.dropdown {
+  width: 14rem;
+  border-radius: 1.25rem;
+  border-top-right-radius: 0;
+  right: 0;
+  transform-origin: top right;
+}
+.dashboard .cards .overview__content .overview__item .header .doctors-on-duty.dropdown p {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-direction: row;
+  gap: 0;
+}
+.dashboard .cards .overview__content .overview__item .header .doctors-on-duty.dropdown p span {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: row;
+  gap: 0;
+  width: 1.5rem;
+  height: 1.5rem;
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: var(--ntrl-clr-300);
+  padding: 0.3rem;
+  border-radius: 50%;
+  background-color: var(--pr-clr-200);
+}
+.dashboard .cards .overview__content .overview__item .header .dropdown {
   width: 10rem;
   position: absolute;
   top: 1rem;
@@ -3849,23 +3879,23 @@ body.user-homepage main .about .services .appointment__button:hover {
   scale: 0;
   transition: 200ms ease-in-out;
 }
-.dashboard .cards .overview__content .overview__item .header .appointment-summary.active {
+.dashboard .cards .overview__content .overview__item .header .dropdown.active {
   scale: 1;
 }
-.dashboard .cards .overview__content .overview__item .header .appointment-summary .summary-title {
+.dashboard .cards .overview__content .overview__item .header .dropdown .title {
   font-size: 1.25rem;
   font-weight: 700;
   color: var(--pr-clr-300);
   line-height: 1.2;
   padding: 1rem;
 }
-.dashboard .cards .overview__content .overview__item .header .appointment-summary hr {
+.dashboard .cards .overview__content .overview__item .header .dropdown hr {
   width: min(100% - 1rem);
   margin-inline: auto;
   background: none;
   border-color: hsla(0, 0%, 38%, 0.2);
 }
-.dashboard .cards .overview__content .overview__item .header .appointment-summary .appointment-types {
+.dashboard .cards .overview__content .overview__item .header .dropdown .lists {
   width: 100%;
   display: flex;
   align-items: flex-start;
@@ -3874,7 +3904,7 @@ body.user-homepage main .about .services .appointment__button:hover {
   gap: 0.5rem;
   padding: 1rem;
 }
-.dashboard .cards .overview__content .overview__item .header .appointment-summary .appointment-types > * {
+.dashboard .cards .overview__content .overview__item .header .dropdown .lists > * {
   width: 100%;
   display: flex;
   align-items: center;
@@ -3882,7 +3912,7 @@ body.user-homepage main .about .services .appointment__button:hover {
   flex-direction: row;
   gap: 0;
 }
-.dashboard .cards .overview__content .overview__item .header .appointment-summary .appointment-types > * .appointment-count {
+.dashboard .cards .overview__content .overview__item .header .dropdown .lists > * .appointment-count {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -3894,10 +3924,10 @@ body.user-homepage main .about .services .appointment__button:hover {
   color: var(--ntrl-clr-100);
   border-radius: 50%;
 }
-.dashboard .cards .overview__content .overview__item .header .appointment-summary .appointment-types p:nth-child(1) .appointment-count {
+.dashboard .cards .overview__content .overview__item .header .dropdown .lists p:nth-child(1) .appointment-count {
   background-color: var(--pr-clr-300);
 }
-.dashboard .cards .overview__content .overview__item .header .appointment-summary .appointment-types p:nth-child(2) .appointment-count {
+.dashboard .cards .overview__content .overview__item .header .dropdown .lists p:nth-child(2) .appointment-count {
   background-color: var(--pr-clr-100);
 }
 .dashboard .cards .overview__content .overview__item .overview__label {

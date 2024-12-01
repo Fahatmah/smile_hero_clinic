@@ -168,7 +168,31 @@
               }
             }
 
-            .appointment-summary {
+            .doctors-on-duty.dropdown {
+              width: 14rem;
+              border-radius: 1.25rem;
+              border-top-right-radius: 0;
+              right: 0;
+              transform-origin: top right;
+
+              p {
+                width: 100%;
+                @include display-flex($x: space-between);
+                span {
+                  @include display-flex();
+                  width: 1.5rem;
+                  height: 1.5rem;
+                  font-size: 0.9rem;
+                  font-weight: 700;
+                  color: var(--ntrl-clr-300);
+                  padding: 0.3rem;
+                  border-radius: 50%;
+                  background-color: var(--pr-clr-200);
+                }
+              }
+            }
+
+            .dropdown {
               width: 10rem;
               position: absolute;
               top: 1rem;
@@ -187,7 +211,7 @@
                 scale: 1;
               }
 
-              .summary-title {
+              .title {
                 font-size: 1.25rem;
                 font-weight: 700;
                 color: var(--pr-clr-300);
@@ -202,7 +226,7 @@
                 border-color: hsl(0, 0%, 38%, 0.2);
               }
 
-              .appointment-types {
+              .lists {
                 width: 100%;
                 @include display-flex(
                   $dir: column,
