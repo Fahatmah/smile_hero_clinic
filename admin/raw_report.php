@@ -58,6 +58,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['filter'])) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="../assets/images/logoipsum.svg" type="image/x-icon" />
     <title>Appointments Filter</title>
     <link rel="stylesheet" href="../src/dist/styles.css" />
     <script>
@@ -125,8 +126,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['filter'])) {
                 <input type="checkbox" name="status[]" value="rejected" <?php echo in_array('rejected', $status) ? 'checked' : ''; ?>> <p>Rejected</p>
               </div>
               <div class="checkbox">
-
                 <input type="checkbox" name="status[]" value="missed" <?php echo in_array('missed', $status) ? 'checked' : ''; ?>> <p>Missed</p>
+              </div>
+              <div class="checkbox">
+                <input type="checkbox" name="status[]" value="request" <?php echo in_array('request', $status) ? 'checked' : ''; ?>> <p>Request</p>
               </div>
             </div>
           </div>
@@ -205,7 +208,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['filter'])) {
                 <td><?php echo htmlspecialchars($dateReport['time']); ?></td>
                 <td><?php echo htmlspecialchars($dateReport['service']); ?></td>
                 <td><?php echo htmlspecialchars($dateReport['status']); ?></td>
-                <td><?php echo htmlspecialchars($dateReport['created_at']); ?></td>
+                <td class="created-at"><?php echo htmlspecialchars($dateReport['created_at']); ?></td>
               </tr>
               <?php endforeach; ?>
             </tbody>
@@ -217,7 +220,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['filter'])) {
     </main>
 
     <script>
-    // Wait for the DOM to fully load
     document.addEventListener("DOMContentLoaded", function () {
       // Map statuses to their corresponding colors
       const statusColors = {
@@ -226,6 +228,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['filter'])) {
         rejected: "#e84531",
         missed: "#faaf0d",
         canceled: "#616161",
+        request: "#8a2be2",
       };
 
       // Get all rows in the table body
@@ -248,6 +251,28 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['filter'])) {
           }
         }
       });
+    });
+
+    const formatDateTime = (dateTime) => {
+      const date = new Date(dateTime);
+      const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+      const month = months[date.getMonth()];
+      const day = date.getDate();
+      const year = date.getFullYear();
+      let hours = date.getHours();
+      const minutes = date.getMinutes().toString().padStart(2, "0");
+      const amPm = hours >= 12 ? "PM" : "AM";
+      hours = hours % 12 || 12;
+      return `${month}, ${day}, ${year} - ${hours}:${minutes} ${amPm}`;
+    };
+
+    // Target all cells with the class "created-at"
+    const createdAtCells = document.querySelectorAll(".created-at");
+    createdAtCells.forEach(cell => {
+      const originalDateTime = cell.textContent.trim();
+      if (originalDateTime) {
+        cell.textContent = formatDateTime(originalDateTime);
+      }
     });
   </script>
 

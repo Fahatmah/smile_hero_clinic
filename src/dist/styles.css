@@ -6929,6 +6929,7 @@ body.user-homepage main .about .services .appointment__button:hover {
   width: 100%;
 }
 .raw-report-container .table-container {
+  width: 100%;
   display: flex;
   align-items: flex-start;
   justify-content: center;
@@ -6979,6 +6980,7 @@ body.user-homepage main .about .services .appointment__button:hover {
   background-color: var(--ntrl-clr-300);
 }
 .raw-report-container .table-container .appointments-table {
+  width: 100%;
   border: 1px solid hsla(0, 0%, 38%, 0.5);
   border-collapse: collapse;
 }
