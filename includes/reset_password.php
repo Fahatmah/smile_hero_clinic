@@ -68,48 +68,10 @@ if (strtotime($user["reset_token_expires_at"]) <= time()){
 
         <button type="submit" class="confirm-pass-btn">Confirm</button>
       </form>
-
-      <!-- modal -->
-      <div class="reset-pass modal" style="display: none">
-       <div class="modal__content">
-         <div class="body-text">
-           <div class="modal__header">
-             <h3 id="modalStatus" class="modal__status">
-               You have <br> successfully reset <br> your password!
-             </h3>
-             <p id="modalMessage" class="modal__message" style="color: #616161;"> 
-                 You can now login and enter your new password
-             </p>
-           </div>
-           <a href="../login.php" target="_blank" id="exitButton" class="modal__button" style="text-align: center;">
-               LOG IN
-           </a>
-         </div>
-         <div class="illustration__container">
-          <img src="../assets/reset-password.svg" alt="">
-         </div>
-       </div>
-      </div>
     </main>
 </body>
 
 <script>
-
-  document.addEventListener('DOMContentLoaded', () => {
-    const modalContainer = document.querySelector(".modal");
-    const exitBtn = modalContainer.querySelector("#exitButton");
-
-    <?php if ($showModal) : ?>
-      modalContainer.style.display = "flex";
-    <?php endif; ?>
-
-     // Close modal when exit button is clicked
-     exitBtn.addEventListener("click", () => {
-            modalContainer.style.transform = "scale(0)";
-             window.close()
-        });
-    });
-
     function validate(){
         var contact = document.getElementById("contact");
         var password = document.getElementById("password");

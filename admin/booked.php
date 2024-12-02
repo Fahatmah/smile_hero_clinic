@@ -22,7 +22,7 @@ $totalRow = $totalResult->fetch_assoc();
 $totalRecords = $totalRow['total'];
 
 // Fetch records for the current page
-$query = "SELECT * FROM appointments WHERE status = 'accepted' OR status = 'completed' OR  status = 'canceled' OR status = 'missed' LIMIT $start, $limit";
+$query = "SELECT * FROM appointments WHERE status = 'accepted' OR status = 'completed' OR  status = 'canceled' OR status = 'missed' ORDER BY status, date, time ASC LIMIT $start, $limit";
 $result = $conn->query($query);
 $users = [];
 if ($result->num_rows > 0) {
@@ -127,25 +127,7 @@ $totalPages = ceil($totalRecords / $limit);
                 </th>
                 <th>phone #</th>
                 <th>id #</th>
-                <th>
-                  action 
-                  <!-- <div class="dropdown-container">
-                    <button class="filter-btn">
-                    <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M5.22488 3.35999L3.36487 1.5L1.50488 3.35999" stroke="#616161" stroke-width="0.75" stroke-linecap="round" stroke-linejoin="round"/>
-                    <path d="M3.36499 10.5V1.5" stroke="#616161" stroke-width="0.75" stroke-linecap="round" stroke-linejoin="round"/>
-                    <path d="M6.77466 8.64001L8.63467 10.5L10.4947 8.64001" stroke="#616161" stroke-width="0.75" stroke-linecap="round" stroke-linejoin="round"/>
-                    <path d="M8.63379 1.5V10.5" stroke="#616161" stroke-width="0.75" stroke-linecap="round" stroke-linejoin="round"/>
-                    </svg>
-                    </button>
-
-                    <ul class="dropdown actions">
-                      <li><button>all</button></li>
-                      <li><button>updated</button></li>
-                      <li><button>accepted</button></li>
-                    </ul>
-                  </div> -->
-                </th>
+                <th>action</th>
               </tr>
             </thead>
 
@@ -186,14 +168,6 @@ $totalPages = ceil($totalRecords / $limit);
                   <?php echo $user['appointment_id']; ?>
                 </td>
 
-                <td class="patient-cell action" data-status="<?php echo $user['status']; ?>">
-                  <button type="button">
-                    <a href="appointment-details.php?aptId=<?php echo $user['appointment_id'] ?>">
-                      View Details
-                    </a>
-                  </button>
-                </td>
-
                 <?php
                 $bgColor = '';
                   switch ($user['status']) {
@@ -215,8 +189,12 @@ $totalPages = ceil($totalRecords / $limit);
                       break;
                   }
                 ?>
-
-                <td>
+                <td class="patient-cell action" data-status="<?php echo $user['status']; ?>">
+                  <button type="button">
+                    <a href="appointment-details.php?aptId=<?php echo $user['appointment_id'] ?>">
+                      View Details
+                    </a>
+                  </button>
                   <div class="identifier" style=" background-color:<?php echo $bgColor ?>; "></div>
                 </td>
               </tr>
@@ -265,7 +243,7 @@ $totalPages = ceil($totalRecords / $limit);
   })
 
   const filterByLabel = (label) => {
-  const rows = document.querySelectorAll('.patients__table tbody tr:not(.no-appointment-message)');
+  const rows = document.querySelectorAll('#items tr:not(.no-appointment-message)');
   let visibleRows = 0;
   let showRow = false;
 
@@ -333,7 +311,7 @@ $totalPages = ceil($totalRecords / $limit);
   })
   
   // filter accepted or rescheduled appointments
-  const actionsDropdown = document.querySelector('.dropdown.actions')
+  // const actionsDropdown = document.querySelector('.dropdown.actions')
   const appointmentRows = document.querySelectorAll('.appointment-row')
   function filterAppointments(filterType) {
     let visibleRows = 0
@@ -347,11 +325,11 @@ $totalPages = ceil($totalRecords / $limit);
     document.querySelector('.no-appointment-message').style.display = visibleRows === 0 ? '' : 'none'
   }
 
-  actionsDropdown.addEventListener('click', e => {
-    const filterType = e.target.textContent.trim().toLowerCase()
-    if(filterType === 'updated') filterAppointments('rescheduled')
-    else if (filterType === 'accepted') filterAppointments('accepted')
-    else filterAppointments('all')
-  })
+  // actionsDropdown.addEventListener('click', e => {
+  //   const filterType = e.target.textContent.trim().toLowerCase()
+  //   if(filterType === 'updated') filterAppointments('rescheduled')
+  //   else if (filterType === 'accepted') filterAppointments('accepted')
+  //   else filterAppointments('all')
+  // })
 </script>
 </html>

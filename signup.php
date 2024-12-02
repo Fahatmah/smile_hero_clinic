@@ -366,7 +366,17 @@ if (isset($_SESSION['signup_process'])) {
             }, 2000);
 
         return false; // prevent form submission
-    } else if (password.value !== Cpassword.value) {
+    } else if (contact.value.length != 11) {
+        error_msg.innerHTML = "Invalid Contact Number";
+        error_msg.style.display = "flex";
+
+        setTimeout(() => {
+            error_msg.style.display = "none";
+        }, 2000);
+
+        return false;
+    }
+    else if (password.value !== Cpassword.value) {
         error_msg.innerHTML = "Passwords do not match";
         error_msg.style.display = "flex";
 

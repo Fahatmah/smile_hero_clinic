@@ -12,8 +12,10 @@ if(!isset($_SESSION['adminID'])) {
 $query = "SELECT * FROM doctors WHERE availability = 'On Duty'";
 $result = $conn->query($query);
 $doctors = 0;
+$GetOnDUty = [];
 if ($result->num_rows > 0) {
   while ($row = $result->fetch_assoc()) {
+    $GetOnDUty[] = $row;
     $doctors++;
   }
 }
@@ -229,15 +231,12 @@ $startOfMonth = date('Y-m-01');
               </button>
 
               <div class="doctors-on-duty dropdown" id="dropdown">
-                <p class="header-title title">On Duty Doctors <span>6</span></p>
+                <p class="header-title title">On Duty Doctors <span><?php echo $doctors ?></span></p>
                 <hr>
                 <ul class="doctors lists">
-                  <li class="list">Doctor Name</li>
-                  <li class="list">Doctor Name</li>
-                  <li class="list">Doctor Name</li>
-                  <li class="list">Doctor Name</li>
-                  <li class="list">Doctor Name</li>
-                  <li class="list">Doctor Name</li>
+                <?php foreach ($GetOnDUty as $ResOnduty) { ?>
+                     <li class="list">Doc. <?php echo $ResOnduty['first_name'] . " " . $ResOnduty['last_name'];?></li>
+                <?php  } ?>
                 </ul>
               </div>
             </div>
@@ -540,11 +539,11 @@ $startOfMonth = date('Y-m-01');
           data.monthly = dataFromDB;
         }
 
-        // Update the UI with the new data (this will depend on your HTML structure)
-        updateDashboard(period);
+        // Update the UI with the new data
+        updateOverview(period); // Replace updateDashboard with updateOverview
       })
       .catch(error => console.error('Error fetching data:', error));
-    }
+  }
 
     // Assuming you have data objects for each filter type
     const data = {
@@ -585,9 +584,9 @@ $startOfMonth = date('Y-m-01');
     });
 
     // Initial data fetch
-    fetchData('today');
-    fetchData('weekly');
     fetchData('monthly');
+    fetchData('weekly');
+    fetchData('today');
 
 
     const overviewLabel = document.querySelector(".overview__header .overview__title");
@@ -611,6 +610,12 @@ $startOfMonth = date('Y-m-01');
       newPatientsElem.textContent = filterData.newPatients;
       doctorsOnDutyElem.textContent = filterData.doctorsOnDuty;
     }
+
+    document.querySelectorAll('input[name="filterType"]').forEach(button => {
+      button.addEventListener('change', function () {
+        fetchData(this.value); // fetch data based on the selected filter
+      });
+    });
 
     // Event listeners for filter buttons
     document.getElementById("todayBtn").addEventListener("click", () => updateOverview("today"));

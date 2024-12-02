@@ -75,7 +75,7 @@ if (isset($_SESSION['email_process'])) {
 
   <script>
       document.addEventListener('DOMContentLoaded', () => {
-        const modalContainer = document.querySelector(".modal");
+        const modalContainer = document.querySelector(".forgot-pass-modal");
         const exitBtn = modalContainer.querySelector("#exitButton");
 
         <?php if ($showModal) : ?>

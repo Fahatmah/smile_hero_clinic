@@ -111,7 +111,7 @@ if (isset($_SESSION['pending_appointment'])) {
                     </ul>
                   </div>
                 </th>
-                <th>message</th>
+                <th>Service</th>
                 <th>actions</th>
               </tr>
             </thead>

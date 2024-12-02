@@ -34,9 +34,9 @@ if (isset($_SESSION['user_id']) && isset($_SESSION['email'])) {
                           WHERE user_id = ?";
                 $stmt = $conn->prepare($query);
                 $stmt->bind_param(
-                    "ssssssssss", 
+                    "sssssssss", 
                     $fname, $mname, $lname, $suffix, 
-                    $birthdate, $gender, $email, $contact, $address, $user_id
+                    $birthdate, $gender, $contact, $address, $user_id
                 );
                 $stmt->execute();
 

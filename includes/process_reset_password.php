@@ -38,21 +38,9 @@ if($_SERVER["REQUEST_METHOD"] = "POST"){
     $stmt = $mysqli->prepare($qryUpdatePass);
     $stmt->bind_param("ss", $hashedPassword, $user["user_id"]);
     $stmt->execute();
- 
-    $_SESSION["reset_pass_process"] = "success";
 
     $mysqli->close();
     $stmt->close();
-    
-   
-
-    $showModal = false;
-        if (isset($_SESSION['reset_pass_process'])) {
-        if ($_SESSION['reset_pass_process'] === 'success') {
-            $showModal = true;
-        }
-        unset($_SESSION['reset_pass_process']);  // Clear the signup process session
-    }
 }
 ?>
 
@@ -74,7 +62,7 @@ if($_SERVER["REQUEST_METHOD"] = "POST"){
 </head>
 <body>
       <!-- modal -->
-      <div class="modal" style="display: none">
+      <div class="forgot-pass-modal">
        <div class="modal__content">
          <div class="body-text">
            <div class="modal__header">
@@ -96,22 +84,4 @@ if($_SERVER["REQUEST_METHOD"] = "POST"){
       </div>
     </main>
 </body>
-
-<script>
-
-  document.addEventListener('DOMContentLoaded', () => {
-    const modalContainer = document.querySelector(".modal");
-    const exitBtn = modalContainer.querySelector("#exitButton");
-
-    <?php if ($showModal) : ?>
-      modalContainer.style.display = "flex";
-    <?php endif; ?>
-
-     // Close modal when exit button is clicked
-     exitBtn.addEventListener("click", () => {
-            modalContainer.style.transform = "scale(0)";
-             window.close()
-        });
-    });
-</script>
 </html>
