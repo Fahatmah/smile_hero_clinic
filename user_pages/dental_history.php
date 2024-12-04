@@ -39,6 +39,7 @@ $user_id = $_SESSION['user_id'];
   <title>Feedback Form | Smile Hero Clinic</title>
 
   <link rel="stylesheet" href="../src/dist/styles.css" />
+  <script src="js/mobile-nav.js" defer></script>
 </head>
 
 <body class="user__page">
@@ -55,10 +56,10 @@ $user_id = $_SESSION['user_id'];
       <table>
         <thead>
           <tr>
-            <th>Appointment ID</th>
+            <th>Apt ID</th>
             <th>Date</th>
             <th>Time</th>
-            <th>Request Date</th>
+            <th>Req. Date</th>
             <th>Status</th>
           </tr>
         </thead>
@@ -82,7 +83,7 @@ $user_id = $_SESSION['user_id'];
   </main>
 </body>
 <script>
-  const setStatusStyles = (statusElement, statusText) => statusElement.classList.add(statusText === 'pending' ? 'pending' :  statusText === 'complete' ? 'complete' : statusText === 'accepted' ? 'accepted' : 'rejected')
+  const setStatusStyles = (statusElement, statusText) => statusElement.classList.add(statusText === 'pending' ? 'pending' :  statusText === 'completed' ? 'completed' : statusText === 'accepted' ? 'accepted' : statusText === 'missed' ? 'missed' : statusText = 'canceled' ? 'canceled' : 'rejected')
   document.querySelectorAll('.status').forEach((status) => setStatusStyles(status, status.innerText.toLowerCase()))
 </script>
 

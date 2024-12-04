@@ -334,7 +334,7 @@ body main.admin__main .admin__content {
 }
 .account__header.user-header .header__content .header__button.button--appointment a {
   color: var(--ntrl-clr-300);
-  padding: 0.75rem 1rem;
+  padding: 0.6rem 1rem;
   border-radius: 4px;
   border: 1px solid hsla(0, 0%, 38%, 0.5);
   cursor: pointer;
@@ -349,7 +349,25 @@ body main.admin__main .admin__content {
 .account__header.user-header .header__content .header__button.button--appointment:active a {
   color: var(--ntrl-clr-300);
 }
+.account__header.user-header .header__content .menu-btn {
+  display: none;
+}
+.account__header.user-header .header__content .menu-btn:hover {
+  font-weight: 900;
+  color: var(--pr-clr-300);
+}
 
+@media screen and (max-width: 51.25rem) {
+  .user__page .user__main .user-header .header__content .header__date {
+    display: none;
+  }
+  .user__page .user__main .user-header .header__content .header__button a {
+    font-size: 0.8rem;
+  }
+  .user__page .user__main .user-header .header__content .menu-btn {
+    display: flex;
+  }
+}
 .footer__section {
   display: flex;
   align-items: center;
@@ -1878,6 +1896,15 @@ footer .contact-section .footer-info__credits {
   background-color: var(--pr-clr-300);
 }
 
+@media screen and (max-width: 51.25rem) {
+  .form-modal .forgot-pass-modal .modal__content {
+    flex-direction: column-reverse;
+    margin-inline: 1rem;
+  }
+  .form-modal .forgot-pass-modal .modal__content > * {
+    height: 320px;
+  }
+}
 .form-modal .forgot-pass-form .field label {
   display: flex;
   color: var(--ntrl-clr-300);
@@ -1996,6 +2023,16 @@ footer .contact-section .footer-info__credits {
   background-color: var(--ntrl-clr-100);
   padding: 1rem;
 }
+.aside__sidebar .close-btn {
+  display: none;
+  width: 100%;
+  font-size: 1.2rem;
+  text-align: right;
+  cursor: pointer;
+}
+.aside__sidebar .close-btn:hover {
+  color: var(--pr-clr-100);
+}
 .aside__sidebar ul {
   width: 100%;
   display: flex;
@@ -2056,6 +2093,27 @@ footer .contact-section .footer-info__credits {
   background-color: var(--pr-clr-300);
 }
 
+@media screen and (max-width: 51.25rem) {
+  body {
+    position: relative;
+  }
+  body .aside__sidebar {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    max-width: 100%;
+    justify-content: flex-start;
+    border-radius: 0;
+    z-index: 1000;
+  }
+  body .aside__sidebar .close-btn {
+    display: block;
+  }
+  body .aside__sidebar ul {
+    width: 100%;
+  }
+}
 .user-profile {
   width: 100%;
   display: flex;
@@ -2150,6 +2208,19 @@ footer .contact-section .footer-info__credits {
   font-size: 0.875rem;
 }
 
+@media screen and (max-width: 51.25rem) {
+  .user-profile__header {
+    flex-direction: column;
+    gap: 1rem;
+    align-items: flex-start;
+  }
+  .user-profile__header .user-profile__actions {
+    width: 100%;
+  }
+  .user-profile__header .user-profile__actions > * {
+    width: 100%;
+  }
+}
 .appointment__page .appointments__container .appointment__item {
   display: flex;
   align-items: center;
@@ -2290,6 +2361,34 @@ footer .contact-section .footer-info__credits {
   background-color: var(--pr-clr-350);
 }
 
+@media screen and (max-width: 51.25rem) {
+  .appointment__page .appointments__container .appointment__item {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+  .appointment__page .appointments__container .appointment__item > * {
+    width: 100%;
+    color: var(--ntrl-clr-300);
+    padding: 1.5rem;
+    border-radius: 0.5rem;
+    background-color: var(--ntrl-clr-100);
+  }
+  .appointment__page .appointments__container .appointment__item .header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1rem;
+  }
+  .appointment__page .appointments__container .appointment__item .header button {
+    align-self: flex-end;
+    justify-self: flex-end;
+  }
+  .appointment__page .appointments__container .appointment__item .modal.cancel-appointment > * {
+    width: 20rem;
+  }
+}
 .appointment_form {
   display: flex;
   align-items: center;
@@ -2548,6 +2647,11 @@ footer .contact-section .footer-info__credits {
   background-color: var(--pr-clr-300);
 }
 
+@media screen and (max-width: 51.25rem) {
+  .appointment_form form {
+    flex-direction: column;
+  }
+}
 .dental-history__page {
   --light-gray-border: 1px solid hsl(0, 0%, 38%, 0.3);
   --ff-inter: "Inter", sans-serif;
@@ -2555,6 +2659,8 @@ footer .contact-section .footer-info__credits {
   --complete-bg: #dbffe5;
   --accepted-bg: #eef5ff;
   --rejected-bg: #ffe9e6;
+  --missed-bg: #e8e8e8;
+  --canceled-bg: #ff1c1c;
   width: 100%;
   border-radius: 0.5rem;
   border: var(--light-gray-border);
@@ -2583,7 +2689,7 @@ footer .contact-section .footer-info__credits {
   border-bottom: var(--light-gray-border);
 }
 .dental-history__page table thead tr th:nth-child(1) {
-  width: 9.5625rem;
+  width: 9rem;
 }
 .dental-history__page table thead tr th:nth-child(2), .dental-history__page table thead tr th:nth-child(4) {
   width: 117px;
@@ -2600,6 +2706,8 @@ footer .contact-section .footer-info__credits {
 }
 .dental-history__page table tbody tr td:first-child {
   text-transform: unset;
+  font-size: clamp(0.6rem, 0.5296rem + 0.3005vw, 0.8rem);
+  font-weight: 500;
 }
 .dental-history__page table tbody tr td:last-child {
   text-align: center;
@@ -2608,7 +2716,7 @@ footer .contact-section .footer-info__credits {
 .dental-history__page table tbody tr td:last-child .status {
   width: -moz-min-content;
   width: min-content;
-  font-size: 0.625rem;
+  font-size: 0.6rem;
   font-weight: bold;
   padding: 0.1875rem 0.5rem;
   border-radius: 0.25rem;
@@ -2618,7 +2726,7 @@ footer .contact-section .footer-info__credits {
   border: 1px solid var(--pr-clr-200);
   background-color: var(--pending-bg);
 }
-.dental-history__page table tbody tr td:last-child .status.complete {
+.dental-history__page table tbody tr td:last-child .status.completed {
   color: var(--pr-clr-270);
   border: 1px solid var(--pr-clr-270);
   background-color: var(--complete-bg);
@@ -2632,6 +2740,16 @@ footer .contact-section .footer-info__credits {
   color: var(--pr-clr-100);
   border: 1px solid var(--pr-clr-100);
   background-color: var(--rejected-bg);
+}
+.dental-history__page table tbody tr td:last-child .status.missed {
+  color: var(--ntrl-clr-300);
+  border: 1px solid var(--ntrl-clr-300);
+  background-color: var(--missed-bg);
+}
+.dental-history__page table tbody tr td:last-child .status.canceled {
+  color: var(--ntrl-clr-100);
+  border: 1px solid var(--canceled-bg);
+  background-color: var(--canceled-bg);
 }
 
 .faqs-and-questions__page {
@@ -3025,7 +3143,7 @@ footer .contact-section .footer-info__credits {
 
 body.user-homepage {
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   justify-content: center;
   flex-direction: row;
   width: 100%;
@@ -3033,92 +3151,66 @@ body.user-homepage {
   background-color: var(--ntrl-clr-200);
 }
 body.user-homepage main {
-  width: min(100% - 12rem, 80rem);
+  width: min(100% - 2rem, 80rem);
   margin-inline: auto;
 }
 body.user-homepage main .navbar__user {
-  width: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-direction: row;
-  justify-content: space-between;
-  padding-block: 1.5rem;
-  border-bottom: 1px solid hsla(0, 0%, 38%, 0.3);
-}
-body.user-homepage main .navbar__user-logo {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-direction: row;
-  background-color: var(--pr-clr-300);
-  border-radius: 50%;
-}
-body.user-homepage main .navbar__user-logo a {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-direction: row;
-  padding: 0.5rem;
-}
-body.user-homepage main .navbar__user-logo a svg path {
-  fill: white;
-}
-body.user-homepage main .navbar__user-menu {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-direction: row;
-  gap: 1rem;
-}
-body.user-homepage main .navbar__user-menu button {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-direction: row;
-  border-radius: 8px;
-  overflow: hidden;
-}
-body.user-homepage main .navbar__user-menu button a {
-  padding: 1rem;
-  color: white;
-}
-body.user-homepage main .navbar__user-menu button#logoutBtn {
-  background-color: hsla(0, 0%, 38%, 0.7);
-}
-body.user-homepage main .navbar__user-menu button#logoutBtn:hover {
-  background-color: var(--ntrl-clr-300);
-}
-body.user-homepage main .navbar__user-menu button#accountBtn {
-  background-color: var(--pr-clr-100);
-}
-body.user-homepage main .navbar__user-menu button#accountBtn:hover {
-  background-color: var(--pr-clr-150);
-}
-body.user-homepage main .navbar__user-menu button#accountBtn a {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-direction: row;
-  gap: 8px;
-}
-body.user-homepage main .hero {
   display: flex;
   align-items: center;
   justify-content: space-between;
   flex-direction: row;
   gap: 0;
+  margin-bottom: 2rem;
   padding-block: 2rem;
   border-bottom: 1px solid hsla(0, 0%, 38%, 0.3);
 }
-body.user-homepage main .hero h1,
-body.user-homepage main .hero .circle-span {
-  width: 860px;
-  font-size: 6.25rem;
+body.user-homepage main .navbar__user-menu {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: row-reverse;
+  gap: 0.5rem;
+}
+body.user-homepage main .navbar__user-menu .menu__button {
+  border-radius: 0.5rem;
+}
+body.user-homepage main .navbar__user-menu .menu__button:nth-child(1) {
+  background-color: var(--ntrl-clr-300);
+}
+body.user-homepage main .navbar__user-menu .menu__button:nth-child(1):hover {
+  background-color: var(--ntrl-clr-400);
+}
+body.user-homepage main .navbar__user-menu .menu__button:nth-child(2) {
+  background-color: var(--pr-clr-100);
+}
+body.user-homepage main .navbar__user-menu .menu__button:nth-child(2):hover {
+  background-color: var(--pr-clr-150);
+}
+body.user-homepage main .navbar__user-menu .menu__button a {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: row;
+  gap: 0;
+  color: var(--ntrl-clr-100);
+  padding: 0.8rem 1rem;
+}
+body.user-homepage main .hero {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 1rem;
+  padding-block-end: 2rem;
+  border-bottom: 1px solid hsla(0, 0%, 38%, 0.3);
+}
+body.user-homepage main .hero h1 {
+  font-size: clamp(2.45rem, 1.112rem + 5.7089vw, 6.25rem);
   font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: -2px;
   color: transparent;
-  letter-spacing: -6px;
-  line-height: 82px;
+  line-height: 1;
   text-transform: uppercase;
   background-image: url(../../assets/images/mesh_bg.png);
   background-repeat: no-repeat;
@@ -3127,23 +3219,8 @@ body.user-homepage main .hero .circle-span {
   -webkit-background-clip: text;
   background-clip: text;
 }
-body.user-homepage main .hero h1.circle-span,
-body.user-homepage main .hero .circle-span.circle-span {
-  position: relative;
-}
-body.user-homepage main .hero h1.circle-span::after,
-body.user-homepage main .hero .circle-span.circle-span::after {
-  content: "";
-  position: absolute;
-  top: -0.5rem;
-  right: 3.7rem;
-  width: 2rem;
-  height: 2rem;
-  border-radius: 50%;
-  background-image: url(../../assets/mesh-circle.svg);
-}
 body.user-homepage main .hero__details {
-  width: 336px;
+  width: 100%;
   display: flex;
   align-items: flex-start;
   justify-content: center;
@@ -3151,6 +3228,7 @@ body.user-homepage main .hero__details {
   gap: 1rem;
 }
 body.user-homepage main .hero__details .contact__info {
+  width: 100%;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -3171,10 +3249,10 @@ body.user-homepage main .hero__details .current__date {
   justify-content: center;
   flex-direction: row;
   gap: 10px;
-  padding: 1rem;
-  border-radius: 2rem;
+  padding: 0.875rem 1rem;
+  border-radius: 0.5rem;
   outline: 1px solid var(--ntrl-clr-300);
-  font-size: 1.5rem;
+  font-size: clamp(1rem, 0.9472rem + 0.2254vw, 1.15rem);
   font-weight: 300;
   color: var(--ntrl-clr-300);
 }
@@ -3182,54 +3260,55 @@ body.user-homepage main .about {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  flex-direction: row;
-  gap: 0;
+  flex-direction: column;
+  gap: 2rem;
   padding-block: 2rem;
 }
 body.user-homepage main .about__intro {
   position: relative;
-  width: 760px;
-  height: 560px;
-  border-radius: 2rem;
+  width: 100%;
+  height: 50vh;
+  border-radius: 0.5rem;
   background-image: url(../../assets/smile-hero-img.jpg);
   background-repeat: no-repeat;
-  background-position: center center;
+  background-position: center;
 }
 body.user-homepage main .about__intro > * {
-  width: initial;
+  width: 19.5rem;
+  width: min(100% - 2rem, 30rem);
   position: absolute;
-  left: 2rem;
-  right: 2rem;
-  padding: 1rem;
-  font-size: 1.125rem;
+  left: 1rem;
+  right: 1rem;
+  padding: 0.875rem 1rem;
+  font-size: clamp(0.85rem, 0.7532rem + 0.4131vw, 1.125rem);
   color: var(--ntrl-clr-350);
-  border-radius: 12px;
+  line-height: 1.5;
+  border-radius: 0.5rem;
   background-color: hsla(0, 0%, 100%, 0.7);
-  -webkit-backdrop-filter: blur(6px);
-          backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(4px);
+          backdrop-filter: blur(4px);
 }
 body.user-homepage main .about__intro #aboutTitle {
-  width: -moz-max-content;
-  width: max-content;
-  top: 2rem;
+  top: 1rem;
+  text-align: center;
 }
 body.user-homepage main .about__intro .sub-header {
-  bottom: 2rem;
+  bottom: 1rem;
 }
 body.user-homepage main .about .services {
-  width: 468px;
+  width: 100%;
 }
 body.user-homepage main .about .services #servicesTitle {
   width: 100%;
   padding: 1rem;
-  font-size: 3.875rem;
+  font-size: clamp(2.45rem, 1.9482rem + 2.1408vw, 3.875rem);
   font-weight: 900;
   color: var(--ntrl-clr-200);
-  letter-spacing: -6px;
+  letter-spacing: -1px;
   text-align: center;
   text-transform: uppercase;
-  border-radius: 4rem;
-  background-color: hsla(0, 0%, 38%, 0.7);
+  border-radius: 0.5rem;
+  background-color: var(--ntrl-clr-300);
   margin-bottom: 2rem;
 }
 body.user-homepage main .about .services__list {
@@ -3255,20 +3334,52 @@ body.user-homepage main .about .services .appointment__button {
   justify-content: space-between;
   flex-direction: row;
   gap: 0;
-  padding: 1.5rem 2rem;
-  font-size: 2.8125rem;
+  padding: 0.875rem 1rem;
+  font-size: clamp(1.25rem, 0.6998rem + 2.3474vw, 2.8125rem);
   font-weight: 900;
   color: var(--ntrl-clr-200);
   text-transform: uppercase;
-  letter-spacing: -3px;
-  line-height: 55px;
-  border-radius: 4rem;
-  background-color: var(--pr-clr-150);
-}
-body.user-homepage main .about .services .appointment__button:hover {
+  letter-spacing: -1px;
+  line-height: 1;
+  border-radius: 0.5rem;
   background-color: var(--pr-clr-100);
 }
+body.user-homepage main .about .services .appointment__button:hover {
+  background-color: var(--pr-clr-150);
+}
 
+@media screen and (min-width: 46.875rem) {
+  body.user-homepage main .hero {
+    flex-direction: row;
+  }
+  body.user-homepage main .hero h1 {
+    letter-spacing: -6px;
+    line-height: 0.85;
+  }
+  body.user-homepage main .hero__details {
+    width: 32rem;
+  }
+}
+@media screen and (min-width: 56.25rem) {
+  body.user-homepage main .hero {
+    gap: 8rem;
+  }
+  body.user-homepage main .hero h1 {
+    letter-spacing: -6px;
+    line-height: 0.85;
+  }
+}
+@media screen and (min-width: 64rem) {
+  body.user-homepage main .about {
+    flex-direction: row;
+  }
+  body.user-homepage main .about__intro {
+    height: 32.5rem;
+  }
+  body.user-homepage main .about__intro > * {
+    width: initial;
+  }
+}
 .edit-profile {
   width: 100%;
 }
@@ -3409,6 +3520,7 @@ body.user-homepage main .about .services .appointment__button:hover {
 }
 .edit-profile .modal__content .body-text .modal__header #modalStatus {
   font-size: 2.625rem;
+  font-size: clamp(2rem, 1.7799rem + 0.939vw, 2.625rem);
   font-weight: bold;
   color: var(--ntrl-clr-300);
   text-align: left;
@@ -3449,6 +3561,18 @@ body.user-homepage main .about .services .appointment__button:hover {
   background-color: var(--pr-clr-300);
 }
 
+@media screen and (max-width: 51.25rem) {
+  .edit-profile .modal__content {
+    flex-direction: column-reverse;
+    margin-inline: 1rem;
+  }
+  .edit-profile .modal__content > * {
+    height: 300px;
+  }
+  .edit-profile .modal__content .body-text .modal__header .modal__status {
+    line-height: 1;
+  }
+}
 .navbar {
   --ff-inter: "Inter", sans-serif;
   width: 100%;

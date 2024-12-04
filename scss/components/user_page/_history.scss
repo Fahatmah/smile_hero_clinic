@@ -7,6 +7,8 @@
   --complete-bg: #dbffe5;
   --accepted-bg: #eef5ff;
   --rejected-bg: #ffe9e6;
+  --missed-bg: #e8e8e8;
+  --canceled-bg: #ff1c1c;
 
   width: 100%;
   border-radius: 0.5rem;
@@ -39,7 +41,7 @@
           border-bottom: var(--light-gray-border);
 
           &:nth-child(1) {
-            width: 9.5625rem;
+            width: 9rem;
           }
 
           &:nth-child(2),
@@ -68,6 +70,8 @@
         td {
           &:first-child {
             text-transform: unset;
+            font-size: clamp(0.6rem, 0.5296rem + 0.3005vw, 0.8rem);
+            font-weight: 500;
           }
 
           &:last-child {
@@ -76,7 +80,7 @@
 
             .status {
               width: min-content;
-              font-size: 0.625rem;
+              font-size: 0.6rem;
               font-weight: bold;
               padding: 0.1875rem 0.5rem;
               border-radius: 0.25rem;
@@ -87,7 +91,7 @@
                 background-color: var(--pending-bg);
               }
 
-              &.complete {
+              &.completed {
                 color: var(--pr-clr-270);
                 border: 1px solid var(--pr-clr-270);
                 background-color: var(--complete-bg);
@@ -103,6 +107,18 @@
                 color: var(--pr-clr-100);
                 border: 1px solid var(--pr-clr-100);
                 background-color: var(--rejected-bg);
+              }
+
+              &.missed {
+                color: var(--ntrl-clr-300);
+                border: 1px solid var(--ntrl-clr-300);
+                background-color: var(--missed-bg);
+              }
+
+              &.canceled {
+                color: var(--ntrl-clr-100);
+                border: 1px solid var(--canceled-bg);
+                background-color: var(--canceled-bg);
               }
             }
           }

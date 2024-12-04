@@ -27,6 +27,7 @@ if (isset($_SESSION['feedback_proccess'])) {
   <title>Feedback Form | Smile Hero Clinic</title>
   
   <link rel="stylesheet" href="../src/dist/styles.css" />
+  <script src="js/mobile-nav.js" defer></script>
 </head>
 
 <body class="user__page">

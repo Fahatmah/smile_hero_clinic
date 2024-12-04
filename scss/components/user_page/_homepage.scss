@@ -1,80 +1,58 @@
 @use '../../abstracts' as *;
 body.user-homepage {
-  @include flex();
+  @include flex($y: flex-start);
   width: 100%;
   min-height: 100vh;
   background-color: var(--ntrl-clr-200);
 
   main {
-    width: min(100% - 12rem, 80rem);
+    width: min(100% - 2rem, 80rem);
     margin-inline: auto;
 
-    // nav
     .navbar__user {
-      width: 100%;
-      @include flex();
-      justify-content: space-between;
-      padding-block: 1.5rem;
+      @include display-flex($x: space-between);
+      margin-bottom: 2rem;
+      padding-block: 2rem;
       border-bottom: 1px solid hsl(0, 0%, 38%, 0.3);
 
-      &-logo {
-        @include flex();
-        background-color: var(--pr-clr-300);
-        border-radius: 50%;
-        a {
-          @include flex();
-          padding: 0.5rem;
-          svg path {
-            fill: white;
-          }
-        }
-      }
-
       &-menu {
-        @include display-flex($gap: 1rem);
+        @include display-flex($gap: 0.5rem, $dir: row-reverse);
 
-        button {
-          @include flex();
-          border-radius: 8px;
-          overflow: hidden;
-          a {
-            padding: 1rem;
-            color: white;
-          }
-          &#logoutBtn {
-            background-color: hsl(0, 0%, 38%, 0.7);
-
+        .menu__button {
+          border-radius: 0.5rem;
+          &:nth-child(1) {
+            background-color: var(--ntrl-clr-300);
             &:hover {
-              background-color: var(--ntrl-clr-300);
+              background-color: var(--ntrl-clr-400);
             }
           }
-          &#accountBtn {
+          &:nth-child(2) {
             background-color: var(--pr-clr-100);
             &:hover {
               background-color: var(--pr-clr-150);
             }
-            a {
-              @include display-flex($gap: 8px);
-            }
+          }
+          a {
+            @include display-flex();
+            color: var(--ntrl-clr-100);
+            padding: 0.8rem 1rem;
           }
         }
       }
     }
 
-    // header
     .hero {
-      @include display-flex($x: space-between);
-      padding-block: 2rem;
+      @include display-flex($dir: column, $gap: 1rem);
+      padding-block-end: 2rem;
       border-bottom: 1px solid hsl(0, 0%, 38%, 0.3);
 
-      h1,
-      .circle-span {
-        width: 860px;
-        font-size: 6.25rem;
+      h1 {
+        font-size: clamp(2.45rem, 1.112rem + 5.7089vw, 6.25rem);
         font-weight: 900;
+        text-transform: uppercase;
+        letter-spacing: -2px;
         color: transparent;
-        letter-spacing: -6px;
-        line-height: 82px;
+        line-height: 1;
         text-transform: uppercase;
 
         background-image: url(../../assets/images/mesh_bg.png);
@@ -83,27 +61,14 @@ body.user-homepage {
         background-position: center;
         -webkit-background-clip: text;
         background-clip: text;
-
-        &.circle-span {
-          position: relative;
-          &::after {
-            content: '';
-            position: absolute;
-            top: -0.5rem;
-            right: 3.7rem;
-            width: 2rem;
-            height: 2rem;
-            border-radius: 50%;
-            background-image: url(../../assets/mesh-circle.svg);
-          }
-        }
       }
 
       &__details {
-        width: 336px;
+        width: 100%;
         @include display-flex($dir: column, $y: flex-start, $gap: 1rem);
 
         .contact__info {
+          width: 100%;
           @include display-flex($gap: 0.625rem, $x: space-between);
           flex-wrap: wrap;
           color: var(--ntrl-clr-350);
@@ -118,11 +83,11 @@ body.user-homepage {
         .current__date {
           width: 100%;
           @include display-flex($gap: 10px);
-          padding: 1rem;
-          border-radius: 2rem;
+          padding: 0.875rem 1rem;
+          border-radius: 0.5rem;
           outline: 1px solid var(--ntrl-clr-300);
 
-          font-size: 1.5rem;
+          font-size: clamp(1rem, 0.9472rem + 0.2254vw, 1.15rem);
           font-weight: 300;
           color: var(--ntrl-clr-300);
         }
@@ -131,55 +96,57 @@ body.user-homepage {
 
     // section
     .about {
-      @include display-flex($x: space-between);
+      @include display-flex($x: space-between, $dir: column, $gap: 2rem);
       padding-block: 2rem;
 
       &__intro {
         position: relative;
-        width: 760px;
-        height: 560px;
-        border-radius: 2rem;
+        width: 100%;
+        height: 50vh;
+        border-radius: 0.5rem;
         background-image: url(../../assets/smile-hero-img.jpg);
         background-repeat: no-repeat;
-        background-position: center center;
+        background-position: center;
 
         & > * {
-          width: initial;
+          width: 19.5rem;
+          width: min(100% - 2rem, 30rem);
           position: absolute;
-          left: 2rem;
-          right: 2rem;
-          padding: 1rem;
-          font-size: 1.125rem;
+          left: 1rem;
+          right: 1rem;
+          padding: 0.875rem 1rem;
+          font-size: clamp(0.85rem, 0.7532rem + 0.4131vw, 1.125rem);
           color: var(--ntrl-clr-350);
-          border-radius: 12px;
+          line-height: 1.5;
+          border-radius: 0.5rem;
           background-color: hsl(0, 0%, 100%, 0.7);
-          backdrop-filter: blur(6px);
+          backdrop-filter: blur(4px);
         }
 
         #aboutTitle {
-          width: max-content;
-          top: 2rem;
+          top: 1rem;
+          text-align: center;
         }
 
         .sub-header {
-          bottom: 2rem;
+          bottom: 1rem;
         }
       }
 
       .services {
-        width: 468px;
+        width: 100%;
 
         #servicesTitle {
           width: 100%;
           padding: 1rem;
-          font-size: 3.875rem;
+          font-size: clamp(2.45rem, 1.9482rem + 2.1408vw, 3.875rem);
           font-weight: 900;
           color: var(--ntrl-clr-200);
-          letter-spacing: -6px;
+          letter-spacing: -1px;
           text-align: center;
           text-transform: uppercase;
-          border-radius: 4rem;
-          background-color: hsl(0, 0%, 38%, 0.7);
+          border-radius: 0.5rem;
+          background-color: var(--ntrl-clr-300);
           margin-bottom: 2rem;
         }
 
@@ -196,17 +163,71 @@ body.user-homepage {
 
         .appointment__button {
           @include display-flex($x: space-between);
-          padding: 1.5rem 2rem;
-          font-size: 2.8125rem;
+          padding: 0.875rem 1rem;
+          font-size: clamp(1.25rem, 0.6998rem + 2.3474vw, 2.8125rem);
           font-weight: 900;
           color: var(--ntrl-clr-200);
           text-transform: uppercase;
-          letter-spacing: -3px;
-          line-height: 55px;
-          border-radius: 4rem;
-          background-color: var(--pr-clr-150);
+          letter-spacing: -1px;
+          line-height: 1;
+          border-radius: 0.5rem;
+          background-color: var(--pr-clr-100);
           &:hover {
-            background-color: var(--pr-clr-100);
+            background-color: var(--pr-clr-150);
+          }
+        }
+      }
+    }
+  }
+}
+
+// 750px
+@media screen and (min-width: 46.875rem) {
+  body.user-homepage {
+    main {
+      .hero {
+        flex-direction: row;
+
+        h1 {
+          letter-spacing: -6px;
+          line-height: 0.85;
+        }
+
+        &__details {
+          width: 32rem;
+        }
+      }
+    }
+  }
+}
+
+// 900
+@media screen and (min-width: 56.25rem) {
+  body.user-homepage {
+    main {
+      .hero {
+        gap: 8rem;
+        h1 {
+          letter-spacing: -6px;
+          line-height: 0.85;
+        }
+      }
+    }
+  }
+}
+
+// 1024px
+@media screen and (min-width: 64rem) {
+  body.user-homepage {
+    main {
+      .about {
+        flex-direction: row;
+
+        &__intro {
+          height: 32.5rem;
+
+          & > * {
+            width: initial;
           }
         }
       }

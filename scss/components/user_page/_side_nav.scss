@@ -9,6 +9,18 @@
   background-color: var(--ntrl-clr-100);
   padding: 1rem;
 
+  .close-btn {
+    display: none;
+    width: 100%;
+    font-size: 1.2rem;
+    text-align: right;
+    cursor: pointer;
+
+    &:hover {
+      color: var(--pr-clr-100);
+    }
+  }
+
   ul {
     width: 100%;
     @include display-flex($dir: column, $y: flex-start, $gap: 0.5rem);
@@ -61,6 +73,31 @@
 
       &:active {
         background-color: var(--pr-clr-300);
+      }
+    }
+  }
+}
+
+// 820px
+@media screen and (max-width: 51.25rem) {
+  body {
+    position: relative;
+    .aside__sidebar {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      max-width: 100%;
+      justify-content: flex-start;
+      border-radius: 0;
+      z-index: 1000;
+
+      .close-btn {
+        display: block;
+      }
+
+      ul {
+        width: 100%;
       }
     }
   }

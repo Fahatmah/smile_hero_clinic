@@ -2,7 +2,6 @@
 require_once '../includes/config_session.inc.php';
 require_once '../includes/dbh.inc.php';
 
-
 $userid = $_SESSION['user_id'];
 $status = "completed";
 
@@ -20,33 +19,11 @@ if ($stmts) {  // Check if prepare was successful
 } else {
     $hasAppointments = false; // Fallback if query fails
 }
-
-// Function to resolve the correct path
-// function require_with_fallback($relativePath1, $relativePath2) {
-//   $currentDir = __DIR__;
-//   $path1 = realpath($currentDir . '/' . $relativePath1);
-//   $path2 = realpath($currentDir . '/' . $relativePath2);
-  
-//   if ($path1 && file_exists($path1)) {
-//     require_once $path1;
-//   } elseif ($path2 && file_exists($path2)) {
-//     require_once $path2;
-//     } else {
-//       die('Required file not found: ' . $relativePath1 . ' or ' . $relativePath2);
-//     }
-//   }
-  
-//   // Include the config session file
-//   require_with_fallback('../includes/config_session.inc.php', '../../includes/config_session.inc.php');
-  
-//   // Include the login view file
-//   require_with_fallback('../includes/login_view.inc.php', '../../includes/login_view.inc.php');
-  
-  // Get the current page filename
   $current_page = basename($_SERVER['PHP_SELF']);
 ?>
 
-<aside class="aside__sidebar">
+<aside class="aside__sidebar" id="asideBar">
+  <button class="close-btn" id="closeBtn">🗙</button>
   <ul>
     <li <?php echo ($current_page == 'profile.php') ? 'class="active__link"' : ''; ?>>
       <a href="../user_pages/profile.php">

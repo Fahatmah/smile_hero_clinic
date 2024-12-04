@@ -32,6 +32,7 @@ if(!isset($_SESSION['user_id'])) {
   
   
   <link rel="stylesheet" href="../src/dist/styles.css" />
+  <script src="js/mobile-nav.js" defer></script>
 </head>
 
 <body class="user__page">

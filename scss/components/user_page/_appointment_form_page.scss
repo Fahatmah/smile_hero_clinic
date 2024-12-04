@@ -253,3 +253,14 @@
     }
   }
 }
+
+
+
+// 820px
+@media screen and (max-width: 51.25rem) {
+ .appointment_form {
+  form {
+    flex-direction: column;
+  }
+ } 
+}

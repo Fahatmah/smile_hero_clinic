@@ -1,26 +1,26 @@
 <?php
-if (!isset($_GET["token"])) {
-    echo "<script>alert('Invalid or expired token.'); window.close();</script>";
-    exit;
-}
+// if (!isset($_GET["token"])) {
+//     echo "<script>alert('Invalid or expired token.'); window.close();</script>";
+//     exit;
+// }
 
-$token = $_GET["token"];
-$token_hash = hash("sha256", $token);
+// $token = $_GET["token"];
+// $token_hash = hash("sha256", $token);
 
-$mysqli = require __DIR__ . "/dbh.inc.php";
-$sql = "SELECT * FROM users WHERE account_activation_hash = ?";
+// $mysqli = require __DIR__ . "/dbh.inc.php";
+// $sql = "SELECT * FROM users WHERE account_activation_hash = ?";
 
-$stmt = $mysqli->prepare($sql);
-$stmt->bind_param("s", $token_hash);
-$stmt->execute();
-$result = $stmt->get_result();
-$user = $result->fetch_assoc();
+// $stmt = $mysqli->prepare($sql);
+// $stmt->bind_param("s", $token_hash);
+// $stmt->execute();
+// $result = $stmt->get_result();
+// $user = $result->fetch_assoc();
 
-if ($user === null) {
-    // Redirect or display a friendly error message
-    echo "<script>alert('Invalid or expired token.'); window.close();</script>";
-    exit;
-}
+// if ($user === null) {
+//     // Redirect or display a friendly error message
+//     echo "<script>alert('Invalid or expired token.'); window.close();</script>";
+//     exit;
+// }
 
 // Handle the form submission
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
@@ -69,9 +69,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
         .activate-account-page .body-header h1 {
             font-size: 3.5rem;
+            font-size: clamp(1.5rem, 0.7958rem + 3.0047vw, 3.5rem);
             font-weight: 900;
             color: #1D72F2;
-            letter-spacing: -4px;
+            letter-spacing: -2px;
         }
 
         .activate-account-page .body-header {
@@ -82,15 +83,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             text-align: center;
         }
 
-        .activate-account-page .body-text .activate-button {
+        .activate-account-page .body-text form{
             width: 100%;
-            color: #fff;
         }
         
-        .activate-account-page .body-text .activate-button a {
+        .activate-account-page .body-text form input {
             display: inline-block;
             width: 100%;
-            font-size: 1.5rem;
+            font-size: 1rem;
             color: #fff;
             text-transform: uppercase;
             padding: 1rem;

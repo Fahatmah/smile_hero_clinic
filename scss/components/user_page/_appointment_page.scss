@@ -141,3 +141,40 @@
     }
   }
 }
+
+// 820px
+@media screen and (max-width: 51.25rem) {
+  .appointment__page {
+    .appointments__container {
+      .appointment__item {
+        @include display-flex($dir: column, $gap: 0.5rem);
+
+        & > * {
+          width: 100%;
+          color: var(--ntrl-clr-300);
+          padding: 1.5rem;
+          border-radius: 0.5rem;
+          background-color: var(--ntrl-clr-100);
+        }
+
+        .header {
+          flex-direction: column;
+          align-items: flex-start;
+          gap: 1rem;
+
+          button {
+            align-self: flex-end;
+            justify-self: flex-end;
+          }
+        }
+
+        .modal.cancel-appointment {
+          // width: 100%;
+          & > * {
+            width: 20rem;
+          }
+        }
+      }
+    }
+  }
+}

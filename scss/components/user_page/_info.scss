@@ -91,3 +91,22 @@
     }
   }
 }
+
+// 820px
+@media screen and (max-width: 51.25rem) {
+  .user-profile {
+    &__header {
+      flex-direction: column;
+      gap: 1rem;
+      align-items: flex-start;
+
+      .user-profile__actions {
+        width: 100%;
+
+        & > * {
+          width: 100%;
+        }
+      }
+    }
+  }
+}

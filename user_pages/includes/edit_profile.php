@@ -117,6 +117,7 @@ if (isset($_SESSION['edit_process'])) {
   <title>Edit account | Smile Hero Clinic</title>
   
   <link rel="stylesheet" href="../../src/dist/styles.css" />
+  <script src="../js/mobile-nav.js" defer></script>
   <style>
   #loading-screen {
     position: fixed;

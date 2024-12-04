@@ -162,3 +162,19 @@
     }
   }
 }
+
+// 820px
+@media screen and (max-width: 51.25rem) {
+  .form-modal {
+    .forgot-pass-modal  {
+      .modal__content {
+        flex-direction: column-reverse;
+        margin-inline: 1rem;
+
+        & > * {
+          height: 320px;
+        }
+      }
+    }
+  }
+}
