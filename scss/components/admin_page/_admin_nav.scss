@@ -35,7 +35,7 @@
   &__datetime {
     width: 20rem;
     @include display-flex($gap: 1rem);
-    font-family: var(--ff-inter);
+    // font-family: var(--ff-inter);
     color: var(--ntrl-clr-300);
     text-transform: uppercase;
 
@@ -75,7 +75,7 @@
       @include display-flex($gap: 1rem);
 
       font-size: 0.875rem;
-      font-family: var(--ff-inter);
+      // font-family: var(--ff-inter);
       color: var(--ntrl-clr-300);
       text-transform: uppercase;
 

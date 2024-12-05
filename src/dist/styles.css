@@ -3713,7 +3713,6 @@ body.user-homepage main .about .services .appointment__button:hover {
   justify-content: center;
   flex-direction: row;
   gap: 1rem;
-  font-family: var(--ff-inter);
   color: var(--ntrl-clr-300);
   text-transform: uppercase;
 }
@@ -3763,7 +3762,6 @@ body.user-homepage main .about .services .appointment__button:hover {
   flex-direction: row;
   gap: 1rem;
   font-size: 0.875rem;
-  font-family: var(--ff-inter);
   color: var(--ntrl-clr-300);
   text-transform: uppercase;
   padding: 0.875rem 1rem;
@@ -4477,7 +4475,7 @@ body.user-homepage main .about .services .appointment__button:hover {
   flex-direction: row;
   gap: 0.5rem;
   font-size: 1.5rem;
-  font-family: var(--ff-inter);
+  font-weight: 900;
   text-transform: uppercase;
 }
 .appointments__container.appointments__page .appointments__table .table-heading__container .table-heading .table-item-count {
@@ -4614,7 +4612,6 @@ body.user-homepage main .about .services .appointment__button:hover {
   font-weight: 600;
 }
 .appointments__container.appointments__page .appointments__table table tbody tr td.patient-cell.name .patient-email {
-  font-family: var(--ff-inter);
   font-size: 0.875rem;
   color: var(--charcoal-gray);
 }
@@ -4940,7 +4937,7 @@ body.user-homepage main .about .services .appointment__button:hover {
   flex-direction: row;
   gap: 0.5rem;
   font-size: 1.5rem;
-  font-family: var(--ff-inter);
+  font-weight: 900;
   text-transform: uppercase;
 }
 .booked__container .booked-appointments__table .table-heading__container .table-heading .table-item-count {
@@ -5080,7 +5077,6 @@ body.user-homepage main .about .services .appointment__button:hover {
   font-weight: 600;
 }
 .booked__container .booked-appointments__table table tbody tr td.name-email .patient-email {
-  font-family: var(--ff-inter);
   font-size: 0.875rem;
   color: var(--charcoal-gray);
 }
@@ -5144,7 +5140,7 @@ body.user-homepage main .about .services .appointment__button:hover {
   flex-direction: row;
   gap: 0.5rem;
   font-size: 1.5rem;
-  font-family: var(--ff-inter);
+  font-weight: 900;
   text-transform: uppercase;
 }
 .patients__container .patients__table .table-heading__container .table-heading .table-item-count {
@@ -5282,7 +5278,6 @@ body.user-homepage main .about .services .appointment__button:hover {
   font-weight: 600;
 }
 .patients__container .patients__table table tbody tr td.patient-cell.name-email .patient-email {
-  font-family: var(--ff-inter);
   font-size: 0.875rem;
   color: var(--charcoal-gray);
 }
@@ -5321,7 +5316,7 @@ body.user-homepage main .about .services .appointment__button:hover {
   flex-direction: row;
   gap: 0.5rem;
   font-size: 1.5rem;
-  font-family: var(--ff-inter);
+  font-weight: 900;
   text-transform: uppercase;
 }
 .feedbacks__container .feedbacks__table .table-heading .table-item-count {
@@ -5514,7 +5509,7 @@ body.user-homepage main .about .services .appointment__button:hover {
   flex-direction: row;
   gap: 0.5rem;
   font-size: 1.5rem;
-  font-family: var(--ff-inter);
+  font-weight: 900;
   text-transform: uppercase;
 }
 .doctors__container .doctors__table .table-heading .table-item-count {
@@ -5575,7 +5570,6 @@ body.user-homepage main .about .services .appointment__button:hover {
   font-weight: 600;
 }
 .doctors__container .doctors__table table tbody tr td.name-email .email {
-  font-family: var(--ff-inter);
   font-size: 0.875rem;
   color: var(--charcoal-gray);
 }

@@ -23,7 +23,8 @@
     .table-heading {
       @include display-flex($gap: 0.5rem);
       font-size: 1.5rem;
-      font-family: var(--ff-inter);
+      font-weight: 900;
+      // font-family: var(--ff-inter);
       text-transform: uppercase;
 
       .table-item-count {
@@ -86,7 +87,7 @@
                 font-weight: 600;
               }
               .email {
-                font-family: var(--ff-inter);
+                // font-family: var(--ff-inter);
                 font-size: 0.875rem;
                 color: var(--charcoal-gray);
               }
