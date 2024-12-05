@@ -584,9 +584,9 @@ $startOfMonth = date('Y-m-01');
     });
 
     // Initial data fetch
-    fetchData('monthly');
-    fetchData('weekly');
-    fetchData('today');
+    // fetchData('monthly');
+    // fetchData('weekly');
+    // fetchData('today');
 
 
     const overviewLabel = document.querySelector(".overview__header .overview__title");

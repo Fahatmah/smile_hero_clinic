@@ -11,9 +11,9 @@ if ($result->num_rows > 0) {
 }
 
 $query = "SELECT
-(SELECT COUNT(*) FROM appointments WHERE DATE(date) = CURDATE()) AS TotalTodayApt,
-(SELECT COUNT(*) FROM appointments WHERE WEEK(date) = WEEK(CURDATE())) AS TotalWeekApt,
-(SELECT COUNT(*) FROM appointments WHERE MONTH(date) = MONTH(CURDATE())) AS TotalMonthApt";
+(SELECT COUNT(*) FROM appointments WHERE status != 'request' AND DATE(date) = CURDATE()) AS TotalTodayApt,
+(SELECT COUNT(*) FROM appointments WHERE status != 'request' AND WEEK(date) = WEEK(CURDATE())) AS TotalWeekApt,
+(SELECT COUNT(*) FROM appointments WHERE status != 'request' AND MONTH(date) = MONTH(CURDATE())) AS TotalMonthApt";
 $result = $conn->query($query);
 if ($result->num_rows > 0) {
   $row = $result->fetch_assoc();
@@ -24,8 +24,8 @@ if ($result->num_rows > 0) {
 }
 
 $query = "SELECT
-(SELECT COUNT(*) FROM appointments WHERE label = 'walk-in' AND MONTH(date) = MONTH(CURDATE())) AS walkInCount,
-(SELECT COUNT(*) FROM appointments WHERE label != 'walk-in' AND MONTH(date) = MONTH(CURDATE())) AS onlineCount";
+(SELECT COUNT(*) FROM appointments WHERE status != 'request' AND label = 'walk-in' AND MONTH(date) = MONTH(CURDATE())) AS walkInCount,
+(SELECT COUNT(*) FROM appointments WHERE status != 'request' AND label != 'walk-in' AND MONTH(date) = MONTH(CURDATE())) AS onlineCount";
 $result = $conn->query($query);
 if ($result->num_rows > 0) {
   $row = $result->fetch_assoc();
@@ -35,12 +35,12 @@ if ($result->num_rows > 0) {
 }
 
 $query = "SELECT
-(SELECT COUNT(*) FROM appointments WHERE label = 'walk-in' AND DATE(date) = CURDATE()) AS todaywalkInCount,
-(SELECT COUNT(*) FROM appointments WHERE label != 'walk-in' AND DATE(date) = CURDATE()) AS todayonlineCount,
-(SELECT COUNT(*) FROM appointments WHERE label = 'walk-in' AND WEEK(date) = WEEK(CURDATE())) AS weeklywalkInCount,
-(SELECT COUNT(*) FROM appointments WHERE label != 'walk-in' AND WEEK(date) = WEEK(CURDATE())) AS weeklyonlineCount,
-(SELECT COUNT(*) FROM appointments WHERE label = 'walk-in' AND MONTH(date) = MONTH(CURDATE())) AS monthlywalkInCount,
-(SELECT COUNT(*) FROM appointments WHERE label != 'walk-in' AND MONTH(date) = MONTH(CURDATE())) AS monthlyonlineCount";
+(SELECT COUNT(*) FROM appointments WHERE label = 'walk-in' AND status != 'request' AND DATE(date) = CURDATE()) AS todaywalkInCount,
+(SELECT COUNT(*) FROM appointments WHERE label != 'walk-in' AND status != 'request' AND DATE(date) = CURDATE()) AS todayonlineCount,
+(SELECT COUNT(*) FROM appointments WHERE label = 'walk-in' AND status != 'request' AND WEEK(date) = WEEK(CURDATE())) AS weeklywalkInCount,
+(SELECT COUNT(*) FROM appointments WHERE label != 'walk-in' AND status != 'request' AND WEEK(date) = WEEK(CURDATE())) AS weeklyonlineCount,
+(SELECT COUNT(*) FROM appointments WHERE label = 'walk-in' AND status != 'request' AND MONTH(date) = MONTH(CURDATE())) AS monthlywalkInCount,
+(SELECT COUNT(*) FROM appointments WHERE label != 'walk-in' AND status != 'request' AND MONTH(date) = MONTH(CURDATE())) AS monthlyonlineCount";
 $result = $conn->query($query);
 if ($result->num_rows > 0) {
   $row = $result->fetch_assoc();

@@ -10,16 +10,27 @@ if (!isset($_SESSION['adminID'])) {
   exit();
 }
 
+$query = "UPDATE appointments SET status = 'missed' WHERE date < CURDATE() AND status = 'accepted';";
+$stmt = $conn->prepare($query);
+$stmt->execute();
+
+
 // Pagination setup
 $limit = 10; // Number of entries to show per page
 $page = isset($_GET['page']) ? (int)$_GET['page'] : 1; // Current page number
 $start = ($page - 1) * $limit; // Calculate the starting row for the query
 
 // Get total number of records for booked meetings
-$totalQuery = "SELECT COUNT(*) AS total FROM appointments WHERE status = 'accepted' OR status = 'completed' ";
+$totalQuery = "SELECT COUNT(*) AS total FROM appointments WHERE status = 'accepted' OR status = 'completed'";
 $totalResult = $conn->query($totalQuery);
 $totalRow = $totalResult->fetch_assoc();
 $totalRecords = $totalRow['total'];
+
+// Get total number of records for booked meetings for pagination
+$totalPageQuery = "SELECT COUNT(*) AS total FROM appointments WHERE status = 'accepted' OR status = 'completed' OR  status = 'canceled' OR status = 'missed'";
+$totalPageResult = $conn->query($totalPageQuery);
+$totalPageRow = $totalPageResult->fetch_assoc();
+$totalPageRecords = $totalPageRow['total'];
 
 // Fetch records for the current page
 $query = "SELECT * FROM appointments WHERE status = 'accepted' OR status = 'completed' OR  status = 'canceled' OR status = 'missed' ORDER BY status, date, time ASC LIMIT $start, $limit";
@@ -32,7 +43,7 @@ if ($result->num_rows > 0) {
 }
 
 // Calculate total pages needed
-$totalPages = ceil($totalRecords / $limit);
+$totalPages = ceil($totalPageRecords / $limit);
 ?>
 
 <!DOCTYPE html>
