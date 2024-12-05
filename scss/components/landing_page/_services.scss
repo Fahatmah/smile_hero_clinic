@@ -3,32 +3,54 @@
 .homepage {
   .services-page {
     header {
-      .texts-container {
-        width: 100%;
-        & > * {
-          width: 100%;
-          max-width: 55rem;
-        }
-        .paragraph-text {
-          width: 100%;
-          flex-direction: row;
-          flex-wrap: wrap;
-          gap: 1rem;
-          justify-content: flex-start;
+            .container {
+        max-width: 80rem;
+        @include display-flex($dir: column, $gap: 2rem, $y: flex-start);
+        padding: 2rem;
 
-          .list-column {
-            @include display-flex($gap: 1rem, $dir: column, $y: flex-start);
+        .texts-container {
+          width: 100%;
 
-            li {
-              width: 100%;
-              max-width: 20rem;
-              @include display-flex($gap: 1rem, $x: flex-start);
-              border-radius: 0.5rem;
-              padding: 1rem;
-              outline: 1px solid var(--pr-clr-300);
-              background-color: #f0f3f9;
+          & > * {
+            width: 100%;
+            // max-width: 55rem;
+          }
+
+          .paragraph-text {
+            width: 100%;
+            flex-direction: row;
+            flex-wrap: wrap;
+            gap: 1rem;
+            justify-content: flex-start;
+
+            .list-column {
+              @include display-flex($gap: 1rem, $dir: column, $y: flex-start);
+
+              li {
+                width: 100%;
+                max-width: 20rem;
+                @include display-flex($gap: 1rem, $x: flex-start);
+                border-radius: 0.5rem;
+                padding: 1rem;
+                outline: 1px solid var(--pr-clr-300);
+                background-color: #f0f3f9;
+              }
             }
           }
+        }
+      }
+    }
+  }
+}
+
+@media screen and (min-width: 75rem) {
+  .homepage {
+    .services-page {
+      header {
+
+        .container {
+          flex-direction: row;
+          padding-inline: 0;
         }
       }
     }

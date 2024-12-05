@@ -8,9 +8,9 @@
 
   .signup {
     width: 100%;
-    // max-width: 75rem;
+    max-width: 80rem;
     padding: 4rem 1.5rem;
-    font-family: var(--ff-inter);
+    // font-family: var(--ff-inter);
     @include display-flex($dir: column, $gap: 2rem, $y: flex-start);
     overflow: hidden;
 
@@ -21,6 +21,7 @@
       letter-spacing: -2px;
       color: var(--pr-clr-300);
       text-transform: uppercase;
+      line-height: 1;
     }
 
     .signup__form {
@@ -193,7 +194,7 @@
                     $gap: 0.5rem
                   );
                   & > * {
-                    font-family: 'Inter', sans-serif;
+                    // font-family: 'Inter', sans-serif;
                     color: var(--ntrl-clr-300);
                   }
                   .heading {
@@ -392,4 +393,14 @@
       }
     }
   }
+}
+
+@media screen and (min-width: 90.6rem) {
+.signup__page {
+  .signup {
+    .signup__form {
+      padding-inline-start: 0;
+    }
+  }
+}
 }

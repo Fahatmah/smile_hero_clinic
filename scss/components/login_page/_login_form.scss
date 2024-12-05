@@ -8,9 +8,9 @@
 
   .login {
     width: 100%;
-    // max-width: 75rem;
+    max-width: 80rem;
     padding: 4rem 1.5rem;
-    font-family: var(--ff-inter);
+    // font-family: var(--ff-inter);
     @include display-flex($dir: column, $gap: 2rem);
     overflow: hidden;
 
@@ -151,12 +151,11 @@
 @media screen and (min-width: 60rem) {
   .login__page {
     .login {
-      width: 100%;
       padding: 0;
       flex-direction: row;
       align-items: flex-start;
       justify-content: space-between;
-      gap: 15rem;
+      // gap: 15rem;
 
       .login__form {
         padding-inline-start: 5rem;
@@ -185,6 +184,16 @@
         img {
           object-fit: cover;
         }
+      }
+    }
+  }
+}
+
+@media screen and (min-width: 82rem) {
+  .login__page {
+    .login {
+      .login__form {
+        padding-inline-start: 3;
       }
     }
   }

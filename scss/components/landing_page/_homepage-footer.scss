@@ -24,27 +24,38 @@ footer {
   .form-section {
     width: 100%;
     background-color: var(--ntrl-clr-100);
-    .footer-header {
-      color: var(--pr-clr-300);
-    }
+    align-items: flex-start;
 
-    .form-links {
-      width: 100%;
-      @include display-flex($dir: column, $gap: 0.625rem);
-      margin-top: 1rem;
+    .container {
+      max-width: 24rem;
+      padding: 1.5rem;
 
-      li {
+      .footer-header {
+        color: var(--pr-clr-300);
+      }
+
+      .form-links {
         width: 100%;
-        a {
-          width: 100%;
-          padding: 1rem;
-          @include display-flex();
-          color: var(--pr-clr-300);
-          border-radius: 0.25rem;
+        @include display-flex($dir: column, $gap: 0.625rem);
+        margin-top: 1rem;
 
-          &.signup-link {
-            color: var(--ntrl-clr-100);
-            background-color: var(--pr-clr-300);
+        li {
+          width: 100%;
+          a {
+            width: 100%;
+            padding: 1rem;
+            @include display-flex();
+            color: var(--pr-clr-300);
+            border-radius: 0.25rem;
+
+            &.signup-link {
+              color: var(--ntrl-clr-100);
+              background-color: var(--pr-clr-300);
+            }
+
+            &.login-link {
+              border: 1px solid var(--pr-clr-300);
+            }
           }
         }
       }
@@ -54,31 +65,35 @@ footer {
   .contact-section {
     background-color: var(--pr-clr-300);
 
-    .footer-header {
-      color: var(--ntrl-clr-100);
-    }
+    .container {
+      @include display-flex($gap: 2rem, $dir: column);
+      max-width: 40rem;
+      .footer-header {
+        color: var(--ntrl-clr-100);
+      }
 
-    .contact-list {
-      @include display-flex($dir: column, $gap: 1rem);
+      .contact-list {
+        @include display-flex($dir: column, $gap: 1rem);
 
-      li {
-        a {
-          color: var(--ntrl-clr-100);
-          @include display-flex($gap: 0.5rem);
-          text-align: center;
-          cursor: pointer;
+        li {
+          a {
+            color: var(--ntrl-clr-100);
+            @include display-flex($gap: 0.5rem);
+            text-align: center;
+            cursor: pointer;
+          }
         }
       }
-    }
 
-    .footer-info {
-      @include display-flex($dir: column, $gap: 0.75rem);
-      font-size: 0.75rem;
-      color: var(--ntrl-clr-100);
-      text-align: center;
+      .footer-info {
+        @include display-flex($dir: column, $gap: 0.75rem);
+        font-size: 0.75rem;
+        color: var(--ntrl-clr-100);
+        text-align: center;
 
-      &__credits {
-        font-weight: bold;
+        &__credits {
+          font-weight: bold;
+        }
       }
     }
   }
@@ -105,23 +120,26 @@ footer {
       }
     }
     .contact-section {
-      width: 100%;
       align-items: flex-start;
-
-      .contact-list {
-        gap: 0.5rem;
+      .container {
+        width: 100%;
         align-items: flex-start;
 
-        li {
-          a {
-            text-align: left;
+        .contact-list {
+          gap: 0.5rem;
+          align-items: flex-start;
+
+          li {
+            a {
+              text-align: left;
+            }
           }
         }
-      }
 
-      .footer-info {
-        align-items: flex-start;
-        text-align: left;
+        .footer-info {
+          align-items: flex-start;
+          text-align: left;
+        }
       }
     }
   }
@@ -138,17 +156,29 @@ footer {
       // padding-block: 2.5rem;
       padding: 1.5rem 5rem;
     }
-    .contact-section {
-      gap: 2rem;
 
-      .contact-list {
-        position: relative;
-        // top: -2rem;
-        flex-direction: row;
-        gap: 1rem;
-        flex-wrap: wrap;
-        justify-content: flex-start;
-        text-align: left;
+    .form-section {
+      align-items: flex-end;
+      .container {
+        .form-links {
+          flex-direction: row;
+        }
+      }
+    }
+
+    .contact-section {
+      .container {
+        gap: 2rem;
+
+        .contact-list {
+          position: relative;
+          // top: -2rem;
+          flex-direction: row;
+          gap: 1rem;
+          flex-wrap: wrap;
+          justify-content: flex-start;
+          text-align: left;
+        }
       }
     }
   }
