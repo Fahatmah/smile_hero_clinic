@@ -1,5 +1,6 @@
 <?php
-require_once '../includes/config_session.inc.php';
+// require_once '../includes/config_session.inc.php';
+session_start();
 require_once '../includes/login_view.inc.php';
 
 ini_set('display_errors', 1);

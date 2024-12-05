@@ -1,6 +1,7 @@
 <?php
 
-require_once "config_session.inc.php";
+// require_once "config_session.inc.php";
+session_start();
 
 if($_SERVER["REQUEST_METHOD"] === "POST"){
 
@@ -23,7 +24,7 @@ if($_SERVER["REQUEST_METHOD"] === "POST"){
     $mail = require __DIR__ ."/../mailer.php";
     $mail->setFrom("jpvillaruel02@gmail.com");
     $mail->addAddress($email);
-    $baseUrl = "http://localhost/smile_hero_clinic";
+    $baseUrl = "http://smileheroclinic.freesite.online";
     $activationUrl = $baseUrl . "/includes/reset_password.php?token=$token";
     $mail->Subject = "Smile Hero Clinic Password Reset";
     $mail->Body = <<<END

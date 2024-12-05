@@ -1,5 +1,6 @@
 <?php 
-require_once "config_session.inc.php";
+// require_once "config_session.inc.php";
+session_start();
 
 if (!isset($_GET["token"])) {
     echo "<script>alert('Invalid or expired token.'); window.close();</script>";

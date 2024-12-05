@@ -25,7 +25,7 @@
         $errors["account_inactive"] = "Account activation is needed";
       }
 
-      require_once("config_session.inc.php");
+      session_start();
 
       if (!isUsernameWrong($getAdminResult['email']) && !isPasswordWrong($password, $getAdminResult['password'])) {
         $_SESSION["adminID"] = $getAdminResult['admin_id'];

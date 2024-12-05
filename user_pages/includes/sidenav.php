@@ -1,5 +1,5 @@
 <?php
-require_once '../includes/config_session.inc.php';
+// require_once '../includes/config_session.inc.php';
 require_once '../includes/dbh.inc.php';
 
 $userid = $_SESSION['user_id'];

@@ -1,5 +1,6 @@
 <?php
-require_once '../includes/config_session.inc.php';
+// require_once '../includes/config_session.inc.php';
+session_start();
 require_once '../includes/login_view.inc.php';
 require_once '../includes/dbh.inc.php';
 require_once './includes/pagination.php'; // Ensure this file includes a `renderPagination` function

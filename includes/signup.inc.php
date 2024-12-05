@@ -40,7 +40,7 @@ if ($_SERVER['REQUEST_METHOD'] === "POST") {
         $errors["emailRegistered"] = "Email is already registered. ";
     }
 
-    require_once("config_session.inc.php");
+    session_start();
 
     if ($errors) {
         $_SESSION["errors_signup"] = $errors;
@@ -64,7 +64,7 @@ if ($_SERVER['REQUEST_METHOD'] === "POST") {
     $mail = require __DIR__ . "/../mailer.php"; 
     $mail->setFrom("jpvillaruel02@gmail.com");
     $mail->addAddress($_POST["email"]);
-    $baseUrl = "http://localhost/smile_hero_clinic"; // Replace with your local project folder path
+    $baseUrl = "http://smileheroclinic.freesite.online"; // Replace with your local project folder path
     $activationUrl = $baseUrl . "/includes/activate_account.php?token=$activation_token";
     $mail->Subject = "Smile Hero Dental Clinic Account Activation";
     $mail->Body = <<<END

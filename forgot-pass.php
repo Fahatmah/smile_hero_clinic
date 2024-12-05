@@ -1,5 +1,6 @@
 <?php
-require_once "includes/config_session.inc.php";
+// require_once "includes/config_session.inc.php";
+session_start();
 
 $showModal = false;
 if (isset($_SESSION['email_process'])) {
