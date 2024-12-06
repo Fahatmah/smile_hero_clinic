@@ -218,3 +218,35 @@
     }
   }
 }
+
+// 820px
+@media screen and (max-width: 51.25rem) {
+  .feedback__page {
+    .form {
+      &__rating {
+        .rating-container {
+          flex-wrap: wrap;
+
+          .radio-field {
+            flex: 0 1 initial;
+          }
+        }
+      }
+
+      .feedback__submit-btn {
+        width: 100%;
+      }
+    }
+  }
+
+  .feedback-modal {
+    .modal__content {
+      flex-direction: column-reverse;
+      margin-inline: 1rem;
+
+      & > * {
+        height: 280px;
+      }
+    }
+  }
+}

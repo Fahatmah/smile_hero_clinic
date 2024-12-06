@@ -11,7 +11,7 @@
       </a>  
     </button>
 
-    <button class="menu-btn" id="menuBtn">☰</button>
+    <button class="menu-btn" id="menuBtn"><img src="../assets/icons/user_account/menu-btn.svg" alt="menu icon"></button>
   </div>
 </nav>
 

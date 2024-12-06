@@ -23,7 +23,9 @@ if ($stmts) {  // Check if prepare was successful
 ?>
 
 <aside class="aside__sidebar" id="asideBar">
-  <button class="close-btn" id="closeBtn">🗙</button>
+  <button class="close-btn" id="closeBtn">
+    <img src="../assets/icons/user_account/close-btn.svg" alt="close icon">
+  </button>
   <ul>
     <li <?php echo ($current_page == 'profile.php') ? 'class="active__link"' : ''; ?>>
       <a href="../user_pages/profile.php">

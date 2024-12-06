@@ -10,14 +10,14 @@
   padding: 1rem;
 
   .close-btn {
-    display: none;
     width: 100%;
-    font-size: 1.2rem;
-    text-align: right;
+    @include display-flex($x: flex-end);
+    padding: 1.25rem;
     cursor: pointer;
+    display: none;
 
-    &:hover {
-      color: var(--pr-clr-100);
+    img {
+      justify-self: flex-end;
     }
   }
 

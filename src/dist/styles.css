@@ -2122,14 +2122,18 @@ footer .contact-section .container .footer-info__credits {
   padding: 1rem;
 }
 .aside__sidebar .close-btn {
-  display: none;
   width: 100%;
-  font-size: 1.2rem;
-  text-align: right;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  flex-direction: row;
+  gap: 0;
+  padding: 1.25rem;
   cursor: pointer;
+  display: none;
 }
-.aside__sidebar .close-btn:hover {
-  color: var(--pr-clr-100);
+.aside__sidebar .close-btn img {
+  justify-self: flex-end;
 }
 .aside__sidebar ul {
   width: 100%;
@@ -3152,6 +3156,24 @@ footer .contact-section .container .footer-info__credits {
   background-color: var(--pr-clr-300);
 }
 
+@media screen and (max-width: 51.25rem) {
+  .feedback__page .form__rating .rating-container {
+    flex-wrap: wrap;
+  }
+  .feedback__page .form__rating .rating-container .radio-field {
+    flex: 0 1 initial;
+  }
+  .feedback__page .form .feedback__submit-btn {
+    width: 100%;
+  }
+  .feedback-modal .modal__content {
+    flex-direction: column-reverse;
+    margin-inline: 1rem;
+  }
+  .feedback-modal .modal__content > * {
+    height: 280px;
+  }
+}
 .modal_container {
   position: fixed;
   top: 0;
