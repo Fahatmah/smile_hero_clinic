@@ -23,7 +23,7 @@ if (isset($_SESSION['signup_process'])) {
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <link rel="shortcut icon" href="./assets/images/logoipsum.svg" type="image/x-icon">
+  <link rel="shortcut icon" href="./assets/logos/logo-blue.png" type="image/x-icon">
   <title>Signup an Account | Smile Hero Clinic</title>
   
   

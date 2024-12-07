@@ -18,11 +18,7 @@ if (isset($_SESSION['email_process'])) {
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link
-      rel="shortcut icon"
-      href="./assets/images/logoipsum.svg"
-      type="image/x-icon"
-    />
+    <link rel="shortcut icon" href="assets/logos/logo-blue.png" type="image/x-icon" />
     <title>Forgot Password | Smile Hero Clinic</title>
     <!-- stylesheets -->
     <link rel="stylesheet" href="src/dist/styles.css" />

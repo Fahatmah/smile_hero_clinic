@@ -54,11 +54,7 @@ if (isset($_SESSION['complete_process'])) {
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link
-      rel="shortcut icon"
-      href="../assets/images/logoipsum.svg"
-      type="image/x-icon"
-    />
+    <link rel="shortcut icon" href="../assets/logos/logo-white.png" type="image/x-icon" />
     <title>Appointment Details | Admin | Smile Hero Clinic</title>
     <link rel="stylesheet" href="../src/dist/styles.css" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">

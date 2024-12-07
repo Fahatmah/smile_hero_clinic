@@ -3,7 +3,7 @@ body.user-homepage {
   @include flex($y: flex-start);
   width: 100%;
   min-height: 100vh;
-  background-color: var(--ntrl-clr-200);
+  background-color: var(--ntrl-clr-250);
 
   main {
     width: min(100% - 2rem, 80rem);
@@ -14,6 +14,16 @@ body.user-homepage {
       margin-bottom: 2rem;
       padding-block: 2rem;
       border-bottom: 1px solid hsl(0, 0%, 38%, 0.3);
+
+      &-logo {
+        a {
+          img {
+            width: 4rem;
+            height: 4rem;
+            border-radius: 0.5rem;
+          }
+        }
+      }
 
       &-menu {
         @include display-flex($gap: 0.5rem, $dir: row-reverse);

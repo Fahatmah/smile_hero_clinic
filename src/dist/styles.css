@@ -258,7 +258,7 @@ body {
   font-family: "Funnel Display", sans-serif;
   font-size: var(--fs-200);
   color: var(--ntrl-clr-400);
-  background-color: var(--ntrl-clr-200);
+  background-color: var(--ntrl-clr-250);
   position: relative;
 }
 body.user__page {
@@ -3268,7 +3268,7 @@ body.user-homepage {
   flex-direction: row;
   width: 100%;
   min-height: 100vh;
-  background-color: var(--ntrl-clr-200);
+  background-color: var(--ntrl-clr-250);
 }
 body.user-homepage main {
   width: min(100% - 2rem, 80rem);
@@ -3283,6 +3283,11 @@ body.user-homepage main .navbar__user {
   margin-bottom: 2rem;
   padding-block: 2rem;
   border-bottom: 1px solid hsla(0, 0%, 38%, 0.3);
+}
+body.user-homepage main .navbar__user-logo a img {
+  width: 4rem;
+  height: 4rem;
+  border-radius: 0.5rem;
 }
 body.user-homepage main .navbar__user-menu {
   display: flex;

@@ -1,6 +1,6 @@
 <nav class="account__header user-header">
-  <a href="homepage.php">
-    <img src="../assets/logo-blue-bg.svg" alt="">
+  <a href="homepage.php" style="width: 4rem; height: 4rem">
+    <img src="../assets/logos/logo-with-name-blue-circle.png" alt="">
   </a>
 
   <bu class="header__content">
