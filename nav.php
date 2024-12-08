@@ -2,8 +2,8 @@
 
 <nav class="nav landing-page">
   <div class="nav-container">
-    <a href="index.php" class="logo" style="width: 4rem; height: 4rem">
-      <img src="././assets/logos/logo-with-name-blue-circle.png" alt="logo" style="width: 4rem; height: 4rem"/>
+    <a href="index.php" class="logo" style="width: 4rem !important; height: 4rem !important">
+      <img src="././assets/logos/logo-with-name-blue-circle-60x60.png" alt="logo" style="width: 4rem !important; height: 4rem !important"/>
     </a>
 
     <div class="mobile-nav-container hidden">
