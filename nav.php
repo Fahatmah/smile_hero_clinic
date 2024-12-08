@@ -3,7 +3,7 @@
 <nav class="nav landing-page">
   <div class="nav-container">
     <a href="index.php" class="logo" style="width: 4rem; height: 4rem">
-      <img src="././assets/logos/logo-with-name-blue-circle.png" alt="logo" />
+      <img src="././assets/logos/logo-with-name-blue-circle.png" alt="logo" style="width: 4rem; height: 4rem"/>
     </a>
 
     <div class="mobile-nav-container hidden">

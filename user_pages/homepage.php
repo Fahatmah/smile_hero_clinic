@@ -40,7 +40,7 @@ if($totalAppointment >= 5){
         <!-- logo -->
         <div class="navbar__user-logo">
           <a href="#" aria-label="Smile Hero Clinic Homepage">
-            <img src="../assets/logos/logo-with-name-blue.png" alt="smile hero clinic logo">
+            <img src="../assets/logos/logo-with-name-blue.png" alt="smile hero clinic logo" style="width: 4rem; height: 4rem">
           </a>
         </div>
         <!-- end of logo -->
