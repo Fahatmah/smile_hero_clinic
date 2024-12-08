@@ -38,7 +38,7 @@ body {
   font-family: 'Funnel Display', sans-serif;
   font-size: var(--fs-200);
   color: var(--ntrl-clr-400);
-  background-color: var(--ntrl-clr-250);
+  background-color: var(--ntrl-clr-250) !important;
   position: relative;
 
   &.user__page {

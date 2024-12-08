@@ -3,7 +3,7 @@ body.user-homepage {
   @include flex($y: flex-start);
   width: 100%;
   min-height: 100vh;
-  background-color: var(--ntrl-clr-250);
+  background-color: var(--ntrl-clr-250) !important;
 
   main {
     width: min(100% - 2rem, 80rem);
@@ -18,9 +18,9 @@ body.user-homepage {
       &-logo {
         a {
           img {
-            width: 4rem;
-            height: 4rem;
-            border-radius: 0.5rem;
+            width: 4rem !important;
+            height: 4rem !important;
+            border-radius: 0.5rem !important;
           }
         }
       }
