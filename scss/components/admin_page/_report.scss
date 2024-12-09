@@ -15,10 +15,15 @@
       @include display-flex($x: space-between);
 
       .heading {
+        @include display-flex($gap: 1rem);
         font-size: 2rem;
         font-weight: bold;
         letter-spacing: -1px;
         color: var(--pr-clr-300);
+
+        img {
+          border-radius: 0.5rem;
+        }
       }
     }
 

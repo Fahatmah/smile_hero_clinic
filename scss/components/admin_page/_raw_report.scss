@@ -18,6 +18,15 @@
   .header-container {
     @include display-flex($dir: column, $y: flex-start);
 
+    .heading {
+      @include display-flex($gap: 1rem);
+      font-size: 2.5rem;
+      font-weight: 900;
+      color: var(--pr-clr-300);
+      letter-spacing: -1px;
+      margin-bottom: 2rem;
+    }
+
     .header {
       font-size: 1.5rem;
       font-weight: bold;

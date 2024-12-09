@@ -19,10 +19,10 @@
     </li>
 
     <!-- accepted appointments -->
-    <li <?php echo ($current_page == 'booked.php') ? 'class="active__link"' : ''; ?>>
+    <li <?php echo ($current_page == 'booked.php' || $current_page == 'appointment-details.php') ? 'class="active__link"' : ''; ?>>
       <a href="../admin/booked.php">
         <img
-          src="../assets/admin_assets/icons/dashboard/<?php echo ($current_page == 'booked.php') ? 'active/booked-appointments.svg' : 'default/booked-appointments.svg'; ?>"
+          src="../assets/admin_assets/icons/dashboard/<?php echo ($current_page == 'booked.php' || $current_page == 'appointment-details.php') ? 'active/booked-appointments.svg' : 'default/booked-appointments.svg'; ?>"
           alt="" style="width: 1.375rem; height: 1.375rem" />Booked Meetings</a>
     </li>
 
@@ -32,6 +32,14 @@
         <img
           src="../assets/admin_assets/icons/dashboard/<?php echo ($current_page == 'patients.php') ? 'active/patients.svg' : 'default/patients.svg'; ?>"
           alt="" style="width: 1.375rem; height: 1.375rem" />Clients/Patients</a>
+    </li>
+
+    <!-- services -->
+    <li <?php echo ($current_page == 'services.php' || $current_page == 'update-service.php') ? 'class="active__link"' : ''; ?>>
+      <a href="../admin/services.php">
+        <img
+          src="../assets/admin_assets/icons/dashboard/<?php echo ($current_page == 'services.php' || $current_page == 'update-service.php') ? 'active/services.svg' : 'default/services.svg'; ?>"
+          alt="" style="width: 1.375rem; height: 1.375rem" />Services</a>
     </li>
 
     <!-- doctors -->
@@ -54,6 +62,12 @@
 
   <div class="bottom-links">
     <ul>
+      <li <?php echo ($current_page == 'add-services.php') ? 'class="active__link"' : ''; ?>>
+        <a href="../admin/add-services.php">
+          Add Service
+        </a>
+      </li>
+
       <li <?php echo ($current_page == 'set-dates.php') ? 'class="active__link"' : ''; ?>>
         <a href="../admin/set-dates.php">
           Set Appointment Dates

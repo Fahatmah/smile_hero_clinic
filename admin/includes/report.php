@@ -128,14 +128,17 @@ if($result->num_rows > 0){
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="../../src/dist/styles.css" />
-    <link rel="shortcut icon" href="../../assets/images/logoipsum.svg" type="image/x-icon" />
+    <link rel="shortcut icon" href="../../assets/logos/logo-white.png" type="image/x-icon" />
     <title>Smile Hero Clinic Report - <span id="currentDate"></span></title>
 </head>
 <body class="dashboard-report">
   <main class="dashboard-report-container">
 
     <div class="report-header">
-      <p class="heading">Smile Hero Clinic Report</p>
+      <p class="heading">
+        <img src="../../assets/logos/logo-with-name-blue.png" alt="" style="width: 4rem; height: 4rem;"> 
+        Smile Hero Clinic Report
+      </p>
       <button class="print-report-btn" onclick="window.print()">Print Report</button>
     </div>
     <section class="table-container">

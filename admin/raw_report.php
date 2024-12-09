@@ -86,6 +86,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['filter'])) {
     <main class="admin__main raw-report-container">
       <!-- header -->
       <div class="header-container">
+        <p class="heading">
+          <img src="../assets/logos/logo-with-name-blue.png" alt="" style="width: 4rem; height: 4rem;"> 
+          Smile Hero Clinic Report
+        </p>
         <h1 class="header">Filter Your Reports with Ease</h1>
         <p class="sub-header">Quickly refine, sort, and customize your data to find exactly what you need.</p>
       </div>
