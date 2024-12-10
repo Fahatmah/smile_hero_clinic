@@ -3,7 +3,7 @@
 .homepage {
   .services-page {
     header {
-            .container {
+      .container {
         max-width: 80rem;
         @include display-flex($dir: column, $gap: 2rem, $y: flex-start);
         padding: 2rem;
@@ -38,6 +38,10 @@
             }
           }
         }
+
+        .image-container {
+          width: 50rem; // 800px
+        }
       }
     }
   }
@@ -47,7 +51,6 @@
   .homepage {
     .services-page {
       header {
-
         .container {
           flex-direction: row;
           padding-inline: 0;

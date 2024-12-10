@@ -47,7 +47,7 @@
         </div>
 
         <div class="image-container">
-          <img src="././assets/landing-page/services-img.png" alt="services image">
+          <img src="././assets/landing-page/services-img.png" alt="services image" onerror="this.onerror=null; this.src='././assets/landing-page/services.jpg'; this.style.borderRadius='0.5rem'; this.style.width='800px'; this.style.height='600px'; this.style.objectFit='cover';">
         </div>
       </div>
     </header>

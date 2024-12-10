@@ -61,7 +61,7 @@
             </div>
           </div>
           <div class="image-container">
-            <img src="././assets/landing-page/about-img.png" alt="about image">
+            <img src="././assets/landing-page/about-img.png" alt="about image" onerror="this.onerror=null; this.src='././assets/landing-page/about.jpg'; this.style.borderRadius='0.5rem'">
           </div>
         </div>
       </div>

@@ -222,7 +222,7 @@ while ($row = $result->fetch_assoc()) {
               <label class="appointment-form__label">Service</label>
               <input type="button" value="Select service" class="services-btn" id="servicesBtn">
               <div class="selected-services" id="selectedServices"></div>
-              <div class="appointment-form__checkbox-group">
+              <div class="appointment-form__checkbox-group active">
                 <div class="checkbox-container">
                     <input type="checkbox" id="cleaning" name="dentalService[]" value="teeth cleaning  ₱2,800">
                     <label for="cleaning">Teeth Cleaning <span class="service-price">₱2,800</span></label>

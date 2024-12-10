@@ -999,6 +999,9 @@ body main.admin__main .admin__content {
   outline: 1px solid var(--pr-clr-300);
   background-color: #f0f3f9;
 }
+.homepage .services-page header .container .image-container {
+  width: 50rem;
+}
 
 @media screen and (min-width: 75rem) {
   .homepage .services-page header .container {
@@ -2755,6 +2758,16 @@ footer .contact-section .container .footer-info__credits {
   .appointment_form form {
     flex-direction: column;
   }
+  .appointment_form form .appointment-form__field #servicesBtn {
+    pointer-events: none;
+  }
+  .appointment_form form .appointment-form__field .appointment-form__checkbox-group {
+    position: initial;
+    width: 100%;
+    right: 0;
+    justify-content: flex-start;
+    transform-origin: top left;
+  }
 }
 .dental-history__page {
   --light-gray-border: 1px solid hsl(0, 0%, 38%, 0.3);
@@ -3426,7 +3439,7 @@ body.user-homepage main .about__intro {
   width: 100%;
   height: 50vh;
   border-radius: 0.5rem;
-  background-image: url(../../assets/smile-hero-img.jpg);
+  background-image: url(../../assets/smile-hero-img.jpg), url(../../assets/landing-page/dental-clinic-room.jpg);
   background-repeat: no-repeat;
   background-position: center;
 }

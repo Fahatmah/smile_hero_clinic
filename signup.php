@@ -223,7 +223,7 @@ if (isset($_SESSION['signup_process'])) {
       </form>
 
       <div class="image-container">
-        <img src="././assets/landing-page/form-bg.jpg" alt="dental clinic room">
+        <img src="././assets/landing-page/form-bg.jpg" alt="dental clinic room" onerror="this.onerror=null; this.src='././assets/landing-page/dental-clinic-room.jpg';">
       </div>
 
       <!-- modal -->

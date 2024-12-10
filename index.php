@@ -31,7 +31,7 @@
           </div>
 
           <div class="image-container">
-            <img src="././assets/landing-page/hero-images.png" alt="hero-image">
+            <img src="././assets/landing-page/hero-images.png" alt="hero-image" onerror="this.onerror=null; this.src='././assets/landing-page/homepage.jpg'; this.style.height='500px'; this.style.objectFit='cover'; this.style.objectPosition='bottom center'; this.style.borderRadius='0.5rem'" >
           </div>
         </div>
       </header>

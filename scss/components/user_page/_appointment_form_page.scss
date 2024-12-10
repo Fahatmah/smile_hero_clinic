@@ -256,13 +256,27 @@
   }
 }
 
-
-
 // 820px
 @media screen and (max-width: 51.25rem) {
- .appointment_form {
-  form {
-    flex-direction: column;
+  .appointment_form {
+    form {
+      flex-direction: column;
+
+      .appointment-form__field {
+        #servicesBtn {
+          pointer-events: none;
+        }
+        .appointment-form__checkbox-group {
+          position: initial;
+          width: 100%;
+          // top: 0;
+          // bottom: -16rem;
+          right: 0;
+          // align-items: flex-end;
+          justify-content: flex-start;
+          transform-origin: top left;
+        }
+      }
+    }
   }
- } 
 }
