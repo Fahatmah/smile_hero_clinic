@@ -2,6 +2,22 @@
 
 .services {
   .appointments__table {
+    .table-heading__container {
+      button {
+        a {
+          color: var(--ntrl-clr-100);
+          padding: 0.8rem 1rem;
+          border-radius: 0.5rem;
+          background-color: var(--pr-clr-300);
+          transition: 200ms ease-in-out;
+
+          &:hover {
+            background-color: var(--pr-clr-350);
+          }
+        }
+      }
+    }
+
     table {
       tbody {
         tr {

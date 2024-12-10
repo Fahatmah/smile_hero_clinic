@@ -87,6 +87,11 @@
         padding-block: 0.75rem;
         border-radius: 0.375rem;
         background-color: var(--pr-clr-100);
+        cursor: pointer;
+
+        &:hover {
+          background-color: var(--pr-clr-150)
+        }
       }
     }
 

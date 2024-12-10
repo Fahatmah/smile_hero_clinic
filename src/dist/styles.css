@@ -2703,7 +2703,7 @@ footer .contact-section .container .footer-info__credits {
   -webkit-backdrop-filter: blur(3px);
           backdrop-filter: blur(3px);
 }
-.appointment_form form .modal__content {
+.appointment_form form .modal__content.form {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -2713,10 +2713,11 @@ footer .contact-section .container .footer-info__credits {
   border-radius: 0.5rem;
   background-color: var(--ntrl-clr-100);
 }
-.appointment_form form .modal__content > * {
+.appointment_form form .modal__content.form > * {
   font-size: 0.875rem;
+  height: initial;
 }
-.appointment_form form .modal__content .modal__header {
+.appointment_form form .modal__content.form .modal__header {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -2724,15 +2725,16 @@ footer .contact-section .container .footer-info__credits {
   gap: 0.5rem;
   padding-inline: 1rem;
 }
-.appointment_form form .modal__content .modal__header #modalStatus {
+.appointment_form form .modal__content.form .modal__header #modalStatus {
   font-size: 1.5rem;
   font-weight: bold;
   color: var(--ntrl-clr-300);
   text-align: center;
   line-height: 1;
 }
-.appointment_form form .modal__content .modal__header #modalMessage {
+.appointment_form form .modal__content.form .modal__header #modalMessage {
   color: var(--pr-clr-100);
+  text-align: center;
 }
 .appointment_form form .modal__button {
   width: 100%;
@@ -2756,66 +2758,71 @@ footer .contact-section .container .footer-info__credits {
 }
 .dental-history__page {
   --light-gray-border: 1px solid hsl(0, 0%, 38%, 0.3);
-  --ff-inter: "Inter", sans-serif;
   --pending-bg: #fff3d8;
   --complete-bg: #dbffe5;
   --accepted-bg: #eef5ff;
   --rejected-bg: #ffe9e6;
   --missed-bg: #e8e8e8;
   --canceled-bg: #ff1c1c;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  flex-direction: column;
+  gap: 1rem;
+}
+.dental-history__page .table-container {
   width: 100%;
   border-radius: 0.5rem;
   border: var(--light-gray-border);
   background-color: var(--ntrl-clr-100);
   overflow: hidden;
 }
-.dental-history__page table {
+.dental-history__page .table-container table {
   width: 100%;
-  font-family: var(--ff-inter);
   border-collapse: collapse;
 }
-.dental-history__page table th,
-.dental-history__page table td {
+.dental-history__page .table-container table th,
+.dental-history__page .table-container table td {
   font-size: 0.75rem;
   color: var(--ntrl-clr-300);
   text-align: left;
   text-transform: uppercase;
   padding: 0.75rem;
 }
-.dental-history__page table th:not(:last-child),
-.dental-history__page table td:not(:last-child) {
+.dental-history__page .table-container table th:not(:last-child),
+.dental-history__page .table-container table td:not(:last-child) {
   border-right: var(--light-gray-border);
 }
-.dental-history__page table thead tr th {
+.dental-history__page .table-container table thead tr th {
   font-weight: bold;
   border-bottom: var(--light-gray-border);
 }
-.dental-history__page table thead tr th:nth-child(1) {
+.dental-history__page .table-container table thead tr th:nth-child(1) {
   width: 9rem;
 }
-.dental-history__page table thead tr th:nth-child(2), .dental-history__page table thead tr th:nth-child(4) {
+.dental-history__page .table-container table thead tr th:nth-child(2), .dental-history__page .table-container table thead tr th:nth-child(4) {
   width: 117px;
   width: 206px;
 }
-.dental-history__page table thead tr th:nth-child(3) {
+.dental-history__page .table-container table thead tr th:nth-child(3) {
   width: 95px;
 }
-.dental-history__page table thead tr th:nth-child(5) {
+.dental-history__page .table-container table thead tr th:nth-child(5) {
   width: 117px;
 }
-.dental-history__page table tbody tr:not(:last-child) {
+.dental-history__page .table-container table tbody tr:not(:last-child) {
   border-bottom: var(--light-gray-border);
 }
-.dental-history__page table tbody tr td:first-child {
+.dental-history__page .table-container table tbody tr td:first-child {
   text-transform: unset;
   font-size: clamp(0.6rem, 0.5296rem + 0.3005vw, 0.8rem);
   font-weight: 500;
 }
-.dental-history__page table tbody tr td:last-child {
+.dental-history__page .table-container table tbody tr td:last-child {
   text-align: center;
   text-transform: capitalize;
 }
-.dental-history__page table tbody tr td:last-child .status {
+.dental-history__page .table-container table tbody tr td:last-child .status {
   width: -moz-min-content;
   width: min-content;
   font-size: 0.6rem;
@@ -2823,35 +2830,60 @@ footer .contact-section .container .footer-info__credits {
   padding: 0.1875rem 0.5rem;
   border-radius: 0.25rem;
 }
-.dental-history__page table tbody tr td:last-child .status.pending {
+.dental-history__page .table-container table tbody tr td:last-child .status.pending {
   color: var(--pr-clr-200);
   border: 1px solid var(--pr-clr-200);
   background-color: var(--pending-bg);
 }
-.dental-history__page table tbody tr td:last-child .status.completed {
+.dental-history__page .table-container table tbody tr td:last-child .status.completed {
   color: var(--pr-clr-270);
   border: 1px solid var(--pr-clr-270);
   background-color: var(--complete-bg);
 }
-.dental-history__page table tbody tr td:last-child .status.accepted {
+.dental-history__page .table-container table tbody tr td:last-child .status.accepted {
   color: var(--pr-clr-300);
   border: 1px solid var(--pr-clr-300);
   background-color: var(--accepted-bg);
 }
-.dental-history__page table tbody tr td:last-child .status.rejected {
+.dental-history__page .table-container table tbody tr td:last-child .status.rejected {
   color: var(--pr-clr-100);
   border: 1px solid var(--pr-clr-100);
   background-color: var(--rejected-bg);
 }
-.dental-history__page table tbody tr td:last-child .status.missed {
+.dental-history__page .table-container table tbody tr td:last-child .status.missed {
   color: var(--ntrl-clr-300);
   border: 1px solid var(--ntrl-clr-300);
   background-color: var(--missed-bg);
 }
-.dental-history__page table tbody tr td:last-child .status.canceled {
+.dental-history__page .table-container table tbody tr td:last-child .status.canceled {
   color: var(--ntrl-clr-100);
   border: 1px solid var(--canceled-bg);
   background-color: var(--canceled-bg);
+}
+.dental-history__page .pagination {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  flex-direction: row;
+  gap: 0.2rem;
+}
+.dental-history__page .pagination a {
+  padding: 0.5rem 0.8rem;
+  color: var(--pr-clr-300);
+  border: 1px solid var(--pr-clr-300);
+  border-radius: 0.5rem;
+  transition: background-color 0.3s, color 0.3s;
+  background-color: var(--ntrl-clr-100);
+}
+.dental-history__page .pagination a.active {
+  font-weight: 900;
+  color: var(--ntrl-clr-100);
+  background-color: var(--pr-clr-300);
+}
+.dental-history__page .pagination a:hover {
+  color: var(--ntrl-clr-100);
+  background-color: var(--pr-clr-350);
 }
 
 .faqs-and-questions__page {
@@ -5490,7 +5522,6 @@ body.user-homepage main .about .services .appointment__button:hover {
   width: 4rem;
   height: 4rem;
   padding: 0.5rem 1rem;
-  font-family: var(--ff-inter);
   color: var(--ntrl-clr-300);
   text-decoration: none;
   border-radius: 50%;
@@ -5529,7 +5560,15 @@ body.user-homepage main .about .services .appointment__button:hover {
   border-radius: 1.25rem;
   background-color: var(--ntrl-clr-100);
 }
-.doctors__container .doctors__table .table-heading {
+.doctors__container .doctors__table .table-heading__container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-direction: row;
+  gap: 0;
+  width: 100%;
+}
+.doctors__container .doctors__table .table-heading__container .table-heading {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -5539,7 +5578,7 @@ body.user-homepage main .about .services .appointment__button:hover {
   font-weight: 900;
   text-transform: uppercase;
 }
-.doctors__container .doctors__table .table-heading .table-item-count {
+.doctors__container .doctors__table .table-heading__container .table-heading .table-item-count {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -5552,6 +5591,16 @@ body.user-homepage main .about .services .appointment__button:hover {
   padding: 0.25rem;
   border-radius: 50%;
   background-color: var(--pr-clr-100);
+}
+.doctors__container .doctors__table .table-heading__container button a {
+  color: var(--ntrl-clr-100);
+  padding: 0.8rem 1rem;
+  border-radius: 0.5rem;
+  background-color: var(--pr-clr-300);
+  transition: 200ms ease-in-out;
+}
+.doctors__container .doctors__table .table-heading__container button a:hover {
+  background-color: var(--pr-clr-350);
 }
 .doctors__container .doctors__table table {
   width: 100%;
@@ -6015,6 +6064,10 @@ body.user-homepage main .about .services .appointment__button:hover {
   padding-block: 0.75rem;
   border-radius: 0.375rem;
   background-color: var(--pr-clr-100);
+  cursor: pointer;
+}
+.new-doctor__container form > * .doctor-form__submit-button:hover {
+  background-color: var(--pr-clr-150);
 }
 .new-doctor__container form .modal {
   display: flex;
@@ -7071,9 +7124,10 @@ body.user-homepage main .about .services .appointment__button:hover {
 .raw-report-container .form-fields-container {
   display: flex;
   align-items: flex-start;
-  justify-content: center;
+  justify-content: flex-start;
   flex-direction: row;
   gap: 1.5rem;
+  flex-wrap: wrap;
 }
 .raw-report-container .form-fields-container .date-container {
   display: flex;
@@ -7119,6 +7173,7 @@ body.user-homepage main .about .services .appointment__button:hover {
   outline: 2px solid var(--pr-clr-300);
 }
 .raw-report-container .form-fields-container .status-container,
+.raw-report-container .form-fields-container .service-container,
 .raw-report-container .form-fields-container .patient-label-container {
   display: flex;
   align-items: flex-start;
@@ -7127,16 +7182,19 @@ body.user-homepage main .about .services .appointment__button:hover {
   gap: 0.5rem;
 }
 .raw-report-container .form-fields-container .status-container .field-header,
+.raw-report-container .form-fields-container .service-container .field-header,
 .raw-report-container .form-fields-container .patient-label-container .field-header {
   font-weight: bold;
   color: var(--ntrl-clr-300);
   letter-spacing: -1px;
 }
 .raw-report-container .form-fields-container .status-container .field-header span,
+.raw-report-container .form-fields-container .service-container .field-header span,
 .raw-report-container .form-fields-container .patient-label-container .field-header span {
   color: var(--pr-clr-100);
 }
 .raw-report-container .form-fields-container .status-container .form-field,
+.raw-report-container .form-fields-container .service-container .form-field,
 .raw-report-container .form-fields-container .patient-label-container .form-field {
   display: flex;
   align-items: flex-start;
@@ -7149,12 +7207,14 @@ body.user-homepage main .about .services .appointment__button:hover {
   outline: 1px solid hsla(0, 0%, 38%, 0.5);
 }
 .raw-report-container .form-fields-container .status-container .form-field label,
+.raw-report-container .form-fields-container .service-container .form-field label,
 .raw-report-container .form-fields-container .patient-label-container .form-field label {
   display: none;
   color: var(--ntrl-clr-300);
   letter-spacing: -1px;
 }
 .raw-report-container .form-fields-container .status-container .form-field .checkboxes-container,
+.raw-report-container .form-fields-container .service-container .form-field .checkboxes-container,
 .raw-report-container .form-fields-container .patient-label-container .form-field .checkboxes-container {
   width: 20rem;
   display: flex;
@@ -7166,6 +7226,7 @@ body.user-homepage main .about .services .appointment__button:hover {
   color: var(--ntrl-clr-300);
 }
 .raw-report-container .form-fields-container .status-container .form-field .checkboxes-container .checkbox,
+.raw-report-container .form-fields-container .service-container .form-field .checkboxes-container .checkbox,
 .raw-report-container .form-fields-container .patient-label-container .form-field .checkboxes-container .checkbox {
   display: flex;
   align-items: center;
@@ -7173,12 +7234,21 @@ body.user-homepage main .about .services .appointment__button:hover {
   flex-direction: row;
   gap: 0.2rem;
 }
+.raw-report-container .form-fields-container .service-container {
+  width: 45rem;
+}
+.raw-report-container .form-fields-container .service-container .form-field {
+  width: 100%;
+}
+.raw-report-container .form-fields-container .service-container .form-field .checkboxes-container {
+  width: 100%;
+}
 .raw-report-container .form-fields-container .form-button {
-  align-self: center;
+  align-self: flex-start;
   font-weight: 600;
   color: var(--ntrl-clr-100);
   padding: 0.8rem 2rem;
-  margin-bottom: 0.5rem;
+  margin-top: 1.5rem;
   border-radius: 0.4rem;
   background-color: var(--pr-clr-300);
 }
@@ -7212,14 +7282,63 @@ body.user-homepage main .about .services .appointment__button:hover {
   gap: 0;
   width: 100%;
 }
-.raw-report-container .table-container .header-container .header-text {
+.raw-report-container .table-container .header-container .table-heading-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-direction: row;
+  gap: 0;
+  width: 100%;
+}
+.raw-report-container .table-container .header-container .table-heading-container .header-text {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  flex-direction: row;
+  gap: 0.5rem;
   width: 100%;
   font-size: 1.5rem;
   font-weight: bold;
   color: var(--ntrl-clr-300);
 }
-.raw-report-container .table-container .header-container .buttons-container {
+.raw-report-container .table-container .header-container .table-heading-container .header-text .number-results {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: row;
+  gap: 0;
+  width: 1.5rem;
+  height: 1.5rem;
+  font-size: 0.85rem;
+  color: var(--ntrl-clr-100);
+  border-radius: 50%;
+  background-color: var(--pr-clr-100);
+}
+.raw-report-container .table-container .header-container .table-heading-container .search__container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-direction: row;
+  gap: 0;
   width: 100%;
+  padding: 0.3rem 1rem;
+  border-radius: 0.5rem;
+  border: 1px solid hsla(0, 0%, 38%, 0.5);
+}
+.raw-report-container .table-container .header-container .table-heading-container .search__container:hover, .raw-report-container .table-container .header-container .table-heading-container .search__container:active, .raw-report-container .table-container .header-container .table-heading-container .search__container:focus {
+  border-color: var(--ntrl-clr-300);
+}
+.raw-report-container .table-container .header-container .table-heading-container .search__container input {
+  color: var(--ntrl-clr-300);
+}
+.raw-report-container .table-container .header-container .table-heading-container .search__container input::-moz-placeholder {
+  color: hsla(0, 0%, 38%, 0.5) !important;
+}
+.raw-report-container .table-container .header-container .table-heading-container .search__container input::placeholder {
+  color: hsla(0, 0%, 38%, 0.5) !important;
+}
+.raw-report-container .table-container .header-container .buttons-container {
+  width: 25rem;
   display: flex;
   align-items: center;
   justify-content: flex-end;
@@ -7280,6 +7399,16 @@ body.user-homepage main .about .services .appointment__button:hover {
   margin-top: 1rem;
 }
 
+.services .appointments__table .table-heading__container button a {
+  color: var(--ntrl-clr-100);
+  padding: 0.8rem 1rem;
+  border-radius: 0.5rem;
+  background-color: var(--pr-clr-300);
+  transition: 200ms ease-in-out;
+}
+.services .appointments__table .table-heading__container button a:hover {
+  background-color: var(--pr-clr-350);
+}
 .services .appointments__table table tbody tr td {
   padding-block: 1rem !important;
 }

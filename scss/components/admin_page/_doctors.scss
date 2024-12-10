@@ -20,22 +20,41 @@
     border-radius: 1.25rem;
     background-color: var(--ntrl-clr-100);
 
-    .table-heading {
-      @include display-flex($gap: 0.5rem);
-      font-size: 1.5rem;
-      font-weight: 900;
-      // font-family: var(--ff-inter);
-      text-transform: uppercase;
+    .table-heading__container {
+      @include display-flex($x: space-between);
+      width: 100%;
 
-      .table-item-count {
-        @include display-flex();
-        width: 1.25rem;
-        height: 1.25rem;
-        font-size: 0.875rem;
-        color: var(--ntrl-clr-100);
-        padding: 0.25rem;
-        border-radius: 50%;
-        background-color: var(--pr-clr-100);
+      .table-heading {
+        @include display-flex($gap: 0.5rem);
+        font-size: 1.5rem;
+        font-weight: 900;
+        // font-family: var(--ff-inter);
+        text-transform: uppercase;
+
+        .table-item-count {
+          @include display-flex();
+          width: 1.25rem;
+          height: 1.25rem;
+          font-size: 0.875rem;
+          color: var(--ntrl-clr-100);
+          padding: 0.25rem;
+          border-radius: 50%;
+          background-color: var(--pr-clr-100);
+        }
+      }
+
+      button {
+        a {
+          color: var(--ntrl-clr-100);
+          padding: 0.8rem 1rem;
+          border-radius: 0.5rem;
+          background-color: var(--pr-clr-300);
+          transition: 200ms ease-in-out;
+
+          &:hover {
+            background-color: var(--pr-clr-350);
+          }
+        }
       }
     }
 

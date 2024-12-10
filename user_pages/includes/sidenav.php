@@ -44,8 +44,7 @@ if ($stmts) {  // Check if prepare was successful
       <a href="../user_pages/dental_history.php">
         <img
           src="../assets/icons/user_account/<?php echo ($current_page == 'dental_history.php') ? 'dental-icon-active.png' : 'dental-history.png'; ?>"
-          alt="" style="width: 1.375rem; height: 1.375rem" />Dental
-        History</a>
+          alt="" style="width: 1.375rem; height: 1.375rem" />History</a>
     </li>
     <li <?php echo ($current_page == 'faqs_questions.php') ? 'class="active__link"' : ''; ?>>
       <a href="../user_pages/faqs_questions.php">

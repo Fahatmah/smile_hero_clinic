@@ -35,10 +35,10 @@
     </li>
 
     <!-- services -->
-    <li <?php echo ($current_page == 'services.php' || $current_page == 'update-service.php') ? 'class="active__link"' : ''; ?>>
+    <li <?php echo ($current_page == 'services.php' || $current_page == 'update-service.php'  || $current_page == 'add-services.php') ? 'class="active__link"' : ''; ?>>
       <a href="../admin/services.php">
         <img
-          src="../assets/admin_assets/icons/dashboard/<?php echo ($current_page == 'services.php' || $current_page == 'update-service.php') ? 'active/services.svg' : 'default/services.svg'; ?>"
+          src="../assets/admin_assets/icons/dashboard/<?php echo ($current_page == 'services.php' || $current_page == 'update-service.php'  || $current_page == 'add-services.php') ? 'active/services.svg' : 'default/services.svg'; ?>"
           alt="" style="width: 1.375rem; height: 1.375rem" />Services</a>
     </li>
 
@@ -62,11 +62,11 @@
 
   <div class="bottom-links">
     <ul>
-      <li <?php echo ($current_page == 'add-services.php') ? 'class="active__link"' : ''; ?>>
+      <!-- <li <?php // echo ($current_page == 'add-services.php') ? 'class="active__link"' : ''; ?>>
         <a href="../admin/add-services.php">
           Add Service
         </a>
-      </li>
+      </li> -->
 
       <li <?php echo ($current_page == 'set-dates.php') ? 'class="active__link"' : ''; ?>>
         <a href="../admin/set-dates.php">
@@ -80,11 +80,11 @@
         </a>
       </li>
 
-      <li <?php echo ($current_page == 'new-doctor.php') ? 'class="active__link"' : ''; ?>>
+      <!-- <li <?php // echo ($current_page == 'new-doctor.php') ? 'class="active__link"' : ''; ?>>
         <a href="../admin/new-doctor.php">
           New doctor
         </a>
-      </li>
+      </li> -->
 
       <li <?php echo ($current_page == 'settings.php') ? 'class="active__link"' : ''; ?>>
         <a href="../admin/settings.php">

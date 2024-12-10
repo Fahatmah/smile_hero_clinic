@@ -60,9 +60,13 @@ $totalPages = ceil($totalRecords / $limit);
       <!-- doctors -->
       <div class="doctors__container">
         <div class="doctors__table">
-          <h1 class="table-heading">
-            doctors <span class="table-item-count"><?php echo $totalRecords?></span>
-          </h1>
+          <b class="table-heading__container">
+            <h1 class="table-heading">
+              doctors <span class="table-item-count"><?php echo $totalRecords?></span>
+            </h1>
+
+            <button><a href="new-doctor.php">Add Doctor</a></button>
+          </b>
 
           <table>
             <thead>

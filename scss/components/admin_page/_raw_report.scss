@@ -39,7 +39,8 @@
   }
 
   .form-fields-container {
-    @include display-flex($y: flex-start, $gap: 1.5rem);
+    @include display-flex($y: flex-start, $x: flex-start, $gap: 1.5rem);
+    flex-wrap: wrap;
 
     .date-container {
       @include display-flex($gap: 0.5rem, $dir: column, $y: flex-start);
@@ -84,6 +85,7 @@
     }
 
     .status-container,
+    .service-container,
     .patient-label-container {
       @include display-flex($gap: 0.5rem, $dir: column, $y: flex-start);
 
@@ -123,12 +125,24 @@
       }
     }
 
+    .service-container {
+      width: 45rem;
+
+      .form-field {
+        width: 100%;
+
+        .checkboxes-container {
+          width: 100%;
+        }
+      }
+    }
+
     .form-button {
-      align-self: center;
+      align-self: flex-start;
       font-weight: 600;
       color: var(--ntrl-clr-100);
       padding: 0.8rem 2rem;
-      margin-bottom: 0.5rem;
+      margin-top: 1.5rem;
       border-radius: 0.4rem;
       background-color: var(--pr-clr-300);
 
@@ -158,14 +172,53 @@
     .header-container {
       @include display-flex($x: space-between);
       width: 100%;
-      .header-text {
+
+      .table-heading-container {
+        @include display-flex($x: space-between);
         width: 100%;
-        font-size: 1.5rem;
-        font-weight: bold;
-        color: var(--ntrl-clr-300);
+
+        .header-text {
+          @include display-flex($x: flex-start, $gap: 0.5rem);
+          width: 100%;
+          font-size: 1.5rem;
+          font-weight: bold;
+          color: var(--ntrl-clr-300);
+
+          .number-results {
+            @include display-flex();
+            width: 1.5rem;
+            height: 1.5rem;
+            font-size: 0.85rem;
+            color: var(--ntrl-clr-100);
+            border-radius: 50%;
+            background-color: var(--pr-clr-100);
+          }
+        }
+
+        .search__container {
+          @include display-flex($x: space-between);
+          width: 100%;
+          padding: 0.3rem 1rem;
+          border-radius: 0.5rem;
+          border: 1px solid hsl(0, 0%, 38%, 0.5);
+
+          &:hover,
+          &:active,
+          &:focus {
+            border-color: var(--ntrl-clr-300);
+          }
+
+          input {
+            color: var(--ntrl-clr-300);
+            &::placeholder {
+              color: hsl(0, 0%, 38%, 0.5) !important;
+            }
+          }
+        }
       }
+
       .buttons-container {
-        width: 100%;
+        width: 25rem;
         @include display-flex($gap: 1rem, $x: flex-end);
 
         button {

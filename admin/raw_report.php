@@ -160,6 +160,42 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['filter'])) {
             </div>
           </div>
         </div>
+
+        <!-- service -->
+        <!-- <div class="service-container">
+          <p class="field-header">Select service of appointment <span>*</span></p>
+          <div class="form-field">
+            <label for="status">Status</label>
+            <div class="checkboxes-container">
+              <div class="checkbox">
+                <input type="checkbox" name="service[]" value="teeth cleaning" <?php // echo in_array('teeth cleaning', $service) ? 'checked' : ''; ?>> <p>Teeth Cleaning</p>
+              </div>
+              <div class="checkbox">
+                <input type="checkbox" name="service[]" value="teeth whitening" <?php // echo in_array('teeth whitening', $service) ? 'checked' : ''; ?>> <p>Teeth Whitening</p>
+              </div>
+              <div class="checkbox">
+                <input type="checkbox" name="service[]" value="tooth extraction" <?php // echo in_array('tooth extraction', $service) ? 'checked' : ''; ?>> <p>Tooth Extraction</p>
+              </div>
+              <div class="checkbox">
+                <input type="checkbox" name="service[]" value="dental feeling" <?php // echo in_array('dental feeling', $service) ? 'checked' : ''; ?>> <p>Dental Feeling</p>
+              </div>
+              <div class="checkbox">
+                <input type="checkbox" name="service[]" value="routine checkup" <?php // echo in_array('routine checkup', $service) ? 'checked' : ''; ?>> <p>Routine Checkup</p>
+              </div>
+              <div class="checkbox">
+                <input type="checkbox" name="service[]" value="braces consultation" <?php // echo in_array('braces consultation', $service) ? 'checked' : ''; ?>> <p>Braces Consultation</p>
+              </div>
+
+              <div class="checkbox">
+                <input type="checkbox" name="service[]" value="root canal treatment" <?php // echo in_array('root canal treatment', $service) ? 'checked' : ''; ?>> <p>Root Canal Treatment</p>
+              </div>
+
+              <div class="checkbox">
+                <input type="checkbox" name="service[]" value="dental implants" <?php // echo in_array('dental implants', $service) ? 'checked' : ''; ?>> <p>Dental Implants</p>
+              </div>
+            </div>
+          </div>
+        </div> -->
         
         <input type="submit" name="filter" value="Filter" class="form-button">
       </form>
@@ -172,7 +208,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['filter'])) {
 
          <?php if (!empty($datesStore)) : ?>
           <div class="header-container">
-            <div class="header-text">Filter Results</div>
+            <div class="table-heading-container">
+              <div class="header-text">Filter Results
+                <span class="number-results">18</span>
+              </div>
+              <?php include("includes/search.php"); ?>
+            </div>
+
             <div class="buttons-container">
               <form action="includes/export.php" method="post">
                 <input type="hidden" name="fromDate" value="<?php echo htmlspecialchars($fromDate); ?>">
@@ -187,6 +229,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['filter'])) {
           <table id="appointmentsTable" class="appointments-table">
             <thead>
               <tr>
+                <th>#</th>
                 <th>user id</th>
                 <th>doc id</th>
                 <th>apt id</th>
@@ -202,16 +245,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['filter'])) {
             </thead>
             <tbody>
               <?php foreach ($datesStore as $dateReport) : ?>
-              <tr>
+              <tr class="appointment-row">
+                <td>1</td>
                 <td><?php echo htmlspecialchars($dateReport['user_id']); ?></td>
                 <td><?php echo htmlspecialchars($dateReport['doctor_id']); ?></td>
                 <td><?php echo htmlspecialchars($dateReport['appointment_id']); ?></td>
                 <td><?php echo htmlspecialchars($dateReport['label']); ?></td>
-                <td><?php echo htmlspecialchars($dateReport['name']); ?></td>
-                <td><?php echo htmlspecialchars($dateReport['email']); ?></td>
-                <td><?php echo htmlspecialchars($dateReport['date']); ?></td>
+                <td class="patient-name"><?php echo htmlspecialchars($dateReport['name']); ?></td>
+                <td class="patient-email"><?php echo htmlspecialchars($dateReport['email']); ?></td>
+                <td class="patient-cell date"><?php echo htmlspecialchars($dateReport['date']); ?></td>
                 <td><?php echo htmlspecialchars($dateReport['time']); ?></td>
-                <td><?php echo htmlspecialchars($dateReport['service']); ?></td>
+                <td class="patient-cell service"><?php echo htmlspecialchars($dateReport['service']); ?></td>
                 <td><?php echo htmlspecialchars($dateReport['status']); ?></td>
                 <td class="created-at"><?php echo htmlspecialchars($dateReport['created_at']); ?></td>
               </tr>
@@ -219,7 +263,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['filter'])) {
             </tbody>
           </table>
           <?php else : ?>
-            <p class="empty-table-text">No appointments found for the selected date range.</p>
+            <p class="no-appointment-message empty-table-text">No appointments found for the selected date range.</p>
           <?php endif; ?>
       </div>
     </main>

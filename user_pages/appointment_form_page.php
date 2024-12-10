@@ -177,7 +177,7 @@ while ($row = $result->fetch_assoc()) {
           </section> 
           <!-- Modal -->
           <div class="modal" style="display: none; z-index: 1;">
-            <div class="modal__content">
+            <div class="modal__content form">
               <div class="modal__header">
                 <h3 id="modalStatus" class="modal__status"></h3>
                 <p id="modalMessage1" class="modal__message"></p>

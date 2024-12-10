@@ -21,15 +21,17 @@
         let email = row.querySelector('.patient-email').textContent.toLowerCase()
         let date = row.querySelector('.patient-cell.date').textContent
         let time = row.querySelector('.patient-cell.time')?.textContent
-        let phone = row.querySelector('.patient-cell.phone').textContent
-        let doctor = row.querySelector('.patient-cell.doctor').textContent.toLowerCase()
+        let phone = row.querySelector('.patient-cell.phone')?.textContent
+        let doctor = row.querySelector('.patient-cell.doctor')?.textContent.toLowerCase()
+        let service = row.querySelector('.patient-cell.service')?.textContent.toLowerCase()
 
         if (name.includes(query) || 
             email.includes(query) || 
             date.includes(query) || 
             time?.includes(query) || 
             doctor?.includes(query) || 
-            phone.includes(query)) {
+            service?.includes(query) || 
+            phone?.includes(query)) {
             row.style.display = ''
             hasMatches = true;
         } else {

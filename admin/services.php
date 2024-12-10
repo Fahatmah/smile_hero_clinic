@@ -59,7 +59,8 @@ $result = $conn->query($query);
         <div class="appointments__table">
           <div class="table-heading__container">
             <h1 class="table-heading">Services <span class="table-item-count">12</span></h1>
-            <?php include("includes/search.php"); ?>
+            <button><a href="add-services.php">Add Service</a></button>
+            <!-- <?php // include("includes/search.php"); ?> -->
           </div>
 
           <table>
