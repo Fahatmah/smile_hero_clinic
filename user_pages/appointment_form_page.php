@@ -11,6 +11,8 @@ if(!isset($_SESSION['user_id'])) {
   exit();
 }
 
+$user_id = $_SESSION['user_id'];
+
 $showModal = false;
 $modalStatus = '';
 $modalMessage = '';
@@ -19,12 +21,12 @@ if (isset($_SESSION['appointment_status'])) {
     if ($_SESSION['appointment_status'] === 'created') {
         $showModal = true;
         $modalStatus = 'Your appointment request has been successfully submitted.';
-        $modalMessage1 = '*Please allow 3 to 4 hours for processing and confirmation.*';
+        $modalMessage1 = '*Please allow 15 min to 30 min for processing and confirmation.*';
         $modalMessage = '*Kindly await an email notification for the confirmation of your appointment.*';
     } elseif ($_SESSION['appointment_status'] === 'exists') {
         $showModal = true;
         $modalStatus = 'You already submitted an appointment.';
-        $modalMessage1 = '*Please wait for processing and confirmation.*';
+        $modalMessage1 = '*Please allow 15 min to 30 min for processing and confirmation.*';
         $modalMessage = '*Kindly await an email notification for the confirmation of your appointment.*';
     }
     unset($_SESSION['appointment_status']);
@@ -54,15 +56,6 @@ while ($row = $result->fetch_assoc()) {
     $availableDates[] = $row['available_dates'];
 }
 
-// Fetch dates with 20 or more appointments
-// $disabledDatesQuery = "SELECT date FROM appointments GROUP BY date HAVING COUNT(*) >= 20 ";
-// $disabledDatesResult = $conn->query($disabledDatesQuery);
-
-// $disabledDates = [];
-// while ($row = $disabledDatesResult->fetch_assoc()) {
-//     $disabledDates[] = $row['date'];
-// }
-
 $query = "SELECT * FROM services";
 $stmt = $conn->prepare($query);
 $stmt->execute();
@@ -72,6 +65,16 @@ if ($serviceresult->num_rows > 0) {
     while ($rowService = $serviceresult->fetch_assoc()) {
         $serviceList[] = $rowService;
     }
+}
+
+$query = "SELECT * FROM appointments WHERE user_id = ? AND status = 'accepted' OR status = 'request'";
+$stmt = $conn->prepare($query);
+$stmt->bind_param("s", $user_id);
+$stmt->execute();
+$result = $stmt->get_result();
+
+if($dataFetch = $result->fetch_assoc()){
+  $showAptPreventMessage = true;
 }
 
 
@@ -150,6 +153,9 @@ if ($serviceresult->num_rows > 0) {
       <!-- appointment form -->
       <div class="appointment_form">
         <h1>Schedule fresh meeting</h1> 
+        <h1 id="aptPreventMessage" style="display: none; color:#e84531; font-size: 0.810rem;">
+          *You cannot book another appointment until your current accepted appointment is completed.*
+        </h1>
 
         <form action="../includes/appointment.inc.php" method="post" id="appointmentForm">
           <!-- Personal Details Section -->
@@ -279,6 +285,11 @@ if ($serviceresult->num_rows > 0) {
       const modalMessage1 = modalContainer.querySelector("#modalMessage1");
       const modalMessage = modalContainer.querySelector("#modalMessage");
       const appointmentDateSelect = document.getElementById('appointmentDate');
+      const aptPreventMessage = document.getElementById('aptPreventMessage');
+
+      <?php if($showAptPreventMessage):?>
+        aptPreventMessage.style.display = 'block'; 
+      <?php endif; ?>
 
       // Check if the modal should be displayed
       <?php if ($showModal) : ?>

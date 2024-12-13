@@ -31,6 +31,17 @@ $availableDates = [];
 while ($row = $result->fetch_assoc()) {
     $availableDates[] = $row['available_dates'];
 }
+
+$query = "SELECT * FROM services";
+$stmt = $conn->prepare($query);
+$stmt->execute();
+$serviceresult = $stmt->get_result();
+$serviceList = [];
+if ($serviceresult->num_rows > 0) {
+    while ($rowService = $serviceresult->fetch_assoc()) {
+        $serviceList[] = $rowService;
+    }
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -331,7 +342,7 @@ while ($row = $result->fetch_assoc()) {
                   <option value="-">Select doctor</option>
                   <?php foreach($onDutyDoctors as $onDutyDoctor) { ?>
                     <option value="<?php echo $onDutyDoctor['doctor_id']; ?>">
-                      Doc. <?php echo $onDutyDoctor['first_name'] . ' ' . $onDutyDoctor['last_name'] .' ('. $onDutyDoctor['availability'] . ')';?>
+                      Doc. <?php echo $onDutyDoctor['first_name'] . ' ' . $onDutyDoctor['last_name'];?>
                     </option>
                   <?php } ?>
                 </select>
@@ -346,39 +357,13 @@ while ($row = $result->fetch_assoc()) {
               <input type="button" value="Select service" class="services-btn" id="servicesBtn">
               <div class="selected-services" id="selectedServices"></div>
               <div class="appointment-form__checkbox-group">
-                <div class="checkbox-container">
-                    <input type="checkbox" id="cleaning" name="dentalService[]" value="teeth cleaning  ₱2,800">
-                    <label for="cleaning">Teeth Cleaning <span class="service-price">₱2,800</span></label>
-                </div>
-                <div class="checkbox-container">
-                    <input type="checkbox" id="whitening" name="dentalService[]" value="teeth whitening  ₱8,400">
-                    <label for="whitening">Teeth Whitening <span class="service-price">₱8,400</span></label>
-                </div>
-                <div class="checkbox-container">
-                    <input type="checkbox" id="extraction" name="dentalService[]" value="tooth extraction  ₱4,200">
-                    <label for="extraction">Tooth Extraction <span class="service-price">₱4,200</span></label>
-                </div>
-                <div class="checkbox-container">
-                    <input type="checkbox" id="filling" name="dentalService[]" value="dental filling  ₱6,700">
-                    <label for="filling">Dental Filling <span class="service-price">₱6,700</span></label>
-                </div>
-                <div class="checkbox-container">
-                    <input type="checkbox" id="checkup" name="dentalService[]" value="routine checkup-up ₱2,200">
-                    <label for="checkup">Routine Check-up <span class="service-price">₱2,200</span></label>
-                </div>
-                <div class="checkbox-container">
-                    <input type="checkbox" id="braces" name="dentalService[]" value="braces consultation  ₱5,600">
-                    <label for="braces">Braces Consultation <span class="service-price">₱5,600</span></label>
-                </div>
-                <div class="checkbox-container">
-                    <input type="checkbox" id="root_canal" name="dentalService[]" value="root canal treatment ₱16,800">
-                    <label for="root_canal">Root Canal Treatment <span class="service-price">₱16,800</span></label>
-                </div>
-                <div class="checkbox-container">
-                    <input type="checkbox" id="implants" name="dentalService[]" value="dental implants  ₱56,000">
-                    <label for="implants">Dental Implants <span class="service-price">₱56,000</span></label>
-                </div>
-            </div>
+              <?php foreach($serviceList as $serviceItem): ?>
+                  <div class="checkbox-container">
+                    <input type="checkbox" id="<?php echo $serviceItem['service_name'] ?>" name="dentalService[]" value="<?php echo $serviceItem['service_name'] ?>">
+                    <label for="<?php echo $serviceItem['service_name'] ?>"><?php echo $serviceItem['service_name'] ?><span class="service-price">₱<?php echo $serviceItem['service_price'] ?></span></label>
+                  </div>
+                  <?php endforeach; ?>   
+              </div>
             
             <div id="selectedServicesError" class="appointment-form__text--error" style="display: none; color: red; font-size: 14px; "></div>
               </div>
