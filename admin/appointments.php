@@ -185,7 +185,7 @@ if (isset($_SESSION['pending_appointment'])) {
 
                                 <?php foreach($onDutyDoctors as $onDutyDoctor) { ?>
                                     <option value="<?php echo $onDutyDoctor['doctor_id']; ?>">
-                                        Doc. <?php echo $onDutyDoctor['first_name'] . ' ' . $onDutyDoctor['last_name'] .' ('. $onDutyDoctor['availability'] . ')';?>
+                                        Doc. <?php echo $onDutyDoctor['first_name'] . ' ' . $onDutyDoctor['last_name'];?>
                                     </option>
                                 <?php } ?>
 

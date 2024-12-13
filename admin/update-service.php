@@ -1,3 +1,27 @@
+<?php 
+session_start();
+require_once '../includes/login_view.inc.php';
+require_once '../includes/dbh.inc.php';
+
+$service_id = $_GET['service_id'];
+
+$query = "SELECT * FROM services WHERE service_id = ?";
+$stmt = $conn->prepare($query);
+$stmt->bind_param("s", $service_id);
+$stmt->execute();
+
+$result = $stmt->get_result();
+
+$showModal = false;
+if (isset($_SESSION['service_updated'])) {
+    if ($_SESSION['service_updated'] === 'updated') {
+        $showModal = true;
+    }
+    unset($_SESSION['service_updated']);
+}
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -15,28 +39,31 @@
       <section class="admin__content">
         <!-- side bar -->
         <?php include("includes/side_nav.php"); ?>
-
+        <?php if($getServiceDet = $serviceRes = $result->fetch_assoc()): ?>
+        
         <div class="set-date-container">
-          <h1>Update Tooth Extraction Service</h1>
+          <h1>Update <?php echo $getServiceDet['service_name'] ?> Service</h1>
 
-          <form action="" method="post" id="">
+          <form action="includes/update_services.php" onsubmit="return validate()"  method="post">
+             <input type="hidden" name="service_id" value="<?php echo $getServiceDet['service_id'] ?>">
               <div class="field-group">
-                  <label for="dates">Update Service Name</label>
-                  <input type="text" id="serviceName" name="service-name" />
+                  <label for="serviceName">Update Service Name</label>
+                  <input type="text" id="serviceName" name="serviceName" value="<?php echo $getServiceDet['service_name'] ?>"/>
               </div>
 
               <div class="field-group">
                   <label for="servicePrice">Update Price</label>
-                  <input type="number" id="servicePrice" name="service-price" />
+                  <input type="text" id="servicePrice" name="servicePrice" value="<?php echo $getServiceDet['service_price'] ?>"/>
               </div>
+              <p id="form_error" style="color: red; font-size: 0.875rem;"></p>
               <button type="submit">Update Service</button>
-          </form>
-          
-        </div>
+            </form>
+          </div>
+          <?php endif; ?>
       </section>
 
       <!-- modal -->
-        <div class="modal">
+        <div class="modal" style="display: none;">
           <div class="modal__content">
             <div class="body-text">
               <div class="modal__header">
@@ -68,17 +95,46 @@
       document.addEventListener('DOMContentLoaded', () => {
         const modalContainer = document.querySelector(".modal");
         const exitBtn = modalContainer.querySelector("#exitButton");
-        const modalStatus = modalContainer.querySelector("#modalStatus");
 
         // Check if the modal should be displayed
-        <?php if ($showModal) : ?>
-        modalStatus.innerText = "<?php echo $modalStatus; ?>";
+        <?php  if ($showModal) : ?>
         modalContainer.style.display = "flex";
         <?php endif; ?>
         exitBtn.addEventListener("click", () => {
           modalContainer.style.transform = "scale(0)";
         });
       });
+
+      function validate(){
+
+      var serviceName = document.getElementById("serviceName"); 
+      var servicePrice = document.getElementById("servicePrice"); 
+      var form_error =  document.getElementById("form_error");
+
+      notValid = false;
+
+      const nameRegex = /^[A-Za-z ]+$/;
+      const currencyRegex = /^(?!0(\.00?)?$)(\d{1,3}(?:,\d{3})*(?:\.\d{2})?)$/;
+
+
+      if (serviceName.value == "" || servicePrice.value == "") {
+          form_error.innerHTML = "Please fill up the form";
+          form_error.style.display = "flex";
+          
+          return false; // prevent form submission
+        }
+        else if(!nameRegex.test(serviceName.value)){
+          form_error.innerHTML = "Invalid service name format"
+          form_error.style.display = "flex";
+          return false;
+        }
+        else if(!currencyRegex.test(servicePrice.value)){
+          form_error.innerHTML = "Invalid price format. Use Use 100 or 1,000 or 1,000.50"
+          form_error.style.display = "flex";
+          return false;
+        }
+      return true; // allow form submission if all checks pass
+      }
     </script>
   </body>
   

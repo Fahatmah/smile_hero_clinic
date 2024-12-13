@@ -1,3 +1,23 @@
+<?php 
+session_start();
+require_once '../includes/login_view.inc.php';
+require_once '../includes/dbh.inc.php';
+
+if (!isset($_SESSION['adminID'])) {
+  header("Location: ../login.php?login=failed");
+  exit();
+}
+
+$showModal = false;
+if (isset($_SESSION['service_added'])) {
+    if ($_SESSION['service_added'] === 'added') {
+        $showModal = true;
+    }
+    unset($_SESSION['service_added']);
+}
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -19,28 +39,29 @@
         <div class="set-date-container">
           <h1>Add Service</h1>
 
-          <form action="" method="post" id="">
+          <form action="includes/add_new_services.php" onsubmit="return validate()" method="post">
               <div class="field-group">
-                  <label for="dates">Enter Service Name</label>
-                  <input type="text" id="serviceName" name="service-name" placeholder="Service Name here..." required="true" />
+                  <label for="serviceName">Enter Service Name</label>
+                  <input type="text" id="serviceName" name="serviceName" placeholder="Service Name here..." />
               </div>
 
               <div class="field-group">
                   <label for="servicePrice">Set Price</label>
-                  <input type="number" id="servicePrice" name="service-price" placeholder="Enter the service price" required="true" />
+                  <input type="text" id="servicePrice" name="servicePrice" placeholder="Enter the service price" />
               </div>
+              <p id="form_error" style="color: red; font-size: 0.875rem;"></p>
               <button type="submit">Add New Service</button>
           </form>
 
           <!-- modal -->
-        <div class="modal" style="display: none">
+        <div class="modal" style="display: none;">
           <div class="modal__content">
             <div class="body-text">
               <div class="modal__header">
                 <h3 id="modalStatus" class="modal__status">
                   New Service Added
                 </h3>
-                <p id="modalMessage" class="modal__message">
+                <p class="modal__message">
                   <a href="services.php">
                     View Services
                     <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -68,17 +89,46 @@
       document.addEventListener('DOMContentLoaded', () => {
         const modalContainer = document.querySelector(".modal");
         const exitBtn = modalContainer.querySelector("#exitButton");
-        const modalStatus = modalContainer.querySelector("#modalStatus");
 
         // Check if the modal should be displayed
         <?php if ($showModal) : ?>
-        modalStatus.innerText = "<?php echo $modalStatus; ?>";
         modalContainer.style.display = "flex";
         <?php endif; ?>
         exitBtn.addEventListener("click", () => {
           modalContainer.style.transform = "scale(0)";
         });
       });
+
+      function validate(){
+
+      var serviceName = document.getElementById("serviceName"); 
+      var servicePrice = document.getElementById("servicePrice"); 
+      var form_error =  document.getElementById("form_error");
+
+      notValid = false;
+
+      const nameRegex = /^[A-Za-z ]+$/;
+      const currencyRegex = /^(?!0(\.00?)?$)(\d{1,3}(?:,\d{3})*(?:\.\d{2})?)$/;
+
+
+      if (serviceName.value == "" || servicePrice.value == "") {
+          form_error.innerHTML = "Please fill up the form";
+          form_error.style.display = "flex";
+          
+          return false; // prevent form submission
+        }
+        else if(!nameRegex.test(serviceName.value)){
+          form_error.innerHTML = "Invalid service name format"
+          form_error.style.display = "flex";
+          return false;
+        }
+        else if(!currencyRegex.test(servicePrice.value)){
+          form_error.innerHTML = "Invalid price format. Use Use 100 or 1,000 or 1,000.50"
+          form_error.style.display = "flex";
+          return false;
+        }
+      return true; // allow form submission if all checks pass
+      }
     </script>
   </body>
   
