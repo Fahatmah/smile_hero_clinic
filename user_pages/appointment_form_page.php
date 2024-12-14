@@ -67,6 +67,7 @@ if ($serviceresult->num_rows > 0) {
     }
 }
 
+$showAptPreventMessage = false;
 $query = "SELECT * FROM appointments WHERE user_id = ? AND status = 'accepted' OR status = 'request'";
 $stmt = $conn->prepare($query);
 $stmt->bind_param("s", $user_id);
@@ -153,7 +154,10 @@ if($dataFetch = $result->fetch_assoc()){
       <!-- appointment form -->
       <div class="appointment_form">
         <h1>Schedule fresh meeting</h1> 
-        <h1 id="aptPreventMessage" style="display: none; color:#e84531; font-size: 0.810rem;">
+        <h1 id="aptPreventMessage" 
+             style="display: <?php echo $showAptPreventMessage ? 'block' : 'none'; ?>;  
+                  color:#e84531; 
+                  font-size: 0.810rem;">
           *You cannot book another appointment until your current accepted appointment is completed.*
         </h1>
 
@@ -286,10 +290,6 @@ if($dataFetch = $result->fetch_assoc()){
       const modalMessage = modalContainer.querySelector("#modalMessage");
       const appointmentDateSelect = document.getElementById('appointmentDate');
       const aptPreventMessage = document.getElementById('aptPreventMessage');
-
-      <?php if($showAptPreventMessage):?>
-        aptPreventMessage.style.display = 'block'; 
-      <?php endif; ?>
 
       // Check if the modal should be displayed
       <?php if ($showModal) : ?>

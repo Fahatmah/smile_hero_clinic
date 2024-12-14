@@ -15,27 +15,13 @@ if(!isset($_SESSION['user_id'])) {
 
 $user_id = $_SESSION['user_id'];
 
-  // Fetch appointments for the user
-  $query = "SELECT * FROM appointments WHERE user_id = ? AND status != 'request' ORDER BY created_at DESC";
-  $stmt = $conn->prepare($query);
-  $stmt->bind_param("s", $user_id);
-  $stmt->execute();
-  $result = $stmt->get_result();
-  $users = [];
-  if ($result->num_rows > 0) {
-      while ($row = $result->fetch_assoc()) {
-          $users[] = $row;
-      }
-  }
-  $stmt->close();
-
 // Pagination setup
 $limit = 10; // Number of entries to show per page
 $page = isset($_GET['page']) ? (int)$_GET['page'] : 1; // Current page number
 $start = ($page - 1) * $limit; // Calculate the starting row for the query
 
 // Get total number of completed appointments for pagination
-$totalQuery = "SELECT COUNT(*) AS total FROM appointments WHERE user_id = ? AND status != 'request'";
+$totalQuery = "SELECT COUNT(*) AS total FROM appointments WHERE user_id = ? AND status != 'request' AND status != 'accepted'";
 $stmt = $conn->prepare($totalQuery);
 $stmt->bind_param("s", $user_id);
 $stmt->execute();
@@ -48,7 +34,7 @@ $stmt->close();
 $totalPages = ceil($totalRecords / $limit);
 
 // Fetch appointments for the current page
-$query = "SELECT * FROM appointments WHERE user_id = ? AND status != 'request' ORDER BY created_at DESC LIMIT ?, ?";
+$query = "SELECT * FROM appointments WHERE user_id = ? AND status != 'request' AND status != 'accepted' ORDER BY created_at DESC LIMIT ?, ?";
 $stmt = $conn->prepare($query);
 $stmt->bind_param("sii", $user_id, $start, $limit);
 $stmt->execute();

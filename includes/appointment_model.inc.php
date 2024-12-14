@@ -48,7 +48,7 @@ function isTimeReachedLimit(mysqli $conn, string $appointmentDate, string $appoi
 
     $timeLimit = (int) $row['timeLimit'];
 
-    return $timeLimit >= 5;
+    return $timeLimit >= 1;
 }
 
 function isDateReachedLimit(mysqli $conn, string $appointmentDate){
@@ -62,5 +62,5 @@ function isDateReachedLimit(mysqli $conn, string $appointmentDate){
 
     $dateLimit = (int) $row['dateLimit'];
 
-    return $dateLimit >= 40;
+    return $dateLimit >= 8;
 }

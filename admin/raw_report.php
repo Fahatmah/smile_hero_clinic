@@ -9,15 +9,27 @@ if (!isset($_SESSION['adminID'])) {
     exit();
 }
 
+$query = "SELECT * FROM services";
+$stmt = $conn->prepare($query);
+$stmt->execute();
+$serviceresult = $stmt->get_result();
+$serviceList = [];
+if ($serviceresult->num_rows > 0) {
+    while ($rowService = $serviceresult->fetch_assoc()) {
+        $serviceList[] = $rowService;
+    }
+}
+
 $datesStore = [];
 $fromDate = $toDate = '';
-$status = $labels = [];
+$status = $labels = $services = [];
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['filter'])) {
     $fromDate = $_POST['fromDate'] ?? '';
     $toDate = $_POST['toDate'] ?? '';
     $status = $_POST['status'] ?? [];
     $labels = $_POST['label'] ?? [];
+    $services = $_POST['service'] ?? [];
 
     if (!empty($fromDate) && !empty($toDate)) {
         $query = "SELECT * FROM appointments WHERE date BETWEEN ? AND ?";
@@ -38,12 +50,23 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['filter'])) {
             $types .= str_repeat('s', count(value: $labels));
         }
 
+        if (!empty($services)) {
+          $serviceConditions = [];
+          foreach ($services as $service) {
+              $serviceConditions[] = "service LIKE ?";
+              $params[] = "%$service%";
+              $types .= 's';
+          }
+          $query .= " AND (" . implode(" OR ", $serviceConditions) . ")";
+        }
+
         $stmt = $conn->prepare($query);
         if ($stmt) {
             $stmt->bind_param($types, ...$params);
             $stmt->execute();
             $result = $stmt->get_result();
             $datesStore = $result->fetch_all(MYSQLI_ASSOC);
+            $totalResults = count($datesStore);
             $stmt->close();
         } else {
             echo "<script> alert('Error preparing the query: " . htmlspecialchars(json_encode($conn->error), ENT_QUOTES, 'UTF-8') . "'); </script>";
@@ -162,40 +185,19 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['filter'])) {
         </div>
 
         <!-- service -->
-        <!-- <div class="service-container">
+        <div class="service-container">
           <p class="field-header">Select service of appointment <span>*</span></p>
           <div class="form-field">
             <label for="status">Status</label>
             <div class="checkboxes-container">
+            <?php foreach($serviceList as $serviceItem): ?>
               <div class="checkbox">
-                <input type="checkbox" name="service[]" value="teeth cleaning" <?php // echo in_array('teeth cleaning', $service) ? 'checked' : ''; ?>> <p>Teeth Cleaning</p>
+                <input type="checkbox" name="service[]" value="<?php echo htmlspecialchars($serviceItem['service_name']) ?>" <?php echo in_array($serviceItem['service_name'], $services) ? 'checked' : ''; ?>> <p><?php echo $serviceItem['service_name'] ?></p>
               </div>
-              <div class="checkbox">
-                <input type="checkbox" name="service[]" value="teeth whitening" <?php // echo in_array('teeth whitening', $service) ? 'checked' : ''; ?>> <p>Teeth Whitening</p>
-              </div>
-              <div class="checkbox">
-                <input type="checkbox" name="service[]" value="tooth extraction" <?php // echo in_array('tooth extraction', $service) ? 'checked' : ''; ?>> <p>Tooth Extraction</p>
-              </div>
-              <div class="checkbox">
-                <input type="checkbox" name="service[]" value="dental feeling" <?php // echo in_array('dental feeling', $service) ? 'checked' : ''; ?>> <p>Dental Feeling</p>
-              </div>
-              <div class="checkbox">
-                <input type="checkbox" name="service[]" value="routine checkup" <?php // echo in_array('routine checkup', $service) ? 'checked' : ''; ?>> <p>Routine Checkup</p>
-              </div>
-              <div class="checkbox">
-                <input type="checkbox" name="service[]" value="braces consultation" <?php // echo in_array('braces consultation', $service) ? 'checked' : ''; ?>> <p>Braces Consultation</p>
-              </div>
-
-              <div class="checkbox">
-                <input type="checkbox" name="service[]" value="root canal treatment" <?php // echo in_array('root canal treatment', $service) ? 'checked' : ''; ?>> <p>Root Canal Treatment</p>
-              </div>
-
-              <div class="checkbox">
-                <input type="checkbox" name="service[]" value="dental implants" <?php // echo in_array('dental implants', $service) ? 'checked' : ''; ?>> <p>Dental Implants</p>
-              </div>
+            <?php endforeach; ?>   
             </div>
           </div>
-        </div> -->
+        </div>
         
         <input type="submit" name="filter" value="Filter" class="form-button">
       </form>
@@ -210,7 +212,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['filter'])) {
           <div class="header-container">
             <div class="table-heading-container">
               <div class="header-text">Filter Results
-                <span class="number-results">18</span>
+                <span class="number-results"><?php echo $totalResults; ?></span>
               </div>
               <?php include("includes/search.php"); ?>
             </div>

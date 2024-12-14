@@ -34,7 +34,7 @@ if($_SERVER["REQUEST_METHOD"] === "POST"){
         $user_id = $result['user_id'];
         $label =  $result['label'];
     }else{
-        $user_id = "walk-in";
+        $user_id = generateWalkInID($conn);
         $label = "walk-in";
       
         disableForeignKeyChecks($conn);
@@ -93,6 +93,24 @@ if($_SERVER["REQUEST_METHOD"] === "POST"){
         while (!$unique) {
             $randString = strval(mt_rand());
             $appointmentID = 'SHC' . substr(md5(uniqid($randString, true)), 0, 4);
+            $query = "SELECT appointment_id FROM appointments WHERE appointment_id = ?";
+            $stmt = $conn->prepare($query);
+            $stmt->bind_param('s', $appointmentID);
+            $stmt->execute();
+            $stmt->store_result();
+            if ($stmt->num_rows === 0) {
+                $unique = true;
+            }
+        }
+        return $appointmentID;
+    }
+
+    function generateWalkInID(mysqli $conn) {
+        $unique = false;
+        $appointmentID = '';
+        while (!$unique) {
+            $randString = strval(mt_rand());
+            $appointmentID = 'SHC' . substr(md5(uniqid($randString, true)), 0, 4) . 'TCU';
             $query = "SELECT appointment_id FROM appointments WHERE appointment_id = ?";
             $stmt = $conn->prepare($query);
             $stmt->bind_param('s', $appointmentID);
