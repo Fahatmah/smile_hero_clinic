@@ -5,11 +5,12 @@
     header {
       .container {
         max-width: 80rem;
-        @include display-flex($dir: column, $gap: 2rem, $y: flex-start);
+        @include display-flex($dir: column, $gap: 2rem);
         padding: 2rem;
 
         .texts-container {
-          width: 100%;
+          width: 100% !important;
+          padding: 0 !important;
 
           & > * {
             width: 100%;
@@ -24,24 +25,25 @@
             justify-content: flex-start;
 
             .list-column {
+              width: 100%;
               @include display-flex($gap: 1rem, $dir: column, $y: flex-start);
 
               li {
                 width: 100%;
-                max-width: 20rem;
+                // max-width: 20rem;
                 @include display-flex($gap: 1rem, $x: flex-start);
                 border-radius: 0.5rem;
                 padding: 1rem;
-                outline: 1px solid var(--pr-clr-300);
-                background-color: #f0f3f9;
+                outline: 1px solid var(--pr-clr-350);
+                background-color: var(--ntrl-clr-100);
               }
             }
           }
         }
 
-        .image-container {
-          width: 50rem; // 800px
-        }
+        // .image-container {
+        //   width: 50rem; // 800px
+        // }
       }
     }
   }
@@ -54,6 +56,17 @@
         .container {
           flex-direction: row;
           padding-inline: 0;
+
+          .texts-container {
+            .paragraph-text {
+              .list-column {
+                width: unset;
+                li {
+                  width: 20rem;
+                }
+              }
+            }
+          }
         }
       }
     }

@@ -86,11 +86,18 @@
         </a>
       </li> -->
 
+      <li <?php echo ($current_page == 'edit-user-homepage.php') ? 'class="active__link"' : ''; ?>>
+        <a href="../admin/edit-user-homepage.php">
+          User Homepage
+        </a>
+      </li>
+      
       <li <?php echo ($current_page == 'settings.php') ? 'class="active__link"' : ''; ?>>
         <a href="../admin/settings.php">
           Settings
         </a>
       </li>
+
     </ul>
     <!-- logout button -->
     <button id="logout_button">

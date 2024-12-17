@@ -264,17 +264,22 @@
 
       .appointment-form__field {
         #servicesBtn {
-          pointer-events: none;
+          // pointer-events: none;
         }
         .appointment-form__checkbox-group {
-          position: initial;
+          position: initial !important;
           width: 100%;
+          height: 0;
           // top: 0;
           // bottom: -16rem;
           right: 0;
           // align-items: flex-end;
           justify-content: flex-start;
-          transform-origin: top left;
+          transform-origin: unset;
+
+          &.active {
+            height: initial;
+          }
         }
       }
     }
