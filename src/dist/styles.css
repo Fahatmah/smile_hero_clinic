@@ -7797,4 +7797,50 @@ body.user-homepage main .about .services .appointment__button:hover {
 }
 .admin__content .edit-user-homepage-container form button:hover {
   background-color: var(--pr-clr-350);
+}
+
+.admin__content .edit-user-homepage-container {
+  width: 100%;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  flex-direction: column;
+  gap: 1.2rem;
+  border-radius: 1rem;
+  padding: 1rem;
+  color: var(--ntrl-clr-300);
+  letter-spacing: -1px;
+  background-color: var(--ntrl-clr-100);
+}
+.admin__content .edit-user-homepage-container h1 {
+  font-size: 1.8rem;
+  font-weight: 600;
+  color: var(--pr-clr-300);
+}
+.admin__content .edit-user-homepage-container .links-container {
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  flex-direction: column;
+  gap: 0;
+  width: 100%;
+}
+.admin__content .edit-user-homepage-container .links-container .link-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-direction: row;
+  gap: 0;
+  width: 100%;
+  color: var(--ntrl-clr-300);
+  padding: 1.2rem;
+  transition: 200ms ease-in-out;
+}
+.admin__content .edit-user-homepage-container .links-container .link-item:not(:last-child) {
+  border-bottom: 1px solid hsla(0, 0%, 38%, 0.3);
+}
+.admin__content .edit-user-homepage-container .links-container .link-item:hover {
+  color: var(--pr-clr-300);
+  border-color: var(--pr-clr-300);
+  background-color: hsla(216, 100%, 68%, 0.1);
 }/*# sourceMappingURL=styles.css.map */

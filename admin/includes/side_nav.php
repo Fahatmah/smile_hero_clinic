@@ -86,9 +86,9 @@
         </a>
       </li> -->
 
-      <li <?php echo ($current_page == 'edit-user-homepage.php') ? 'class="active__link"' : ''; ?>>
-        <a href="../admin/edit-user-homepage.php">
-          User Homepage
+      <li <?php echo ($current_page == 'manage-contents.php') ? 'class="active__link"' : ''; ?>>
+        <a href="../admin/manage-contents.php">
+          Manage Contents
         </a>
       </li>
       
