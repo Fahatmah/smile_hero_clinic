@@ -100,9 +100,39 @@ if (!isset($_SESSION['adminID'])) {
               <button type="submit" id="updateBtn">Update User Homepage</button>
           </form>
         </div>
+        <!-- modal -->
+        <div class="modal" style="display: flex;">
+          <div class="modal__content">
+            <div class="body-text">
+              <div class="modal__header">
+                <h3 id="modalStatus" class="modal__status">
+                  User Homepage Updated
+                </h3>
+              </div>
+              <button type="button" id="exitButton" class="modal__button">
+                okay, got it!
+              </button>
+            </div>
+            <div class="illustration__container">
+              <img src="../assets/admin_assets/update-content.svg" alt="illustration of updated content">
+            </div>
+          </div>
+        </div>
       </section>
     </main>
     <script>
+      document.addEventListener('DOMContentLoaded', () => {
+        const modalContainer = document.querySelector(".modal");
+        const exitBtn = modalContainer.querySelector("#exitButton");
+
+        // Check if the modal should be displayed
+        // <?php   //if ($showModal) : ?>
+        modalContainer.style.display = "flex";
+        // <?php // endif; ?>
+        exitBtn.addEventListener("click", () => {
+          modalContainer.style.transform = "scale(0)";
+        });
+      });
       // Simulated initial list of services (hardcoded for now)
       const initialServices = [
           "Routine dental check-ups and cleanings",
