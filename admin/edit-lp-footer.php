@@ -10,6 +10,19 @@ if (!isset($_SESSION['adminID'])) {
   exit();
 }
 
+$showModal = false;
+if (isset( $_SESSION['footer_update'])) {
+    if ( $_SESSION['footer_update'] === 'success') {
+        $showModal = true;
+    }
+    unset( $_SESSION['footer_update']);
+}
+
+$query = "SELECT * FROM footer";
+$stmt = $conn->prepare($query);
+$stmt->execute();
+
+$result = $stmt->get_result();
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -33,9 +46,11 @@ if (!isset($_SESSION['adminID'])) {
 
         <div class="edit-user-homepage-container">
           <h1>Edit Footer Component</h1>
+          
 
-          <form action="" method="post">
+          <form action="includes/edit-lp-footer.inc.php" method="post">
               <!-- header title 1 -->
+        <?php if($dataFetch = $result->fetch_assoc()): ?>
               <div class="field-group">
                   <label for="title1">Header Title 1</label>
                   <!-- 
@@ -44,56 +59,56 @@ if (!isset($_SESSION['adminID'])) {
                       nung sa user apt form, already filled
                       with their name, contact and email
                   -->
-                  <input type="text" id="title1" name="title1" value="Contact Us"/>
+                  <input type="text" id="title1" name="title1" value="<?php echo $dataFetch['title_one']?>"/>
               </div>
 
               <!-- header title 2 -->
               <div class="field-group">
                   <label for="title2">Header Title 2</label>
-                  <input type="text" id="title2" name="title2" value="Ready for a new smile?"/>
+                  <input type="text" id="title2" name="title2" value="<?php echo $dataFetch['title_two']?>"/>
               </div>
               
               <!-- number -->
               <div class="field-group">
                 <label for="number">Contact Number</label>
-                <input type="tel" id="number" name="number" value="09171606212"/>
+                <input type="tel" id="number" name="number" value="<?php echo $dataFetch['contact']?>"/>
               </div>
 
               <!-- email -->
               <div class="field-group">
                 <label for="email">Email Address</label>
-                <input type="email" id="email" name="email" value="smilehero@gmail.com"/>
+                <input type="email" id="email" name="email" value="<?php echo $dataFetch['email']?>"/>
               </div>
 
               <!-- socmedname -->
               <div class="field-group">
                 <label for="socmedname">Facebook Account Name</label>
-                <input type="text" id="socmedname" name="socmedname" value="Smile Hero Dental Clinic"/>
+                <input type="text" id="socmedname" name="socmedname" value="<?php echo $dataFetch['socmedname']?>"/>
               </div>
 
               <!-- socmedlink -->
               <div class="field-group">
                 <label for="socmedlink">Facebook Account Link</label>
-                <input type="text" id="socmedlink" name="socmedlink" value="https://www.facebook.com/BayaniRoadSmileHeroDentalClinic"/>
+                <input type="text" id="socmedlink" name="socmedlink" value="<?php echo $dataFetch['socmedlink']?>"/>
               </div>
 
               <!-- address -->
               <div class="field-group">
                 <label for="address">Clinic Address</label>
-                <input type="text" id="address" name="address" value="Ground Floor Amber Place, #67 Bayani Road, Western Bicutan, Fort Bonifacio, Taguig, Philippines"/>
+                <input type="text" id="address" name="address" value="<?php echo $dataFetch['address']?>"/>
               </div>
 
               <div class="other-branch-container" style="width: 100%; display: flex; gap: 0.5rem">
                 <!-- otherbranch 1 -->
                 <div class="field-group" style="width: 20rem">
                   <label for="otherbranch1">Other Branch 1 - Barangay Name</label>
-                  <input type="text" id="otherbranch1" name="otherbranch1" value="North Signal"/>
+                  <input type="text" id="otherbranch1" name="otherbranch1" value="<?php echo $dataFetch['otherbranch_one']?>"/>
                 </div>
                 
                 <!-- otherbranch 1 link -->
                 <div class="field-group">
                   <label for="otherbranch1link">Other Branch 1 - Full Address/Google Map</label>
-                  <input type="text" id="otherbranch1link" name="otherbranch1link" value="Ground Floor Amber Place, #67 Bayani Road, Western Bicutan, Fort Bonifacio, Taguig, Philippines"/>
+                  <input type="text" id="otherbranch1link" name="otherbranch1link" value="<?php echo $dataFetch['otherbranch_one_link']?>"/>
                 </div>
               </div>
 
@@ -101,22 +116,22 @@ if (!isset($_SESSION['adminID'])) {
                 <!-- otherbranch 2 -->
                 <div class="field-group" style="width: 20rem">
                   <label for="otherbranch2">Other Branch 2 - Barangay Name</label>
-                  <input type="text" id="otherbranch2" name="otherbranch2" value="Pinagsama"/>
+                  <input type="text" id="otherbranch2" name="otherbranch2" value="<?php echo $dataFetch['otherbranch_two']?>"/>
                 </div>
                 
                 <!-- otherbranch 2 link -->
                 <div class="field-group">
                   <label for="otherbranch2link">Other Branch 2 - Full Address/Google Map</label>
-                  <input type="text" id="otherbranch2link" name="otherbranch2link" value="Ground Floor Amber Place, #67 Bayani Road, Western Bicutan, Fort Bonifacio, Taguig, Philippines"/>
+                  <input type="text" id="otherbranch2link" name="otherbranch2link" value="<?php echo $dataFetch['otherbranch_two_link']?>"/>
                 </div>
               </div>
               
               <!-- paragraph -->
               <div class="field-group">
                   <label for="paragraph">Paragraph</label>
-                  <textarea name="paragraph" id="paragraph">Stay connected on our social media for updates on appointments, monthly adjustments, and checkups at our dental clinic.</textarea>
+                  <textarea name="paragraph" id="paragraph"><?php echo $dataFetch['paragraph']?></textarea>
               </div>
-
+            <?php endif; ?>
               <button type="submit" id="updateBtn">Update Footer Component</button>
           </form>
         </div>
@@ -142,17 +157,19 @@ if (!isset($_SESSION['adminID'])) {
     </main>
     <script>
       document.addEventListener('DOMContentLoaded', () => {
-        const modalContainer = document.querySelector(".modal");
-        const exitBtn = modalContainer.querySelector("#exitButton");
+  const modalContainer = document.querySelector(".modal");
+  const exitBtn = modalContainer.querySelector("#exitButton");
 
-        // Check if the modal should be displayed
-        // <?php   //if ($showModal) : ?>
-        modalContainer.style.display = "flex";
-        // <?php // endif; ?>
-        exitBtn.addEventListener("click", () => {
-          modalContainer.style.transform = "scale(0)";
-        });
+      // Check if the modal should be displayed
+      <?php if ($showModal): ?>
+      modalContainer.style.display = "flex"; // Display the modal when $showModal is true
+      <?php endif; ?>
+
+      exitBtn.addEventListener("click", () => {
+        modalContainer.style.display = "none"; // Hide the modal on button click
       });
+    });
+
     </script>
   </body>
 </html>
