@@ -7798,6 +7798,28 @@ body.user-homepage main .about .services .appointment__button:hover {
 .admin__content .edit-user-homepage-container form button:hover {
   background-color: var(--pr-clr-350);
 }
+.admin__content .edit-user-homepage-container form [class*=container] {
+  width: 100%;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin-block-end: 0.5rem;
+}
+.admin__content .edit-user-homepage-container form [class*=container] .title {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: var(--pr-clr-100);
+}
+.admin__content .edit-user-homepage-container form [class*=container][class*=container] {
+  width: 100%;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  flex-direction: column;
+  gap: 0.5rem;
+}
 
 .admin__content .edit-user-homepage-container {
   width: 100%;

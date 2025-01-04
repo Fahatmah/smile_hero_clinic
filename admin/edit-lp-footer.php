@@ -49,80 +49,95 @@ $result = $stmt->get_result();
           
 
           <form action="includes/edit-lp-footer.inc.php" method="post">
-              <!-- header title 1 -->
-        <?php if($dataFetch = $result->fetch_assoc()): ?>
-              <div class="field-group">
-                  <label for="title1">Header Title 1</label>
-                  <!-- 
-                      jp, pakilagay mo na lang current title 
-                      as well as to other input fields gaya 
-                      nung sa user apt form, already filled
-                      with their name, contact and email
-                  -->
-                  <input type="text" id="title1" name="title1" value="<?php echo $dataFetch['title_one']?>"/>
-              </div>
-
-              <!-- header title 2 -->
-              <div class="field-group">
-                  <label for="title2">Header Title 2</label>
-                  <input type="text" id="title2" name="title2" value="<?php echo $dataFetch['title_two']?>"/>
-              </div>
-              
-              <!-- number -->
-              <div class="field-group">
-                <label for="number">Contact Number</label>
-                <input type="tel" id="number" name="number" value="<?php echo $dataFetch['contact']?>"/>
-              </div>
-
-              <!-- email -->
-              <div class="field-group">
-                <label for="email">Email Address</label>
-                <input type="email" id="email" name="email" value="<?php echo $dataFetch['email']?>"/>
-              </div>
-
-              <!-- socmedname -->
-              <div class="field-group">
-                <label for="socmedname">Facebook Account Name</label>
-                <input type="text" id="socmedname" name="socmedname" value="<?php echo $dataFetch['socmedname']?>"/>
-              </div>
-
-              <!-- socmedlink -->
-              <div class="field-group">
-                <label for="socmedlink">Facebook Account Link</label>
-                <input type="text" id="socmedlink" name="socmedlink" value="<?php echo $dataFetch['socmedlink']?>"/>
-              </div>
-
-              <!-- address -->
-              <div class="field-group">
-                <label for="address">Clinic Address</label>
-                <input type="text" id="address" name="address" value="<?php echo $dataFetch['address']?>"/>
-              </div>
-
-              <div class="other-branch-container" style="width: 100%; display: flex; gap: 0.5rem">
-                <!-- otherbranch 1 -->
-                <div class="field-group" style="width: 20rem">
-                  <label for="otherbranch1">Other Branch 1 - Barangay Name</label>
-                  <input type="text" id="otherbranch1" name="otherbranch1" value="<?php echo $dataFetch['otherbranch_one']?>"/>
-                </div>
+            <?php if($dataFetch = $result->fetch_assoc()): ?>
+              <div class="headers-container">
+                <p class="title">Headers</p>
                 
-                <!-- otherbranch 1 link -->
-                <div class="field-group">
-                  <label for="otherbranch1link">Other Branch 1 - Full Address/Google Map</label>
-                  <input type="text" id="otherbranch1link" name="otherbranch1link" value="<?php echo $dataFetch['otherbranch_one_link']?>"/>
+                <div class="container">
+                  <!-- header title 1 -->
+                  <div class="field-group">
+                    <label for="title1">Header Title 1</label>
+                    <input type="text" id="title1" name="title1" value="<?php echo $dataFetch['title_one']?>"/>
+                  </div>
+
+                  <!-- header title 2 -->
+                  <div class="field-group">
+                    <label for="title2">Header Title 2</label>
+                    <input type="text" id="title2" name="title2" value="<?php echo $dataFetch['title_two']?>"/>
+                  </div>
+                </div>
+              </div>
+                
+              <div class="contacts-container">
+                <p class="title">Contact Information</p>
+
+                <div class="container">
+                  <!-- number -->
+                  <div class="field-group">
+                    <label for="number">Contact Number</label>
+                    <input type="tel" id="number" name="number" value="<?php echo $dataFetch['contact']?>"/>
+                  </div>
+                  
+                  <!-- email -->
+                  <div class="field-group">
+                    <label for="email">Email Address</label>
+                    <input type="email" id="email" name="email" value="<?php echo $dataFetch['email']?>"/>
+                  </div>
+                  
+                  <!-- socmedname -->
+                  <div class="field-group">
+                    <label for="socmedname">Facebook Account Name</label>
+                    <input type="text" id="socmedname" name="socmedname" value="<?php echo $dataFetch['socmedname']?>"/>
+                  </div>
+
+                  <!-- socmedlink -->
+                  <div class="field-group">
+                    <label for="socmedlink">Facebook Account Link</label>
+                    <input type="text" id="socmedlink" name="socmedlink" value="<?php echo $dataFetch['socmedlink']?>"/>
+                  </div>
                 </div>
               </div>
 
-              <div class="other-branch-container" style="width: 100%; display: flex; gap: 0.5rem">
-                <!-- otherbranch 2 -->
-                <div class="field-group" style="width: 20rem">
-                  <label for="otherbranch2">Other Branch 2 - Barangay Name</label>
-                  <input type="text" id="otherbranch2" name="otherbranch2" value="<?php echo $dataFetch['otherbranch_two']?>"/>
-                </div>
-                
-                <!-- otherbranch 2 link -->
-                <div class="field-group">
-                  <label for="otherbranch2link">Other Branch 2 - Full Address/Google Map</label>
-                  <input type="text" id="otherbranch2link" name="otherbranch2link" value="<?php echo $dataFetch['otherbranch_two_link']?>"/>
+              <div class="address-container">
+
+                <p class="title">Address</p>
+
+                <div class="container">
+
+                  
+                  <!-- address -->
+                  <div class="field-group">
+                    <label for="address">Clinic Address</label>
+                    <input type="text" id="address" name="address" value="<?php echo $dataFetch['address']?>"/>
+                  </div>
+                  
+                  <div class="other-branch-container" style="width: 100%; display: flex; gap: 0.5rem">
+                    <!-- otherbranch 1 -->
+                    <div class="field-group" style="width: 20rem">
+                      <label for="otherbranch1">Other Branch 1 - Barangay Name</label>
+                      <input type="text" id="otherbranch1" name="otherbranch1" value="<?php echo $dataFetch['otherbranch_one']?>"/>
+                    </div>
+                    
+                    <!-- otherbranch 1 link -->
+                    <div class="field-group">
+                      <label for="otherbranch1link">Other Branch 1 - Full Address/Google Map</label>
+                      <input type="text" id="otherbranch1link" name="otherbranch1link" value="<?php echo $dataFetch['otherbranch_one_link']?>"/>
+                    </div>
+                  </div>
+                  
+                  <div class="other-branch-container" style="width: 100%; display: flex; gap: 0.5rem">
+                    <!-- otherbranch 2 -->
+                    <div class="field-group" style="width: 20rem">
+                      <label for="otherbranch2">Other Branch 2 - Barangay Name</label>
+                      <input type="text" id="otherbranch2" name="otherbranch2" value="<?php echo $dataFetch['otherbranch_two']?>"/>
+                    </div>
+                    
+                    <!-- otherbranch 2 link -->
+                    <div class="field-group">
+                      <label for="otherbranch2link">Other Branch 2 - Full Address/Google Map</label>
+                      <input type="text" id="otherbranch2link" name="otherbranch2link" value="<?php echo $dataFetch['otherbranch_two_link']?>"/>
+                    </div>
+                  </div>
                 </div>
               </div>
               
