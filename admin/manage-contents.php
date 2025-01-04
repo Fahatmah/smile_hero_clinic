@@ -46,7 +46,7 @@ if (!isset($_SESSION['adminID'])) {
               <a href="edit-lp-about.php" class="link-item">
                 <p class="page-title">
                   <span class="header">About Page</span>
-                  Modify the 'About Us' section of the landing page to reflect accurate and engaging information.
+                  Update information about your clinic such as address and clinic name.
                 </p>
                 
                 <img src="../assets/admin_assets/icons/arrow-right.svg" alt="arrow right icon">
@@ -55,7 +55,7 @@ if (!isset($_SESSION['adminID'])) {
               <a href="edit-lp-services.php" class="link-item">
                 <p class="page-title">
                   <span class="header">Services Page</span>
-                  Add, remove, or update the services offered, showcased on the services page.
+                  Edit the services offered, showcased on the services page.
                 </p>
                 
                 <img src="../assets/admin_assets/icons/arrow-right.svg" alt="arrow right icon">

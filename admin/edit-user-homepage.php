@@ -91,6 +91,7 @@ if (!isset($_SESSION['adminID'])) {
               <div class="field-group">
                   <label for="homepage-image">Upload Homepage Image</label>
                   <input type="file" id="homepage-image" accept="image/*" />
+                  <small id="error-message" style="color: red; display: none;">File must be less than 2MB</small>
                   
                   <div class="image-preview" id="image-preview">
                       <p>No image uploaded</p>
@@ -101,7 +102,7 @@ if (!isset($_SESSION['adminID'])) {
           </form>
         </div>
         <!-- modal -->
-        <div class="modal" style="display: flex;">
+        <div class="modal" style="display: none;">
           <div class="modal__content">
             <div class="body-text">
               <div class="modal__header">
@@ -120,15 +121,16 @@ if (!isset($_SESSION['adminID'])) {
         </div>
       </section>
     </main>
+    <script src="js/image-update.js"></script>
     <script>
       document.addEventListener('DOMContentLoaded', () => {
         const modalContainer = document.querySelector(".modal");
         const exitBtn = modalContainer.querySelector("#exitButton");
 
         // Check if the modal should be displayed
-        // <?php   //if ($showModal) : ?>
+       <?php  if ($showModal) : ?>
         modalContainer.style.display = "flex";
-        // <?php // endif; ?>
+       <?php  endif; ?>
         exitBtn.addEventListener("click", () => {
           modalContainer.style.transform = "scale(0)";
         });
@@ -209,29 +211,7 @@ if (!isset($_SESSION['adminID'])) {
       // render initial hardcoded services on page load
       renderInitialServices();
 
-      // Select the file input and preview container
-      const imageInput = document.getElementById("homepage-image");
-      const imagePreview = document.getElementById("image-preview");
-
-      // Event listener for when a file is selected
-      imageInput.addEventListener("change", () => {
-          const file = imageInput.files[0]; // Get the selected file
-
-          // Check if a file is selected and is an image
-          if (file && file.type.startsWith("image/")) {
-              const reader = new FileReader();
-
-              // When the file is loaded, set it as the preview image
-              reader.onload = function (e) {
-                  imagePreview.innerHTML = `<img src="${e.target.result}" alt="Selected Image" style="max-width: 100%; height: auto; border: 1px solid #ddd; border-radius: 5px;" />`;
-              };
-
-              reader.readAsDataURL(file); // Read the file as a data URL
-          } else {
-              // If no valid image is selected, reset the preview
-              imagePreview.innerHTML = `<p>No image uploaded</p>`;
-          }
-      });
+      updatePageImage('homepage-image')
     </script>
   </body>
 </html>

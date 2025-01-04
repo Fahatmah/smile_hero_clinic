@@ -30,7 +30,7 @@ if (!isset($_SESSION['adminID'])) {
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="shortcut icon" href="../assets/logos/logo-white.png" type="image/x-icon" />
-    <title>Edit Home Page Component | Landing Page | Admin</title>
+    <title>Edit Services Page Component | Landing Page | Admin</title>
     <link rel="stylesheet" href="../src/dist/styles.css" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
     <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
@@ -45,26 +45,44 @@ if (!isset($_SESSION['adminID'])) {
         <?php include("includes/side_nav.php"); ?>
 
         <div class="edit-user-homepage-container">
-          <h1>Edit Homepage Component in Landing Page</h1>
+          <h1>Edit Services Section in Landing Page</h1>
           
 
           <form action="" method="post">
-              <!-- header-->
+              <!-- service #1-->
               <div class="field-group">
-                  <label for="header">Header</label>
-                  <input type="text" id="header" name="header" value="Seamless smiles begin here"/>
+                  <label for="service1">Main Service #1</label>
+                  <input type="text" id="service1" name="service1" value="Routine dental check-ups and cleanings"/>
+              </div>
+              
+              <!-- service #2-->
+              <div class="field-group">
+                  <label for="service2">Main Service #2</label>
+                  <input type="text" id="service2" name="service2" value="Cosmetic dentistry, such as teeth whitening and veneers"/>
               </div>
 
-              <!-- subheading -->
+              <!-- service #3-->
               <div class="field-group">
-                  <label for="subheading">Subheading</label>
-                  <input type="text" id="subheading" name="subheading" value="Expert dental care for a confident, healthy smile. Streamlined dental appointments for your convenience"/>
+                  <label for="service3">Main Service #3</label>
+                  <input type="text" id="service3" name="service3" value="Orthodontic treatments, including braces and Invisalign"/>
+              </div>
+
+              <!-- service #4-->
+              <div class="field-group">
+                  <label for="service4">Main Service #4</label>
+                  <input type="text" id="service4" name="service4" value="Restorative procedures like fillings, crowns, and bridges"/>
+              </div>
+
+              <!-- service #5-->
+              <div class="field-group">
+                  <label for="service5">Main Service #5</label>
+                  <input type="text" id="service5" name="service5" value="Emergency dental services"/>
               </div>
 
               <!-- image -->
               <div class="field-group">
-                  <label for="homepage-image">Update Homepage Image</label>
-                  <input type="file" id="homepage-image" accept="image/*" />
+                  <label for="servicespage-image">Update Services Page Image</label>
+                  <input type="file" id="servicespage-image" accept="image/*" />
                   <small id="error-message" style="color: red; display: none;">File must be less than 2MB</small>
                   
                   <div class="image-preview" id="image-preview">
@@ -72,7 +90,7 @@ if (!isset($_SESSION['adminID'])) {
                   </div>
               </div>
               
-              <button type="submit" id="updateBtn">Update Homepage</button>
+              <button type="submit" id="updateBtn">Update Services Page</button>
           </form>
         </div>
         <!-- modal -->
@@ -81,7 +99,7 @@ if (!isset($_SESSION['adminID'])) {
             <div class="body-text">
               <div class="modal__header">
                 <h3 id="modalStatus" class="modal__status">
-                  Homepage Updated
+                  Services Page Updated
                 </h3>
               </div>
               <button type="button" id="exitButton" class="modal__button">
@@ -111,7 +129,7 @@ if (!isset($_SESSION['adminID'])) {
         });
       });
 
-      updatePageImage('homepage-image')
+      updatePageImage('servicespage-image')
     </script>
   </body>
 </html>
