@@ -7843,4 +7843,15 @@ body.user-homepage main .about .services .appointment__button:hover {
   color: var(--pr-clr-300);
   border-color: var(--pr-clr-300);
   background-color: hsla(216, 100%, 68%, 0.1);
+}
+.admin__content .edit-user-homepage-container .links-container .link-item .page-title {
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+.admin__content .edit-user-homepage-container .links-container .link-item .page-title .header {
+  font-size: 1.5rem;
+  font-weight: bold;
 }/*# sourceMappingURL=styles.css.map */

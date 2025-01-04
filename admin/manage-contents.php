@@ -36,32 +36,55 @@ if (!isset($_SESSION['adminID'])) {
 
           <div class="links-container">
               <a href="edit-lp-home.php" class="link-item">
-                Manage and update the main content displayed on the landing page of your website.
+                <p class="page-title">
+                  <span class="header">Home Page</span>
+                  Manage and update the main content displayed on the landing page of your website.
+                </p>
                 <img src="../assets/admin_assets/icons/arrow-right.svg" alt="arrow right icon">
               </a>
             
               <a href="edit-lp-about.php" class="link-item">
-                Modify the 'About Us' section of the landing page to reflect accurate and engaging information.
+                <p class="page-title">
+                  <span class="header">About Page</span>
+                  Modify the 'About Us' section of the landing page to reflect accurate and engaging information.
+                </p>
+                
                 <img src="../assets/admin_assets/icons/arrow-right.svg" alt="arrow right icon">
               </a>
             
               <a href="edit-lp-services.php" class="link-item">
-                Add, remove, or update the services offered, showcased on the services page.
+                <p class="page-title">
+                  <span class="header">Services Page</span>
+                  Add, remove, or update the services offered, showcased on the services page.
+                </p>
+                
                 <img src="../assets/admin_assets/icons/arrow-right.svg" alt="arrow right icon">
               </a>
             
               <a href="edit-lp-promotions.php" class="link-item">
-                Update promotional banners, deals, and offers displayed on the promotions page.
+                <p class="page-title">
+                  <span class="header">Promotions Page</span>
+                  Update promotional banners, deals, and offers displayed on the promotions page.
+                </p>
+                
                 <img src="../assets/admin_assets/icons/arrow-right.svg" alt="arrow right icon">
               </a>
             
               <a href="edit-lp-footer.php" class="link-item">
-                Customize the footer section of the landing page, including contact information and social media links.
+                <p class="page-title">
+                  <span class="header">Footer Component</span>
+                  Customize the footer section of the landing page, including contact information and social media links.
+                </p>
+                
                 <img src="../assets/admin_assets/icons/arrow-right.svg" alt="arrow right icon">
               </a>
             
               <a href="edit-user-homepage.php" class="link-item">
-                Adjust content specific to the user homepage to enhance user engagement.
+                <p class="page-title">
+                  <span class="header">User Homepage</span>
+                  Adjust content specific to the user homepage to enhance user engagement.
+                </p>
+                
                 <img src="../assets/admin_assets/icons/arrow-right.svg" alt="arrow right icon">
               </a>          
           </div>

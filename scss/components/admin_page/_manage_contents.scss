@@ -36,6 +36,15 @@
           border-color: var(--pr-clr-300);
           background-color: hsl(216, 100%, 68%, 0.1);
         }
+
+        .page-title {
+          @include display-flex($dir: column, $y: flex-start, $gap: 0.5rem);
+
+          .header {
+            font-size: 1.5rem;
+            font-weight: bold;
+          }
+        }
       }
     }
   }
