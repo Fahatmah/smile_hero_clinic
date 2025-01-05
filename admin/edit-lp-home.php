@@ -10,19 +10,19 @@ if (!isset($_SESSION['adminID'])) {
   exit();
 }
 
-// $showModal = false;
-// if (isset( $_SESSION['footer_update'])) {
-//     if ( $_SESSION['footer_update'] === 'success') {
-//         $showModal = true;
-//     }
-//     unset( $_SESSION['footer_update']);
-// }
+$showModal = false;
+if (isset( $_SESSION['updated_home_info'])) {
+    if ( $_SESSION['updated_home_info'] === 'success') {
+        $showModal = true;
+    }
+    unset( $_SESSION['updated_home_info']);
+}
 
-// $query = "SELECT * FROM footer";
-// $stmt = $conn->prepare($query);
-// $stmt->execute();
+$query = "SELECT * FROM home_info";
+$stmt = $conn->prepare($query);
+$stmt->execute();
 
-// $result = $stmt->get_result();
+$result = $stmt->get_result();
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -47,18 +47,19 @@ if (!isset($_SESSION['adminID'])) {
         <div class="edit-user-homepage-container">
           <h1>Edit Homepage Component in Landing Page</h1>
           
+          <?php if($dataFetch = $result->fetch_assoc()) : ?>
 
-          <form action="" method="post">
+          <form action="includes/edit-lp-home.inc.php" method="post">
               <!-- header-->
               <div class="field-group">
                   <label for="header">Header</label>
-                  <input type="text" id="header" name="header" value="Seamless smiles begin here"/>
+                  <input type="text" id="header" name="header" value="<?php echo $dataFetch['header'] ?>"/>
               </div>
 
               <!-- subheading -->
               <div class="field-group">
                   <label for="subheading">Subheading</label>
-                  <input type="text" id="subheading" name="subheading" value="Expert dental care for a confident, healthy smile. Streamlined dental appointments for your convenience"/>
+                  <input type="text" id="subheading" name="subheading" value="<?php echo $dataFetch['subheading'] ?>"/>
               </div>
 
               <!-- image -->
@@ -73,6 +74,7 @@ if (!isset($_SESSION['adminID'])) {
               </div>
               
               <button type="submit" id="updateBtn">Update Homepage</button>
+              <?php endif; ?>
           </form>
         </div>
         <!-- modal -->

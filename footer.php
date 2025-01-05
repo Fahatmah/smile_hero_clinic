@@ -1,7 +1,7 @@
 <?php 
 include_once "includes/dbh.inc.php";
 
-$query = "SELECT * FROM footer";
+$query = "SELECT * FROM footer_info";
 $stmt =  $conn->prepare($query);
 $stmt->execute();
 $result = $stmt->get_result();

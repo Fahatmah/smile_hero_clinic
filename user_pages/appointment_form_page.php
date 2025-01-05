@@ -48,6 +48,14 @@ if (isset($_SESSION['date_limit'])) {
     unset($_SESSION['date_limit']);
 }
 
+$pastTimeError = '';
+if (isset( $_SESSION['past_time'])) {
+    if ( $_SESSION['past_time'] === 'invalid') { 
+        $pastTimeError = 'Sorry, the selected time is already past';
+    }
+    unset( $_SESSION['past_time']);
+}
+
 $query = "SELECT available_dates FROM appointment_dates WHERE available_dates >= CURDATE()";
 $result = $conn->query($query);
 
@@ -239,6 +247,7 @@ if($dataFetch = $result->fetch_assoc()){
                 <p class="appointment-form__text appointment-form__text--valid">Valid</p>
               </div>
               <p class="time_error"><?php echo $TimeMessageError ?></p>
+              <p class="time_error"><?php echo $pastTimeError ?></p>
             </div>
             <div class="appointment-form__field">
               <label class="appointment-form__label">Service</label>

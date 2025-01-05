@@ -22,6 +22,12 @@ if($totalAppointment >= 5){
   $stmt->bind_param("s",$user_id);
   $stmt->execute();
 }
+
+$sql = "SELECT * FROM homepage_info WHERE id = 1"; // Assuming there's only one row to fetch
+$result = $conn->query($sql);
+$content = $result->fetch_assoc();
+
+$conn->close();
 ?>
 
 <!DOCTYPE html>
@@ -74,15 +80,12 @@ if($totalAppointment >= 5){
 
       <!-- hero -->
       <header class="hero">
-        <h1>Welcome to Smile Hero <span class="circle-span">Clinic</span></h1>
+        <h1><?php echo htmlspecialchars($content['title']); ?></h1>
         <section class="hero__details" aria-labelledby="clinicInfo">
           <ul class="contact__info" aria-label="Clinic Contact Information">
-            <li>
-              Ground Floor Amber Place, #67 Bayani Road, Western Bicutan, Fort
-              Bonifacio, Taguig, Philippines
-            </li>
-            <li>Monday to Sunday</li>
-            <li>0917 160 6212</li>
+            <li><?php echo htmlspecialchars($content['address']); ?></li>
+            <li><?php echo htmlspecialchars($content['workdays']); ?></li>
+            <li><?php echo htmlspecialchars($content['number']); ?></li>
           </ul>
           <p class="current__date">Loading...</p>
         </section>
@@ -92,53 +95,19 @@ if($totalAppointment >= 5){
       <!-- about -->
       <section class="about" aria-labelledby="aboutTitle">
         <div class="about__intro">
-          <h2 id="aboutTitle">
-            Your Trusted Partner for Comprehensive Dental Care
-          </h2>
-          <p class="sub-header">
-            We make booking easy with our web-based appointment system. Schedule
-            your dental visits quickly from anywhere—home, work, or on the go.
-          </p>
+          <h2 id="aboutTitle"><?php echo htmlspecialchars($content['subheader1']); ?></h2>
+          <p class="sub-header"><?php echo htmlspecialchars($content['subheader2']); ?></p>
         </div>
 
         <article class="services" aria-labelledby="servicesTitle">
           <h3 id="servicesTitle">Our Services</h3>
           <ul class="services__list" aria-label="List of Dental Services">
-            <li>
-              <img
-                src="../assets/icons/user_account/check-icon.svg"
-                alt="Check icon"
-              />
-              Routine dental check-ups and cleanings
-            </li>
-            <li>
-              <img
-                src="../assets/icons/user_account/check-icon.svg"
-                alt="Check icon"
-              />
-              Cosmetic dentistry, such as teeth whitening and veneers
-            </li>
-            <li>
-              <img
-                src="../assets/icons/user_account/check-icon.svg"
-                alt="Check icon"
-              />
-              Orthodontic treatments, including braces and Invisalign
-            </li>
-            <li>
-              <img
-                src="../assets/icons/user_account/check-icon.svg"
-                alt="Check icon"
-              />
-              Restorative procedures like fillings, crowns, and bridges
-            </li>
-            <li>
-              <img
-                src="../assets/icons/user_account/check-icon.svg"
-                alt="Check icon"
-              />
-              Emergency dental services
-            </li>
+            <?php
+            $services = json_decode($content['services'], true);
+            foreach ($services as $service) {
+                echo '<li><img src="../assets/icons/user_account/check-icon.svg" alt="Check icon" />' . htmlspecialchars($service) . '</li>';
+            }
+            ?>
           </ul>
           <a class="appointment__button" href="appointment_form_page.php" role="button">
             Book Your Appointment

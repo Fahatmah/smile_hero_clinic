@@ -1,3 +1,14 @@
+<?php 
+include_once "includes/dbh.inc.php";
+
+$query = "SELECT * FROM about_info";
+$stmt = $conn->prepare($query);
+$stmt->execute();
+
+$result = $stmt->get_result();
+?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -11,6 +22,7 @@
   <main class="about-page">
     <?php include("nav.php"); ?>
     
+    <?php if($dataFetch = $result->fetch_assoc()) : ?>
     <header>
       <div class="texts-container">
         <div class="header-text">
@@ -24,7 +36,7 @@
               <img src="././assets/landing-page/about/location.svg" alt="location icon">
               <div class="texts">
                 <p class="header-text">Our Location</p>
-                <p>Located on Bayani Road, Taguig City, near Heritage, our clinic is dedicated to providing top-notch dental services to ensure your smile remains healthy and beautiful.</p>
+                <p>Located on <?php echo $dataFetch['address'] ?>, near Heritage, our clinic is dedicated to providing top-notch dental services to ensure your smile remains healthy and beautiful.</p>
               </div>
             </div>
 
@@ -32,7 +44,7 @@
               <img src="././assets/landing-page/about/hmo-philhealth.svg" alt="HMO and PhilHealth icon">
               <div class="texts">
                 <p class="header-text">HMO & PhilHealth Accredited</p>
-                <p>Smile Hero Clinic is proud to be HMO Accredited and a recognized partner of PhilHealth. We ensure our services are accessible and affordable, helping you make the most of your healthcare benefits.</p>
+                <p><?php echo $dataFetch['clinicname'] ?> is proud to be HMO Accredited and a recognized partner of PhilHealth. We ensure our services are accessible and affordable, helping you make the most of your healthcare benefits.</p>
               </div>
             </div>
 
@@ -40,7 +52,7 @@
               <img src="././assets/landing-page/about/accessibility.svg" alt="accessibility icon">
               <div class="texts">
                 <p class="header-text">Convenience & Accessibility</p>
-                <p>At Smile Hero Clinic, we understand the importance of convenience and accessibility when it comes to your dental health.</p>
+                <p>At <?php echo $dataFetch['clinicname'] ?>, we understand the importance of convenience and accessibility when it comes to your dental health.</p>
               </div>
             </div>
 
@@ -56,7 +68,7 @@
               <img src="././assets/landing-page/about/schedule-anytime.svg" alt="schedule icon">
               <div class="texts">
                 <p class="header-text">Schedule Anytime, Anywhere</p>
-                <p>Whether you’re at home, at work, or on the go, you can schedule your appointments with just a few clicks.</p>
+                <p>Whether you're at home, at work, or on the go, you can schedule your appointments with just a few clicks.</p>
               </div>
             </div>
           </div>
@@ -68,6 +80,7 @@
 
       
     </header>
+    <?php endif; ?>
   </main>
   <?php include("footer.php"); ?>
 </body>

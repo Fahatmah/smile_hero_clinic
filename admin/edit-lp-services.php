@@ -10,19 +10,20 @@ if (!isset($_SESSION['adminID'])) {
   exit();
 }
 
-// $showModal = false;
-// if (isset( $_SESSION['footer_update'])) {
-//     if ( $_SESSION['footer_update'] === 'success') {
-//         $showModal = true;
-//     }
-//     unset( $_SESSION['footer_update']);
-// }
+$sId = 1;
+$query = "SELECT * FROM service_info WHERE id = ?";
+$stmt = $conn->prepare($query);
+$stmt->bind_param("s", $sId);
+$stmt->execute();
+$result = $stmt->get_result();
 
-// $query = "SELECT * FROM footer";
-// $stmt = $conn->prepare($query);
-// $stmt->execute();
-
-// $result = $stmt->get_result();
+$showModal = false;
+if (isset( $_SESSION['updated_service_info'])) {
+    if ( $_SESSION['updated_service_info'] === 'success') {
+        $showModal = true;
+    }
+    unset( $_SESSION['updated_service_info']);
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -48,35 +49,36 @@ if (!isset($_SESSION['adminID'])) {
           <h1>Edit Services Section in Landing Page</h1>
           
 
-          <form action="" method="post">
+          <form action="includes/edit-lp-services.inc.php" method="post">
+            <?php if($dataFetch = $result->fetch_assoc()) : ?>
               <!-- service #1-->
               <div class="field-group">
                   <label for="service1">Main Service #1</label>
-                  <input type="text" id="service1" name="service1" value="Routine dental check-ups and cleanings"/>
+                  <input type="text" id="service1" name="service1" value="<?php echo htmlspecialchars($dataFetch['service_one'])?>"/>
               </div>
               
               <!-- service #2-->
               <div class="field-group">
                   <label for="service2">Main Service #2</label>
-                  <input type="text" id="service2" name="service2" value="Cosmetic dentistry, such as teeth whitening and veneers"/>
+                  <input type="text" id="service2" name="service2" value="<?php echo htmlspecialchars($dataFetch['service_two'])?>"/>
               </div>
 
               <!-- service #3-->
               <div class="field-group">
                   <label for="service3">Main Service #3</label>
-                  <input type="text" id="service3" name="service3" value="Orthodontic treatments, including braces and Invisalign"/>
+                  <input type="text" id="service3" name="service3" value="<?php echo htmlspecialchars($dataFetch['service_three'])?>"/>
               </div>
 
               <!-- service #4-->
               <div class="field-group">
                   <label for="service4">Main Service #4</label>
-                  <input type="text" id="service4" name="service4" value="Restorative procedures like fillings, crowns, and bridges"/>
+                  <input type="text" id="service4" name="service4" value="<?php echo htmlspecialchars($dataFetch['service_four'])?>"/>
               </div>
 
               <!-- service #5-->
               <div class="field-group">
                   <label for="service5">Main Service #5</label>
-                  <input type="text" id="service5" name="service5" value="Emergency dental services"/>
+                  <input type="text" id="service5" name="service5" value="<?php echo htmlspecialchars($dataFetch['service_five'])?>"/>
               </div>
 
               <!-- image -->
@@ -91,6 +93,7 @@ if (!isset($_SESSION['adminID'])) {
               </div>
               
               <button type="submit" id="updateBtn">Update Services Page</button>
+             <?php endif; ?>
           </form>
         </div>
         <!-- modal -->

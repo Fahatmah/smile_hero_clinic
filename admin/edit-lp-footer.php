@@ -18,7 +18,7 @@ if (isset( $_SESSION['footer_update'])) {
     unset( $_SESSION['footer_update']);
 }
 
-$query = "SELECT * FROM footer";
+$query = "SELECT * FROM footer_info";
 $stmt = $conn->prepare($query);
 $stmt->execute();
 

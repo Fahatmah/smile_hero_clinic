@@ -1,3 +1,16 @@
+<?php
+
+require_once 'includes/dbh.inc.php';
+
+$query = "SELECT * FROM home_info";
+$stmt = $conn->prepare($query);
+$stmt->execute();
+
+$result = $stmt->get_result();
+
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -11,16 +24,16 @@
     <main>
       <?php include("nav.php"); ?>
 
+      <?php if($dataFetch = $result->fetch_assoc()) : ?>
       <header>
         <div class="main-header-container">
           <div class="header-container">
             <div class="header-texts">
                 <h1>
-                  Seamless <strong>smiles</strong> begin here
+                  <?php echo $dataFetch['header'] ?>
                 </h1>
                 <p>
-                  Expert dental care for a confident, healthy smile.
-                  Streamlined dental appointments for your convenience
+                <?php echo $dataFetch['subheading'] ?>
                 </p>
               </div>
               
@@ -35,6 +48,7 @@
           </div>
         </div>
       </header>
+      <?php endif; ?>
     </main>
     <?php include("footer.php"); ?>
   </body>

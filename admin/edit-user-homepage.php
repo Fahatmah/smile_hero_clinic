@@ -10,6 +10,21 @@ if (!isset($_SESSION['adminID'])) {
   exit();
 }
 
+$showModal = false;
+if (isset( $_SESSION['updated-homepage'])) {
+    if ( $_SESSION['updated-homepage'] === 'success') {
+        $showModal = true;
+    }
+    unset( $_SESSION['updated-homepage']);
+}
+
+require_once '../includes/dbh.inc.php';
+
+$sql = "SELECT * FROM homepage_info WHERE id = 1"; // Assuming there's only one row to fetch
+$result = $conn->query($sql);
+$content = $result->fetch_assoc();
+
+$conn->close();
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -34,47 +49,41 @@ if (!isset($_SESSION['adminID'])) {
         <div class="edit-user-homepage-container">
           <h1>Manage User Homepage</h1>
 
-          <form action="" method="post">
+          <form action="includes/edit-user-homepage.inc.php" method="post">
               <!-- header title -->
               <div class="field-group">
                   <label for="title">Header Title</label>
-                  <!-- 
-                      jp, pakilagay mo na lang current title 
-                      as well as to other input fields gaya 
-                      nung sa user apt form, already filled
-                      with their name, contact and email
-                  -->
-                  <input type="text" id="title" name="title" placeholder="Title"/>
+                  <input type="text" id="title" name="title" value="<?php echo htmlspecialchars($content['title']); ?>" placeholder="Title"/>
               </div>
               
               <!-- sub header 1 -->
               <div class="field-group">
                   <label for="subheader1">Sub Header 1</label>
-                  <textarea name="subheader1" id="subheader1">Your Trusted Partner for Comprehensive Dental Care</textarea>
+                  <textarea name="subheader1" id="subheader1"><?php echo htmlspecialchars($content['subheader1']); ?></textarea>
               </div>
 
               <!-- sub header 2 -->
               <div class="field-group">
                 <label for="subheader2">Sub Header 2</label>
-                <textarea name="subheader2" id="subheader2">We make booking easy with our web-based appointment system. Schedule your dental visits quickly from anywhere—home, work, or on the go.</textarea>
+                <textarea name="subheader2" id="subheader2"><?php echo htmlspecialchars($content['subheader2']); ?></textarea>
               </div>
               
               <!-- address -->
               <div class="field-group">
                   <label for="address">Address</label>
-                  <input type="text" id="address" name="address" placeholder="address"/>
+                  <input type="text" id="address" name="address" value="<?php echo htmlspecialchars($content['address']); ?>" placeholder="address"/>
               </div>
 
               <!-- workdays -->
               <div class="field-group">
                   <label for="Workdays">Workdays</label>
-                  <input type="text" id="Workdays" name="Workdays" placeholder="Monday to Sunday"/>
+                  <input type="text" id="Workdays" name="Workdays" value="<?php echo htmlspecialchars($content['workdays']); ?>" placeholder="Monday to Sunday"/>
               </div>
 
               <!-- number -->
               <div class="field-group">
                   <label for="number">Number</label>
-                  <input type="number" id="number" name="number" placeholder="0917 160 6212"/>
+                  <input type="number" id="number" name="number" value="<?php echo htmlspecialchars($content['number']); ?>" placeholder="0917 160 6212"/>
               </div>
 
               <!-- summary of services (bullet format) -->
@@ -85,6 +94,7 @@ if (!isset($_SESSION['adminID'])) {
                   <button type="button" id="add-service-btn">Add Service</button>
 
                   <ul id="services-list"></ul>
+                  <input type="hidden" name="services" id="services-hidden-input" />
               </div>
 
               <!-- image -->
@@ -128,26 +138,21 @@ if (!isset($_SESSION['adminID'])) {
         const exitBtn = modalContainer.querySelector("#exitButton");
 
         // Check if the modal should be displayed
-       <?php  if ($showModal) : ?>
+       <?php if ($showModal) : ?>
         modalContainer.style.display = "flex";
-       <?php  endif; ?>
+       <?php endif; ?>
         exitBtn.addEventListener("click", () => {
           modalContainer.style.transform = "scale(0)";
         });
       });
       // Simulated initial list of services (hardcoded for now)
-      const initialServices = [
-          "Routine dental check-ups and cleanings",
-          "Cosmetic dentistry, such as teeth whitening and veneers",
-          "Orthodontic treatments, including braces and Invisalign",
-          "Restorative procedures like fillings, crowns, and bridges",
-          "Emergency dental services"
-      ];
+      const initialServices = <?php echo json_encode(json_decode($content['services'], true)); ?>;
 
       // Select necessary DOM elements
       const serviceInput = document.getElementById("service-input");
       const addServiceBtn = document.getElementById("add-service-btn");
       const servicesList = document.getElementById("services-list");
+      const servicesHiddenInput = document.getElementById("services-hidden-input");
 
       // Function to render initial services
       function renderInitialServices() {
@@ -174,7 +179,19 @@ if (!isset($_SESSION['adminID'])) {
           // Add event listener to remove the list item
           removeBtn.addEventListener("click", () => {
               servicesList.removeChild(li);
+              updateHiddenInput();
           });
+
+          updateHiddenInput();
+      }
+
+      // Function to update the hidden input with the current services
+      function updateHiddenInput() {
+          const services = [];
+          servicesList.querySelectorAll("li").forEach(li => {
+              services.push(li.textContent.replace("Remove", "").trim());
+          });
+          servicesHiddenInput.value = JSON.stringify(services);
       }
 
       // Select the necessary DOM elements for character counting

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 14, 2024 at 03:51 AM
+-- Generation Time: Jan 05, 2025 at 05:39 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -20,6 +20,25 @@ SET time_zone = "+00:00";
 --
 -- Database: `smile_hero_clinic`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `about_info`
+--
+
+CREATE TABLE `about_info` (
+  `id` int(11) NOT NULL,
+  `address` varchar(299) DEFAULT NULL,
+  `clinicname` varchar(299) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `about_info`
+--
+
+INSERT INTO `about_info` (`id`, `address`, `clinicname`) VALUES
+(1, 'Bayani Road, Taguig Cityy', 'Smile Hero Clinicc');
 
 -- --------------------------------------------------------
 
@@ -74,10 +93,12 @@ CREATE TABLE `appointments` (
 --
 
 INSERT INTO `appointments` (`user_id`, `doctor_id`, `appointment_id`, `label`, `name`, `email`, `contact`, `message`, `date`, `time`, `service`, `location`, `status`, `created_at`) VALUES
+('SHC936dTCU', 'DOCca26', 'SHC1cba', 'walk-in', 'TestTimeZone TestTimeZone TestTimeZone ', 'jpvillaruel02@gmail.com', '09412412312', '', '2024-12-14', '2:00 PM', 'Teeth Whitening, Dental Filling', 'Bayani Road, Taguig City', 'missed', '2024-12-14 11:05:00'),
+('SHCb9caTCU', 'DOCca26', 'SHC4030', 'regular', 'John Paul Villaruel Dela Cruz ', 'jpvillaruel02@gmail.com', '09070050140', '', '2025-01-06', '9:00 AM', 'Teeth Whitening', 'Bayani Road, Taguig City', 'accepted', '2025-01-05 22:36:51'),
 ('SHCb9caTCU', 'DOC7069', 'SHC859e', 'regular', 'John Paul Villaruel Dela Cruz ', 'jpvillaruel02@gmail.com', '09070050140', '', '2024-12-17', '1:00 PM', 'Dental Filling, Braces Consultation', 'Bayani Road, Taguig City', 'completed', '2024-12-13 23:11:08'),
-('SHCb9caTCU', 'DOC30ca', 'SHC8791', 'regular', 'John Paul Villaruel Dela Cruz ', 'jpvillaruel02@gmail.com', '09070050140', '', '2024-12-17', '9:00 AM', 'Dental Filling, Braces Consultation', 'Bayani Road, Taguig City', 'accepted', '2024-12-14 01:10:36'),
-('SHC94d0TCU', 'DOC7069', 'SHCd1fc', 'walk-in', 'Testwalkin Testwalkin Testwalkin ', 'jpvillaruel02@gmail.com', '09412151251', '', '2024-12-14', '2:00 PM', 'Teeth Whitening, Dental Filling', 'Bayani Road, Taguig City', 'accepted', '2024-12-14 00:47:47'),
-('SHCd55bTCU', 'DOC30ca', 'SHCedaf', 'regular', 'Limuel Morales Tagumpay ', 'test@gmail.com', '09532542223', '', '2024-12-18', '3:00 PM', 'Dental Filling, Braces Consultation', 'Bayani Road, Taguig City', 'accepted', '2024-12-10 17:14:15'),
+('SHCb9caTCU', 'DOC30ca', 'SHC8791', 'regular', 'John Paul Villaruel Dela Cruz ', 'jpvillaruel02@gmail.com', '09070050140', '', '2024-12-17', '9:00 AM', 'Dental Filling, Braces Consultation', 'Bayani Road, Taguig City', 'missed', '2024-12-14 01:10:36'),
+('SHC94d0TCU', 'DOC7069', 'SHCd1fc', 'walk-in', 'Testwalkin Testwalkin Testwalkin ', 'jpvillaruel02@gmail.com', '09412151251', '', '2024-12-14', '2:00 PM', 'Teeth Whitening, Dental Filling', 'Bayani Road, Taguig City', 'missed', '2024-12-14 00:47:47'),
+('SHCd55bTCU', 'DOC30ca', 'SHCedaf', 'regular', 'Limuel Morales Tagumpay ', 'test@gmail.com', '09532542223', '', '2024-12-18', '3:00 PM', 'Dental Filling, Braces Consultation', 'Bayani Road, Taguig City', 'missed', '2024-12-10 17:14:15'),
 ('SHCVP16TCU', 'DOCZR33', 'SHCTY84', 'regular', 'Mason Allen', 'mason.allen@example.com', '09182345678', 'I would like a root canal treatment', '2024-12-12', '11:00 am', 'Root Canal Treatment', 'Bayani Road, Taguig City', 'completed', '2024-11-05 15:15:00'),
 ('SHCAG23TCU', 'DOCMD67', 'SHCUI53', 'new', 'Olivia Davis', 'olivia.davis@example.com', '09215678901', 'I need braces consultation', '2024-11-22', '4:00 pm', 'Braces Consultation', 'Bayani Road, Taguig City', 'missed', '2024-11-08 11:21:48'),
 ('SHCWB38TCU', 'DOCPX94', 'SHCUM61', 'walk-in', 'Lucas Martinez', 'lucas.martinez@example.com', '09234567890', 'I would like a teeth cleaning', '2024-11-21', '2:00 am', 'Teeth Cleaning', 'Bayani Road, Taguig City', 'missed', '2024-11-21 14:32:11');
@@ -99,21 +120,6 @@ CREATE TABLE `appointment_dates` (
 --
 
 INSERT INTO `appointment_dates` (`id`, `available_dates`, `created_at`) VALUES
-(13, '2024-12-18', '2024-11-12 23:45:23'),
-(14, '2024-12-17', '2024-11-12 23:45:23'),
-(15, '2024-12-26', '2024-11-12 23:45:23'),
-(16, '2024-12-19', '2024-11-12 23:45:23'),
-(17, '2024-12-20', '2024-11-12 23:45:23'),
-(18, '2024-12-27', '2024-11-12 23:45:23'),
-(27, '2024-12-16', '2024-11-15 11:48:34'),
-(36, '2024-12-23', '2024-11-15 23:25:21'),
-(37, '2024-12-24', '2024-11-15 23:25:21'),
-(38, '2024-12-25', '2024-11-15 23:25:21'),
-(39, '2024-12-30', '2024-11-15 23:25:21'),
-(40, '2024-12-31', '2024-11-15 23:25:21'),
-(127, '2024-12-14', '2024-11-29 22:32:39'),
-(128, '2024-12-21', '2024-11-29 22:32:39'),
-(129, '2024-12-28', '2024-11-29 22:32:39'),
 (130, '2025-01-08', '2024-11-30 15:22:09'),
 (131, '2025-01-09', '2024-11-30 15:22:09'),
 (132, '2025-01-07', '2024-11-30 15:22:09'),
@@ -136,14 +142,8 @@ INSERT INTO `appointment_dates` (`id`, `available_dates`, `created_at`) VALUES
 (149, '2025-01-19', '2024-12-05 08:57:14'),
 (150, '2025-01-26', '2024-12-05 08:57:14'),
 (151, '2025-01-10', '2024-12-05 00:51:06'),
-(152, '2025-01-03', '2024-12-05 00:51:06'),
-(153, '2025-01-02', '2024-12-05 00:51:06'),
-(154, '2025-01-01', '2024-12-05 00:51:06'),
 (155, '2025-01-24', '2024-12-05 00:51:06'),
-(156, '2025-01-31', '2024-12-05 00:51:06'),
-(158, '2024-12-15', '2024-12-06 02:47:35'),
-(159, '2024-12-22', '2024-12-06 02:47:35'),
-(160, '2024-12-29', '2024-12-06 02:47:35');
+(156, '2025-01-31', '2024-12-05 00:51:06');
 
 -- --------------------------------------------------------
 
@@ -169,7 +169,7 @@ INSERT INTO `doctors` (`doctor_id`, `first_name`, `last_name`, `phone_number`, `
 ('DOC30ca', 'Marlon', 'Quezon', '09745647456', 'MArQ2003@gmail.com', 'On Duty', '2024-11-29 14:37:45'),
 ('DOC577e', 'Mark', 'Josefa', '09412131312', 'DcJose@gmail.com', 'On Duty', '2024-11-24 07:18:24'),
 ('DOC7069', 'Allan ', 'Cayetano', '09412131312', 'Allcayo@gmail.com', 'Off Duty', '2024-11-24 12:04:13'),
-('DOCca26', 'Juan', 'Dela Cruz', '09581241242', 'JuanD@gmail.com', 'On Duty', '2024-11-30 07:26:00');
+('DOCca26', 'Juan', 'Dela Cruz', '09581241242', 'JuanD@gmail.com', 'Off Duty', '2024-11-30 07:26:00');
 
 -- --------------------------------------------------------
 
@@ -202,6 +202,78 @@ INSERT INTO `feedback` (`id`, `user_id`, `doctor_id`, `name`, `email`, `feedback
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `footer_info`
+--
+
+CREATE TABLE `footer_info` (
+  `id` int(11) NOT NULL,
+  `title_one` varchar(299) DEFAULT NULL,
+  `title_two` varchar(299) DEFAULT NULL,
+  `contact` varchar(11) DEFAULT NULL,
+  `email` varchar(299) DEFAULT NULL,
+  `socmedname` varchar(299) DEFAULT NULL,
+  `socmedlink` varchar(299) DEFAULT NULL,
+  `address` varchar(299) DEFAULT NULL,
+  `otherbranch_one` varchar(299) DEFAULT NULL,
+  `otherbranch_one_link` varchar(299) DEFAULT NULL,
+  `otherbranch_two` varchar(299) DEFAULT NULL,
+  `otherbranch_two_link` varchar(299) DEFAULT NULL,
+  `paragraph` varchar(299) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `footer_info`
+--
+
+INSERT INTO `footer_info` (`id`, `title_one`, `title_two`, `contact`, `email`, `socmedname`, `socmedlink`, `address`, `otherbranch_one`, `otherbranch_one_link`, `otherbranch_two`, `otherbranch_two_link`, `paragraph`) VALUES
+(1, 'Contact Us', 'Ready for a new smile?', '09171606212', 'smilehero@gmail.com', 'Smile Hero Dental Clinic', 'https://www.facebook.com/BayaniRoadSmileHeroDentalClinic', 'Ground Floor Amber Place, #67 Bayani Road, Western Bicutan, Fort Bonifacio, Taguig, Philippines', 'North Signal', 'Ground Floor Amber Place, #67 Bayani Road, Western Bicutan, Fort Bonifacio, Taguig, Philippines', 'South Signal', 'Ground Floor Amber Place, #67 Bayani Road, Western Bicutan, Fort Bonifacio, Taguig, Philippines', 'Stay connected on our social media for updates on appointments, monthly adjustments, and checkups at our dental clinic.');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `homepage_info`
+--
+
+CREATE TABLE `homepage_info` (
+  `id` int(11) NOT NULL,
+  `title` varchar(299) DEFAULT NULL,
+  `subheader1` varchar(299) DEFAULT NULL,
+  `subheader2` varchar(299) DEFAULT NULL,
+  `address` varchar(299) DEFAULT NULL,
+  `workdays` varchar(299) DEFAULT NULL,
+  `number` varchar(299) DEFAULT NULL,
+  `services` varchar(299) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `homepage_info`
+--
+
+INSERT INTO `homepage_info` (`id`, `title`, `subheader1`, `subheader2`, `address`, `workdays`, `number`, `services`) VALUES
+(1, 'Welcome to Smile Hero Clinic', 'Your Trusted Partner for Comprehensive Dental Care', 'We make booking easy with our web-based appointment system. Schedule your dental visits quickly from anywhere—home, work, or on the go.', 'Ground Floor Amber Place, #67 Bayani Road, Western Bicutan, Fort Bonifacio, Taguig, Philippines', 'Monday to Sunday', '09171606212', '[\"Routine dental check-ups and cleanings\",\"Cosmetic dentistry, such as teeth whitening and veneers\",\"Orthodontic treatments, including braces and Invisalign\",\"Restorative procedures like fillings, crowns, and bridges\",\"Emergency dental services\"]');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `home_info`
+--
+
+CREATE TABLE `home_info` (
+  `id` int(11) NOT NULL,
+  `header` varchar(299) DEFAULT NULL,
+  `subheading` varchar(299) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `home_info`
+--
+
+INSERT INTO `home_info` (`id`, `header`, `subheading`) VALUES
+(1, 'Seamless smiles begin here', 'Expert dental care for a confident, healthy smile. Streamlined dental appointments for your convenience');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `services`
 --
 
@@ -223,6 +295,28 @@ INSERT INTO `services` (`service_id`, `service_name`, `service_price`, `created_
 (29, 'Dental Filling', '300', '2024-12-13 22:43:43'),
 (31, 'Braces Consultation', '400', '2024-12-13 22:44:12'),
 (32, 'Root Canal Treatment', '2,100', '2024-12-13 22:44:27');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `service_info`
+--
+
+CREATE TABLE `service_info` (
+  `id` int(11) NOT NULL,
+  `service_one` varchar(299) DEFAULT NULL,
+  `service_two` varchar(299) DEFAULT NULL,
+  `service_three` varchar(299) DEFAULT NULL,
+  `service_four` varchar(299) DEFAULT NULL,
+  `service_five` varchar(299) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `service_info`
+--
+
+INSERT INTO `service_info` (`id`, `service_one`, `service_two`, `service_three`, `service_four`, `service_five`) VALUES
+(1, 'Routine dental check-ups and cleanings', 'Cosmetic dentistry, such as teeth whitening and veneers', 'Orthodontic treatments, including braces and Invisalign', 'Emergency dental services', 'Restorative procedures like fillings, crowns, and bridges');
 
 -- --------------------------------------------------------
 
@@ -329,6 +423,12 @@ INSERT INTO `users` (`user_id`, `first_name`, `middle_name`, `last_name`, `suffi
 --
 
 --
+-- Indexes for table `about_info`
+--
+ALTER TABLE `about_info`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `admin`
 --
 ALTER TABLE `admin`
@@ -363,10 +463,34 @@ ALTER TABLE `feedback`
   ADD KEY `doctor_id` (`doctor_id`);
 
 --
+-- Indexes for table `footer_info`
+--
+ALTER TABLE `footer_info`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `homepage_info`
+--
+ALTER TABLE `homepage_info`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `home_info`
+--
+ALTER TABLE `home_info`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `services`
 --
 ALTER TABLE `services`
   ADD PRIMARY KEY (`service_id`);
+
+--
+-- Indexes for table `service_info`
+--
+ALTER TABLE `service_info`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `users`
@@ -378,6 +502,12 @@ ALTER TABLE `users`
 --
 -- AUTO_INCREMENT for dumped tables
 --
+
+--
+-- AUTO_INCREMENT for table `about_info`
+--
+ALTER TABLE `about_info`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `admin`
@@ -398,10 +528,34 @@ ALTER TABLE `feedback`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
 
 --
+-- AUTO_INCREMENT for table `footer_info`
+--
+ALTER TABLE `footer_info`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT for table `homepage_info`
+--
+ALTER TABLE `homepage_info`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT for table `home_info`
+--
+ALTER TABLE `home_info`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
 -- AUTO_INCREMENT for table `services`
 --
 ALTER TABLE `services`
   MODIFY `service_id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=34;
+
+--
+-- AUTO_INCREMENT for table `service_info`
+--
+ALTER TABLE `service_info`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

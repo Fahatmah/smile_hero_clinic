@@ -10,19 +10,19 @@ if (!isset($_SESSION['adminID'])) {
   exit();
 }
 
-// $showModal = false;
-// if (isset( $_SESSION['footer_update'])) {
-//     if ( $_SESSION['footer_update'] === 'success') {
-//         $showModal = true;
-//     }
-//     unset( $_SESSION['footer_update']);
-// }
+$showModal = false;
+if (isset( $_SESSION['updated_about_info'])) {
+    if ( $_SESSION['updated_about_info'] === 'success') {
+        $showModal = true;
+    }
+    unset( $_SESSION['updated_about_info']);
+}
 
-// $query = "SELECT * FROM footer";
-// $stmt = $conn->prepare($query);
-// $stmt->execute();
+$query = "SELECT * FROM about_info";
+$stmt = $conn->prepare($query);
+$stmt->execute();
 
-// $result = $stmt->get_result();
+$result = $stmt->get_result();
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -47,18 +47,19 @@ if (!isset($_SESSION['adminID'])) {
         <div class="edit-user-homepage-container">
           <h1>Edit About Section in Landing Page</h1>
           
+          <?php if($dataFetch = $result->fetch_assoc()) : ?>
 
-          <form action="" method="post">
+          <form action="includes/edit-lp-about.inc.php" method="post">
               <!-- address-->
               <div class="field-group">
                   <label for="address">Short Address</label>
-                  <input type="text" id="address" name="address" value="Bayani Road, Taguig City"/>
+                  <input type="text" id="address" name="address" value="<?php echo $dataFetch['address'] ?>"/>
               </div>
 
               <!-- clinic name -->
               <div class="field-group">
                   <label for="clinicname">Clinic Name</label>
-                  <input type="text" id="clinicname" name="clinicname" value="Smile Hero Clinic"/>
+                  <input type="text" id="clinicname" name="clinicname" value="<?php echo $dataFetch['clinicname'] ?>"/>
               </div>
 
               <!-- image -->
@@ -73,6 +74,7 @@ if (!isset($_SESSION['adminID'])) {
               </div>
               
               <button type="submit" id="updateBtn">Update About Page</button>
+              <?php endif; ?>
           </form>
         </div>
         <!-- modal -->

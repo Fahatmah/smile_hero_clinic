@@ -24,6 +24,11 @@ if ($_SERVER['REQUEST_METHOD'] === "POST" && isset($_SESSION['user_id'])) {
     require_once("dbh.inc.php");
     require_once("appointment_model.inc.php");
     
+    if(pastTimeBasedOnCurDate($appointmentDate, $appointmentTime)){
+        $_SESSION['past_time'] = 'invalid';
+        header("Location: ../user_pages/appointment_form_page.php");
+        die();
+    }
 
     if (isDateReachedLimit($conn, $appointmentDate)) {
         $_SESSION['date_limit'] = 'invalid';
@@ -80,4 +85,16 @@ function generateAppoinmentID(mysqli $conn) {
         }
     }
     return $appointmentID;
+}
+
+function pastTimeBasedOnCurDate(string $selectedDate, string $selectedTime): bool {
+    $currentDate = date('Y-m-d');
+    $currentTime = date("H:i"); // 24-hour format for easier comparison
+
+    if ($selectedDate === $currentDate) {
+        // Convert selected time to 24-hour format if needed
+        $formattedSelectedTime = date("H:i", strtotime($selectedTime));
+        return $formattedSelectedTime < $currentTime;
+    }
+    return false;
 }
