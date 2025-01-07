@@ -1,4 +1,20 @@
-<?php $current_page = basename($_SERVER['PHP_SELF']); ?>
+<?php 
+include_once "includes/dbh.inc.php";
+function isPromotionsTableEmpty($conn) {
+    $query = "SELECT COUNT(*) FROM promotions_info";
+    $result = mysqli_query($conn, $query);
+    $row = mysqli_fetch_row($result);
+    return $row[0] == 0;
+}
+
+$show_promotions = !isPromotionsTableEmpty($conn);
+
+// try mo insert to sa sql ng promotions_info
+//  INSERT INTO promotions_info (title, description, start_date, end_date, discount_percentage) VALUES ('New Patient Special', 'Get a Free Dental exam and X-rays on your first visit.', '2025-01-01', '2025-12-31', NULL), ('Family Plans', 'Bring your family for checkups and get 10% off.', '2025-01-01', '2025-12-31', 10.00), ('Teeth Whitening Discount', 'Brighten your smile with 30% Off Professional Whitening Treatments.', '2025-01-01', '2025-12-31', 30.00), ('Emergency Dental Care Offer', 'Flat $50 Off for Same-Day Emergency Appointments.', '2025-01-01', '2025-12-31', NULL);
+
+
+$current_page = basename($_SERVER['PHP_SELF']); 
+?>
 
 <nav class="nav landing-page">
   <div class="nav-container">
@@ -22,9 +38,22 @@
           <li <?php echo ($current_page == 'about.php') ? 'class="active__link"' : ''; ?>>
             <a href="./about.php">About</a>
           </li>
-          <li <?php echo ($current_page == 'services.php') ? 'class="active__link"' : ''; ?>>
-            <a href="./services.php">Services</a>
+
+          <li class="dropdown <?php echo ($current_page == 'services.php' || ($current_page == 'promotions.php' && $show_promotions)) ? 'active__link' : ''; ?>">
+            <a href="#" class="dropdown-toggle">Offers</a>
+            <ul class="dropdown-menu">
+              <li <?php echo ($current_page == 'services.php') ? 'class="active__link"' : ''; ?>>
+                <a href="./services.php">Services</a>
+              </li>
+              
+              <?php if ($show_promotions): ?>
+                <li <?php echo ($current_page == 'promotions.php') ? 'class="active__link"' : ''; ?>>
+                  <a href="./promotions.php">Promotions</a>
+                </li>
+              <?php endif; ?>
+            </ul>
           </li>
+
         </div>
 
         <div class="form-links">

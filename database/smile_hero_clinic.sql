@@ -2,8 +2,8 @@
 -- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
--- Host: 127.0.0.1
--- Generation Time: Jan 07, 2025 at 12:10 PM
+-- Host: localhost
+-- Generation Time: Jan 07, 2025 at 04:10 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -276,6 +276,23 @@ INSERT INTO `home_info` (`id`, `header`, `subheading`, `image_path`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `promotions_info`
+--
+
+CREATE TABLE `promotions_info` (
+  `id` int(11) NOT NULL,
+  `title` varchar(255) NOT NULL,
+  `description` text DEFAULT NULL,
+  `start_date` date NOT NULL,
+  `end_date` date NOT NULL,
+  `discount_percentage` decimal(5,2) DEFAULT NULL,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `services`
 --
 
@@ -484,6 +501,12 @@ ALTER TABLE `home_info`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `promotions_info`
+--
+ALTER TABLE `promotions_info`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `services`
 --
 ALTER TABLE `services`
@@ -547,6 +570,12 @@ ALTER TABLE `homepage_info`
 --
 ALTER TABLE `home_info`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT for table `promotions_info`
+--
+ALTER TABLE `promotions_info`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `services`

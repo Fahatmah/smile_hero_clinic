@@ -84,6 +84,39 @@
               text-decoration: underline;
             }
           }
+
+          &.dropdown {
+            position: relative;
+
+            .dropdown-toggle {
+              cursor: pointer;
+            }
+
+            .dropdown-menu {
+              display: none;
+              position: absolute;
+              left: 0;
+              top: 100%;
+              background: var(--ntrl-clr-100);
+              list-style: none;
+              box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+              border-radius: 0.5rem;
+
+              li {
+                padding: 10px 20px;
+
+                a {
+                  text-decoration: none;
+                  color: var(--ntrl-clr-300);
+                }
+              }
+            }
+
+            &:hover .dropdown-menu {
+              display: block;
+            }
+          }
+
           a {
             @include display-flex($x: flex-start);
             width: 100%;

@@ -1,0 +1,77 @@
+@use '../../abstracts' as *;
+.homepage {
+  [class*='-page'] {
+    header {
+      .texts-container {
+        width: 100%;
+        align-self: flex-start;
+        @include display-flex($dir: column, $gap: 2rem, $y: flex-start);
+        // padding: 2rem;
+
+        & > * {
+          @include display-flex($dir: column, $y: flex-start);
+        }
+
+        h1 {
+          font-size: 1.5rem;
+          font-size: clamp(1.5rem, 0.6197rem + 3.7559vw, 4rem);
+          font-weight: 900;
+          color: var(--pr-clr-300);
+          text-transform: uppercase;
+          line-height: 1;
+        }
+
+        .cards-container {
+          display: grid;
+          grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+          grid-gap: 1rem;
+          width: 100%;
+
+          .card {
+            @include display-flex($dir: column, $gap: 0.5rem, $y: flex-start);
+            width: 100%;
+            padding: 1rem;
+            border-radius: 1.4rem;
+            background-color: var(--ntrl-clr-100);
+
+            .header {
+              font-size: 1.25rem;
+              font-size: clamp(1.25rem, 0.9859rem + 1.1268vw, 2rem);
+              font-weight: 600;
+              color: var(--ntrl-clr-300);
+              letter-spacing: -1px;
+            }
+
+            .description {
+              font-size: clamp(1rem, 0.912rem + 0.3756vw, 1.25rem);
+              color: var(--ntrl-clr-300);
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+@media screen and (min-width: 75rem) {
+  .promotions-page {
+    header {
+      .texts-container {
+        padding-block: 8rem !important;
+        padding-inline: 0 !important;
+
+        .cards-container {
+          grid-template-columns: repeat(
+            auto-fit,
+            minmax(500px, 1fr)
+          ) !important;
+
+          .card {
+            gap: 1rem !important;
+            padding: 1.5rem !important;
+          }
+        }
+      }
+    }
+  }
+}
