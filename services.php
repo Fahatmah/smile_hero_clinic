@@ -60,7 +60,7 @@ $result = $stmt->get_result();
         </div>
           <?php endif; ?>
         <div class="image-container">
-          <img src="././assets/landing-page/services-img.png" style="width: 800px" alt="services image" onerror="this.onerror=null; this.src='././assets/landing-page/services.jpg'; this.style.borderRadius='0.5rem'; this.style.width='800px'; this.style.height='600px'; this.style.objectFit='cover';">
+          <img src="./<?php echo $dataFetch['image_path'] ?>" style="width: 800px" alt="services image" onerror="this.onerror=null; this.src='././assets/landing-page/services.jpg'; this.style.borderRadius='0.5rem'; this.style.width='800px'; this.style.height='600px'; this.style.objectFit='cover';">
         </div>
       </div>
     </header>

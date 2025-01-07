@@ -49,7 +49,7 @@ $conn->close();
         <div class="edit-user-homepage-container">
           <h1>Manage User Homepage</h1>
 
-          <form action="includes/edit-user-homepage.inc.php" method="post">
+          <form action="includes/edit-user-homepage.inc.php" method="post" enctype="multipart/form-data">
               <!-- header title -->
               <div class="field-group">
                   <label for="title">Header Title</label>
@@ -100,11 +100,15 @@ $conn->close();
               <!-- image -->
               <div class="field-group">
                   <label for="homepage-image">Upload Homepage Image</label>
-                  <input type="file" id="homepage-image" accept="image/*" />
+                  <input type="file" id="homepage-image" name="homepage-image" accept="image/*" />
                   <small id="error-message" style="color: red; display: none;">File must be less than 2MB</small>
                   
                   <div class="image-preview" id="image-preview">
-                      <p>No image uploaded</p>
+                      <?php if ($content['image_path']): ?>
+                          <img src="../<?php echo $content['image_path'] ?>" alt="Current Image" style="max-width: 100%; height: auto;">
+                      <?php else: ?>
+                          <p>No image uploaded</p>
+                      <?php endif; ?>
                   </div>
               </div>
               

@@ -8,7 +8,6 @@ $stmt->execute();
 $result = $stmt->get_result();
 ?>
 
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -56,14 +55,6 @@ $result = $stmt->get_result();
               </div>
             </div>
 
-            <!-- <div class="group">
-              <img src="././assets/landing-page/about/online-booking.svg" alt="online booking icon">
-              <div class="texts">
-                <p class="header-text">Easy Online Booking</p>
-                <p>That’s why we’ve developed a web-based appointment system designed to make booking your dental visits as easy and efficient as possible.</p>
-              </div>
-            </div> -->
-
             <div class="group">
               <img src="././assets/landing-page/about/schedule-anytime.svg" alt="schedule icon">
               <div class="texts">
@@ -73,12 +64,10 @@ $result = $stmt->get_result();
             </div>
           </div>
           <div class="image-container">
-            <img src="././assets/landing-page/about-img.png" alt="about image" onerror="this.onerror=null; this.src='././assets/landing-page/about.jpg'; this.style.borderRadius='0.5rem'">
+            <img src="./<?php echo $dataFetch['image_path'] ?>" alt="about image" onerror="this.onerror=null; this.src='././assets/landing-page/about.jpg'; this.style.borderRadius='0.5rem'">
           </div>
         </div>
       </div>
-
-      
     </header>
     <?php endif; ?>
   </main>

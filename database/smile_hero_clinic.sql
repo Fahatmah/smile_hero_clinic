@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 05, 2025 at 05:39 PM
+-- Generation Time: Jan 07, 2025 at 12:10 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -30,15 +30,16 @@ SET time_zone = "+00:00";
 CREATE TABLE `about_info` (
   `id` int(11) NOT NULL,
   `address` varchar(299) DEFAULT NULL,
-  `clinicname` varchar(299) DEFAULT NULL
+  `clinicname` varchar(299) DEFAULT NULL,
+  `image_path` varchar(299) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `about_info`
 --
 
-INSERT INTO `about_info` (`id`, `address`, `clinicname`) VALUES
-(1, 'Bayani Road, Taguig Cityy', 'Smile Hero Clinicc');
+INSERT INTO `about_info` (`id`, `address`, `clinicname`, `image_path`) VALUES
+(1, 'Bayani Road, Taguig City', 'Smile Hero Clinic', './assets/landing-page/about-img.png');
 
 -- --------------------------------------------------------
 
@@ -94,7 +95,7 @@ CREATE TABLE `appointments` (
 
 INSERT INTO `appointments` (`user_id`, `doctor_id`, `appointment_id`, `label`, `name`, `email`, `contact`, `message`, `date`, `time`, `service`, `location`, `status`, `created_at`) VALUES
 ('SHC936dTCU', 'DOCca26', 'SHC1cba', 'walk-in', 'TestTimeZone TestTimeZone TestTimeZone ', 'jpvillaruel02@gmail.com', '09412412312', '', '2024-12-14', '2:00 PM', 'Teeth Whitening, Dental Filling', 'Bayani Road, Taguig City', 'missed', '2024-12-14 11:05:00'),
-('SHCb9caTCU', 'DOCca26', 'SHC4030', 'regular', 'John Paul Villaruel Dela Cruz ', 'jpvillaruel02@gmail.com', '09070050140', '', '2025-01-06', '9:00 AM', 'Teeth Whitening', 'Bayani Road, Taguig City', 'accepted', '2025-01-05 22:36:51'),
+('SHCb9caTCU', 'DOCca26', 'SHC4030', 'regular', 'John Paul Villaruel Dela Cruz ', 'jpvillaruel02@gmail.com', '09070050140', '', '2025-01-06', '9:00 AM', 'Teeth Whitening', 'Bayani Road, Taguig City', 'missed', '2025-01-05 22:36:51'),
 ('SHCb9caTCU', 'DOC7069', 'SHC859e', 'regular', 'John Paul Villaruel Dela Cruz ', 'jpvillaruel02@gmail.com', '09070050140', '', '2024-12-17', '1:00 PM', 'Dental Filling, Braces Consultation', 'Bayani Road, Taguig City', 'completed', '2024-12-13 23:11:08'),
 ('SHCb9caTCU', 'DOC30ca', 'SHC8791', 'regular', 'John Paul Villaruel Dela Cruz ', 'jpvillaruel02@gmail.com', '09070050140', '', '2024-12-17', '9:00 AM', 'Dental Filling, Braces Consultation', 'Bayani Road, Taguig City', 'missed', '2024-12-14 01:10:36'),
 ('SHC94d0TCU', 'DOC7069', 'SHCd1fc', 'walk-in', 'Testwalkin Testwalkin Testwalkin ', 'jpvillaruel02@gmail.com', '09412151251', '', '2024-12-14', '2:00 PM', 'Teeth Whitening, Dental Filling', 'Bayani Road, Taguig City', 'missed', '2024-12-14 00:47:47'),
@@ -137,7 +138,6 @@ INSERT INTO `appointment_dates` (`id`, `available_dates`, `created_at`) VALUES
 (144, '2025-01-28', '2024-11-30 16:02:01'),
 (145, '2025-01-06', '2024-12-05 08:57:14'),
 (146, '2025-01-27', '2024-12-05 08:57:14'),
-(147, '2025-01-05', '2024-12-05 08:57:14'),
 (148, '2025-01-12', '2024-12-05 08:57:14'),
 (149, '2025-01-19', '2024-12-05 08:57:14'),
 (150, '2025-01-26', '2024-12-05 08:57:14'),
@@ -242,15 +242,16 @@ CREATE TABLE `homepage_info` (
   `address` varchar(299) DEFAULT NULL,
   `workdays` varchar(299) DEFAULT NULL,
   `number` varchar(299) DEFAULT NULL,
-  `services` varchar(299) DEFAULT NULL
+  `services` varchar(299) DEFAULT NULL,
+  `image_path` varchar(299) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `homepage_info`
 --
 
-INSERT INTO `homepage_info` (`id`, `title`, `subheader1`, `subheader2`, `address`, `workdays`, `number`, `services`) VALUES
-(1, 'Welcome to Smile Hero Clinic', 'Your Trusted Partner for Comprehensive Dental Care', 'We make booking easy with our web-based appointment system. Schedule your dental visits quickly from anywhere—home, work, or on the go.', 'Ground Floor Amber Place, #67 Bayani Road, Western Bicutan, Fort Bonifacio, Taguig, Philippines', 'Monday to Sunday', '09171606212', '[\"Routine dental check-ups and cleanings\",\"Cosmetic dentistry, such as teeth whitening and veneers\",\"Orthodontic treatments, including braces and Invisalign\",\"Restorative procedures like fillings, crowns, and bridges\",\"Emergency dental services\"]');
+INSERT INTO `homepage_info` (`id`, `title`, `subheader1`, `subheader2`, `address`, `workdays`, `number`, `services`, `image_path`) VALUES
+(1, 'Welcome to Smile Hero Clinic', 'Your Trusted Partner for Comprehensive Dental Care', 'We make booking easy with our web-based appointment system. Schedule your dental visits quickly from anywhere—home, work, or on the go.', 'Ground Floor Amber Place, #67 Bayani Road, Western Bicutan, Fort Bonifacio, Taguig, Philippines', 'Monday to Sunday', '09171606212', '[\"Routine dental check-ups and cleanings\",\"Cosmetic dentistry, such as teeth whitening and veneers\",\"Orthodontic treatments, including braces and Invisalign\",\"Restorative procedures like fillings, crowns, and bridges\",\"Emergency dental services\"]', NULL);
 
 -- --------------------------------------------------------
 
@@ -261,15 +262,16 @@ INSERT INTO `homepage_info` (`id`, `title`, `subheader1`, `subheader2`, `address
 CREATE TABLE `home_info` (
   `id` int(11) NOT NULL,
   `header` varchar(299) DEFAULT NULL,
-  `subheading` varchar(299) DEFAULT NULL
+  `subheading` varchar(299) DEFAULT NULL,
+  `image_path` varchar(299) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `home_info`
 --
 
-INSERT INTO `home_info` (`id`, `header`, `subheading`) VALUES
-(1, 'Seamless smiles begin here', 'Expert dental care for a confident, healthy smile. Streamlined dental appointments for your convenience');
+INSERT INTO `home_info` (`id`, `header`, `subheading`, `image_path`) VALUES
+(1, 'Seamless smiles begin here', 'Expert dental care for a confident, healthy smile. Streamlined dental appointments for your convenience', './assets/landing-page/hero-images.png');
 
 -- --------------------------------------------------------
 
@@ -308,15 +310,16 @@ CREATE TABLE `service_info` (
   `service_two` varchar(299) DEFAULT NULL,
   `service_three` varchar(299) DEFAULT NULL,
   `service_four` varchar(299) DEFAULT NULL,
-  `service_five` varchar(299) DEFAULT NULL
+  `service_five` varchar(299) DEFAULT NULL,
+  `image_path` varchar(299) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `service_info`
 --
 
-INSERT INTO `service_info` (`id`, `service_one`, `service_two`, `service_three`, `service_four`, `service_five`) VALUES
-(1, 'Routine dental check-ups and cleanings', 'Cosmetic dentistry, such as teeth whitening and veneers', 'Orthodontic treatments, including braces and Invisalign', 'Emergency dental services', 'Restorative procedures like fillings, crowns, and bridges');
+INSERT INTO `service_info` (`id`, `service_one`, `service_two`, `service_three`, `service_four`, `service_five`, `image_path`) VALUES
+(1, 'Routine dental check-ups and cleanings', 'Cosmetic dentistry, such as teeth whitening and veneers', 'Orthodontic treatments, including braces and Invisalign', 'Emergency dental services', 'Restorative procedures like fillings, crowns, and bridges', './assets/landing-page/services-img.png');
 
 -- --------------------------------------------------------
 

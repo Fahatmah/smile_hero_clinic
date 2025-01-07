@@ -49,7 +49,7 @@ $result = $stmt->get_result();
           
           <?php if($dataFetch = $result->fetch_assoc()) : ?>
 
-          <form action="includes/edit-lp-home.inc.php" method="post">
+          <form action="includes/edit-lp-home.inc.php" method="post" enctype="multipart/form-data">
               <!-- header-->
               <div class="field-group">
                   <label for="header">Header</label>
@@ -65,11 +65,15 @@ $result = $stmt->get_result();
               <!-- image -->
               <div class="field-group">
                   <label for="homepage-image">Update Homepage Image</label>
-                  <input type="file" id="homepage-image" accept="image/*" />
+                  <input type="file" id="homepage-image" name="homepage-image" accept="image/*" />
                   <small id="error-message" style="color: red; display: none;">File must be less than 2MB</small>
                   
                   <div class="image-preview" id="image-preview">
-                      <p>No image uploaded</p>
+                      <?php if ($dataFetch['image_path']): ?>
+                          <img src="../<?php echo $dataFetch['image_path'] ?>" alt="Current Image" style="max-width: 100%; height: auto;">
+                      <?php else: ?>
+                          <p>No image uploaded</p>
+                      <?php endif; ?>
                   </div>
               </div>
               
