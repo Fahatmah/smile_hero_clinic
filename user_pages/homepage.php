@@ -28,6 +28,12 @@ $result = $conn->query($sql);
 $content = $result->fetch_assoc();
 
 $conn->close();
+
+$backgroundImage = "../assets/smile-hero-img.jpg";
+
+if (empty($backgroundImage)) {
+    $backgroundImage = "../assets/smile-hero-img.jpg";
+}
 ?>
 
 <!DOCTYPE html>
@@ -148,6 +154,9 @@ $conn->close();
       }
 
       setInterval(getDate, 1000)
+
+      const backgroundImage = "<?php echo $backgroundImage; ?>";
+      document.querySelector('.about__intro').style.backgroundImage = `url(${backgroundImage})`;
     </script>
   </body>
 </html>

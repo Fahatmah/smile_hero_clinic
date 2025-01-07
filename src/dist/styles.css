@@ -3444,7 +3444,6 @@ body.user-homepage main .about__intro {
   width: 100%;
   height: 50vh;
   border-radius: 0.5rem;
-  background-image: url(../../assets/smile-hero-img.jpg), url(../../assets/landing-page/dental-clinic-room.jpg);
   background-repeat: no-repeat;
   background-position: center;
 }
