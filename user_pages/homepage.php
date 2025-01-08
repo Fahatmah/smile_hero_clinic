@@ -29,7 +29,7 @@ $content = $result->fetch_assoc();
 
 $conn->close();
 
-$backgroundImage = "../assets/smile-hero-img.jpg";
+$backgroundImage = "." . $content['image_path'];
 
 if (empty($backgroundImage)) {
     $backgroundImage = "../assets/smile-hero-img.jpg";

@@ -49,7 +49,7 @@ if (isset( $_SESSION['updated_service_info'])) {
           <h1>Edit Services Section in Landing Page</h1>
           
 
-          <form action="includes/edit-lp-services.inc.php" method="post">
+          <form action="includes/edit-lp-services.inc.php" method="post" enctype="multipart/form-data">
             <?php if($dataFetch = $result->fetch_assoc()) : ?>
               <!-- service #1-->
               <div class="field-group">
@@ -84,11 +84,15 @@ if (isset( $_SESSION['updated_service_info'])) {
               <!-- image -->
               <div class="field-group">
                   <label for="servicespage-image">Update Services Page Image</label>
-                  <input type="file" id="servicespage-image" accept="image/*" />
+                  <input type="file" id="servicespage-image" name="servicespage-image" accept="image/*" />
                   <small id="error-message" style="color: red; display: none;">File must be less than 2MB</small>
                   
                   <div class="image-preview" id="image-preview">
-                      <p>No image uploaded</p>
+                      <?php if ($dataFetch['image_path']): ?>
+                          <img src="../<?php echo $dataFetch['image_path'] ?>" alt="Current Image" style="max-width: 100%; height: auto;">
+                      <?php else: ?>
+                          <p>No image uploaded</p>
+                      <?php endif; ?>
                   </div>
               </div>
               
