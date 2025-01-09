@@ -29,11 +29,18 @@ $content = $result->fetch_assoc();
 
 $conn->close();
 
-$backgroundImage = "." . $content['image_path'];
+// $backgroundImage = "." . $content['image_path'];
 
-if (empty($backgroundImage)) {
+// if (empty($backgroundImage)) {
+//     $backgroundImage = "../assets/smile-hero-img.jpg";
+// }
+
+if (!empty($content['image_path'])) {
+    $backgroundImage = "." . $content['image_path'];
+} else {
     $backgroundImage = "../assets/smile-hero-img.jpg";
 }
+
 ?>
 
 <!DOCTYPE html>
