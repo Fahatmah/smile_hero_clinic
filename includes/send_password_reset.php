@@ -2,6 +2,7 @@
 
 // require_once "config_session.inc.php";
 session_start();
+require_once '../includes/dbh.inc.php';
 
 if($_SERVER["REQUEST_METHOD"] === "POST"){
 
@@ -12,14 +13,13 @@ if($_SERVER["REQUEST_METHOD"] === "POST"){
   
   $expiry = date("Y-m-d H:i:s", time() + 60 * 30);
   
-  $mysqli = require __DIR__ ."/dbh.inc.php";
   $sql = "UPDATE users SET reset_token_hash = ?, reset_token_expires_at = ? WHERE email =?";
-  $stmt = $mysqli->prepare($sql);
+  $stmt = $conn->prepare($sql);
   $stmt->bind_param("sss", $token_hash, $expiry, $email);
   
   $stmt->execute();
   
-  if($mysqli->affected_rows){
+  if($conn->affected_rows){
   
     $mail = require __DIR__ ."/../mailer.php";
     $mail->setFrom("jpvillaruel02@gmail.com");
@@ -44,7 +44,7 @@ if($_SERVER["REQUEST_METHOD"] === "POST"){
   
   $_SESSION["email_process"] = "sent";
 
-  $mysqli->close();
+  $conn->close();
   $stmt->close();
   
   header("Location: ../forgot-pass.php");

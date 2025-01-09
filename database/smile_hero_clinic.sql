@@ -2,8 +2,8 @@
 -- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
--- Host: localhost
--- Generation Time: Jan 07, 2025 at 04:10 PM
+-- Host: 127.0.0.1
+-- Generation Time: Jan 09, 2025 at 08:23 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -123,7 +123,6 @@ CREATE TABLE `appointment_dates` (
 INSERT INTO `appointment_dates` (`id`, `available_dates`, `created_at`) VALUES
 (130, '2025-01-08', '2024-11-30 15:22:09'),
 (131, '2025-01-09', '2024-11-30 15:22:09'),
-(132, '2025-01-07', '2024-11-30 15:22:09'),
 (133, '2025-01-13', '2024-11-30 15:22:09'),
 (134, '2025-01-14', '2024-11-30 15:22:09'),
 (135, '2025-01-15', '2024-11-30 15:22:09'),
@@ -136,7 +135,6 @@ INSERT INTO `appointment_dates` (`id`, `available_dates`, `created_at`) VALUES
 (142, '2025-01-30', '2024-11-30 16:02:01'),
 (143, '2025-01-29', '2024-11-30 16:02:01'),
 (144, '2025-01-28', '2024-11-30 16:02:01'),
-(145, '2025-01-06', '2024-12-05 08:57:14'),
 (146, '2025-01-27', '2024-12-05 08:57:14'),
 (148, '2025-01-12', '2024-12-05 08:57:14'),
 (149, '2025-01-19', '2024-12-05 08:57:14'),
@@ -166,7 +164,7 @@ CREATE TABLE `doctors` (
 --
 
 INSERT INTO `doctors` (`doctor_id`, `first_name`, `last_name`, `phone_number`, `email`, `availability`, `created_at`) VALUES
-('DOC30ca', 'Marlon', 'Quezon', '09745647456', 'MArQ2003@gmail.com', 'On Duty', '2024-11-29 14:37:45'),
+('DOC30ca', 'Marlon', 'Quezon', '09745647456', 'MArQ2003@gmail.com', 'Off Duty', '2024-11-29 14:37:45'),
 ('DOC577e', 'Mark', 'Josefa', '09412131312', 'DcJose@gmail.com', 'On Duty', '2024-11-24 07:18:24'),
 ('DOC7069', 'Allan ', 'Cayetano', '09412131312', 'Allcayo@gmail.com', 'Off Duty', '2024-11-24 12:04:13'),
 ('DOCca26', 'Juan', 'Dela Cruz', '09581241242', 'JuanD@gmail.com', 'Off Duty', '2024-11-30 07:26:00');
@@ -251,7 +249,7 @@ CREATE TABLE `homepage_info` (
 --
 
 INSERT INTO `homepage_info` (`id`, `title`, `subheader1`, `subheader2`, `address`, `workdays`, `number`, `services`, `image_path`) VALUES
-(1, 'Welcome to Smile Hero Clinic', 'Your Trusted Partner for Comprehensive Dental Care', 'We make booking easy with our web-based appointment system. Schedule your dental visits quickly from anywhere—home, work, or on the go.', 'Ground Floor Amber Place, #67 Bayani Road, Western Bicutan, Fort Bonifacio, Taguig, Philippines', 'Monday to Sunday', '09171606212', '[\"Routine dental check-ups and cleanings\",\"Cosmetic dentistry, such as teeth whitening and veneers\",\"Orthodontic treatments, including braces and Invisalign\",\"Restorative procedures like fillings, crowns, and bridges\",\"Emergency dental services\"]', NULL);
+(1, 'Welcome to Smile Hero Clinic', 'Your Trusted Partner for Comprehensive Dental Care', 'We make booking easy with our web-based appointment system. Schedule your dental visits quickly from anywhere—home, work, or on the go.', 'Ground Floor Amber Place, #67 Bayani Road, Western Bicutan, Fort Bonifacio, Taguig, Philippines', 'Monday to Sunday', '09171606212', '[\"Routine dental check-ups and cleanings\",\"Cosmetic dentistry, such as teeth whitening and veneers\",\"Orthodontic treatments, including braces and Invisalign\",\"Restorative procedures like fillings, crowns, and bridges\",\"Emergency dental services\"]', './assets/smile-hero-img.jpg');
 
 -- --------------------------------------------------------
 
@@ -284,11 +282,18 @@ CREATE TABLE `promotions_info` (
   `title` varchar(255) NOT NULL,
   `description` text DEFAULT NULL,
   `start_date` date NOT NULL,
-  `end_date` date NOT NULL,
-  `discount_percentage` decimal(5,2) DEFAULT NULL,
-  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
-  `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
+  `end_date` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `promotions_info`
+--
+
+INSERT INTO `promotions_info` (`id`, `title`, `description`, `start_date`, `end_date`) VALUES
+(1, 'New Year Special', 'Get a Free Dental exam and X-rays on your first visit.', '2025-01-01', '2025-01-09'),
+(2, 'Family Plans', 'Bring your family for checkups and get 10% off.', '2025-01-01', '2025-04-07'),
+(3, 'Teeth Whitening Discount', 'Brighten your smile with 30% Off Professional Whitening Treatments.', '2025-01-20', '2025-09-18'),
+(5, 'Emergency Dental Care Offer', 'Flat $50 Off for Same-Day Emergency Appointments.', '2025-01-15', '2025-12-24');
 
 -- --------------------------------------------------------
 
@@ -575,7 +580,7 @@ ALTER TABLE `home_info`
 -- AUTO_INCREMENT for table `promotions_info`
 --
 ALTER TABLE `promotions_info`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `services`

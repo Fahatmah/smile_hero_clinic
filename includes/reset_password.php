@@ -1,6 +1,7 @@
 <?php 
 // require_once "config_session.inc.php";
 session_start();
+require_once '../includes/dbh.inc.php';
 
 if (!isset($_GET["token"])) {
     echo "<script>alert('Invalid or expired token.'); window.close();</script>";
@@ -10,11 +11,9 @@ if (!isset($_GET["token"])) {
 $token = $_GET["token"];
 $token_hash = hash("sha256", $token);
 
-
-$mysqli = require __DIR__ ."/dbh.inc.php";
 $query = "SELECT * FROM users WHERE reset_token_hash = ?";
 
-$stmt = $mysqli->prepare($query);
+$stmt = $conn->prepare($query);
 $stmt->bind_param("s", $token_hash);
 $stmt-> execute();
 $result = $stmt->get_result();

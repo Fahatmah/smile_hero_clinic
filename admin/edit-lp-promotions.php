@@ -9,6 +9,23 @@ if (!isset($_SESSION['adminID'])) {
   header("Location: ../login.php?login=failed");
   exit();
 }
+
+$showModal = false;
+if (isset( $_SESSION['updated_promo_info'])) {
+    if ( $_SESSION['updated_promo_info'] === 'success') {
+        $showModal = true;
+    }
+    unset( $_SESSION['updated_promo_info']);
+}
+
+// Fetch existing promotions from the database
+$promotions = [];
+$result = $conn->query("SELECT * FROM promotions_info");
+if ($result->num_rows > 0) {
+    while ($row = $result->fetch_assoc()) {
+        $promotions[] = $row;
+    }
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -33,48 +50,22 @@ if (!isset($_SESSION['adminID'])) {
         <div class="edit-user-homepage-container">
           <h1>Edit Promotions Section in Landing Page</h1>
           
-          <form action="" method="post" id="promotionsForm">
+          <form action="includes/edit-lp-promotions.inc.php" method="post" id="promotionsForm">
             <div id="promotionsContainer" style="width: 100%; display: flex; flex-direction: column; align-items: flex-start; gap: 1rem">
-              <!-- Promotion 1 -->
-              <div class="field-group" data-id="1">
-                <label contenteditable="true" for="promotion1">New Patient Special</label>
-                <input type="text" id="promotion1" name="promotion1" value="Get a Free Dental exam and X-rays on your first visit." />
-                <label for="start_date1">Start Date:</label>
-                <input type="text" id="start_date1" name="start_date1" class="flatpickr" value="2025-01-01" />
-                <label for="end_date1">End Date:</label>
-                <input type="text" id="end_date1" name="end_date1" class="flatpickr" value="2025-12-31" />
+              <?php $PromoNum = 1; foreach ($promotions as $promotion): ?>
+              <div class="field-group" data-id="<?php echo $promotion['id']; ?>">
+                <input type="hidden" name="promo_id[]" value="<?php echo $promotion['id']; ?>" />
+                <label for="promo_title">Promo Title <?php echo $PromoNum?></label>
+                <input type="text" id="promo_title" name="promo_title[]" value="<?php echo $promotion['title']; ?>" />
+                <label for="promotion_desc">Description <?php echo $PromoNum?></label>
+                <input type="text" id="promotion_desc" name="promotion_desc[]" value="<?php echo $promotion['description']; ?>" />
+                <label for="start_date">Start Date:</label>
+                <input type="text" id="start_date" name="start_date[]" class="flatpickr" value="<?php echo $promotion['start_date']; ?>" />
+                <label for="end_date">End Date:</label>
+                <input type="text" id="end_date" name="end_date[]" class="flatpickr" value="<?php echo $promotion['end_date']; ?>" />
                 <button type="button" class="removePromotionBtn">Delete</button>
               </div>
-              <!-- Promotion 2 -->
-              <div class="field-group" data-id="2">
-                <label contenteditable="true" for="promotion2">Family Plans</label>
-                <input type="text" id="promotion2" name="promotion2" value="Bring your family for checkups and get 10% off." />
-                <label for="start_date2">Start Date:</label>
-                <input type="text" id="start_date2" name="start_date2" class="flatpickr" value="2025-01-01" />
-                <label for="end_date2">End Date:</label>
-                <input type="text" id="end_date2" name="end_date2" class="flatpickr" value="2025-12-31" />
-                <button type="button" class="removePromotionBtn">Delete</button>
-              </div>
-              <!-- Promotion 3 -->
-              <div class="field-group" data-id="3">
-                <label contenteditable="true" for="promotion3">Teeth Whitening Discount</label>
-                <input type="text" id="promotion3" name="promotion3" value="Brighten your smile with 30% Off Professional Whitening Treatments." />
-                <label for="start_date3">Start Date:</label>
-                <input type="text" id="start_date3" name="start_date3" class="flatpickr" value="2025-01-01" />
-                <label for="end_date3">End Date:</label>
-                <input type="text" id="end_date3" name="end_date3" class="flatpickr" value="2025-12-31" />
-                <button type="button" class="removePromotionBtn">Delete</button>
-              </div>
-              <!-- Promotion 4 -->
-              <div class="field-group" data-id="4">
-                <label contenteditable="true" for="promotion4">Emergency Dental Care Offer</label>
-                <input type="text" id="promotion4" name="promotion4" value="Flat $50 Off for Same-Day Emergency Appointments." />
-                <label for="start_date4">Start Date:</label>
-                <input type="text" id="start_date4" name="start_date4" class="flatpickr" value="2025-01-01" />
-                <label for="end_date4">End Date:</label>
-                <input type="text" id="end_date4" name="end_date4" class="flatpickr" value="2025-12-31" />
-                <button type="button" class="removePromotionBtn">Delete</button>
-              </div>
+              <?php $PromoNum++; endforeach; ?>
             </div>
             <button type="button" id="addPromotionBtn">Add Promotion</button>
             <button type="submit" id="updateBtn">Update Promotions Page</button>
@@ -144,19 +135,22 @@ if (!isset($_SESSION['adminID'])) {
         newPromotion.className = 'field-group';
         newPromotion.dataset.id = `new-${promotionCount}`;
         newPromotion.innerHTML = `
-          <label contenteditable="true" for="promotion${promotionCount}">New Promotion</label>
-          <input type="text" id="promotion${promotionCount}" name="promotion${promotionCount}" value="Enter promotion details here." />
-          <label for="start_date${promotionCount}">Start Date:</label>
-          <input type="text" id="start_date${promotionCount}" name="start_date${promotionCount}" class="flatpickr" value="2025-01-01" />
-          <label for="end_date${promotionCount}">End Date:</label>
-          <input type="text" id="end_date${promotionCount}" name="end_date${promotionCount}" class="flatpickr" value="2025-12-31" />
+          <input type="hidden" name="promo_id[]" value="" />
+          <label for="promo_title">New Promotion Title</label>
+          <input type="text" id="promo_title" name="promo_title[]" placeholder="Enter promotion name"" />
+          <label contenteditable="true" for="promotion">New Promotion Description</label>
+          <input type="text" id="promotion_desc" name="promotion_desc[]" placeholder="Enter promotion details here." />
+          <label for="start_date">Start Date:</label>
+          <input type="text" id="start_date" name="start_date[]" class="flatpickr" placeholder="Select Date" />
+          <label for="end_date">End Date:</label>
+          <input type="text" id="end_date" name="end_date[]" class="flatpickr" placeholder="Select Date" />
           <button type="button" class="removePromotionBtn">Delete</button>
         `;
         promotionsContainer.appendChild(newPromotion);
 
         // Initialize the flatpickr on new input fields
-        flatpickr(`#start_date${promotionCount}`, { dateFormat: 'Y-m-d' });
-        flatpickr(`#end_date${promotionCount}`, { dateFormat: 'Y-m-d' });
+        flatpickr(`#start_date`, { dateFormat: 'Y-m-d' });
+        flatpickr(`#end_date`, { dateFormat: 'Y-m-d' });
       });
 
       // Remove promotion

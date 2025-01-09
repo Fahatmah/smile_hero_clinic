@@ -1,5 +1,11 @@
 <?php 
-include_once "includes/dbh.inc.php";
+include_once 'includes/dbh.inc.php';
+
+
+$query = "SELECT * FROM promotions_info";
+$result = mysqli_query($conn, $query);
+$promotions = mysqli_fetch_all($result, MYSQLI_ASSOC);
+
 ?>
 
 <!DOCTYPE html>
@@ -43,44 +49,17 @@ include_once "includes/dbh.inc.php";
         <h1>Special Offers and Promotions</h1>
         
         <div class="cards-container">
+          <?php foreach ($promotions as $promotion): ?>
           <div class="card">
-            <p class="header">New Patient Special</p>
-            <p class="description">Get a Free Dental exam and X-rays on your first visit.</p>
+            <p class="header"><?php echo $promotion['title'] ?></p>
+            <p class="description"><?php echo $promotion['description'] ?></p>
 
             <div class="promotion-duration">
-              <p class="start-date">Start Date: 2025-01-01</p>
-              <p class="end-date">End Date: 2025-12-31</p>
+              <p class="start-date"><?php echo $promotion['start_date'] ?></p>
+              <p class="end-date"><?php echo $promotion['end_date'] ?></p>
             </div>
           </div>
-          
-          <div class="card">
-            <p class="header">Family Plans</p>
-            <p class="description">Bring your family for checkups and get 10% off.</p>
-
-            <div class="promotion-duration">
-              <p class="start-date">Start Date: 2025-01-01</p>
-              <p class="end-date">End Date: 2025-12-31</p>
-            </div>
-          </div>
-          
-          <div class="card">
-            <p class="header">Teeth Whitening Discount</p>
-            <p class="description">Brighten your smile with 30% Off Professional Whitening Treatments.</p>
-
-            <div class="promotion-duration">
-              <p class="start-date">Start Date: 2025-01-01</p>
-              <p class="end-date">End Date: 2025-12-31</p>
-            </div>
-          </div>
-          
-          <div class="card">
-            <p class="header">Emergency Dental Care Offer</p>
-            <p class="description">Flat $50 Off for Same-Day Emergency Appointments.</p>
-
-            <div class="promotion-duration">
-              <p class="start-date">Start Date: 2025-01-01</p>
-              <p class="end-date">End Date: 2025-12-31</p>
-            </div>
+        <?php endforeach; ?>
           </div>
         </div>
       </div>
